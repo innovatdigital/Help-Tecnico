@@ -16,7 +16,6 @@
     <div class="content">
         <div class="top">
             <img src="/img/checkout/nav.png" alt="">
-            <h1 id="title">Checkout de pagamento:</h1>
         </div>
         
         <div class="container">
@@ -36,8 +35,10 @@
                             <input class="form" type="text" name="senha" id="password" placeholder="  Senha">
                             <button class="btn-continue">Prosseguir</button>
                         </div>
+                        
+                        <p class="privacy">Ao clicar no botão abaixo, você concordar com os nossos termos de <br> privacidade e utilização de cookies.</p>
 
-                        <img src="/img/checkout/seguro.png" style="height: 4vw; margin-top: 12.4vw;" alt="">
+                        <img src="/img/checkout/seguro.png" class="security" alt="compra segura">
                     </div>
     
                     <div class="card">
@@ -107,7 +108,7 @@
             initialization: {
             amount: parseFloat('<%= planInfo.value_month %>'),
             payer: {
-                email: '',
+                email: 'contato@plubee.net',
             },
             },
             customization: {
