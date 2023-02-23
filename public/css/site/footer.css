@@ -1,0 +1,89 @@
+@import url('https://fonts.cdnfonts.com/css/made-tommy-outline');
+@import url('https://fonts.cdnfonts.com/css/cavilant');
+
+footer {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: space-around;
+	background-color: #752A7A;
+	margin-top: 5rem;
+	height: 18rem;
+}
+
+.logo-footer {
+	height: 2.5rem;
+	margin-left: 1rem;
+	margin-top: 3rem;
+	margin-bottom: 1rem;
+}
+
+footer h2 {
+	font-family: 'MADE TOMMY';
+	font-style: normal;
+	font-weight: 800;
+	font-size: 18px;
+	line-height: 21px;
+	display: flex;
+	align-items: center;
+	letter-spacing: 0.05em;
+	color: #FFFFFF;
+	margin-top: 3rem;
+	margin-bottom: 1.6rem;
+}
+
+.p-1 {
+	font-family: 'MADE TOMMY';
+	font-style: normal;
+	font-weight: 400;
+	font-size: 15px;
+	display: flex;
+	align-items: center;
+	color: #FFFFFF;
+	margin-left: 1rem;
+	margin-top: 0%;
+}
+
+.a-footer {
+	font-family: 'MADE TOMMY';
+	font-style: normal;
+	font-weight: 400;
+	font-size: 15px;
+	line-height: 17px;
+	display: flex;
+	align-items: center;
+	margin-bottom: 1.2rem;
+	text-decoration-line: underline;
+	color: #FFFFFF;
+}
+
+.social {
+	display: inline-flex;
+}
+
+i {
+	font-size: 1.2rem;
+	margin-right: 10px;
+}
+
+.a-rights {
+	color: #752A7A;
+	text-decoration: underline;
+}
+
+.rights {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	align-items: center;
+	height: 4rem;
+	background-color: #FFFFFF;
+}
+
+.rights p {
+	font-family: 'MADE TOMMY';
+	font-style: normal;
+	font-weight: 400;
+	font-size: 16px;
+	color: #752A7A;
+}

@@ -1,0 +1,132 @@
+@import url('https://fonts.cdnfonts.com/css/made-tommy-outline');
+@import url('https://fonts.cdnfonts.com/css/cavilant');
+
+.box {
+    height: 41.4vw;
+    margin: 1.5vw;
+    background: #FFFFFF;
+    box-shadow: 0px 2px 9px rgba(0, 0, 0, 0.25);
+    border-radius: 19px;
+    overflow-y: scroll
+}
+
+.title {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 2px solid #BEBEBE;
+    padding: 1vw;
+}
+
+.title span {
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 800;
+    font-size: 1.1vw;
+    color: #7D7D7D
+}
+
+.title h2 {
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 1.1vw;
+    margin-left: 0.6vw;
+    margin-right: 0.6vw;
+    color: #752A7A;
+}
+
+.input-area {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin: 2.4rem 0;
+}
+
+.input-area div {
+    display: flex;
+    width: 4vw;
+    font-size: 1.4rem;
+    justify-content: center;
+    align-items: center;
+    background-color: #c8c8c8;
+    border-radius: 20rem 0 0 20rem;
+}
+
+.link-group {
+    width: 60vw;
+    height: 6vh;
+    border: 2px solid #c8c8c8;
+    border-radius: 0 20rem 20rem 0;
+    background: url(../../plataforma/ligacao.png) no-repeat scroll 7px 7px;
+    padding-left: 10px;
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 1rem;
+    color: #7D7D7D;
+}
+
+.add-group {
+    width: 7.2rem;
+    margin-left: 1.3rem;
+    background-color: #752A7A;
+    border-radius: 15rem;
+    border: none;
+    font-family: 'MADE TOMMY';
+    font-style: normal;
+    font-weight: 00;
+    font-size: 0.8vw;
+    color: #ffffff;
+    letter-spacing: 0.03rem;
+}
+
+.groups {
+    display: flex;
+    justify-content: space-between;
+    margin: 0 2rem;
+    padding: 1rem 0;
+    border-top: 2px solid #d7d7d7;
+}
+
+.title-group {
+    display: flex;
+    align-items: center;
+}
+
+.title-group h2 {
+    font-family: 'MADE TOMMY';
+    font-style: normal;
+    font-weight: 800;
+    font-size: 1vw;
+    color: #7D7D7D;
+    letter-spacing: 0.03rem;
+}
+
+.title-group img {
+    height: 2.8vw;
+    border-radius: 50px;
+    margin-right: 0.8rem;
+}
+
+.delete {
+    display: flex;
+    align-items: center;
+}
+
+.delete i {
+    font-size: 1.1vw;
+    color: #752A7A;
+    margin-right: 1rem;
+    padding: 0.8vw;
+    border-radius: 50rem;
+    transition: all 200ms linear;
+}
+
+.delete i:hover {
+    font-size: 1.1vw;
+    background-color: #752A7A;
+    color: #ffffff;
+    margin-right: 1rem;
+    border-radius: 50rem;
+    cursor: pointer;
+}

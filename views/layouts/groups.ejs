@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>pluBee | Todos os posts</title>
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="//img/admin/PLUBEE-LOGO-E-NOME.png" type="image/x-icon">
+  <!-- Custom styles -->
+  <link rel="stylesheet" href="/css/admin/style.css">
+</head>
+
+<body>
+  <div class="layer"></div>
+  
+  <!-- ! Body -->
+  <div class="page-flex">
+
+    <!-- ! Sidebar -->
+    <%- include('../partials/sidebar-platform', {isAdmin: isAdmin}) %>
+
+    <div class="main-wrapper">
+      <!-- ! Main nav -->
+      <%- include('../partials/nav-platform') %>
+  
+      <!-- ! Main -->
+      <main class="main users chart-page" id="skip-target">
+        <div class="container">
+          <% if (isAdmin) { %>
+            <h2 class="main-title">Selecione uma conta: - Administrador</h2>
+          <% } else { %>
+            <h2 class="main-title">Selecione uma conta:</h2>
+          <% } %>
+
+          <div class="row">
+            <div class="col-lg" style="display: flex; flex-direction: row;">
+              <select name="accounts" id="accounts">
+                <% accounts.forEach(function(item) { %>
+                  <option value="<%= item.id_account %>"><%= item.name %></option>
+                <% }) %>
+              </select>
+              <button id="btn-filter" style="background-color: #752A7A; color: #FFFFFF; width: 7rem; border-radius: 0rem 0.5rem 0.5rem 0rem;" onclick="viewGroups()">Ver grupos</button>
+            </div>
+          </div>
+        </div>
+      </main>
+
+      <!-- ! Footer -->
+      <%- include('../partials/footer-platform') %>
+    </div>
+  </div>
+
+
+<!-- Chart library -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<!-- Icons library -->
+<script src="js/admin/feather.min.js"></script>
+</body>
+</html>
+
+<script>
+  function viewGroups() {
+    const id_account = document.querySelector('#accounts')
+    selectValue = id_account.value
+
+    window.location.href = "/platform/groups/" + selectValue;
+  }  
+</script>

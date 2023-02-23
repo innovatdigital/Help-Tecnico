@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>pluBee | Contas conectadas</title>
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="//img/admin/PLUBEE-LOGO-E-NOME.png" type="image/x-icon">
+  <!-- Custom styles -->
+  <link rel="stylesheet" href="/css/admin/style.css">
+</head>
+
+<body>
+  <div class="layer"></div>
+  
+  <!-- ! Body -->
+  <div class="page-flex">
+
+    <!-- ! Sidebar -->
+    <%- include('../partials/sidebar-platform', {isAdmin: isAdmin}) %>
+
+    <div class="main-wrapper">
+      <!-- ! Main nav -->
+      <%- include('../partials/nav-platform') %>
+  
+      <!-- ! Main -->
+      <main class="main users chart-page" id="skip-target">
+        <div class="container">
+          <% if (isAdmin) { %>
+            <h2 class="main-title">Contas cadastradas - Administrador</h2>
+          <% } else { %>
+            <h2 class="main-title">Contas cadastradas</h2>
+          <% } %>
+
+          <div class="row">
+            <div class="col-lg">
+              <div class="users-table table-wrapper">
+                <table class="posts-table">
+                  <thead>
+                    <tr class="users-table-info">
+                      <th style="font-weight: bold">
+                        <label class="users-table__checkbox">
+                          ID da conta
+                        </label>
+                      </th>
+                      <th>Foto</th>
+                      <th>Nome da conta</th>
+                      <th>Plataforma</th>
+                      <th>Data de cadastro</th>
+                      <th>Ações</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <% accounts.forEach(function(item) { %>
+                      <tr>
+                        <td>
+                          <div style="font-weight: bold">
+                            <%= item.id_account %>
+                          </div>
+                        </td>
+
+                        <td>
+                          <div class="categories-table-img">
+                            <img src="<%= item.photo %>" alt="foto-de-perfil" style="width: 46.5px; border-radius: 50px;">
+                          </div>
+                        </td>
+
+                        <td>
+                          <div>
+                            <%= item.name %>
+                          </div>
+                        </td>
+
+                        <% if (item.platform == "Facebook") { %>
+                          <td>
+                            <div style="color: #1877F2; font-weight: bold;">
+                              <%= item.platform %>
+                            </div>
+                          </td>
+                        <% } else { %>
+                          <td>
+                            <div style="font-weight: bold; color: #C21F70">
+                              <%= item.platform %>
+                            </div>
+                          </td>
+                        <% } %>
+                        <td>
+                          <div>
+                            <%= item.date %>
+                          </div>
+                        </td>
+
+                        <td>
+                          <div> 
+                            <button id="delete-account" onclick="deleteAccount('<%= item.id_account %>', '<%= item.platform %>')">Excluir conta</button>
+                          </div>
+                        </td>                                                    
+                      </tr>
+                    <% }); %>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <div class="col-lg-3" style="margin-top: 3rem">
+              <article class="white-block">
+                <button style="color: #FFFFFF; background-color: #752A7A; padding: 10px; border-radius: 10px"><a href="accounts/auth/facebook">Adicionar conta Facebook</a></button>
+              </article>
+
+              <article class="white-block">
+                <button disabled style="color: #FFFFFF; background-color: #5c5c5c; padding: 10px; border-radius: 10px">Adicionar conta Instagram</button>
+              </article>
+
+              <article class="white-block">
+                <div class="top-cat-title">
+                  <h3>Contas cadastradas</h3>
+                  <% if (total_accounts === 1) { %>
+                    <p style="font-size: 16px; color: #752A7A;"><%= total_accounts %> conta cadastrada.</p>
+                  <% } else if (total_accounts > 1) { %>
+                    <p style="font-size: 16px; color: #752A7A;"><%= total_accounts %> contas cadastradas.</p>
+                  <% } else { %>
+                    <p style="font-size: 16px; color: #752A7A;">Nenhuma conta cadastrada ainda.</p>
+                  <% } %>
+                </div>
+              </article>
+
+              <article class="white-block">
+                <div class="top-cat-title">
+                  <h3>Contas restantes</h3>
+                  <% if (accountsRemaining === 1) { %>
+                    <p style="font-size: 16px; color: #752A7A;"><%= accountsRemaining %> conta restante.</p>
+                  <% } else if (accountsRemaining > 1) { %>
+                    <p style="font-size: 16px; color: #752A7A;"><%= accountsRemaining %> contas restantes.</p>
+                  <% } else { %>
+                    <p style="font-size: 16px; color: #752A7A;">Nenhuma conta cadastrada ainda.</p>
+                  <% } %>
+                </div>
+              </article>
+
+              <article class="white-block" style="background-color: #faf613;">
+                <div class="top-cat-title">
+                  <h3>Faça upgrade da sua conta</h3>
+                  <p>Faça upgrade para cadastrar contas sem limites</p>
+                </div>
+              </article>
+            </div>
+          </div>
+        </div>
+      </main>
+
+      <%- include('../partials/footer-platform') %>
+    </div>
+  </div>
+
+
+<!-- Chart library -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<!-- Icons library -->
+<script src="js/admin/feather.min.js"></script>
+</body>
+</html>
+
+<script>
+  function deleteAccount(id_account, platform) {
+    fetch("accounts/delete/" + id_account, {
+      method: "DELETE",
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ platform: platform })
+    })
+
+    location.reload();
+  }
+</script>

@@ -1,0 +1,64 @@
+@import url('https://fonts.cdnfonts.com/css/made-tommy-outline');
+@import url('https://fonts.cdnfonts.com/css/cavilant');
+
+.box {
+    height: 20.4vw;
+    margin: 1.5vw;
+    background: #FFFFFF;
+    box-shadow: 0px 2px 9px rgba(0, 0, 0, 0.25);
+    border-radius: 19px;
+    overflow-y: scroll
+}
+
+.title {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 2px solid #BEBEBE;
+    padding: 1vw;
+}
+
+.title span {
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 800;
+    font-size: 1.1vw;
+    color: #7D7D7D
+}
+
+.title h2 {
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 1.1vw;
+    margin-left: 0.6vw;
+    margin-right: 0.6vw;
+    color: #752A7A;
+}
+
+.div-table {
+    display: flex;
+    justify-content: center;
+}
+
+table {
+    width: 78vw;
+    margin: 2rem 0 0 0;
+    justify-content: center;
+}
+
+table thead {
+    font-family: 'MADE TOMMY';
+    font-style: normal;
+    font-weight: 800;
+    font-size: 1.4rem;
+    color: #313131;
+    margin: 0 100px 0 100px;
+}
+
+table tbody {
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 17px;
+    color: #7D7D7D;
+}

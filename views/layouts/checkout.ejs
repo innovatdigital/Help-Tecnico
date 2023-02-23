@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>pluBee</title>
+    <link rel="stylesheet" href="/css/checkout/checkout.css">
+    <link rel="stylesheet" href="/css/site/nav.css">
+    <link rel="stylesheet" href="/css/site/footer.css">
+
+</head>
+<body>
+    <%- include('../partials/nav-site') %>
+
+    <div class="content">
+        <div class="top">
+            <img src="/img/checkout/nav.png" alt="">
+            <h1 id="title">Checkout de pagamento:</h1>
+        </div>
+        
+        <div class="container">
+            <div class="box-option">
+                <div class="title-options">
+                    <h1 class="title">Realize o seu cadastro primeiro:</h1>
+                </div>
+    
+                <div class="div-options">
+                    <div class="form-floating">
+                        <div>
+                            <p class="p-dados" style="font-weight: bold;">Preencha com os seus dados:</p>
+                            <input class="form" type="text" name="nome" id="name" placeholder="  Nome completo:">
+                            <input class="form" type="text" name="telefone" id="number" placeholder="  Telefone:">
+                            <input class="form" type="text" name="cpf" id="cpf" placeholder="  CPF:">
+                            <input class="form" type="text" name="email" id="email" placeholder="  Email">
+                            <input class="form" type="text" name="senha" id="password" placeholder="  Senha">
+                            <button class="btn-continue">Prosseguir</button>
+                        </div>
+
+                        <img src="/img/checkout/seguro.png" style="height: 4vw; margin-top: 12.4vw;" alt="">
+                    </div>
+    
+                    <div class="card">
+                        <div>
+                            <img src="/img/checkout/card.jpg" alt="">
+                            <p id="title-paragraph">Pagamento via Cartão de crédito</p>
+                        </div>
+                        <div>
+                            <input type="radio" name="pag" id="card" value="CARD" tabindex="2">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pag-card">
+                <div class="title-options">
+                    <h1>Complete com os dados do seu cartão:</h1>
+                </div>
+
+                <div id="cardPaymentBrick_container"></div>      
+            </div>
+    
+            <div class="box-details">
+                <div class="title-details">
+                    <h1>Resumo do pedido</h1>
+                </div>
+                <h2>Tem um cupom? Insira aqui:</h2>
+                <div class="cupom-div">
+                    <input type="text" class="cupom-input" placeholder="Cupom de desconto aqui">
+                    <button class="btn-cupom">Adicionar</button>
+                </div>
+                <div class="itens">
+                    <h2>1 item selecionado:</h2>
+                    <p>- Plano <span><%= planInfo.title %></span></p>
+                </div>
+                <div class="infos">
+                    <div class="space">
+                        <h1>Método de pagamento:</h1>
+                        <h2>Cartão</h2>
+                    </div>
+                    <div class="space">
+                        <h1>Tipo:</h1>
+                        <h2>Crédito ou débito</h2>
+                    </div>
+                    <div class="space-two">
+                        <h1>Valor total:</h1>
+                        <h2>R$<%= planInfo.value_month %></h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <%- include('../partials/footer-site') %>
+
+    <script src="https://sdk.mercadopago.com/js/v2"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
+    <script type="text/javascript" src="/js/checkout/index.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        const div = document.querySelector('.div-options')
+        div.style.height = "10px"
+        const mp = new MercadoPago('APP_USR-0746d526-9a34-4d80-9015-3ffbe7d0b0cf');
+        const bricksBuilder = mp.bricks();
+        const renderCardPaymentBrick = async (bricksBuilder) => {
+        const settings = {
+            initialization: {
+            amount: parseFloat('<%= planInfo.value_month %>'),
+            payer: {
+                email: '',
+            },
+            },
+            customization: {
+            visual: {
+                style: {
+                theme: 'flat'
+                }
+            }
+            },        
+            callbacks: {
+            onReady: () => {
+            },
+            onSubmit: (cardFormData) => {
+                const account = {
+                    name: document.querySelector('#name').value,
+                    number: document.querySelector('#number').value,
+                    cpf: document.querySelector('#cpf').value,
+                    email: document.querySelector('#email').value,
+                    password: document.querySelector('#password').value,
+                    type_account: '<%= planInfo.title %>'
+                }
+
+                const data = {
+                    cardFormData,
+                    account
+                }
+
+                return new Promise((resolve, reject) => {
+                fetch("/checkout/process_payment", {
+                    method: "POST",
+                    headers: {
+                    "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify(data)
+                })
+                    .then((response) => {
+                        if (response.ok) {
+                            return response.json();
+                        }
+                        throw new Error("Erro ao processar a resposta da requisição");
+                    })
+                    .then((data) => {
+                        if (data.approved) {
+                            $(".container").hide()
+                            $("#title").text("Pagamento aprovado com sucesso!")
+                            $(".content").append(`<p class="p-approved">Olá ${document.querySelector('#name').value}, seu pagamento foi aprovado com sucesso.</p>`)
+                            $(".content").append("<p class='p-approved'>Você receberá um email com todos os dados da sua compra.</p>")
+                            $(".content").append("<p class='p-approved'>Faça login agora mesmo na sua conta clicando no botão abaxo.</p>")
+                        }
+                        resolve();
+                    })
+                    .catch((error) => {
+                        console.log(error)
+                        reject();
+                    })
+                });
+            },
+            onError: (error) => {
+                console.error(error);
+            },
+            },
+        };
+        window.cardPaymentBrickController = await bricksBuilder.create('cardPayment', 'cardPaymentBrick_container', settings);
+        };
+        renderCardPaymentBrick(bricksBuilder);
+    </script>
+</body>
+</html>

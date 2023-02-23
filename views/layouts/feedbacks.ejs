@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>pluBee | Feedbacks</title>
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="//img/admin/PLUBEE-LOGO-E-NOME.png" type="image/x-icon">
+  <!-- Custom styles -->
+  <link rel="stylesheet" href="/css/admin/style.css">
+</head>
+
+<body>
+  <div class="layer"></div>
+  
+  <!-- ! Body -->
+  <div class="page-flex">
+
+    <!-- ! Sidebar -->
+    <%- include('../partials/sidebar-platform', {isAdmin: isAdmin}) %>
+
+    <div class="main-wrapper">
+      <!-- ! Main nav -->
+      <%- include('../partials/nav-platform') %>
+  
+      <!-- ! Main -->
+      <main class="main users chart-page" id="skip-target">
+        <div class="container">
+          <% if (isAdmin) { %>
+            <h2 class="main-title">Todos os posts - Administrador</h2>
+          <% } else { %>
+            <h2 class="main-title">Todos os posts - Nome usuário</h2>
+          <% } %>
+          
+          <div class="row" style="margin-top: 2rem">
+            <div class="col-md-6 col-xl-3">
+              <article class="stat-cards-item">
+                <div class="stat-cards-icon warning">
+                  <img style="height: 2.4rem" src="/img/admin/estrela.png" alt="">
+                </div>
+                <div class="stat-cards-info">
+                  <p class="stat-cards-info__num">Vagner Lemos</p>
+                  <p class="stat-cards-info__title">a pluBee me ajudou demais a gerenciar meu tempo com as publicações. obrigado por essa plataforma!</p>
+                  <span class="data-span"> Mês passado</span>
+                </div>
+              </article>
+            </div>
+          </div>
+        </div>
+      </main>
+
+      <!-- ! Footer -->
+      <%- include('../partials/footer-platform') %>
+    </div>
+  </div>
+
+
+<!-- Chart library -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<!-- Icons library -->
+<script src="js/admin/feather.min.js"></script>
+</body>
+</html>
+
+<script>
+    const btn = document.querySelector('#btn-add-link')
+
+    btn.addEventListener("click", function() {
+        const link = document.querySelector("#link");
+
+        if (link.length == 0) {
+          link.style.cssText = "background-color: red;"
+        }
+
+        fetch("groups/new/" + link.value, {
+            method: "POST",
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ id_user: '63ec3ca3bdeb832d9eb38322', id_account: 1 })
+        })
+
+        location.reload();
+    })
+  
+</script>

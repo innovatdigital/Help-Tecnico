@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>pluBee | Bot de comentários</title>
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="//img/admin/PLUBEE-LOGO-E-NOME.png" type="image/x-icon">
+  <!-- Custom styles -->
+  <link rel="stylesheet" href="/css/admin/style.css">
+  <link rel="stylesheet" href="/css/platform/comments.css">
+</head>
+
+<body>
+  <div class="layer"></div>
+  <!-- ! Body -->
+  <div class="page-flex">
+
+    <!-- ! Sidebar -->
+    <%- include('../partials/sidebar-platform', {isAdmin: isAdmin}) %>
+
+    <div class="main-wrapper">
+      <!-- ! Main nav -->
+      <%- include('../partials/nav-platform') %>
+  
+      <!-- ! Main -->
+      <main class="main users chart-page" id="skip-target">
+        <div class="container">
+
+          <div class="row active-div">
+            <div class="col-lg">
+              <div class="card-body">
+                <h5 class="card-title">Ativar comentário automático - Title</h5>
+                <input type="text" name="content" id="content-input"><input type="text" maxlength="4" name="limit" id="limit-input">
+                <button id="btn-active" onclick="activeComment()">Ativar</button>
+                <button id="btn-close" onclick="setHide()">Fechar</button>
+              </div>          
+            </div>
+          </div>
+
+          <% if (isAdmin) { %>
+            <h2 class="main-title">Ativar comentários automáticos - Administrador</h2>
+          <% } else { %>
+            <h2 class="main-title">Todos os posts - Nome usuário</h2>
+          <% } %>
+
+          <div class="row">
+            <div class="col-lg">
+              <div class="users-table table-wrapper">
+
+                <table class="posts-table">
+                  <thead>
+                    <tr class="users-table-info">
+                      <th style="font-weight: bold">
+                        <label class="users-table__checkbox">
+                          Thumbnail
+                        </label>
+                      </th>
+                      <th>Titulo</th>
+                      <th>Nome da conta</th>
+                      <th>Status</th>
+                      <th>Ações</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <% posts.forEach(function(item) { %>
+                      <tr>
+                        <td>
+                          <div class="categories-table-img">
+                            <picture><source srcset="<%= item.image %>"><img src="<%= item.image %>" alt="category"></picture>
+                          </div>
+                        </td>
+                        <td>
+                          <%= item.title %>
+                        </td>
+                        <td>
+                          <div class="pages-table-img">
+                            <picture><source srcset="/img/admin/avatar-illustrated-04.webp" type="image/webp"><img src="/img/admin/avatar-illustrated-04.webp" alt="User Name"><%= item.name_user %></picture>
+                        
+                          </div>
+                        </td>
+                        <% if (item.status_bot == "enable") { %>
+                        <td><span class="badge badge-pill badge-success">Ativado</span></td>
+                        <td>
+                          <button><a href="#">Editar comentário</a></button>
+                          <button onclick="disableComment('<%= item._id %>')">Desativar comentário</button>
+                        </td>
+                        <% } else { %>
+                        <td><span class="badge-active">Desativado</span></td>
+                        <td>
+                          <button id="btn-open" onclick="activeComment('<%= item.id_post %>', '<%= item.id_account %>', '<%= item.id_user %>', '<%= item.platform %>')" background-color: #FFFFFF; padding: 6px; border-radius: 9px; border: 3px solid #752A7A">Ativar comentários</button>
+                        </td>
+                        <% } %>
+                      </tr>
+                    <% }); %>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            
+            <div class="col-lg-3" style="margin-top: 3rem;">
+              <article class="white-block">
+                <div class="top-cat-title">
+                  <h3>Comentários recentes</h3>
+                  <p>200 comentários</p>
+                </div>
+                <ul class="top-cat-list">
+                  <% comments.forEach(function(item) { %>
+                    <li>
+                      <a href="##">
+                        <div class="top-cat-list__title">
+                          <%= item.name %>
+                        </div>
+                        <div class="top-cat-list__subtitle">
+                          Plano <%= item.type_account %> <span class="purple"><%= item.date %></span>
+                        </div>
+                      </a>
+                    </li>
+                  <% }); %>
+                </ul>
+              </article>
+            </div>
+          </div>
+      </main>
+
+      <!-- ! Footer -->
+      <%- include('../partials/footer-platform') %>
+    </div>
+  </div>
+
+
+<!-- Chart library -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<!-- Icons library -->
+<script src="js/admin/feather.min.js"></script>
+</body>
+
+<script>
+  const btnActive = document.querySelector('#btn-active')
+  const btnOpen = document.querySelector('#btn-open')
+  const btnClose = document.querySelector('#btn-close')
+  const active = document.querySelector('.active-div')
+  let idPost = ''
+  let idAccount = ''
+  let idUser = ''
+
+  let count = 0
+
+  active.style.display = "none"
+
+  function activeComment(id_post, id_account, id_user, platform) {
+    if (count == 0) {
+      active.style.display = "flex"
+      idPost = id_post
+      idAccount = id_account
+      idUser = id_user
+      platformPost = platform
+
+      count = 1
+
+    } else {
+      const content = document.querySelector('#content-input')
+      const limit = document.querySelector('#limit-input')
+
+      fetch("comments-automatic/config", {
+          method: "PUT",
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ id_user: idUser, id_account: idAccount, id_post: idPost, platform: platformPost, content_comment: content.value, limit_comments: limit.value })
+      }).then(response => response.ok)
+        .then(data => {
+          if (data) {
+            location.reload()
+          }
+        })
+        .catch(error => console.error(error));
+    }
+  }
+
+  function disableComment(id_post) {
+    fetch("comments-automatic/delete/" + id_post, {
+        method: "DELETE",
+        headers: { 'Content-Type': 'application/json' },
+    }).then(response => response.ok)
+      .then(data => {
+        if (data) {
+          location.reload()
+        }
+      })
+      .catch(error => console.error(error));
+  }
+
+  function setHide() {
+    active.style.display = "none"
+    count = 0
+  }
+
+  $(document).ready(function(){
+  });
+</script>
+
+</html>

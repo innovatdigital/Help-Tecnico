@@ -1,0 +1,117 @@
+<!-- ! Sidebar -->
+<aside class="sidebar" >
+    <div class="sidebar-start">
+        <div class="sidebar-head">
+            <a href="/" class="logo-wrapper" title="Home">
+                <span class="sr-only">Home</span>
+                <img class="logo-nav" src="/img/admin/PLUBEE-LOGO-E-NOME.png">
+                <div class="logo-text"></div>
+            </a>
+            <button class="sidebar-toggle transparent-btn" title="Menu" type="button">
+                <span class="sr-only">Toggle menu</span>
+                <span class="icon menu-toggle" aria-hidden="true"></span>
+            </button>
+        </div>
+        <div class="sidebar-body">
+            <ul class="sidebar-body-menu">
+                <li>
+                    <a class="active" href="/platform">
+                        <span class="icon" aria-hidden="true"><img src="/img/admin/Bulk/home.png" alt=""></span>Dashboard
+                    </a>
+                    <ul class="cat-sub-menu">
+                    </ul>
+                </li>
+
+                <li>
+                    <a class="show-cat-btn" href="/platform/all-posts">
+                        <span class="icon" aria-hidden="true"><img src="/img/admin/Bulk/posts.png" alt=""></span>Posts
+                    </a>
+                </li>
+
+                
+                <li>
+                    <a class="show-cat-btn" href="/platform/post_facebook">
+                        <span class="icon" aria-hidden="true"><img src="/img/admin/Bulk/facebook.png" alt=""></span>Novo post Facebook
+                    </a>
+                </li>
+
+                
+                <li>
+                    <a class="show-cat-btn" href="/platform/post_instagram">
+                        <span class="icon" aria-hidden="true"><img src="/img/admin/Bulk/instagram.png" alt=""></span>Novo post Instagram
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="show-cat-btn" href="/platform/accounts">
+                        <span class="icon" aria-hidden="true"><img src="/img/admin/Bulk/perfil.png" alt=""></span>Contas inseridas
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="show-cat-btn" href="/platform/groups">
+                        <span class="icon" aria-hidden="true"><img src="/img/admin/Bulk/grupos.png" alt=""></span>Grupos
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="show-cat-btn" href="/platform/comments-automatic">
+                        <span class="icon" aria-hidden="true"><img src="/img/admin/Bulk/comentario.png" alt=""></span>Bot de comentários
+                    </a>
+                </li>
+
+                <li>
+                    <a class="show-cat-btn" href="/platform/config">
+                        <span class="icon" aria-hidden="true"><img src="/img/admin/Bulk/config.png" alt=""></span>Configurações
+                    </a>
+                </li>
+
+                <% if (isAdmin) { %>
+                    <br>
+                    <span class="system-menu__title">Funções admin</span>
+                    
+                    <li>
+                        <a class="show-cat-btn" href="/platform/email">
+                            <span class="icon" aria-hidden="true"><img src="/img/admin/Bulk/e-mail.png" alt=""></span>Enviar emails
+                        </a>
+                    </li>
+
+                    <li>
+                        <a class="show-cat-btn" href="/platform/users">
+                            <span class="icon" aria-hidden="true"><img src="/img/admin/Bulk/usuarios.png" alt=""></span>Usuários
+                        </a>
+                    </li>
+
+                    <li>
+                        <a class="show-cat-btn" href="##">
+                            <span class="icon" aria-hidden="true"><img src="/img/admin/Bulk/pages.png" alt=""></span>Páginas
+                        </a>
+                    </li>
+
+                    <li>
+                        <a class="show-cat-btn" href="/platform/feedbacks">
+                            <span class="icon" aria-hidden="true"><img src="/img/admin/Bulk/feedbacks.png" alt=""></span>Feedbacks
+                        </a>
+                    </li>
+
+                    <li>
+                        <a class="show-cat-btn" href="/platform/plans">
+                            <span class="icon" aria-hidden="true"><img src="/img/admin/Bulk/precos.png" alt=""></span>Planos
+                        </a>
+                    </li>
+
+                    <li>
+                        <a class="show-cat-btn" href="/platform/finance">
+                            <span class="icon" aria-hidden="true"><img src="/img/admin/Bulk/dinheiro.png" alt=""></span>Finanças
+                        </a>
+                    </li>
+                <% } %>
+            </ul>
+        </div>
+    </div>
+</aside>
+
+<!-- Icons library -->
+<script src="plugins/feather.min.js"></script>
+<!-- Custom scripts -->
+<script src="js/script.js"></script>

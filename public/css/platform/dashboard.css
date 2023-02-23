@@ -1,0 +1,115 @@
+@import url('https://fonts.cdnfonts.com/css/made-tommy-outline');
+@import url('https://fonts.cdnfonts.com/css/cavilant');
+
+.box {
+    height: 41.4vw;
+    margin: 1.5vw;
+    background: #FFFFFF;
+    box-shadow: 0px 2px 9px rgba(0, 0, 0, 0.25);
+    border-radius: 19px;
+    overflow-y: scroll
+}
+
+.title {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 2px solid #BEBEBE;
+    padding: 1vw;
+}
+
+.title span {
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 800;
+    font-size: 1.1vw;
+    color: #7D7D7D
+}
+
+.title h2 {
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 1.1vw;
+    margin-left: 0.6vw;
+    margin-right: 0.6vw;
+    color: #752A7A;
+}
+
+.post {
+    display: flex;
+    align-items: center;
+    margin-top: 1.8vw;
+    margin-left: 1vw;
+    margin-right: 1vw;
+    padding-bottom: 1.6vw;
+    border-bottom: 1px solid #D4D4D4;
+}
+
+.post i {
+    margin-left: 0.1vw;
+    font-size: 2.6vw;
+    color: #2dd221
+}
+
+.post img {
+    width: auto;
+    height: 8.4vh;
+    border-radius: 0.4rem;
+}
+
+.post .icon {
+    margin-left: 1.4vw;
+    height: 1.2vw;
+}
+
+.post h2 {
+    font-family: 'MADE TOMMY';
+    font-style: normal;
+    font-weight: 800;
+    font-size: 1vw;
+    color: #7D7D7D;
+    transition: all 200ms linear;
+}
+
+.title-description {
+    margin-left: 1.3vw;
+}
+
+.title-description p {
+    width: 60rem;
+    font-family: 'MADE TOMMY';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 0.8vw;
+    color: #868686;
+    margin-top: 0.3vw;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    transition: all 200ms linear;
+}
+
+.utils {
+    margin-left: 5vw;
+}
+
+.utils span {
+    display: flex;
+    align-items: center;
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 0.8vw;
+    color: #752A7A;
+}
+
+.div-top button:hover, .div-top button:hover .plus {
+    color: #FFFFFF;
+    background-color: #752A7A;
+    transition: all 200ms ease;
+}
+
+.post:hover h2, .post:hover p {
+    color: #752A7A;
+    transition: all 100ms ease;
+}

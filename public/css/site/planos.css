@@ -1,0 +1,161 @@
+@import url('https://fonts.cdnfonts.com/css/made-tommy-outline');
+@import url('https://fonts.cdnfonts.com/css/cavilant');
+
+.planos {
+	background: url("../login/back-branco.png") no-repeat;
+}
+
+.planos .title-planos {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+}
+
+.planos .title-planos h1 {
+	font-family: 'Cavilant';
+	font-style: normal;
+	font-weight: 400;
+	font-size: 46px;
+	color: #752A7A;
+	margin: 0%;
+	margin-top: 4rem;
+}
+
+.planos-anual h2 {
+	width: 10rem;
+	height: 3rem;
+	font-family: 'MADE TOMMY';
+	font-style: normal;
+	font-weight: 800;
+	font-size: 20px;
+	text-align: center;
+	color: #747474;
+	margin-top: 3rem;
+}
+
+.planos h2 {
+	width: 10rem;
+	font-family: 'MADE TOMMY';
+	font-style: normal;
+	font-weight: 800;
+	font-size: 20px;
+	text-align: center;
+	color: #747474;
+	margin-top: 3rem;
+}
+
+.planos .flex-planos {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	margin-top: 1.4rem;
+}
+
+.planos .flex-planos .div-small {
+	width: 21rem;
+	height: 30rem;
+	background-color: #FFFFFF;
+	border: 5px solid #752A7A;
+	box-shadow: 0px 4px 18px rgba(0, 0, 0, 0.25);
+	border-radius: 20px;
+}
+
+.planos-anual {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+}
+
+.div-small, .div-big {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	flex-direction: column;
+}
+
+.planos .flex-planos .div-big {
+	width: 22rem;
+	height: 33rem;
+	background-color: #752A7A;
+	border: 5px solid #752A7A;
+	box-shadow: 0px 4px 18px rgba(0, 0, 0, 0.25);
+	border-radius: 20px;
+}
+
+.planos .flex-planos h2 {
+	width: 20rem;
+	margin: 0%;
+	margin-top: 2rem;
+	font-family: 'MADE TOMMY';
+	font-style: normal;
+	font-weight: 400;
+	font-size: 24px;
+	color: #752A7A;
+}
+
+.planos .flex-planos p {
+	font-family: 'MADE TOMMY';
+	margin: 0%;
+	font-style: normal;
+	font-weight: 400;
+	font-size: 16px;
+	color: #752A7A;
+}
+
+.planos .flex-planos span {
+	font-family: 'MADE TOMMY';
+	font-style: normal;
+	font-weight: 800;
+	font-size: 21px;
+	color: #752A7A;
+}
+
+.planos .flex-planos h1 {
+	font-family: 'MADE TOMMY';
+	font-style: normal;
+	font-weight: 800;
+	font-size: 36px;
+	margin-top: 0.5rem;
+	margin-bottom: 0.8rem;
+	color: #752A7A;
+}
+
+.planos .flex-planos i {
+	color: #3cd731;
+	font-weight: 800;
+	font-size: 2rem;
+}
+
+.planos .flex-planos button {
+	width: 10.5rem;
+	height: 3.4rem;
+	background: #752A7A;
+	box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+	border-radius: 26px;
+	border: None;
+	font-family: 'MADE TOMMY';
+	font-style: normal;
+	font-weight: 800;
+	font-size: 14px;
+	line-height: 23px;
+	align-items: center;
+	text-align: center;
+	color: #FFFFFF;
+	margin-top: 1.8rem;
+}
+
+.planos .flex-planos h3 {
+	font-family: 'MADE TOMMY';
+	font-style: normal;
+	font-weight: 400;
+	font-size: 15px;
+	margin-top: 2rem;
+	margin-bottom: 0.8rem;
+	color: #ffffff;
+}
+
+.planos-anual h2:hover {
+	border-bottom: 0.2rem solid #747474;
+	transition: all 250ms;
+	transition-timing-function: ease;
+}

@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>pluBee | Contas conectadas</title>
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="//img/admin/PLUBEE-LOGO-E-NOME.png" type="image/x-icon">
+  <!-- Custom styles -->
+  <link rel="stylesheet" href="/css/admin/style.css">
+</head>
+
+<body>
+  <div class="layer"></div>
+  
+  <!-- ! Body -->
+  <div class="page-flex">
+
+    <!-- ! Sidebar -->
+    <%- include('../partials/sidebar-platform', {isAdmin: isAdmin}) %>
+
+    <div class="main-wrapper">
+      <!-- ! Main nav -->
+      <%- include('../partials/nav-platform') %>
+  
+      <!-- ! Main -->
+      <main class="main users chart-page" id="skip-target">
+        <div class="container">
+          <% if (isAdmin) { %>
+            <h2 class="main-title">Inserir novo post - Administrador</h2>
+          <% } else { %>
+            <h2 class="main-title">Inserir novo post - Nome usuário</h2>
+          <% } %>
+
+          <div class="row">
+            <div class="col-lg-12">
+              <article class="white-block">
+                <div class="top-cat-title">
+                  <h2 style="color: #1877F2; display: flex; align-items: center;"><img src="/img/platform/facebook.png" width=45 height=45 alt="" style="margin-right: 5px;">Novo post Facebook</h2>
+                </div>
+                <br>
+                <p style="font-size: 15px; margin-bottom: 10px; font-weight: bold;">Selecione uma conta:</p>
+                <select name="accounts-post" id="accounts-post">
+                  <% accounts.forEach(function(item) { %>
+                    <option value="<%= item.id_account %>"><%= item.name %></option>
+                  <% }) %>
+                </select>
+                <br>
+                <br>
+                <p style="font-size: 15px; margin-bottom: 10px; font-weight: bold;">Escreva o post aqui:</p>
+                <textarea name="" id="" cols="30" rows="4"></textarea>
+                <br>
+                <br>
+                <p style="font-size: 15px; margin-bottom: 10px; font-weight: bold;">Inserir imagens:</p>
+                <input type="file" name="files" id="files" multiple>
+                <br>
+                <p style="font-size: 15px; margin-bottom: 10px">Visualização:</p>
+                <div class="results">
+                </div>
+                <br>
+                <br>
+                <p style="font-size: 15px; margin-bottom: 10px; font-weight: bold;">Configurações:</p>
+                <div style="display: flex;">
+                  <input type="radio" name="program" id="program-no" value="yes" tabindex="1">Programar
+                  <input type="radio" name="program" id="program-yes" value="no" tabindex="2">Não programar
+                </div>
+                <br>
+                <br>
+                <button style="color: #FFFFFF; background-color: #752A7A; padding: 10px; border-radius: 10px">Inserir post</button>
+              </article>
+            </div>
+          </div>
+        </div>
+      </main>
+
+      <%- include('../partials/footer-platform') %>
+    </div>
+  </div>
+
+
+<!-- Chart library -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<!-- Icons library -->
+<script src="js/admin/feather.min.js"></script>
+</body>
+</html>
+
+<script>
+  let file_input = document.querySelector('#files');
+  let image_preview = document.querySelector('.results');
+
+  const handle_file_preview = (e) => {
+    let files = e.target.files;
+    let length = files.length;
+
+    for(let i = 0; i < length; i++) {
+        let image = document.createElement('img');
+        image.setAttribute('width', '80');
+        image.setAttribute('height', '50');
+        image.setAttribute('style', 'margin-right: 1rem; border-radius: 20px; border: 2px solid #752a7a');
+        // use the DOMstring for source
+        image.src = window.URL.createObjectURL(files[i]);
+        image_preview.appendChild(image);
+    }
+  }
+
+  file_input.addEventListener('change', handle_file_preview);
+
+  function post() {
+    fetch("/checkout/process_payment", {
+    method: "POST",
+    headers: {
+    "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data)
+  })
+  .then((response) => {
+      if (response.ok) {
+          return response.json();
+      }
+      throw new Error("Erro ao processar a resposta da requisição");
+  })
+  .then((data) => {
+      if (data.approved) {
+          $(".container").hide()
+          $("#title").text("Pagamento aprovado com sucesso!")
+          $(".content").append(`<p class="p-approved">Olá ${document.querySelector('#name').value}, seu pagamento foi aprovado com sucesso.</p>`)
+          $(".content").append("<p class='p-approved'>Faça login agora mesmo na sua conta clicando no botão abaxo.</p>")
+      }
+      resolve();
+  })
+  .catch((error) => {
+      console.log(error)
+      reject();
+  })
+  }
+</script>

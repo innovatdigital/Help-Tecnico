@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>pluBee | Dashboard</title>
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="/img/admin/PLUBEE-LOGO-E-NOME.png" type="image/x-icon">
+  <!-- Custom styles -->
+  <link rel="stylesheet" href="/css/admin/style.css">
+</head>
+
+<body>
+  <div class="layer"></div>
+
+  <div class="page-flex">
+    <!-- ! Sidebar -->
+    <%- include('../partials/sidebar-platform', {isAdmin: isAdmin}) %>
+
+    <div class="main-wrapper">
+      <!-- ! Main nav -->
+      <%- include('../partials/nav-platform') %>
+      
+      <!-- ! Main -->
+      <main class="main users chart-page" id="skip-target">
+        <div class="container">
+          <% if (isAdmin) { %>
+            <h2 class="main-title">Dashboard - Administrador</h2>
+          <% } else { %>
+            <h2 class="main-title">Dashboard - Nome usuário</h2>
+          <% } %>
+          
+          <% if (isAdmin) { %>
+            <div class="row stat-cards">
+              <div class="col-md-6 col-xl-3">
+                <article class="stat-cards-item">
+                  <div class="stat-cards-icon primary">
+                    <img style="height: 2.5rem" src="img/admin/internet.png" alt="">
+                  </div>
+                  <div class="stat-cards-info">
+                    <p class="stat-cards-info__num">0</p>
+                    <p class="stat-cards-info__title">Total visits</p>
+                    <p class="stat-cards-info__progress">
+                      <span class="stat-cards-info__profit success">
+                      </span>
+                      Mês passado
+                    </p>
+                  </div>
+                </article>
+              </div>
+
+              <div class="col-md-6 col-xl-3">
+                <article class="stat-cards-item">
+                  <div class="stat-cards-icon warning">
+                    <img style="height: 3rem" src="img/admin/group.png" alt="">
+                  </div>
+                  <div class="stat-cards-info">
+                    <p class="stat-cards-info__num"><%- totalUsers %></p>
+                    <p class="stat-cards-info__title">Total users</p>
+                    <p class="stat-cards-info__progress">
+                      <span class="stat-cards-info__profit success">
+                        <i data-feather="trending-up" aria-hidden="true"></i>0.24%
+                      </span>
+                      Mês passado
+                    </p>
+                  </div>
+                </article>
+              </div>
+
+              <div class="col-md-6 col-xl-3">
+                <article class="stat-cards-item">
+                  <div class="stat-cards-icon purple">
+                    <img style="height: 1.9rem" src="img/admin/post.png" alt="">
+                  </div>
+                  <div class="stat-cards-info">
+                    <p class="stat-cards-info__num"><%- totalPosts %></p>
+                    <p class="stat-cards-info__title">Total posts (usuários)</p>
+                    <p class="stat-cards-info__progress">
+                      <span class="stat-cards-info__profit danger">
+                        <i data-feather="trending-down" aria-hidden="true"></i>1.64%
+                      </span>
+                      Mês passado
+                    </p>
+                  </div>
+                </article>
+              </div>
+
+              <div class="col-md-6 col-xl-3">
+                <article class="stat-cards-item">
+                  <div class="stat-cards-icon success">
+                    <img style="height: 2.1rem" src="img/admin/estrela.png" alt="">
+                  </div>
+                  <div class="stat-cards-info">
+                    <p class="stat-cards-info__num"><%- totalFeedbacks %></p>
+                    <p class="stat-cards-info__title">Feedbacks</p>
+                    <p class="stat-cards-info__progress">
+                      <span class="stat-cards-info__profit warning">
+                        <i data-feather="trending-up" aria-hidden="true"></i>0.00%
+                      </span>
+                      Todo o período
+                    </p>
+                  </div>
+                </article>
+              </div>
+            </div>
+          <% } else { %>
+            <div class="row stat-cards">
+              <div class="col-md-6 col-xl-3">
+                <article class="stat-cards-item">
+                  <div class="stat-cards-icon primary">
+                    <img style="height: 2rem" src="img/admin/facebook.png" alt="">
+                  </div>
+                  <div class="stat-cards-info">
+                    <p class="stat-cards-info__num">0</p>
+                    <p class="stat-cards-info__title">Total de contas</p>
+                    <p class="stat-cards-info__progress">
+                      Mês passado
+                    </p>
+                  </div>
+                </article>
+              </div>
+
+              <div class="col-md-6 col-xl-3">
+                <article class="stat-cards-item">
+                  <div class="stat-cards-icon warning">
+                    <img style="height: 3rem" src="img/admin/group.png" alt="">
+                  </div>
+                  <div class="stat-cards-info">
+                    <p class="stat-cards-info__num">0</p>
+                    <p class="stat-cards-info__title">Total de grupos</p>
+                    <p class="stat-cards-info__progress">
+                      Mês passado
+                    </p>
+                  </div>
+                </article>
+              </div>
+
+              <div class="col-md-6 col-xl-3">
+                <article class="stat-cards-item">
+                  <div class="stat-cards-icon purple">
+                    <img style="height: 1.9rem" src="img/admin/post.png" alt="">
+                  </div>
+                  <div class="stat-cards-info">
+                    <p class="stat-cards-info__num">0</p>
+                    <p class="stat-cards-info__title">Total posts</p>
+                    <p class="stat-cards-info__progress">
+                      Mês passado
+                    </p>
+                  </div>
+                </article>
+              </div>
+
+              <div class="col-md-6 col-xl-3">
+                <article class="stat-cards-item">
+                  <div class="stat-cards-icon success">
+                    <img style="height: 2.1rem" src="img/admin/tipo-conta.png" alt="">
+                  </div>
+                  <div class="stat-cards-info">
+                    <p class="stat-cards-info__num" style="font-weight: bold;"><%= type_account %></p>
+                    <p class="stat-cards-info__title">Tipo de conta:</p>
+                    <p class="stat-cards-info__progress">
+                      Status: Ativa
+                    </p>
+                  </div>
+                </article>
+              </div>
+            </div>
+          <% } %>
+
+          <div class="row">
+            <div class="col-lg-9">
+              <div class="chart">
+                <canvas id="myChart" aria-label="Site statistics" role="img"></canvas>
+              </div>
+              
+              <div class="users-table table-wrapper">
+                <% if (isAdmin) { %>
+                  <table class="posts-table">
+                    <thead>
+                      <tr class="users-table-info">
+                        <th>
+                          <label class="users-table__checkbox ms-20">
+                            Thumbnail
+                          </label>
+                        </th>
+                        <th>Titulo</th>
+                        <th>Usuário</th>
+                        <th>Status</th>
+                        <th>Data</th>
+                        <th>Ações</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <% postsRecents.forEach(function(item) { %>
+                        <tr>
+                          <td>
+                            <div class="categories-table-img">
+                              <picture><source srcset=""><img src="{{image}}" alt="category"></picture>
+                            </div>
+                          </td>
+                          <td>
+                            <%- item.title %>
+                          </td>
+                          <td>
+                            <div class="pages-table-img">
+                              <picture><source srcset="img/admin/avatar-illustrated-04.webp" type="image/webp"><img src="img/admin/avatar-illustrated-04.webp" alt="User Name"></picture>
+                              <%- item.name_user %>
+                            </div>
+                          </td>
+                          <td><span class="badge-active">Postado</span></td>
+                          <td><%- item.date %></td>
+                          <td>
+                            <span class="p-relative">
+                              <button class="dropdown-btn transparent-btn" type="button" title="More info">
+                                <div class="sr-only">More info</div>
+                                <i data-feather="more-horizontal" aria-hidden="true"></i>
+                              </button>
+                              <ul class="users-item-dropdown dropdown">
+                                <li><a href="##">Edit</a></li>
+                                <li><a href="##">Quick edit</a></li>
+                                <li><a href="##">Trash</a></li>
+                              </ul>
+                            </span>
+                          </td>
+                        </tr>
+                      <% }); %>
+                    </tbody>
+                  </table>
+                <% } else { %>
+                  <table class="posts-table">
+                    <thead>
+                      <tr class="users-table-info">
+                        <th>
+                          <label class="users-table__checkbox ms-20">
+                            Thumbnail
+                          </label>
+                        </th>
+                        <th>Titulo</th>
+                        <th>Conta</th>
+                        <th>Status</th>
+                        <th>Data</th>
+                        <th>Total de grupos</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                          <td>
+                            <div class="categories-table-img">
+                              <picture><source srcset=""><img src="" alt="imagem"></picture>
+                            </div>
+                          </td>
+                          <td>
+                            Titulo
+                          </td>
+                          <td>
+                            <div class="pages-table-img">
+                              <picture><source srcset="img/admin/avatar-illustrated-04.webp" type="image/webp"><img src="img/admin/avatar-illustrated-04.webp" alt="User Name"></picture>
+                              Nome da conta
+                            </div>
+                          </td>
+                          <td><span class="badge-active">Publicado</span></td>
+                          <td>Data</td>
+                          <td>
+                            0
+                          </td>
+                        </tr>
+                    </tbody>
+                  </table>
+                <% } %>
+              </div>
+            </div>
+            
+            <% if (isAdmin == "true") { %>
+            <div class="col-lg-3">
+              <article class="white-block">
+                <div class="top-cat-title">
+                  <h3>Usuários recentes</h3>
+                  <p>10 usuários</p>
+                </div>
+                <ul class="top-cat-list">
+                  <% usersRecent.forEach(function(item) { %>
+                    <li>
+                      <a href="##">
+                        <div class="top-cat-list__title">
+                          <%= item.name %>
+                        </div>
+                        <div class="top-cat-list__subtitle">
+                          Plano <%= item.type_account %> <span class="purple"><%= item.date %></span>
+                        </div>
+                      </a>
+                    </li>
+                  <% }); %>
+                </ul>
+              </article>
+            </div>
+            <% } %>
+          </div>
+        </div>
+      </main>
+
+      <!-- ! Footer -->
+      <%- include('../partials/footer-platform') %>
+    </div>
+  </div>
+
+
+<!-- Chart library -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</body>
+</html>
+
+<script>
+  const ctx = document.getElementById('myChart');
+
+  new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: ['Comentários', 'Posts', 'Likes', 'Compartilhações', 'Posts'],
+      datasets: [{
+        label: '# Visão geral',
+        data: [12, 19, 8, 10, 15],
+        borderWidth: 1
+      }]
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true
+        }
+      }
+    }
+  });
+</script>

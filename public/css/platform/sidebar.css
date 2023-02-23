@@ -1,0 +1,97 @@
+@import url('https://fonts.cdnfonts.com/css/made-tommy-outline');
+@import url('https://fonts.cdnfonts.com/css/cavilant');
+
+* {
+    margin: 0%;
+    padding: 0%;
+}
+
+.logo-side {
+    width: auto;
+	height: 5vh;
+	margin-top: 5.6vh;
+	margin-bottom: 8vh;
+}
+
+.sidebar {
+    display: flex;
+    height: 100vh;
+    flex-direction: column;
+    background-color: #752A7A;
+    align-items: center;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.ul-side li {
+    margin: 0rem 0.8vw;
+	list-style: none;
+	font-family: 'MADE TOMMY';
+	font-style: normal;
+	font-weight: 400;
+	color: #752A7A;
+    margin-bottom: 5.6vh;
+}
+
+.ul-side li a {
+    font-family: 'MADE TOMMY';
+    font-style: normal;
+    font-weight: 800;
+    font-size: 1vw;
+    color: #FFFFFF;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    letter-spacing: 0.03rem;
+    transition: all 200ms ease;
+}
+
+.account {
+    display: flex;
+    align-items: center;
+    margin-top: 13.4vw;
+    margin-right: 1vw;
+}
+
+.account div {
+    margin-left: 0.8vw
+}
+
+.account h2 {
+    font-family: 'MADE TOMMY';
+    font-style: normal;
+    font-weight: 800;
+    font-size: 0.9vw;
+    color: #FFFFFF;
+    letter-spacing: 0.03rem;
+    margin-bottom: 0.2vw;
+}
+
+.account p {
+    font-family: 'MADE TOMMY';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 0.7vw;
+    color: #FFFFFF;
+    letter-spacing: 0.03rem;
+}
+
+.account img {
+    width: auto;
+    height: 2.6vw;
+    border: 3px solid #FFFFFF;
+    border-radius: 50px;
+    margin-top: 0.2vw;
+}
+
+.ul-side li a:hover {
+    color: #752A7A;
+    background-color: white;
+    padding: 0.8rem;
+    border-radius: 40px;
+    justify-content: center;
+}
+
+.icon-side {
+    margin-right: 0.8vw;
+    font-size: 1.4vw;
+}

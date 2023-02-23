@@ -1,0 +1,120 @@
+@import url('https://fonts.cdnfonts.com/css/made-tommy-outline');
+@import url('https://fonts.cdnfonts.com/css/cavilant');
+
+.box {
+    height: 27vw;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin: 1.5vw;
+    background: #FFFFFF;
+    box-shadow: 0px 2px 9px rgba(0, 0, 0, 0.25);
+    border-radius: 19px;
+}
+
+.coluwn-one, .coluwn-two, .coluwn-three {
+    display: flex;
+    flex-direction: column;
+}
+
+.coluwn-one {
+    margin-top: 2.2vw;
+    margin-left: 2.6vw;
+}
+
+.coluwn-two {
+    margin-top: 2.2vw;
+    margin-left: 6.5vw;
+    margin-right: 2.6vw;
+}
+
+.coluwn-two i {
+    color: #752A7A;
+    font-size: 1.2vw;
+}
+
+.coluwn-three {
+    margin-top: 2.2vw;
+    margin-left: 2.5vw;
+    margin-right: 2.6vw;
+}
+
+.coluwn-one h2, .coluwn-two h2, .coluwn-three h2 {
+    font-family: 'MADE TOMMY';
+    font-style: normal;
+    font-weight: 800;
+    font-size: 1.2vw;
+    letter-spacing: 0.03rem;
+    margin-bottom: 1vw;
+    color: #752A7A;
+}
+
+input {
+	width: 16vw;
+	height: 2.8rem;
+    margin-bottom: 2.1vw;
+	border: 2px solid #752A7A;
+	border-radius: 16px;
+	font-family: 'MADE TOMMY';
+	font-style: normal;
+	font-weight: 400;
+	font-size: 16px;
+	color: #8F8F8F;
+    background-color: #F9F9F9;
+    padding: 0.2vw;
+}
+
+i {
+    font-size: 0.8vw;
+    margin-right: 6px;
+}
+
+.files {
+    border: none;
+    background-color: #FFFFFF;
+}
+
+textarea {
+    width: 16vw;
+	border: 2px solid #752A7A;
+	border-radius: 16px;
+	font-family: 'MADE TOMMY';
+	font-style: normal;
+	font-weight: 400;
+	font-size: 16px;
+	color: #8F8F8F;
+    background-color: #F9F9F9;
+    padding: 0.2vw;
+}
+
+.submit {
+    display: flex;
+    width: 10vw;
+    align-self: flex-end;
+	height: 3vw;
+    background-color: #752A7A;
+	box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+	border-radius: 26px;
+	border: 3px solid #752A7A;
+	font-family: 'MADE TOMMY';
+	font-style: normal;
+	font-weight: 800;
+	font-size: 0.8vw;
+	align-items: center;
+    justify-content: center;
+	text-align: center;
+	color: #ffffff;
+    cursor: pointer;
+    letter-spacing: 0.03rem;
+    transition: all 200ms linear;
+}
+
+.submit:hover {
+    background-color: #ffffff;
+    color: #752A7A;
+}
+
+.span-text {
+    margin-left: 0.4vw;
+    color: #1877F2;
+}

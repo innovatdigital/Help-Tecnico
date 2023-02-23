@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plataforma</title>
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="../css/plataforma/sidebar.css">
+    <link rel="stylesheet" href="../css/plataforma/plataforma.css">
+    <link rel="stylesheet" href="../css/plataforma/nav.css">
+    <link rel="stylesheet" href="../css/plataforma/novo-facebook.css">
+</head>
+<body>
+    <section class="grid">
+        <div class="sidebar">
+            <div>
+                <img class="logo-side" src="../login/img/PLUBEE-LOGO-E-NOME.png" alt="">
+            </div>
+            
+            <ul class="ul-side">
+                <li><a href=""><i class="bi bi-postcard icon-side"></i>Dashboard</a></li>
+                <li><a href=""><i class="bi bi-plus-circle-fill icon-side"></i>Criar publicação</a></li>
+                <li><a href=""><i class="bi bi-people-fill icon-side"></i>Importar grupos</a></li>
+                <li><a href=""><i class="bi bi-person-circle icon-side"></i>Gerenciar contas</a></li>
+                <li><a href=""><i class="bi bi-robot icon-side"></i>Bot comentários</a></li>
+            </ul>
+
+            <div class="account">
+                <img src="./img/publi-logo-completa.png" alt="">
+                <div>
+                    <h2>Nome da conta</h2>
+                    <p>Plano da conta</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="div-top">
+            <h1>Criar publicação para o<span class="span-text">Facebook</span>:</h1>
+            <div>
+                <i class="bi bi-bell-fill bell"></i>
+                <button><i class="bi bi-plus-circle-fill plus"></i>Criar publicação</button>
+            </div>
+        </div>
+
+        <div class="content">
+            <div class="box">
+                <form action="" style="display: flex;">
+                    <div class="coluwn-one">
+                        <h2>Titulo da publicação: *</h2>
+                        <input type="text" id="title" placeholder="Insira o titulo:">
+                        <h2>Descrição da publicação: *</h2>
+                        <textarea name="description" id="" cols="30" rows="10" placeholder="Descreva a sua publicação:"></textarea>
+                    </div>
+
+                    <div class="coluwn-two">
+                        <h2>Público da publicação: *</h2>
+                        <input type="text" placeholder="Selecione uma opção">
+                        <h2>Selecione os grupos:</h2>
+                        <input type="text" placeholder="Selecione as opções">
+                        <h2>Inserir imagens:</h2>
+                        <div><i class="bi bi-image-fill"></i><input class="files" type="file" name="" id=""></div>
+                    </div>
+
+                    <div class="coluwn-three">
+                        <h2>Programar publicação: *</h2>
+                        <input type="text" placeholder="Selecione uma data">
+                        <h2>Conta de publicação: *</h2>
+                        <input type="text" placeholder="Selecione uma opção">
+                        <button class="submit"><i class="bi bi-megaphone"></i>Fazer publicação</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+</body>
+</html>

@@ -1,0 +1,1175 @@
+@import url('https://fonts.cdnfonts.com/css/made-tommy-outline');
+@import url('https://fonts.cdnfonts.com/css/cavilant');
+
+/* NAV */
+
+html {
+	scroll-behavior: smooth;
+}
+
+nav {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: space-around;
+	height: 5vw;
+	background-color: #FFFFFF;
+	border-bottom: 2px solid #752A7A;
+}
+
+.logo-nav {
+	height: 4.5vw;
+	margin-top: 2.6vw;
+	margin-bottom: 2.6vw;
+}
+
+#menu {
+	display: flex;
+}
+
+.li-nav {
+	margin: 0rem 0.8rem;
+	list-style: none;
+	font-family: 'MADE TOMMY';
+	font-style: normal;
+	font-weight: 400;
+	font-size: 1.06rem;
+	color: #752A7A;
+}
+
+.a-nav, .a-nav:link, .a-nav:active, .a-nav:visited {
+	color: #752A7A;
+	text-decoration: none;
+	transition: all 250ms;
+	transition-timing-function: ease;
+}
+
+.a-nav-login {
+	padding: 0.9vw 2.8vw;
+	background: #FFFFFF;
+	border: 3px solid #752A7A;
+	border-radius: 28px;
+	font-family: 'MADE TOMMY';
+	font-style: normal;
+	font-weight: 800;
+	font-size: 0.9rem;
+	text-align: center;
+	color: #752A7A;
+	transition: all 400ms ease;
+	margin-left: 1rem;
+	text-decoration: none;
+}
+
+.a-nav-planos {
+	padding: 0.9vw 1.8vw;
+	background: #752A7A;
+	border: 3px solid #752A7A;
+	border-radius: 28px;
+	font-family: 'MADE TOMMY';
+	font-style: normal;
+	font-weight: 800;
+	font-size: 0.9rem;
+	text-align: center;
+	color: #FFFFFF;
+	transition: all 400ms ease;
+	margin-left: 0.4rem;
+	text-decoration: none;
+}
+
+.a-nav-login:hover {
+	background: #752A7A;
+	color: #FFFFFF;
+}
+
+.a-nav-planos:hover {
+	background: #FFFFFF;
+	border: 3px solid #752A7A;
+	color: #752A7A;
+}
+
+.a-nav:hover {
+	padding-bottom: 0.8rem;
+	border-bottom: 0.2rem solid #752A7A;
+}
+
+.a-nav-clicked {
+	color: #752A7A;
+}
+
+
+
+
+
+
+
+
+
+
+/* HOME */
+.home {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	align-items: center;
+	flex-flow: row wrap;
+	height: 29vw;
+	background: url("../login/back-branco.png") no-repeat;
+	background-color: #752A7A;
+}
+
+.home h1 {
+	font-family: 'Cavilant';
+	font-style: normal;
+	font-weight: 400;
+	font-size: 2vw;
+	display: flex;
+	align-items: center;
+	color: #FFFFFF;
+	text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+	margin-bottom: 1vw;
+}
+
+.home h3 {
+	font-family: 'MADE TOMMY';
+	font-style: normal;
+	font-weight: 800;
+	font-size: 1.3vw;
+	color: #FF794D;
+	margin-bottom: 1.4vw;
+}
+
+.home span {
+	font-family: 'MADE TOMMY';
+	font-style: normal;
+	font-weight: 800;
+	font-size: 1.3vw;
+	color: #ffffff;
+}
+
+.home p {
+	font-family: 'MADE TOMMY';
+	font-style: normal;
+	font-weight: 400;
+	font-size: 1.2vw;
+	color: #FFFFFF;
+	letter-spacing: 0.02rem;
+	margin-bottom: 1vw;
+}
+
+.home p>i {
+	font-size: 1.5vw;
+	color: #FFFFFF;
+}
+
+.home p>span {
+	font-family: 'MADE TOMMY';
+	font-style: normal;
+	font-weight: 800;
+	font-size: 1.2vw;
+	color: #ffffff;
+}
+
+.home-infos {
+	margin-left: 13vw
+}
+
+.home img {
+	max-width: 100%;
+	border: 2px solid #FFFFFF;
+	border-radius: 2rem;
+	height: 22vw;
+	margin-right: 10vw;
+	margin-top: 1vw;
+}
+
+
+
+
+
+
+
+
+
+/* A PLATAFORMA */
+.a-plataforma-title {
+	display: flex;
+	justify-content: center;
+    height: 40vw;
+	flex-direction: column;
+}
+
+.a-plataforma-title h1 {
+	font-family: 'Cavilant';
+	font-style: normal;
+	font-weight: 400;
+	font-size: 2.2vw;
+	margin: 0%;
+	color: #752A7A;
+	margin-top: 1vw;
+	text-align: center;
+}
+
+.a-plataforma-title h2 {
+	font-family: 'MADE TOMMY';
+	font-style: normal;
+	font-weight: 400;
+	font-size: 1.8vw;
+	text-align: center;
+	color: #752A7A;
+	margin: 0%;
+}
+
+.span-insta {
+	font-family: 'MADE TOMMY';
+	font-style: normal;
+	font-weight: 800;
+	font-size: 1.8vw;
+	line-height: 42px;
+	text-align: center;
+	color: #C21F70
+}
+
+.span-facebook {
+	font-family: 'MADE TOMMY';
+	font-style: normal;
+	font-weight: 800;
+	font-size: 1.8vw;
+	line-height: 42px;
+	text-align: center;
+	color: #1877F2
+}
+
+.a-plataforma-section {
+	display: flex;
+	flex-wrap: wrap;
+}
+
+.a-plataforma-img {
+	width: 35vw;
+	height: 23vw;
+	margin-left: 11vw;
+	margin-top: 5vw;
+	border: 2px solid #752A7A;
+	border-radius: 2rem;
+}
+
+.a-plataforma-infos-one {
+	margin-top: 3vw;
+}
+
+.a-plataforma-icon {
+	height: 3vw;
+}
+
+.a-plataforma-infos-two {
+	display: flex;
+	flex-wrap: wrap;
+	margin-top: 3.2vw;
+	margin-left: 1.4vw;
+}
+
+.a-plataforma-infos-two div {
+	margin-left: 5vw;
+}
+
+.a-plataforma-infos-two h3 {
+	font-family: 'MADE TOMMY';
+	font-style: normal;
+	font-weight: 800;
+	font-size: 1.1vw;
+	color: #752A7A;
+}
+
+.a-plataforma-infos-two p {
+	font-family: 'MADE TOMMY';
+	font-style: normal;
+	font-weight: 400;
+	font-size: 0.9vw;
+	line-height: 20px;
+	color: #752A7A;
+	margin-top: 0.2rem;
+}
+
+
+
+
+
+
+
+
+
+/* SOBRE */
+.sobre {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	height: 30vw;
+	background-color: #B64F65;
+}
+
+.sobre div {
+	margin-top: 2.4vw;
+}
+
+.sobre img {
+	height: 25vw;
+	border-radius: 50rem;
+	margin-right: 8vw;
+	margin-top: 0.4vw;
+}
+
+.sobre h1 {
+	font-family: 'Cavilant';
+	font-style: normal;
+	font-weight: 400;
+	font-size: 2vw;
+	line-height: 40px;
+	color: #FFFFFF;
+	text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+	margin-top: 1.8vw;
+	margin-bottom: 5px;
+}
+
+.sobre p {
+	width: 32vw;
+	font-family: 'MADE TOMMY';
+	font-style: normal;
+	font-weight: 400;
+	font-size: 1vw;
+	color: #FFFFFF;
+	margin-top: 1.3vw;
+	text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.sobre span {
+	background-color: #ffffff;
+	color: #ffffff;
+	box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+	font-size: 0.4vw;
+}
+
+
+
+
+
+
+
+
+
+/* DEPOIMENTOS */
+.depoimentos {
+	height: 25vw;
+	background-color: #752A7A;
+}
+
+.depoimentos .title {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	height: 6.5vw;
+	background-color: #752A7A;
+}
+
+.depoimentos h1 {
+	font-family: 'Cavilant';
+	font-style: normal;
+	font-weight: 400;
+	font-size: 2vw;
+	line-height: 43px;
+	color: #FFFFFF;
+	margin-top: 3.5vw;
+}
+
+.depoimentos .flex {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	align-items: center;
+	background-color: #752A7A;
+}
+
+.depoimento-div {
+	width: 18vw;
+	height: 14vw;
+	background: rgba(255, 255, 255, 0.84);
+	box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+	margin: 2vw;
+	border-radius: 3vw;
+}
+
+.depoimento-div .content {
+	margin: 1.2vw 1.2vw;
+}
+
+.depoimentos .flex i {
+	font-size: 1.4vw;
+	color: #FFB21C;
+	margin: 0.1vw;
+}
+
+.depoimentos .flex p {
+	font-family: 'Cavilant';
+	font-style: normal;
+	font-weight: 400;
+	font-size: 0.9vw;
+	color: #B64F65;
+	margin-top: 1vw;
+}
+
+.author {
+	display: flex;
+	flex-wrap: wrap;
+}
+
+.depoimentos .flex img {
+	height: 3vw;
+	border-radius: 50rem;
+	margin-top: 0.5vw;
+}
+
+.depoimentos .flex h2 {
+	font-family: 'MADE TOMMY';
+	font-style: normal;
+	font-weight: 800;
+	font-size: 0.9vw;
+	letter-spacing: 0.1px;
+	color: #752A7A;
+	margin-top: 0.9vw;
+	margin-left: 0.5vw;
+}
+
+.depoimentos .flex span {
+	font-family: 'MADE TOMMY';
+	font-style: normal;
+	font-weight: 400;
+	font-size: 0.8vw;
+	letter-spacing: 0.1px;
+	color: #752A7A;
+}
+
+
+
+
+
+
+
+
+/* PLANOS */
+.planos {
+	background: url("/img/login/back-branco.png") no-repeat;
+    margin-top: 1.8vw;
+}
+
+.planos .title-planos {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+}
+
+.planos .title-planos h1 {
+	font-family: 'Cavilant';
+	font-style: normal;
+	font-weight: 400;
+	font-size: 2vw;
+	color: #752A7A;
+    margin: 0;
+	margin-top: 4vw;
+}
+
+.planos-anual h2 {
+	width: 10vw;
+	height: 2vw;
+	font-family: 'MADE TOMMY';
+	font-style: normal;
+	font-weight: 800;
+	font-size: 0.8vw;
+	text-align: center;
+	color: #747474;
+	margin-top: 3vw;
+}
+
+.planos h2 {
+	width: 8vw;
+	font-family: 'MADE TOMMY';
+	font-style: normal;
+	font-weight: 800;
+	font-size: 1vw;
+	text-align: center;
+	color: #747474;
+	margin-top: 2.2vw;
+}
+
+.planos .flex-planos {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	margin-top: 3vw;
+}
+
+.planos .flex-planos .div-small {
+	width: 16vw;
+	height: 24vw;
+	background-color: #FFFFFF;
+	border: 5px solid #752A7A;
+	box-shadow: 0px 4px 18px rgba(0, 0, 0, 0.25);
+	border-radius: 20px;
+}
+
+.planos-anual {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+}
+
+.div-small, .div-big {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	flex-direction: column;
+}
+
+.planos .flex-planos .div-big {
+	width: 17vw;
+	height: 26.4vw;
+	background-color: #752A7A;
+	border: 5px solid #752A7A;
+	box-shadow: 0px 4px 18px rgba(0, 0, 0, 0.25);
+	border-radius: 20px;
+	margin-right: 4vw;
+	margin-left: 4vw;
+}
+
+.planos .flex-planos h2 {
+	width: 16vw;
+	margin: 0%;
+	margin-top: 1.5vw;
+	font-family: 'MADE TOMMY';
+	font-style: normal;
+	font-weight: 400;
+	font-size: 1.2vw;
+	color: #752A7A;
+    transition: all 250ms;
+	transition-timing-function: ease;
+}
+
+.planos .flex-planos p {
+	font-family: 'MADE TOMMY';
+	margin: 0%;
+	font-style: normal;
+	font-weight: 400;
+	font-size: 0.8vw;
+	color: #752A7A;
+}
+
+.planos .flex-planos span {
+	font-family: 'MADE TOMMY';
+	font-style: normal;
+	font-weight: 800;
+	font-size: 1.2vw;
+	color: #752A7A;
+}
+
+.planos .flex-planos h1 {
+	font-family: 'MADE TOMMY';
+	font-style: normal;
+	font-weight: 800;
+	font-size: 1.8vw;
+	margin-top: 0.3vw;
+	margin-bottom: 0.6vw;
+	color: #752A7A;
+}
+
+.planos .flex-planos i {
+	color: #3cd731;
+	font-weight: 800;
+	font-size: 1.6vw;
+}
+
+.planos .flex-planos a {
+	padding: 0.7vw 3vw;
+	background: #752A7A;
+	box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+	border-radius: 26px;
+	border: None;
+	font-family: 'MADE TOMMY';
+	font-style: normal;
+	font-weight: 800;
+	font-size: 0.7vw;
+	line-height: 23px;
+	align-items: center;
+	text-align: center;
+	color: #FFFFFF;
+	margin-top: 1.5vw;
+	text-decoration: none;
+}
+
+.planos .flex-planos h3 {
+	font-family: 'MADE TOMMY';
+	font-style: normal;
+	font-weight: 400;
+	font-size: 0.8vw;
+	margin-top: 1.5vw;
+	margin-bottom: 0.8vw;
+	color: #ffffff;
+}
+
+.planos-anual h2:hover {
+	border-bottom: 0.2rem solid #747474;
+}
+
+
+
+
+
+
+
+
+
+
+/* FOOTER */
+footer {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: space-around;
+	background-color: #752A7A;
+	margin-top: 5rem;
+	height: 18rem;
+}
+
+.logo-footer {
+	height: 2.5rem;
+	margin-left: 1rem;
+	margin-top: 3rem;
+	margin-bottom: 1rem;
+}
+
+footer h2 {
+	font-family: 'MADE TOMMY';
+	font-style: normal;
+	font-weight: 800;
+	font-size: 18px;
+	line-height: 21px;
+	display: flex;
+	align-items: center;
+	letter-spacing: 0.05em;
+	color: #FFFFFF;
+	margin-top: 3rem;
+	margin-bottom: 1.6rem;
+}
+
+.p-1 {
+	font-family: 'MADE TOMMY';
+	font-style: normal;
+	font-weight: 400;
+	font-size: 15px;
+	display: flex;
+	align-items: center;
+	color: #FFFFFF;
+	margin-left: 1rem;
+	margin-top: 0%;
+}
+
+.a-footer {
+	font-family: 'MADE TOMMY';
+	font-style: normal;
+	font-weight: 400;
+	font-size: 15px;
+	line-height: 17px;
+	display: flex;
+	align-items: center;
+	margin-bottom: 1.2rem;
+	text-decoration-line: underline;
+	color: #FFFFFF;
+}
+
+.social {
+	display: inline-flex;
+}
+
+i {
+	font-size: 1.2rem;
+	margin-right: 10px;
+}
+
+.a-rights {
+	color: #752A7A;
+	text-decoration: underline;
+}
+
+.rights {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	align-items: center;
+	height: 4rem;
+	background-color: #FFFFFF;
+}
+
+.rights p {
+	font-family: 'MADE TOMMY';
+	font-style: normal;
+	font-weight: 400;
+	font-size: 16px;
+	color: #752A7A;
+}
+
+#btn-mobile {
+	display: none;
+}
+
+@media (max-width: 500px) {
+	nav {
+		height: 80px;
+	}
+
+	.a-nav-login, .a-nav-planos {
+		display: none;
+	}
+
+	.logo-nav {
+		height: 60px;
+	}
+
+	.home {
+		height: 370px;
+		display: flex;
+		justify-content: start;
+		align-content: start;
+	}
+
+	.home h1 {
+		font-size: 6vw;
+		margin-right: 10px;
+	}
+	
+	.home h3 {
+		width: 400px;
+		font-size: 4vw;
+	}
+	
+	.home span {
+		font-family: 'MADE TOMMY';
+		font-style: normal;
+		font-weight: 800;
+		font-size: 4vw;
+		color: #ffffff;
+	}
+	
+	.home p {
+		font-family: 'MADE TOMMY';
+		font-style: normal;
+		font-weight: 400;
+		font-size: 3.4vw;
+		color: #FFFFFF;
+		letter-spacing: 0.02rem;
+		margin-bottom: 1vw;
+	}
+	
+	.home p>i {
+		font-size: 3.4vw;
+		color: #FFFFFF;
+	}
+	
+	.home p>span {
+		font-family: 'MADE TOMMY';
+		font-style: normal;
+		font-weight: 800;
+		font-size: 3.4vw;
+		color: #ffffff;
+	}
+	
+	.home-infos {
+		margin-left: 13vw
+	}
+	
+	.home img {
+		display: none;
+	}
+
+	.a-plataforma-title {
+		height: 400px;
+	}
+	
+	.a-plataforma-title h1 {
+		font-size: 6vw;
+	}
+	
+	.a-plataforma-title h2 {
+		font-size: 5vw;
+	}
+	
+	.span-insta {
+		font-size: 5vw;
+	}
+	
+	.span-facebook {
+		font-size: 5vw;
+	}
+	
+	.a-plataforma-section {
+		display: flex;
+		flex-wrap: wrap;
+	}
+	
+	.a-plataforma-img {
+		display: none;
+	}
+	
+	.a-plataforma-infos-one {
+		margin-top: 6vw;
+	}
+	
+	.a-plataforma-icon {
+		height: 9vw;
+	}
+	
+	.a-plataforma-infos-two {
+		display: flex;
+		flex-wrap: wrap;
+		margin-top: 3.2vw;
+		margin-left: 1.4vw;
+	}
+	
+	.a-plataforma-infos-two div {
+		margin-left: 5vw;
+	}
+	
+	.a-plataforma-infos-two h3 {
+		font-size: 2.8vw;
+	}
+	
+	.a-plataforma-infos-two p {
+		font-size: 2.5vw;
+	}
+
+	.sobre {
+		height: 500px;
+		display: flex;
+		flex-direction: column;
+	}
+	
+	.sobre div {
+		margin-top: 2.4vw;
+	}
+	
+	.sobre img {
+		display: none;
+	}
+	
+	.sobre h1 {
+		font-size: 6.4vw;
+	}
+	
+	.sobre p {
+		width: 90vw;
+		font-size: 4vw;
+	}
+	
+	.sobre span {
+		font-size: 1.8vw;
+	}	
+
+	#menu {
+		display: none;
+	}
+
+	.depoimentos {
+		height: 820px;
+	}
+	
+	.depoimentos .title {
+		height: 6.5vw;
+	}
+	
+	.depoimentos h1 {
+		font-size: 5vw;
+	}
+	
+	.depoimentos .flex {
+		display: flex;
+		flex-direction: column;
+		margin-top: 10vw;
+	}
+	
+	.depoimento-div {
+		width: 60vw;
+		height: 40vw;
+		background: rgba(255, 255, 255, 0.84);
+		box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+		margin: 2vw;
+		border-radius: 3vw;
+	}
+	
+	.depoimento-div .content {
+		margin: 1.2vw 1.2vw;
+	}
+	
+	.depoimentos .flex i {
+		font-size: 4vw;
+	}
+	
+	.depoimentos .flex p {
+		font-family: 'Cavilant';
+		font-style: normal;
+		font-weight: 400;
+		font-size: 3vw;
+		color: #B64F65;
+		margin-top: 3vw;
+	}
+	
+	.depoimentos .flex img {
+		height: 8vw;
+		border-radius: 50rem;
+		margin-top: 2vw;
+	}
+	
+	.depoimentos .flex h2 {
+		font-family: 'MADE TOMMY';
+		font-style: normal;
+		font-weight: 800;
+		font-size: 3vw;
+		letter-spacing: 0.1px;
+		color: #752A7A;
+		margin-top: 2.2vw;
+		margin-left: 0.5vw;
+	}
+	
+	.depoimentos .flex span {
+		font-family: 'MADE TOMMY';
+		font-style: normal;
+		font-weight: 400;
+		font-size: 3vw;
+		letter-spacing: 0.1px;
+		color: #752A7A;
+	}
+
+	.planos {
+		background: url("/img/login/back-branco.png") no-repeat;
+		margin-top: 1.8vw;
+	}
+	
+	.planos .title-planos {
+		display: flex;
+	}
+	
+	.planos .title-planos h1 {
+		font-family: 'Cavilant';
+		font-style: normal;
+		font-weight: 400;
+		font-size: 6vw;
+		color: #752A7A;
+		margin: 0;
+		text-align: center;
+		margin-top: 4vw;
+		margin-bottom: 4vw;
+		width: 80vw;
+	}
+	
+	.planos .flex-planos {
+		display: flex;
+		align-content: column;
+		flex-direction: column;
+		align-items: center;
+	}
+	
+	.planos .flex-planos .div-small {
+		width: 70vw;
+		height: 80vw;
+		background-color: #FFFFFF;
+		border: 5px solid #752A7A;
+		box-shadow: 0px 4px 18px rgba(0, 0, 0, 0.25);
+		border-radius: 20px;
+	}
+	
+	.planos-anual {
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: center;
+	}
+	
+	.div-small, .div-big {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		flex-direction: column;
+	}
+	
+	.planos .flex-planos .div-big {
+		width: 70vw;
+		height: 90vw;
+		background-color: #752A7A;
+		border: 5px solid #752A7A;
+		box-shadow: 0px 4px 18px rgba(0, 0, 0, 0.25);
+		border-radius: 20px;
+		margin-top: 8vw;
+		margin-bottom: 8vw;
+	}
+	
+	.planos .flex-planos h2 {
+		width: 70vw;
+		font-size: 6vw;
+		margin-top: 20px;
+	}
+	
+	.planos .flex-planos p {
+		font-family: 'MADE TOMMY';
+		margin: 0%;
+		font-style: normal;
+		font-weight: 400;
+		font-size: 3.5vw;
+		color: #752A7A;
+	}
+	
+	.planos .flex-planos span {
+		font-family: 'MADE TOMMY';
+		font-style: normal;
+		font-weight: 800;
+		font-size: 6vw;
+		color: #752A7A;
+	}
+	
+	.planos .flex-planos h1 {
+		font-family: 'MADE TOMMY';
+		font-style: normal;
+		font-weight: 800;
+		font-size: 7vw;
+		margin-top: 0.3vw;
+		margin-bottom: 3vw;
+		color: #752A7A;
+	}
+	
+	.planos .flex-planos i {
+		color: #3cd731;
+		font-weight: 800;
+		font-size: 5vw;
+	}
+	
+	.planos .flex-planos a {
+		padding: 2vw 12vw;
+		background: #752A7A;
+		box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+		border-radius: 26px;
+		border: None;
+		font-family: 'MADE TOMMY';
+		font-style: normal;
+		font-weight: 800;
+		font-size: 3vw;
+		line-height: 23px;
+		align-items: center;
+		text-align: center;
+		color: #FFFFFF;
+		margin-top: 5vw;
+		text-decoration: none;
+	}
+	
+	.planos .flex-planos h3 {
+		font-family: 'MADE TOMMY';
+		font-style: normal;
+		font-weight: 400;
+		font-size: 3vw;
+		margin-top: 3vw;
+		margin-bottom: 0.8vw;
+		color: #ffffff;
+	}
+	
+	.planos-anual h2:hover {
+		border-bottom: 0.2rem solid #747474;
+	}
+
+	footer {
+		display: flex;
+		flex-direction: column;
+	}
+
+	.logo-footer {
+		height: 2.5rem;
+		margin-left: 1rem;
+		margin-top: 3rem;
+		margin-bottom: 1rem;
+	}
+	
+	footer h2 {
+		font-family: 'MADE TOMMY';
+		font-style: normal;
+		font-weight: 800;
+		font-size: 18px;
+		line-height: 21px;
+		display: flex;
+		align-items: center;
+		letter-spacing: 0.05em;
+		color: #FFFFFF;
+		margin-top: 3rem;
+		margin-bottom: 1.6rem;
+	}
+	
+	.p-1 {
+		font-family: 'MADE TOMMY';
+		font-style: normal;
+		font-weight: 400;
+		font-size: 15px;
+		display: flex;
+		align-items: center;
+		color: #FFFFFF;
+		margin-left: 1rem;
+		margin-top: 0%;
+	}
+	
+	.a-footer {
+		font-family: 'MADE TOMMY';
+		font-style: normal;
+		font-weight: 400;
+		font-size: 15px;
+		line-height: 17px;
+		display: flex;
+		align-items: center;
+		margin-bottom: 1.2rem;
+		text-decoration-line: underline;
+		color: #FFFFFF;
+	}
+	
+	.social {
+		display: inline-flex;
+	}
+	
+	i {
+		font-size: 1.2rem;
+		margin-right: 10px;
+	}	
+}
+
+@media (max-width: 1400px) {
+	nav {
+		height: 80px;
+	}
+
+	.a-plataforma-title {
+		height: 480px;
+	}
+}
+
+/* @media (max-width: 1022px) {
+	#btn-mobile {
+		display: block;
+	}
+
+	#menu {
+		display: none;
+		display: block;
+		position: absolute;
+		width: 100%;
+		top: 70px;
+		right: 0px;
+		left: 0px;
+		height: 100vh;
+		
+	}
+
+	#nav.active #menu {
+		display: flex;
+	}
+
+	#nav.active {
+		height: 20vh;
+	}
+} */

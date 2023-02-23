@@ -1,0 +1,94 @@
+@import url('https://fonts.cdnfonts.com/css/made-tommy-outline');
+@import url('https://fonts.cdnfonts.com/css/cavilant');
+
+.depoimentos {
+	height: 32rem;
+	background-color: #752A7A;
+}
+
+.depoimentos .title {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	height: 8rem;
+	background-color: #752A7A;
+}
+
+.depoimentos h1 {
+	font-family: 'Cavilant';
+	font-style: normal;
+	font-weight: 400;
+	font-size: 40px;
+	line-height: 43px;
+	color: #FFFFFF;
+	margin-top: 3.5rem;
+}
+
+.depoimentos .flex {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	align-items: center;
+	background-color: #752A7A;
+}
+
+.depoimento-div {
+	width: 22rem;
+	height: 15rem;
+	background: rgba(255, 255, 255, 0.84);
+	box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+	margin: 3rem;
+	border-radius: 40px;
+}
+
+.depoimento-div .content {
+	margin: 1.5rem 1.5rem;
+}
+
+.depoimentos .flex i {
+	font-size: 1.5rem;
+	color: #FFB21C;
+	margin: 0.4%;
+}
+
+.depoimentos .flex p {
+	font-family: 'Cavilant';
+	font-style: normal;
+	font-weight: 400;
+	font-size: 17px;
+	color: #B64F65;
+	margin-top: 1rem;
+}
+
+.author {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: flex-start;
+	margin-bottom: 10rem;
+}
+
+.depoimentos .flex img {
+	height: 3.5rem;
+	border-radius: 50rem;
+	margin-top: 1.4rem;
+}
+
+.depoimentos .flex h2 {
+	font-family: 'MADE TOMMY';
+	font-style: normal;
+	font-weight: 800;
+	font-size: 16px;
+	letter-spacing: 0.1px;
+	color: #752A7A;
+	margin-top: 1.8rem;
+	margin-left: 0.6rem;
+}
+
+.depoimentos .flex span {
+	font-family: 'MADE TOMMY';
+	font-style: normal;
+	font-weight: 400;
+	font-size: 16px;
+	letter-spacing: 0.1px;
+	color: #752A7A;
+}

@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>pluBee | Finanças</title>
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="//img/admin/PLUBEE-LOGO-E-NOME.png" type="image/x-icon">
+  <!-- Custom styles -->
+  <link rel="stylesheet" href="/css/admin/style.css">
+</head>
+
+<body>
+  <div class="layer"></div>
+  
+  <!-- ! Body -->
+  <div class="page-flex">
+
+    <!-- ! Sidebar -->
+    <%- include('../partials/sidebar-platform', {isAdmin: isAdmin}) %>
+
+    <div class="main-wrapper">
+      <!-- ! Main nav -->
+      <%- include('../partials/nav-platform') %>
+  
+      <!-- ! Main -->
+      <main class="main users chart-page" id="skip-target">
+        <div class="container">
+          <% if (isAdmin) { %>
+            <h2 class="main-title">Finanças - Administrador</h2>
+          <% } %>
+            
+          <div class="row">
+            <div class="col-lg">
+              <div class="users-table table-wrapper">
+                <table class="posts-table">
+                  <thead>
+                    <tr class="users-table-info">
+                      <th style="font-weight: bold">
+                        <label class="users-table__checkbox">
+                          ID compra
+                        </label>
+                      </th>
+                      <th>ID usuário</th>
+                      <th>Email</th>
+                      <th>Valor</th>
+                      <th>Dia</th>
+                      <th>Mês</th>
+                      <th>Ano</th>
+                      <th>Plano</th>
+                      <th>Status</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <% finance.forEach(function(item) { %>
+                      <tr>
+                        <td>
+                          <div style="font-weight: bold">
+                            <%= item._id %>
+                          </div>
+                        </td>
+
+                        <td>
+                          <div>
+                            <%= item.idUser %>
+                          </div>
+                        </td>
+
+                        <td>
+                          <div>
+                            <%= item.email %>
+                          </div>
+                        </td>
+                        
+                        <td>
+                          <div>
+                            <%= item.value %>
+                          </div>
+                        </td>
+
+                        <td>
+                          <div>
+                            <%= item.day %>
+                          </div>
+                        </td>
+
+                        <td>
+                          <div>
+                            <%= item.month %>
+                          </div>
+                        </td>
+
+                        <td>
+                          <div>
+                            <%= item.year %>
+                          </div>
+                        </td>
+
+                        <td>
+                          <div>
+                            <%= item.plan %>
+                          </div>
+                        </td>
+
+                        <td>
+                          <div>
+                            <%= item.status %>
+                          </div>
+                        </td>
+                      </tr>
+                    <% }); %>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <div class="col-lg-3" style="margin-top: 3rem">
+              <article class="white-block">
+                <div class="top-cat-title">
+                  <h3>Filtrar</h3>
+                  <p style="font-size: 15px;">Total faturado: R$100.000</p>
+                </div>
+                <input type="text" placeholder="Enter keywords ..." style="margin-bottom: 18px;" required>
+                <div style="display: flex; justify-content: space-between; margin: 10px 0px">
+                  <p>Todos os contratos</p>
+                  <input type="checkbox" name="Plano Pro" id="" class="check" checked>
+                </div>
+                <div style="display: flex; justify-content: space-between; margin: 10px 0px">
+                  <p>Usuários com plano Básico</p>
+                  <input type="checkbox" name="Plano Pro" id="" class="check">
+                </div>
+                <div style="display: flex; justify-content: space-between; margin: 10px 0px">
+                  <p>Usuários com plano Avançado</p>
+                  <input type="checkbox" name="Plano Pro" id="" class="check">
+                </div>
+                <div style="display: flex; justify-content: space-between; margin: 10px 0px">
+                  <p>Usuários com plano Pro</p>
+                  <input type="checkbox" name="Plano Pro" id="" class="check">
+                </div>
+                <div style="display: flex; justify-content: space-between; margin: 10px 0px">
+                  <p>Usuários bloqueados</p>
+                  <input type="checkbox" name="Plano Pro" id="" class="check">
+                </div>
+                <div style="display: flex; justify-content: space-between; margin: 10px 0px">
+                  <p>Usuários com plano Pro</p>
+                  <input type="checkbox" name="Plano Pro" id="" class="check">
+                </div>
+                <br>
+                <button style="color: #FFFFFF; background-color: #752A7A; padding: 10px; border-radius: 10px">Filtrar usuários</button>
+              </article>
+            </div>
+          </div>
+        </div>
+      </main>
+
+      <%- include('../partials/footer-platform') %>
+    </div>
+  </div>
+
+
+<!-- Chart library -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<!-- Icons library -->
+<script src="js/admin/feather.min.js"></script>
+</body>
+</html>

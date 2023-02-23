@@ -1,0 +1,22 @@
+@import url('https://fonts.cdnfonts.com/css/made-tommy-outline');
+@import url('https://fonts.cdnfonts.com/css/cavilant');
+
+.grid {
+	display: grid;
+    grid-template: 
+        "sidebar div-top div-top" 8.5vh
+        "sidebar content content"
+        / 14.5vw 1vw;
+}
+
+.sidebar {
+    grid-area: sidebar;
+}
+
+.div-top {
+    grid-area: div-top;
+}
+
+.content {
+    grid-area: content;
+}

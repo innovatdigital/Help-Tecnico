@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>pluBee | Contas conectadas</title>
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="//img/admin/PLUBEE-LOGO-E-NOME.png" type="image/x-icon">
+  <!-- Custom styles -->
+  <link rel="stylesheet" href="/css/admin/style.css">
+</head>
+
+<body>
+  <div class="layer"></div>
+  
+  <!-- ! Body -->
+  <div class="page-flex">
+
+    <!-- ! Sidebar -->
+    <%- include('../partials/sidebar-platform', {isAdmin: isAdmin}) %>
+
+    <div class="main-wrapper">
+      <!-- ! Main nav -->
+      <%- include('../partials/nav-platform') %>
+  
+      <!-- ! Main -->
+      <main class="main users chart-page" id="skip-target">
+        <div class="container">
+          <% if (isAdmin) { %>
+            <h2 class="main-title">Contas cadastradas - Administrador</h2>
+          <% } else { %>
+            <h2 class="main-title">Contas cadastradas - Nome usuário</h2>
+          <% } %>
+
+          <div class="row">
+            <div class="col-lg">
+              <div class="users-table table-wrapper">
+                <table class="posts-table">
+                  <thead>
+                    <tr class="users-table-info">
+                      <th>Nome</th>
+                      <th>Email</th>
+                      <th>Number</th>
+                      <th>CPF</th>
+                      <th>Data de cadastro</th>
+                      <th>Tipo de conta</th>
+                      <th>Bloqueado</th>
+                      <th>Ações</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <% users.forEach(function(item) { %>
+                      <tr>
+                        <td>
+                          <div>
+                            <%= item.name %>
+                          </div>
+                          <div>
+                            <input class="<%= item.email %>" type="text" style="margin-top: 10px; width: 8vw; margin-right: 0.4vw; display: none;" value="<%= item.name %>">
+                          </div>
+                        </td>
+
+                        <td>
+                          <div>
+                            <%= item.email %>
+                          </div>
+                          <div>
+                            <input class="<%= item.email %>" type="text" style="margin-top: 10px; width: 8vw; margin-right: 0.4vw; display: none;" value="<%= item.email %>">
+                          </div>
+                        </td>
+                        
+                        <td>
+                          <div>
+                            <%= item.number %>
+                          </div>
+                          <div>
+                            <input class="<%= item.email %>" type="text" style="margin-top: 10px; width: 8vw; margin-right: 0.4vw; display: none;" value="<%= item.number %>">
+                          </div>
+                        </td>
+
+                        <td>
+                          <div>
+                            <%= item.cpf %>
+                          </div>
+                          <div>
+                            <input class="<%= item.email %>" type="text" style="margin-top: 10px; width: 8vw; margin-right: 0.4vw; display: none;" value="<%= item.cpf %>">
+                          </div>
+                        </td>
+
+                        <td>
+                          <div>
+                            <%= item.date %>
+                          </div>
+                        </td>
+
+                        <td>
+                          <div>
+                            <%= item.type_account %>
+                          </div>
+                          <div>
+                            <input class="<%= item.email %>" type="text" style="margin-top: 10px; width: 8vw; margin-right: 0.4vw; display: none;" value="<%= item.type_account %>">
+                          </div>
+                        </td>
+
+                        <% if (item.isBloqued == false) { %>
+                          <td>
+                            <div style="font-weight: bold; color: rgb(52, 175, 15);">
+                              Não
+                            </div>
+                          </td>
+                        <% } else { %>
+                          <td>
+                            <div style="font-weight: bold; color: rgb(194, 18, 18);">
+                              Sim
+                            </div>
+                          </td>
+                        <% } %>
+
+                        <td>
+                          <div>
+                            <% if (item.isBloqued == false) { %>
+                              <button onclick="blockUser('<%= item._id %>')">Bloquear</button>
+                            <% } else { %>
+                              <button onclick="unlockUser('<%= item._id %>')">Desbloquear</button>
+                            <% } %>
+                            <button onclick="deleteUser('<%= item._id %>')">Excluir</button>
+                            <button id="btn-edit" onclick="editUser('<%= item.email %>')">Modificar</button>
+                          </div>
+                        </td>
+                      </tr>
+                    <% }); %>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <div class="col-lg-3" style="margin-top: 3rem">
+              <article class="white-block">
+                <div class="top-cat-title">
+                  <h3>Filtrar</h3>
+                  <p style="font-size: 15px;">Total de usuários: 100</p>
+                </div>
+                <input type="text" placeholder="Enter keywords ..." style="margin-bottom: 18px;" required>
+                <div style="display: flex; justify-content: space-between; margin: 10px 0px">
+                  <p>Todos os usuários</p>
+                  <input type="checkbox" name="Plano Pro" id="" class="check" checked>
+                </div>
+                <div style="display: flex; justify-content: space-between; margin: 10px 0px">
+                  <p>Usuários com plano Básico</p>
+                  <input type="checkbox" name="Plano Pro" id="" class="check">
+                </div>
+                <div style="display: flex; justify-content: space-between; margin: 10px 0px">
+                  <p>Usuários com plano Avançado</p>
+                  <input type="checkbox" name="Plano Pro" id="" class="check">
+                </div>
+                <div style="display: flex; justify-content: space-between; margin: 10px 0px">
+                  <p>Usuários com plano Pro</p>
+                  <input type="checkbox" name="Plano Pro" id="" class="check">
+                </div>
+                <div style="display: flex; justify-content: space-between; margin: 10px 0px">
+                  <p>Usuários bloqueados</p>
+                  <input type="checkbox" name="Plano Pro" id="" class="check">
+                </div>
+                <div style="display: flex; justify-content: space-between; margin: 10px 0px">
+                  <p>Usuários com plano Pro</p>
+                  <input type="checkbox" name="Plano Pro" id="" class="check">
+                </div>
+                <br>
+                <button style="color: #FFFFFF; background-color: #752A7A; padding: 10px; border-radius: 10px">Filtrar usuários</button>
+              </article>
+            </div>
+          </div>
+        </div>
+      </main>
+
+      <%- include('../partials/footer-platform') %>
+    </div>
+  </div>
+
+
+<!-- Chart library -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<!-- Icons library -->
+<script src="js/admin/feather.min.js"></script>
+</body>
+</html>
+
+<script>
+  function blockUser(id_user) {
+    fetch("users/block/" + id_user, {
+      method: "POST",
+      headers: { 'Content-Type': 'application/json' },
+    })
+
+    location.reload();
+  }
+
+  function unlockUser(id_user) {
+    fetch("users/unlock/" + id_user, {
+      method: "POST",
+      headers: { 'Content-Type': 'application/json' },
+    })
+
+    location.reload();
+  }
+
+  function deleteUser(id_user) {
+    fetch("users/delete/" + id_user, {
+      method: "DELETE",
+      headers: { 'Content-Type': 'application/json' },
+    })
+
+    location.reload();
+  }
+
+  function editUser(email) {
+    const editInputs = document.querySelectorAll(`.${email}`)
+    const btnEdit = document.querySelectorAll("#btn-edit")
+    editInputs.forEach(input => {
+      input.style.display = "flex"
+    })
+  }
+</script>

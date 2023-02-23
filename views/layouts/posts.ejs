@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>pluBee | Todos os posts</title>
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="//img/admin/PLUBEE-LOGO-E-NOME.png" type="image/x-icon">
+  <!-- Custom styles -->
+  <link rel="stylesheet" href="/css/admin/style.css">
+</head>
+
+<body>
+  <div class="layer"></div>
+  
+  <!-- ! Body -->
+  <div class="page-flex">
+
+    <!-- ! Sidebar -->
+    <%- include('../partials/sidebar-platform', {isAdmin: isAdmin}) %>
+
+    <div class="main-wrapper">
+      <!-- ! Main nav -->
+      <%- include('../partials/nav-platform') %>
+  
+      <!-- ! Main -->
+      <main class="main users chart-page" id="skip-target">
+        <div class="container">
+          <% if (isAdmin) { %>
+            <h2 class="main-title">Todos os posts - Administrador</h2>
+          <% } else { %>
+            <h2 class="main-title">Todos os posts - Nome usuário</h2>
+          <% } %>
+
+          <div class="row">
+            <div class="col-lg">
+              <div class="users-table table-wrapper">
+                  <table class="posts-table">
+                    <thead>
+                      <tr class="users-table-info">
+                        <th style="font-weight: bold">
+                          <label class="users-table__checkbox">
+                            ID do post
+                          </label>
+                        </th>
+                        <th>Thumbnail</th>
+                        <th>Titulo</th>
+                        <th>Usuário</th>
+                        <th>Status</th>
+                        <th>Data</th>
+                        <th>Ações</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <% posts.forEach(function(item) { %>
+                        <tr>
+                          <td>
+                            <div>
+                              <%= item.id_post %>
+                            </div>
+                          </td>
+                          <td>
+                            <div class="categories-table-img">
+                              <picture><source srcset="<%= item.image %>"><img src="<%= item.image %>" alt="category"></picture>
+                            </div>
+                          </td>
+                          <td>
+                            <%= item.title %>
+                          </td>
+                          <td>
+                            <div class="pages-table-img">
+                              <picture><source srcset="/img/admin/avatar-illustrated-04.webp" type="image/webp"><img src="/img/admin/avatar-illustrated-04.webp" alt="User Name"><%= item.nameUser %></picture>
+                          
+                            </div>
+                          </td>
+                          <td><span class="badge badge-pill badge-success">Programado</span></td>
+                          <td><%= item.date %></td>
+                          <td>
+                            <a href="#">Ativar Bot</a>
+                          </td>
+                        </tr>
+                      <% }); %>
+                    </tbody>
+                  </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+
+      <!-- ! Footer -->
+      <%- include('../partials/footer-platform') %>
+    </div>
+  </div>
+
+
+<!-- Chart library -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<!-- Icons library -->
+<script src="js/admin/feather.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,50 @@
+@import url('https://fonts.cdnfonts.com/css/made-tommy-outline');
+@import url('https://fonts.cdnfonts.com/css/cavilant');
+
+.videos-plataforma {
+	height: 40rem;
+	background: url("../login/back-branco.png") no-repeat;
+	border-top: 2px solid #752A7A;
+	margin-top: 4rem;
+}
+
+.videos-plataforma h1 {
+	font-family: 'Cavilant';
+	font-style: normal;
+	font-weight: 400;
+	font-size: 2.5rem;
+	color: #752A7A;
+	margin-top: 5rem;
+	text-align: center;
+}
+
+.grid {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	margin-top: 5rem;
+}
+
+.video-small, .video-big {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	align-items: center;
+}
+
+.video-big {
+	margin-left: 5rem;
+	margin-right: 5rem;
+}
+
+.video-small img {
+	height: 13em;
+	border: 2px solid #752A7A;
+	border-radius: 2rem;
+}
+
+.video-big img {
+	height: 20em;
+	border: 2px solid #752A7A;
+	border-radius: 2rem;
+}
