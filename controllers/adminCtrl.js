@@ -3,18 +3,17 @@ const User = require('../models/User')
 const Plans = require('../models/Plans')
 const Feedbacks = require('../models/Feedbacks')
 const Finances = require('../models/Finances')
-const bcrypt = require('bcrypt')
 
 const feedbacks = asyncHandler(async(req, res) => {
     const getFeedbacks = await Feedbacks.find({}).lean()
 
-    res.render('layouts/feedbacks', { isAdmin: "true", feedbacks: getFeedbacks })
+    res.render('layouts/feedbacks', { isAdmin: true, feedbacks: getFeedbacks })
 })
 
 const users = asyncHandler(async(req, res) => {
     const users = await User.find({}).lean()
 
-    res.render('layouts/users', { isAdmin: "true", users: users })
+    res.render('layouts/users', { isAdmin: true, users: users })
 })
 
 const blockUser = asyncHandler(async(req, res) => {
@@ -60,7 +59,7 @@ const deleteUser = asyncHandler(async(req, res) => {
 const plans = asyncHandler(async(req, res) => {
     const plans = await Plans.find({}).lean()
 
-    res.render('layouts/plans', { isAdmin: "true", plans: plans })
+    res.render('layouts/plans', { isAdmin: true, plans: plans })
 })
 
 const newPlan = asyncHandler(async(req, res) => {
@@ -72,11 +71,17 @@ const newPlan = asyncHandler(async(req, res) => {
 const finance = asyncHandler(async(req, res) => {
     const finance = await Finances.find({}).lean()
 
-    res.render('layouts/finance', { isAdmin: "true", finance: finance })
+    valueTotal = 0
+
+    finance.forEach((value) => {
+        valueTotal = valueTotal + value.value
+    })
+
+    res.render('layouts/finance', { isAdmin: true, finance: finance, valueTotal: valueTotal })
 })
 
 const emails = asyncHandler(async(req, res) => {
-    res.render('layouts/emails', { isAdmin: "true" })
+    res.render('layouts/emails', { isAdmin: true })
 })
 
 module.exports = {

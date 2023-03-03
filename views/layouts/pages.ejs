@@ -23,36 +23,24 @@
 
     <div class="main-wrapper">
       <!-- ! Main nav -->
-      <%- include('../partials/nav-platform', {isAdmin: isAdmin, title: "Grupos importados"}) %>
+      <%- include('../partials/nav-platform', {isAdmin: isAdmin, title: "Páginas importadas"}) %>
   
       <!-- ! Main -->
       <main class="main users chart-page" id="skip-target">
         <div class="container">
           <div class="row" style="margin-top: 16px">
-            <% accounts.forEach(function(item) { %>
-              <% item.groups.forEach(function(group) { %>
+            <% pages.forEach(function(item) { %>
+              <% item.pages.forEach(function(page) { %>
                 <div class="col-md-6 col-xl-3">
                   <article class="stat-cards-item">
                     <div class="stat-cards-icon warning">
-                      <% if (group.image) { %>
-                        <img style="height: 3rem" src="<%= group.image %>" alt="">
-                      <% } else { %>
-                        <img style="height: 3rem" src="/img/admin/Bulk/grupos.png" alt="">
-                      <% } %>
+                      <img style="border-radius: 5rem;" src="<%= page.image %>" alt="">
                     </div>
                     <div class="stat-cards-info">
-                      <p class="stat-cards-info__num"><%= group.name %></p>
-                      <% if (group.description) { %>
-                        <p class="stat-cards-info__title description-group" style="width: 270px; height: 20px; overflow: hidden; text-overflow: ellipsis;"><%= group.description %></p>
-                      <% } else { %>
-                        <p class="stat-cards-info__title description-group" style="width: 270px; height: 20px; overflow: hidden; text-overflow: ellipsis;">Sem descrição</p>
-                      <% } %>
-                      <p class="stat-cards-info__progress">
-                        ID do grupo: <%= group.id %>
-                      </p>
-                      <p class="stat-cards-info__progress" style="font-weight: bold; color: #1877F2; margin-top: 4px;">
-                        Conta: <%= item.name %>
-                      </p>
+                      <p class="stat-cards-info__num"><%= page.name %></p>
+                      <p class="stat-cards-info__title description-group">ID da página:</p>
+                      <p class="stat-cards-info__title description-group"><%= page.id_page %></p>
+                      <p class="stat-cards-info__title description-group" style="font-weight: bold; color: #1877F2">Conta: <%= item.name %></p>
                     </div>
                   </article>
                 </div>
@@ -76,10 +64,10 @@
 </html>
 
 <script>
-  function viewGroups() {
+  function viewPages() {
     const id_account = document.querySelector('#accounts')
     selectValue = id_account.value
 
-    window.location.href = "/platform/groups/" + selectValue;
+    window.location.href = "/platform/pages/" + selectValue;
   }  
 </script>

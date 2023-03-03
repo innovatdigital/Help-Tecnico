@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>pluBee | Bot de comentários</title>
   <!-- Favicon -->
-  <link rel="shortcut icon" href="//img/admin/PLUBEE-LOGO-E-NOME.png" type="image/x-icon">
+  <link rel="shortcut icon" href="/img/site/plubee-icon.png" type="image/x-icon">
   <!-- Custom styles -->
   <link rel="stylesheet" href="/css/admin/style.css">
   <link rel="stylesheet" href="/css/platform/comments.css">
@@ -23,7 +23,7 @@
 
     <div class="main-wrapper">
       <!-- ! Main nav -->
-      <%- include('../partials/nav-platform') %>
+      <%- include('../partials/nav-platform', {isAdmin: isAdmin, title: "Comentários automáticos"}) %>
   
       <!-- ! Main -->
       <main class="main users chart-page" id="skip-target">
@@ -39,12 +39,6 @@
               </div>          
             </div>
           </div>
-
-          <% if (isAdmin) { %>
-            <h2 class="main-title">Ativar comentários automáticos - Administrador</h2>
-          <% } else { %>
-            <h2 class="main-title">Todos os posts - Nome usuário</h2>
-          <% } %>
 
           <div class="row">
             <div class="col-lg">
@@ -65,7 +59,7 @@
                     </tr>
                   </thead>
                   <tbody>
-                    <% posts.forEach(function(item) { %>
+                    <!-- <% posts.forEach(function(item) { %>
                       <tr>
                         <td>
                           <div class="categories-table-img">
@@ -94,14 +88,36 @@
                         </td>
                         <% } %>
                       </tr>
-                    <% }); %>
+                    <% }); %> -->
+
+                    <!-- <tr>
+                      <td>
+                        <div class="categories-table-img">
+                          <picture><source srcset="https://img.itdg.com.br/images/recipes/000/000/023/365326/365326_original.jpg"><img src="https://img.itdg.com.br/images/recipes/000/000/023/365326/365326_original.jpg" alt="imagem"></picture>
+                        </div>
+                      </td>
+                      <td style="font-weight: bold;">
+                        Como fazer um bolo de cenoura!
+                      </td>
+                      <td>
+                        <div class="pages-table-img">
+                          <picture><source srcset="/img/admin/avatar-illustrated-04.webp" type="image/webp"><img src="/img/admin/avatar-illustrated-04.webp" alt="User Name"></picture>
+                          Receita e Bolos
+                        </div>
+                      </td>
+                      <td><span class="badge badge-pill badge-success">Ativado</span></td>
+                      <td>
+                        <button class="event"><a href="#">Editar comentário</a></button>
+                        <button class="event" onclick="disableComment()">Desativar comentário</button>
+                      </td>
+                    </tr> -->
                   </tbody>
                 </table>
               </div>
             </div>
             
             <div class="col-lg-3" style="margin-top: 3rem;">
-              <article class="white-block">
+              <!-- <article class="white-block">
                 <div class="top-cat-title">
                   <h3>Comentários recentes</h3>
                   <p>200 comentários</p>
@@ -120,7 +136,7 @@
                     </li>
                   <% }); %>
                 </ul>
-              </article>
+              </article> -->
             </div>
           </div>
       </main>

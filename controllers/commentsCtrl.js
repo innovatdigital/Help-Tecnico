@@ -4,19 +4,12 @@ const User = require('../models/User')
 const Comments = require('../models/Comments')
 
 const comments = asyncHandler(async(req, res) => {
-    const find = await User.findOne({email: "admin"})
+    const find = await User.findById(req.cookies._id)
 
-    if (find.isAdmin == "true") {
-        const posts = await Posts.find({})
-        const comments = await User.find({}).limit(10)
+    const posts = await Posts.find({})
+    const comments = await User.find({}).limit(10)
 
-        res.render('layouts/comments', {isAdmin: true, posts: posts, comments: comments})
-    } else {
-        const posts = await Posts.find({})
-        const comments = await User.find({}).limit(10)
-
-        res.render('layouts/comments', {isAdmin: false, posts: posts, comments: comments})
-    }
+    res.render('layouts/comments', {isAdmin: find.isAdmin, posts: posts, comments: comments})
 })
 
 
@@ -48,9 +41,9 @@ const disableBot = asyncHandler(async(req, res) => {
 
         const deleteComment = Comments.findOneAndDelete({_id: id}, async(error, result) => {
             if (error) {
-                console.error(error);
+                res.send(error)
             } else {
-                console.log(result)
+                res.send(true)
             }
         })
     } catch (err) {

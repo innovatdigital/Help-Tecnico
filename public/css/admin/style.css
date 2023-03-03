@@ -1792,7 +1792,7 @@ input[type="radio"] {
 input[type="radio"] {
   width: 24px;
   height: 24px;
-  margin-right: 19px;
+  margin-right: 4px;
 }
 
 input[type="radio"]:focus {
@@ -1912,6 +1912,13 @@ label {
 
 .users-table__checkbox input {
   margin-right: 20px;
+}
+
+button.event {
+  background-color: #923799 !important;
+  padding: 5px;
+  color: #FFFFFF;
+  border-radius: 8px;
 }
 
 .users-table td {
@@ -2672,7 +2679,7 @@ label {
 }
 
 .stat-cards-icon.warning {
-  background-color: rgba(255, 182, 72, 0.1);
+  background-color: #752a7a6c;
   color: #ffb648;
 }
 
@@ -3575,6 +3582,57 @@ description-group {
 textarea {
   border: 2px solid #752a7a;
   border-radius: 10px;
+}
+
+.alert {
+  padding: 22px 60px;
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background-color: #752A7A;
+  border-radius: 3px;
+  z-index: 1;
+  color: #fff;
+  animation: slidein 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+}
+
+.alert p {
+  display: flex;
+  align-items: center;
+  margin-left: 13px;
+  font-weight: bold;
+}
+
+@keyframes slidein {
+  0% {
+    transform: translateX(1000px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.message-notify::before {
+  width: 100px;
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 0;
+  height: 5px;
+  background-color: rgba(255, 255, 255, 0.829);
+  animation: time 3s forwards;
+}
+
+@keyframes time {
+  0% {
+    width: 0;
+  }
+  100% {
+    width: 100%;
+  }
 }
 
 @media (min-width: 576px) {

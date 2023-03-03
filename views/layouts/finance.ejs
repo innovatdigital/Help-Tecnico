@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>pluBee | Finanças</title>
   <!-- Favicon -->
-  <link rel="shortcut icon" href="//img/admin/PLUBEE-LOGO-E-NOME.png" type="image/x-icon">
+  <link rel="shortcut icon" href="/img/site/plubee-icon.png" type="image/x-icon">
   <!-- Custom styles -->
   <link rel="stylesheet" href="/css/admin/style.css">
 </head>
@@ -23,15 +23,11 @@
 
     <div class="main-wrapper">
       <!-- ! Main nav -->
-      <%- include('../partials/nav-platform') %>
+      <%- include('../partials/nav-platform', {isAdmin: isAdmin, title: "Finanças"}) %>
   
       <!-- ! Main -->
       <main class="main users chart-page" id="skip-target">
         <div class="container">
-          <% if (isAdmin) { %>
-            <h2 class="main-title">Finanças - Administrador</h2>
-          <% } %>
-            
           <div class="row">
             <div class="col-lg">
               <div class="users-table table-wrapper">
@@ -105,7 +101,7 @@
                         </td>
 
                         <td>
-                          <div>
+                          <div style="font-weight: bold; color: rgb(52, 175, 15);">
                             <%= item.status %>
                           </div>
                         </td>
@@ -120,11 +116,11 @@
               <article class="white-block">
                 <div class="top-cat-title">
                   <h3>Filtrar</h3>
-                  <p style="font-size: 15px;">Total faturado: R$100.000</p>
+                  <p style="font-size: 15px;">Total faturado: R$<%= valueTotal %></p>
                 </div>
                 <input type="text" placeholder="Enter keywords ..." style="margin-bottom: 18px;" required>
                 <div style="display: flex; justify-content: space-between; margin: 10px 0px">
-                  <p>Todos os contratos</p>
+                  <p>Todos os valores</p>
                   <input type="checkbox" name="Plano Pro" id="" class="check" checked>
                 </div>
                 <div style="display: flex; justify-content: space-between; margin: 10px 0px">
@@ -136,15 +132,11 @@
                   <input type="checkbox" name="Plano Pro" id="" class="check">
                 </div>
                 <div style="display: flex; justify-content: space-between; margin: 10px 0px">
-                  <p>Usuários com plano Pro</p>
+                  <p>Compras aprovadas</p>
                   <input type="checkbox" name="Plano Pro" id="" class="check">
                 </div>
                 <div style="display: flex; justify-content: space-between; margin: 10px 0px">
-                  <p>Usuários bloqueados</p>
-                  <input type="checkbox" name="Plano Pro" id="" class="check">
-                </div>
-                <div style="display: flex; justify-content: space-between; margin: 10px 0px">
-                  <p>Usuários com plano Pro</p>
+                  <p>Compras não concluidas</p>
                   <input type="checkbox" name="Plano Pro" id="" class="check">
                 </div>
                 <br>

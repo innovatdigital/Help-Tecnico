@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>pluBee | Dashboard</title>
   <!-- Favicon -->
-  <link rel="shortcut icon" href="/img/admin/PLUBEE-LOGO-E-NOME.png" type="image/x-icon">
+  <link rel="shortcut icon" href="/img/site/plubee-icon.png" type="image/x-icon">
   <!-- Custom styles -->
   <link rel="stylesheet" href="/css/admin/style.css">
 </head>
@@ -21,17 +21,11 @@
 
     <div class="main-wrapper">
       <!-- ! Main nav -->
-      <%- include('../partials/nav-platform') %>
+      <%- include('../partials/nav-platform', {isAdmin: isAdmin, title: "Dashboard do usuário:"}) %>
       
       <!-- ! Main -->
       <main class="main users chart-page" id="skip-target">
-        <div class="container">
-          <% if (isAdmin) { %>
-            <h2 class="main-title">Dashboard - Administrador</h2>
-          <% } else { %>
-            <h2 class="main-title">Dashboard - Nome usuário</h2>
-          <% } %>
-          
+        <div class="container">          
           <% if (isAdmin) { %>
             <div class="row stat-cards">
               <div class="col-md-6 col-xl-3">
@@ -113,11 +107,8 @@
                     <img style="height: 2rem" src="img/admin/facebook.png" alt="">
                   </div>
                   <div class="stat-cards-info">
-                    <p class="stat-cards-info__num">0</p>
-                    <p class="stat-cards-info__title">Total de contas</p>
-                    <p class="stat-cards-info__progress">
-                      Mês passado
-                    </p>
+                    <p class="stat-cards-info__num" style="color: #752a7a; font-weight: bold;">0 contas</p>
+                    <p class="stat-cards-info__title">Total na plataforma</p>
                   </div>
                 </article>
               </div>
@@ -128,11 +119,8 @@
                     <img style="height: 3rem" src="img/admin/group.png" alt="">
                   </div>
                   <div class="stat-cards-info">
-                    <p class="stat-cards-info__num">0</p>
+                    <p class="stat-cards-info__num" style="color: #752a7a; font-weight: bold;">0 grupos</p>
                     <p class="stat-cards-info__title">Total de grupos</p>
-                    <p class="stat-cards-info__progress">
-                      Mês passado
-                    </p>
                   </div>
                 </article>
               </div>
@@ -143,11 +131,8 @@
                     <img style="height: 1.9rem" src="img/admin/post.png" alt="">
                   </div>
                   <div class="stat-cards-info">
-                    <p class="stat-cards-info__num">0</p>
+                    <p class="stat-cards-info__num" style="color: #752a7a; font-weight: bold;">0 posts realizados</p>
                     <p class="stat-cards-info__title">Total posts</p>
-                    <p class="stat-cards-info__progress">
-                      Mês passado
-                    </p>
                   </div>
                 </article>
               </div>
@@ -159,10 +144,7 @@
                   </div>
                   <div class="stat-cards-info">
                     <p class="stat-cards-info__num" style="font-weight: bold;"><%= type_account %></p>
-                    <p class="stat-cards-info__title">Tipo de conta:</p>
-                    <p class="stat-cards-info__progress">
-                      Status: Ativa
-                    </p>
+                    <p class="stat-cards-info__title">Tipo de conta</p>
                   </div>
                 </article>
               </div>
@@ -238,41 +220,85 @@
                           </label>
                         </th>
                         <th>Titulo</th>
-                        <th>Conta</th>
+                        <th>Página</th>
                         <th>Status</th>
                         <th>Data</th>
                         <th>Total de grupos</th>
                       </tr>
                     </thead>
                     <tbody>
-                        <tr>
+                        <!-- <tr>
                           <td>
                             <div class="categories-table-img">
-                              <picture><source srcset=""><img src="" alt="imagem"></picture>
+                              <picture><source srcset="https://img.itdg.com.br/images/recipes/000/000/023/365326/365326_original.jpg"><img src="https://img.itdg.com.br/images/recipes/000/000/023/365326/365326_original.jpg" alt="imagem"></picture>
                             </div>
                           </td>
-                          <td>
-                            Titulo
+                          <td style="font-weight: bold;">
+                            Como fazer um bolo de cenoura!
                           </td>
                           <td>
                             <div class="pages-table-img">
                               <picture><source srcset="img/admin/avatar-illustrated-04.webp" type="image/webp"><img src="img/admin/avatar-illustrated-04.webp" alt="User Name"></picture>
-                              Nome da conta
+                              Receita e Bolos
                             </div>
                           </td>
                           <td><span class="badge-active">Publicado</span></td>
-                          <td>Data</td>
+                          <td>01/02/2023</td>
                           <td>
-                            0
+                            4 grupos
                           </td>
                         </tr>
+
+                        <tr>
+                          <td>
+                            <div class="categories-table-img">
+                              <picture><source srcset="https://agendor-blog-uploads.s3.sa-east-1.amazonaws.com/2020/08/19171948/agendor-metodos-prospeccao-clientes.jpg"><img src="https://agendor-blog-uploads.s3.sa-east-1.amazonaws.com/2020/08/19171948/agendor-metodos-prospeccao-clientes.jpg" alt="imagem"></picture>
+                            </div>
+                          </td>
+                          <td style="font-weight: bold;">
+                            Como atrair mais clientes no digital
+                          </td>
+                          <td>
+                            <div class="pages-table-img">
+                              <picture><source srcset="img/admin/avatar-illustrated-04.webp" type="image/webp"><img src="img/admin/avatar-illustrated-04.webp" alt="User Name"></picture>
+                              Marketing com sabedoria
+                            </div>
+                          </td>
+                          <td><span class="badge-active">Publicado</span></td>
+                          <td>28/01/2023</td>
+                          <td>
+                            10 grupos
+                          </td>
+                        </tr>
+
+                        <tr>
+                          <td>
+                            <div class="categories-table-img">
+                              <picture><source srcset="https://www.oficinadeervas.com.br/images/produtos/20220216_95114_Chas%20compostos.jpg"><img src="https://www.oficinadeervas.com.br/images/produtos/20220216_95114_Chas%20compostos.jpg" alt="imagem"></picture>
+                            </div>
+                          </td>
+                          <td style="font-weight: bold;">
+                            Chá de camomila alivia o estresse
+                          </td>
+                          <td>
+                            <div class="pages-table-img">
+                              <picture><source srcset="img/admin/avatar-illustrated-04.webp" type="image/webp"><img src="img/admin/avatar-illustrated-04.webp" alt="User Name"></picture>
+                              Receita e Bolos
+                            </div>
+                          </td>
+                          <td><span class="badge-active">Publicado</span></td>
+                          <td>24/01/2023</td>
+                          <td>
+                            8 grupos
+                          </td>
+                        </tr> -->
                     </tbody>
                   </table>
                 <% } %>
               </div>
             </div>
             
-            <% if (isAdmin == "true") { %>
+            <!-- <% if (isAdmin == "true") { %>
             <div class="col-lg-3">
               <article class="white-block">
                 <div class="top-cat-title">
@@ -295,7 +321,95 @@
                 </ul>
               </article>
             </div>
-            <% } %>
+            <% } %> -->
+
+            <div class="col-lg-3">
+              <article class="white-block">
+                <div class="top-cat-title">
+                  <h3>Comentários recentes</h3>
+                  <!-- <p>10 comentários</p> -->
+                </div>
+                <ul class="top-cat-list">
+                    <!-- <li>
+                      <a href="##">
+                        <div class="top-cat-list__title">
+                          Muito legal o seu post
+                        </div>
+                        <div class="top-cat-list__subtitle">
+                          Tiago<span class="purple">02/01/2023</span>
+                        </div>
+                      </a>
+                    </li>
+
+                    <li>
+                      <a href="##">
+                        <div class="top-cat-list__title">
+                          Adorei essa dica
+                        </div>
+                        <div class="top-cat-list__subtitle">
+                          Guilherme<span class="purple">04/01/2023</span>
+                        </div>
+                      </a>
+                    </li>
+
+                    <li>
+                      <a href="##">
+                        <div class="top-cat-list__title">
+                          Muito bacana esse bolo!
+                        </div>
+                        <div class="top-cat-list__subtitle">
+                          Amanda<span class="purple">08/01/2023</span>
+                        </div>
+                      </a>
+                    </li>
+
+                    <li>
+                      <a href="##">
+                        <div class="top-cat-list__title">
+                          Que dica legal
+                        </div>
+                        <div class="top-cat-list__subtitle">
+                          Vanessa<span class="purple">25/01/2023</span>
+                        </div>
+                      </a>
+                    </li>
+
+                    <li>
+                      <a href="##">
+                        <div class="top-cat-list__title">
+                          Vou fazer aqui!
+                        </div>
+                        <div class="top-cat-list__subtitle">
+                          Marina<span class="purple">11/02/2023</span>
+                        </div>
+                      </a>
+                    </li>
+                    
+                    <li>
+                      <a href="##">
+                        <div class="top-cat-list__title">
+                          Compartilhei com todos aqui
+                        </div>
+                        <div class="top-cat-list__subtitle">
+                          Pedro<span class="purple">13/02/2023</span>
+                        </div>
+                      </a>
+                    </li>
+
+                    <li>
+                      <a href="##">
+                        <div class="top-cat-list__title">
+                          Acompanho vocês em tudo!
+                        </div>
+                        <div class="top-cat-list__subtitle">
+                          Larissa<span class="purple">14/02/2023</span>
+                        </div>
+                      </a>
+                    </li> -->
+
+                </ul>
+              </article>
+            </div>
           </div>
         </div>
       </main>

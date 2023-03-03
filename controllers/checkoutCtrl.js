@@ -2,9 +2,6 @@ const asyncHandler = require('express-async-handler')
 const User = require('../models/User')
 const Plans = require('../models/Plans')
 const Finances = require('../models/Finances')
-const bcrypt = require('bcrypt');
-const fbgraph = require('fbgraph');
-const fb = require('fb');
 const axios = require('axios')
 const mercadopago = require('mercadopago');
 const nodemailer = require('nodemailer');
@@ -13,33 +10,33 @@ mercadopago.configure({
     access_token: 'APP_USR-1680886342878290-011613-a8697bc1e7bdc9a7003609de727629c1-810849321'
 });
 
-async function aprovedEmail(email, value, id) {
-    let transporter = nodemailer.createTransport({
-        host: 'smtp.gmail.com',
-        port: 465,
-        secure: true, // true para 465, false para outras portas
-        auth: {
-            user: 'vagner12lemos@gmail.com',
-            pass: 'qrbjshaakihsgkhl'
-        }
-    });
+// async function aprovedEmail(email, value, id) {
+//     let transporter = nodemailer.createTransport({
+//         host: 'smtp.gmail.com',
+//         port: 465,
+//         secure: true, // true para 465, false para outras portas
+//         auth: {
+//             user: 'vagner12lemos@gmail.com',
+//             pass: 'qrbjshaakihsgkhl'
+//         }
+//     });
 
-    let mailOptions = {
-        from: '"PluBee" vagner12lemos@gmail.com',
-        to: email,
-        subject: 'Compra aprovada com sucesso!',
-        text: 'Conteúdo do email em texto puro',
-        html: '<b>Conteúdo do email em HTML</b>'
-    };
+//     let mailOptions = {
+//         from: '"PluBee" vagner12lemos@gmail.com',
+//         to: email,
+//         subject: 'Compra aprovada com sucesso!',
+//         text: 'Conteúdo do email em texto puro',
+//         html: '<b>Conteúdo do email em HTML</b>'
+//     };
 
-    transporter.sendMail(mailOptions, (error, info) => {
-        if (error) {
-            return console.log(error);
-        }
-        console.log('Mensagem enviada: %s', info.messageId);
-        console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info));
-    });
-}
+//     transporter.sendMail(mailOptions, (error, info) => {
+//         if (error) {
+//             return console.log(error);
+//         }
+//         console.log('Mensagem enviada: %s', info.messageId);
+//         console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info));
+//     });
+// }
 
 const checkout = asyncHandler(async(req, res) => {
     const findPlan = await Plans.findById(req.params.id)

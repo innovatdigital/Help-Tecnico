@@ -23,12 +23,54 @@
 
     <div class="main-wrapper">
       <!-- ! Main nav -->
-      <%- include('../partials/nav-platform', {isAdmin: isAdmin, title: "Nova publicação"}) %>
+      <%- include('../partials/nav-platform') %>
   
       <!-- ! Main -->
       <main class="main users chart-page" id="skip-target">
         <div class="container">
-            <h2 class="main-title">Funcionalidade em manutenção</h2>
+          <% if (isAdmin) { %>
+            <h2 class="main-title">Inserir novo post - Administrador</h2>
+          <% } else { %>
+            <h2 class="main-title">Inserir novo post - Nome usuário</h2>
+          <% } %>
+
+          <div class="row">
+            <div class="col-lg-12">
+              <article class="white-block">
+                <div class="top-cat-title">
+                  <h2 style="color: #C21F70; display: flex; align-items: center;"><img src="/img/platform/instagram.png" width=45 height=45 alt="" style="margin-right: 5px;">Novo post Instagram</h2>
+                </div>
+                <br>
+                <p style="font-size: 15px; margin-bottom: 10px; font-weight: bold;">Selecione uma conta:</p>
+                <select name="accounts-post" id="accounts-post">
+                    <option></option>
+                </select>
+                <br>
+                <br>
+                <p style="font-size: 15px; margin-bottom: 10px; font-weight: bold;">Escreva o post aqui:</p>
+                <textarea name="" id="" cols="30" rows="4"></textarea>
+                <br>
+                <br>
+                <p style="font-size: 15px; margin-bottom: 10px; font-weight: bold;">Inserir imagens:</p>
+                <input type="file" name="files" id="files" multiple>
+                <br>
+                <p style="font-size: 15px; margin-bottom: 10px">Visualização:</p>
+                <div class="results">
+                </div>
+                <br>
+                <br>
+                <p style="font-size: 15px; margin-bottom: 10px; font-weight: bold;">Configurações:</p>
+                <div style="display: flex;">
+                  <input type="radio" name="program" id="program-no" value="yes" tabindex="1">Programar
+                  <input type="radio" name="program" id="program-yes" value="no" tabindex="2">Não programar
+                </div>
+                <br>
+                <br>
+                <button style="color: #FFFFFF; background-color: #752A7A; padding: 10px; border-radius: 10px">Inserir post</button>
+              </article>
+            </div>
+          </div>
+        </div>
       </main>
 
       <%- include('../partials/footer-platform') %>

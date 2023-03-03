@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>pluBee | Todos os posts</title>
   <!-- Favicon -->
-  <link rel="shortcut icon" href="//img/admin/PLUBEE-LOGO-E-NOME.png" type="image/x-icon">
+  <link rel="shortcut icon" href="/img/site/plubee-icon.png" type="image/x-icon">
   <!-- Custom styles -->
   <link rel="stylesheet" href="/css/admin/style.css">
 </head>
@@ -23,17 +23,11 @@
 
     <div class="main-wrapper">
       <!-- ! Main nav -->
-      <%- include('../partials/nav-platform') %>
+      <%- include('../partials/nav-platform', {isAdmin: isAdmin, title: "Todos os posts"}) %>
   
       <!-- ! Main -->
       <main class="main users chart-page" id="skip-target">
         <div class="container">
-          <% if (isAdmin) { %>
-            <h2 class="main-title">Todos os posts - Administrador</h2>
-          <% } else { %>
-            <h2 class="main-title">Todos os posts - Nome usuário</h2>
-          <% } %>
-
           <div class="row">
             <div class="col-lg">
               <div class="users-table table-wrapper">
@@ -53,36 +47,40 @@
                         <th>Ações</th>
                       </tr>
                     </thead>
-                    <tbody>
-                      <% posts.forEach(function(item) { %>
-                        <tr>
-                          <td>
-                            <div>
-                              <%= item.id_post %>
-                            </div>
-                          </td>
-                          <td>
-                            <div class="categories-table-img">
-                              <picture><source srcset="<%= item.image %>"><img src="<%= item.image %>" alt="category"></picture>
-                            </div>
-                          </td>
-                          <td>
-                            <%= item.title %>
-                          </td>
-                          <td>
-                            <div class="pages-table-img">
-                              <picture><source srcset="/img/admin/avatar-illustrated-04.webp" type="image/webp"><img src="/img/admin/avatar-illustrated-04.webp" alt="User Name"><%= item.nameUser %></picture>
-                          
-                            </div>
-                          </td>
-                          <td><span class="badge badge-pill badge-success">Programado</span></td>
-                          <td><%= item.date %></td>
-                          <td>
-                            <a href="#">Ativar Bot</a>
-                          </td>
-                        </tr>
-                      <% }); %>
-                    </tbody>
+                    <% if (posts.length == 0) { %>
+                      <tbody>
+                        <% posts.forEach(function(item) { %>
+                          <tr>
+                            <td>
+                              <div>
+                                <%= item.id_post %>
+                              </div>
+                            </td>
+                            <td>
+                              <div class="categories-table-img">
+                                <picture><source srcset="<%= item.image %>"><img src="<%= item.image %>" alt="category"></picture>
+                              </div>
+                            </td>
+                            <td>
+                              <%= item.title %>
+                            </td>
+                            <td>
+                              <div class="pages-table-img">
+                                <picture><source srcset="/img/admin/avatar-illustrated-04.webp" type="image/webp"><img src="/img/admin/avatar-illustrated-04.webp" alt="User Name"><%= item.nameUser %></picture>
+                            
+                              </div>
+                            </td>
+                            <td><span class="badge badge-pill badge-success">Programado</span></td>
+                            <td><%= item.date %></td>
+                            <td>
+                              <a href="#">Ativar Bot</a>
+                            </td>
+                          </tr>
+                        <% }); %>
+                      </tbody>
+                    <% } else { %>
+                      <div>Nenhum post cadastrado ainda.</div>
+                    <% } %>
                   </table>
               </div>
             </div>

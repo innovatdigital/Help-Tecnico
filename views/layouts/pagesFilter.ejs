@@ -29,35 +29,34 @@
       <main class="main users chart-page" id="skip-target">
         <div class="container">
           <% if (isAdmin) { %>
-            <h2 class="main-title">Grupos importados - Administrador</h2>
+            <h2 class="main-title">Páginas importadas - Administrador</h2>
           <% } else { %>
-            <h2 class="main-title">Grupos importados</h2>
+            <h2 class="main-title">Páginas importadas</h2>
           <% } %>
 
           <div class="row">
             <div class="col-lg" style="display: flex; flex-direction: row;">
               <select name="accounts" id="accounts">
                 <% accounts.forEach(function(item) { %>
-                  <option value="volvo"><%= item.name %></option>
+                  <option value="<%= item.id_account %>"><%= item.name %></option>
                 <% }) %>
               </select>
-              <button id="btn-filter" style="background-color: #752A7A; color: #FFFFFF; width: 7rem; border-radius: 0rem 0.5rem 0.5rem 0rem;">Ver grupos</button>
+              <button id="btn-filter" style="background-color: #752A7A; color: #FFFFFF; width: 7rem; border-radius: 0rem 0.5rem 0.5rem 0rem;" onclick="viewPages()">Ver páginas</button>
             </div>
           </div>  
 
           <div class="row" style="margin-top: 16px">
-            <% account.forEach(function(item) { %>
+            <% pages.forEach(function(item) { %>
               <div class="col-md-6 col-xl-3">
                 <article class="stat-cards-item">
                   <div class="stat-cards-icon warning">
-                    <img style="height: 3rem" src="<%= item.image %>" alt="">
+                    <img style="border-radius: 5rem;" src="<%= item.image %>" alt="">
                   </div>
                   <div class="stat-cards-info">
                     <p class="stat-cards-info__num"><%= item.name %></p>
-                    <p class="stat-cards-info__title description-group" style="width: 270px; height: 20px; overflow: hidden; text-overflow: ellipsis;"><%= item.description %></p>
-                    <p class="stat-cards-info__progress">
-                      <%= item.id %>
-                    </p>
+                    <p class="stat-cards-info__title description-group">ID da página:</p>
+                    <p class="stat-cards-info__title description-group"><%= item.id_page %></p>
+
                   </div>
                 </article>
               </div>
@@ -80,10 +79,10 @@
 </html>
 
 <script>
-    function viewGroups(id_account) {
-      fetch("groups/" + id_account, {
-          method: "GET",
-          headers: { 'Content-Type': 'application/json' },
-      })
-    }  
+  function viewPages() {
+    const id_account = document.querySelector('#accounts')
+    selectValue = id_account.value
+
+    window.location.href = "/platform/pages/" + selectValue;
+  }  
 </script>

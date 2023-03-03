@@ -1,6 +1,5 @@
 const asyncHandler = require('express-async-handler')
 const User = require('../models/User')
-const bcrypt = require('bcrypt')
 const cookie = require('cookie');
 
 const Page = asyncHandler(async(req, res) => {

@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>pluBee | Feedbacks</title>
   <!-- Favicon -->
-  <link rel="shortcut icon" href="//img/admin/PLUBEE-LOGO-E-NOME.png" type="image/x-icon">
+  <link rel="shortcut icon" href="/img/site/plubee-icon.png" type="image/x-icon">
   <!-- Custom styles -->
   <link rel="stylesheet" href="/css/admin/style.css">
 </head>
@@ -23,17 +23,11 @@
 
     <div class="main-wrapper">
       <!-- ! Main nav -->
-      <%- include('../partials/nav-platform') %>
+      <%- include('../partials/nav-platform', {isAdmin: isAdmin, title: "Feedbacks"}) %>
   
       <!-- ! Main -->
       <main class="main users chart-page" id="skip-target">
         <div class="container">
-          <% if (isAdmin) { %>
-            <h2 class="main-title">Todos os posts - Administrador</h2>
-          <% } else { %>
-            <h2 class="main-title">Todos os posts - Nome usuário</h2>
-          <% } %>
-          
           <div class="row" style="margin-top: 2rem">
             <div class="col-md-6 col-xl-3">
               <article class="stat-cards-item">

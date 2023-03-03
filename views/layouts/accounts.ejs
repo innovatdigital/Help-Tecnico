@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>pluBee | Contas conectadas</title>
   <!-- Favicon -->
-  <link rel="shortcut icon" href="//img/admin/PLUBEE-LOGO-E-NOME.png" type="image/x-icon">
+  <link rel="shortcut icon" href="/img/site/plubee-icon.png" type="image/x-icon">
   <!-- Custom styles -->
   <link rel="stylesheet" href="/css/admin/style.css">
 </head>
@@ -23,17 +23,11 @@
 
     <div class="main-wrapper">
       <!-- ! Main nav -->
-      <%- include('../partials/nav-platform') %>
+      <%- include('../partials/nav-platform', {isAdmin: isAdmin, title: "Contas cadastradas"}) %>
   
       <!-- ! Main -->
       <main class="main users chart-page" id="skip-target">
         <div class="container">
-          <% if (isAdmin) { %>
-            <h2 class="main-title">Contas cadastradas - Administrador</h2>
-          <% } else { %>
-            <h2 class="main-title">Contas cadastradas</h2>
-          <% } %>
-
           <div class="row">
             <div class="col-lg">
               <div class="users-table table-wrapper">
@@ -63,7 +57,7 @@
 
                         <td>
                           <div class="categories-table-img">
-                            <img src="<%= item.photo %>" alt="foto-de-perfil" style="width: 46.5px; border-radius: 50px;">
+                            <img src="<%= item.photo %>" alt="foto-de-perfil" style="width: 40px; height: 40px; border-radius: 50px;">
                           </div>
                         </td>
 
@@ -94,7 +88,7 @@
 
                         <td>
                           <div> 
-                            <button id="delete-account" onclick="deleteAccount('<%= item.id_account %>', '<%= item.platform %>')">Excluir conta</button>
+                            <button class="event" id="delete-account" onclick="deleteAccount('<%= item.id_account %>', '<%= item.platform %>')">Excluir conta</button>
                           </div>
                         </td>                                                    
                       </tr>
@@ -110,7 +104,7 @@
               </article>
 
               <article class="white-block">
-                <button disabled style="color: #FFFFFF; background-color: #5c5c5c; padding: 10px; border-radius: 10px">Adicionar conta Instagram</button>
+                <button style="color: #FFFFFF; background-color: #752A7A; padding: 10px; border-radius: 10px"><a href="">Adicionar conta Instagram</a></button>
               </article>
 
               <article class="white-block">

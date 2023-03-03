@@ -530,6 +530,11 @@ nav {
 	flex-wrap: wrap;
 	align-items: center;
 	flex-direction: column;
+	transition: all 250ms;
+}
+
+.div-small:hover, .div-big:hover {
+	padding: 10px;
 }
 
 .planos .flex-planos .div-big {
@@ -720,6 +725,9 @@ i {
 
 #btn-mobile {
 	display: none;
+	background-color: #FFFFFF;
+	border: none;
+	margin-left: 35vw;
 }
 
 @media (max-width: 500px) {
@@ -838,6 +846,7 @@ i {
 		font-size: 6vw;
 		margin: 0px;
 		margin-right: 10px;
+		margin-top: 4vw;
 	}
 	
 	.home h3 {
@@ -948,6 +957,7 @@ i {
 	
 	.sobre div {
 		margin-top: 2.4vw;
+		margin-left: 5vw;
 	}
 	
 	.sobre img {

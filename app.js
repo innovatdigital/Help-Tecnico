@@ -2,16 +2,14 @@ const express = require('express');
 const mongoose = require('mongoose')
 const bodyParser = require('body-parser')
 const path = require('path')
-const mercadopago = require('mercadopago');
 const main = require('./routes/main')
 const checkout = require('./routes/checkoutRouter')
-const dotenv = require('dotenv').config()
 const login = require('./routes/loginRouter')
 const platform = require('./routes/platformRouter')
 const cookieParser = require('cookie-parser');
+const dotenv = require('dotenv').config()
 const ejs = require('ejs');
 const fs = require('fs')
-const jwt = require('jsonwebtoken');
 const https = require('https')
 const app = express();
 

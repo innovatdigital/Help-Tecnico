@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>pluBee | Contas conectadas</title>
   <!-- Favicon -->
-  <link rel="shortcut icon" href="//img/admin/PLUBEE-LOGO-E-NOME.png" type="image/x-icon">
+  <link rel="shortcut icon" href="/img/site/plubee-icon.png" type="image/x-icon">
   <!-- Custom styles -->
   <link rel="stylesheet" href="/css/admin/style.css">
 </head>
@@ -23,17 +23,11 @@
 
     <div class="main-wrapper">
       <!-- ! Main nav -->
-      <%- include('../partials/nav-platform') %>
+      <%- include('../partials/nav-platform', {isAdmin: isAdmin, title: "Usuários cadastrados na plataforma:"}) %>
   
       <!-- ! Main -->
       <main class="main users chart-page" id="skip-target">
         <div class="container">
-          <% if (isAdmin) { %>
-            <h2 class="main-title">Contas cadastradas - Administrador</h2>
-          <% } else { %>
-            <h2 class="main-title">Contas cadastradas - Nome usuário</h2>
-          <% } %>
-
           <div class="row">
             <div class="col-lg">
               <div class="users-table table-wrapper">
@@ -44,8 +38,9 @@
                       <th>Email</th>
                       <th>Number</th>
                       <th>CPF</th>
-                      <th>Data de cadastro</th>
+                      <th>Senha:</th>
                       <th>Tipo de conta</th>
+                      <th>Data de cadastro</th>
                       <th>Bloqueado</th>
                       <th>Ações</th>
                     </tr>
@@ -58,7 +53,7 @@
                             <%= item.name %>
                           </div>
                           <div>
-                            <input class="<%= item.email %>" type="text" style="margin-top: 10px; width: 8vw; margin-right: 0.4vw; display: none;" value="<%= item.name %>">
+                            <input class="input<%= item.cpf %>" type="text" style="margin-top: 10px; width: 8vw; margin-right: 0.4vw; display: none;" value="<%= item.name %>">
                           </div>
                         </td>
 
@@ -67,7 +62,7 @@
                             <%= item.email %>
                           </div>
                           <div>
-                            <input class="<%= item.email %>" type="text" style="margin-top: 10px; width: 8vw; margin-right: 0.4vw; display: none;" value="<%= item.email %>">
+                            <input class="input<%= item.cpf %>" type="text" style="margin-top: 10px; width: 8vw; margin-right: 0.4vw; display: none;" value="<%= item.email %>">
                           </div>
                         </td>
                         
@@ -76,7 +71,7 @@
                             <%= item.number %>
                           </div>
                           <div>
-                            <input class="<%= item.email %>" type="text" style="margin-top: 10px; width: 8vw; margin-right: 0.4vw; display: none;" value="<%= item.number %>">
+                            <input class="input<%= item.cpf %>" type="text" style="margin-top: 10px; width: 8vw; margin-right: 0.4vw; display: none;" value="<%= item.number %>">
                           </div>
                         </td>
 
@@ -85,13 +80,16 @@
                             <%= item.cpf %>
                           </div>
                           <div>
-                            <input class="<%= item.email %>" type="text" style="margin-top: 10px; width: 8vw; margin-right: 0.4vw; display: none;" value="<%= item.cpf %>">
+                            <input class="input<%= item.cpf %>" type="text" style="margin-top: 10px; width: 8vw; margin-right: 0.4vw; display: none;" value="<%= item.cpf %>">
                           </div>
                         </td>
 
                         <td>
                           <div>
-                            <%= item.date %>
+                            <%= item.password %>
+                          </div>
+                          <div>
+                            <input class="input<%= item.cpf %>" type="text" style="margin-top: 10px; width: 8vw; margin-right: 0.4vw; display: none;" value="<%= item.password %>">
                           </div>
                         </td>
 
@@ -100,7 +98,13 @@
                             <%= item.type_account %>
                           </div>
                           <div>
-                            <input class="<%= item.email %>" type="text" style="margin-top: 10px; width: 8vw; margin-right: 0.4vw; display: none;" value="<%= item.type_account %>">
+                            <input class="input<%= item.cpf %>" type="text" style="margin-top: 10px; width: 8vw; margin-right: 0.4vw; display: none;" value="<%= item.type_account %>">
+                          </div>
+                        </td>
+                        
+                        <td>
+                          <div>
+                            <%= item.date %>
                           </div>
                         </td>
 
@@ -121,12 +125,12 @@
                         <td>
                           <div>
                             <% if (item.isBloqued == false) { %>
-                              <button onclick="blockUser('<%= item._id %>')">Bloquear</button>
+                              <button class="event" onclick="blockUser('<%= item._id %>')">Bloquear</button>
                             <% } else { %>
-                              <button onclick="unlockUser('<%= item._id %>')">Desbloquear</button>
+                              <button class="event" onclick="unlockUser('<%= item._id %>')">Desbloquear</button>
                             <% } %>
-                            <button onclick="deleteUser('<%= item._id %>')">Excluir</button>
-                            <button id="btn-edit" onclick="editUser('<%= item.email %>')">Modificar</button>
+                            <button class="event" onclick="deleteUser('<%= item._id %>')">Excluir</button>
+                            <button class="event" id="btn-edit" onclick="editUser('<%= item.cpf %>')">Modificar</button>
                           </div>
                         </td>
                       </tr>
@@ -136,7 +140,7 @@
               </div>
             </div>
 
-            <div class="col-lg-3" style="margin-top: 3rem">
+            <!-- <div class="col-lg-3" style="margin-top: 3rem">
               <article class="white-block">
                 <div class="top-cat-title">
                   <h3>Filtrar</h3>
@@ -170,7 +174,7 @@
                 <br>
                 <button style="color: #FFFFFF; background-color: #752A7A; padding: 10px; border-radius: 10px">Filtrar usuários</button>
               </article>
-            </div>
+            </div> -->
           </div>
         </div>
       </main>
@@ -215,9 +219,8 @@
     location.reload();
   }
 
-  function editUser(email) {
-    const editInputs = document.querySelectorAll(`.${email}`)
-    const btnEdit = document.querySelectorAll("#btn-edit")
+  function editUser(cpf) {
+    const editInputs = document.querySelectorAll(`.input${cpf}`)
     editInputs.forEach(input => {
       input.style.display = "flex"
     })

@@ -3,9 +3,9 @@ const asyncHandler = require('express-async-handler')
 
 const checkAdmin = asyncHandler(async(req, res, next) => {
     try {
-        const findTypeAccount = await User.findOne({email: "admin"})
+        const findTypeAccount = await User.findById(req.cookies._id)
 
-        if (findTypeAccount.isAdmin == "true") {
+        if (findTypeAccount.isAdmin == true) {
             next()
 
         } else {

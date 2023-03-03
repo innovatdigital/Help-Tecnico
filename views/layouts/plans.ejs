@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>pluBee | Planos</title>
   <!-- Favicon -->
-  <link rel="shortcut icon" href="/img/admin/PLUBEE-LOGO-E-NOME.png" type="image/x-icon">
+  <link rel="shortcut icon" href="/img/site/plubee-icon.png" type="image/x-icon">
   <!-- Custom styles -->
   <link rel="stylesheet" href="/css/admin/style.css">
 
@@ -25,7 +25,7 @@
 
     <div class="main-wrapper">
       <!-- ! Main nav -->
-      <%- include('../partials/nav-platform') %>
+      <%- include('../partials/nav-platform', {isAdmin: isAdmin, title: "Planos da plataforma"}) %>
   
       <!-- ! Main -->
       <main class="main users chart-page" id="skip-target">
@@ -34,13 +34,12 @@
             <h2 class="main-title">Planos - Administrador - Em manutenção</h2>
           <% } %>
           
-          <!-- <div class="row" style="margin-top: 2rem">
+          <div class="row" style="margin-top: 2rem">
             <% plans.forEach(item => { %>
               <div class="col-md-6 col-xl-3">
                 <article class="stat-cards-item plans">
                   <h2 style="color: #752A7A;"><%= item.title %></h2>
-                  <h1 style="color: #752A7A; font-size: 15px; margin: 12px 0 8px 0">Valor mensal: R$<%= item.value_month %></h1>
-                  <h1 style="color: #752A7A; font-size: 15px;">Valor anual: R$<%= item.value_year %></h1>
+                  <h1 style="color: #752A7A; font-size: 15px; margin: 12px 0 8px 0">Valor mensal: R$<%= item.value_month %></h1><br>
                   <h4 style="margin: 22px 0px;">Descrição plano:</h4>
                   <div>
                     <% item.description.forEach(description => { %>
@@ -48,14 +47,14 @@
                     <% }) %>
                   </div>
                   <div style="margin: 15px 0 6px 0;">
-                    <h4>Ações</h4>
-                    <button>Editar</button>
-                    <button>Excluir</button>
+                    <h4 style="margin-bottom: 10px;">Ações</h4>
+                    <button class="event">Editar</button>
+                    <button class="event">Excluir</button>
                   </div>
                 </article>
               </div>
             <% }) %>
-          </div> -->
+          </div>
         </div>
       </main>
 
