@@ -1736,6 +1736,7 @@ button.disabled:focus {
   font-weight: 500;
   font-size: 12px;
   line-height: 1.67;
+  font-weight: bold;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -3601,6 +3602,58 @@ textarea {
   align-items: center;
   margin-left: 13px;
   font-weight: bold;
+}
+
+.enable {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  margin: 0%;
+  width: 100%;
+  height: 90.9%;
+  z-index: 1;
+  background-color: #11111d7a;
+}
+
+.enable > div {
+  width: 30vw;
+  height: 19vw;
+  padding: 20px;
+  background-color: #ffffff;
+  border-radius: 20px;
+  box-shadow: 0 0 6px rgba(0, 0, 0, 0.3);
+}
+
+.enable > div > h1 {
+  font-size: 22px;
+  color: #752a7a;
+}
+
+.enable > div > h3 {
+  font-size: 18px;
+  color: #5a5a5a;
+  margin-top: 30px;
+}
+
+.enable > div > p {
+  font-weight: bold;
+  color: #1877F2;
+  margin-top: 6px;
+}
+
+.enable > div > textarea {
+  width: 100%;
+  padding: 6px;
+  margin-top: 10px;
+}
+
+.enable > div > input {
+  margin-top: 10px;
+}
+
+.enable > div > button {
+  margin-top: 22px;
 }
 
 @keyframes slidein {

@@ -34,53 +34,57 @@
                   <table class="posts-table">
                     <thead>
                       <tr class="users-table-info">
-                        <th style="font-weight: bold">
-                          <label class="users-table__checkbox">
-                            ID do post
-                          </label>
-                        </th>
                         <th>Thumbnail</th>
-                        <th>Titulo</th>
-                        <th>Usuário</th>
+                        <th>Descrição</th>
+                        <th>Conta</th>
+                        <th>Página</th>
+                        <th>Plataforma</th>
                         <th>Status</th>
                         <th>Data</th>
-                        <th>Ações</th>
                       </tr>
                     </thead>
-                    <% if (posts.length == 0) { %>
                       <tbody>
                         <% posts.forEach(function(item) { %>
                           <tr>
                             <td>
-                              <div>
-                                <%= item.id_post %>
-                              </div>
-                            </td>
-                            <td>
                               <div class="categories-table-img">
-                                <picture><source srcset="<%= item.image %>"><img src="<%= item.image %>" alt="category"></picture>
+                                <picture><source srcset="<%= item.image %>"><img src="<%= item.image %>" alt="img"></picture>
                               </div>
                             </td>
                             <td>
-                              <%= item.title %>
+                              <p style="width: 140px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"><%= item.content %></p>
                             </td>
                             <td>
                               <div class="pages-table-img">
-                                <picture><source srcset="/img/admin/avatar-illustrated-04.webp" type="image/webp"><img src="/img/admin/avatar-illustrated-04.webp" alt="User Name"><%= item.nameUser %></picture>
-                            
+                                <picture><source srcset="<%= item.image_account %>" type="image/webp"><img src="<%= item.image_account %>" alt="User Name"><%= item.name_account %></picture>
                               </div>
                             </td>
-                            <td><span class="badge badge-pill badge-success">Programado</span></td>
-                            <td><%= item.date %></td>
                             <td>
-                              <a href="#">Ativar Bot</a>
+                              <%= item.page_name %>
                             </td>
+                            <% if (item.platform == "Facebook") { %>
+                              <td>
+                                <div style="color: #1877F2; font-weight: bold;">
+                                  <%= item.platform %>
+                                </div>
+                              </td>
+                            <% } else { %>
+                              <td>
+                                <div style="font-weight: bold; color: #C21F70">
+                                  <%= item.platform %>
+                                </div>
+                              </td>
+                            <% } %>    
+                            <% if(item.program_post == true) { %>
+                              <td><span class="badge badge-pill badge-success">Programado</span></td>
+                              <td><%= item.day %> <%= item.hour %></td>
+                            <% } else { %>
+                              <td><span class="badge badge-pill badge-active">Publicado</span></td>
+                              <td>Não programado</td>
+                            <% } %>
                           </tr>
                         <% }); %>
                       </tbody>
-                    <% } else { %>
-                      <div>Nenhum post cadastrado ainda.</div>
-                    <% } %>
                   </table>
               </div>
             </div>

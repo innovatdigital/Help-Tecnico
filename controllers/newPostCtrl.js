@@ -3,7 +3,8 @@ const Images = require('../models/Images')
 const User = require('../models/User')
 const nodemailer = require('nodemailer');
 const Posts = require('../models/Posts')
-const FB = require('fb')
+const axios = require('axios')
+const Facebook = require('facebook-node-sdk');
 
 // async function notificationEmail(type, email) {
 //     let transporter = nodemailer.createTransport({
@@ -33,38 +34,93 @@ const FB = require('fb')
 //     });
 // }
 
-async function makePostFb(id_user, id_account, content) {
+async function postNow(pageId, content, imageUrl, accessToken) {
     try {
-        // Autenticar o usuário
-        const accessToken = 'seu_token_de_acesso';
+        const url = `https://graph.facebook.com/${pageId}/feed`;
+        const params = {
+          message: content,
+          access_token: accessToken,
+          link: imageUrl
+        };
+        const response = await axios.post(url, params);
+        return {success: true, id_post: response.data.id};
+    } catch (error) {
+        console.log(error);
+        return false;
+    }
+}
 
-        // Obter o ID do grupo
-        const groupId = '1234567890';
+async function programPost(pageId, content, imageUrl, accessToken, day, hour) {
+    const fb = new Facebook({ accessToken: accessToken });
+    const date = new Date(day + " " + hour);
+    const utcDate = new Date(date.toUTCString());
+    const scheduledTime = utcDate.toISOString();
 
-        // Configurar o objeto do Facebook SDK
-        const fb = new Facebook({
-            appId: 'seu_app_id',
-            secret: 'seu_app_secret',
-            accessToken: accessToken,
+    try {
+        const response = await new Promise((resolve, reject) => {
+            fb.api(
+                `/${pageId}/feed`,
+                'POST',
+                { message: content, scheduled_publish_time: scheduledTime, link: imageUrl },
+                function(response) {
+                    if (!response || response.error) {
+                        reject(response ? response.error : 'Unknown error');
+                    } else {
+                        resolve(response);
+                    }
+                }
+            );
         });
 
-        // Publicar na API do grupo
-        fb.api(
-        `/${groupId}/feed`,
-        'POST',
-        {
-            message: 'Hello, World!',
-        },
-        (res) => {
-            if (!res || res.error) {
-            console.error(res.error);
-            return;
-            }
-            console.log(`Mensagem publicada com ID: ${res.id}`);
-        }
-        );
+        return {success: true, id_post: response.data.id};
     } catch (err) {
-        return 'Error';
+        return false;
+    }
+}
+
+async function programPostGroup(group, content, imageUrl, accessToken, day, hour) {
+    const fb = new Facebook({ accessToken: accessToken });
+    const date = new Date(day + " " + hour);
+    const utcDate = new Date(date.toUTCString());
+    const scheduledTime = utcDate.toISOString();
+
+    try {
+        const response = await new Promise((resolve, reject) => {
+            fb.api(
+                `/${group}/feed`,
+                'POST',
+                { message: content, scheduled_publish_time: scheduledTime, link: imageUrl },
+                function(response) {
+                    if (!response || response.error) {
+                        reject(response ? response.error : 'Unknown error');
+                    } else {
+                        resolve(response);
+                    }
+                }
+            );
+        });
+
+        return {success: true, id_post: response.data.id};
+    } catch (err) {
+        return false;
+    }
+}
+
+async function postNowGroup(group, content, imageUrl, accessToken) {
+    console.log(group)
+
+    try {
+        const url = `https://graph.facebook.com/${group}/feed`;
+        const params = {
+          message: content,
+          access_token: accessToken,
+          link: imageUrl
+        };
+        const response = await axios.post(url, params);
+        return {success: true, id_post: response.data.id};
+    } catch (error) {
+        console.log(error);
+        return false;
     }
 }
 
@@ -92,25 +148,6 @@ async function makePostFb(id_user, id_account, content) {
 //         return 'Erro'
 //     }
 // }
-
-async function findIdPage(acess_token, page) {
-    try {
-        FB.setAccessToken(acess_token);
-
-        FB.api(
-          `/${page}?fields=id`,
-          function (res) {
-            if(!res || res.error) {
-              console.log(!res ? 'error occurred' : res.error);
-              return;
-            }
-            return res.id;
-          }
-        );
-    } catch (err) {
-        console.log('Ocorreu um erro ao enviar', err)
-    }
-}
 
 async function code() {
     const length = 40;
@@ -140,47 +177,95 @@ async function validCode() {
 
 const PostFacebook = asyncHandler(async(req, res) => {
     try {
-        const { account, pages, groups, content, program, day, hour, images } = req.body
+        let name = ''
 
-        console.log(account, pages, groups, content, program, day, hour, images)
+        const { account, page, groups, content, program, day, hour, image } = req.body
 
         const findAccount = await User.findById({_id: req.cookies._id, accountsFb: {$elemMatch: {id_account: account}}})
+        findAccount.accountsFb[0].pages.forEach(page_user => {
+            if (page_user.id_page == page) {
+                name = page_user.name
+            }
+        })
 
         if (findAccount) {
-            const id_post = await validCode()
-            const post = await makePostFb(req.cookies._id, id_post, account, content)
+            if (program) {
+                const programPost = await programPost(page, content, image, findAccount.accountsFb[0].access_token, day, hour)
 
-            if (post == "Sucess") {
-                User.findOneAndUpdate({
-                    "accountsFb.id_account": account
-                }, {
-                    $push: {
-                        "accountsFb.$.posts": {
-                            "id_post": id_post,
-                            "title": req.body.title,
-                            "description": req.body.description,
-                            "public": req.body.public,
-                            "program_post": req.body.program_post,
-                            "groups": req.body.groups,
-                            "images": req.body.images,
+                if (programPost.success) {
+                    const newPost = await Posts.create({id_post: programPost.id_post, id_user: req.cookies._id, id_account: account, platform: "Facebook", name_account: findAccount.accountsFb[0].name, image_account: findAccount.accountsFb[0].photo, image: image, status_bot: false, day: day, hour: hour, page_id: page, page_name: name, groups: groups, content: content})
+                    const save = await User.updateOne(
+                        { _id: req.cookies._id, "accountsFb.id_account": account },
+                        {
+                        $push: {
+                            "accountsFb.$.posts": {
+                            "id_post": programPost.id_post,
+                            "id_account": account,
+                            "name_account": findAccount.accountsFb[0].name,
+                            "image_account": findAccount.accountsFb[0].photo,
+                            "status_bot": false,
+                            "content": content,
+                            "comment_content": "",
+                            "day": day,
+                            "hour": hour,
+                            "platform": "Facebook",
+                            "program_post": true,
+                            "page_id": page,
+                            "page_name": name,
+                            "groups": groups,
+                            "image": image,
+                            }
                         }
-                    }
-                }, (error, result) => {
-                    if (error) {
-                        console.error(error);
-                        return res.send("Erro");
-                    }
+                        }
+                    );
 
+                    // const programPostGroup = await programPostGroup(groups, content, image, findAccount.accountsFb[0].access_token, day, hour)
+                    
                     res.sendStatus(200)
-                });
+                } else {
+                    res.sendStatus(500)
+                }
+
+                res.sendStatus(200)
             } else {
-                res.send('Ocorreu um erro')
+                const post = await postNow(page, content, image, findAccount.accountsFb[0].access_token)
+
+                if (post.success) {
+                    const newPost = await Posts.create({id_post: post.id_post, id_user: req.cookies._id, platform: "Facebook", id_account: account, name_account: findAccount.accountsFb[0].name, image_account: findAccount.accountsFb[0].photo, image: image, status_bot: false, page_id: page, page_name: name, groups: groups, content: content})
+                    const save = await User.updateOne(
+                        { _id: req.cookies._id, "accountsFb.id_account": account },
+                        {
+                          $push: {
+                            "accountsFb.$.posts": {
+                              "id_post": post.id_post,
+                              "id_account": account,
+                              "name_account": findAccount.accountsFb[0].name,
+                              "image_account": findAccount.accountsFb[0].photo,
+                              "status_bot": false,
+                              "content": content,
+                              "program_post": false,
+                              "comment_content": "",
+                              "page_id": page,
+                              "page_name": name,
+                              "platform": "Facebook",
+                              "groups": groups,
+                              "image": image,
+                            }
+                          }
+                        }
+                    );
+                    const postGroup = await postNowGroup(groups, content, image, findAccount.accountsFb[0].access_token)    
+                    
+                    res.sendStatus(200)
+                } else {
+                    res.sendStatus(500)
+                }
             }
         } else {
-            res.send(500)
+            res.sendStatus(500)
         }
     } catch (err) {
-        res.send(err)
+        res.sendStatus(500)
     }
 })
 

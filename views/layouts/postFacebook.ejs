@@ -24,6 +24,12 @@
     <div class="main-wrapper">
       <!-- ! Main nav -->
       <%- include('../partials/nav-platform', {isAdmin: isAdmin, title: "Nova publicação"}) %>
+
+      <div class="enable" style="display: flex; flex-direction: column;">
+        <img src="/img/admin/Bulk/loading.gif" alt="loading" height="80">
+        <br>
+        <h1 style="color: #FFFFFF; margin-bottom: 10vw;" class="enable-h1">Carregando publicação!</h1>
+      </div>
   
       <!-- ! Main -->
       <main class="main users chart-page" id="skip-target">
@@ -46,7 +52,7 @@
                     <% }) %>
                   </select>
 
-                  <select name="pages-post" id="pages-post" style="margin-top: 1vw;">
+                  <select name="page-post" id="page-post" style="margin-top: 1vw;">
                     <option value="select">Selecione a página</option>
                     <% pages.forEach(function(item) { %>
                       <option value="<%= item.id %>"><%= item.name_page %></option>
@@ -68,7 +74,7 @@
                 <textarea name="" id="content-post" cols="30" rows="4" style="transition: none; padding: 10px;" placeholder="Hoje vamos aprender a preparar um café delicioso!"></textarea>
                 <br>
                 <p style="font-size: 15px; margin-bottom: 10px; font-weight: bold;">Inserir imagens:</p>
-                <input type="file" name="files" id="files" style="border: 2px dashed #752A7A !important" class="files" multiple>
+                <input type="file" name="files" id="files" style="border: 2px dashed #752A7A !important" class="files">
                 <br>
                 <p style="font-size: 15px; margin-bottom: 10px">Visualização:</p>
                 <div class="results">
@@ -76,8 +82,8 @@
                 <br>
                 <p style="font-size: 20px; margin-bottom: 10px; font-weight: bold; border-bottom: 2.5px solid #63636360; padding-bottom: 15px; color: #752A7A; display: flex; align-items: center;"><img src="/img/platform/tempo.png" width=28 height=28 alt="" style="margin-right: 12px;">Programar post</p>
                 <div style="display: flex;">
-                  <input type="radio" name="program" id="program-no" value="yes" tabindex="1"><p style="display: flex; justify-content: center; align-items: center; margin-right: 10px;">Programar</p>
-                  <input type="radio" name="program" id="program-yes" value="no" tabindex="2"><p style="display: flex; justify-content: center; align-items: center;">Não programar</p>
+                  <input type="radio" name="program" id="program-yes" value="yes" tabindex="1"><p style="display: flex; justify-content: center; align-items: center; margin-right: 10px;">Programar</p>
+                  <input type="radio" name="program" id="program-no" value="no" tabindex="2"><p style="display: flex; justify-content: center; align-items: center;">Não programar</p>
                 </div>
                 <div class="program-div" style="margin-top: 30px; display: flex;">
                   <div style="margin-right: 16px;">
@@ -116,6 +122,8 @@
 <script>
   let file_input = document.querySelector('#files');
   let image_preview = document.querySelector('.results');
+  const enable = document.querySelector('.enable')
+  enable.style.display = "none"
   let images = [];
 
   const handle_file_preview = (e) => {
@@ -133,43 +141,107 @@
 
       // add image to images array
       images.push(files[i]);
-      console.log(images)
     }
   }
 
   // listen for file input changes
   file_input.addEventListener('change', handle_file_preview);
 
-  function post() {
+  async function uploadImage(file) {
+    const CLOUDINARY_URL = 'https://api.cloudinary.com/v1_1/dxpaf689x/upload';
+    const CLOUDINARY_UPLOAD_PRESET = 'of4ovlpe';
+
+    const formData = new FormData();
+    formData.append('file', file);
+    formData.append('upload_preset', CLOUDINARY_UPLOAD_PRESET);
+
+    const response = await fetch(CLOUDINARY_URL, {
+      method: 'POST',
+      body: formData
+    });
+    
+    const data = await response.json();
+    return data.secure_url;
+  }
+
+  async function post() {
+    const errors = []
     const account = document.querySelector('#accounts-post');
-    const pages = document.querySelector('#pages-post');
+    const page = document.querySelector('#page-post');
     const groups = document.querySelector('#groups-post');
     const content = document.querySelector('#content-post');
     const day = document.querySelector('#day');
     const hour = document.querySelector('#hour');
-    const program = document.querySelector('#program-no');
-    const no_program = document.querySelector('#program-yes');
+    const program = document.querySelector('#program-yes');
+    const no_program = document.querySelector('#program-no');
 
-    const formData = new FormData();
-    formData.append('account', account.value);
-    formData.append('pages', pages.value);
-    formData.append('groups', groups.value);
-    formData.append('content', content.value);
-    formData.append('program', program.checked);
-    formData.append('day', day.value);
-    formData.append('hour', hour.value);
-
-    // append each file to the formData object
-    for (let i = 0; i < images.length; i++) {
-      formData.append('images[]', images[i], images[i].name);
+    if (account.value == "select") {
+      account.style.border = "2px solid #e00d0d"
+      errors.push("Selecione a conta")
+    }
+    if (page.value == "select") {
+      page.style.border = "2px solid #e00d0d";
+      errors.push("Selecione a página")
+    }
+    if (groups.value == "select") {
+      groups.style.border = "2px solid #e00d0d";
+      errors.push("Selecione os grupos")
+    }
+    if (content.value == "") {
+      content.style.border = "2px solid #e00d0d";
+      errors.push("Preencha o campo conteúdo")
+    }
+    if (program.checked) {
+      if (day.value == "") {
+        day.style.border = "2px solid #e00d0d";
+        errors.push("Selecione o dia")
+      }
+      if (hour.value == "") {
+        hour.style.border = "2px solid #e00d0d";
+        errors.push("Selecione a hora")
+      }
     }
 
-    fetch('/platform/post_facebook/new', {
-      method: 'POST',
-    })
-    .then((response) => {
-        if (response.ok) {
-            const btn = document.getElementsByClassName(".btn-notify");
+    if (errors.length == 0) {
+      const file = file_input.files[0];
+      const imageUrl = await uploadImage(file);
+      enable.style.display = "flex"
+
+      console.log(imageUrl)
+
+      fetch('/platform/post_facebook/new', {
+        method: 'POST',
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({account: account.value, page: page.value, groups: groups.value, content: content.value, program: program.checked, day: day.value, hour: hour.value, image: imageUrl})
+      })
+      .then((response) => {
+          if (response.ok) {
+              enable.style.display = "none"
+              const divMessage = document.querySelector(".alert");
+              divMessage.style.display = "flex";
+              divMessage.innerHTML = "";
+              const message = document.createElement("p");
+              const img = document.createElement("img");
+              img.src = "/img/platform/checked.png"
+              img.width = "28"
+              img.height = "28"
+              message.classList.add("message-notify");
+              if (program.checked) {
+                message.innerText = "Post programado com sucesso.";
+              } else {
+                message.innerText = "Post realizado."
+              }
+              divMessage.appendChild(img);
+              divMessage.appendChild(message);
+
+              setTimeout(() => {
+                divMessage.style.display = "none";
+              }, 4000);
+          } else {
+            enable.style.display = "none"
+            enable.style.display = "none"
             const divMessage = document.querySelector(".alert");
             divMessage.style.display = "flex";
             divMessage.innerHTML = "";
@@ -180,9 +252,9 @@
             img.height = "28"
             message.classList.add("message-notify");
             if (program.checked) {
-              message.innerText = "Erro desconhecido";
+              message.innerText = "Erro ao programar post";
             } else {
-              message.innerText = "Erro desconhecido"
+              message.innerText = "Erro ao publicar"
             }
             divMessage.appendChild(img);
             divMessage.appendChild(message);
@@ -190,28 +262,33 @@
             setTimeout(() => {
               divMessage.style.display = "none";
             }, 4000);
+
+            throw new Error("Erro ao processar a resposta da requisição");
+          }
+      })
+      .catch((error) => {
+        enable.style.display = "none"
+        const divMessage = document.querySelector(".alert");
+        divMessage.style.display = "flex";
+        divMessage.innerHTML = "";
+        const message = document.createElement("p");
+        const img = document.createElement("img");
+        img.src = "/img/platform/checked.png"
+        img.width = "28"
+        img.height = "28"
+        message.classList.add("message-notify");
+        if (program.checked) {
+          message.innerText = "Erro ao programar post";
         } else {
-          throw new Error("Erro ao processar a resposta da requisição");
+          message.innerText = "Erro ao publicar"
         }
-    })
-    .catch((error) => {
-        console.log(error)
-    })
+        divMessage.appendChild(img);
+        divMessage.appendChild(message);
+
+        setTimeout(() => {
+          divMessage.style.display = "none";
+        }, 4000);
+      })
+    }
   }
-
-  // const btn = document.getElementsByClassName(".btn-notify");
-  // const divMessage = document.querySelector(".alert");
-
-  // const msg = "teste de alerta";
-
-  // function ativar(msg) {
-  //   const message = document.createElement("div");
-  //   message.classList.add("message");
-  //   message.innerText = msg;
-  //   divMessage.appendChild(message);
-
-  //   setTimeout(() => {
-  //     message.style.display = "none";
-  //   }, 3000);
-  // }
 </script>

@@ -17,6 +17,7 @@ const {
 const { 
     feedbacks,
     users,
+    newUser,
     blockUser,
     unlockUser,
     deleteUser,
@@ -80,11 +81,11 @@ router.get("/accounts", auth, accounts)
 
 
 // NewPost
-router.get("/post_facebook/", postFacebook)
-router.get("/post_instagram/", postInstagram)
+router.get("/post_facebook/", auth, postFacebook)
+router.get("/post_instagram/", auth, postInstagram)
 
-router.post("/post_facebook/new", PostFacebook)
-router.post("/post_instagram/new", postFacebook)
+router.post("/post_facebook/new", auth, PostFacebook)
+router.post("/post_instagram/new", auth, postFacebook)
 
 
 
@@ -101,15 +102,15 @@ router.get("/pages", auth, pages)
 // Accounts
 router.get("/accounts", auth, accounts)
 router.delete("/accounts/delete/:id", auth, deleteAccount)
-router.get('/accounts/auth/facebook', (req, res) => {
+router.get('/accounts/auth/facebook', auth, (req, res) => {
     const appId = '540889994808844';
-    const redirectUri = 'https://localhost:5500/platform/accounts/auth/facebook/callback';
+    const redirectUri = 'https://plubee.net/platform/accounts/auth/facebook/callback';
     const url = `https://www.facebook.com/v13.0/dialog/oauth?client_id=${appId}&redirect_uri=${redirectUri}&scope=email`;
   
     res.redirect(url);
 });
 
-router.get('/accounts/auth/facebook/callback', (req, res) => {
+router.get('/accounts/auth/facebook/callback', auth, (req, res) => {
   // Verifique se há um código no parâmetro de consulta
   const code = req.query.code;
   if (!code) {
@@ -119,7 +120,7 @@ router.get('/accounts/auth/facebook/callback', (req, res) => {
   // Use o código para obter o token de acesso do Facebook
   const appId = '540889994808844';
   const appSecret = '8f14320ee467d63b94aa48dc439734f7';
-  const redirectUri = 'https://localhost:5500/platform/accounts/auth/facebook/callback';
+  const redirectUri = 'https://plubee.net/platform/accounts/auth/facebook/callback';
   const tokenUrl = `https://graph.facebook.com/v13.0/oauth/access_token?client_id=${appId}&client_secret=${appSecret}&redirect_uri=${redirectUri}&code=${code}`;
 
   // Faça uma solicitação POST para obter o token de acesso
@@ -145,21 +146,21 @@ router.get('/accounts/auth/facebook/callback', (req, res) => {
     });
 });
 
-router.get('/accounts/auth/instagram', (req, res) => {
+router.get('/accounts/auth/instagram', auth, (req, res) => {
     const redirect_uri = 'https://localhost:5500/platform/accounts/auth/instagram/callback';
     const client_id = '873936987022758';
     const url = `https://api.instagram.com/oauth/authorize?client_id=${client_id}&redirect_uri=${redirect_uri}&response_type=code&scope=user_profile,user_media`;
   
     res.redirect(url);
 })
-router.get('/accounts/auth/instagram/callback', newAccountIg)
+router.get('/accounts/auth/instagram/callback', auth, newAccountIg)
 
 
 
 // Comments bot
 router.get("/comments-automatic", auth, comments)
-router.put("/comments-automatic/config/", activeBot)
-router.delete("/comments-automatic/delete/:id_post", disableBot)
+router.put("/comments-automatic/config/", auth, activeBot)
+router.delete("/comments-automatic/delete/:id_post", auth, disableBot)
 
 
 
@@ -180,8 +181,9 @@ router.get("/plans", checkAdmin, plans)
 router.get("/finance", checkAdmin, finance)
 router.get("/email", checkAdmin, emails)
 router.post("/plans/new-plan", checkAdmin, newPlan)
-router.post("/users/block/:id", blockUser)
-router.post("/users/unlock/:id", unlockUser)
-router.delete("/users/delete/:id", deleteUser)
+router.post("/users/new", checkAdmin, newUser)
+router.post("/users/block/:id", checkAdmin, blockUser)
+router.post("/users/unlock/:id", checkAdmin, unlockUser)
+router.delete("/users/delete/:id", checkAdmin, deleteUser)
 
 module.exports = router

@@ -5,49 +5,71 @@ const Comments = require('../models/Comments')
 
 const comments = asyncHandler(async(req, res) => {
     const find = await User.findById(req.cookies._id)
+    
+    const listPosts = []
 
-    const posts = await Posts.find({})
-    const comments = await User.find({}).limit(10)
+    find.accountsFb.forEach(account => {
+        account.posts.forEach(post => {
+            listPosts.push(post)
+        })
+    })
 
-    res.render('layouts/comments', {isAdmin: find.isAdmin, posts: posts, comments: comments})
+    res.render('layouts/comments', {isAdmin: find.isAdmin, posts: listPosts})
 })
 
 
 const activeBot = asyncHandler(async(req, res) => {
     try {
         // Salvar o link da publicação nos grupos tmb
-        const { id_user, id_post, id_account, content_comment, limit_comments, platform } = req.body
+        const { id_post, id_account, content_comment, limit_comments, platform } = req.body
 
-        const newActiveBot = Comments.create({id_user: id_user, id_post: id_post, id_account: parseInt(id_account), content_comment: content_comment, limit_comments: parseInt(limit_comments), platform: platform}, async(error, result) => {
-            if (error) {
-                console.error(error);
-            } else {
-                const update = await Posts.findOneAndUpdate({id_post: id_post}, {status_bot: "enable"})
-
-                res.sendStatus(200)
-            }
+        User.updateOne(
+            { "accountsFb.posts.id_post": id_post },
+            { $set: { "accountsFb.$[account].posts.$[elem].status_bot": true, "accountsFb.$[account].posts.$[elem].comment_content": content_comment } },
+            { arrayFilters: [{ "account.id_account": id_account }, { "elem.id_post": id_post }] }
+          )
+        .then(result => {
+            const newActiveBot = Comments.create({id_user: req.cookies._id, id_post: id_post, id_account: id_account, content_comment: content_comment, limit_comments: parseInt(limit_comments), platform: platform}, async(error, result) => {
+                if (error) {
+                    console.error(error);
+                    res.sendStatus(500)
+                } else {
+                    const update = await Posts.findOneAndUpdate({id_post: id_post}, {status_bot: true})
+                    res.sendStatus(200)
+                }
+            })    
         })
-
+        .catch(error => {
+            console.error(error);
+        });
     } catch (err) {
-        res.send(err)
+        res.send(500)
     }
 })
 
 const disableBot = asyncHandler(async(req, res) => {
     try {
-        const id = req.params._id_post
-
-        console.log(req.params)
-
-        const deleteComment = Comments.findOneAndDelete({_id: id}, async(error, result) => {
-            if (error) {
-                res.send(error)
-            } else {
-                res.send(true)
-            }
+        User.updateOne(
+            { "accountsFb.posts.id_post": req.params.id_post },
+            { $set: { "accountsFb.$[account].posts.$[elem].status_bot": false } },
+            { arrayFilters: [{ "account.id_account": req.body.id_account }, { "elem.id_post": req.params.id_post }] }
+          )
+        .then(result => {
+            const newActiveBot = Comments.findOneAndDelete({id_post: req.params.id_post}, async(error, result) => {
+                if (error) {
+                    console.error(error);
+                    res.sendStatus(500)
+                } else {
+                    const update = await Posts.findOneAndUpdate({id_post: req.params.id_post}, {status_bot: false})
+                    res.sendStatus(200)
+                }
+            })    
         })
+        .catch(error => {
+            console.error(error);
+        });
     } catch (err) {
-        res.send(err)
+        res.send(500)
     }
 })
 

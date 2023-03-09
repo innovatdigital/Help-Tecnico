@@ -61,11 +61,11 @@ const accounts = asyncHandler(async(req, res) => {
     })
 
     if (find.type_account == "Basico") {
-        accountsRemaining = 1 - count
-    } else if (find.type_account == "Pro") {
         accountsRemaining = 5 - count
+    } else if (find.type_account == "Pro") {
+        accountsRemaining = 15 - count
     } else if (find.type_account == "Avançado") {
-        accountsRemaining = 10 - count
+        accountsRemaining = 30 - count
     }
 
     res.render('layouts/accounts', {isAdmin: find.isAdmin, accounts: accounts, total_accounts: count, accountsRemaining: accountsRemaining})

@@ -16,6 +16,28 @@ const users = asyncHandler(async(req, res) => {
     res.render('layouts/users', { isAdmin: true, users: users })
 })
 
+const newUser = asyncHandler(async(req, res) => {
+    try {
+        const data = Date.now();
+        const options = { day: '2-digit', month: '2-digit', year: 'numeric' };
+        const formater = new Intl.DateTimeFormat('pt-BR', options);
+        const dataFormat = formater.format(data);
+
+        var dataAtual = new Date();
+        var day = dataAtual.getDate();
+        var mes = dataAtual.getMonth() + 1;
+        var ano = dataAtual.getFullYear()
+
+        const newUser = await User.create({name: req.body.name, cpf: req.body.cpf, number: req.body.number, email: req.body.email, date: dataFormat, password: req.body.password, type_account: req.body.type_account})
+        const saveFinance = await Finances.create({idUser: newUser._id, value: req.body.value, day: day, month: mes, year: ano, email: req.body.email, status: "Aprovado", plan: req.body.type_account})
+
+        res.sendStatus(200)
+    } catch (err) {
+        res.send(err)
+    }
+})
+
+
 const blockUser = asyncHandler(async(req, res) => {
     try {
         const id_user = req.params.id
@@ -87,6 +109,7 @@ const emails = asyncHandler(async(req, res) => {
 module.exports = {
     feedbacks,
     users,
+    newUser,
     blockUser,
     unlockUser,
     deleteUser,

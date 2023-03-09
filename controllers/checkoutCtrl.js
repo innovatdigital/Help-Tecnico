@@ -86,7 +86,7 @@ const processPayment = asyncHandler(async(req, res) => {
                             var ano = dataAtual.getFullYear()
                     
                             const newUser = await User.create({name: req.body.account.name, cpf: req.body.account.cpf, number: req.body.account.number, email: req.body.account.email, date: dataFormat, password: req.body.account.password, type_account: req.body.account.type_account})
-                            const saveFinance = await Finances.create({idUser: newUser._id, value: paymentData.transaction_amount, day: day, month: mes, year: ano, email: req.body.account.email, status: "Aprovado", plan: "Pro"})
+                            const saveFinance = await Finances.create({idUser: newUser._id, value: paymentData.transaction_amount, day: day, month: mes, year: ano, email: req.body.account.email, status: "Aprovado", plan: req.body.account.type_account})
  
                             res.send({approved: true})
 

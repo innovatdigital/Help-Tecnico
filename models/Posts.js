@@ -13,30 +13,50 @@ const Posts = new mongoose.Schema({
         type: String,
         require: true
     },
-    name_user: {
+    name_account: {
+        type: String,
+        require: true
+    },
+    image_account: {
         type: String,
         require: true
     },
     image: {
-        type: String,
+        type: Array,
         require: true
     },
     status_bot: {
+        type: Boolean,
+        require: true
+    },
+    day: {
         type: String,
         require: true
     },
-    date: {
+    hour: {
         type: String,
         require: true
     },
-    title: {
+    groups: {
+        type: Array,
+        require: true
+    },
+    page_id: {
         type: String,
         require: true
     },
     platform: {
         type: String,
         require: true
-    }
+    },
+    page_name: {
+        type: String,
+        require: true  
+    },
+    content: {
+        type: String,
+        require: true
+    },
     },
     {
         versionKey: false

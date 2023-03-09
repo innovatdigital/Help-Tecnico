@@ -22,12 +22,16 @@
     <%- include('../partials/sidebar-platform', {isAdmin: isAdmin}) %>
 
     <div class="main-wrapper">
-      <!-- ! Main nav -->
+      <!-- !  Main nav -->
       <%- include('../partials/nav-platform', {isAdmin: isAdmin, title: "Usuários cadastrados na plataforma:"}) %>
   
       <!-- ! Main -->
       <main class="main users chart-page" id="skip-target">
         <div class="container">
+          <span class="btn-new" style="display: flex; justify-content: end;">
+            <a href="/platform/users/new_user"><button class="event">Novo usuário</button></a>
+          </span>
+
           <div class="row">
             <div class="col-lg">
               <div class="users-table table-wrapper">

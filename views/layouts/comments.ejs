@@ -24,26 +24,34 @@
     <div class="main-wrapper">
       <!-- ! Main nav -->
       <%- include('../partials/nav-platform', {isAdmin: isAdmin, title: "Comentários automáticos"}) %>
+
+      <div class="enable">
+        <div>
+          <h1 class="enable-h1"></h1>
+          <p class="enable-p"></p>
+          <h3>Contéudo do comentário</h3>
+          <textarea type="text" name="content" id="content-input"></textarea><br>
+
+          <h3>Limite de comentários</h3>
+          <input type="text" maxlength="2" name="limit" id="limit-input">
+          <br>
+          <button class="event" id="btn-active" style="padding: 12px;" onclick="activeComment()">Ativar</button>
+          <button class="event" id="btn-close" style="padding: 12px;" onclick="setHide()">Fechar</button>
+        </div>
+      </div>
   
       <!-- ! Main -->
       <main class="main users chart-page" id="skip-target">
         <div class="container">
+          <div class="alert" style="display: none;"></div>
 
-          <div class="row active-div">
-            <div class="col-lg">
-              <div class="card-body">
-                <h5 class="card-title">Ativar comentário automático - Title</h5>
-                <input type="text" name="content" id="content-input"><input type="text" maxlength="4" name="limit" id="limit-input">
-                <button id="btn-active" onclick="activeComment()">Ativar</button>
-                <button id="btn-close" onclick="setHide()">Fechar</button>
-              </div>          
-            </div>
+          <div>
+            <h2>Você poderá ativar os comentários somente nos posts que já foram publicados.</h2>
           </div>
 
           <div class="row">
             <div class="col-lg">
               <div class="users-table table-wrapper">
-
                 <table class="posts-table">
                   <thead>
                     <tr class="users-table-info">
@@ -52,97 +60,59 @@
                           Thumbnail
                         </label>
                       </th>
-                      <th>Titulo</th>
-                      <th>Nome da conta</th>
+                      <th>Descrição</th>
+                      <th>Conta</th>
+                      <th>Página</th>
+                      <th>Plataforma</th>
                       <th>Status</th>
                       <th>Ações</th>
+                      <th>Conteúdo</th>
                     </tr>
                   </thead>
                   <tbody>
-                    <!-- <% posts.forEach(function(item) { %>
+                    <% posts.forEach(function(item) { %>
                       <tr>
                         <td>
                           <div class="categories-table-img">
-                            <picture><source srcset="<%= item.image %>"><img src="<%= item.image %>" alt="category"></picture>
+                            <picture><source srcset="<%= item.image %>"><img src="<%= item.image %>" alt="img"></picture>
                           </div>
                         </td>
                         <td>
-                          <%= item.title %>
+                          <p style="width: 140px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"><%= item.content %></p>
                         </td>
                         <td>
                           <div class="pages-table-img">
-                            <picture><source srcset="/img/admin/avatar-illustrated-04.webp" type="image/webp"><img src="/img/admin/avatar-illustrated-04.webp" alt="User Name"><%= item.name_user %></picture>
+                            <picture><source srcset="<%= item.image_account %>" type="image/webp"><img src="<%= item.image_account %>" alt="User Name"><%= item.name_account %></picture>
                         
                           </div>
                         </td>
-                        <% if (item.status_bot == "enable") { %>
+                        <td><%= item.page_name %></td>
+                        <td style="color: #1877F2"><%= item.platform %></td>
+                        <% if (item.status_bot == true) { %>
                         <td><span class="badge badge-pill badge-success">Ativado</span></td>
                         <td>
-                          <button><a href="#">Editar comentário</a></button>
-                          <button onclick="disableComment('<%= item._id %>')">Desativar comentário</button>
+                          <button class="event" onclick="disableComment('<%= item.id_post %>', '<%= item.id_account %>')">Desativar comentário</button>
                         </td>
+                        <td><p style="font-weight: bold; width: 105px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"><%= item.comment_content %></p></td>
                         <% } else { %>
                         <td><span class="badge-active">Desativado</span></td>
                         <td>
-                          <button id="btn-open" onclick="activeComment('<%= item.id_post %>', '<%= item.id_account %>', '<%= item.id_user %>', '<%= item.platform %>')" background-color: #FFFFFF; padding: 6px; border-radius: 9px; border: 3px solid #752A7A">Ativar comentários</button>
+                          <button class="event" id="btn-open" onclick="openDiv('<%= item.id_post %>', '<%= item.id_account %>', '<%= item.name_account %>', '<%= item.platform %>')">Ativar comentários</button>
                         </td>
+                        <td>Não ativado</td>
                         <% } %>
                       </tr>
                     <% }); %> -->
-
-                    <!-- <tr>
-                      <td>
-                        <div class="categories-table-img">
-                          <picture><source srcset="https://img.itdg.com.br/images/recipes/000/000/023/365326/365326_original.jpg"><img src="https://img.itdg.com.br/images/recipes/000/000/023/365326/365326_original.jpg" alt="imagem"></picture>
-                        </div>
-                      </td>
-                      <td style="font-weight: bold;">
-                        Como fazer um bolo de cenoura!
-                      </td>
-                      <td>
-                        <div class="pages-table-img">
-                          <picture><source srcset="/img/admin/avatar-illustrated-04.webp" type="image/webp"><img src="/img/admin/avatar-illustrated-04.webp" alt="User Name"></picture>
-                          Receita e Bolos
-                        </div>
-                      </td>
-                      <td><span class="badge badge-pill badge-success">Ativado</span></td>
-                      <td>
-                        <button class="event"><a href="#">Editar comentário</a></button>
-                        <button class="event" onclick="disableComment()">Desativar comentário</button>
-                      </td>
-                    </tr> -->
                   </tbody>
                 </table>
               </div>
-            </div>
-            
-            <div class="col-lg-3" style="margin-top: 3rem;">
-              <!-- <article class="white-block">
-                <div class="top-cat-title">
-                  <h3>Comentários recentes</h3>
-                  <p>200 comentários</p>
-                </div>
-                <ul class="top-cat-list">
-                  <% comments.forEach(function(item) { %>
-                    <li>
-                      <a href="##">
-                        <div class="top-cat-list__title">
-                          <%= item.name %>
-                        </div>
-                        <div class="top-cat-list__subtitle">
-                          Plano <%= item.type_account %> <span class="purple"><%= item.date %></span>
-                        </div>
-                      </a>
-                    </li>
-                  <% }); %>
-                </ul>
-              </article> -->
             </div>
           </div>
       </main>
 
       <!-- ! Footer -->
       <%- include('../partials/footer-platform') %>
+      
     </div>
   </div>
 
@@ -157,47 +127,63 @@
   const btnActive = document.querySelector('#btn-active')
   const btnOpen = document.querySelector('#btn-open')
   const btnClose = document.querySelector('#btn-close')
-  const active = document.querySelector('.active-div')
-  let idPost = ''
-  let idAccount = ''
-  let idUser = ''
+  const enable = document.querySelector('.enable')
+  const enableH1 = document.querySelector('.enable-h1')
+  const enableP = document.querySelector('.enable-p')
+  const content = document.querySelector('#content-input')
+  const limit = document.querySelector('#limit-input')
+  let idPost = ""
+  let idAccount = ""
+  let platformPost = ""
 
-  let count = 0
+  enable.style.display = "none"
 
-  active.style.display = "none"
+  function openDiv(id_post, id_account, name_account, platform) {
+    enable.style.display = "flex"
+    enableH1.innerHTML = "Ativar comentários automáticos"
+    enableP.innerHTML = "Conta: " + name_account
 
-  function activeComment(id_post, id_account, id_user, platform) {
-    if (count == 0) {
-      active.style.display = "flex"
-      idPost = id_post
-      idAccount = id_account
-      idUser = id_user
-      platformPost = platform
-
-      count = 1
-
-    } else {
-      const content = document.querySelector('#content-input')
-      const limit = document.querySelector('#limit-input')
-
-      fetch("comments-automatic/config", {
-          method: "PUT",
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ id_user: idUser, id_account: idAccount, id_post: idPost, platform: platformPost, content_comment: content.value, limit_comments: limit.value })
-      }).then(response => response.ok)
-        .then(data => {
-          if (data) {
-            location.reload()
-          }
-        })
-        .catch(error => console.error(error));
-    }
+    idPost = id_post
+    idAccount = id_account
+    platformPost = platform
   }
 
-  function disableComment(id_post) {
+  function activeComment() {
+    fetch("comments-automatic/config", {
+      method: "PUT",
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ id_account: idAccount, id_post: idPost, platform: platformPost, content_comment: content.value, limit_comments: limit.value })
+    })
+    .then(response => {
+      if (response.ok) {
+        const divMessage = document.querySelector(".alert");
+        divMessage.style.display = "flex";
+        divMessage.innerHTML = "";
+        const message = document.createElement("p");
+        const img = document.createElement("img");
+        img.src = "/img/platform/checked.png"
+        img.width = "28"
+        img.height = "28"
+        message.classList.add("message-notify");
+        message.innerText = "Bot ativado com sucesso.";
+        divMessage.appendChild(img);
+        divMessage.appendChild(message);
+
+        setTimeout(() => {
+          enable.style.display = "none"
+          divMessage.style.display = "none";
+          location.reload()
+        }, 1500);
+      }
+    })
+    .catch(error => console.error(error));
+  }
+
+  function disableComment(id_post, id_account) {
     fetch("comments-automatic/delete/" + id_post, {
         method: "DELETE",
         headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({id_account: id_account})
     }).then(response => response.ok)
       .then(data => {
         if (data) {
@@ -208,7 +194,7 @@
   }
 
   function setHide() {
-    active.style.display = "none"
+    enable.style.display = "none"
     count = 0
   }
 

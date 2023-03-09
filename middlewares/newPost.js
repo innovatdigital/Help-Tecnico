@@ -1,7 +1,7 @@
 const User = require('../models/User')
 const asyncHandler = require('express-async-handler')
 
-const checkTypeAccount = asyncHandler(async(req, res, next) => {
+const checkPost = asyncHandler(async(req, res, next) => {
     try {
         const findTypeAccount = await User.findById(req.cookies._id)
 

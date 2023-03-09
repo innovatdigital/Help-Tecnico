@@ -21,18 +21,19 @@ const dashboard = asyncHandler(async(req, res) => {
 
 const allPosts = asyncHandler(async(req, res) => {
     const find = await User.findById(req.cookies._id)
-    const posts = await Posts.find({id_user: req.cookies._id}).lean()
     
     const listPosts = []
 
-    posts.forEach(post => {
-        listPosts.push(post)
+    find.accountsFb.forEach(account => {
+        account.posts.forEach(post => {
+            listPosts.push(post)
+        })
     })
 
     if (find.isAdmin) {
-        res.render('layouts/posts', {isAdmin: true, posts: posts})
+        res.render('layouts/posts', {isAdmin: true, posts: listPosts})
     } else {
-        res.render('layouts/posts', {isAdmin: false, posts: posts})
+        res.render('layouts/posts', {isAdmin: false, posts: listPosts})
     }
 })
 
