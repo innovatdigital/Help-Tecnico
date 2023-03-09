@@ -103,7 +103,7 @@ router.get("/pages", auth, pages)
 router.get("/accounts", auth, accounts)
 router.delete("/accounts/delete/:id", auth, deleteAccount)
 router.get('/accounts/auth/facebook', auth, (req, res) => {
-    const appId = '540889994808844';
+    const appId = process.env.FACEBOOK_APP_ID;
     const redirectUri = 'https://plubee.net/platform/accounts/auth/facebook/callback';
     const url = `https://www.facebook.com/v13.0/dialog/oauth?client_id=${appId}&redirect_uri=${redirectUri}&scope=email`;
   
@@ -118,8 +118,8 @@ router.get('/accounts/auth/facebook/callback', auth, (req, res) => {
   }
 
   // Use o código para obter o token de acesso do Facebook
-  const appId = '540889994808844';
-  const appSecret = '8f14320ee467d63b94aa48dc439734f7';
+  const appId = process.env.FACEBOOK_APP_ID;
+  const appSecret = process.env.FACEBOOK_APP_SECRET;
   const redirectUri = 'https://plubee.net/platform/accounts/auth/facebook/callback';
   const tokenUrl = `https://graph.facebook.com/v13.0/oauth/access_token?client_id=${appId}&client_secret=${appSecret}&redirect_uri=${redirectUri}&code=${code}`;
 
