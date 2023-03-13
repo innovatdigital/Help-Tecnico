@@ -117,7 +117,7 @@ router.get("/accounts", auth, accounts)
 router.delete("/accounts/delete/:id", auth, deleteAccount)
 router.get('/accounts/auth/facebook', auth, (req, res) => {
     const appId = process.env.FACEBOOK_APP_ID;
-    const redirectUri = 'https://localhost:5500/platform/accounts/auth/facebook/callback';
+    const redirectUri = 'https://plubee.net/platform/accounts/auth/facebook/callback';
     const url = `https://www.facebook.com/v13.0/dialog/oauth?client_id=${appId}&redirect_uri=${redirectUri}&scope=email`;
   
     res.redirect(url);
@@ -133,7 +133,7 @@ router.get('/accounts/auth/facebook/callback', auth, (req, res) => {
   // Use o código para obter o token de acesso do Facebook
   const appId = process.env.FACEBOOK_APP_ID;
   const appSecret = process.env.FACEBOOK_APP_SECRET;
-  const redirectUri = 'https://localhost:5500/platform/accounts/auth/facebook/callback';
+  const redirectUri = 'https://plubee.net/platform/accounts/auth/facebook/callback';
   const tokenUrl = `https://graph.facebook.com/v13.0/oauth/access_token?client_id=${appId}&client_secret=${appSecret}&redirect_uri=${redirectUri}&code=${code}`;
 
   // Faça uma solicitação POST para obter o token de acesso
@@ -160,7 +160,7 @@ router.get('/accounts/auth/facebook/callback', auth, (req, res) => {
 });
 
 router.get('/accounts/auth/instagram', auth, (req, res) => {
-    const redirect_uri = 'https://localhost:5500/platform/accounts/auth/instagram/callback';
+    const redirect_uri = 'https://plubee.net/platform/accounts/auth/instagram/callback';
     const client_id = '873936987022758';
     const url = `https://api.instagram.com/oauth/authorize?client_id=${client_id}&redirect_uri=${redirect_uri}&response_type=code&scope=user_profile,user_media`;
   
