@@ -3,6 +3,7 @@ const User = require('../models/User')
 const passport = require("passport")
 const axios = require('axios');
 const request = require('request')
+const Historic = require('../models/Historic')
 const FacebookStrategy = require('passport-facebook').Strategy;
 const InstagramStrategy = require('passport-instagram').Strategy;
 
@@ -169,7 +170,9 @@ async function newAccountFb(id_user, accessToken, profile) {
                                 new: true
                             })
                             .then(result => {
-                                console.log("Conta inserida com sucesso");
+                                const find = User.findById(id_user)
+                                // const historic = Historic.create({"action": `Nova conta adicionada: ${profile.name}`, "name": find.name, "id_user": find._id, "date": dataFormat})
+                                res.send(200)
                             })
                             .catch(error => {
                                 console.error(error);

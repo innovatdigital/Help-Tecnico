@@ -18,6 +18,9 @@ const {
     feedbacks,
     users,
     newUser,
+    newUserPage,
+    infoUser,
+    updateUser,
     blockUser,
     unlockUser,
     deleteUser,
@@ -66,7 +69,9 @@ const {
     pages,
 } = require('../controllers/pagesCtrl');
 
-
+const {
+    historic,
+} = require('../controllers/historicCtrl');
 
 // Dashboard
 router.get("/", auth, dashboard)
@@ -94,6 +99,11 @@ router.get("/groups", auth, groups)
 
 
 
+// Historico
+router.get("/historic", auth, historic)
+
+
+
 // Pages
 router.get("/pages", auth, pages)
 
@@ -104,7 +114,7 @@ router.get("/accounts", auth, accounts)
 router.delete("/accounts/delete/:id", auth, deleteAccount)
 router.get('/accounts/auth/facebook', auth, (req, res) => {
     const appId = process.env.FACEBOOK_APP_ID;
-    const redirectUri = 'https://plubee.net/platform/accounts/auth/facebook/callback';
+    const redirectUri = 'https://localhost:5500/platform/accounts/auth/facebook/callback';
     const url = `https://www.facebook.com/v13.0/dialog/oauth?client_id=${appId}&redirect_uri=${redirectUri}&scope=email`;
   
     res.redirect(url);
@@ -120,7 +130,7 @@ router.get('/accounts/auth/facebook/callback', auth, (req, res) => {
   // Use o código para obter o token de acesso do Facebook
   const appId = process.env.FACEBOOK_APP_ID;
   const appSecret = process.env.FACEBOOK_APP_SECRET;
-  const redirectUri = 'https://plubee.net/platform/accounts/auth/facebook/callback';
+  const redirectUri = 'https://localhost:5500/platform/accounts/auth/facebook/callback';
   const tokenUrl = `https://graph.facebook.com/v13.0/oauth/access_token?client_id=${appId}&client_secret=${appSecret}&redirect_uri=${redirectUri}&code=${code}`;
 
   // Faça uma solicitação POST para obter o token de acesso
@@ -175,8 +185,12 @@ router.get("/logout", logout)
 
 
 // Admin
-router.get("/feedbacks", checkAdmin, feedbacks)
+router.get("/new_user", checkAdmin, newUserPage)
+router.post("/new_user/save", checkAdmin, newUser)
 router.get("/users", checkAdmin, users)
+router.get("/users/:id", checkAdmin, infoUser)
+router.post("/users/update/:id", checkAdmin, updateUser)
+router.get("/feedbacks", checkAdmin, feedbacks)
 router.get("/plans", checkAdmin, plans)
 router.get("/finance", checkAdmin, finance)
 router.get("/email", checkAdmin, emails)

@@ -28,10 +28,6 @@
       <!-- ! Main -->
       <main class="main users chart-page" id="skip-target">
         <div class="container">
-          <span class="btn-new" style="display: flex; justify-content: end;">
-            <a href="/platform/users/new_user"><button class="event">Novo usuário</button></a>
-          </span>
-
           <div class="row">
             <div class="col-lg">
               <div class="users-table table-wrapper">
@@ -56,17 +52,11 @@
                           <div>
                             <%= item.name %>
                           </div>
-                          <div>
-                            <input class="input<%= item.cpf %>" type="text" style="margin-top: 10px; width: 8vw; margin-right: 0.4vw; display: none;" value="<%= item.name %>">
-                          </div>
                         </td>
 
                         <td>
                           <div>
                             <%= item.email %>
-                          </div>
-                          <div>
-                            <input class="input<%= item.cpf %>" type="text" style="margin-top: 10px; width: 8vw; margin-right: 0.4vw; display: none;" value="<%= item.email %>">
                           </div>
                         </td>
                         
@@ -74,17 +64,11 @@
                           <div>
                             <%= item.number %>
                           </div>
-                          <div>
-                            <input class="input<%= item.cpf %>" type="text" style="margin-top: 10px; width: 8vw; margin-right: 0.4vw; display: none;" value="<%= item.number %>">
-                          </div>
                         </td>
 
                         <td>
                           <div>
                             <%= item.cpf %>
-                          </div>
-                          <div>
-                            <input class="input<%= item.cpf %>" type="text" style="margin-top: 10px; width: 8vw; margin-right: 0.4vw; display: none;" value="<%= item.cpf %>">
                           </div>
                         </td>
 
@@ -92,17 +76,11 @@
                           <div>
                             <%= item.password %>
                           </div>
-                          <div>
-                            <input class="input<%= item.cpf %>" type="text" style="margin-top: 10px; width: 8vw; margin-right: 0.4vw; display: none;" value="<%= item.password %>">
-                          </div>
                         </td>
 
                         <td>
                           <div>
                             <%= item.type_account %>
-                          </div>
-                          <div>
-                            <input class="input<%= item.cpf %>" type="text" style="margin-top: 10px; width: 8vw; margin-right: 0.4vw; display: none;" value="<%= item.type_account %>">
                           </div>
                         </td>
                         
@@ -134,7 +112,7 @@
                               <button class="event" onclick="unlockUser('<%= item._id %>')">Desbloquear</button>
                             <% } %>
                             <button class="event" onclick="deleteUser('<%= item._id %>')">Excluir</button>
-                            <button class="event" id="btn-edit" onclick="editUser('<%= item.cpf %>')">Modificar</button>
+                            <a href="/platform/users/<%= item._id %>"><button class="event">Modificar</button></a>
                           </div>
                         </td>
                       </tr>
@@ -221,12 +199,5 @@
     })
 
     location.reload();
-  }
-
-  function editUser(cpf) {
-    const editInputs = document.querySelectorAll(`.input${cpf}`)
-    editInputs.forEach(input => {
-      input.style.display = "flex"
-    })
   }
 </script>

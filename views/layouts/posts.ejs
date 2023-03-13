@@ -26,72 +26,80 @@
       <%- include('../partials/nav-platform', {isAdmin: isAdmin, title: "Todos os posts"}) %>
   
       <!-- ! Main -->
-      <main class="main users chart-page" id="skip-target">
-        <div class="container">
-          <div class="row">
-            <div class="col-lg">
-              <div class="users-table table-wrapper">
-                  <table class="posts-table">
-                    <thead>
-                      <tr class="users-table-info">
-                        <th>Thumbnail</th>
-                        <th>Descrição</th>
-                        <th>Conta</th>
-                        <th>Página</th>
-                        <th>Plataforma</th>
-                        <th>Status</th>
-                        <th>Data</th>
-                      </tr>
-                    </thead>
-                      <tbody>
-                        <% posts.forEach(function(item) { %>
-                          <tr>
-                            <td>
-                              <div class="categories-table-img">
-                                <picture><source srcset="<%= item.image %>"><img src="<%= item.image %>" alt="img"></picture>
-                              </div>
-                            </td>
-                            <td>
-                              <p style="width: 140px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"><%= item.content %></p>
-                            </td>
-                            <td>
-                              <div class="pages-table-img">
-                                <picture><source srcset="<%= item.image_account %>" type="image/webp"><img src="<%= item.image_account %>" alt="User Name"><%= item.name_account %></picture>
-                              </div>
-                            </td>
-                            <td>
-                              <%= item.page_name %>
-                            </td>
-                            <% if (item.platform == "Facebook") { %>
+      <% if (posts.length > 0) { %>
+        <main class="main users chart-page" id="skip-target">
+          <div class="container">
+            <div class="row">
+              <div class="col-lg">
+                <div class="users-table table-wrapper">
+                    <table class="posts-table">
+                      <thead>
+                        <tr class="users-table-info">
+                          <th>Thumbnail</th>
+                          <th>Descrição</th>
+                          <th>Conta</th>
+                          <th>Página</th>
+                          <th>Plataforma</th>
+                          <th>Status</th>
+                          <th>Data</th>
+                        </tr>
+                      </thead>
+                        <tbody>
+                          <% posts.forEach(function(item) { %>
+                            <tr>
                               <td>
-                                <div style="color: #1877F2; font-weight: bold;">
-                                  <%= item.platform %>
+                                <div class="categories-table-img">
+                                  <picture><source srcset="<%= item.image %>"><img src="<%= item.image %>" alt="img"></picture>
                                 </div>
                               </td>
-                            <% } else { %>
                               <td>
-                                <div style="font-weight: bold; color: #C21F70">
-                                  <%= item.platform %>
+                                <p style="width: 140px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"><%= item.content %></p>
+                              </td>
+                              <td>
+                                <div class="pages-table-img">
+                                  <picture><source srcset="<%= item.image_account %>" type="image/webp"><img src="<%= item.image_account %>" alt="User Name"><%= item.name_account %></picture>
                                 </div>
                               </td>
-                            <% } %>    
-                            <% if(item.program_post == true) { %>
-                              <td><span class="badge badge-pill badge-success">Programado</span></td>
-                              <td><%= item.day %> <%= item.hour %></td>
-                            <% } else { %>
-                              <td><span class="badge badge-pill badge-active">Publicado</span></td>
-                              <td>Não programado</td>
-                            <% } %>
-                          </tr>
-                        <% }); %>
-                      </tbody>
-                  </table>
+                              <td>
+                                <%= item.page_name %>
+                              </td>
+                              <% if (item.platform == "Facebook") { %>
+                                <td>
+                                  <div style="color: #1877F2; font-weight: bold;">
+                                    <%= item.platform %>
+                                  </div>
+                                </td>
+                              <% } else { %>
+                                <td>
+                                  <div style="font-weight: bold; color: #C21F70">
+                                    <%= item.platform %>
+                                  </div>
+                                </td>
+                              <% } %>    
+                              <% if(item.program_post == true) { %>
+                                <td><span class="badge badge-pill badge-success">Programado</span></td>
+                                <td><%= item.day %> <%= item.hour %></td>
+                              <% } else { %>
+                                <td><span class="badge badge-pill badge-active">Publicado</span></td>
+                                <td>Não programado</td>
+                              <% } %>
+                            </tr>
+                          <% }); %>
+                        </tbody>
+                    </table>
+                </div>
               </div>
             </div>
           </div>
+        </main>
+      <% } else { %>
+        <div class="alert" style="display: none;"></div>
+        <div class="empty">
+          <img src="/img/admin/post.png" height="60" alt=""><br>
+          <h2>Nenhum post adicionado</h2>
+          <button style="padding: 13px 50px !important; margin-top: 30px;" class="event" id="btn-open"><a href="/platform/post_facebook">Novo post</a></button>
         </div>
-      </main>
-
+      <% } %>
       <!-- ! Footer -->
       <%- include('../partials/footer-platform') %>
     </div>

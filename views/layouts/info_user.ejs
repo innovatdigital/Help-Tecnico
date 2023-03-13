@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>pluBee | Editar usuário</title>
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="/img/site/plubee-icon.png" type="image/x-icon">
+  <!-- Custom styles -->
+  <link rel="stylesheet" href="/css/admin/style.css">
+</head>
+
+<body>
+  <div class="layer"></div>
+  
+  <!-- ! Body -->
+  <div class="page-flex">
+
+    <!-- ! Sidebar -->
+    <%- include('../partials/sidebar-platform', {isAdmin: isAdmin}) %>
+
+    <div class="main-wrapper">
+      <!-- ! Main nav -->
+      <%- include('../partials/nav-platform', {isAdmin: isAdmin, title: "Nova publicação"}) %>
+
+      <!-- ! Main -->
+      <main class="main users chart-page" id="skip-target">
+        <div class="container">
+          <div class="alert" style="display: none;"></div>
+          <br>
+
+          <div class="row">
+            <div class="col-lg-12">
+              <article class="white-block">
+                <p style="font-size: 20px; margin-bottom: 10px; font-weight: bold; border-bottom: 2.5px solid #63636360; padding-bottom: 15px; display: flex; align-items: center;"><img src="/img/admin/Bulk/update.png" width=28 height=28 alt="" style="margin-right: 12px;">Editar usuário</p>
+                <br>
+                <p style="font-size: 15px; margin-bottom: 10px; font-weight: bold;">Nome do usuário:</p>
+                <input type="text" name="name" id="name" style="border: 2px solid #25960f; padding: 5px;" value="<%= find.name %>">
+                <br>
+                <br>
+                <p style="font-size: 15px; margin-bottom: 10px; font-weight: bold;">CPF:</p>
+                <input type="text" name="cpf" id="cpf" style="border: 2px solid #25960f; padding: 5px;" value="<%= find.cpf %>">
+                <br>
+                <br>
+                <p style="font-size: 15px; margin-bottom: 10px; font-weight: bold;">Email:</p>
+                <input type="text" name="email" id="email" style="border: 2px solid #25960f; padding: 5px;" value="<%= find.email %>">
+                <br>
+                <br>
+                <p style="font-size: 15px; margin-bottom: 10px; font-weight: bold;">Senha:</p>
+                <input type="text" name="password" id="password" style="border: 2px solid #25960f; padding: 5px;" value="<%= find.password %>">
+                <br>
+                <br>
+                <p style="font-size: 15px; margin-bottom: 10px; font-weight: bold;">Número de telefone:</p>
+                <input type="text" name="number" id="number" style="border: 2px solid #25960f; padding: 5px;" value="<%= find.number %>">
+                <br>
+                <br>
+                <p style="font-size: 15px; margin-bottom: 10px; font-weight: bold; display: flex; align-items: center;">Tipo de conta do usuário:</p>
+                <select name="type_account" id="type_account" style="width: 100%">
+                  <option value="select">Selecione uma opção</option>
+                    <% if (find.type_account == "Básico") { %>
+                      <option value="basico" selected>Básico</option>
+                      <option value="pro">Pro</option>
+                      <option value="avancado">Avançado</option>
+                    <% } else if (find.type_account == "Pro") { %>
+                      <option value="basico">Básico</option>
+                      <option value="pro" selected>Pro</option>
+                      <option value="avancado">Avançado</option>
+                    <% } else if (find.type_account == "Avançado") { %>
+                      <option value="basico">Básico</option>
+                      <option value="pro">Pro</option>
+                      <option value="avancado" selected>Avançado</option>
+                    <% } %>
+                </select>
+                <br>
+                <br>
+                <p style="font-size: 15px; margin-bottom: 10px; font-weight: bold; display: flex; align-items: center;">Tipo de usuário:</p>
+                <div style="display: flex;">
+                  <% if (find.isAdmin) { %>
+                    <input type="radio" checked name="program" id="admin-true" value="yes" tabindex="1"><p style="display: flex; justify-content: center; align-items: center; margin-right: 10px;" id="p-true">Administrador</p>
+                    <input type="radio" name="program" id="admin-false" value="no" tabindex="2"><p style="display: flex; justify-content: center; align-items: center;" id="p-false">Usuário comum</p>
+                  <% } else if (find.isAdmin == false) { %>
+                    <input type="radio" name="program" id="admin-true" value="yes" tabindex="1"><p style="display: flex; justify-content: center; align-items: center; margin-right: 10px;" id="p-true">Administrador</p>
+                    <input type="radio" checked name="program" id="admin-false" value="no" tabindex="2"><p style="display: flex; justify-content: center; align-items: center;" id="p-false">Usuário comum</p>
+                  <% } %>
+                </div>
+                <br>
+                <br>
+                <button style="color: #FFFFFF; background-color: #752a7a; padding: 13px; border-radius: 10px" onclick="update('<%= find._id %>')">Atualizar usuário</button>
+              </article>
+            </div>
+          </div>
+        </div>
+      </main>
+
+      <%- include('../partials/footer-platform') %>
+    </div>
+  </div>
+
+
+<!-- Chart library -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/blueimp-file-upload/9.28.0/js/jquery.fileupload.min.js"></script>
+<script src="https://widget.cloudinary.com/v2.0/global/all.js" type="text/javascript"></script>
+<!-- Icons library -->
+<script src="js/admin/feather.min.js"></script>
+</body>
+</html>
+
+<script>
+  const name = document.querySelector("#name")
+  const cpf = document.querySelector("#cpf")
+  const email = document.querySelector("#email")
+  const password = document.querySelector("#password")
+  const number = document.querySelector("#number")
+  const type = document.querySelector("#type_account")
+  const adminTrue = document.querySelector("#admin-true")
+  const adminFalse = document.querySelector("#admin-false")
+  const p_true = document.querySelector("#p-true")
+  const p_false = document.querySelector("#p-false")
+  let admin = ""
+
+  function update(id) {
+    const errors = []
+
+    if (name.value.length == 0) {
+      name.style = "border: 2px solid #e00d0d !important"
+      errors.push("error")
+    }
+    if (password.value.length == 0) {
+      password.style.border = "2px solid #e00d0d";
+      errors.push("error")
+    }
+    if (cpf.value.length == 0) {
+      password.style.border = "2px solid #e00d0d";
+      errors.push("error")
+    }
+    if (email.value.length == 0) {
+      email.style.border = "2px solid #e00d0d";
+      errors.push("error")
+    }
+    if (number.value.length == 0) {
+      number.style.border = "2px solid #e00d0d";
+      errors.push("error")
+    }
+    if (type.value == "select") {
+      type.style.border = "2px solid #e00d0d"
+      errors.push("error")
+    }
+    if (adminTrue.checked == false && adminFalse.checked == false) {
+      p_false.color = "#e00d0d !important";
+      p_true.color = "#e00d0d !important";
+      errors.push("error")
+    }
+    if (adminFalse.checked == false) {
+      admin = false
+    }
+    if (adminTrue.checked == true) {
+      admin = true
+    }
+    if (errors.length == 0) {
+      fetch('/platform/users/update/' + id, {
+        method: 'POST',
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({name: name.value, cpf: cpf.value, email: email.value, password: password.value, number: number.value, admin: admin, type_account: type.value})
+      })
+      .then((response) => {
+          if (response.ok) {
+              const divMessage = document.querySelector(".alert");
+              divMessage.style.display = "flex";
+              divMessage.innerHTML = "";
+              const message = document.createElement("p");
+              const img = document.createElement("img");
+              img.src = "/img/admin/Bulk/checked.png"
+              img.width = "28"
+              img.height = "28"
+              message.classList.add("message-notify");
+              message.innerText = "Usuário atualizado com sucesso!";
+              divMessage.appendChild(img);
+              divMessage.appendChild(message);
+
+              setTimeout(() => {
+                divMessage.style.display = "none";
+              }, 4000);
+          } else {
+            const divMessage = document.querySelector(".alert");
+            divMessage.style.display = "flex";
+            divMessage.innerHTML = "";
+            const message = document.createElement("p");
+            const img = document.createElement("img");
+            img.src = "/img/admin/Bulk/checked.png"
+            img.width = "28"
+            img.height = "28"
+            message.classList.add("message-notify");
+            message.innerText = "Erro";
+            divMessage.appendChild(img);
+            divMessage.appendChild(message);
+
+            setTimeout(() => {
+              divMessage.style.display = "none";
+            }, 4000);
+
+            throw new Error("Erro ao processar a resposta da requisição");
+          }
+      })
+      .catch((error) => {
+        const divMessage = document.querySelector(".alert");
+        divMessage.style.display = "flex";
+        divMessage.innerHTML = "";
+        const message = document.createElement("p");
+        const img = document.createElement("img");
+        img.src = "/img/admin/Bulk/error.png"
+        img.width = "28"
+        img.height = "28"
+        message.classList.add("message-notify");
+        message.innerText = "Erro";
+        divMessage.appendChild(img);
+        divMessage.appendChild(message);
+
+        setTimeout(() => {
+          divMessage.style.display = "none";
+        }, 4000);
+      })
+    }
+  }
+</script>

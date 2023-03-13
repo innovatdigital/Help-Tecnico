@@ -24,11 +24,100 @@
     <div class="main-wrapper">
       <!-- ! Main nav -->
       <%- include('../partials/nav-platform', {isAdmin: isAdmin, title: "Nova publicação"}) %>
+      <div style="display: none; align-items: start;" class="enable pages close">
+        <div style="height: 60%; margin-top: 40px; overflow-y: scroll">
+          <div style="display: flex; align-items: center; padding-bottom: 14px; border-bottom: 2px solid #8b8b8b; width: 100%;">
+            <img style="margin-right: 9px; height: 1.8vw" src="/img/admin/post.png" alt="">
+            <h2 class="enable-h1">Selecione as páginas</h2>
+          </div>
+          <div style="display: flex; flex-direction: column; flex-wrap: wrap; margin-top: 15px; width: 100%;">
+            <% pages.forEach(function(item) { %>
+              <div style="display: flex; justify-content: space-between;">
+                <div style>
+                  <p style="font-size: 16px; margin-bottom: 10px; font-weight: bold; padding-bottom: 15px; color: #752A7A; display: flex; align-items: center;"><img class="page-icon" src="<%= item.image %>" alt=""><%= item.name_page %></p>
+                </div>
 
-      <div class="enable" style="display: flex; flex-direction: column;">
-        <img src="/img/admin/Bulk/loading.gif" alt="loading" height="80">
-        <br>
-        <h1 style="color: #FFFFFF; margin-bottom: 10vw;" class="enable-h1">Carregando publicação!</h1>
+                <div>
+                  <button id="add-page<%= item.id %>" class="event" onclick="add_page('<%= item.id %>', '<%= item.name_page %>', '<%= item.access_token %>')">Selecionar</button>
+                  <button id="del-page<%= item.id %>" class="event" style="display: none; background-color: #bb0404 !important;" onclick="del_page('<%= item.id %>', '<%= item.name_page %>', '<%= item.access_token %>')">Excluir</button>
+                </div>
+              </div>
+            <% }) %>
+          </div>
+          <div style="display: flex; justify-content: space-between; margin-top: 5px; margin-left: 10px;">
+            <div class="selects-page" style="display: flex; align-items: center;">
+              Selecionados: 0
+            </div>
+
+            <div>
+              <button class="event" id="btn-close" style="background-color: #bb0404 !important; padding: 12px 30px; margin-right: 5px;" onclick="setHide()">Fechar</button>
+              <button class="event" id="btn-active" style="background-color: #52d31f !important; padding: 12px 30px" onclick="pages_selects()">Continuar</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div style="display: none; align-items: start;" class="enable groups close">
+        <div style="height: 60%; margin-top: 40px; overflow-y: scroll">
+          <div style="display: flex; align-items: center; padding-bottom: 14px; border-bottom: 2px solid #8b8b8b; width: 100%;">
+            <img style="margin-right: 9px; height: 1.8vw" src="/img/admin/post.png" alt="">
+            <h2 class="enable-h1">Selecione até 3 grupos:</h2>
+          </div>
+          <div style="display: flex; flex-direction: column; flex-wrap: wrap; margin-top: 15px; width: 100%;">
+            <% groups.forEach(function(item) { %>
+              <div style="display: flex; justify-content: space-between;">
+                <div style>
+                  <p style="font-size: 16px; margin-bottom: 10px; font-weight: bold; padding-bottom: 15px; color: #752A7A; display: flex; align-items: center;"><img class="page-icon" src="<%= item.image %>" alt=""><%= item.name_group %></p>
+                </div>
+
+                <div>
+                  <button id="add-group<%= item.id %>" class="event" onclick="add_group('<%= item.id %>')">Selecionar</button>
+                  <button id="del-group<%= item.id %>" class="event" style="display: none; background-color: #bb0404 !important;" onclick="del_group('<%= item.id %>')">Excluir</button>
+                </div>
+              </div>
+            <% }) %>
+          </div>
+          <div style="display: flex; justify-content: space-between; margin-top: 5px; margin-left: 10px;">
+            <div class="selects-group" style="display: flex; align-items: center;">
+              Selecionados: 0
+            </div>
+
+            <div>
+              <button class="event" id="btn-close" style="background-color: #bb0404 !important; padding: 12px 30px; margin-right: 5px;" onclick="setHide()">Fechar</button>
+              <button class="event" id="btn-active" style="background-color: #52d31f !important; padding: 12px 30px" onclick="groups_selects()">Continuar</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div style="display: none; align-items: start;" class="enable pre close">
+        <div style="height: 60%; margin-top: 40px;">
+          <div style="display: flex; align-items: center; padding-bottom: 14px; border-bottom: 2px solid #8b8b8b; width: 100%;">
+            <img style="margin-right: 9px; height: 1.8vw" src="/img/admin/post.png" alt="">
+            <h2 class="enable-h1">Pré-visualização:</h2>
+          </div>
+          <br>
+          <p class="content-p">Imagens selecionadas:</p>
+          <div style="display: flex; flex-wrap: wrap; margin-top: 15px; width: 100%;">
+            <img class="img-post" src="https://res.cloudinary.com/dxpaf689x/image/upload/v1678557994/gcartxsmtawbapy9rgp8.png" alt="">
+            <img class="img-post" src="https://res.cloudinary.com/dxpaf689x/image/upload/v1678557994/gcartxsmtawbapy9rgp8.png" alt="">
+          </div>
+          <div style="margin-top: 20px;">
+            <p class="content-p">Conteúdo da publicação:</p>
+            <p class="description">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolorem tenetur fugit voluptates, quos quae dignissimos qui, natus recusandae deserunt culpa earum. Vel magni soluta eum velit, amet eligendi pariatur cupiditate.</p>
+          </div>
+          <div style="display: flex; justify-content: end; margin-top: 62px; margin-left: 10px;">
+            <button class="event" id="btn-close" style="background-color: #bb0404 !important; padding: 12px 30px; margin-right: 5px;" onclick="setHide()">Fechar</button>
+            <button class="event" id="btn-active" style="padding: 12px 30px" onclick="post()">Salvar</button>
+          </div>
+        </div>
+      </div>
+
+      <div style="display: none; align-items: start;" class="enable pre loader-div">
+        <div class="loader">
+          <div class="loader-wheel"></div>
+          <p style="font-size: 18px; color: #752a7a;">Criando publicação. Por favor não feche a janela.</p>
+        </div>
       </div>
   
       <!-- ! Main -->
@@ -45,26 +134,27 @@
               <article class="white-block">
                 <p style="font-size: 20px; margin-bottom: 10px; font-weight: bold; border-bottom: 2.5px solid #63636360; padding-bottom: 15px; color: #752A7A; display: flex; align-items: center;"><img src="/img/platform/perfil.png" width=28 height=28 alt="" style="margin-right: 12px;">Detalhes do post:</p>
                 <div style="display: flex; flex-wrap: wrap;">
-                  <select name="accounts-post" id="accounts-post">
-                    <option value="select">Selecione a conta</option>
+                  <p style="font-size: 16px; margin-bottom: 10px; font-weight: bold;">Selecione uma conta:</p>
+                  <select name="accounts-post" id="accounts-post" style="width: 100%">
+                    <option value="select">Selecione uma opção</option>
                     <% accounts.forEach(function(item) { %>
                       <option value="<%= item.id_account %>"><%= item.name %></option>
                     <% }) %>
                   </select>
-
-                  <select name="page-post" id="page-post" style="margin-top: 1vw;">
-                    <option value="select">Selecione a página</option>
+                  <!-- <p style="font-size: 16px; margin-top: 32px; font-weight: bold;">Selecione uma página:</p>
+                  <select name="page-post" id="page-post" style="width: 100%; margin-top: 8px;">
+                    <option value="select">Selecione uma opção</option>
                     <% pages.forEach(function(item) { %>
                       <option value="<%= item.id %>"><%= item.name_page %></option>
                     <% }) %>
-                  </select>
+                  </select> -->
 
-                  <select name="groups-post" id="groups-post" style="margin-top: 1vw">
+                  <!-- <select name="groups-post" id="groups-post" style="margin-top: 1vw">
                     <option value="select">Selecione os grupos</option>
                     <% groups.forEach(function(item) { %>
                       <option value="<%= item.id %>"><%= item.name_group %></option>
                     <% }) %>
-                  </select>
+                  </select> -->
                 </div>
                 <br>
                 <br>
@@ -74,7 +164,7 @@
                 <textarea name="" id="content-post" cols="30" rows="4" style="transition: none; padding: 10px;" placeholder="Hoje vamos aprender a preparar um café delicioso!"></textarea>
                 <br>
                 <p style="font-size: 15px; margin-bottom: 10px; font-weight: bold;">Inserir imagens:</p>
-                <input type="file" name="files" id="files" style="border: 2px dashed #752A7A !important" class="files">
+                <input type="file" name="files" id="files" style="border: 2px dashed #752A7A !important" class="files" multiple>
                 <br>
                 <p style="font-size: 15px; margin-bottom: 10px">Visualização:</p>
                 <div class="results">
@@ -82,10 +172,10 @@
                 <br>
                 <p style="font-size: 20px; margin-bottom: 10px; font-weight: bold; border-bottom: 2.5px solid #63636360; padding-bottom: 15px; color: #752A7A; display: flex; align-items: center;"><img src="/img/platform/tempo.png" width=28 height=28 alt="" style="margin-right: 12px;">Programar post</p>
                 <div style="display: flex;">
-                  <input type="radio" name="program" id="program-yes" value="yes" tabindex="1"><p style="display: flex; justify-content: center; align-items: center; margin-right: 10px;">Programar</p>
-                  <input type="radio" name="program" id="program-no" value="no" tabindex="2"><p style="display: flex; justify-content: center; align-items: center;">Não programar</p>
+                  <input type="radio" name="program" id="program-yes" value="yes" tabindex="1" onclick="show()"><p style="display: flex; justify-content: center; align-items: center; margin-right: 10px;">Programar</p>
+                  <input type="radio" name="program" id="program-no" value="no" tabindex="2" onclick="hide()" checked><p style="display: flex; justify-content: center; align-items: center;">Não programar</p>
                 </div>
-                <div class="program-div" style="margin-top: 30px; display: flex;">
+                <div class="program-div" style="margin-top: 30px; display: none;">
                   <div style="margin-right: 16px;">
                     <p style="color: #752A7A; font-weight: bold; margin-bottom: 5px;">Escolha o dia:</p>
                     <input type="date" id="day">
@@ -97,7 +187,7 @@
                 </div>
                 <br>
                 <br>
-                <button style="color: #FFFFFF; background-color: #752A7A; padding: 13px; border-radius: 10px" onclick="post()">Inserir post</button>
+                <button style="color: #FFFFFF; background-color: #752A7A; padding: 13px; border-radius: 10px" onclick="continue_options()">Inserir post</button>
               </article>
             </div>
           </div>
@@ -123,8 +213,9 @@
   let file_input = document.querySelector('#files');
   let image_preview = document.querySelector('.results');
   const enable = document.querySelector('.enable')
-  enable.style.display = "none"
   let images = [];
+  let pages = []
+  let groups = []
 
   const handle_file_preview = (e) => {
     let files = e.target.files;
@@ -142,6 +233,134 @@
       // add image to images array
       images.push(files[i]);
     }
+  }
+
+  function add_page(id, name, access_token) {
+    const add = document.querySelector(`#add-page${id}`)
+    add.style.display = "none";
+    const remove = document.querySelector(`#del-page${id}`)
+    remove.style.display = "flex";
+    pages.push({id: id, name: name, access_token: access_token})
+    const selects = document.querySelector(".selects-page")
+    selects.innerText = `Selecionados: ${pages.length}`
+  }
+
+  function del_page(id, name, access_token) {
+    const add = document.querySelector(`#add-page${id}`)
+    add.style.display = "flex";
+    const remove = document.querySelector(`#del-page${id}`)
+    remove.style.display = "none";
+    pages.pop({id: id, name: name, access_token: access_token})
+    const selects = document.querySelector(".selects-page")
+    selects.innerText = `Selecionados: ${pages.length}`
+  }
+
+  function add_group(id) {
+    if (groups.length >= 3) {
+      const divMessage = document.querySelector(".alert");
+      divMessage.style.display = "flex";
+      divMessage.innerHTML = "";
+      const message = document.createElement("p");
+      const img = document.createElement("img");
+      img.src = "/img/admin/Bulk/error.png"
+      img.width = "28"
+      img.height = "28"
+      message.classList.add("message-notify");
+      message.innerText = "Não é possível adicionar mais que 3";
+      divMessage.appendChild(img);
+      divMessage.appendChild(message);
+    } else {
+      const add = document.querySelector(`#add-group${id}`)
+      add.style.display = "none";
+      const remove = document.querySelector(`#del-group${id}`)
+      remove.style.display = "flex";
+      groups.push(id)
+      const selects = document.querySelector(".selects-group")
+      selects.innerText = `Selecionados: ${groups.length}`
+    }
+  }
+
+  function del_group(id) {
+    const add = document.querySelector(`#add-group${id}`)
+    add.style.display = "flex";
+    const remove = document.querySelector(`#del-group${id}`)
+    remove.style.display = "none";
+    groups.pop(id)
+    const selects = document.querySelector(".selects-group")
+    selects.innerText = `Selecionados: ${groups.length}`
+  }
+
+  function show() {
+    const divProgram = document.querySelector('.program-div').style.display = "flex"
+  }
+  
+  function hide() {
+    const divProgram = document.querySelector('.program-div').style.display = "none"
+  }
+
+  function pages_selects() {
+    if (pages.length > 0) {
+      const pages = document.querySelector(".pages")
+      const groups = document.querySelector(".groups")
+      pages.style.display = "none"
+      groups.style.display = "flex"
+    } else {
+      const divMessage = document.querySelector(".alert");
+      divMessage.style.display = "flex";
+      divMessage.innerHTML = "";
+      const message = document.createElement("p");
+      const img = document.createElement("img");
+      img.src = "/img/admin/Bulk/error.png"
+      img.width = "28"
+      img.height = "28"
+      message.classList.add("message-notify");
+      message.innerText = "Selecione uma página";
+      divMessage.appendChild(img);
+      divMessage.appendChild(message);
+
+      setTimeout(() => {
+        divMessage.style = "animation: slideoff 2s;"
+        setTimeout(() => {
+          divMessage.style = "display: none"
+        }, 800)
+      }, 2000);
+    }
+  }
+
+  function groups_selects() {
+    if (groups.length > 0) {
+      const groups = document.querySelector(".groups")
+      const pre = document.querySelector(".pre")
+      groups.style.display = "none"
+      pre.style.display = "flex"
+    } else {
+      const divMessage = document.querySelector(".alert");
+      divMessage.style.display = "flex";
+      divMessage.innerHTML = "";
+      const message = document.createElement("p");
+      const img = document.createElement("img");
+      img.src = "/img/admin/Bulk/error.png"
+      img.width = "28"
+      img.height = "28"
+      message.classList.add("message-notify");
+      message.innerText = "Selecione um grupo";
+      divMessage.appendChild(img);
+      divMessage.appendChild(message);
+
+      setTimeout(() => {
+        divMessage.style = "animation: slideoff 2s;"
+        setTimeout(() => {
+          divMessage.style = "display: none"
+        }, 800)
+      }, 2000);
+    }
+  }
+  
+  function setHide() {
+    const close = document.querySelectorAll('.close')
+    close.forEach((item) => {
+      item.style.display = "none"
+    })
   }
 
   // listen for file input changes
@@ -164,11 +383,9 @@
     return data.secure_url;
   }
 
-  async function post() {
+  function continue_options() {
     const errors = []
     const account = document.querySelector('#accounts-post');
-    const page = document.querySelector('#page-post');
-    const groups = document.querySelector('#groups-post');
     const content = document.querySelector('#content-post');
     const day = document.querySelector('#day');
     const hour = document.querySelector('#hour');
@@ -179,15 +396,7 @@
       account.style.border = "2px solid #e00d0d"
       errors.push("Selecione a conta")
     }
-    if (page.value == "select") {
-      page.style.border = "2px solid #e00d0d";
-      errors.push("Selecione a página")
-    }
-    if (groups.value == "select") {
-      groups.style.border = "2px solid #e00d0d";
-      errors.push("Selecione os grupos")
-    }
-    if (content.value == "") {
+    if (content.value.length == 0) {
       content.style.border = "2px solid #e00d0d";
       errors.push("Preencha o campo conteúdo")
     }
@@ -203,92 +412,119 @@
     }
 
     if (errors.length == 0) {
-      const file = file_input.files[0];
-      const imageUrl = await uploadImage(file);
-      enable.style.display = "flex"
+      const pages = document.querySelector(".pages")
+      const description = document.querySelector(".description")
+      description.innerText = content.value
+      pages.style.display = "flex"
+    }
+  }
 
-      console.log(imageUrl)
+  async function post() {
+    const loader = document.querySelector('.loader-div')
+    const pre = document.querySelector('.pre')
+    pre.style.display = "none"
+    loader.style.display = "flex"
 
-      fetch('/platform/post_facebook/new', {
-        method: 'POST',
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({account: account.value, page: page.value, groups: groups.value, content: content.value, program: program.checked, day: day.value, hour: hour.value, image: imageUrl})
-      })
-      .then((response) => {
-          if (response.ok) {
-              enable.style.display = "none"
-              const divMessage = document.querySelector(".alert");
-              divMessage.style.display = "flex";
-              divMessage.innerHTML = "";
-              const message = document.createElement("p");
-              const img = document.createElement("img");
-              img.src = "/img/platform/checked.png"
-              img.width = "28"
-              img.height = "28"
-              message.classList.add("message-notify");
-              if (program.checked) {
-                message.innerText = "Post programado com sucesso.";
-              } else {
-                message.innerText = "Post realizado."
-              }
-              divMessage.appendChild(img);
-              divMessage.appendChild(message);
+    pages.forEach((page) => {
+      const formData = new FormData();
+      formData.append('access_token', page.access_token);
+      const ids = [];
 
-              setTimeout(() => {
-                divMessage.style.display = "none";
-              }, 4000);
-          } else {
-            enable.style.display = "none"
-            enable.style.display = "none"
-            const divMessage = document.querySelector(".alert");
-            divMessage.style.display = "flex";
-            divMessage.innerHTML = "";
-            const message = document.createElement("p");
-            const img = document.createElement("img");
-            img.src = "/img/platform/checked.png"
-            img.width = "28"
-            img.height = "28"
-            message.classList.add("message-notify");
-            if (program.checked) {
-              message.innerText = "Erro ao programar post";
-            } else {
-              message.innerText = "Erro ao publicar"
-            }
-            divMessage.appendChild(img);
-            divMessage.appendChild(message);
+      Promise.all(images.map(image => {
+        const reader = new FileReader();
 
+        return new Promise((resolve, reject) => {
+          reader.onload = () => {
+            const imageData = new Uint8Array(reader.result);
+            const blob = new Blob([imageData], { type: image.type });
+            formData.append('source', blob, image.name);
+            resolve();
+          };
+
+          reader.readAsArrayBuffer(image);
+        });
+      }))
+      .then(() => {
+        return fetch(`https://graph.facebook.com/v12.0/${page.id}/photos`, {
+          method: 'POST',
+          body: formData
+        })
+        .then(response => {
+          ids.push(response)
+          loader.style.display = "none"
+          const divMessage = document.querySelector(".alert");
+          divMessage.style.display = "flex";
+          divMessage.innerHTML = "";
+          const message = document.createElement("p");
+          const img = document.createElement("img");
+          img.width = "28"
+          img.height = "28"
+          img.src = "/img/admin/Bulk/checked.png"
+          message.classList.add("message-notify");
+          message.innerText = "Sucesso!";
+          divMessage.appendChild(img);
+          divMessage.appendChild(message);
+
+          setTimeout(() => {
+            divMessage.style = "animation: slideoff 2s;"
             setTimeout(() => {
-              divMessage.style.display = "none";
-            }, 4000);
+              divMessage.style = "display: none"
+            }, 800)
+          }, 2000);
+          return response;
+        })
+        .catch(error => {
+          ids.push(response)
+          loader.style.display = "none"
+          const divMessage = document.querySelector(".alert");
+          divMessage.style.display = "flex";
+          divMessage.innerHTML = "";
+          const message = document.createElement("p");
+          const img = document.createElement("img");
+          divMessage.style = "background-color: #e00d0d !important"
+          img.width = "28"
+          img.height = "28"
+          img.src = "/img/admin/Bulk/error.png"
+          message.classList.add("message-notify");
+          message.innerText = `Erro ao publicar na página: ${page.name}`;
+          divMessage.appendChild(img);
+          divMessage.appendChild(message);
 
-            throw new Error("Erro ao processar a resposta da requisição");
-          }
+          setTimeout(() => {
+            divMessage.style = "animation: slideoff 2s;"
+            setTimeout(() => {
+              divMessage.style = "display: none"
+            }, 800)
+          }, 2000);
+          throw error;
+        });
       })
-      .catch((error) => {
-        enable.style.display = "none"
+      .then(response => {
+        console.log(ids);
+      })
+      .catch(error => {
+        console.error(error);
         const divMessage = document.querySelector(".alert");
         divMessage.style.display = "flex";
         divMessage.innerHTML = "";
         const message = document.createElement("p");
         const img = document.createElement("img");
-        img.src = "/img/platform/checked.png"
+        divMessage.style = "background-color: #e00d0d !important"
         img.width = "28"
         img.height = "28"
+        img.src = "/img/admin/Bulk/error.png"
         message.classList.add("message-notify");
-        if (program.checked) {
-          message.innerText = "Erro ao programar post";
-        } else {
-          message.innerText = "Erro ao publicar"
-        }
+        message.innerText = "Erro ao criar post.";
         divMessage.appendChild(img);
         divMessage.appendChild(message);
 
         setTimeout(() => {
-          divMessage.style.display = "none";
-        }, 4000);
-      })
-    }
+          divMessage.style = "animation: slideoff 2s;"
+          setTimeout(() => {
+            divMessage.style = "display: none"
+          }, 800)
+        }, 2000);
+      });
+    })
   }
 </script>

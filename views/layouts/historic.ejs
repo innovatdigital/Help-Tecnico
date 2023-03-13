@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>pluBee | Histórico</title>
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="/img/site/plubee-icon.png" type="image/x-icon">
+  <!-- Custom styles -->
+  <link rel="stylesheet" href="/css/admin/style.css">
+</head>
+
+<body>
+  <div class="layer"></div>
+  
+  <!-- ! Body -->
+  <div class="page-flex">
+
+    <!-- ! Sidebar -->
+    <%- include('../partials/sidebar-platform', {isAdmin: isAdmin}) %>
+
+    <div class="main-wrapper">
+      <!-- ! Main nav -->
+      <%- include('../partials/nav-platform', {isAdmin: isAdmin, title: "Histórico do usuário"}) %>
+  
+      <% if (historic.length > 0) { %>
+      <main class="main users chart-page" id="skip-target">
+        <div class="container">
+          <div class="row">
+            <div class="col-lg">
+              <div class="users-table table-wrapper">
+                  <table class="campaings-table">
+                    <thead>
+                      <tr class="users-table-info">
+                        <th>Ação</th>
+                        <th>Nome do usuário</th>
+                        <th>Créditos do WhatsApp</th>
+                        <th>Créditos de SMS</th>
+                        <th>Data</th>
+                      </tr>
+                    </thead>
+                      <tbody>
+                        <% historic.forEach(function(item) { %>
+                          <tr>
+                            <td>
+                              <%= item.action %>
+                            </td>
+                            <td>
+                              <%= item.name %>
+                            </td>
+                            <td>
+                              <%= item.credits_whatsapp %>
+                            </td>
+                            <td>
+                              <%= item.credits_sms %>
+                            </td>
+                            <td>
+                              <%= item.date %>
+                            </td>
+                          </tr>
+                        <% }); %>
+                      </tbody>
+                  </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+      <% } else { %>
+        <div class="alert" style="display: none;"></div>
+        <div class="empty">
+          <img src="/img/admin/Bulk/historic-green.png" height="60" alt=""><br>
+          <h2>Nenhuma atividade recente</h2>
+        </div>
+      <% } %>
+
+      <!-- ! Footer -->
+      <%- include('../partials/footer-platform') %>
+    </div>
+  </div>
+
+
+<!-- Chart library -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<!-- Icons library -->
+<script src="js/admin/feather.min.js"></script>
+</body>
+</html>

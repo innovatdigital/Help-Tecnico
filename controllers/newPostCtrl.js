@@ -333,13 +333,13 @@ const postFacebook = asyncHandler(async(req, res) => {
 
     pages.forEach((page) => {
         page.forEach(page_content => {
-            pages_format.push({name_page: page_content.name, id: page_content.id_page})
+            pages_format.push({name_page: page_content.name, image: page_content.image, id: page_content.id_page, access_token: page_content.access_token})
         })
     })
 
     groups.forEach((group) => {
         group.forEach(group_content => {
-            groups_format.push({name_group: group_content.name, id: group_content.id})
+            groups_format.push({name_group: group_content.name, id: group_content.id, image: group_content.image})
         })
     })
 

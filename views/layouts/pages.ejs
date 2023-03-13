@@ -26,6 +26,7 @@
       <%- include('../partials/nav-platform', {isAdmin: isAdmin, title: "Páginas importadas"}) %>
   
       <!-- ! Main -->
+      <% if (pages.length > 0) { %>
       <main class="main users chart-page" id="skip-target">
         <div class="container">
           <div class="row" style="margin-top: 16px">
@@ -49,6 +50,14 @@
           </div>
         </div>
       </main>
+      <% } else { %>
+      <div class="empty">
+        <img src="/img/admin/page.png" height="60" alt=""><br>
+        <h2>Nenhuma página importada ainda.</h2>
+        <p style="margin-top: 4px;">Você precisa adicionar uma conta para ver as suas páginas.</p>
+        <button style="padding: 13px 50px !important; margin-top: 30px;" class="event" id="btn-open"><a href="/platform/accounts">Adicionar conta</a></button>
+      </div>
+      <% } %>
 
       <!-- ! Footer -->
       <%- include('../partials/footer-platform') %>

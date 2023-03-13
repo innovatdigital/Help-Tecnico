@@ -30,6 +30,7 @@
         <div class="container">
           <div class="row">
             <div class="col-lg">
+              <% if (accounts.length > 0) { %>
               <div class="users-table table-wrapper">
                 <table class="posts-table">
                   <thead>
@@ -96,6 +97,12 @@
                   </tbody>
                 </table>
               </div>
+              <% } else { %>
+              <div class="empty">
+                <img src="/img/admin/accounts.png" height="60" alt=""><br>
+                <h2>Nenhuma conta adicionada</h2>
+              </div>
+              <% } %>
             </div>
 
             <div class="col-lg-3" style="margin-top: 3rem">

@@ -20,8 +20,9 @@
   <%- include('../partials/nav-site') %>
 
   <div class="main">
-    <div class="box" id="box">
+    <div class="alert" style="display: none;"></div>
 
+    <div class="box" id="box">
       <div class="login-box">
         <h1>Login</h1>
         <p class="p-dados">Preencha com os seus dados:</p>
@@ -52,27 +53,45 @@
     const password = document.querySelector("#inputPassword").value;
 
     if (email.length == 0) { 
-      email.style.cssText = "border: 2px solid red"
+      email.style = "border: 2px solid red;"
     }
 
     if (password.length == 0) {
-      password.style.cssText = "border: 2px solid red"
+      password.style = "border: 2px solid red;"
     }
 
     fetch("/login/auth", {
-        method: "POST",
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email: email, password: password })
+      method: "POST",
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email: email, password: password })
     })
       .then((response) => {
           if (response.ok) {
-              return response.json(); // obter os dados da resposta no formato JSON
+            return response.json();
           }
           throw new Error("Erro ao processar a resposta da requisição");
       })
       .then((data) => {
           if (data.auth) {
             location.reload()
+          } else {
+            const divMessage = document.querySelector(".alert");
+            divMessage.style.display = "flex";
+            divMessage.innerHTML = "";
+            const message = document.createElement("p");
+            const img = document.createElement("img");
+            img.src = "/img/admin/Bulk/error.png"
+            message.classList.add("message-notify");
+            message.innerText = "Usuário não existente";
+            divMessage.appendChild(img);
+            divMessage.appendChild(message);
+
+            setTimeout(() => {
+              divMessage.style = "animation: slideoff 2s;"
+              setTimeout(() => {
+                divMessage.style = "display: none"
+              }, 800)
+            }, 2000);
           }
       })
       .catch((error) => {
