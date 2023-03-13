@@ -23,50 +23,164 @@
 
     <div class="main-wrapper">
       <!-- ! Main nav -->
-      <%- include('../partials/nav-platform') %>
+      <%- include('../partials/nav-platform', {isAdmin: isAdmin, title: "Nova publicação"}) %>
+      <div style="display: none; align-items: start;" class="enable pages close">
+        <div style="height: 60%; margin-top: 40px; overflow-y: scroll">
+          <div style="display: flex; align-items: center; padding-bottom: 14px; border-bottom: 2px solid #8b8b8b; width: 100%;">
+            <img style="margin-right: 9px; height: 1.8vw" src="/img/admin/post.png" alt="">
+            <h2 class="enable-h1">Selecione as páginas</h2>
+          </div>
+          <div style="display: flex; flex-direction: column; flex-wrap: wrap; margin-top: 15px; width: 100%;">
+            <% pages.forEach(function(item) { %>
+              <div style="display: flex; justify-content: space-between;">
+                <div style>
+                  <p style="font-size: 16px; margin-bottom: 10px; font-weight: bold; padding-bottom: 15px; color: #752A7A; display: flex; align-items: center;"><img class="page-icon" src="<%= item.image %>" alt=""><%= item.name_page %></p>
+                </div>
+
+                <div>
+                  <button id="add-page<%= item.id %>" class="event" onclick="add_page('<%= item.id %>')">Selecionar</button>
+                  <button id="del-page<%= item.id %>" class="event" style="display: none; background-color: #bb0404 !important;" onclick="del_page('<%= item.id %>')">Excluir</button>
+                </div>
+              </div>
+            <% }) %>
+          </div>
+          <div style="display: flex; justify-content: space-between; margin-top: 5px; margin-left: 10px;">
+            <div class="selects-page" style="display: flex; align-items: center;">
+              Selecionados: 0
+            </div>
+
+            <div>
+              <button class="event" id="btn-close" style="background-color: #bb0404 !important; padding: 12px 30px; margin-right: 5px;" onclick="setHide()">Fechar</button>
+              <button class="event" id="btn-active" style="background-color: #52d31f !important; padding: 12px 30px" onclick="pages_selects()">Continuar</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div style="display: none; align-items: start;" class="enable groups close">
+        <div style="height: 60%; margin-top: 40px; overflow-y: scroll">
+          <div style="display: flex; align-items: center; padding-bottom: 14px; border-bottom: 2px solid #8b8b8b; width: 100%;">
+            <img style="margin-right: 9px; height: 1.8vw" src="/img/admin/post.png" alt="">
+            <h2 class="enable-h1">Selecione até 3 grupos:</h2>
+          </div>
+          <div style="display: flex; flex-direction: column; flex-wrap: wrap; margin-top: 15px; width: 100%;">
+            <% groups.forEach(function(item) { %>
+              <div style="display: flex; justify-content: space-between;">
+                <div style>
+                  <p style="font-size: 16px; margin-bottom: 10px; font-weight: bold; padding-bottom: 15px; color: #752A7A; display: flex; align-items: center;"><img class="page-icon" src="<%= item.image %>" alt=""><%= item.name_group %></p>
+                </div>
+
+                <div>
+                  <button id="add-group<%= item.id %>" class="event" onclick="add_group('<%= item.id %>')">Selecionar</button>
+                  <button id="del-group<%= item.id %>" class="event" style="display: none; background-color: #bb0404 !important;" onclick="del_group('<%= item.id %>')">Excluir</button>
+                </div>
+              </div>
+            <% }) %>
+          </div>
+          <div style="display: flex; justify-content: space-between; margin-top: 5px; margin-left: 10px;">
+            <div class="selects-group" style="display: flex; align-items: center;">
+              Selecionados: 0
+            </div>
+
+            <div>
+              <button class="event" id="btn-close" style="background-color: #bb0404 !important; padding: 12px 30px; margin-right: 5px;" onclick="setHide()">Fechar</button>
+              <button class="event" id="btn-active" style="background-color: #52d31f !important; padding: 12px 30px" onclick="groups_selects()">Continuar</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div style="display: none; align-items: start;" class="enable pre close">
+        <div style="height: 60%; margin-top: 40px;">
+          <div style="display: flex; align-items: center; padding-bottom: 14px; border-bottom: 2px solid #8b8b8b; width: 100%;">
+            <img style="margin-right: 9px; height: 1.8vw" src="/img/admin/post.png" alt="">
+            <h2 class="enable-h1">Pré-visualização:</h2>
+          </div>
+          <br>
+          <p class="content-p">Imagens selecionadas:</p>
+          <div style="display: flex; flex-wrap: wrap; margin-top: 15px; width: 100%;">
+            <img class="img-post" src="https://res.cloudinary.com/dxpaf689x/image/upload/v1678557994/gcartxsmtawbapy9rgp8.png" alt="">
+            <img class="img-post" src="https://res.cloudinary.com/dxpaf689x/image/upload/v1678557994/gcartxsmtawbapy9rgp8.png" alt="">
+          </div>
+          <div style="margin-top: 20px;">
+            <p class="content-p">Conteúdo da publicação:</p>
+            <p class="description">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolorem tenetur fugit voluptates, quos quae dignissimos qui, natus recusandae deserunt culpa earum. Vel magni soluta eum velit, amet eligendi pariatur cupiditate.</p>
+          </div>
+          <div style="display: flex; justify-content: end; margin-top: 62px; margin-left: 10px;">
+            <button class="event" id="btn-close" style="background-color: #bb0404 !important; padding: 12px 30px; margin-right: 5px;" onclick="setHide()">Fechar</button>
+            <button class="event" id="btn-active" style="padding: 12px 30px" onclick="addContacts()">Salvar</button>
+          </div>
+        </div>
+      </div>
   
       <!-- ! Main -->
       <main class="main users chart-page" id="skip-target">
         <div class="container">
-          <% if (isAdmin) { %>
-            <h2 class="main-title">Inserir novo post - Administrador</h2>
-          <% } else { %>
-            <h2 class="main-title">Inserir novo post - Nome usuário</h2>
-          <% } %>
+          <div class="top-cat-title">
+            <h2 style="color: #1877F2; display: flex; align-items: center;"><img src="/img/platform/facebook.png" width=45 height=45 alt="" style="margin-right: 12px;">Novo post Facebook</h2>
+          </div>
+          <div class="alert" style="display: none;"></div>
+          <br>
 
           <div class="row">
             <div class="col-lg-12">
               <article class="white-block">
-                <div class="top-cat-title">
-                  <h2 style="color: #C21F70; display: flex; align-items: center;"><img src="/img/platform/instagram.png" width=45 height=45 alt="" style="margin-right: 5px;">Novo post Instagram</h2>
+                <p style="font-size: 20px; margin-bottom: 10px; font-weight: bold; border-bottom: 2.5px solid #63636360; padding-bottom: 15px; color: #752A7A; display: flex; align-items: center;"><img src="/img/platform/perfil.png" width=28 height=28 alt="" style="margin-right: 12px;">Detalhes do post:</p>
+                <div style="display: flex; flex-wrap: wrap;">
+                  <p style="font-size: 16px; margin-bottom: 10px; font-weight: bold;">Selecione uma conta:</p>
+                  <select name="accounts-post" id="accounts-post" style="width: 100%">
+                    <option value="select">Selecione uma opção</option>
+                    <% accounts.forEach(function(item) { %>
+                      <option value="<%= item.id_account %>"><%= item.name %></option>
+                    <% }) %>
+                  </select>
+                  <!-- <p style="font-size: 16px; margin-top: 32px; font-weight: bold;">Selecione uma página:</p>
+                  <select name="page-post" id="page-post" style="width: 100%; margin-top: 8px;">
+                    <option value="select">Selecione uma opção</option>
+                    <% pages.forEach(function(item) { %>
+                      <option value="<%= item.id %>"><%= item.name_page %></option>
+                    <% }) %>
+                  </select> -->
+
+                  <!-- <select name="groups-post" id="groups-post" style="margin-top: 1vw">
+                    <option value="select">Selecione os grupos</option>
+                    <% groups.forEach(function(item) { %>
+                      <option value="<%= item.id %>"><%= item.name_group %></option>
+                    <% }) %>
+                  </select> -->
                 </div>
                 <br>
-                <p style="font-size: 15px; margin-bottom: 10px; font-weight: bold;">Selecione uma conta:</p>
-                <select name="accounts-post" id="accounts-post">
-                    <option></option>
-                </select>
                 <br>
-                <br>
+
+                <p style="font-size: 20px; margin-bottom: 10px; font-weight: bold; border-bottom: 2.5px solid #63636360; padding-bottom: 15px; color: #752A7A; display: flex; align-items: center;"><img src="/img/platform/lapis.png" width=28 height=28 alt="" style="margin-right: 12px;">Descreva o post:</p>
                 <p style="font-size: 15px; margin-bottom: 10px; font-weight: bold;">Escreva o post aqui:</p>
-                <textarea name="" id="" cols="30" rows="4"></textarea>
-                <br>
+                <textarea name="" id="content-post" cols="30" rows="4" style="transition: none; padding: 10px;" placeholder="Hoje vamos aprender a preparar um café delicioso!"></textarea>
                 <br>
                 <p style="font-size: 15px; margin-bottom: 10px; font-weight: bold;">Inserir imagens:</p>
-                <input type="file" name="files" id="files" multiple>
+                <input type="file" name="files" id="files" style="border: 2px dashed #752A7A !important" class="files">
                 <br>
                 <p style="font-size: 15px; margin-bottom: 10px">Visualização:</p>
                 <div class="results">
                 </div>
                 <br>
-                <br>
-                <p style="font-size: 15px; margin-bottom: 10px; font-weight: bold;">Configurações:</p>
+                <p style="font-size: 20px; margin-bottom: 10px; font-weight: bold; border-bottom: 2.5px solid #63636360; padding-bottom: 15px; color: #752A7A; display: flex; align-items: center;"><img src="/img/platform/tempo.png" width=28 height=28 alt="" style="margin-right: 12px;">Programar post</p>
                 <div style="display: flex;">
-                  <input type="radio" name="program" id="program-no" value="yes" tabindex="1">Programar
-                  <input type="radio" name="program" id="program-yes" value="no" tabindex="2">Não programar
+                  <input type="radio" name="program" id="program-yes" value="yes" tabindex="1" onclick="show()"><p style="display: flex; justify-content: center; align-items: center; margin-right: 10px;">Programar</p>
+                  <input type="radio" name="program" id="program-no" value="no" tabindex="2" onclick="hide()" checked><p style="display: flex; justify-content: center; align-items: center;">Não programar</p>
+                </div>
+                <div class="program-div" style="margin-top: 30px; display: none;">
+                  <div style="margin-right: 16px;">
+                    <p style="color: #752A7A; font-weight: bold; margin-bottom: 5px;">Escolha o dia:</p>
+                    <input type="date" id="day">
+                  </div>
+                  <div>
+                    <p style="color: #752A7A; font-weight: bold; margin-bottom: 5px;">Escolha a hora:</p>
+                    <input type="time" id="hour">
+                  </div>
                 </div>
                 <br>
                 <br>
-                <button style="color: #FFFFFF; background-color: #752A7A; padding: 10px; border-radius: 10px">Inserir post</button>
+                <button style="color: #FFFFFF; background-color: #752A7A; padding: 13px; border-radius: 10px" onclick="continue_options()">Inserir post</button>
               </article>
             </div>
           </div>
@@ -80,6 +194,9 @@
 
 <!-- Chart library -->
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/blueimp-file-upload/9.28.0/js/jquery.fileupload.min.js"></script>
+<script src="https://widget.cloudinary.com/v2.0/global/all.js" type="text/javascript"></script>
 <!-- Icons library -->
 <script src="js/admin/feather.min.js"></script>
 </body>
@@ -88,50 +205,297 @@
 <script>
   let file_input = document.querySelector('#files');
   let image_preview = document.querySelector('.results');
+  const enable = document.querySelector('.enable')
+  let images = [];
+  let pages = []
+  let groups = []
 
   const handle_file_preview = (e) => {
     let files = e.target.files;
     let length = files.length;
 
     for(let i = 0; i < length; i++) {
-        let image = document.createElement('img');
-        image.setAttribute('width', '80');
-        image.setAttribute('height', '50');
-        image.setAttribute('style', 'margin-right: 1rem; border-radius: 20px; border: 2px solid #752a7a');
-        // use the DOMstring for source
-        image.src = window.URL.createObjectURL(files[i]);
-        image_preview.appendChild(image);
+      let image = document.createElement('img');
+      image.setAttribute('width', '80');
+      image.setAttribute('height', '80');
+      image.setAttribute('style', 'margin-right: 1rem; border-radius: 20px; border: 2px solid #752a7a');
+      // use the DOMstring for source
+      image.src = window.URL.createObjectURL(files[i]);
+      image_preview.appendChild(image);
+
+      // add image to images array
+      images.push(files[i]);
     }
   }
 
+  function add_page(id) {
+    const add = document.querySelector(`#add-page${id}`)
+    add.style.display = "none";
+    const remove = document.querySelector(`#del-page${id}`)
+    remove.style.display = "flex";
+    pages.push(id)
+    const selects = document.querySelector(".selects-page")
+    selects.innerText = `Selecionados: ${pages.length}`
+  }
+
+  function del_page(id) {
+    const add = document.querySelector(`#add-page${id}`)
+    add.style.display = "flex";
+    const remove = document.querySelector(`#del-page${id}`)
+    remove.style.display = "none";
+    pages.pop(id)
+    const selects = document.querySelector(".selects-page")
+    selects.innerText = `Selecionados: ${pages.length}`
+  }
+
+  function add_group(id) {
+    if (groups.length >= 3) {
+      const divMessage = document.querySelector(".alert");
+      divMessage.style.display = "flex";
+      divMessage.innerHTML = "";
+      const message = document.createElement("p");
+      const img = document.createElement("img");
+      img.src = "/img/admin/Bulk/error.png"
+      img.width = "28"
+      img.height = "28"
+      message.classList.add("message-notify");
+      message.innerText = "Não é possível adicionar mais que 3";
+      divMessage.appendChild(img);
+      divMessage.appendChild(message);
+    } else {
+      const add = document.querySelector(`#add-group${id}`)
+      add.style.display = "none";
+      const remove = document.querySelector(`#del-group${id}`)
+      remove.style.display = "flex";
+      groups.push(id)
+      const selects = document.querySelector(".selects-group")
+      selects.innerText = `Selecionados: ${groups.length}`
+    }
+  }
+
+  function del_group(id) {
+    const add = document.querySelector(`#add-group${id}`)
+    add.style.display = "flex";
+    const remove = document.querySelector(`#del-group${id}`)
+    remove.style.display = "none";
+    groups.pop(id)
+    const selects = document.querySelector(".selects-group")
+    selects.innerText = `Selecionados: ${groups.length}`
+  }
+
+  function show() {
+    const divProgram = document.querySelector('.program-div').style.display = "flex"
+  }
+  
+  function hide() {
+    const divProgram = document.querySelector('.program-div').style.display = "none"
+  }
+
+  function pages_selects() {
+    if (pages.length > 0) {
+      const pages = document.querySelector(".pages")
+      const groups = document.querySelector(".groups")
+      pages.style.display = "none"
+      groups.style.display = "flex"
+    } else {
+      const divMessage = document.querySelector(".alert");
+      divMessage.style.display = "flex";
+      divMessage.innerHTML = "";
+      const message = document.createElement("p");
+      const img = document.createElement("img");
+      img.src = "/img/admin/Bulk/error.png"
+      img.width = "28"
+      img.height = "28"
+      message.classList.add("message-notify");
+      message.innerText = "Selecione uma página";
+      divMessage.appendChild(img);
+      divMessage.appendChild(message);
+
+      setTimeout(() => {
+        divMessage.style = "animation: slideoff 2s;"
+        setTimeout(() => {
+          divMessage.style = "display: none"
+        }, 800)
+      }, 2000);
+    }
+  }
+
+  function groups_selects() {
+    if (groups.length > 0) {
+      const groups = document.querySelector(".groups")
+      const pre = document.querySelector(".pre")
+      groups.style.display = "none"
+      pre.style.display = "flex"
+    } else {
+      const divMessage = document.querySelector(".alert");
+      divMessage.style.display = "flex";
+      divMessage.innerHTML = "";
+      const message = document.createElement("p");
+      const img = document.createElement("img");
+      img.src = "/img/admin/Bulk/error.png"
+      img.width = "28"
+      img.height = "28"
+      message.classList.add("message-notify");
+      message.innerText = "Selecione um grupo";
+      divMessage.appendChild(img);
+      divMessage.appendChild(message);
+
+      setTimeout(() => {
+        divMessage.style = "animation: slideoff 2s;"
+        setTimeout(() => {
+          divMessage.style = "display: none"
+        }, 800)
+      }, 2000);
+    }
+  }
+  
+  function setHide() {
+    const close = document.querySelectorAll('.close')
+    close.forEach((item) => {
+      item.style.display = "none"
+    })
+  }
+
+  // listen for file input changes
   file_input.addEventListener('change', handle_file_preview);
 
-  function post() {
-    fetch("/checkout/process_payment", {
-    method: "POST",
-    headers: {
-    "Content-Type": "application/json",
-    },
-    body: JSON.stringify(data)
-  })
-  .then((response) => {
-      if (response.ok) {
-          return response.json();
+  async function uploadImage(file) {
+    const CLOUDINARY_URL = 'https://api.cloudinary.com/v1_1/dxpaf689x/upload';
+    const CLOUDINARY_UPLOAD_PRESET = 'of4ovlpe';
+
+    const formData = new FormData();
+    formData.append('file', file);
+    formData.append('upload_preset', CLOUDINARY_UPLOAD_PRESET);
+
+    const response = await fetch(CLOUDINARY_URL, {
+      method: 'POST',
+      body: formData
+    });
+    
+    const data = await response.json();
+    return data.secure_url;
+  }
+
+  function continue_options() {
+    const errors = []
+    const account = document.querySelector('#accounts-post');
+    const content = document.querySelector('#content-post');
+    const day = document.querySelector('#day');
+    const hour = document.querySelector('#hour');
+    const program = document.querySelector('#program-yes');
+    const no_program = document.querySelector('#program-no');
+
+    if (account.value == "select") {
+      account.style.border = "2px solid #e00d0d"
+      errors.push("Selecione a conta")
+    }
+    if (content.value.length == 0) {
+      content.style.border = "2px solid #e00d0d";
+      errors.push("Preencha o campo conteúdo")
+    }
+    if (program.checked) {
+      if (day.value == "") {
+        day.style.border = "2px solid #e00d0d";
+        errors.push("Selecione o dia")
       }
-      throw new Error("Erro ao processar a resposta da requisição");
-  })
-  .then((data) => {
-      if (data.approved) {
-          $(".container").hide()
-          $("#title").text("Pagamento aprovado com sucesso!")
-          $(".content").append(`<p class="p-approved">Olá ${document.querySelector('#name').value}, seu pagamento foi aprovado com sucesso.</p>`)
-          $(".content").append("<p class='p-approved'>Faça login agora mesmo na sua conta clicando no botão abaxo.</p>")
+      if (hour.value == "") {
+        hour.style.border = "2px solid #e00d0d";
+        errors.push("Selecione a hora")
       }
-      resolve();
-  })
-  .catch((error) => {
-      console.log(error)
-      reject();
-  })
+    }
+
+    if (errors.length == 0) {
+      const pages = document.querySelector(".pages")
+      const description = document.querySelector(".description")
+      description.innerText = content.value
+      pages.style.display = "flex"
+    }
+  }
+
+  async function post() {
+    const file = file_input.files[0];
+    const imageUrl = await uploadImage(file);
+    enable.style.display = "flex"
+
+    fetch('/platform/post_facebook/new', {
+      method: 'POST',
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({account: account.value, page: page.value, groups: groups.value, content: content.value, program: program.checked, day: day.value, hour: hour.value, image: imageUrl})
+    })
+    .then((response) => {
+        if (response.ok) {
+            enable.style.display = "none"
+            const divMessage = document.querySelector(".alert");
+            divMessage.style.display = "flex";
+            divMessage.innerHTML = "";
+            const message = document.createElement("p");
+            const img = document.createElement("img");
+            img.src = "/img/platform/checked.png"
+            img.width = "28"
+            img.height = "28"
+            message.classList.add("message-notify");
+            if (program.checked) {
+              message.innerText = "Post programado com sucesso.";
+            } else {
+              message.innerText = "Post realizado."
+            }
+            divMessage.appendChild(img);
+            divMessage.appendChild(message);
+
+            setTimeout(() => {
+              divMessage.style.display = "none";
+            }, 4000);
+        } else {
+          enable.style.display = "none"
+          enable.style.display = "none"
+          const divMessage = document.querySelector(".alert");
+          divMessage.style.display = "flex";
+          divMessage.innerHTML = "";
+          const message = document.createElement("p");
+          const img = document.createElement("img");
+          img.src = "/img/platform/checked.png"
+          img.width = "28"
+          img.height = "28"
+          message.classList.add("message-notify");
+          if (program.checked) {
+            message.innerText = "Erro ao programar post";
+          } else {
+            message.innerText = "Erro ao publicar"
+          }
+          divMessage.appendChild(img);
+          divMessage.appendChild(message);
+
+          setTimeout(() => {
+            divMessage.style.display = "none";
+          }, 4000);
+
+          throw new Error("Erro ao processar a resposta da requisição");
+        }
+    })
+    .catch((error) => {
+      enable.style.display = "none"
+      const divMessage = document.querySelector(".alert");
+      divMessage.style.display = "flex";
+      divMessage.innerHTML = "";
+      const message = document.createElement("p");
+      const img = document.createElement("img");
+      img.src = "/img/platform/checked.png"
+      img.width = "28"
+      img.height = "28"
+      message.classList.add("message-notify");
+      if (program.checked) {
+        message.innerText = "Erro ao programar post";
+      } else {
+        message.innerText = "Erro ao publicar"
+      }
+      divMessage.appendChild(img);
+      divMessage.appendChild(message);
+
+      setTimeout(() => {
+        divMessage.style.display = "none";
+      }, 4000);
+    })
   }
 </script>

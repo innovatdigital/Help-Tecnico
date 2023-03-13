@@ -37,10 +37,6 @@ const User = new mongoose.Schema({
         type: String,
         require: true
     },
-    fb_acess_token: {
-        type: String,
-        require: true
-    },
     isAdmin: {
         type: Boolean,
         require: true,
