@@ -46,6 +46,7 @@ const {
 const {
     PostFacebook,
     pagesList,
+    access_token,
     postFacebook,
     postInstagram
 } = require('../controllers/newPostCtrl')
@@ -89,7 +90,7 @@ router.get("/accounts", auth, accounts)
 // NewPost
 router.get("/post_facebook/", auth, postFacebook)
 router.get("/post_facebook/pages/:id", auth, pagesList)
-router.get("/post_facebook/access/:id", auth, pagesList)
+router.get("/post_facebook/access/:id", auth, access_token)
 router.get("/post_instagram/", auth, postInstagram)
 
 router.post("/post_facebook/new", auth, PostFacebook)

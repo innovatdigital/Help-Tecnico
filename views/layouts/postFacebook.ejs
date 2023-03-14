@@ -31,19 +31,6 @@
             <h2 class="enable-h1">Selecione as páginas</h2>
           </div>
           <div class="pages-list" style="display: flex; flex-direction: column; flex-wrap: wrap; margin-top: 15px; width: 100%;">
-            <!-- <% pages.forEach(function(item) { %>
-              <div style="display: flex; justify-content: space-between;">
-                <div style="display: flex; align-items: center;">
-                  <p style="font-size: 16px; margin-bottom: 10px; font-weight: bold; padding-bottom: 15px; color: #752A7A; display: flex; align-items: center;"></p>
-                  <img class="page-icon" src="<%= item.image %>" alt="">
-                </div>
-
-                <div>
-                  <button id="add-page<%= item.id %>" class="event" onclick="add_page('<%= item.id %>', '<%= item.name_page %>', '<%= item.access_token %>')">Selecionar</button>
-                  <button id="del-page<%= item.id %>" class="event" style="display: none; background-color: #bb0404 !important;" onclick="del_page('<%= item.id %>', '<%= item.name_page %>', '<%= item.access_token %>')">Excluir</button>
-                </div>
-              </div>
-            <% }) %> -->
           </div>
           <div style="display: flex; justify-content: space-between; margin-top: 5px; margin-left: 10px;">
             <div class="selects-page" style="display: flex; align-items: center;">
@@ -68,7 +55,7 @@
             <% groups.forEach(function(item) { %>
               <div style="display: flex; justify-content: space-between;">
                 <div style>
-                  <p style="font-size: 16px; margin-bottom: 10px; font-weight: bold; padding-bottom: 15px; color: #752A7A; display: flex; align-items: center;"><img class="page-icon" src="<%= item.image %>" alt=""><%= item.name_group %></p>
+                  <p style="font-size: 16px; margin-bottom: 10px; font-weight: bold; padding-bottom: 15px; color: #752A7A; display: flex; align-items: center;"><img class="page-icon" src="<%= item.image %>" alt=""><%= item.name %></p>
                 </div>
 
                 <div>
@@ -91,7 +78,7 @@
         </div>
       </div>
 
-      <div style="display: flex; align-items: start;" class="enable pre close">
+      <div style="display: none; align-items: start;" class="enable pre close">
         <div style="height: 70%; margin-top: 40px; overflow: scroll;">
           <div style="display: flex; align-items: center; padding-bottom: 14px; border-bottom: 2px solid #8b8b8b; width: 100%;">
             <img style="margin-right: 9px; height: 1.8vw" src="/img/admin/post.png" alt="">
@@ -141,20 +128,6 @@
                       <option value="<%= item.id_account %>"><%= item.name %></option>
                     <% }) %>
                   </select>
-                  <!-- <p style="font-size: 16px; margin-top: 32px; font-weight: bold;">Selecione uma página:</p>
-                  <select name="page-post" id="page-post" style="width: 100%; margin-top: 8px;">
-                    <option value="select">Selecione uma opção</option>
-                    <% pages.forEach(function(item) { %>
-                      <option value="<%= item.id %>"><%= item.name_page %></option>
-                    <% }) %>
-                  </select> -->
-
-                  <!-- <select name="groups-post" id="groups-post" style="margin-top: 1vw">
-                    <option value="select">Selecione os grupos</option>
-                    <% groups.forEach(function(item) { %>
-                      <option value="<%= item.id %>"><%= item.name_group %></option>
-                    <% }) %>
-                  </select> -->
                 </div>
                 <br>
                 <br>
@@ -164,7 +137,7 @@
                 <textarea name="" id="content-post" cols="30" rows="4" style="transition: none; padding: 10px;" placeholder="Hoje vamos aprender a preparar um café delicioso!"></textarea>
                 <br>
                 <p style="font-size: 15px; margin-bottom: 10px; font-weight: bold;">Inserir imagens:</p>
-                <input type="file" name="files" id="files" style="border: 2px dashed #752A7A !important" class="files" multiple>
+                <input type="file" name="files" class="files" id="files" style="border: 2px dashed #752A7A !important" class="files">
                 <br>
                 <p style="font-size: 15px; margin-bottom: 10px">Visualização:</p>
                 <div class="results">
@@ -191,7 +164,7 @@
                 </div>
                 <br>
                 <br>
-                <button style="color: #FFFFFF; background-color: #752A7A; padding: 13px; border-radius: 10px" onclick="continue_options()">Inserir post</button>
+                <button style="color: #FFFFFF; background-color: #752A7A; padding: 13px; border-radius: 10px" onclick="continue_options()">Continuar</button>
               </article>
             </div>
           </div>
@@ -311,52 +284,70 @@
   
   function find_pages(id_account) {
     const pages_list = document.querySelector('.pages-list')
+    pages_list.innerHTML = ""
 
     fetch('/platform/post_facebook/pages/' + id_account)
     .then(response => response.json())
     .then(data => {
-      data.forEach(page => {
+      if (data.length > 0) {
+        data.forEach(page => {
+          const div_page = document.createElement('div')
+          div_page.style = "display: flex; justify-content: space-between; margin-bottom: 20px"
+
+          const div_name = document.createElement('div')
+          div_name.style = "display: flex; align-itens: center"
+          
+          const name = document.createElement('p')
+          name.innerText = page.name
+          name.style = "display: flex !important; align-itens: center !important; font-size: 16px; margin-bottom: 10px; font-weight: bold; padding-bottom: 15px; color: #752A7A; display: flex; align-items: center;"
+
+          const img = document.createElement('img')
+          img.classList.add('page-icon')
+          img.src = page.image
+
+          div_name.appendChild(img)
+          div_name.appendChild(name)
+
+          const div_btn = document.createElement('div')
+          const btn_add = document.createElement("button");
+          btn_add.setAttribute("id", `add-page${page.id_page}`);
+          btn_add.setAttribute("class", "event");
+          btn_add.setAttribute("onclick", `add_page(${page.id_page}, '${page.name}', '${page.access_token}')`);
+          btn_add.textContent = "Selecionar";
+          
+          const btn_del = document.createElement('button');
+          btn_del.setAttribute('id', `del-page${page.id_page}`);
+          btn_del.setAttribute('class', 'event');
+          btn_del.setAttribute('style', 'display: none; background-color: #bb0404 !important;');
+          btn_del.innerHTML = 'Excluir';
+          btn_del.onclick = function() {
+            del_page(page.id_page, page.name, page.access_token);
+          };
+
+          div_btn.appendChild(btn_add)
+          div_btn.appendChild(btn_del)
+
+          div_page.appendChild(div_name)
+          div_page.appendChild(div_btn)
+
+          pages_list.appendChild(div_page)
+        })
+      } else {
         const div_page = document.createElement('div')
-        div_page.style = "display: flex; justify-content: space-between;"
-
-        const div_name = document.createElement('div')
-        div_name.style = "display: flex; align-itens: center"
+        div_page.style = "display: flex; justify-content: center; align-itens: center; border: 2px solid #bb0404"
         
-        const name = document.createElement('p')
-        name.innerText = page.name
-        name.style = "display: flex !important; align-itens: center !important; font-size: 16px; margin-bottom: 10px; font-weight: bold; padding-bottom: 15px; color: #752A7A; display: flex; align-items: center;"
-
         const img = document.createElement('img')
         img.classList.add('page-icon')
-        img.src = page.image
+        img.src = '../public/img/admin/Bulk/pages.png'
 
-        div_name.appendChild(img)
-        div_name.appendChild(name)
+        const p = document.createElement('p')
+        p.innerText = "Essa conta não possui nenhuma página. Por favor troque de conta."
 
-        const div_btn = document.createElement('div')
-        const btn_add = document.createElement("button");
-        btn_add.setAttribute("id", `add-page${page.id_page}`);
-        btn_add.setAttribute("class", "event");
-        btn_add.setAttribute("onclick", `add_page(${page.id_page}, '${page.name}', '${page.access_token}')`);
-        btn_add.textContent = "Selecionar";
-        
-        const btn_del = document.createElement('button');
-        btn_del.setAttribute('id', `del-page${page.id_page}`);
-        btn_del.setAttribute('class', 'event');
-        btn_del.setAttribute('style', 'display: none; background-color: #bb0404 !important;');
-        btn_del.innerHTML = 'Excluir';
-        btn_del.onclick = function() {
-          del_page(page.id_page, page.name, page.access_token);
-        };
-
-        div_btn.appendChild(btn_add)
-        div_btn.appendChild(btn_del)
-
-        div_page.appendChild(div_name)
-        div_page.appendChild(div_btn)
+        div_page.appendChild(img)
+        div_page.appendChild(p)
 
         pages_list.appendChild(div_page)
-      })
+      }
     })
   }
   
@@ -406,31 +397,89 @@
   }
 
   function groups_selects() {
-    if (groups.length > 0) {
-      const groups = document.querySelector(".groups")
-      const pre = document.querySelector(".pre")
-      groups.style.display = "none"
-      pre.style.display = "flex"
-    } else {
-      const divMessage = document.querySelector(".alert");
-      divMessage.style.display = "flex";
-      divMessage.innerHTML = "";
-      const message = document.createElement("p");
-      const img = document.createElement("img");
-      img.src = "/img/admin/Bulk/error.png"
-      img.width = "28"
-      img.height = "28"
-      message.classList.add("message-notify");
-      message.innerText = "Selecione um grupo";
-      divMessage.appendChild(img);
-      divMessage.appendChild(message);
+    const type_account = '<%= type_account %>'
 
-      setTimeout(() => {
-        divMessage.style = "animation: slideoff 2s;"
+    if (type_account == "Basico") {
+      if (groups.length <= 3) {
+        const groups = document.querySelector(".groups")
+        const pre = document.querySelector(".pre")
+        groups.style.display = "none"
+        pre.style.display = "flex"
+      } else {
+        const divMessage = document.querySelector(".alert");
+        divMessage.style.display = "flex";
+        divMessage.innerHTML = "";
+        const message = document.createElement("p");
+        const img = document.createElement("img");
+        img.src = "/img/admin/Bulk/error.png"
+        img.width = "28"
+        img.height = "28"
+        message.classList.add("message-notify");
+        message.innerText = "Selecione até 3 grupos";
+        divMessage.appendChild(img);
+        divMessage.appendChild(message);
+
         setTimeout(() => {
-          divMessage.style = "display: none"
-        }, 800)
-      }, 2000);
+          divMessage.style = "animation: slideoff 2s;"
+          setTimeout(() => {
+            divMessage.style = "display: none"
+          }, 800)
+        }, 2000);
+      }
+    } else if (type_account == "Pro") {
+      if (groups.length <= 9) {
+        const groups = document.querySelector(".groups")
+        const pre = document.querySelector(".pre")
+        groups.style.display = "none"
+        pre.style.display = "flex"
+      } else {
+        const divMessage = document.querySelector(".alert");
+        divMessage.style.display = "flex";
+        divMessage.innerHTML = "";
+        const message = document.createElement("p");
+        const img = document.createElement("img");
+        img.src = "/img/admin/Bulk/error.png"
+        img.width = "28"
+        img.height = "28"
+        message.classList.add("message-notify");
+        message.innerText = "Selecione até 9 grupos";
+        divMessage.appendChild(img);
+        divMessage.appendChild(message);
+
+        setTimeout(() => {
+          divMessage.style = "animation: slideoff 2s;"
+          setTimeout(() => {
+            divMessage.style = "display: none"
+          }, 800)
+        }, 2000);
+      }
+    } else if (type_account == "Avançado") {
+      if (groups.length <= 30) {
+        const groups = document.querySelector(".groups")
+        const pre = document.querySelector(".pre")
+        groups.style.display = "none"
+        pre.style.display = "flex"
+      } else {
+        const divMessage = document.querySelector(".alert");
+        divMessage.style.display = "flex";
+        divMessage.innerHTML = "";
+        const message = document.createElement("p");
+        const img = document.createElement("img");
+        img.src = "/img/admin/Bulk/error.png"
+        img.width = "28"
+        img.height = "28"
+        message.classList.add("message-notify");
+        message.innerText = "Selecione até 30 grupos";
+        divMessage.appendChild(img);
+        divMessage.appendChild(message);
+
+        setTimeout(() => {
+          divMessage.style = "animation: slideoff 2s;"
+          setTimeout(() => {
+            divMessage.style = "display: none"
+          }, 800)
+        }, 2000);
+      }
     }
   }
   

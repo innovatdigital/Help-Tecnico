@@ -11,7 +11,7 @@ const InstagramStrategy = require('passport-instagram').Strategy;
 //     clientID: '540889994808844',
 //     clientSecret: '8f14320ee467d63b94aa48dc439734f7',
 //     callbackURL: 'https://localhost:5500/platform/accounts/auth/facebook/callback',
-//     profileFields: ['id', 'displayName', 'photos', 'email'],
+//     profileFields: ['id', 'name', 'photos', 'email'],
 //     scope: ['email', 'public_profile']
 // }, function(accessToken, refreshToken, profile, done) {
 //     // Lógica de verificação do usuário aqui
@@ -99,21 +99,21 @@ async function newAccountFb(id_user, accessToken, profile) {
             accounts.push(account.name)
         })
         
-        if (accounts.includes(profile.displayName)) {
+        if (accounts.includes(profile.name)) {
             return "Conta já existente"
-        } else {        
-            axios.get(`https://graph.facebook.com/v12.0/me/groups?access_token=${accessToken}&fields=administrator,name,icon,description,id`)
+        } else {
+            axios.get(`https://graph.facebook.com/v12.0/me/groups?access_token=${accessToken}&fields=privacy,name,icon,description,id`)
             .then(async response => {
               const groups = response.data.data;
               const groupIds = groups
-                .filter(group => group.administrator === true)
+                .filter(group => group.privacy === "OPEN")
                 .map(group => group.id);
           
               const list = [];
 
               const pages_user = []
               const comments = []
-      
+
               for (const page of pages) {
                   try {
                       const response = await axios.get(`https://graph.facebook.com/v12.0/${page.id}/picture?redirect=false&type=large&access_token=${page.access_token}`);
@@ -138,51 +138,90 @@ async function newAccountFb(id_user, accessToken, profile) {
                   }
               }
           
-              // Loop através dos IDs de grupo e buscar informações de cada grupo
-              groups.forEach(group => {
-                if (group.administrator) {
-                    axios.get(`https://graph.facebook.com/v16.0/${group.id}?fields=name,description,cover&access_token=${accessToken}`)
-                    .then(response => {
-                        try {
-                            list.push({name: response.data.name, description: response.data.description, image: response.data.cover.source, id: response.data.id});
-                        } catch (err) {
-                            list.push({name: response.data.name, id: response.data.id});
-                        }
-          
-                        // Se a lista de grupos estiver completa, atualizar a conta do usuário
-                        if (list.length === groupIds.length) {
-                            User.findByIdAndUpdate(id_user, {
-                                $push: {
-                                    accountsFb: {
-                                        "id_account": profile.id,
-                                        "name": profile.name,
-                                        "platform": "Facebook",
-                                        "photo": profile.picture.data.url,
-                                        "date": dataFormat,
-                                        "access_token": accessToken,
-                                        "posts": [],
-                                        "groups": list,
-                                        "pages": pages_user,
-                                        "comments": comments
+              // Loop através dos IDs de grupo e buscar informações de cada grupo]
+              if (groups.length > 0) {
+                groups.forEach(async group => {
+                    if (group.privacy == "OPEN") {
+                        axios.get(`https://graph.facebook.com/v16.0/${group.id}?fields=name,description,cover&access_token=${accessToken}`)
+                        .then(response => {
+                            try {
+                                list.push({name: response.data.name, description: response.data.description, image: response.data.cover.source, id: response.data.id, account_name: profile.name, id_account: profile.id});
+                            } catch (err) {
+                                list.push({name: response.data.name, id: response.data.id, account_name: profile.name, id_account: profile.id});
+                            }
+            
+                            // Se a lista de grupos estiver completa, atualizar a conta do usuário
+                            if (list.length === groupIds.length) {
+                                list.forEach(async group => {
+                                    const saveGroup = await User.findByIdAndUpdate(id_user, {
+                                        $push: {
+                                            groups: {
+                                                "name": group.name,
+                                                "id": group.id,
+                                                "account_name": group.account_name,
+                                                "id_account": group.id_account
+                                            }
+                                        }
+                                    })
+                                })
+
+                                User.findByIdAndUpdate(id_user, {
+                                    $push: {
+                                        accountsFb: {
+                                            "id_account": profile.id,
+                                            "name": profile.name,
+                                            "platform": "Facebook",
+                                            "photo": profile.picture.data.url,
+                                            "date": dataFormat,
+                                            "access_token": accessToken,
+                                            "posts": [],
+                                            "pages": pages_user,
+                                            "comments": comments
+                                        },
                                     }
-                                }
-                            }, {
-                                new: true
-                            })
-                            .then(result => {
-                                const find = User.findById(id_user)
-                                // const historic = Historic.create({"action": `Nova conta adicionada: ${profile.name}`, "name": find.name, "id_user": find._id, "date": dataFormat})
-                                res.send(200)
-                            })
-                            .catch(error => {
-                                console.error(error);
-                            });
-                        }
-                    })
-                    .catch(error => {
-                        console.error(error);
-                    })
-                }})
+                                }, {
+                                    new: true
+                                })
+                                .then(result => {
+                                    const find = User.findById(id_user)
+                                    // const historic = Historic.create({"action": `Nova conta adicionada: ${profile.name}`, "name": find.name, "id_user": find._id, "date": dataFormat})
+                                })
+                                .catch(error => {
+                                    console.error(error);
+                                });
+                            }
+                        })
+                        .catch(error => {
+                            console.error(error);
+                        })
+                    }
+                })
+              } else {
+                User.findByIdAndUpdate(id_user, {
+                    $push: {
+                        accountsFb: {
+                            "id_account": profile.id,
+                            "name": profile.name,
+                            "platform": "Facebook",
+                            "photo": profile.picture.data.url,
+                            "date": dataFormat,
+                            "access_token": accessToken,
+                            "posts": [],
+                            "pages": pages_user,
+                            "comments": comments
+                        },
+                    }
+                }, {
+                    new: true
+                })
+                .then(result => {
+                    const find = User.findById(id_user)
+                    // const historic = Historic.create({"action": `Nova conta adicionada: ${profile.name}`, "name": find.name, "id_user": find._id, "date": dataFormat})
+                })
+                .catch(error => {
+                    console.error(error);
+                });
+              }
             })
             .catch(error => {
               console.error(error);
@@ -290,8 +329,12 @@ const deleteAccount = asyncHandler(async(req, res) => {
         if (req.body.platform === "Facebook") {
             const deleteAccount = await User.findByIdAndUpdate({_id: req.cookies._id}, {
                 $pull: {
+                    groups: {
+                        "id_account": id_account.id
+                    },
+
                     accountsFb: {
-                        "id_account": id_account.id,
+                        "id_account": id_account.id
                     }
                 }
             })

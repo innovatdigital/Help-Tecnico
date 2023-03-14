@@ -38,8 +38,8 @@
                     <p class="stat-cards-info__title">Total visits</p>
                     <p class="stat-cards-info__progress">
                       <span class="stat-cards-info__profit success">
+                      Todo o período
                       </span>
-                      Mês passado
                     </p>
                   </div>
                 </article>
@@ -47,7 +47,7 @@
 
               <div class="col-md-6 col-xl-3">
                 <article class="stat-cards-item">
-                  <div class="stat-cards-icon warning">
+                  <div class="stat-cards-icon primary">
                     <img style="height: 3rem" src="img/admin/group.png" alt="">
                   </div>
                   <div class="stat-cards-info">
@@ -55,9 +55,8 @@
                     <p class="stat-cards-info__title">Total users</p>
                     <p class="stat-cards-info__progress">
                       <span class="stat-cards-info__profit success">
-                        <i data-feather="trending-up" aria-hidden="true"></i>0.24%
+                        Todo o período
                       </span>
-                      Mês passado
                     </p>
                   </div>
                 </article>
@@ -65,17 +64,16 @@
 
               <div class="col-md-6 col-xl-3">
                 <article class="stat-cards-item">
-                  <div class="stat-cards-icon purple">
+                  <div class="stat-cards-icon primary">
                     <img style="height: 1.9rem" src="img/admin/post.png" alt="">
                   </div>
                   <div class="stat-cards-info">
                     <p class="stat-cards-info__num"><%- totalPosts %></p>
                     <p class="stat-cards-info__title">Total posts (usuários)</p>
                     <p class="stat-cards-info__progress">
-                      <span class="stat-cards-info__profit danger">
-                        <i data-feather="trending-down" aria-hidden="true"></i>1.64%
+                      <span class="stat-cards-info__profit success">
+                        Todo o período
                       </span>
-                      Mês passado
                     </p>
                   </div>
                 </article>
@@ -83,17 +81,16 @@
 
               <div class="col-md-6 col-xl-3">
                 <article class="stat-cards-item">
-                  <div class="stat-cards-icon success">
+                  <div class="stat-cards-icon primary">
                     <img style="height: 2.1rem" src="img/admin/estrela.png" alt="">
                   </div>
                   <div class="stat-cards-info">
                     <p class="stat-cards-info__num"><%- totalFeedbacks %></p>
                     <p class="stat-cards-info__title">Feedbacks</p>
                     <p class="stat-cards-info__progress">
-                      <span class="stat-cards-info__profit warning">
-                        <i data-feather="trending-up" aria-hidden="true"></i>0.00%
+                      <span class="stat-cards-info__profit success">
+                        Todo o período
                       </span>
-                      Todo o período
                     </p>
                   </div>
                 </article>
@@ -107,7 +104,7 @@
                     <img style="height: 2rem" src="img/admin/facebook.png" alt="">
                   </div>
                   <div class="stat-cards-info">
-                    <p class="stat-cards-info__num" style="color: #752a7a; font-weight: bold;">0 contas</p>
+                    <p class="stat-cards-info__num" style="color: #752a7a; font-weight: bold;"><%= total_accounts %> contas</p>
                     <p class="stat-cards-info__title">Total na plataforma</p>
                   </div>
                 </article>
@@ -115,11 +112,11 @@
 
               <div class="col-md-6 col-xl-3">
                 <article class="stat-cards-item">
-                  <div class="stat-cards-icon warning">
+                  <div class="stat-cards-icon primary">
                     <img style="height: 3rem" src="img/admin/group.png" alt="">
                   </div>
                   <div class="stat-cards-info">
-                    <p class="stat-cards-info__num" style="color: #752a7a; font-weight: bold;">0 grupos</p>
+                    <p class="stat-cards-info__num" style="color: #752a7a; font-weight: bold;"><%= total_groups %> grupos</p>
                     <p class="stat-cards-info__title">Total de grupos</p>
                   </div>
                 </article>
@@ -127,11 +124,11 @@
 
               <div class="col-md-6 col-xl-3">
                 <article class="stat-cards-item">
-                  <div class="stat-cards-icon purple">
+                  <div class="stat-cards-icon primary">
                     <img style="height: 1.9rem" src="img/admin/post.png" alt="">
                   </div>
                   <div class="stat-cards-info">
-                    <p class="stat-cards-info__num" style="color: #752a7a; font-weight: bold;">0 posts realizados</p>
+                    <p class="stat-cards-info__num" style="color: #752a7a; font-weight: bold;"><%= total_posts %> posts realizados</p>
                     <p class="stat-cards-info__title">Total posts</p>
                   </div>
                 </article>
@@ -139,7 +136,7 @@
 
               <div class="col-md-6 col-xl-3">
                 <article class="stat-cards-item">
-                  <div class="stat-cards-icon success">
+                  <div class="stat-cards-icon primary">
                     <img style="height: 2.1rem" src="img/admin/tipo-conta.png" alt="">
                   </div>
                   <div class="stat-cards-info">
@@ -153,148 +150,62 @@
 
           <div class="row">
             <div class="col-lg-9">
-              <div class="chart">
-                <canvas id="myChart" aria-label="Site statistics" role="img"></canvas>
-              </div>
-              
               <div class="users-table table-wrapper">
-                <% if (isAdmin) { %>
-                  <table class="posts-table">
-                    <thead>
-                      <tr class="users-table-info">
-                        <th>
-                          <label class="users-table__checkbox ms-20">
-                            Thumbnail
-                          </label>
-                        </th>
-                        <th>Titulo</th>
-                        <th>Usuário</th>
-                        <th>Status</th>
-                        <th>Data</th>
-                        <th>Ações</th>
-                      </tr>
-                    </thead>
+                <table class="posts-table">
+                  <thead>
+                    <tr class="users-table-info">
+                      <th>Thumbnail</th>
+                      <th>Descrição</th>
+                      <th>Conta</th>
+                      <th>Página</th>
+                      <th>Plataforma</th>
+                      <th>Status</th>
+                      <th>Data</th>
+                    </tr>
+                  </thead>
                     <tbody>
-                      <% postsRecents.forEach(function(item) { %>
+                      <% posts.forEach(function(item) { %>
                         <tr>
                           <td>
                             <div class="categories-table-img">
-                              <picture><source srcset=""><img src="{{image}}" alt="category"></picture>
+                              <picture><source srcset="<%= item.image %>"><img src="<%= item.image %>" alt="img"></picture>
                             </div>
                           </td>
                           <td>
-                            <%- item.title %>
+                            <p style="width: 140px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"><%= item.content %></p>
                           </td>
                           <td>
                             <div class="pages-table-img">
-                              <picture><source srcset="img/admin/avatar-illustrated-04.webp" type="image/webp"><img src="img/admin/avatar-illustrated-04.webp" alt="User Name"></picture>
-                              <%- item.name_user %>
+                              <picture><source srcset="<%= item.image_account %>" type="image/webp"><img src="<%= item.image_account %>" alt="User Name"><%= item.name_account %></picture>
                             </div>
                           </td>
-                          <td><span class="badge-active">Postado</span></td>
-                          <td><%- item.date %></td>
                           <td>
-                            <span class="p-relative">
-                              <button class="dropdown-btn transparent-btn" type="button" title="More info">
-                                <div class="sr-only">More info</div>
-                                <i data-feather="more-horizontal" aria-hidden="true"></i>
-                              </button>
-                              <ul class="users-item-dropdown dropdown">
-                                <li><a href="##">Edit</a></li>
-                                <li><a href="##">Quick edit</a></li>
-                                <li><a href="##">Trash</a></li>
-                              </ul>
-                            </span>
+                            <%= item.page_name %>
                           </td>
+                          <% if (item.platform == "Facebook") { %>
+                            <td>
+                              <div style="color: #1877F2; font-weight: bold;">
+                                <%= item.platform %>
+                              </div>
+                            </td>
+                          <% } else { %>
+                            <td>
+                              <div style="font-weight: bold; color: #C21F70">
+                                <%= item.platform %>
+                              </div>
+                            </td>
+                          <% } %>    
+                          <% if(item.program_post == true) { %>
+                            <td><span class="badge badge-pill badge-success">Programado</span></td>
+                            <td><%= item.day %> <%= item.hour %></td>
+                          <% } else { %>
+                            <td><span class="badge badge-pill badge-active">Publicado</span></td>
+                            <td>Não programado</td>
+                          <% } %>
                         </tr>
                       <% }); %>
                     </tbody>
-                  </table>
-                <% } else { %>
-                  <table class="posts-table">
-                    <thead>
-                      <tr class="users-table-info">
-                        <th>
-                          <label class="users-table__checkbox ms-20">
-                            Thumbnail
-                          </label>
-                        </th>
-                        <th>Titulo</th>
-                        <th>Página</th>
-                        <th>Status</th>
-                        <th>Data</th>
-                        <th>Total de grupos</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                        <!-- <tr>
-                          <td>
-                            <div class="categories-table-img">
-                              <picture><source srcset="https://img.itdg.com.br/images/recipes/000/000/023/365326/365326_original.jpg"><img src="https://img.itdg.com.br/images/recipes/000/000/023/365326/365326_original.jpg" alt="imagem"></picture>
-                            </div>
-                          </td>
-                          <td style="font-weight: bold;">
-                            Como fazer um bolo de cenoura!
-                          </td>
-                          <td>
-                            <div class="pages-table-img">
-                              <picture><source srcset="img/admin/avatar-illustrated-04.webp" type="image/webp"><img src="img/admin/avatar-illustrated-04.webp" alt="User Name"></picture>
-                              Receita e Bolos
-                            </div>
-                          </td>
-                          <td><span class="badge-active">Publicado</span></td>
-                          <td>01/02/2023</td>
-                          <td>
-                            4 grupos
-                          </td>
-                        </tr>
-
-                        <tr>
-                          <td>
-                            <div class="categories-table-img">
-                              <picture><source srcset="https://agendor-blog-uploads.s3.sa-east-1.amazonaws.com/2020/08/19171948/agendor-metodos-prospeccao-clientes.jpg"><img src="https://agendor-blog-uploads.s3.sa-east-1.amazonaws.com/2020/08/19171948/agendor-metodos-prospeccao-clientes.jpg" alt="imagem"></picture>
-                            </div>
-                          </td>
-                          <td style="font-weight: bold;">
-                            Como atrair mais clientes no digital
-                          </td>
-                          <td>
-                            <div class="pages-table-img">
-                              <picture><source srcset="img/admin/avatar-illustrated-04.webp" type="image/webp"><img src="img/admin/avatar-illustrated-04.webp" alt="User Name"></picture>
-                              Marketing com sabedoria
-                            </div>
-                          </td>
-                          <td><span class="badge-active">Publicado</span></td>
-                          <td>28/01/2023</td>
-                          <td>
-                            10 grupos
-                          </td>
-                        </tr>
-
-                        <tr>
-                          <td>
-                            <div class="categories-table-img">
-                              <picture><source srcset="https://www.oficinadeervas.com.br/images/produtos/20220216_95114_Chas%20compostos.jpg"><img src="https://www.oficinadeervas.com.br/images/produtos/20220216_95114_Chas%20compostos.jpg" alt="imagem"></picture>
-                            </div>
-                          </td>
-                          <td style="font-weight: bold;">
-                            Chá de camomila alivia o estresse
-                          </td>
-                          <td>
-                            <div class="pages-table-img">
-                              <picture><source srcset="img/admin/avatar-illustrated-04.webp" type="image/webp"><img src="img/admin/avatar-illustrated-04.webp" alt="User Name"></picture>
-                              Receita e Bolos
-                            </div>
-                          </td>
-                          <td><span class="badge-active">Publicado</span></td>
-                          <td>24/01/2023</td>
-                          <td>
-                            8 grupos
-                          </td>
-                        </tr> -->
-                    </tbody>
-                  </table>
-                <% } %>
+                </table>
               </div>
             </div>
             
@@ -326,7 +237,7 @@
             <div class="col-lg-3">
               <article class="white-block">
                 <div class="top-cat-title">
-                  <h3>Comentários recentes</h3>
+                  <h3>Histórico de atividades:</h3>
                   <!-- <p>10 comentários</p> -->
                 </div>
                 <ul class="top-cat-list">
@@ -421,29 +332,28 @@
 
 
 <!-- Chart library -->
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </body>
 </html>
 
 <script>
-  const ctx = document.getElementById('myChart');
+  // const ctx = document.getElementById('myChart');
 
-  new Chart(ctx, {
-    type: 'bar',
-    data: {
-      labels: ['Comentários', 'Posts', 'Likes', 'Compartilhações', 'Posts'],
-      datasets: [{
-        label: '# Visão geral',
-        data: [12, 19, 8, 10, 15],
-        borderWidth: 1
-      }]
-    },
-    options: {
-      scales: {
-        y: {
-          beginAtZero: true
-        }
-      }
-    }
-  });
+  // new Chart(ctx, {
+  //   type: 'bar',
+  //   data: {
+  //     labels: ['Comentários', 'Posts', 'Likes', 'Compartilhações', 'Posts'],
+  //     datasets: [{
+  //       label: '# Visão geral',
+  //       data: [12, 19, 8, 10, 15],
+  //       borderWidth: 1
+  //     }]
+  //   },
+  //   options: {
+  //     scales: {
+  //       y: {
+  //         beginAtZero: true
+  //       }
+  //     }
+  //   }
+  // });
 </script>

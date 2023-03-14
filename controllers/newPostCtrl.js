@@ -301,34 +301,13 @@ const PostInstagram = asyncHandler(async(req, res) => {
 const postFacebook = asyncHandler(async(req, res) => {
     const find = await User.findById(req.cookies._id)
 
-    const groups = []
-    const pages = []
-
-    const groups_format = []
-    const pages_format = []
-
-    find.accountsFb.forEach(account => {
-        groups.push(account.groups)
-        pages.push(account.pages)
-    })
-
-    pages.forEach((page) => {
-        page.forEach(page_content => {
-            pages_format.push({name_page: page_content.name, image: page_content.image, id: page_content.id_page, access_token: page_content.access_token})
-        })
-    })
-
-    groups.forEach((group) => {
-        group.forEach(group_content => {
-            groups_format.push({name_group: group_content.name, id: group_content.id, image: group_content.image})
-        })
-    })
-
-    res.render("layouts/postFacebook", { isAdmin: find.isAdmin, accounts: find.accountsFb, groups: groups_format, pages: pages_format })
+    res.render("layouts/postFacebook", { isAdmin: find.isAdmin, accounts: find.accountsFb, groups: find.groups, type_account: find.type_account })
 })
 
 const pagesList = asyncHandler(async(req, res) => {
-    const findAccount = await User.findById({_id: req.cookies._id, accountsIg: {$elemMatch: {id_account: req.params.id}}})
+    const findAccount = await User.findOne({_id: req.cookies._id, accountsFb: {$elemMatch: {id_account: req.params.id}}}, {'accountsFb.$': 1})
+
+    console.log(findAccount)
     
     if (findAccount) {
         res.send(findAccount.accountsFb[0].pages)
@@ -338,7 +317,7 @@ const pagesList = asyncHandler(async(req, res) => {
 })
 
 const access_token = asyncHandler(async(req, res) => {
-    const findAccount = await User.findById({_id: req.cookies._id, accountsIg: {$elemMatch: {id_account: req.params.id}}})
+    const findAccount = await User.findById({_id: req.cookies._id, accountsFb: {$elemMatch: {id_account: req.params.id}}}, {'accountsFb.$': 1})
     
     if (findAccount) {
         res.send(findAccount.accountsFb[0].access_token)

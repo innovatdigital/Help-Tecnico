@@ -5,6 +5,13 @@ const Feedbacks = require('../models/Feedbacks')
 
 const dashboard = asyncHandler(async(req, res) => {
     const find = await User.findById(req.cookies._id)
+    const listPosts = []
+
+    find.accountsFb.forEach(account => {
+        account.posts.forEach(post => {
+            listPosts.push(post)
+        })
+    })
 
     if (find.isAdmin) {
         const users = await User.countDocuments({})
@@ -13,9 +20,21 @@ const dashboard = asyncHandler(async(req, res) => {
         const postsRecents = await Posts.find({})
         const feedbacks = await Feedbacks.countDocuments({})
 
-        res.render('layouts/dashboard', {isAdmin: true, totalUsers: users, totalPosts: posts, totalFeedbacks: feedbacks, usersRecent: usersRecent, postsRecents: postsRecents})
+        res.render('layouts/dashboard', {isAdmin: true, totalUsers: users, totalPosts: posts, totalFeedbacks: feedbacks, usersRecent: usersRecent, postsRecents: postsRecents, posts: listPosts})
     } else {
-        res.render('layouts/dashboard', {isAdmin: false, type_account: find.type_account})
+        let total_groups = 0
+        let total_posts = 0 
+        
+        find.accountsFb.forEach(account => {
+            total_groups = total_groups + account.groups.length
+            total_posts = total_posts + account.posts.length
+        })
+
+        find.accountsIg.forEach(account => {
+            total_posts = total_posts + account.posts.length
+        })
+
+        res.render('layouts/dashboard', {isAdmin: false, type_account: find.type_account, posts: listPosts, total_accounts: find.accountsFb.length + find.accountsIg.length, total_groups: total_groups, total_posts: total_posts})
     }
 })
 
