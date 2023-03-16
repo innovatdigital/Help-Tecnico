@@ -28,6 +28,14 @@ const Comments = new mongoose.Schema({
     date: {
         type: Date,
         default: Date.now()
+    },
+    comments: {
+        type: Array,
+        default: []
+    },
+    count: {
+        type: Number,
+        default: 0
     }
     },
     {

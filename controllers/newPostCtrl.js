@@ -179,7 +179,7 @@ const PostFacebook = asyncHandler(async(req, res) => {
     try {
         let name = ''
 
-        const { account, pages, groups, ids_posts, content, program, day, hour, image } = req.body
+        const { pages, groups, ids_posts, content, program, day, hour, image } = req.body
 
         const findAccount = await User.findById({_id: req.cookies._id, accountsFb: {$elemMatch: {id_account: account}}})
 
@@ -187,12 +187,12 @@ const PostFacebook = asyncHandler(async(req, res) => {
 
         if (findAccount) {
             if (program) {
-                // const newPost = await Posts.create({id_post: id, id_user: req.cookies._id, id_account: account, platform: "Facebook", name_account: findAccount.accountsFb[0].name, image_account: findAccount.accountsFb[0].photo, image: image, status_bot: false, day: day, hour: hour, page_id: page, page_name: name, groups: groups, content: content})
+                const newPost = await Posts.create({id_post: id, id_user: req.cookies._id, platform: "Facebook", id_account: account, name_account: findAccount.accountsFb[0].name, image_account: findAccount.accountsFb[0].photo, image: image, status_bot: false, pages_ids: pages, ids_posts_pages_and_groups: ids_posts, groups: groups, content: content})
                 const save = await User.updateOne(
                     { _id: req.cookies._id, "accountsFb.id_account": account },
                     {
                     $push: {
-                        "accountsFb.$.posts": {
+                        posts: {
                             "id_post": id,
                             "id_account": account,
                             "name_account": findAccount.accountsFb[0].name,
@@ -215,26 +215,26 @@ const PostFacebook = asyncHandler(async(req, res) => {
                     
                 res.sendStatus(200)
             } else {
-                // const newPost = await Posts.create({id_post: post.id_post, id_user: req.cookies._id, platform: "Facebook", id_account: account, name_account: findAccount.accountsFb[0].name, image_account: findAccount.accountsFb[0].photo, image: image, status_bot: false, page_id: page, page_name: name, groups: groups, content: content})
+                const newPost = await Posts.create({id_post: id, id_user: req.cookies._id, platform: "Facebook", id_account: account, name_account: findAccount.accountsFb[0].name, image_account: findAccount.accountsFb[0].photo, image: image, status_bot: false, pages_ids: pages, ids_posts_pages_and_groups: ids_posts, groups: groups, content: content})
                 const save = await User.updateOne(
                     { _id: req.cookies._id, "accountsFb.id_account": account },
                     {
                         $push: {
-                        "accountsFb.$.posts": {
-                            "id_post": id,
-                            "id_account": account,
-                            "name_account": findAccount.accountsFb[0].name,
-                            "image_account": findAccount.accountsFb[0].photo,
-                            "status_bot": false,
-                            "content": content,
-                            "comment_content": "",
-                            "platform": "Facebook",
-                            "program_post": false,
-                            "ids_posts_pages_and_groups": ids_posts,
-                            "pages_ids": pages,
-                            "groups_ids": groups,
-                            "image": image,
-                        }
+                            posts: {
+                                "id_post": id,
+                                "id_account": account,
+                                "name_account": findAccount.accountsFb[0].name,
+                                "image_account": findAccount.accountsFb[0].photo,
+                                "status_bot": false,
+                                "content": content,
+                                "comment_content": "",
+                                "platform": "Facebook",
+                                "program_post": false,
+                                "ids_posts_pages_and_groups": ids_posts,
+                                "pages_ids": pages,
+                                "groups_ids": groups,
+                                "image": image,
+                            }
                         }
                     }
                 );
@@ -301,7 +301,7 @@ const PostInstagram = asyncHandler(async(req, res) => {
 const postFacebook = asyncHandler(async(req, res) => {
     const find = await User.findById(req.cookies._id)
 
-    res.render("layouts/postFacebook", { isAdmin: find.isAdmin, accounts: find.accountsFb, groups: find.groups, type_account: find.type_account })
+    res.render("layouts/postFacebook", { isAdmin: find.isAdmin, accounts: find.accountsFb, groups: find.groups, pages: find.accountsFb, type_account: find.type_account })
 })
 
 const pagesList = asyncHandler(async(req, res) => {

@@ -41,16 +41,16 @@ const Posts = new mongoose.Schema({
         type: Array,
         require: true
     },
-    page_id: {
-        type: String,
+    pages_ids: {
+        type: Array,
         require: true
     },
     platform: {
         type: String,
         require: true
     },
-    page_name: {
-        type: String,
+    ids_posts_pages_and_groups: {
+        type: Array,
         require: true  
     },
     content: {

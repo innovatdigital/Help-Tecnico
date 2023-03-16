@@ -5,16 +5,8 @@ const Comments = require('../models/Comments')
 
 const comments = asyncHandler(async(req, res) => {
     const find = await User.findById(req.cookies._id)
-    
-    const listPosts = []
 
-    find.accountsFb.forEach(account => {
-        account.posts.forEach(post => {
-            listPosts.push(post)
-        })
-    })
-
-    res.render('layouts/comments', {isAdmin: find.isAdmin, posts: listPosts})
+    res.render('layouts/comments', {isAdmin: find.isAdmin, posts: find.posts})
 })
 
 
@@ -23,11 +15,11 @@ const activeBot = asyncHandler(async(req, res) => {
         // Salvar o link da publicação nos grupos tmb
         const { id_post, id_account, content_comment, limit_comments, platform } = req.body
 
-        User.updateOne(
-            { "accountsFb.posts.id_post": id_post },
-            { $set: { "accountsFb.$[account].posts.$[elem].status_bot": true, "accountsFb.$[account].posts.$[elem].comment_content": content_comment } },
-            { arrayFilters: [{ "account.id_account": id_account }, { "elem.id_post": id_post }] }
-          )
+        User.findById(
+            { _id: req.cookies._id, 'posts._id': req.params.id_post },
+            { $set: { 'posts.$.status_bot': true } },
+            { new: true }
+        )
         .then(result => {
             const newActiveBot = Comments.create({id_user: req.cookies._id, id_post: id_post, id_account: id_account, content_comment: content_comment, limit_comments: parseInt(limit_comments), platform: platform}, async(error, result) => {
                 if (error) {
@@ -49,11 +41,11 @@ const activeBot = asyncHandler(async(req, res) => {
 
 const disableBot = asyncHandler(async(req, res) => {
     try {
-        User.updateOne(
-            { "accountsFb.posts.id_post": req.params.id_post },
-            { $set: { "accountsFb.$[account].posts.$[elem].status_bot": false } },
-            { arrayFilters: [{ "account.id_account": req.body.id_account }, { "elem.id_post": req.params.id_post }] }
-          )
+        User.findByIdAndUpdate(
+            { _id: req.cookies._id, 'posts._id': req.params.id_post },
+            { $set: { 'posts.$.status_bot': false } },
+            { new: true }
+        )
         .then(result => {
             const newActiveBot = Comments.findOneAndDelete({id_post: req.params.id_post}, async(error, result) => {
                 if (error) {

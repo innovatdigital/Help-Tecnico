@@ -29,6 +29,10 @@ const User = new mongoose.Schema({
         type: Array,
         default: []
     },
+    posts: {
+        type: Array,
+        default: []
+    },
     accountsFb: {
         type: Array,
         default: []
