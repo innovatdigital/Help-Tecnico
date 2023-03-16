@@ -110,7 +110,7 @@
       <!-- ! Main -->
       <main class="main users chart-page" id="skip-target">
         <div class="container">
-          <div class="top-cat-title" style="display: flex; justify-content: space-between;">
+          <!-- <div class="top-cat-title" style="display: flex; justify-content: space-between;">
             <div>
               <h2 style="color: #1877F2; display: flex; align-items: center;"><img src="/img/platform/facebook.png" width=45 height=45 alt="" style="margin-right: 12px;">Novo post Facebook</h2>
             </div>
@@ -174,20 +174,89 @@
                 </div>
               </div>
             </div>
-            </div>
+            </div> -->
           <div class="alert" style="display: none;"></div>
           <br>
 
           <div class="row">
             <div class="col-lg-12">
               <article class="white-block">
-                <p style="font-size: 20px; margin-bottom: 10px; font-weight: bold; border-bottom: 2.5px solid #63636360; padding-bottom: 15px; color: #752A7A; display: flex; align-items: center;"><img src="/img/admin/post.png" width=28 height=28 alt="" style="margin-right: 12px;">Descreva o post:</p>
+                <div class="top-cat-title" style="display: flex; justify-content: space-between;">
+                  <div>
+                    <h2 style="color: #1877F2; display: flex; align-items: center;"><img src="/img/platform/facebook.png" width=45 height=45 alt="" style="margin-right: 12px;">Novo post Facebook</h2>
+                  </div>
+      
+                  <div class="pages">
+                    <div class="min">
+                      <img src="https://scontent.fhio3-1.fna.fbcdn.net/v/t39.30808-1/285487229_113005248094569_7132282554238080083_n.jpg?stp=dst-jpg_p200x200&_nc_cat=103&ccb=1-7&_nc_sid=dbb9e7&_nc_eui2=AeFf6vcatEPpsco0PDD8T4FMkzK23-kkusOTMrbf6SS6wzS8_s-Hc-OPxpFTPR_Rtl-l0oI-mIBrPXp3XoulUD_J&_nc_ohc=49tgVK6z8rkAX-cJ7Iz&_nc_ht=scontent.fhio3-1.fna&edm=AOf6bZoEAAAA&oh=00_AfAu2AH8LUEcpp5nB-ycD1VHE2gQJvkkHFuQ3hv-vAzzTg&oe=6416C149" alt="">
+                      <img src="https://scontent.fhio3-1.fna.fbcdn.net/v/t39.30808-1/334135372_549115537043133_2133374319080764182_n.jpg?stp=dst-jpg_p200x200&_nc_cat=102&ccb=1-7&_nc_sid=dbb9e7&_nc_eui2=AeH_bbLjRv9srUOItVG0yHKqdwjqpmWPWzh3COqmZY9bOOU6mNpUVb8hmSWdt-vFTfWbmZbeGe-iT4aQ_-omsv8P&_nc_ohc=K8KozZN-iwAAX-rIRxm&_nc_ht=scontent.fhio3-1.fna&edm=AOf6bZoEAAAA&oh=00_AfAciALI1j2QNyN52QXwEjc_7AbviqFfr9HoZbkKi3sn-Q&oe=64160563" alt="">
+                      <button class="open-pages" onclick="open_pages()">+</button>
+                    </div>
+      
+                    <div class="options">
+                      <div style="display: flex; align-items: center; justify-content: space-between;" class="close">
+                        <div>
+                          <p style="font-weight: bold; font-size: 17px; margin-left: 10px; color: #752A7A;">Selecione:</p>
+                        </div>
+      
+                        <div>
+                          <button class="close-pages" style="width: 39px;" onclick="close_pages()">x</button>
+                        </div>
+                      </div>
+                      <div>
+                        <div class="selects-pages">
+                          <% pages.forEach(function(item) { %>
+                            <% item.pages.forEach(function(page) { %>
+                            <div class="page">
+                              <div style="display: flex; align-items: center; margin-top: 10px; margin-bottom: 10px;">
+                                <img src="<%= page.image %>" alt="">
+                                <p><%= page.name %></p>
+                              </div>
+      
+                              <div style="padding-right: 3px;">
+                                <button id="add-page<%= page.id_page %>" style="font-size: 15px;" onclick="add_page('<%= page.id_page %>', '<%= page.name %>', '<%= page.access_token %>')">Selecionar</button>
+                                <button id="del-page<%= page.id_page %>" style="display: none; background-color: #bb0404 !important; color: #FFFFFF; border: 0px !important; font-size: 15px;" onclick="del_page('<%= page.id_page %>')">Excluir</button>
+                              </div>
+                            </div>
+                            <% }) %>
+                          <% }) %>
+                          <br>
+                          <br>
+                          <br>
+                          <p style="font-weight: bold; font-size: 17px; margin-bottom: 10px; color: #752A7A;">Grupos:</p>
+                          <% groups.forEach(function(item) { %>
+                            <div class="page">
+                              <div style="display: flex; align-items: center; margin-top: 10px; margin-bottom: 10px;">
+                                <% if (item.image) { %>
+                                  <img src="<%= item.image %>" alt="">
+                                <% } else { %>
+                                  <img src="/img/admin/Bulk/groups.png" alt="">
+                                <% } %>
+                                <p><%= item.name %></p>
+                              </div>
+      
+                              <div style="padding-right: 3px;">
+                                <button id="add-group<%= item.id %>" style="font-size: 15px;" onclick="add_group('<%= item.id %>')">Selecionar</button>
+                                <button id="del-group<%= item.id %>" style="display: none; background-color: #bb0404 !important; color: #FFFFFF; border: 0px !important; font-size: 15px;" onclick="del_group('<%= item.id %>')">Excluir</button>
+                              </div>
+                            </div>
+                          <% }) %>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>      
+                <p style="font-size: 20px; margin-bottom: 10px; margin-top: 19px; font-weight: bold; border-bottom: 2.5px solid #63636360; padding-bottom: 15px; color: #752A7A; display: flex; align-items: center;"><img src="/img/admin/post.png" width=28 height=28 alt="" style="margin-right: 12px;">Descreva o post:</p>
                 <p style="font-size: 15px; margin-bottom: 10px; font-weight: bold;">Escreva o post aqui:</p>
-                <textarea name="" id="content-post" cols="30" rows="4" style="transition: none; padding: 10px;" placeholder="Ou cole um link para importar os dados."></textarea>
+                <textarea name="" id="content-post" cols="30" rows="4" style="transition: none; padding: 10px;" placeholder="Hoje vamos aprender a preparar um café!"></textarea>
+                <br>
+                <br>
+                <p style="font-size: 15px; margin-bottom: 10px; font-weight: bold;">Importe um link</p>
+                <input type="text" name="link" class="link" id="link" placeholder="https://www.facebook.com/photo/..." style="border: 2px solid #752A7A !important">
                 <br>
                 <br>
                 <p style="font-size: 15px; margin-bottom: 10px; font-weight: bold;">Inserir imagens:</p>
-                <input type="file" name="files" class="files" id="files" style="border: 2px dashed #752A7A !important" class="files">
+                <input type="file" name="files" class="files" id="files" style="border: 2px dashed #752A7A !important">
                 <br>
                 <br>
                 <p style="font-size: 15px; margin-bottom: 10px">Visualização:</p>
@@ -242,14 +311,23 @@
   let file_input = document.querySelector('#files');
   let image_preview = document.querySelector('.results');
   const enable = document.querySelector('.enable')
-  const content = document.querySelector('#content-post')
+  const link = document.querySelector('#link')
   let images = [];
   let pages = []
   let groups = []
 
-  content.addEventListener('input', function() {
-  // Aqui você pode adicionar o código que deseja executar quando o evento input é acionado
-    console.log(content.value);
+  link.addEventListener('input', function() {
+    const valor = link.value;
+
+    // Defina a expressão regular para verificar se o valor é um link válido
+    const padrao = /^(http|https):\/\/[\w\-]+(\.[\w\-]+)+([\w\-\.,@?^=%&:\/~\+#!]*[\w\-\@?^=%&\/~\+#])*$/;
+
+    // Teste se o valor corresponde ao padrão
+    if (padrao.test(valor)) {
+      console.log(`${valor} é um link válido.`);
+    } else {
+      console.log('Não é um link válido')
+    }
   })
 
   const handle_file_preview = (e) => {
@@ -434,7 +512,7 @@
   }
 
   function show() {
-    const divProgram = document.querySelector('.program-div').style.display = "flex"
+    const divProgram = document.querySelector('.program-div').style.display = "none"
   }
   
   function hide() {
@@ -804,7 +882,9 @@
           });
         })
         .then(response => {
-          fetch(`https://graph.facebook.com/v12.0/${ids[0]}?fields=picture&access_token=${pages[0].access_token}`)
+          const filter = ids[0].split('_')
+
+          fetch(`https://graph.facebook.com/v12.0/${filter[0]}?fields=picture&access_token=${filter[1]}`)
             .then(response => response.json())
             .then(data => {
               const imageUrl = data.picture;

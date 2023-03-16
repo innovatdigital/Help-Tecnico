@@ -181,22 +181,19 @@ const PostFacebook = asyncHandler(async(req, res) => {
 
         const { pages, groups, ids_posts, content, program, day, hour, image } = req.body
 
-        const findAccount = await User.findById({_id: req.cookies._id, accountsFb: {$elemMatch: {id_account: account}}})
+        const findAccount = await User.findById({_id: req.cookies._id})
 
         const id = await validCode()
 
         if (findAccount) {
             if (program) {
-                const newPost = await Posts.create({id_post: id, id_user: req.cookies._id, platform: "Facebook", id_account: account, name_account: findAccount.accountsFb[0].name, image_account: findAccount.accountsFb[0].photo, image: image, status_bot: false, pages_ids: pages, ids_posts_pages_and_groups: ids_posts, groups: groups, content: content})
-                const save = await User.updateOne(
-                    { _id: req.cookies._id, "accountsFb.id_account": account },
+                const newPost = await Posts.create({id_post: id, id_user: req.cookies._id, platform: "Facebook", image: image, status_bot: false, pages_ids: pages, ids_posts_pages_and_groups: ids_posts, groups: groups, content: content})
+                const save = await User.findByIdAndUpdate(
+                    { _id: req.cookies._id },
                     {
                     $push: {
                         posts: {
                             "id_post": id,
-                            "id_account": account,
-                            "name_account": findAccount.accountsFb[0].name,
-                            "image_account": findAccount.accountsFb[0].photo,
                             "status_bot": false,
                             "content": content,
                             "comment_content": "",
@@ -215,16 +212,13 @@ const PostFacebook = asyncHandler(async(req, res) => {
                     
                 res.sendStatus(200)
             } else {
-                const newPost = await Posts.create({id_post: id, id_user: req.cookies._id, platform: "Facebook", id_account: account, name_account: findAccount.accountsFb[0].name, image_account: findAccount.accountsFb[0].photo, image: image, status_bot: false, pages_ids: pages, ids_posts_pages_and_groups: ids_posts, groups: groups, content: content})
-                const save = await User.updateOne(
-                    { _id: req.cookies._id, "accountsFb.id_account": account },
+                const newPost = await Posts.create({id_post: id, id_user: req.cookies._id, platform: "Facebook", image: image, status_bot: false, pages_ids: pages, ids_posts_pages_and_groups: ids_posts, groups: groups, content: content})
+                const save = await User.findByIdAndUpdate(
+                    { _id: req.cookies._id },
                     {
                         $push: {
                             posts: {
                                 "id_post": id,
-                                "id_account": account,
-                                "name_account": findAccount.accountsFb[0].name,
-                                "image_account": findAccount.accountsFb[0].photo,
                                 "status_bot": false,
                                 "content": content,
                                 "comment_content": "",
@@ -242,6 +236,7 @@ const PostFacebook = asyncHandler(async(req, res) => {
                 res.sendStatus(200)
             }
         } else {
+            console.log('aqui')
             res.sendStatus(500)
         }
     } catch (err) {

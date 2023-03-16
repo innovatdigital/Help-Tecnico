@@ -98,12 +98,12 @@
                         <% } else { %>
                         <td><span class="badge-active">Desativado</span></td>
                         <td>
-                          <button class="event" id="btn-open" onclick="openDiv('<%= item.id_post %>', '<%= item.id_account %>', '<%= item.name_account %>', '<%= item.platform %>')">Ativar comentários</button>
+                          <button class="event" id="btn-open" onclick="openDiv('<%= item.id_post %>', '<%= item.platform %>')">Ativar comentários</button>
                         </td>
                         <td>Não ativado</td>
                         <% } %>
                       </tr>
-                    <% }); %> -->
+                    <% }); %>
                   </tbody>
                 </table>
               </div>
@@ -143,18 +143,15 @@
   const content = document.querySelector('#content-input')
   const limit = document.querySelector('#limit-input')
   let idPost = ""
-  let idAccount = ""
   let platformPost = ""
 
   enable.style.display = "none"
 
-  function openDiv(id_post, id_account, name_account, platform) {
+  function openDiv(id_post, platform) {
     enable.style.display = "flex"
     enableH1.innerHTML = "Ativar comentários automáticos"
-    enableP.innerHTML = "Conta: " + name_account
 
     idPost = id_post
-    idAccount = id_account
     platformPost = platform
   }
 
@@ -162,7 +159,7 @@
     fetch("comments-automatic/config", {
       method: "PUT",
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ id_account: idAccount, id_post: idPost, platform: platformPost, content_comment: content.value, limit_comments: limit.value })
+      body: JSON.stringify({ id_post: idPost, platform: platformPost, content_comment: content.value, limit_comments: limit.value })
     })
     .then(response => {
       if (response.ok) {
@@ -189,11 +186,10 @@
     .catch(error => console.error(error));
   }
 
-  function disableComment(id_post, id_account) {
+  function disableComment(id_post) {
     fetch("comments-automatic/delete/" + id_post, {
         method: "DELETE",
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({id_account: id_account})
     }).then(response => response.ok)
       .then(data => {
         if (data) {
@@ -207,9 +203,6 @@
     enable.style.display = "none"
     count = 0
   }
-
-  $(document).ready(function(){
-  });
 </script>
 
 </html>

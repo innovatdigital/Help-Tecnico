@@ -13,15 +13,17 @@ const comments = asyncHandler(async(req, res) => {
 const activeBot = asyncHandler(async(req, res) => {
     try {
         // Salvar o link da publicação nos grupos tmb
-        const { id_post, id_account, content_comment, limit_comments, platform } = req.body
+        const { id_post, content_comment, limit_comments, platform } = req.body
 
-        User.findById(
-            { _id: req.cookies._id, 'posts._id': req.params.id_post },
+        console.log(id_post)
+
+        User.findOneAndUpdate(
+            { _id: req.cookies._id, 'posts.id_post': req.params.id_post },
             { $set: { 'posts.$.status_bot': true } },
             { new: true }
         )
         .then(result => {
-            const newActiveBot = Comments.create({id_user: req.cookies._id, id_post: id_post, id_account: id_account, content_comment: content_comment, limit_comments: parseInt(limit_comments), platform: platform}, async(error, result) => {
+            const newActiveBot = Comments.create({id_user: req.cookies._id, id_post: id_post, content_comment: content_comment, limit_comments: parseInt(limit_comments), platform: platform}, async(error, result) => {
                 if (error) {
                     console.error(error);
                     res.sendStatus(500)
@@ -41,8 +43,8 @@ const activeBot = asyncHandler(async(req, res) => {
 
 const disableBot = asyncHandler(async(req, res) => {
     try {
-        User.findByIdAndUpdate(
-            { _id: req.cookies._id, 'posts._id': req.params.id_post },
+        User.findOneAndUpdate(
+            { _id: req.cookies._id, 'posts.id_post': req.params.id_post },
             { $set: { 'posts.$.status_bot': false } },
             { new: true }
         )
