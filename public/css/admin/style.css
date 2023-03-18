@@ -3805,6 +3805,14 @@ textarea {
   margin-right: 4px;
 }
 
+.link h3 {
+  margin-bottom: 12px;
+}
+
+.link p {
+  margin-bottom: 16px;
+}
+
 .options .selects-pages {
   padding: 6px;
 }

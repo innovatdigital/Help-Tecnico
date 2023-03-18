@@ -29,6 +29,10 @@ const Posts = new mongoose.Schema({
         type: Boolean,
         require: true
     },
+    program: {
+        type: Boolean,
+        require: true
+    },
     day: {
         type: String,
         require: true

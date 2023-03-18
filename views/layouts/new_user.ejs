@@ -63,16 +63,16 @@
                 <p style="font-size: 15px; margin-bottom: 10px; font-weight: bold; display: flex; align-items: center;">Tipo de conta do usuário:</p>
                 <select name="type_account" id="type_account" style="width: 100%">
                   <option value="select">Selecione uma opção</option>
-                    <option value="basico">Básico</option>
-                    <option value="pro">Pro</option>
-                    <option value="avancado">Avançado</option>
+                    <option value="Basico">Básico</option>
+                    <option value="Pro">Pro</option>
+                    <option value="Avançado">Avançado</option>
                 </select>
                 <br>
                 <br>
                 <p style="font-size: 15px; margin-bottom: 10px; font-weight: bold; display: flex; align-items: center;">Tipo de usuário:</p>
                 <div style="display: flex;">
-                  <input type="radio" name="program" id="admin-true" value="yes" tabindex="1"><p style="display: flex; justify-content: center; align-items: center; margin-right: 10px;" id="p-true">Administrador</p>
-                  <input type="radio" name="program" id="admin-false" value="no" tabindex="2"><p style="display: flex; justify-content: center; align-items: center;" id="p-false">Usuário comum</p>
+                  <input type="radio" name="admin" id="admin-true" value="yes" tabindex="1"><p style="display: flex; justify-content: center; align-items: center; margin-right: 10px;" id="p-true">Administrador</p>
+                  <input type="radio" name="admin" id="admin-false" value="no" tabindex="2"><p style="display: flex; justify-content: center; align-items: center;" id="p-false">Usuário comum</p>
                 </div>
                 <br>
                 <br>
@@ -110,7 +110,7 @@
   const p_true = document.querySelector("#p-true")
   const p_false = document.querySelector("#p-false")
   const value = document.querySelector("#value")
-  let admin = ""
+  let admin = false
 
   function save() {
     const errors = []
@@ -227,76 +227,4 @@
     count = 0
   }
 
-  async function saveCampaing() {
-    const file = file_input.files[0];
-    const imageUrl = await uploadImage(file);
-    const id = contact.value.split("-")
-
-    enable.style.display = "none"
-
-    fetch('/platform/new/add_campaing', {
-      method: 'POST',
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({name: name.value, content: content.value, contact: id[1], platform: platform, credits: value, credits_remaing: remaing, total_contacts: id[0].split(",").length, image: imageUrl})
-    })
-    .then((response) => {
-        if (response.ok) {
-            const divMessage = document.querySelector(".alert");
-            divMessage.style.display = "flex";
-            divMessage.innerHTML = "";
-            const message = document.createElement("p");
-            const img = document.createElement("img");
-            img.src = "/img/admin/Bulk/checked.png"
-            img.width = "28"
-            img.height = "28"
-            message.classList.add("message-notify");
-            message.innerText = "Campanha inserida com sucesso!";
-            divMessage.appendChild(img);
-            divMessage.appendChild(message);
-
-            setTimeout(() => {
-              divMessage.style.display = "none";
-            }, 4000);
-        } else {
-          const divMessage = document.querySelector(".alert");
-          divMessage.style.display = "flex";
-          divMessage.innerHTML = "";
-          const message = document.createElement("p");
-          const img = document.createElement("img");
-          img.src = "/img/admin/Bulk/checked.png"
-          img.width = "28"
-          img.height = "28"
-          message.classList.add("message-notify");
-          message.innerText = "Erro";
-          divMessage.appendChild(img);
-          divMessage.appendChild(message);
-
-          setTimeout(() => {
-            divMessage.style.display = "none";
-          }, 4000);
-
-          throw new Error("Erro ao processar a resposta da requisição");
-        }
-    })
-    .catch((error) => {
-      const divMessage = document.querySelector(".alert");
-      divMessage.style.display = "flex";
-      divMessage.innerHTML = "";
-      const message = document.createElement("p");
-      const img = document.createElement("img");
-      img.src = "/img/admin/Bulk/checked.png"
-      img.width = "28"
-      img.height = "28"
-      message.classList.add("message-notify");
-      message.innerText = "Erro";
-      divMessage.appendChild(img);
-      divMessage.appendChild(message);
-
-      setTimeout(() => {
-        divMessage.style.display = "none";
-      }, 4000);
-    })
-  }
 </script>

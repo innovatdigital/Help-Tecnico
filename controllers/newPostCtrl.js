@@ -187,7 +187,7 @@ const PostFacebook = asyncHandler(async(req, res) => {
 
         if (findAccount) {
             if (program) {
-                const newPost = await Posts.create({id_post: id, id_user: req.cookies._id, platform: "Facebook", image: image, status_bot: false, pages_ids: pages, ids_posts_pages_and_groups: ids_posts, groups: groups, content: content})
+                const newPost = await Posts.create({id_post: id, id_user: req.cookies._id, platform: "Facebook", image: image, status_bot: false, pages_ids: pages, ids_posts_pages_and_groups: ids_posts, program: program, day: day, hour: hour, groups: groups, content: content})
                 const save = await User.findByIdAndUpdate(
                     { _id: req.cookies._id },
                     {
@@ -295,14 +295,21 @@ const PostInstagram = asyncHandler(async(req, res) => {
 
 const postFacebook = asyncHandler(async(req, res) => {
     const find = await User.findById(req.cookies._id)
+    const accountsFb = find.accountsFb
+    const groups = []
+    
+    find.groups.forEach(group => {
+      const account = accountsFb.find(account => account.id_account === group.id_account)
+      if (account) {
+        groups.push({id: group.id, name: group.name, access_token: account.access_token})
+      }
+    })
 
-    res.render("layouts/postFacebook", { isAdmin: find.isAdmin, accounts: find.accountsFb, groups: find.groups, pages: find.accountsFb, type_account: find.type_account })
+    res.render("layouts/postFacebook", { isAdmin: find.isAdmin, accounts: find.accountsFb, groups: groups, pages: find.accountsFb, type_account: find.type_account })
 })
 
 const pagesList = asyncHandler(async(req, res) => {
     const findAccount = await User.findOne({_id: req.cookies._id, accountsFb: {$elemMatch: {id_account: req.params.id}}}, {'accountsFb.$': 1})
-
-    console.log(findAccount)
     
     if (findAccount) {
         res.send(findAccount.accountsFb[0].pages)

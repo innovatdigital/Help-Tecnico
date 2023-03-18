@@ -59,18 +59,18 @@
                 <p style="font-size: 15px; margin-bottom: 10px; font-weight: bold; display: flex; align-items: center;">Tipo de conta do usuário:</p>
                 <select name="type_account" id="type_account" style="width: 100%">
                   <option value="select">Selecione uma opção</option>
-                    <% if (find.type_account == "Básico") { %>
-                      <option value="basico" selected>Básico</option>
-                      <option value="pro">Pro</option>
-                      <option value="avancado">Avançado</option>
+                    <% if (find.type_account == "Basico") { %>
+                      <option value="Basico" selected>Básico</option>
+                      <option value="Pro">Pro</option>
+                      <option value="Avançado">Avançado</option>
                     <% } else if (find.type_account == "Pro") { %>
-                      <option value="basico">Básico</option>
-                      <option value="pro" selected>Pro</option>
-                      <option value="avancado">Avançado</option>
+                      <option value="Basico">Básico</option>
+                      <option value="Pro" selected>Pro</option>
+                      <option value="Avançado">Avançado</option>
                     <% } else if (find.type_account == "Avançado") { %>
-                      <option value="basico">Básico</option>
-                      <option value="pro">Pro</option>
-                      <option value="avancado" selected>Avançado</option>
+                      <option value="Basico">Básico</option>
+                      <option value="Pro">Pro</option>
+                      <option value="Avançado" selected>Avançado</option>
                     <% } %>
                 </select>
                 <br>
@@ -78,11 +78,11 @@
                 <p style="font-size: 15px; margin-bottom: 10px; font-weight: bold; display: flex; align-items: center;">Tipo de usuário:</p>
                 <div style="display: flex;">
                   <% if (find.isAdmin) { %>
-                    <input type="radio" checked name="program" id="admin-true" value="yes" tabindex="1"><p style="display: flex; justify-content: center; align-items: center; margin-right: 10px;" id="p-true">Administrador</p>
-                    <input type="radio" name="program" id="admin-false" value="no" tabindex="2"><p style="display: flex; justify-content: center; align-items: center;" id="p-false">Usuário comum</p>
+                    <input type="radio" checked name="admin" id="admin-true" value="yes" tabindex="1"><p style="display: flex; justify-content: center; align-items: center; margin-right: 10px;" id="p-true">Administrador</p>
+                    <input type="radio" name="admin" id="admin-false" value="no" tabindex="2"><p style="display: flex; justify-content: center; align-items: center;" id="p-false">Usuário comum</p>
                   <% } else if (find.isAdmin == false) { %>
-                    <input type="radio" name="program" id="admin-true" value="yes" tabindex="1"><p style="display: flex; justify-content: center; align-items: center; margin-right: 10px;" id="p-true">Administrador</p>
-                    <input type="radio" checked name="program" id="admin-false" value="no" tabindex="2"><p style="display: flex; justify-content: center; align-items: center;" id="p-false">Usuário comum</p>
+                    <input type="radio" name="admin" id="admin-true" value="yes" tabindex="1"><p style="display: flex; justify-content: center; align-items: center; margin-right: 10px;" id="p-true">Administrador</p>
+                    <input type="radio" checked name="admin" id="admin-false" value="no" tabindex="2"><p style="display: flex; justify-content: center; align-items: center;" id="p-false">Usuário comum</p>
                   <% } %>
                 </div>
                 <br>

@@ -28,7 +28,7 @@ const newUser = asyncHandler(async(req, res) => {
         var mes = dataAtual.getMonth() + 1;
         var ano = dataAtual.getFullYear()
 
-        const newUser = await User.create({name: req.body.name, cpf: req.body.cpf, number: req.body.number, email: req.body.email, date: dataFormat, password: req.body.password, type_account: req.body.type_account, admin: req.body.admin})
+        const newUser = await User.create({name: req.body.name, cpf: req.body.cpf, number: req.body.number, email: req.body.email, date: dataFormat, password: req.body.password, type_account: req.body.type_account, isAdmin: req.body.admin})
         const saveFinance = await Finances.create({idUser: newUser._id, value: req.body.value, day: day, month: mes, year: ano, email: req.body.email, status: "Aprovado", plan: req.body.type_account})
 
         res.sendStatus(200)
@@ -49,7 +49,7 @@ const infoUser = asyncHandler(async(req, res) => {
 
 const updateUser = asyncHandler(async(req, res) => {
     try {
-        const updateUser = await User.findByIdAndUpdate(req.params.id, {name: req.body.name, cpf: req.body.cpf, number: req.body.number, email: req.body.email, password: req.body.password, type_account: req.body.type_account, admin: req.body.admin})
+        const updateUser = await User.findByIdAndUpdate(req.params.id, {name: req.body.name, cpf: req.body.cpf, number: req.body.number, email: req.body.email, password: req.body.password, type_account: req.body.type_account, isAdmin: req.body.admin})
 
         res.sendStatus(200)
     } catch (err) {

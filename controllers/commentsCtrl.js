@@ -15,8 +15,6 @@ const activeBot = asyncHandler(async(req, res) => {
         // Salvar o link da publicação nos grupos tmb
         const { id_post, content_comment, limit_comments, platform } = req.body
 
-        console.log(id_post)
-
         User.findOneAndUpdate(
             { _id: req.cookies._id, 'posts.id_post': req.params.id_post },
             { $set: { 'posts.$.status_bot': true } },

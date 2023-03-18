@@ -32,9 +32,12 @@ db.once('open', function() {
                 exists.push(comment.id_comment)
               })
 
+              let count = 1
+
               res.data.data.forEach((response) => {
                 if (exists.includes(response.id)) {
-                  console.log('')
+                  console.log(count)
+                  count += 1
                 } else {
                   axios.post(`https://graph.facebook.com/${response.id}/comments?access_token=${split[1]}`, { message: comment.content_comment })
                     .then(async(res) => {
@@ -48,8 +51,6 @@ db.once('open', function() {
                           }
                         }
                       })
-
-                      console.log(count)
 
                       if (update.count == update.limit_comments) {
                         const disableBot = await Comments.findByIdAndDelete(update._id)
@@ -68,11 +69,12 @@ db.once('open', function() {
             .catch((err) => {
               console.log(err)
               console.log('Erro ao obter detalhes do post do Facebook');
+              return
             });
           })
         })
       }
       }
     );
-  }, 1000);
+  }, 5000);
 });
