@@ -59,7 +59,7 @@ const PostFacebook = asyncHandler(async(req, res) => {
             const split = day.split('-')
 
             if (program) {
-                const newPost = await Posts.create({id_post: id, id_user: req.cookies._id, platform: "Facebook", image: image, status_bot: false, pages_ids: pages, ids_posts_pages_and_groups: ids_posts, program: program, day: day, hour: hour, groups: groups, content: content})
+                const newPost = await Posts.create({id_post: id, id_user: req.cookies._id, platform: "Facebook", image: image, status_bot: false, pages_ids: pages, ids_posts_pages_and_groups: ids_posts, program: program, day: split[2] + '/' + split[1] + '/' + split[0], hour: hour, groups: groups, content: content})
                 const save = await User.findByIdAndUpdate(
                     { _id: req.cookies._id },
                     {

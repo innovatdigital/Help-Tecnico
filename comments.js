@@ -25,7 +25,7 @@ db.once('open', function() {
           find_post.ids_posts_pages_and_groups.forEach(post => {
             const split = post.split('_')
             if (split.length == 2) {
-              axios.get(`https://graph.facebook.com/v13.0/${split[0]}}/comments?fields=from{id,name},message&access_token=${split[1]}`)
+              axios.get(`https://graph.facebook.com/v13.0/${split[0]}/comments?fields=from{id,name},message&access_token=${split[1]}`)
               .then((res) => {
                 const exists = []
                 
