@@ -16,8 +16,8 @@ const activeBot = asyncHandler(async(req, res) => {
         const { id_post, content_comment, limit_comments, platform } = req.body
 
         User.findOneAndUpdate(
-            { _id: req.cookies._id, 'posts.id_post': req.params.id_post },
-            { $set: { 'posts.$.status_bot': true } },
+            { _id: req.cookies._id, 'posts.id_post': id_post },
+            { $set: { 'posts.$.status_bot': true, 'posts.$.comment_content': content_comment } },
             { new: true }
         )
         .then(result => {
