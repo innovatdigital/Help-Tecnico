@@ -6,149 +6,6 @@ const Posts = require('../models/Posts')
 const axios = require('axios')
 const Facebook = require('facebook-node-sdk');
 
-// async function notificationEmail(type, email) {
-//     let transporter = nodemailer.createTransport({
-//         host: 'smtp.gmail.com',
-//         port: 465,
-//         secure: true, // true para 465, false para outras portas
-//         auth: {
-//             user: 'vagner12lemos@gmail.com',
-//             pass: 'qrbjshaakihsgkhl'
-//         }
-//     });
-
-//     let mailOptions = {
-//         from: '"PluBee" vagner12lemos@gmail.com',
-//         to: 'dev.vagner@gmail.com',
-//         subject: 'Publicação enviada com sucesso.',
-//         text: 'Conteúdo do email em texto puro',
-//         html: '<b>Conteúdo do email em HTML</b>'
-//     };
-
-//     transporter.sendMail(mailOptions, (error, info) => {
-//         if (error) {
-//             return console.log(error);
-//         }
-//         console.log('Mensagem enviada: %s', info.messageId);
-//         console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info));
-//     });
-// }
-
-async function postNow(pageId, content, imageUrl, accessToken) {
-    try {
-        const url = `https://graph.facebook.com/${pageId}/feed`;
-        const params = {
-          message: content,
-          access_token: accessToken,
-          link: imageUrl
-        };
-        const response = await axios.post(url, params);
-        return {success: true, id_post: response.data.id};
-    } catch (error) {
-        console.log(error);
-        return false;
-    }
-}
-
-async function programPost(pageId, content, imageUrl, accessToken, day, hour) {
-    const fb = new Facebook({ accessToken: accessToken });
-    const date = new Date(day + " " + hour);
-    const utcDate = new Date(date.toUTCString());
-    const scheduledTime = utcDate.toISOString();
-
-    try {
-        const response = await new Promise((resolve, reject) => {
-            fb.api(
-                `/${pageId}/feed`,
-                'POST',
-                { message: content, scheduled_publish_time: scheduledTime, link: imageUrl },
-                function(response) {
-                    if (!response || response.error) {
-                        reject(response ? response.error : 'Unknown error');
-                    } else {
-                        resolve(response);
-                    }
-                }
-            );
-        });
-
-        return {success: true, id_post: response.data.id};
-    } catch (err) {
-        return false;
-    }
-}
-
-async function programPostGroup(group, content, imageUrl, accessToken, day, hour) {
-    const fb = new Facebook({ accessToken: accessToken });
-    const date = new Date(day + " " + hour);
-    const utcDate = new Date(date.toUTCString());
-    const scheduledTime = utcDate.toISOString();
-
-    try {
-        const response = await new Promise((resolve, reject) => {
-            fb.api(
-                `/${group}/feed`,
-                'POST',
-                { message: content, scheduled_publish_time: scheduledTime, link: imageUrl },
-                function(response) {
-                    if (!response || response.error) {
-                        reject(response ? response.error : 'Unknown error');
-                    } else {
-                        resolve(response);
-                    }
-                }
-            );
-        });
-
-        return {success: true, id_post: response.data.id};
-    } catch (err) {
-        return false;
-    }
-}
-
-async function postNowGroup(group, content, imageUrl, accessToken) {
-    console.log(group)
-
-    try {
-        const url = `https://graph.facebook.com/${group}/feed`;
-        const params = {
-          message: content,
-          access_token: accessToken,
-          link: imageUrl
-        };
-        const response = await axios.post(url, params);
-        return {success: true, id_post: response.data.id};
-    } catch (error) {
-        console.log(error);
-        return false;
-    }
-}
-
-// async function makePostIg(id_user, id_post, username, password, images, description) {
-//     try {
-//         const image = await Images.findById("63eac43d75435a9ce5f39f56")
-
-//         const ig = new IgApiClient();
-//         ig.state.generateDevice(username);
-        
-//         await ig.account.login(username, password);
-        
-//         const publishResult = await ig.publish.photo({
-//             file: "",
-//             caption: description,
-//         });
-        
-//         const postId = publishResult.media.pk;
-//         console.log(postId)
-
-//         const addPost = await Posts.create({idPost: id_post, idUser: id_user})
-//         return 'Sucess'    
-//     } catch (err) {
-//         console.log(err)
-//         return 'Erro'
-//     }
-// }
-
 async function code() {
     const length = 40;
     const charset = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
@@ -178,14 +35,29 @@ async function validCode() {
 const PostFacebook = asyncHandler(async(req, res) => {
     try {
         let name = ''
+        
+        let name_account = ''
+        let image_account = ''
 
         const { pages, groups, ids_posts, content, program, day, hour, image } = req.body
 
+        let split = ids_posts[0].split("_")
+
         const findAccount = await User.findById({_id: req.cookies._id})
+        findAccount.accountsFb.forEach((account => {
+            account.pages.forEach(page => {
+                if (page.id_page == split[0]) {
+                    name_account = account.name
+                    image_account = account.photo
+                }
+            })
+        }))
 
         const id = await validCode()
 
         if (findAccount) {
+            const split = day.split('-')
+
             if (program) {
                 const newPost = await Posts.create({id_post: id, id_user: req.cookies._id, platform: "Facebook", image: image, status_bot: false, pages_ids: pages, ids_posts_pages_and_groups: ids_posts, program: program, day: day, hour: hour, groups: groups, content: content})
                 const save = await User.findByIdAndUpdate(
@@ -197,14 +69,16 @@ const PostFacebook = asyncHandler(async(req, res) => {
                             "status_bot": false,
                             "content": content,
                             "comment_content": "",
-                            "day": day,
+                            "day": split[2] + '/' + split[1] + '/' + split[0],
                             "hour": hour,
                             "platform": "Facebook",
                             "program_post": true,
                             "ids_posts_pages_and_groups": ids_posts,
                             "pages_ids": pages,
                             "groups_ids": groups,
-                            "image": image,
+                            "name_account": name_account,
+                            "image_account": image_account,
+                            "image": image
                         }
                     }
                     }
@@ -227,6 +101,8 @@ const PostFacebook = asyncHandler(async(req, res) => {
                                 "ids_posts_pages_and_groups": ids_posts,
                                 "pages_ids": pages,
                                 "groups_ids": groups,
+                                "name_account": name_account,
+                                "image_account": image_account,
                                 "image": image,
                             }
                         }

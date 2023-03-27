@@ -1,6 +1,7 @@
 const express = require('express')
 const router = express.Router()
 const axios = require('axios')
+const cookie = require('cookie');
 
 const {
     checkTypeAccount
@@ -75,9 +76,11 @@ const {
     historic,
 } = require('../controllers/historicCtrl');
 
+let id_user = ""
+
+
 // Dashboard
 router.get("/", auth, dashboard)
-
 
 
 // Posts
@@ -117,14 +120,16 @@ router.get("/pages", auth, pages)
 router.get("/accounts", auth, accounts)
 router.delete("/accounts/delete/:id", auth, deleteAccount)
 router.get('/accounts/auth/facebook', auth, (req, res) => {
+    id_user = req.cookies._id
+
     const appId = process.env.FACEBOOK_APP_ID;
     const redirectUri = 'https://plubee.net/platform/accounts/auth/facebook/callback';
-    const url = `https://www.facebook.com/v13.0/dialog/oauth?client_id=${appId}&redirect_uri=${redirectUri}&scope=email`;
+    const url = `https://www.facebook.com/v13.0/dialog/oauth?client_id=${appId}&redirect_uri=${redirectUri}&scope=public_profile,email,pages_manage_posts,pages_show_list,publish_to_groups,pages_read_user_content,pages_manage_engagement,pages_read_engagement`;
   
     res.redirect(url);
 });
 
-router.get('/accounts/auth/facebook/callback', auth, (req, res) => {
+router.get('/accounts/auth/facebook/callback', (req, res) => {
   // Verifique se há um código no parâmetro de consulta
   const code = req.query.code;
   if (!code) {
@@ -144,9 +149,12 @@ router.get('/accounts/auth/facebook/callback', auth, (req, res) => {
       // Faça uma solicitação GET para obter o perfil do usuário do Facebook usando o token de acesso
       const graphApiUrl = `https://graph.facebook.com/me?fields=id,name,email,picture.width(500).height(500)&access_token=${accessToken}`;
       axios.get(graphApiUrl)
-        .then(response => {
+        .then(async response => {
           const userData = response.data;
-          newAccountFb(req.cookies._id, accessToken, userData)
+          await newAccountFb(id_user, accessToken, userData)
+          await new Promise((resolve, reject) => {
+            setTimeout(resolve, 9000);
+          });
           res.redirect('/platform/accounts');
         })
         .catch(error => {

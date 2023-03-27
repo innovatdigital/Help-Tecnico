@@ -83,8 +83,8 @@
       
                   <div class="pages">
                     <div class="min">
-                      <img src="https://scontent.fhio3-1.fna.fbcdn.net/v/t39.30808-1/285487229_113005248094569_7132282554238080083_n.jpg?stp=dst-jpg_p200x200&_nc_cat=103&ccb=1-7&_nc_sid=dbb9e7&_nc_eui2=AeFf6vcatEPpsco0PDD8T4FMkzK23-kkusOTMrbf6SS6wzS8_s-Hc-OPxpFTPR_Rtl-l0oI-mIBrPXp3XoulUD_J&_nc_ohc=49tgVK6z8rkAX-cJ7Iz&_nc_ht=scontent.fhio3-1.fna&edm=AOf6bZoEAAAA&oh=00_AfAu2AH8LUEcpp5nB-ycD1VHE2gQJvkkHFuQ3hv-vAzzTg&oe=6416C149" alt="">
-                      <img src="https://scontent.fhio3-1.fna.fbcdn.net/v/t39.30808-1/334135372_549115537043133_2133374319080764182_n.jpg?stp=dst-jpg_p200x200&_nc_cat=102&ccb=1-7&_nc_sid=dbb9e7&_nc_eui2=AeH_bbLjRv9srUOItVG0yHKqdwjqpmWPWzh3COqmZY9bOOU6mNpUVb8hmSWdt-vFTfWbmZbeGe-iT4aQ_-omsv8P&_nc_ohc=K8KozZN-iwAAX-rIRxm&_nc_ht=scontent.fhio3-1.fna&edm=AOf6bZoEAAAA&oh=00_AfAciALI1j2QNyN52QXwEjc_7AbviqFfr9HoZbkKi3sn-Q&oe=64160563" alt="">
+                      <div class="min-img">
+                      </div>
                       <button class="open-pages" onclick="open_pages()">+</button>
                     </div>
       
@@ -95,22 +95,26 @@
                         </div>
       
                         <div>
-                          <button class="close-pages" style="width: 39px;" onclick="close_pages()">x</button>
+                          <button class="close-pages" style="width: 39px; margin: 4px;" onclick="close_pages()">x</button>
                         </div>
                       </div>
                       <div>
                         <div class="selects-pages">
-                          <% pages.forEach(function(item) { %>
+                          <% accounts.forEach(function(item) { %>
+                            <div style="display: flex; align-items: center; margin-top: 10px; margin-bottom: 10px;">
+                              <img src="<%= item.photo %>" alt="">
+                              <p><%= item.name %></p>
+                            </div>
                             <% item.pages.forEach(function(page) { %>
-                            <div class="page">
+                            <div style="margin-left: 14px;" class="page">
                               <div style="display: flex; align-items: center; margin-top: 10px; margin-bottom: 10px;">
-                                <img src="<%= page.image %>" alt="">
-                                <p><%= page.name %></p>
+                                <img style="height: 36px !important" src="<%= page.image %>" alt="">
+                                <p style="color: #747474 !important; font-size: 15px !important;"><%= page.name %></p>
                               </div>
       
                               <div style="padding-right: 3px;">
-                                <button id="add-page<%= page.id_page %>" style="font-size: 15px;" onclick="add_page('<%= page.id_page %>', '<%= page.name %>', '<%= page.access_token %>')">Selecionar</button>
-                                <button id="del-page<%= page.id_page %>" style="display: none; background-color: #bb0404 !important; color: #FFFFFF; border: 0px !important; font-size: 15px;" onclick="del_page('<%= page.id_page %>')">Excluir</button>
+                                <button id="add-page<%= page.id_page %>" style="font-size: 15px;" onclick="add_page('<%= page.id_page %>', '<%= page.name %>', '<%= page.image %>', '<%= page.access_token %>')">+</button>
+                                <button id="del-page<%= page.id_page %>" style="display: none; background-color: #bb0404 !important; color: #FFFFFF; border: 0px !important; font-size: 15px;" onclick="del_page('<%= page.id_page %>', '<%= page.image %>')">Excluir</button>
                               </div>
                             </div>
                             <% }) %>
@@ -131,8 +135,8 @@
                               </div>
       
                               <div style="padding-right: 3px;">
-                                <button id="add-group<%= item.id %>" style="font-size: 15px;" onclick="add_group('<%= item.id %>', '<%= item.name %>', '<%= item.access_token %>')">Selecionar</button>
-                                <button id="del-group<%= item.id %>" style="display: none; background-color: #bb0404 !important; color: #FFFFFF; border: 0px !important; font-size: 15px;" onclick="del_group('<%= item.id %>')">Excluir</button>
+                                <button id="add-group<%= item.id %>" style="font-size: 15px;" onclick="add_group('<%= item.id %>', '<%= item.name %>', '<%= item.image %>', '<%= item.access_token %>')">Selecionar</button>
+                                <button id="del-group<%= item.id %>" style="display: none; background-color: #bb0404 !important; color: #FFFFFF; border: 0px !important; font-size: 15px;" onclick="del_group('<%= item.id %>', '<%= item.image %>')">Excluir</button>
                               </div>
                             </div>
                           <% }) %>
@@ -165,22 +169,19 @@
                   <input type="radio" name="program" id="program-no" value="no" tabindex="2" onclick="hide()" checked><p style="display: flex; justify-content: center; align-items: center;">Não programar</p>
                 </div>
                 <div class="program-div" style="margin-top: 30px; display: none; flex-direction: column;">
-                  <div>
-                    <p style="font-weight: bold;">Observação: o horário precisa estar entre 10 minutos a 70 horas a frente.</p>
-                  </div><br>
                   <div style="margin-right: 16px;">
                     <p style="color: #752A7A; font-weight: bold; margin-bottom: 5px;">Escolha o dia:</p>
-                    <input type="date" id="day">
+                    <input style="width: 100%;" type="date" id="day">
                   </div>
                   <br>
                   <div>
                     <p style="color: #752A7A; font-weight: bold; margin-bottom: 5px;">Escolha a hora:</p>
-                    <input type="time" id="hour">
+                    <input style="width: 100%;" type="time" id="hour">
                   </div>
                 </div>
                 <br>
                 <br>
-                <button style="color: #FFFFFF; background-color: #752A7A; padding: 13px; border-radius: 10px" onclick="post()">Continuar</button>
+                <button style="color: #FFFFFF; background-color: #752A7A; padding: 13px; border-radius: 10px" onclick="continue_options()">Continuar</button>
               </article>
             </div>
           </div>
@@ -200,7 +201,7 @@
 <!-- Icons library -->
 <script src="js/admin/feather.min.js"></script>
 <script>
-    let file_input = document.querySelector('#files');
+  let file_input = document.querySelector('#files');
   const image_text = document.querySelector('.images-text')
   const link_image = document.querySelector('.link_image')
   const div_link = document.querySelector('.div-link')
@@ -213,6 +214,7 @@
   let image_preview = document.querySelector('.results');
   const enable = document.querySelector('.enable')
   const link = document.querySelector('#link')
+  const min_img = document.querySelector('.min-img')
   let images = [];
   let pages = []
   let groups = []
@@ -308,25 +310,32 @@
     options.style.display = "none"
   }
 
-  function add_page(id, name, access_token) {
+  function add_page(id, name, icon, access_token) {
     const add = document.querySelector(`#add-page${id}`)
     add.style.display = "none";
     const remove = document.querySelector(`#del-page${id}`)
     remove.style.display = "flex";
     pages.push({id: id, name: name, access_token: access_token})
     const selects = document.querySelector(".selects-page")
+
+    let image = document.createElement('img')
+    image.src = icon
+    min_img.appendChild(image);
   }
 
-  function del_page(id) {
+  function del_page(id, icon) {
     const add = document.querySelector(`#add-page${id}`)
     add.style.display = "flex";
     const remove = document.querySelector(`#del-page${id}`)
     remove.style.display = "none";
     pages.pop({id: id})
     const selects = document.querySelector(".selects-page")
+
+    const imageToDelete = document.querySelector(`img[src="${icon}"]`);
+    imageToDelete.remove();
   }
 
-  function add_group(id, name, access_token) {
+  function add_group(id, name, icon, access_token) {
     const type_account = '<%= type_account %>'
 
     if (type_account == "Basico") {
@@ -356,6 +365,10 @@
             const remove = document.querySelector(`#del-group${id}`)
             remove.style.display = "flex";
             groups.push({id: id, name: name, access_token: access_token})
+
+            let image = document.createElement('img')
+            image.src = icon
+            min_img.appendChild(image);
         }
     } else if (type_account == "Pro") {
         if (groups.length >= 9) {
@@ -384,8 +397,12 @@
             const remove = document.querySelector(`#del-group${id}`)
             remove.style.display = "flex";
             groups.push({id: id, name: name, access_token: access_token})
+
+            let image = document.createElement('img')
+            image.src = icon
+            min_img.appendChild(image);
         }
-    } else if (type_account == "Avancado") {
+    } else if (type_account == "Avançado") {
         if (groups.length >= 30) {
             const divMessage = document.querySelector(".alert");
             divMessage.style.display = "flex";
@@ -412,16 +429,23 @@
             const remove = document.querySelector(`#del-group${id}`)
             remove.style.display = "flex";
             groups.push({id: id, name: name, access_token: access_token})
+
+            let image = document.createElement('img')
+            image.src = icon
+            min_img.appendChild(image);
         }
     }
   }
 
-  function del_group(id) {
+  function del_group(id, icon) {
     const add = document.querySelector(`#add-group${id}`)
     add.style.display = "flex";
     const remove = document.querySelector(`#del-group${id}`)
     remove.style.display = "none";
     groups.pop({id: id})
+
+    const imageToDelete = document.querySelector(`img[src="${icon}"]`);
+    imageToDelete.remove();
   }
   
   async function createAlbum(albumName, accessToken) {

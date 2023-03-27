@@ -38,7 +38,7 @@
                           <th>Thumbnail</th>
                           <th>Descrição</th>
                           <th>Conta</th>
-                          <th>Página</th>
+                          <th>Páginas e Grupos</th>
                           <th>Plataforma</th>
                           <th>Status</th>
                           <th>Data</th>
@@ -49,7 +49,11 @@
                             <tr>
                               <td>
                                 <div class="categories-table-img">
-                                  <picture><source srcset="<%= item.image %>"><img src="<%= item.image %>" alt="img"></picture>
+                                  <% if (item.image != null) { %>
+                                    <picture><source srcset="<%= item.image %>"><img src="<%= item.image %>" alt="img"></picture>
+                                  <% } else { %>
+                                    <picture><source srcset="/img/admin/link.png"><img src="/img/admin/link.png" alt="img"></picture>
+                                  <% } %>
                                 </div>
                               </td>
                               <td>
@@ -61,7 +65,7 @@
                                 </div>
                               </td>
                               <td>
-                                <%= item.page_name %>
+                                <%= item.ids_posts_pages_and_groups.length %> (Total)
                               </td>
                               <% if (item.platform == "Facebook") { %>
                                 <td>

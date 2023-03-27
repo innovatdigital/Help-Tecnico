@@ -15,19 +15,7 @@ const dashboard = asyncHandler(async(req, res) => {
 
         res.render('layouts/dashboard', {isAdmin: true, totalUsers: users, totalPosts: posts, totalFeedbacks: feedbacks, usersRecent: usersRecent, postsRecents: postsRecents, posts: find.posts})
     } else {
-        let total_groups = 0
-        let total_posts = 0 
-        
-        find.accountsFb.forEach(account => {
-            total_groups = total_groups + account.groups.length
-            total_posts = total_posts + account.posts.length
-        })
-
-        find.accountsIg.forEach(account => {
-            total_posts = total_posts + account.posts.length
-        })
-
-        res.render('layouts/dashboard', {isAdmin: false, type_account: find.type_account, posts: find.posts, total_accounts: find.accountsFb.length + find.accountsIg.length, total_groups: total_groups, total_posts: total_posts})
+        res.render('layouts/dashboard', {isAdmin: false, type_account: find.type_account, posts: find.posts, total_accounts: find.accountsFb.length + find.accountsIg.length, total_groups: find.groups.length, total_posts: find.groups.length})
     }
 })
 

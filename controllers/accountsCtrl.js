@@ -15,7 +15,7 @@ const InstagramStrategy = require('passport-instagram').Strategy;
 //     scope: ['email', 'public_profile']
 // }, function(accessToken, refreshToken, profile, done) {
 //     // Lógica de verificação do usuário aqui
-//     const requestUrl = `https://graph.facebook.com/v12.0/me/accounts?access_token=${accessToken}`;
+//     const requestUrl = `https://graph.facebook.com/v16.0/me/accounts?access_token=${accessToken}`;
 //     request(requestUrl, function(error, response, body) {
 //         if (!error && response.statusCode == 200) {
 //             const pages = JSON.parse(body).data;
@@ -74,7 +74,7 @@ const accounts = asyncHandler(async(req, res) => {
 
 async function newAccountFb(id_user, accessToken, profile) {
     try {
-        const requestUrl = `https://graph.facebook.com/v12.0/me/accounts?access_token=${accessToken}`;
+        const requestUrl = `https://graph.facebook.com/v16.0/me/accounts?access_token=${accessToken}`;
         let pages = ""
 
         request(requestUrl, function(error, response, body) {
@@ -102,7 +102,7 @@ async function newAccountFb(id_user, accessToken, profile) {
         if (accounts.includes(profile.name)) {
             return "Conta já existente"
         } else {
-            axios.get(`https://graph.facebook.com/v12.0/me/groups?access_token=${accessToken}&fields=privacy,name,icon,description,id`)
+            axios.get(`https://graph.facebook.com/v16.0/me/groups?access_token=${accessToken}&fields=privacy,name,icon,description,id`)
             .then(async response => {
               const groups = response.data.data;
               const groupIds = groups
@@ -116,10 +116,10 @@ async function newAccountFb(id_user, accessToken, profile) {
 
               for (const page of pages) {
                   try {
-                      const response = await axios.get(`https://graph.facebook.com/v12.0/${page.id}/picture?redirect=false&type=large&access_token=${page.access_token}`);
+                      const response = await axios.get(`https://graph.facebook.com/v16.0/${page.id}/picture?redirect=false&type=large&access_token=${page.access_token}`);
                       const pageImage = response.data.data.url;
       
-                      const postResponse = await axios.get(`https://graph.facebook.com/v12.0/${page.id}/posts`, {
+                      const postResponse = await axios.get(`https://graph.facebook.com/v16.0/${page.id}/posts`, {
                           params: {
                               fields: 'comments',
                               access_token: page.access_token,
@@ -226,7 +226,6 @@ async function newAccountFb(id_user, accessToken, profile) {
             .catch(error => {
               console.error(error);
             });
-
         }
 
     } catch (err) {

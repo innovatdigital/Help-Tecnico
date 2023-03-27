@@ -46,6 +46,11 @@
 </html>
 
 <script>
+  if (window.location.hash && window.location.hash === '#_=_') {
+    window.location.hash = '';
+    location.href = "/platform/accounts"
+  }
+
   const btn = document.querySelector('.btn-login')
 
   btn.addEventListener("click", function() {
