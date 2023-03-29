@@ -1,10 +1,6 @@
 const asyncHandler = require('express-async-handler')
-const Images = require('../models/Images')
 const User = require('../models/User')
-const nodemailer = require('nodemailer');
 const Posts = require('../models/Posts')
-const axios = require('axios')
-const Facebook = require('facebook-node-sdk');
 
 async function code() {
     const length = 40;
@@ -39,7 +35,7 @@ const PostFacebook = asyncHandler(async(req, res) => {
         let name_account = ''
         let image_account = ''
 
-        const { pages, groups, ids_posts, content, program, day, hour, image } = req.body
+        const { pages, groups, ids_posts, content, program, day, hour, image, path_image, link } = req.body
 
         let split = ids_posts[0].split("_")
 
@@ -53,13 +49,22 @@ const PostFacebook = asyncHandler(async(req, res) => {
             })
         }))
 
+        if (name_account.length == 0) {
+            findAccount.groups.forEach((group) => {
+                if (group.id == split[0]) {
+                    name_account = group.account_name
+                    image_account = group.account_photo
+                }
+            })
+        }
+
         const id = await validCode()
 
         if (findAccount) {
             const split = day.split('-')
 
             if (program) {
-                const newPost = await Posts.create({id_post: id, id_user: req.cookies._id, platform: "Facebook", image: image, status_bot: false, pages_ids: pages, ids_posts_pages_and_groups: ids_posts, program: program, day: split[2] + '/' + split[1] + '/' + split[0], hour: hour, groups: groups, content: content})
+                const newPost = await Posts.create({id_post: id, id_user: req.cookies._id, platform: "Facebook", image: image, status_bot: false, pages_ids: pages, ids_posts_pages_and_groups: ids_posts, program: program, day: split[2] + '/' + split[1] + '/' + split[0], hour: hour, groups: groups, content: content, path_image: path_image, link: link, published: false})
                 const save = await User.findByIdAndUpdate(
                     { _id: req.cookies._id },
                     {
@@ -73,12 +78,14 @@ const PostFacebook = asyncHandler(async(req, res) => {
                             "hour": hour,
                             "platform": "Facebook",
                             "program_post": true,
-                            "ids_posts_pages_and_groups": ids_posts,
                             "pages_ids": pages,
                             "groups_ids": groups,
                             "name_account": name_account,
                             "image_account": image_account,
-                            "image": image
+                            "image": image,
+                            "path_image": path_image,
+                            "link": link,
+                            "published": false
                         }
                     }
                     }
@@ -98,12 +105,13 @@ const PostFacebook = asyncHandler(async(req, res) => {
                                 "comment_content": "",
                                 "platform": "Facebook",
                                 "program_post": false,
-                                "ids_posts_pages_and_groups": ids_posts,
                                 "pages_ids": pages,
                                 "groups_ids": groups,
                                 "name_account": name_account,
                                 "image_account": image_account,
                                 "image": image,
+                                "path_image": path_image,
+                                "link": link
                             }
                         }
                     }

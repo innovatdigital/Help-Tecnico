@@ -145,9 +145,9 @@ async function newAccountFb(id_user, accessToken, profile) {
                         axios.get(`https://graph.facebook.com/v16.0/${group.id}?fields=name,description,cover&access_token=${accessToken}`)
                         .then(response => {
                             try {
-                                list.push({name: response.data.name, description: response.data.description, image: response.data.cover.source, id: response.data.id, account_name: profile.name, id_account: profile.id});
+                                list.push({name: response.data.name, description: response.data.description, image: response.data.cover.source, id: response.data.id, account_name: profile.name, id_account: profile.id, account_photo: profile.picture.data.url});
                             } catch (err) {
-                                list.push({name: response.data.name, id: response.data.id, account_name: profile.name, id_account: profile.id});
+                                list.push({name: response.data.name, id: response.data.id, account_name: profile.name, id_account: profile.id, account_photo: profile.picture.data.url});
                             }
             
                             // Se a lista de grupos estiver completa, atualizar a conta do usuário

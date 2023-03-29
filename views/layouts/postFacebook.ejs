@@ -71,6 +71,7 @@
       <main class="main users chart-page" id="skip-target">
         <div class="container">
           <div class="alert" style="display: none;"></div>
+          <div class="error" style="display: none;"></div>
           <br>
 
           <div class="row">
@@ -201,6 +202,15 @@
 <!-- Icons library -->
 <script src="js/admin/feather.min.js"></script>
 <script>
+  const today = new Date();
+  const dayInput = document.getElementById("day");
+  dayInput.valueAsDate = today;
+
+  const now = new Date();
+  now.setMinutes(now.getMinutes() + 15);
+  const hourInput = document.getElementById("hour");
+  hourInput.value = now.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
+
   let file_input = document.querySelector('#files');
   const image_text = document.querySelector('.images-text')
   const link_image = document.querySelector('.link_image')
@@ -223,7 +233,7 @@
     const valor = link.value;
 
     // Defina a expressão regular para verificar se o valor é um link válido
-    const padrao = /^(http|https):\/\/[\w\-]+(\.[\w\-]+)+([\w\-\.,@?^=%&:\/~\+#!]*[\w\-\@?^=%&\/~\+#])*$/;
+    const padrao = /^(http|https):\/\/[a-zA-Z0-9\-\.]+\.[a-zA-Z]{2,}(\/\S*)?$/;
 
     // Teste se o valor corresponde ao padrão
     if (padrao.test(valor)) {
@@ -235,7 +245,7 @@
       fetch(`https://graph.facebook.com/v12.0/?id=${link.value}&fields=og_object{title,description,image}`, { method: 'GET' })
         .then(response => {
           if (response.ok) {
-            response.json()
+            return response.json()
           } else {
             img_post.style.display = "none"
             div_link.style.display = "flex"
@@ -271,6 +281,51 @@
       image_text.innerText = "Inserir imagens:"
     }
   })
+  
+  function alert_message(type, content) {
+    console.log(content)
+    if (type == 'error') {
+      const divMessage = document.querySelector(".error");
+      divMessage.style.display = "flex";
+      divMessage.innerHTML = "";
+      const message = document.createElement("p");
+      const img = document.createElement("img");
+      img.width = "28"
+      img.height = "28"
+      img.src = "/img/admin/Bulk/error.png"
+      message.classList.add("message-notify");
+      message.innerText = content;
+      divMessage.appendChild(img);
+      divMessage.appendChild(message);
+
+      setTimeout(() => {
+        divMessage.style = "animation: slideoff 2s;"
+        setTimeout(() => {
+          divMessage.style = "display: none"
+        }, 800)
+      }, 2000);
+    } else if (type == "success") {
+      const divMessage = document.querySelector(".alert");
+      divMessage.style.display = "flex";
+      divMessage.innerHTML = "";
+      const message = document.createElement("p");
+      const img = document.createElement("img");
+      img.width = "28"
+      img.height = "28"
+      img.src = "/img/admin/Bulk/checked.png"
+      message.classList.add("message-notify");
+      message.innerText = content;
+      divMessage.appendChild(img);
+      divMessage.appendChild(message);
+
+      setTimeout(() => {
+        divMessage.style = "animation: slideoff 2s;"
+        setTimeout(() => {
+          divMessage.style = "display: none"
+        }, 800)
+      }, 2000);
+    }
+  }
 
   const handle_file_preview = (e) => {
     let files = e.target.files;
@@ -340,25 +395,7 @@
 
     if (type_account == "Basico") {
         if (groups.length >= 3) {
-            const divMessage = document.querySelector(".alert");
-            divMessage.style.display = "flex";
-            divMessage.innerHTML = "";
-            const message = document.createElement("p");
-            const img = document.createElement("img");
-            img.src = "/img/admin/Bulk/error.png"
-            img.width = "28"
-            img.height = "28"
-            message.classList.add("message-notify");
-            message.innerText = "Não é possível adicionar mais que 3 grupos";
-            divMessage.appendChild(img);
-            divMessage.appendChild(message);
-            
-            setTimeout(() => {
-              divMessage.style = "animation: slideoff 2s;"
-              setTimeout(() => {
-                divMessage.style = "display: none"
-              }, 800)
-            }, 2000);
+            alert_message("error", "Não é possível adicionar mais que 3 grupos")
         } else {
             const add = document.querySelector(`#add-group${id}`)
             add.style.display = "none";
@@ -372,25 +409,7 @@
         }
     } else if (type_account == "Pro") {
         if (groups.length >= 9) {
-            const divMessage = document.querySelector(".alert");
-            divMessage.style.display = "flex";
-            divMessage.innerHTML = "";
-            const message = document.createElement("p");
-            const img = document.createElement("img");
-            img.src = "/img/admin/Bulk/error.png"
-            img.width = "28"
-            img.height = "28"
-            message.classList.add("message-notify");
-            message.innerText = "Não é possível adicionar mais que 9 grupos";
-            divMessage.appendChild(img);
-            divMessage.appendChild(message);
-
-            setTimeout(() => {
-              divMessage.style = "animation: slideoff 2s;"
-              setTimeout(() => {
-                divMessage.style = "display: none"
-              }, 800)
-            }, 2000);
+            alert_message("error", "Não é possível adicionar mais que 9 grupos")
         } else {
             const add = document.querySelector(`#add-group${id}`)
             add.style.display = "none";
@@ -404,25 +423,7 @@
         }
     } else if (type_account == "Avançado") {
         if (groups.length >= 30) {
-            const divMessage = document.querySelector(".alert");
-            divMessage.style.display = "flex";
-            divMessage.innerHTML = "";
-            const message = document.createElement("p");
-            const img = document.createElement("img");
-            img.src = "/img/admin/Bulk/error.png"
-            img.width = "28"
-            img.height = "28"
-            message.classList.add("message-notify");
-            message.innerText = "Não é possível adicionar mais que 30 grupos";
-            divMessage.appendChild(img);
-            divMessage.appendChild(message);
-
-            setTimeout(() => {
-              divMessage.style = "animation: slideoff 2s;"
-              setTimeout(() => {
-                divMessage.style = "display: none"
-              }, 800)
-            }, 2000);
+          alert_message("error", "Não é possível adicionar mais que 30 grupos")
         } else {
             const add = document.querySelector(`#add-group${id}`)
             add.style.display = "none";
@@ -568,32 +569,14 @@
     const program = document.querySelector('#program-yes');
     const no_program = document.querySelector('#program-no');
 
-    const padrao = /^(http|https):\/\/[\w\-]+(\.[\w\-]+)+([\w\-\.,@?^=%&:\/~\+#!]*[\w\-\@?^=%&\/~\+#])*$/;
+    const padrao = /^(http|https):\/\/[a-zA-Z0-9\-\.]+\.[a-zA-Z]{2,}(\/\S*)?$/;
 
     if (groups.length == 0 && pages.length == 0) {
       const pages = document.querySelector('.pages')
       pages.style = "background-color: #e00d0d50"
-      
-      const divMessage = document.querySelector(".alert");
-      divMessage.style.display = "flex";
-      divMessage.innerHTML = "";
-      const message = document.createElement("p");
-      const img = document.createElement("img");
-      divMessage.style = "background-color: #e00d0d !important"
-      img.width = "28"
-      img.height = "28"
-      img.src = "/img/admin/Bulk/error.png"
-      message.classList.add("message-notify");
-      message.innerText = `Selecione pelo menos um grupo ou página`;
-      divMessage.appendChild(img);
-      divMessage.appendChild(message);
 
-      setTimeout(() => {
-        divMessage.style = "animation: slideoff 2s;"
-        setTimeout(() => {
-          divMessage.style = "display: none"
-        }, 800)
-      }, 2000);
+      alert_message("error", "Selecione pelo menos um grupo ou página")
+      
       errors.push('Selecione pelo uma conta')
     }
     if (padrao.test(link.value) == false) {
@@ -657,32 +640,14 @@
     const program = document.querySelector('#program-yes');
     const no_program = document.querySelector('#program-no');
 
-    const padrao = /^(http|https):\/\/[\w\-]+(\.[\w\-]+)+([\w\-\.,@?^=%&:\/~\+#!]*[\w\-\@?^=%&\/~\+#])*$/;
+    const padrao = /^(http|https):\/\/[a-zA-Z0-9\-\.]+\.[a-zA-Z]{2,}(\/\S*)?$/;
 
     if (groups.length == 0 && pages.length == 0) {
       const pages = document.querySelector('.pages')
       pages.style = "background-color: #e00d0d50"
-      
-      const divMessage = document.querySelector(".alert");
-      divMessage.style.display = "flex";
-      divMessage.innerHTML = "";
-      const message = document.createElement("p");
-      const img = document.createElement("img");
-      divMessage.style = "background-color: #e00d0d !important"
-      img.width = "28"
-      img.height = "28"
-      img.src = "/img/admin/Bulk/error.png"
-      message.classList.add("message-notify");
-      message.innerText = `Selecione pelo menos um grupo ou página`;
-      divMessage.appendChild(img);
-      divMessage.appendChild(message);
 
-      setTimeout(() => {
-        divMessage.style = "animation: slideoff 2s;"
-        setTimeout(() => {
-          divMessage.style = "display: none"
-        }, 800)
-      }, 2000);
+      alert_message("error", "Selecione pelo menos um grupo ou página")
+      
       errors.push('Selecione pelo uma conta')
     }
 
@@ -722,16 +687,16 @@
       loader.style.display = "flex"
 
       pages.forEach((page) => {
-        groups_pages.push(page)
+        groups_pages.push({content: page, type: "page"})
       })
 
       groups.forEach((group) => {
-        groups_pages.push(group)
+        groups_pages.push({content: group, type: "group"})
       })
 
       groups_pages.forEach((item, index) => {
         const formData = new FormData();
-        formData.append('access_token', item.access_token);
+        formData.append('access_token', item.content.access_token);
         formData.append('message', content.value)
         formData.append('link', link.value)
 
@@ -764,62 +729,56 @@
           } else {
             endpoint = "photos"
           }
-          return fetch(`https://graph.facebook.com/v16.0/${item.id}/${endpoint}`, {
+          return fetch(`https://graph.facebook.com/v16.0/${item.content.id}/${endpoint}`, {
             method: 'POST',
             body: formData
           })
           .then(response => response.json())
           .then(data => {
-            ids.push(`${data.id}_${item.access_token}`)
-            loader.style.display = "none"
-            const divMessage = document.querySelector(".alert");
-            divMessage.style.display = "flex";
-            divMessage.innerHTML = "";
-            const message = document.createElement("p");
-            const img = document.createElement("img");
-            img.width = "28"
-            img.height = "28"
-            img.src = "/img/admin/Bulk/checked.png"
-            message.classList.add("message-notify");
-            message.innerText = "Sucesso!";
-            divMessage.appendChild(img);
-            divMessage.appendChild(message);
+            if (data.id == undefined) {
+              alert_message("error", `Você deve adicionar "pluBee" aos aplicativos do grupo: ${item.content.name}`)
+            } else {
+              alert_message("success", "Sucesso!")
+              if (program.checked) {
+                if (item.type == "page") {
+                  ids.push(`${data.id}_${item.content.access_token}`)
+                }
+              } else {
+                ids.push(`${data.id}_${item.content.access_token}`)
+              }
+            }
 
-            setTimeout(() => {
-              divMessage.style = "animation: slideoff 2s;"
-              setTimeout(() => {
-                divMessage.style = "display: none"
-              }, 800)
-            }, 2000);
+            loader.style.display = "none"
             return data;
           })
           .catch(error => {
             loader.style.display = "none"
-            const divMessage = document.querySelector(".alert");
-            divMessage.style.display = "flex";
-            divMessage.innerHTML = "";
-            const message = document.createElement("p");
-            const img = document.createElement("img");
-            divMessage.style = "background-color: #e00d0d !important"
-            img.width = "28"
-            img.height = "28"
-            img.src = "/img/admin/Bulk/error.png"
-            message.classList.add("message-notify");
-            message.innerText = `Erro ao publicar na página: ${item.name}`;
-            divMessage.appendChild(img);
-            divMessage.appendChild(message);
+            alert_message("error", "Ocorreu um erro.")
 
-            setTimeout(() => {
-              divMessage.style = "animation: slideoff 2s;"
-              setTimeout(() => {
-                divMessage.style = "display: none"
-              }, 800)
-            }, 2000);
             throw error;
           });
         })
         .then(response => {
-          if (index === groups_pages.length - 1) {
+          groups_pages.pop()
+          if (groups_pages.length == 0) {
+            let path_image = ''
+
+            if (groups.length > 0 && files.files.length > 0 && program.checked == true) {
+              const formData = new FormData();
+              formData.append('image', files.files[0]);
+
+              fetch('/platform/post/upload', {
+                method: 'POST',
+                body: formData
+              })
+              .then((response) => {
+                return response.text()
+              })
+              .then((filename) => {
+                path_image = filename
+              })
+            }
+
             const filter = ids[0].split('_')
 
             fetch(`https://graph.facebook.com/v16.0/${filter[0]}?fields=picture&access_token=${filter[1]}`)
@@ -831,40 +790,21 @@
                   headers: {
                     "Content-Type": "application/json",
                   },
-                  body: JSON.stringify({pages: pages, groups: groups, content: content.value, program: program.checked, day: day.value, hour: hour.value, image: imageUrl, ids_posts: ids})
+                  body: JSON.stringify({pages: pages, groups: groups, content: content.value, program: program.checked, day: day.value, hour: hour.value, image: imageUrl, ids_posts: ids, path_image: path_image, link: link.value})
                 })
                 .then(response => {
-
+                  setTimeout(() => {
+                    // location.reload()
+                  }, 2000);
                 })
                 .catch(err => {
-                  console.log(err)
                 })
               })
               .catch(error => console.error(error));
           }
         })
         .catch(error => {
-          console.error(error);
-          const divMessage = document.querySelector(".alert");
-          divMessage.style.display = "flex";
-          divMessage.innerHTML = "";
-          const message = document.createElement("p");
-          const img = document.createElement("img");
-          divMessage.style = "background-color: #e00d0d !important"
-          img.width = "28"
-          img.height = "28"
-          img.src = "/img/admin/Bulk/error.png"
-          message.classList.add("message-notify");
-          message.innerText = "Erro ao criar post.";
-          divMessage.appendChild(img);
-          divMessage.appendChild(message);
-
-          setTimeout(() => {
-            divMessage.style = "animation: slideoff 2s;"
-            setTimeout(() => {
-              divMessage.style = "display: none"
-            }, 800)
-          }, 2000);
+          alert_message("error", `Você deve adicionar "pluBee" aos aplicativos do grupo: ${item.name}`)
         });
       })
     }

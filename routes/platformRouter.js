@@ -2,6 +2,10 @@ const express = require('express')
 const router = express.Router()
 const axios = require('axios')
 const cookie = require('cookie');
+const multer  = require('multer');
+const path = require('path')
+const fs = require('fs')
+const { v4: uuidv4 } = require('uuid');
 
 const {
     checkTypeAccount
@@ -76,8 +80,6 @@ const {
     historic,
 } = require('../controllers/historicCtrl');
 
-let id_user = ""
-
 
 // Dashboard
 router.get("/", auth, dashboard)
@@ -99,6 +101,31 @@ router.get("/post_instagram/", auth, postInstagram)
 router.post("/post_facebook/new", auth, PostFacebook)
 router.post("/post_instagram/new", auth, postFacebook)
 
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, 'uploads')
+  },
+  filename: function (req, file, cb) {
+    const extension = path.extname(file.originalname);
+    const filename = uuidv4() + '-' + Date.now() + extension;
+    cb(null, filename);
+  }
+});
+
+const upload = multer({ storage: storage });
+
+router.post('/post/upload', auth, upload.single('image'), function (req, res, next) {
+  const filePath = path.join('uploads', req.file.filename);
+  if (fs.existsSync(filePath)) {
+    // Se o arquivo já existe, gerar um novo nome com um timestamp diferente
+    const extension = path.extname(req.file.originalname);
+    const filename = uuidv4() + '-' + Date.now() + extension;
+    req.file.filename = filename;
+    res.send(req.file.filename);
+  } else {
+    res.send(req.file.filename);
+  }
+});
 
 
 // Groups
@@ -120,16 +147,18 @@ router.get("/pages", auth, pages)
 router.get("/accounts", auth, accounts)
 router.delete("/accounts/delete/:id", auth, deleteAccount)
 router.get('/accounts/auth/facebook', auth, (req, res) => {
-    id_user = req.cookies._id
+  const appId = process.env.FACEBOOK_APP_ID;
+  const redirectUri = 'https://plubee.net/platform/accounts/auth/facebook/callback';
+  const url = `https://www.facebook.com/v13.0/dialog/oauth?client_id=${appId}&redirect_uri=${redirectUri}&scope=public_profile,email,pages_manage_posts,pages_show_list,publish_to_groups,pages_read_user_content,pages_manage_engagement,pages_read_engagement`;
 
-    const appId = process.env.FACEBOOK_APP_ID;
-    const redirectUri = 'https://plubee.net/platform/accounts/auth/facebook/callback';
-    const url = `https://www.facebook.com/v13.0/dialog/oauth?client_id=${appId}&redirect_uri=${redirectUri}&scope=public_profile,email,pages_manage_posts,pages_show_list,publish_to_groups,pages_read_user_content,pages_manage_engagement,pages_read_engagement`;
-  
-    res.redirect(url);
+  // Armazena o valor do cookie _id na sessão
+  req.session._id = req.cookies._id;
+
+  res.redirect(url);
 });
 
 router.get('/accounts/auth/facebook/callback', (req, res) => {
+
   // Verifique se há um código no parâmetro de consulta
   const code = req.query.code;
   if (!code) {
@@ -151,10 +180,11 @@ router.get('/accounts/auth/facebook/callback', (req, res) => {
       axios.get(graphApiUrl)
         .then(async response => {
           const userData = response.data;
-          await newAccountFb(id_user, accessToken, userData)
+          await newAccountFb(req.session._id, accessToken, userData)
           await new Promise((resolve, reject) => {
             setTimeout(resolve, 9000);
           });
+          const deleteSession = req.session.destroy
           res.redirect('/platform/accounts');
         })
         .catch(error => {

@@ -3595,6 +3595,18 @@ textarea {
   animation: slidein 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
 }
 
+.error {
+  padding: 22px 60px;
+  position: fixed;
+  top: 100px;
+  right: 20px;
+  background-color: #e00d0d;
+  border-radius: 3px;
+  z-index: 1;
+  color: #fff;
+  animation: slidein 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+}
+
 .empty {
   display: flex;
   justify-content: center;
@@ -3607,7 +3619,7 @@ textarea {
   background-color: #11111d00;
 }
 
-.alert p {
+.alert p, .error p {
   display: flex;
   align-items: center;
   margin-left: 13px;

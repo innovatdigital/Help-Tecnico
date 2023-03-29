@@ -61,6 +61,18 @@ const Posts = new mongoose.Schema({
         type: String,
         require: true
     },
+    path_image: {
+        type: String,
+        require: true
+    },
+    link: {
+        type: String,
+        require: true
+    },
+    published: {
+        type: Boolean,
+        require: true
+    }
     },
     {
         versionKey: false

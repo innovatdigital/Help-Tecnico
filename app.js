@@ -1,6 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose')
 const bodyParser = require('body-parser')
+const session = require('express-session');
 const path = require('path')
 const main = require('./routes/main')
 const checkout = require('./routes/checkoutRouter')
@@ -23,6 +24,12 @@ app.set('views', path.join(__dirname, 'views'));
 
 app.use(express.static(path.join(__dirname, 'public')))
 app.use(express.static(path.join(__dirname, "js")));
+
+app.use(session({
+  secret: process.env.SECRET,
+  resave: false,
+  saveUninitialized: true
+}));
  
 app.use("/", main)
 app.use("/login", login)
@@ -41,15 +48,15 @@ const dbConnect = () => {
 
 dbConnect()
 
-// const options = {
-//   key: fs.readFileSync("localhost-key.pem"),
-//   cert: fs.readFileSync("localhost.pem"),
-// };
+const options = {
+  key: fs.readFileSync("localhost-key.pem"),
+  cert: fs.readFileSync("localhost.pem"),
+};
 
-// https.createServer(options, app).listen(5500, () => {
-//   console.log('Server listening on port ' + 5500);
-// });
+https.createServer(options, app).listen(5500, () => {
+  console.log('Server listening on port ' + 5500);
+});
 
-app.listen(3000, () => {
-  console.log('Server listening on port 3000')
-})
+// app.listen(3000, () => {
+//   console.log('Server listening on port 3000')
+// })
