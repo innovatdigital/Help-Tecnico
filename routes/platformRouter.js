@@ -66,6 +66,10 @@ const {
     config,
 } = require('../controllers/configAccountCtrl')
 
+const {
+  tutorials
+} = require('../controllers/tutorialsCtrl')
+
 const { 
     comments,
     activeBot,
@@ -182,7 +186,7 @@ router.get('/accounts/auth/facebook/callback', (req, res) => {
           const userData = response.data;
           await newAccountFb(req.session._id, accessToken, userData)
           await new Promise((resolve, reject) => {
-            setTimeout(resolve, 9000);
+            setTimeout(resolve, 12000);
           });
           const deleteSession = req.session.destroy
           res.redirect('/platform/accounts');
@@ -213,6 +217,11 @@ router.get('/accounts/auth/instagram/callback', auth, newAccountIg)
 router.get("/comments-automatic", auth, comments)
 router.put("/comments-automatic/config/", auth, activeBot)
 router.delete("/comments-automatic/delete/:id_post", auth, disableBot)
+
+
+
+// Tutoriais da plataforma
+router.get("/tutorials", auth, tutorials)
 
 
 

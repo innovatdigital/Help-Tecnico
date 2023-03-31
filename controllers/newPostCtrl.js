@@ -49,9 +49,12 @@ const PostFacebook = asyncHandler(async(req, res) => {
             })
         }))
 
+        console.log(name_account.length)
+
         if (name_account.length == 0) {
             findAccount.groups.forEach((group) => {
                 if (group.id == split[0]) {
+                    console.log(group)
                     name_account = group.account_name
                     image_account = group.account_photo
                 }
@@ -120,7 +123,6 @@ const PostFacebook = asyncHandler(async(req, res) => {
                 res.sendStatus(200)
             }
         } else {
-            console.log('aqui')
             res.sendStatus(500)
         }
     } catch (err) {

@@ -9,7 +9,6 @@ const comments = asyncHandler(async(req, res) => {
     res.render('layouts/comments', {isAdmin: find.isAdmin, posts: find.posts})
 })
 
-
 const activeBot = asyncHandler(async(req, res) => {
     try {
         // Salvar o link da publicação nos grupos tmb

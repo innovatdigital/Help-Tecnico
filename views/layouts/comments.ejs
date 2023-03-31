@@ -30,12 +30,12 @@
           <h1 class="enable-h1"></h1>
           <p class="enable-p"></p>
           <h3>Contéudo do comentário</h3>
-          <textarea type="text" name="content" id="content-input"></textarea><br>
+          <textarea type="text" style="width: 100%;" name="content" id="content-input" placeholder="Que legal o seu comentário!"></textarea><br>
 
           <h3>Limite de comentários</h3>
-          <input type="text" maxlength="2" name="limit" id="limit-input">
+          <input type="text" style="width: 100%;" name="limit" placeholder="Até 1000 comentários" id="limit-input">
           <br>
-          <button class="event" id="btn-active" style="padding: 12px;" onclick="activeComment()">Ativar</button>
+          <button class="event" id="btn-active" style="padding: 12px;" onclick="activeComment('<%= isAdmin %>')">Ativar</button>
           <button class="event" id="btn-close" style="padding: 12px;" onclick="setHide()">Fechar</button>
         </div>
       </div>
@@ -45,6 +45,7 @@
       <main class="main users chart-page" id="skip-target">
         <div class="container">
           <div class="alert" style="display: none;"></div>
+          <div class="error" style="display: none;"></div>
 
           <div>
             <h2>Você poderá ativar os comentários somente nos posts que já foram publicados.</h2>
@@ -156,37 +157,108 @@
 
     idPost = id_post
     platformPost = platform
+
+    window.scrollTo(0, 0);
   }
 
-  function activeComment() {
-    fetch("comments-automatic/config", {
-      method: "PUT",
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ id_post: idPost, platform: platformPost, content_comment: content.value, limit_comments: limit.value })
-    })
-    .then(response => {
-      if (response.ok) {
-        const divMessage = document.querySelector(".alert");
-        divMessage.style.display = "flex";
-        divMessage.innerHTML = "";
-        const message = document.createElement("p");
-        const img = document.createElement("img");
-        img.src = "/img/platform/checked.png"
-        img.width = "28"
-        img.height = "28"
-        message.classList.add("message-notify");
-        message.innerText = "Bot ativado com sucesso.";
-        divMessage.appendChild(img);
-        divMessage.appendChild(message);
+  function activeComment(isAdmin) {
+    if (Number(limit.value)) {
+      if (isAdmin == true) {
+        fetch("comments-automatic/config", {
+          method: "PUT",
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ id_post: idPost, platform: platformPost, content_comment: content.value, limit_comments: limit.value })
+        })
+        .then(response => {
+          if (response.ok) {
+            const divMessage = document.querySelector(".alert");
+            divMessage.style.display = "flex";
+            divMessage.innerHTML = "";
+            const message = document.createElement("p");
+            const img = document.createElement("img");
+            img.src = "/img/platform/checked.png"
+            img.width = "28"
+            img.height = "28"
+            message.classList.add("message-notify");
+            message.innerText = "Bot ativado com sucesso.";
+            divMessage.appendChild(img);
+            divMessage.appendChild(message);
 
-        setTimeout(() => {
-          enable.style.display = "none"
-          divMessage.style.display = "none";
-          location.reload()
-        }, 1500);
+            setTimeout(() => {
+              enable.style.display = "none"
+              divMessage.style.display = "none";
+              location.reload()
+            }, 1500);
+          }
+        })
+        .catch(error => console.error(error));
+      } else {
+        if (limit.value > 1000) {
+          const divMessage = document.querySelector(".error");
+          divMessage.style.display = "flex";
+          divMessage.innerHTML = "";
+          const message = document.createElement("p");
+          const img = document.createElement("img");
+          img.src = "/img/admin/Bulk/error.png"
+          img.width = "28"
+          img.height = "28"
+          message.classList.add("message-notify");
+          message.innerText = "O limite não pode passar de 1000.";
+          divMessage.appendChild(img);
+          divMessage.appendChild(message);
+
+          setTimeout(() => {
+            divMessage.style.display = "none";
+          }, 1500);
+        } else {
+          fetch("comments-automatic/config", {
+            method: "PUT",
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ id_post: idPost, platform: platformPost, content_comment: content.value, limit_comments: limit.value })
+          })
+          .then(response => {
+            if (response.ok) {
+              const divMessage = document.querySelector(".alert");
+              divMessage.style.display = "flex";
+              divMessage.innerHTML = "";
+              const message = document.createElement("p");
+              const img = document.createElement("img");
+              img.src = "/img/platform/checked.png"
+              img.width = "28"
+              img.height = "28"
+              message.classList.add("message-notify");
+              message.innerText = "Bot ativado com sucesso.";
+              divMessage.appendChild(img);
+              divMessage.appendChild(message);
+
+              setTimeout(() => {
+                enable.style.display = "none"
+                divMessage.style.display = "none";
+                location.reload()
+              }, 1500);
+            }
+          })
+          .catch(error => console.error(error));
+        }
       }
-    })
-    .catch(error => console.error(error));
+    } else {
+      const divMessage = document.querySelector(".error");
+      divMessage.style.display = "flex";
+      divMessage.innerHTML = "";
+      const message = document.createElement("p");
+      const img = document.createElement("img");
+      img.src = "/img/admin/Bulk/error.png"
+      img.width = "28"
+      img.height = "28"
+      message.classList.add("message-notify");
+      message.innerText = "O valor deve ser um número.";
+      divMessage.appendChild(img);
+      divMessage.appendChild(message);
+
+      setTimeout(() => {
+        divMessage.style.display = "none";
+      }, 1500);
+    }
   }
 
   function disableComment(id_post) {

@@ -49,7 +49,7 @@
                             <tr>
                               <td>
                                 <div class="categories-table-img">
-                                  <% if (item.image != null) { %>
+                                  <% if (item.image != '') { %>
                                     <picture><source srcset="<%= item.image %>"><img src="<%= item.image %>" alt="img"></picture>
                                   <% } else { %>
                                     <picture><source srcset="/img/admin/link.png"><img src="/img/admin/link.png" alt="img"></picture>
@@ -81,10 +81,10 @@
                                 </td>
                               <% } %>    
                               <% if(item.program_post == true) { %>
-                                <td><span class="badge badge-pill badge-success">Programado</span></td>
+                                <td><span class="badge badge-pill badge-active">Programado</span></td>
                                 <td><%= item.day %> <%= item.hour %></td>
                               <% } else { %>
-                                <td><span class="badge badge-pill badge-active">Publicado</span></td>
+                                <td><span class="badge badge-pill badge-success">Publicado</span></td>
                                 <td>Não programado</td>
                               <% } %>
                             </tr>

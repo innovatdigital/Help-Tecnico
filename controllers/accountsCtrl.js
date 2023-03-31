@@ -106,7 +106,6 @@ async function newAccountFb(id_user, accessToken, profile) {
             .then(async response => {
               const groups = response.data.data;
               const groupIds = groups
-                .filter(group => group.privacy === "OPEN")
                 .map(group => group.id);
           
               const list = [];
@@ -141,60 +140,57 @@ async function newAccountFb(id_user, accessToken, profile) {
               // Loop através dos IDs de grupo e buscar informações de cada grupo]
               if (groups.length > 0) {
                 groups.forEach(async group => {
-                    if (group.privacy == "OPEN") {
-                        axios.get(`https://graph.facebook.com/v16.0/${group.id}?fields=name,description,cover&access_token=${accessToken}`)
-                        .then(response => {
-                            try {
-                                list.push({name: response.data.name, description: response.data.description, image: response.data.cover.source, id: response.data.id, account_name: profile.name, id_account: profile.id, account_photo: profile.picture.data.url});
-                            } catch (err) {
-                                list.push({name: response.data.name, id: response.data.id, account_name: profile.name, id_account: profile.id, account_photo: profile.picture.data.url});
-                            }
-            
-                            // Se a lista de grupos estiver completa, atualizar a conta do usuário
-                            if (list.length === groupIds.length) {
-                                list.forEach(async group => {
-                                    const saveGroup = await User.findByIdAndUpdate(id_user, {
-                                        $push: {
-                                            groups: {
-                                                "name": group.name,
-                                                "id": group.id,
-                                                "account_name": group.account_name,
-                                                "id_account": group.id_account
-                                            }
-                                        }
-                                    })
-                                })
-
-                                User.findByIdAndUpdate(id_user, {
+                    axios.get(`https://graph.facebook.com/v16.0/${group.id}?fields=name,description,cover&access_token=${accessToken}`)
+                    .then(response => {
+                        try {
+                            list.push({name: response.data.name, description: response.data.description, image: response.data.cover.source, id: response.data.id, account_name: profile.name, id_account: profile.id, account_photo: profile.picture.data.url});
+                        } catch (err) {
+                            list.push({name: response.data.name, id: response.data.id, account_name: profile.name, id_account: profile.id, account_photo: profile.picture.data.url});
+                        }
+        
+                        // Se a lista de grupos estiver completa, atualizar a conta do usuário
+                        if (list.length === groupIds.length) {
+                            list.forEach(async group => {
+                                const saveGroup = await User.findByIdAndUpdate(id_user, {
                                     $push: {
-                                        accountsFb: {
-                                            "id_account": profile.id,
-                                            "name": profile.name,
-                                            "platform": "Facebook",
-                                            "photo": profile.picture.data.url,
-                                            "date": dataFormat,
-                                            "access_token": accessToken,
-                                            "posts": [],
-                                            "pages": pages_user,
-                                            "comments": comments
-                                        },
+                                        groups: {
+                                            "name": group.name,
+                                            "id": group.id,
+                                            "account_name": group.account_name,
+                                            "id_account": group.id_account,
+                                            "account_photo": group.account_photo
+                                        }
                                     }
-                                }, {
-                                    new: true
                                 })
-                                .then(result => {
-                                    const find = User.findById(id_user)
-                                    // const historic = Historic.create({"action": `Nova conta adicionada: ${profile.name}`, "name": find.name, "id_user": find._id, "date": dataFormat})
-                                })
-                                .catch(error => {
-                                    console.error(error);
-                                });
-                            }
-                        })
-                        .catch(error => {
-                            console.error(error);
-                        })
-                    }
+                            })
+
+                            User.findByIdAndUpdate(id_user, {
+                                $push: {
+                                    accountsFb: {
+                                        "id_account": profile.id,
+                                        "name": profile.name,
+                                        "platform": "Facebook",
+                                        "photo": profile.picture.data.url,
+                                        "date": dataFormat,
+                                        "access_token": accessToken,
+                                        "posts": [],
+                                        "pages": pages_user,
+                                        "comments": comments
+                                    },
+                                }
+                            }, {
+                                new: true
+                            })
+                            .then(result => {
+                            })
+                            .catch(error => {
+                                console.error(error);
+                            });
+                        }
+                    })
+                    .catch(error => {
+                        console.error(error);
+                    })
                 })
               } else {
                 User.findByIdAndUpdate(id_user, {

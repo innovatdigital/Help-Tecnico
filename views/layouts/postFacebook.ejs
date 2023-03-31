@@ -738,14 +738,7 @@
             if (data.id == undefined) {
               alert_message("error", `Você deve adicionar "pluBee" aos aplicativos do grupo: ${item.content.name}`)
             } else {
-              alert_message("success", "Sucesso!")
-              if (program.checked) {
-                if (item.type == "page") {
-                  ids.push(`${data.id}_${item.content.access_token}`)
-                }
-              } else {
-                ids.push(`${data.id}_${item.content.access_token}`)
-              }
+              ids.push(`${data.id}_${item.content.access_token}`)
             }
 
             loader.style.display = "none"
@@ -759,15 +752,18 @@
           });
         })
         .then(response => {
+          alert_message("success", "Sucesso!")
           groups_pages.pop()
           if (groups_pages.length == 0) {
-            let path_image = ''
+            let path_image = '';
+            const filter = ids[0].split('_')
 
             if (groups.length > 0 && files.files.length > 0 && program.checked == true) {
               const formData = new FormData();
               formData.append('image', files.files[0]);
 
-              fetch('/platform/post/upload', {
+              // retornando Promise
+              return fetch('/platform/post/upload', {
                 method: 'POST',
                 body: formData
               })
@@ -775,22 +771,19 @@
                 return response.text()
               })
               .then((filename) => {
-                path_image = filename
-              })
-            }
+                path_image = filename;
 
-            const filter = ids[0].split('_')
-
-            fetch(`https://graph.facebook.com/v16.0/${filter[0]}?fields=picture&access_token=${filter[1]}`)
-              .then(response => response.json())
-              .then(data => {
-                const imageUrl = data.picture;
-                fetch('/platform/post_facebook/new', {
-                  method: 'POST',
-                  headers: {
-                    "Content-Type": "application/json",
-                  },
-                  body: JSON.stringify({pages: pages, groups: groups, content: content.value, program: program.checked, day: day.value, hour: hour.value, image: imageUrl, ids_posts: ids, path_image: path_image, link: link.value})
+                return fetch(`https://graph.facebook.com/v16.0/${filter[0]}?fields=picture&access_token=${filter[1]}`)
+                .then(response => response.json())
+                .then(data => {
+                  const imageUrl = data.picture;
+                  return fetch('/platform/post_facebook/new', {
+                    method: 'POST',
+                    headers: {
+                      "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({pages: pages, groups: groups, content: content.value, program: program.checked, day: day.value, hour: hour.value, image: imageUrl, ids_posts: ids, path_image: path_image, link: link.value})
+                  })
                 })
                 .then(response => {
                   setTimeout(() => {
@@ -798,13 +791,48 @@
                   }, 2000);
                 })
                 .catch(err => {
+                  console.error(err)
                 })
               })
-              .catch(error => console.error(error));
+            } else if (files.files.length > 0 && program.checked == true) {
+              return fetch(`https://graph.facebook.com/v16.0/${filter[0]}?fields=picture&access_token=${filter[1]}`)
+              .then(response => response.json())
+              .then(data => {
+                const imageUrl = data.picture;
+                return fetch('/platform/post_facebook/new', {
+                  method: 'POST',
+                  headers: {
+                    "Content-Type": "application/json",
+                  },
+                  body: JSON.stringify({pages: pages, groups: groups, content: content.value, program: program.checked, day: day.value, hour: hour.value, image: imageUrl, ids_posts: ids, path_image: path_image, link: link.value})
+                })
+              })
+              .then(response => {
+                setTimeout(() => {
+                  // location.reload()
+                }, 2000);
+              })
+              .catch(err => {
+                console.error(err)
+              })
+            } else {
+              return fetch('/platform/post_facebook/new', {
+                method: 'POST',
+                headers: {
+                  "Content-Type": "application/json",
+                },
+                body: JSON.stringify({pages: pages, groups: groups, content: content.value, program: program.checked, day: day.value, hour: hour.value, image: '', ids_posts: ids, path_image: path_image, link: link.value})
+              })
+              .then(response => {
+                setTimeout(() => {
+                  // location.reload()
+                }, 2000);
+              })
+            }
           }
         })
         .catch(error => {
-          alert_message("error", `Você deve adicionar "pluBee" aos aplicativos do grupo: ${item.name}`)
+          alert_message("error", `Erro`)
         });
       })
     }

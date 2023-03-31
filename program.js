@@ -11,7 +11,7 @@ db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function() {
   setInterval(async () => {
     const now = new Date();
-    const date = now.toLocaleDateString();
+    const date = now.toLocaleDateString('pt-BR', {day: '2-digit', month: '2-digit', year: 'numeric'});
     const time = now.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
     console.log(date, time)
     const posts = await Posts.find({ program: true, day: date, hour: time });
@@ -26,19 +26,6 @@ db.once('open', function() {
             console.log('Publicação atualizada:', post.id);
             post.program = false;
             await post.save();
-            
-            const data = {
-              _id: post.id_user,
-              "posts.id_post": post.id_post
-            };
-            
-            const replace = {
-              $set: {
-                "posts.$.program_post": false
-              }
-            };
-
-            const user = User.findOneAndUpdate(data, replace, { new: true })
           } catch (error) {
             console.error('Erro ao atualizar publicação:', error);
           }
@@ -84,6 +71,19 @@ db.once('open', function() {
             await post.save();
           }
         }
+
+        const data = {
+          _id: post.id_user,
+          "posts.id_post": post.id_post
+        };
+        
+        const replace = {
+          $set: {
+            "posts.$.program_post": false
+          }
+        };
+
+        const user = await User.findOneAndUpdate(data, replace, { new: true })
       } else {
         post.ids_posts_pages_and_groups.forEach(async(item) => {
           const filter = item.split('_')
@@ -158,6 +158,19 @@ db.once('open', function() {
             await post.save();
           }
         }
+
+        const data = {
+          _id: post.id_user,
+          "posts.id_post": post.id_post
+        };
+        
+        const replace = {
+          $set: {
+            "posts.$.program_post": false
+          }
+        };
+
+        const user = await User.findOneAndUpdate(data, replace, { new: true })
       }
     }
   }, 5000);
