@@ -12,22 +12,26 @@ db.once('open', function() {
   setInterval(async () => {
     const now = new Date();
     const date = now.toLocaleDateString('pt-BR', {day: '2-digit', month: '2-digit', year: 'numeric'});
-    const time = now.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
+    const time = now.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit', hour12: false});
     console.log(date, time)
     const posts = await Posts.find({ program: true, day: date, hour: time });
     for (const post of posts) {
-      if (post.image.length == 0) {
+      if (post.path_image.length == 0) {
         post.ids_posts_pages_and_groups.forEach(async(item) => {
-          const filter = item.split('_')
-          const url = `https://graph.facebook.com/${filter[0]}_${filter[1]}?is_published=true&access_token=${filter[2]}`;
-        
-          try {
-            await axios.post(url);
-            console.log('Publicação atualizada:', post.id);
-            post.program = false;
-            await post.save();
-          } catch (error) {
-            console.error('Erro ao atualizar publicação:', error);
+          if (item != "xxxxxx_xxxxxxxx") {
+            const filter = item.split('_')
+            const url = `https://graph.facebook.com/${filter[0]}_${filter[1]}?is_published=true&access_token=${filter[2]}`;
+          
+            try {
+              await axios.post(url);
+              console.log('Publicação atualizada:', post.id);
+              post.program = false;
+              await post.save();
+            } catch (error) {
+              console.error('Erro ao atualizar publicação:', error);
+            }
+          } else {
+            return
           }
         })
 
@@ -86,29 +90,33 @@ db.once('open', function() {
         const user = await User.findOneAndUpdate(data, replace, { new: true })
       } else {
         post.ids_posts_pages_and_groups.forEach(async(item) => {
-          const filter = item.split('_')
-          const url = `https://graph.facebook.com/${filter[0]}?is_published=true&access_token=${filter[1]}`;
-        
-          try {
-            await axios.post(url);
-            console.log('Publicação atualizada:', post.id);
-            post.program = false;
-            await post.save();
-            
-            const data = {
-              _id: post.id_user,
-              "posts.id_post": post.id_post
-            };
-            
-            const replace = {
-              $set: {
-                "posts.$.program_post": false
-              }
-            };
+          if (item != "xxxxxx_xxxxxxxx") {
+            const filter = item.split('_')
+            const url = `https://graph.facebook.com/${filter[0]}?is_published=true&access_token=${filter[1]}`;
+          
+            try {
+              await axios.post(url);
+              console.log('Publicação atualizada:', post.id);
+              post.program = false;
+              await post.save();
+              
+              const data = {
+                _id: post.id_user,
+                "posts.id_post": post.id_post
+              };
+              
+              const replace = {
+                $set: {
+                  "posts.$.program_post": false
+                }
+              };
 
-            const user = User.findOneAndUpdate(data, replace, { new: true })
-          } catch (error) {
-            console.error('Erro ao atualizar publicação');
+              const user = User.findOneAndUpdate(data, replace, { new: true })
+            } catch (error) {
+              console.error('Erro ao atualizar publicação');
+            }
+          } else {
+            return
           }
         })
 
@@ -148,7 +156,13 @@ db.once('open', function() {
             });
         
             await Promise.all(promises)
-        
+            
+            fs.unlink(`./uploads/${post.path_image}`, (err) => {
+              if (err) {
+                console.log(err)
+              }
+            });
+
             const ids = post.ids_posts_pages_and_groups
             ids_update.forEach(id => {
               ids.push(id)

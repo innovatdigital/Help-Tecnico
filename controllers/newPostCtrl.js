@@ -49,8 +49,6 @@ const PostFacebook = asyncHandler(async(req, res) => {
             })
         }))
 
-        console.log(name_account.length)
-
         if (name_account.length == 0) {
             findAccount.groups.forEach((group) => {
                 if (group.id == split[0]) {

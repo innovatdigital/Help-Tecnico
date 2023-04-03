@@ -119,12 +119,15 @@ const storage = multer.diskStorage({
 const upload = multer({ storage: storage });
 
 router.post('/post/upload', auth, upload.single('image'), function (req, res, next) {
+  console.log(1)
+
   const filePath = path.join('uploads', req.file.filename);
   if (fs.existsSync(filePath)) {
     // Se o arquivo já existe, gerar um novo nome com um timestamp diferente
     const extension = path.extname(req.file.originalname);
     const filename = uuidv4() + '-' + Date.now() + extension;
     req.file.filename = filename;
+    console.log(req.file.filename)
     res.send(req.file.filename);
   } else {
     res.send(req.file.filename);

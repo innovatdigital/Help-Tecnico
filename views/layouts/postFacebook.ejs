@@ -119,6 +119,7 @@
                               </div>
                             </div>
                             <% }) %>
+                            <br>
                           <% }) %>
                           <br>
                           <br>
@@ -729,32 +730,36 @@
           } else {
             endpoint = "photos"
           }
-          return fetch(`https://graph.facebook.com/v16.0/${item.content.id}/${endpoint}`, {
-            method: 'POST',
-            body: formData
-          })
-          .then(response => response.json())
-          .then(data => {
-            if (data.id == undefined) {
-              alert_message("error", `Você deve adicionar "pluBee" aos aplicativos do grupo: ${item.content.name}`)
-            } else {
-              ids.push(`${data.id}_${item.content.access_token}`)
-            }
+          if (program.checked == false || program.checked == true && item.type == "page") {
+            return fetch(`https://graph.facebook.com/v16.0/${item.content.id}/${endpoint}`, {
+              method: 'POST',
+              body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+              if (data.id == undefined) {
+                alert_message("error", `Você deve adicionar "pluBee" aos aplicativos do grupo: ${item.content.name}`)
+              } else {
+                ids.push(`${data.id}_${item.content.access_token}`)
+              }
 
-            loader.style.display = "none"
-            return data;
-          })
-          .catch(error => {
-            loader.style.display = "none"
-            alert_message("error", "Ocorreu um erro.")
+              return data;
+            })
+            .catch(error => {
+              alert_message("error", "Ocorreu um erro.")
 
-            throw error;
-          });
+              throw error;
+            });
+          } else {
+            ids.push('xxxxxx_xxxxxxxx')
+          }
         })
         .then(response => {
-          alert_message("success", "Sucesso!")
           groups_pages.pop()
           if (groups_pages.length == 0) {
+            loader.style.display = "none"
+            alert_message("success", "Sucesso!")
+
             let path_image = '';
             const filter = ids[0].split('_')
 
