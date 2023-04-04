@@ -6,7 +6,7 @@ const Comments = require('../models/Comments')
 const comments = asyncHandler(async(req, res) => {
     const find = await User.findById(req.cookies._id)
 
-    res.render('layouts/comments', {isAdmin: find.isAdmin, posts: find.posts})
+    res.render('layouts/comments', {isAdmin: find.isAdmin, posts: find.posts.reverse()})
 })
 
 const activeBot = asyncHandler(async(req, res) => {

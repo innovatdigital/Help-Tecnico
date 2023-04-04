@@ -111,7 +111,8 @@ const storage = multer.diskStorage({
   },
   filename: function (req, file, cb) {
     const extension = path.extname(file.originalname);
-    const filename = uuidv4() + '-' + Date.now() + extension;
+    const randomNumber = Math.floor(Math.random() * 1000000000); // gera um número aleatório com até 9 dígitos
+    const filename = randomNumber.toString() + extension; // concatena o número aleatório com a extensão do arquivo
     cb(null, filename);
   }
 });
@@ -119,19 +120,16 @@ const storage = multer.diskStorage({
 const upload = multer({ storage: storage });
 
 router.post('/post/upload', auth, upload.single('image'), function (req, res, next) {
-  console.log(1)
-
   const filePath = path.join('uploads', req.file.filename);
-  if (fs.existsSync(filePath)) {
-    // Se o arquivo já existe, gerar um novo nome com um timestamp diferente
-    const extension = path.extname(req.file.originalname);
-    const filename = uuidv4() + '-' + Date.now() + extension;
-    req.file.filename = filename;
-    console.log(req.file.filename)
-    res.send(req.file.filename);
-  } else {
-    res.send(req.file.filename);
-  }
+  const extension = path.extname(req.file.originalname);
+  const newRandomNumber = Math.floor(Math.random() * 1000000000); // gera um novo número aleatório com até 9 dígitos
+  const newFilename = uuidv4() + '-' + Date.now() + '-' + newRandomNumber.toString() + extension; // concatena o identificador único, o timestamp e o novo número aleatório com a extensão do arquivo
+  fs.rename(filePath, path.join('uploads', newFilename), function (err) {
+    if (err) {
+      return next(err);
+    }
+    res.send(newFilename);
+  });
 });
 
 
@@ -224,7 +222,7 @@ router.delete("/comments-automatic/delete/:id_post", auth, disableBot)
 
 
 // Tutoriais da plataforma
-router.get("/tutorials", auth, tutorials)
+router.get("/help", auth, tutorials)
 
 
 

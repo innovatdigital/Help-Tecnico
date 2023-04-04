@@ -13,9 +13,9 @@ const dashboard = asyncHandler(async(req, res) => {
         const postsRecents = await Posts.find({})
         const feedbacks = await Feedbacks.countDocuments({})
 
-        res.render('layouts/dashboard', {isAdmin: true, totalUsers: users, totalPosts: posts, totalFeedbacks: feedbacks, usersRecent: usersRecent, postsRecents: postsRecents, posts: find.posts})
+        res.render('layouts/dashboard', {isAdmin: true, totalUsers: users, totalPosts: posts, totalFeedbacks: feedbacks, usersRecent: usersRecent, postsRecents: postsRecents, posts: find.posts.reverse()})
     } else {
-        res.render('layouts/dashboard', {isAdmin: false, type_account: find.type_account, posts: find.posts, total_accounts: find.accountsFb.length + find.accountsIg.length, total_groups: find.groups.length, total_posts: find.groups.length})
+        res.render('layouts/dashboard', {isAdmin: false, type_account: find.type_account, posts: find.posts.reverse(), total_accounts: find.accountsFb.length + find.accountsIg.length, total_groups: find.groups.length, total_posts: find.groups.length})
     }
 })
 
@@ -23,9 +23,9 @@ const allPosts = asyncHandler(async(req, res) => {
     const find = await User.findById(req.cookies._id)
 
     if (find.isAdmin) {
-        res.render('layouts/posts', {isAdmin: true, posts: find.posts})
+        res.render('layouts/posts', {isAdmin: true, posts: find.posts.reverse()})
     } else {
-        res.render('layouts/posts', {isAdmin: false, posts: find.posts})
+        res.render('layouts/posts', {isAdmin: false, posts: find.posts.reverse()})
     }
 })
 
