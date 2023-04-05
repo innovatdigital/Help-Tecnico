@@ -1,3 +1,4 @@
+const videoTypes = ['video/mp4', 'video/quicktime', 'video/x-msvideo', 'video/x-ms-wmv'];
 const mongoose = require('mongoose');
 const Posts = require('./models/Posts');
 const axios = require('axios');
@@ -127,26 +128,54 @@ db.once('open', function() {
           if (post.published == false) {
             post.groups.forEach((item) => {
               const promise = new Promise((resolve, reject) => {
+                const formData = new FormData();
+                let endpoint = ''
+                let count = 0
+
                 fs.readFile(`./uploads/${post.path_image}`, async (err, data) => {
                   if (err) reject(err);
+
+                  const fileType = mime.lookup(`./uploads/${post.path_image}`);
                   
-                  const photoData = new Blob([data], { type: "image/png" });
-                  const formData = new FormData();
-                  formData.append("source", photoData);
-        
-                  formData.append('access_token', item.access_token);
-                  formData.append('message', post.content);
+                  if (!videoTypes.includes(fileType)) {
+                    endpoint = "photos"
+
+                    const photoData = new Blob([data], { type: "image/png" });
+                    formData.append("source", photoData);
+          
+                    formData.append('access_token', item.access_token);
+                    formData.append('message', post.content);
+                  } else {
+                    endpoint = "videos"
+
+                    const videoData = new Blob([data], { type: "video/mp4" });
+                  
+                    formData.append("access_token", item.access_token);
+                    formData.append("source", videoData, "video.mp4");
+                    formData.append("title", post.content);
+                    formData.append("description", post.content);
+                    formData.append("published", false)
+                  }
+
+                  post.published = true
+                  await post.save();
                   
                   axios({
                     method: 'POST',
-                    url: `https://graph.facebook.com/v16.0/${item.id}/photos`,
+                    url: `https://graph.facebook.com/v16.0/${item.id}/${endpoint}`,
                     data: formData,
                     headers: {
                       'Content-Type': 'multipart/form-data'
                     }
                   })
-                  .then(response => {
-                    ids_update.push(`${response.data.post_id}_${item.access_token}`)
+                  .then(async response => {
+                    if (response.data.post_id) {
+                      ids_update.push(`${response.data.post_id}_${item.access_token}`)
+                    } else {
+                      ids_update.push(`${response.data.id}_${item.access_token}`)
+                      const url = `https://graph.facebook.com/${response.data.id}?is_published=true&access_token=${item.access_token}`;
+                      await axios.post(url);
+                    }
                     resolve()
                   })
                   .catch(error => reject(error));

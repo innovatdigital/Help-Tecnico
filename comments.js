@@ -24,7 +24,7 @@ db.once('open', function() {
           const find_post = await Posts.findOne({id_post: comment.id_post})
           if (find_post) {
             find_post.ids_posts_pages_and_groups.forEach(post => {
-              if (post != "xxxxxx_xxxxxxxx") {
+              if (post == "xxxxxx_xxxxxxxx") {
                 return
               } else {
                 const split = post.split('_')
@@ -41,7 +41,6 @@ db.once('open', function() {
       
                     res.data.data.forEach(async(response) => {
                       if (exists.includes(response.id)) {
-                        console.log(count)
                         count += 1
                       } else {
                         if (comment.count == comment.limit_comments) {
@@ -66,14 +65,12 @@ db.once('open', function() {
                             })
                           })
                           .catch((err) => {
-                            console.log(err);
                           });
                         }
                       }
                     })              
                   })
                   .catch((err) => {
-                    console.log(err)
                     console.log('Erro ao obter detalhes do post do Facebook');
                     return
                   });  
@@ -114,14 +111,12 @@ db.once('open', function() {
                             })
                           })
                           .catch((err) => {
-                            console.log(err);
                           });
                         }
                       }
                     })              
                   })
                   .catch((err) => {
-                    console.log(err)
                     console.log('Erro ao obter detalhes do post do Facebook');
                     return
                   });
