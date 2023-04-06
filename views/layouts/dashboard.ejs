@@ -213,36 +213,11 @@
               </div>
             </div>
             
-            <!-- <% if (isAdmin == "true") { %>
-            <div class="col-lg-3">
-              <article class="white-block">
-                <div class="top-cat-title">
-                  <h3>Usuários recentes</h3>
-                  <p>10 usuários</p>
-                </div>
-                <ul class="top-cat-list">
-                  <% usersRecent.forEach(function(item) { %>
-                    <li>
-                      <a href="##">
-                        <div class="top-cat-list__title">
-                          <%= item.name %>
-                        </div>
-                        <div class="top-cat-list__subtitle">
-                          Plano <%= item.type_account %> <span class="purple"><%= item.date %></span>
-                        </div>
-                      </a>
-                    </li>
-                  <% }); %>
-                </ul>
-              </article>
-            </div>
-            <% } %> -->
-
             <div class="col-lg-3">
               <article class="white-block">
                 <div class="top-cat-title">
                   <h3>Histórico de atividades:</h3>
-                  <!-- <p>10 comentários</p> -->
+                  <p><%= historic.length %> conteudos recentes</p>
                 </div>
                 <ul class="top-cat-list">
                     <!-- <li>
@@ -338,26 +313,3 @@
 <!-- Chart library -->
 </body>
 </html>
-
-<script>
-  // const ctx = document.getElementById('myChart');
-
-  // new Chart(ctx, {
-  //   type: 'bar',
-  //   data: {
-  //     labels: ['Comentários', 'Posts', 'Likes', 'Compartilhações', 'Posts'],
-  //     datasets: [{
-  //       label: '# Visão geral',
-  //       data: [12, 19, 8, 10, 15],
-  //       borderWidth: 1
-  //     }]
-  //   },
-  //   options: {
-  //     scales: {
-  //       y: {
-  //         beginAtZero: true
-  //       }
-  //     }
-  //   }
-  // });
-</script>

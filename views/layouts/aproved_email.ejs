@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <title>Pagamento aprovado</title>
+  </head>
+
+  <style>
+    .aproved {
+        font-family: 'MADE TOMMY';
+        font-style: normal;
+        font-weight: 400;
+        margin: 2vw 8vw;
+        color: #752a7a;
+    }
+
+    div {
+        margin: 2vw 0;
+    }
+
+    .box {
+        background-color: #ffffff;
+        padding: 5px 20px;
+        border-radius: 15px;
+        box-shadow: 0px 2px 9px rgba(0, 0, 0, 0.4);
+    }
+
+    span {
+        font-family: 'MADE TOMMY';
+        font-style: normal;
+        font-weight: 800;
+        font-size: 1.3rem;
+        color: #752a7a; 
+    }
+
+    .content {
+        color: #292929;
+    }
+
+    .content-date {
+        font-weight: bold;
+        color: #752a7a;
+    }
+  </style>
+
+<body style="margin: 0%;">
+  <div class="aproved">
+    <div class="box">
+      <h1>Parabéns <span><%= name %></span>, você já pode aproveitar tudo o que o seu plano oferece!</h1>
+      <p>
+        Acesse <a href="plubee.net/login">plubee.net</a> e realize o seu login com as suas informações! <br><br>
+      </p>
+
+      <span style="font-weight: bold;">Confira alguns detalhes do seu pagamento:</span>
+      
+      <div style="display: flex; justify-content: space-between;">
+        <p class="content" style="color: #752a7a; font-weight: bold;">ID do pagamento:</p>
+        <p style="color: #752a7a"><%= id %></p>
+      </div>
+
+      <div style="display: flex; justify-content: space-between;">
+        <p class="content" style="color: #752a7a; font-weight: bold;">Valor pago:</p>
+        <p style="color: #752a7a"><%= value %></p>
+      </div>
+
+      <div style="display: flex; justify-content: space-between;">
+        <p class="content" style="color: #752a7a; font-weight: bold;">Dia do pagamento:</p>
+        <p style="color: #752a7a"><%= date %></p>
+      </div>
+
+      <div style="display: flex; justify-content: space-between;">
+        <p class="content" style="color: #752a7a; font-weight: bold;">Seu CPF:</p>
+        <p style="color: #752a7a"><%= cpf %></p>
+      </div>
+
+      <div style="display: flex; justify-content: space-between;">
+        <p class="content" style="color: #752a7a; font-weight: bold;">Tipo de plano:</p>
+        <p class="content" style="color: #752a7a; font-weight: bold;"><%= plan %></p>
+      </div>
+
+      <p class="content-date">Aguardamos você lá!</p>
+    </div>
+  </div>
+</body>
+</html>

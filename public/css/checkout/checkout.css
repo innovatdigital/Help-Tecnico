@@ -101,7 +101,7 @@ button span {
 .btn-continue {
     width: 10.5vw;
 	height: 2.8vw;
-	background: #FFFFFF;
+	background: #752A7A;
 	border: 3px solid #752A7A;
 	border-radius: 28px;
 	font-family: 'MADE TOMMY';
@@ -110,7 +110,7 @@ button span {
 	font-weight: 800;
 	font-size: 0.8vw;
 	text-align: center;
-	color: #752A7A; 
+	color: #ffffff; 
     transition: all 400ms ease;
     cursor: pointer;
 }
@@ -118,6 +118,18 @@ button span {
 .btn-continue:hover {
 	background: #752A7A;
 	color: #FFFFFF;
+}
+
+h1 {
+    font-family: 'MADE TOMMY';
+    font-style: normal;
+    font-weight: 400;
+}
+
+label {
+    font-family: 'MADE TOMMY';
+	font-style: normal;
+	font-weight: 400;
 }
 
 h2 {
@@ -141,6 +153,7 @@ h2 {
 	font-family: 'MADE TOMMY';
 	font-style: normal;
 	font-weight: 400;
+    padding-left: 6px;
 	font-size: 0.8vw;
 	color: #8F8F8F;
     background-color: #F9F9F9;
@@ -160,9 +173,9 @@ h2 {
 }
 
 .itens {
-    width: 17.5vw;
+    width: 18vw;
     height: 6vw;
-    background-color: #e6e6e6;
+    background-color: #f1f1f1;
     border-radius: 30px;
     margin-left: 1vw;
     margin-top: 1vw;
@@ -207,11 +220,37 @@ h2 {
 }
 
 .form {
-    width: 11vw;
+    width: 10vw;
     height: 2.4vw;
+    font-family: 'MADE TOMMY';
+	font-style: normal;
+	font-weight: 400;
+    padding-left: 10px;
+	font-size: 0.8vw;
     border-radius: 12px;
     border: 3px solid #752A7A;
     margin: 0.4vw 0.8vw;
+}
+
+input, select {
+    font-family: 'MADE TOMMY' !important;
+	font-style: normal !important;
+	font-weight: 400 !important;
+}
+
+div {
+    font-family: 'MADE TOMMY' !important;
+	font-style: normal !important;
+	font-weight: 400 !important;
+}
+
+button > span {
+    font-size: 13px !important;
+}
+
+a {
+    text-decoration: none;
+    color: #752A7A;
 }
 
 .infos {

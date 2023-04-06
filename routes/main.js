@@ -8,4 +8,8 @@ router.get("/", async(req, res) => {
     res.render('layouts/main', { plans: plans })
 })
 
+router.get("/policy", async(req, res) => {
+    res.render('layouts/policy')
+})
+
 module.exports = router

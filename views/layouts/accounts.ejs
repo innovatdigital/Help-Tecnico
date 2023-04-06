@@ -100,7 +100,7 @@
               <% } else { %>
               <div class="empty">
                 <img src="/img/admin/accounts.png" height="60" alt=""><br>
-                <h2>Nenhuma conta adicionada</h2>
+                <h2>Nenhuma conta adicionada.</h2>
               </div>
               <% } %>
             </div>
@@ -171,6 +171,8 @@
       body: JSON.stringify({ platform: platform })
     })
 
-    location.reload();
+    setTimeout(() => {
+      location.reload();
+    }, 2000)
   }
 </script>

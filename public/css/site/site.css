@@ -180,7 +180,7 @@ nav {
 .home img {
 	max-width: 100%;
 	border: 2px solid #FFFFFF;
-	border-radius: 2rem;
+	border-radius: 1.3rem;
 	height: 22vw;
 	margin-right: 10vw;
 	margin-top: 1vw;
@@ -198,7 +198,7 @@ nav {
 .a-plataforma-title {
 	display: flex;
 	justify-content: center;
-    height: 40vw;
+    height: 27vw;
 	flex-direction: column;
 }
 
@@ -258,7 +258,7 @@ nav {
 }
 
 .a-plataforma-infos-one {
-	margin-top: 3vw;
+	margin-top: 2vw;
 }
 
 .a-plataforma-icon {
@@ -273,7 +273,7 @@ nav {
 }
 
 .a-plataforma-infos-two div {
-	margin-left: 5vw;
+	margin: 0 2vw;
 }
 
 .a-plataforma-infos-two h3 {
@@ -723,6 +723,12 @@ i {
 	color: #752A7A;
 }
 
+.rights a {
+	text-decoration: none;
+	color: #752A7A;
+	font-weight: bold;
+}
+
 #btn-mobile {
 	display: none;
 	background-color: #FFFFFF;
@@ -835,7 +841,7 @@ i {
 	}
 
 	.home {
-		height: 320px;
+		height: 430px;
 		display: flex;
 		justify-content: start;
 		align-content: start;
@@ -846,7 +852,7 @@ i {
 		font-size: 6vw;
 		margin: 0px;
 		margin-right: 10px;
-		margin-top: 4vw;
+		margin-top: 5vw;
 	}
 	
 	.home h3 {
@@ -894,7 +900,7 @@ i {
 	}
 
 	.a-plataforma-title {
-		height: 400px;
+		height: 215px !important;
 	}
 	
 	.a-plataforma-title h1 {
@@ -916,6 +922,7 @@ i {
 	.a-plataforma-section {
 		display: flex;
 		flex-wrap: wrap;
+		height: 14vw;
 	}
 	
 	.a-plataforma-img {
@@ -938,7 +945,8 @@ i {
 	}
 	
 	.a-plataforma-infos-two div {
-		margin-left: 5vw;
+		margin-bottom: 1vw;
+		margin-left: 2vw;
 	}
 	
 	.a-plataforma-infos-two h3 {
@@ -952,11 +960,12 @@ i {
 	.sobre {
 		height: 500px;
 		display: flex;
+		margin-top: 270px;
 		flex-direction: column;
 	}
 	
 	.sobre div {
-		margin-top: 2.4vw;
+		margin-top: 0px;
 		margin-left: 5vw;
 	}
 	
