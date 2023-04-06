@@ -28,98 +28,107 @@ db.once('open', function() {
                 return
               } else {
                 const split = post.split('_')
-                if (split.length == 2) {
-                  axios.get(`https://graph.facebook.com/v13.0/${split[0]}/comments?fields=from{id,name},message&access_token=${split[1]}`)
-                  .then((res) => {
-                    const exists = []
-                    
-                    comment.comments.forEach(comment => {
-                      exists.push(comment.id_comment)
-                    })
-      
-                    let count = 1
-      
-                    res.data.data.forEach(async(response) => {
-                      if (exists.includes(response.id)) {
-                        count += 1
-                      } else {
-                        if (comment.count == comment.limit_comments) {
-                          const disableBot = await Comments.findByIdAndDelete(comment._id)
-
-                          const updatePost = await Posts.findOne({id_post: comment.id_post}, {
-                            status_bot: false
-                          })
+                if (split.length == 3) {
+                  if (split[2] == "page") {
+                    axios.get(`https://graph.facebook.com/v13.0/${split[0]}/comments?fields=from{id,name},message&access_token=${split[1]}`)
+                    .then((res) => {
+                      const exists = []
+                      
+                      comment.comments.forEach(comment => {
+                        exists.push(comment.id_comment)
+                      })
+        
+                      let count = 1
+        
+                      res.data.data.forEach(async(response) => {
+                        if (exists.includes(response.id)) {
+                          count += 1
                         } else {
-                          axios.post(`https://graph.facebook.com/${response.id}/comments?access_token=${split[1]}`, { message: comment.content_comment })
-                          .then(async(res) => {
-                            console.log('Comentário respondido:', response.id);
+                          if (comment.count == comment.limit_comments) {
+                            const disableBot = await Comments.findByIdAndDelete(comment._id)
 
-                            const update = await Comments.findByIdAndUpdate(comment._id, {
-                              "count": comment.count + 1,
-      
-                              $push: {
-                                comments: {
-                                  "id_comment": response.id
-                                }
-                              }
+                            const updatePost = await Posts.findOne({id_post: comment.id_post}, {
+                              status_bot: false
                             })
-                          })
-                          .catch((err) => {
-                          });
+                          } else {
+                            axios.post(`https://graph.facebook.com/${response.id}/comments?access_token=${split[1]}`, { message: comment.content_comment })
+                            .then(async(res) => {
+                              console.log('Comentário respondido:', response.id);
+
+                              const update = await Comments.findByIdAndUpdate(comment._id, {
+                                "count": comment.count + 1,
+        
+                                $push: {
+                                  comments: {
+                                    "id_comment": response.id
+                                  }
+                                }
+                              })
+                            })
+                            .catch((err) => {
+                            });
+                          }
                         }
-                      }
-                    })              
-                  })
-                  .catch((err) => {
-                    console.log('Erro ao obter detalhes do post do Facebook');
+                      })              
+                    })
+                    .catch((err) => {
+                      console.log(err)
+                      console.log('Erro ao obter detalhes do post do Facebook');
+                      return
+                    });
+                  } else {
                     return
-                  });  
+                  } 
                 } else {
-                  axios.get(`https://graph.facebook.com/v13.0/${split[0]}_${split[1]}/comments?fields=from{id,name},message&access_token=${split[2]}`)
-                  .then((res) => {
-                    const exists = []
-                    
-                    comment.comments.forEach(comment => {
-                      exists.push(comment.id_comment)
-                    })
-      
-                    let count = 1
-      
-                    res.data.data.forEach(async(response) => {
-                      if (exists.includes(response.id)) {
-                        count += 1
-                      } else {
-                        if (comment.count == comment.limit_comments) {
-                          const disableBot = await Comments.findByIdAndDelete(comment._id)
-
-                          const updatePost = await Posts.findOne({id_post: comment.id_post}, {
-                            status_bot: false
-                          })
+                  if (split[3] == "page") {
+                    axios.get(`https://graph.facebook.com/v13.0/${split[0]}_${split[1]}/comments?fields=from{id,name},message&access_token=${split[2]}`)
+                    .then((res) => {
+                      const exists = []
+                      
+                      comment.comments.forEach(comment => {
+                        exists.push(comment.id_comment)
+                      })
+        
+                      let count = 1
+        
+                      res.data.data.forEach(async(response) => {
+                        if (exists.includes(response.id)) {
+                          count += 1
                         } else {
-                          axios.post(`https://graph.facebook.com/${response.id}/comments?access_token=${split[2]}`, { message: comment.content_comment })
-                          .then(async(res) => {
-                            console.log('Comentário respondido:', response.id);
+                          if (comment.count == comment.limit_comments) {
+                            const disableBot = await Comments.findByIdAndDelete(comment._id)
 
-                            const update = await Comments.findByIdAndUpdate(comment._id, {
-                              "count": comment.count + 1,
-      
-                              $push: {
-                                comments: {
-                                  "id_comment": response.id
-                                }
-                              }
+                            const updatePost = await Posts.findOne({id_post: comment.id_post}, {
+                              status_bot: false
                             })
-                          })
-                          .catch((err) => {
-                          });
+                          } else {
+                            axios.post(`https://graph.facebook.com/${response.id}/comments?access_token=${split[2]}`, { message: comment.content_comment })
+                            .then(async(res) => {
+                              console.log('Comentário respondido:', response.id);
+
+                              const update = await Comments.findByIdAndUpdate(comment._id, {
+                                "count": comment.count + 1,
+        
+                                $push: {
+                                  comments: {
+                                    "id_comment": response.id
+                                  }
+                                }
+                              })
+                            })
+                            .catch((err) => {
+                            });
+                          }
                         }
-                      }
-                    })              
-                  })
-                  .catch((err) => {
-                    console.log('Erro ao obter detalhes do post do Facebook');
+                      })              
+                    })
+                    .catch((err) => {
+                      console.log('Erro ao obter detalhes do post do Facebook');
+                      return
+                    });
+                  } else {
                     return
-                  });
+                  }
                 }
               }
             })

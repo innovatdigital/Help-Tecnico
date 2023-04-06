@@ -3,12 +3,10 @@ const router = express.Router()
 
 const {
     checkout,
-    processPayment,
-    processPaymentTest
+    processPayment
 } = require('../controllers/checkoutCtrl')
 
 router.get("/:id", checkout)
 router.post("/process_payment", processPayment)
-router.post("/process_payment_", processPaymentTest)
 
 module.exports = router

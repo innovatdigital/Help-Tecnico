@@ -754,7 +754,7 @@
               if (data.id == undefined) {
                 alert_message("error", `Você deve adicionar "pluBee" aos aplicativos do grupo: ${item.content.name}`)
               } else {
-                ids.push(`${data.id}_${item.content.access_token}`)
+                ids.push(`${data.id}_${item.content.access_token}_${item.type}`)
               }
 
               return data;

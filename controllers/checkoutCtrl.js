@@ -23,12 +23,12 @@ async function aprovedEmail(infos) {
         }
     });
     
-    const emailTemplate = fs.readFileSync('./views/layouts/aproved_email.ejs', 'utf-8');
+    const emailTemplate = fs.readFileSync('./views/layouts/aproved.ejs', 'utf-8');
 
     const html = ejs.render(emailTemplate, infos);
 
     let mailOptions = {
-        from: '"PluBee" vagner12lemos@gmail.com',
+        from: '"PluBee" plubee.net',
         to: infos.email,
         subject: 'Compra aprovada com sucesso!',
         text: 'Você já pode aproveitar todos os benefícios da nossa plataforma!',
@@ -39,8 +39,6 @@ async function aprovedEmail(infos) {
         if (error) {
             return console.log(error);
         }
-        console.log('Mensagem enviada: %s', info.messageId);
-        console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info));
     });
 }
 
@@ -110,7 +108,8 @@ const processPayment = asyncHandler(async(req, res) => {
                                 cpf: req.body.account.cpf,
                                 date: dataFormat,
                                 plan: req.body.account.type_account,
-                                email: req.body.cardFormData.payer.email
+                                email: req.body.cardFormData.payer.email,
+                                password: req.body.account.password,
                             }
 
                             aprovedEmail(infos)
@@ -118,7 +117,7 @@ const processPayment = asyncHandler(async(req, res) => {
                             res.send({approved: true})
 
                         } catch (err) {
-                            res.send('ds')
+                            res.sendStatus(500)
                         }     
                     } else {
                         try {
@@ -139,35 +138,7 @@ const processPayment = asyncHandler(async(req, res) => {
     }
 })
 
-const processPaymentTest = asyncHandler(async(req, res) => {
-    const data = Date.now();
-    const options = { day: '2-digit', month: '2-digit', year: 'numeric' };
-    const formater = new Intl.DateTimeFormat('pt-BR', options);
-    const dataFormat = formater.format(data);
-
-    var dataAtual = new Date();
-    var day = dataAtual.getDate();
-    var mes = dataAtual.getMonth() + 1;
-    var ano = dataAtual.getFullYear()
-
-    let infos = {
-        id: req.body.id,
-        value: req.body.value,
-        name: req.body.name,
-        cpf: req.body.cpf,
-        date: dataFormat,
-        plan: req.body.type_account,
-        email: req.body.email
-    }
-
-    aprovedEmail(infos)
-
-    res.send({approved: true})
-})
-
-
 module.exports = 
 {   checkout,
-    processPayment,
-    processPaymentTest
+    processPayment
 }

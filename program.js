@@ -57,7 +57,7 @@ db.once('open', function() {
                   }
                 })
                 .then(response => {
-                  ids_update.push(`${response.data.id}_${item.access_token}`)
+                  ids_update.push(`${response.data.id}_${item.access_token}_group`)
                   resolve()
                 })
                 .catch(error => reject(error));
@@ -170,9 +170,9 @@ db.once('open', function() {
                   })
                   .then(async response => {
                     if (response.data.post_id) {
-                      ids_update.push(`${response.data.post_id}_${item.access_token}`)
+                      ids_update.push(`${response.data.post_id}_${item.access_token}_group`)
                     } else {
-                      ids_update.push(`${response.data.id}_${item.access_token}`)
+                      ids_update.push(`${response.data.id}_${item.access_token}_group`)
                       const url = `https://graph.facebook.com/${response.data.id}?is_published=true&access_token=${item.access_token}`;
                       await axios.post(url);
                     }
