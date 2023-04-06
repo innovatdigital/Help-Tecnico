@@ -748,7 +748,7 @@
           } else {
             endpoint = "feed"
           }
-          
+
           if (program.checked == false || program.checked == true && item.type == "page") {
             return fetch(`https://graph.facebook.com/v16.0/${item.content.id}/${endpoint}`, {
               method: 'POST',
@@ -833,7 +833,7 @@
               })
               .then(response => {
                 setTimeout(() => {
-                  // location.reload()
+                  location.reload()
                 }, 2000);
               })
               .catch(err => {
@@ -849,14 +849,13 @@
               })
               .then(response => {
                 setTimeout(() => {
-                  // location.reload()
+                  location.reload()
                 }, 2000);
               })
             }
           }
         })
         .catch(error => {
-          console.log(error)
           alert_message("error", `Erro`)
         });
       })
