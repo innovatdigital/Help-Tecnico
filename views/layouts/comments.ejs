@@ -73,40 +73,42 @@
                   </thead>
                   <tbody>
                     <% posts.forEach(function(item) { %>
-                      <tr>
-                        <td>
-                          <div class="categories-table-img">
-                            <% if (item.image != null) { %>
-                              <picture><source srcset="<%= item.image %>"><img src="<%= item.image %>" alt="img"></picture>
-                            <% } else { %>
-                              <picture><source srcset="/img/admin/link.png"><img src="/img/admin/link.png" alt="img"></picture>
-                            <% } %>                          </div>
-                        </td>
-                        <td>
-                          <p style="width: 140px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"><%= item.content %></p>
-                        </td>
-                        <td>
-                          <div class="pages-table-img">
-                            <picture><source srcset="<%= item.image_account %>" type="image/webp"><img src="<%= item.image_account %>" alt="User Name"><%= item.name_account %></picture>
-                        
-                          </div>
-                        </td>
-                        <td><%= item.groups_ids.length + item.pages_ids.length %> (Total)</td>
-                        <td style="color: #1877F2"><%= item.platform %></td>
-                        <% if (item.status_bot == true) { %>
-                        <td><span class="badge badge-pill badge-success">Ativado</span></td>
-                        <td>
-                          <button class="event" onclick="disableComment('<%= item.id_post %>', '<%= item.id_account %>')">Desativar comentário</button>
-                        </td>
-                        <td><p style="font-weight: bold; width: 105px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"><%= item.comment_content %></p></td>
-                        <% } else { %>
-                        <td><span class="badge-active">Desativado</span></td>
-                        <td>
-                          <button class="event" id="btn-open" onclick="openDiv('<%= item.id_post %>', '<%= item.platform %>')">Ativar comentários</button>
-                        </td>
-                        <td>Não ativado</td>
-                        <% } %>
-                      </tr>
+                      <% if (item.program_post) { %>
+                        <tr>
+                          <td>
+                            <div class="categories-table-img">
+                              <% if (item.image != null) { %>
+                                <picture><source srcset="<%= item.image %>"><img src="<%= item.image %>" alt="img"></picture>
+                              <% } else { %>
+                                <picture><source srcset="/img/admin/link.png"><img src="/img/admin/link.png" alt="img"></picture>
+                              <% } %>                          </div>
+                          </td>
+                          <td>
+                            <p style="width: 140px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"><%= item.content %></p>
+                          </td>
+                          <td>
+                            <div class="pages-table-img">
+                              <picture><source srcset="<%= item.image_account %>" type="image/webp"><img src="<%= item.image_account %>" alt="User Name"><%= item.name_account %></picture>
+                          
+                            </div>
+                          </td>
+                          <td><%= item.groups_ids.length + item.pages_ids.length %> (Total)</td>
+                          <td style="color: #1877F2"><%= item.platform %></td>
+                          <% if (item.status_bot == true) { %>
+                          <td><span class="badge badge-pill badge-success">Ativado</span></td>
+                          <td>
+                            <button class="event" onclick="disableComment('<%= item.id_post %>', '<%= item.id_account %>')">Desativar comentário</button>
+                          </td>
+                          <td><p style="font-weight: bold; width: 105px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"><%= item.comment_content %></p></td>
+                          <% } else { %>
+                          <td><span class="badge-active">Desativado</span></td>
+                          <td>
+                            <button class="event" id="btn-open" onclick="openDiv('<%= item.id_post %>', '<%= item.platform %>')">Ativar comentários</button>
+                          </td>
+                          <td>Não ativado</td>
+                          <% } %>
+                        </tr>
+                      <% } %>
                     <% }); %>
                   </tbody>
                 </table>

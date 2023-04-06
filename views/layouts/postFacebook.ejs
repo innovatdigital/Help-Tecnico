@@ -713,37 +713,42 @@
           const reader = new FileReader();
 
           return new Promise((resolve, reject) => {
-            if (files.files[0].type.startsWith('video/')) {
-              reader.onload = () => {
-                const videoData = new Uint8Array(reader.result);
-                const blob = new Blob([videoData], { type: 'video/mp4' });
-                formData.append('source', blob, 'video.mp4');
-                formData.append('message', content.value)
-                resolve();
-              };
+            if (files.files.length > 0) {
+              if (files.files[0].type.startsWith('video/')) {
+                reader.onload = () => {
+                  const videoData = new Uint8Array(reader.result);
+                  const blob = new Blob([videoData], { type: 'video/mp4' });
+                  formData.append('source', blob, 'video.mp4');
+                  formData.append('message', content.value)
+                  resolve();
+                };
 
-              reader.readAsArrayBuffer(image);
-            } else {
-              reader.onload = () => {
-                const imageData = new Uint8Array(reader.result);
-                const blob = new Blob([imageData], { type: image.type });
-                formData.append('source', blob, image.name);
-                resolve();
-              };
+                reader.readAsArrayBuffer(image);
+              } else {
+                reader.onload = () => {
+                  const imageData = new Uint8Array(reader.result);
+                  const blob = new Blob([imageData], { type: image.type });
+                  formData.append('source', blob, image.name);
+                  resolve();
+                };
 
-              reader.readAsArrayBuffer(image);
+                reader.readAsArrayBuffer(image);
+              }
             }
           });
         }))
         .then(() => {
           let endpoint = ""
-          if (files.files[0].type.startsWith('video/')) {
-            endpoint = "videos"
-          } else if (images.length == 0) {
-            endpoint = "feed"
+          if (files.files.length > 0) {
+            if (files.files[0].type.startsWith('video/')) {
+              endpoint = "videos"
+            } else {
+              endpoint = "photos"
+            }
           } else {
-            endpoint = "photos"
+            endpoint = "feed"
           }
+          
           if (program.checked == false || program.checked == true && item.type == "page") {
             return fetch(`https://graph.facebook.com/v16.0/${item.content.id}/${endpoint}`, {
               method: 'POST',
@@ -851,6 +856,7 @@
           }
         })
         .catch(error => {
+          console.log(error)
           alert_message("error", `Erro`)
         });
       })
