@@ -26,8 +26,8 @@
       <%- include('../partials/nav-platform', {isAdmin: isAdmin, title: "Todos os posts"}) %>
   
       <!-- ! Main -->
-      <% if (posts.length > 0) { %>
         <main class="main users chart-page" id="skip-target">
+          <% if (posts.length > 0) { %>
           <div class="container">
             <div class="row">
               <div class="col-lg">
@@ -49,10 +49,12 @@
                             <tr>
                               <td>
                                 <div class="categories-table-img">
-                                  <% if (item.image != '') { %>
-                                    <picture><source srcset="<%= item.image %>"><img src="<%= item.image %>" alt="img"></picture>
-                                  <% } else { %>
+                                  <% if (item.image == "program_image") { %>
+                                    <picture><source srcset="/img/admin/program.png"><img style="width: 57px !important" src="/img/admin/program.png" alt="img"></picture>
+                                  <% } else if (item.image == "link") { %>
                                     <picture><source srcset="/img/admin/link.png"><img src="/img/admin/link.png" alt="img"></picture>
+                                  <% } else { %>
+                                    <picture><source srcset="<%= item.image %>"><img src="<%= item.image %>" alt="img"></picture>
                                   <% } %>
                                 </div>
                               </td>
@@ -85,7 +87,7 @@
                                 <td><%= item.day %> <%= item.hour %></td>
                               <% } else { %>
                                 <td><span class="badge badge-pill badge-success">Publicado</span></td>
-                                <td>Não programado</td>
+                                <td>Sucesso</td>
                               <% } %>
                             </tr>
                           <% }); %>
@@ -95,24 +97,23 @@
               </div>
             </div>
           </div>
+          <% } else { %>
+            <div class="alert" style="display: none;"></div>
+            <div class="empty">
+              <img src="/img/admin/post.png" height="60" alt=""><br>
+              <h2>Nenhuma publicação adicionada.</h2>
+              <button style="padding: 13px 50px !important; margin-top: 30px;" class="event" id="btn-open"><a href="/platform/post_facebook">Criar publicação</a></button>
+            </div>
+          <% } %>
         </main>
-      <% } else { %>
-        <div class="alert" style="display: none;"></div>
-        <div class="empty">
-          <img src="/img/admin/post.png" height="60" alt=""><br>
-          <h2>Nenhuma publicação adicionada.</h2>
-          <button style="padding: 13px 50px !important; margin-top: 30px;" class="event" id="btn-open"><a href="/platform/post_facebook">Criar publicação</a></button>
-        </div>
-      <% } %>
       <!-- ! Footer -->
       <%- include('../partials/footer-platform') %>
     </div>
   </div>
-
+</body>
+</html>
 
 <!-- Chart library -->
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <!-- Icons library -->
 <script src="js/admin/feather.min.js"></script>
-</body>
-</html>

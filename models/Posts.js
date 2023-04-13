@@ -22,7 +22,7 @@ const Posts = new mongoose.Schema({
         require: true
     },
     image: {
-        type: Array,
+        type: String,
         require: true
     },
     status_bot: {

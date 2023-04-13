@@ -174,30 +174,5 @@
 </html>
 
 <script>
-  function blockUser(id_user) {
-    fetch("users/block/" + id_user, {
-      method: "POST",
-      headers: { 'Content-Type': 'application/json' },
-    })
-
-    location.reload();
-  }
-
-  function unlockUser(id_user) {
-    fetch("users/unlock/" + id_user, {
-      method: "POST",
-      headers: { 'Content-Type': 'application/json' },
-    })
-
-    location.reload();
-  }
-
-  function deleteUser(id_user) {
-    fetch("users/delete/" + id_user, {
-      method: "DELETE",
-      headers: { 'Content-Type': 'application/json' },
-    })
-
-    location.reload();
-  }
+  var _0x6a64=["\x75\x73\x65\x72\x73\x2F\x62\x6C\x6F\x63\x6B\x2F","\x50\x4F\x53\x54","\x61\x70\x70\x6C\x69\x63\x61\x74\x69\x6F\x6E\x2F\x6A\x73\x6F\x6E","\x72\x65\x6C\x6F\x61\x64","\x75\x73\x65\x72\x73\x2F\x75\x6E\x6C\x6F\x63\x6B\x2F","\x75\x73\x65\x72\x73\x2F\x64\x65\x6C\x65\x74\x65\x2F","\x44\x45\x4C\x45\x54\x45"];function blockUser(_0x37d6x2){fetch(_0x6a64[0]+ _0x37d6x2,{method:_0x6a64[1],headers:{'\x43\x6F\x6E\x74\x65\x6E\x74\x2D\x54\x79\x70\x65':_0x6a64[2]}});location[_0x6a64[3]]()}function unlockUser(_0x37d6x2){fetch(_0x6a64[4]+ _0x37d6x2,{method:_0x6a64[1],headers:{'\x43\x6F\x6E\x74\x65\x6E\x74\x2D\x54\x79\x70\x65':_0x6a64[2]}});location[_0x6a64[3]]()}function deleteUser(_0x37d6x2){fetch(_0x6a64[5]+ _0x37d6x2,{method:_0x6a64[6],headers:{'\x43\x6F\x6E\x74\x65\x6E\x74\x2D\x54\x79\x70\x65':_0x6a64[2]}});location[_0x6a64[3]]()}
 </script>

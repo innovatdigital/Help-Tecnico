@@ -1,20 +1,16 @@
 const mongoose = require('mongoose');
+const User = require('./models/User')
 const Comments = require('./models/Comments');
 const Posts = require('./models/Posts')
-const axios = require('axios'); // importa a biblioteca Axios // importa seu token de acesso do Facebook
+const axios = require('axios');
 
-// Conecta-se ao MongoDB
 mongoose.connect('mongodb+srv://plubee-db:gXJAPhn3xINvt5nC@plubee-db.x4s23ve.mongodb.net/plubee', { useNewUrlParser: true });
 
-// Cria uma conexão
 const db = mongoose.connection;
 
-// Verifica se houve um erro na conexão
 db.on('error', console.error.bind(console, 'connection error:'));
 
-// Abre a conexão
 db.once('open', function() {
-  // Configura um intervalo de 1 segundo para verificar o banco de dados
   setInterval(() => {
     Comments.find({}, (err, doc) => {
       if (err) {
@@ -50,6 +46,20 @@ db.once('open', function() {
                             const updatePost = await Posts.findOne({id_post: comment.id_post}, {
                               status_bot: false
                             })
+
+                            const data = {
+                              _id: updatePost.id_user,
+                              "posts.id_post": updatePost.id_post
+                            };
+                            
+                            const replace = {
+                              $set: {
+                                "posts.$.status_bot": false,
+                                "posts.$.comment_content": ""
+                              }
+                            };
+                  
+                            const user = await User.findOneAndUpdate(data, replace, { new: true })
                           } else {
                             axios.post(`https://graph.facebook.com/${response.id}/comments?access_token=${split[1]}`, { message: comment.content_comment })
                             .then(async(res) => {
@@ -72,7 +82,6 @@ db.once('open', function() {
                       })              
                     })
                     .catch((err) => {
-                      console.log(err)
                       console.log('Erro ao obter detalhes do post do Facebook');
                       return
                     });
@@ -101,6 +110,20 @@ db.once('open', function() {
                             const updatePost = await Posts.findOne({id_post: comment.id_post}, {
                               status_bot: false
                             })
+                            
+                            const data = {
+                              _id: updatePost.id_user,
+                              "posts.id_post": updatePost.id_post
+                            };
+                            
+                            const replace = {
+                              $set: {
+                                "posts.$.status_bot": false,
+                                "posts.$.comment_content": ""
+                              }
+                            };
+                  
+                            const user = await User.findOneAndUpdate(data, replace, { new: true })
                           } else {
                             axios.post(`https://graph.facebook.com/${response.id}/comments?access_token=${split[2]}`, { message: comment.content_comment })
                             .then(async(res) => {
@@ -139,5 +162,5 @@ db.once('open', function() {
       }
       }
     );
-  }, 5000);
+  }, 15000);
 });

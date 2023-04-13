@@ -30,33 +30,30 @@ async function validCode() {
 
 const PostFacebook = asyncHandler(async(req, res) => {
     try {
-        let name = ''
-        
         let name_account = ''
         let image_account = ''
 
         const { pages, groups, ids_posts, content, program, day, hour, image, path_image, link } = req.body
 
-        let split = ids_posts[0].split("_")
-
         const findAccount = await User.findById({_id: req.cookies._id})
-        findAccount.accountsFb.forEach((account => {
-            account.pages.forEach(page => {
-                if (page.id_page == split[0]) {
-                    name_account = account.name
-                    image_account = account.photo
-                }
-            })
-        }))
-
-        if (name_account.length == 0) {
-            findAccount.groups.forEach((group) => {
-                if (group.id == split[0]) {
-                    console.log(group)
-                    name_account = group.account_name
-                    image_account = group.account_photo
-                }
-            })
+        if (pages.length > 0) {
+            findAccount.accountsFb.forEach((account => {
+                account.pages.forEach(page => {
+                    if (page.id_page == pages[0].id) {
+                        name_account = account.name
+                        image_account = account.photo
+                    }
+                })
+            }))
+        } else {
+            if (name_account.length == 0) {
+                findAccount.groups.forEach((group) => {
+                    if (group.id == groups[0].id) {
+                        name_account = group.account_name
+                        image_account = group.account_photo
+                    }
+                })
+            }
         }
 
         const id = await validCode()

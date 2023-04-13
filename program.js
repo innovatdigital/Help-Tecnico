@@ -14,39 +14,50 @@ db.once('open', function() {
     const now = new Date();
     const date = now.toLocaleDateString('pt-BR', {day: '2-digit', month: '2-digit', year: 'numeric'});
     const time = now.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit', hour12: false});
-    console.log(date, time)
+
+    // console.log(date, time)
+
     const posts = await Posts.find({ program: true, day: date, hour: time });
     for (const post of posts) {
       if (post.path_image.length == 0) {
-        post.ids_posts_pages_and_groups.forEach(async(item) => {
-          if (item != "xxxxxx_xxxxxxxx") {
-            const filter = item.split('_')
-            const url = `https://graph.facebook.com/${filter[0]}_${filter[1]}?is_published=true&access_token=${filter[2]}`;
-          
-            try {
-              await axios.post(url);
-              console.log('Publicação atualizada:', post.id);
-              post.program = false;
-              await post.save();
-            } catch (error) {
-              console.error('Erro ao atualizar publicação:', error);
-            }
-          } else {
-            return
-          }
-        })
+        if (post.published == false) {
+          post.published = true
+          await post.save();
 
-        if (post.groups.length > 0) {
           const ids_update = []
           const promises = []
-        
-          if (post.published == false) {
+
+          const formData = new FormData();
+          formData.append("link", post.link);
+          formData.append('message', post.content);
+
+          if (post.pages_ids.length > 0) {
+            post.pages_ids.forEach((item) => {
+              const promise = new Promise(async(resolve, reject) => {
+                formData.append('access_token', item.access_token);
+                
+                axios({
+                  method: 'POST',
+                  url: `https://graph.facebook.com/v16.0/${item.id}/feed`,
+                  data: formData,
+                  headers: {
+                    'Content-Type': 'multipart/form-data'
+                  }
+                })
+                .then(response => {
+                  ids_update.push(`${response.data.id}_${item.access_token}_page`)
+                  resolve()
+                })
+                .catch(error => reject(error));
+              })
+              promises.push(promise)
+            })
+          }
+
+          if (post.groups.length > 0) {
             post.groups.forEach((item) => {
               const promise = new Promise(async(resolve, reject) => {
-                const formData = new FormData();
-                formData.append("link", post.link);
                 formData.append('access_token', item.access_token);
-                formData.append('message', post.content);
                 
                 axios({
                   method: 'POST',
@@ -64,68 +75,93 @@ db.once('open', function() {
               })
               promises.push(promise)
             });
-        
-            await Promise.all(promises)
-        
-            const ids = post.ids_posts_pages_and_groups
-            ids_update.forEach(id => {
-              ids.push(id)
-            })
-        
-            post.published = true
-            await post.save();
           }
-        }
 
-        const data = {
-          _id: post.id_user,
-          "posts.id_post": post.id_post
-        };
+          await Promise.all(promises)
         
-        const replace = {
-          $set: {
-            "posts.$.program_post": false
-          }
-        };
+          const ids = post.ids_posts_pages_and_groups
+          ids_update.forEach(id => {
+            ids.push(id)
+          })
 
-        const user = await User.findOneAndUpdate(data, replace, { new: true })
-      } else {
-        post.ids_posts_pages_and_groups.forEach(async(item) => {
-          if (item != "xxxxxx_xxxxxxxx") {
-            const filter = item.split('_')
-            const url = `https://graph.facebook.com/${filter[0]}?is_published=true&access_token=${filter[1]}`;
+          const data = {
+            _id: post.id_user,
+            "posts.id_post": post.id_post
+          };
           
-            try {
-              await axios.post(url);
-              console.log('Publicação atualizada:', post.id);
-              post.program = false;
-              await post.save();
-              
-              const data = {
-                _id: post.id_user,
-                "posts.id_post": post.id_post
-              };
-              
-              const replace = {
-                $set: {
-                  "posts.$.program_post": false
-                }
-              };
-
-              const user = User.findOneAndUpdate(data, replace, { new: true })
-            } catch (error) {
-              console.error('Erro ao atualizar publicação');
+          const replace = {
+            $set: {
+              "posts.$.program_post": false
             }
-          } else {
-            return
-          }
-        })
+          };
 
-        if (post.groups.length > 0) {
+          await post.save();
+  
+          const user = await User.findOneAndUpdate(data, replace, { new: true })
+        }
+      } else {
+        if (post.published == false) {
+          post.published = true
+          await post.save();
+
           const ids_update = []
           const promises = []
-        
-          if (post.published == false) {
+
+          if (post.pages_ids.length > 0) {
+            post.pages_ids.forEach((item) => {
+              const promise = new Promise((resolve, reject) => {
+                const formData = new FormData();
+                let endpoint = ''
+                let count = 0
+
+                fs.readFile(`./uploads/${post.path_image}`, async (err, data) => {
+                  if (err) reject(err);
+
+                  const fileType = mime.lookup(`./uploads/${post.path_image}`);
+                  
+                  if (!videoTypes.includes(fileType)) {
+                    endpoint = "photos"
+
+                    const photoData = new Blob([data], { type: "image/png" });
+                    formData.append("source", photoData);
+          
+                    formData.append('access_token', item.access_token);
+                    formData.append('message', post.content);
+                  } else {
+                    endpoint = "videos"
+
+                    const videoData = new Blob([data], { type: "video/mp4" });
+                  
+                    formData.append("access_token", item.access_token);
+                    formData.append("source", videoData, "video.mp4");
+                    formData.append("title", post.content);
+                    formData.append("description", post.content);
+                  }
+                  
+                  axios({
+                    method: 'POST',
+                    url: `https://graph.facebook.com/v16.0/${item.id}/${endpoint}`,
+                    data: formData,
+                    headers: {
+                      'Content-Type': 'multipart/form-data'
+                    }
+                  })
+                  .then(async response => {
+                    if (response.data.post_id) {
+                      ids_update.push(`${response.data.post_id}_${item.access_token}_page`)
+                    } else {
+                      ids_update.push(`${response.data.id}_${item.access_token}_page`)
+                    }
+                    resolve()
+                  })
+                  .catch(error => reject(error));
+                })
+              })
+              promises.push(promise)
+            })
+          }
+
+          if (post.groups.length > 0) {
             post.groups.forEach((item) => {
               const promise = new Promise((resolve, reject) => {
                 const formData = new FormData();
@@ -154,11 +190,7 @@ db.once('open', function() {
                     formData.append("source", videoData, "video.mp4");
                     formData.append("title", post.content);
                     formData.append("description", post.content);
-                    formData.append("published", false)
                   }
-
-                  post.published = true
-                  await post.save();
                   
                   axios({
                     method: 'POST',
@@ -173,8 +205,6 @@ db.once('open', function() {
                       ids_update.push(`${response.data.post_id}_${item.access_token}_group`)
                     } else {
                       ids_update.push(`${response.data.id}_${item.access_token}_group`)
-                      const url = `https://graph.facebook.com/${response.data.id}?is_published=true&access_token=${item.access_token}`;
-                      await axios.post(url);
                     }
                     resolve()
                   })
@@ -183,38 +213,58 @@ db.once('open', function() {
               })
               promises.push(promise)
             });
-        
-            await Promise.all(promises)
+          }
+
+          await Promise.all(promises)
+
+          // Pegar a imagem do post
+          const filter = ids_update[0].split("_")
+          
+          let url = ''
+
+          if (filter.length == 4) {
+            url = `https://graph.facebook.com/v16.0/${filter[0]}_${filter[1]}?fields=picture&access_token=${filter[2]}`
+          } else {
+            url = `https://graph.facebook.com/v16.0/${filter[0]}?fields=picture&access_token=${filter[1]}`
+          }
+
+          axios({
+            method: 'GET',
+            url: url,
+          })
+          .then(async response => {
+            const image = response.data.picture;
             
             fs.unlink(`./uploads/${post.path_image}`, (err) => {
               if (err) {
                 console.log(err)
               }
             });
-
+  
             const ids = post.ids_posts_pages_and_groups
             ids_update.forEach(id => {
               ids.push(id)
             })
-        
-            post.published = true
+  
+            const data = {
+              _id: post.id_user,
+              "posts.id_post": post.id_post
+            };
+            
+            const replace = {
+              $set: {
+                "posts.$.program_post": false,
+                "posts.$.image": image
+              }
+            };
+  
+            post.image = image
             await post.save();
-          }
+  
+            const user = await User.findOneAndUpdate(data, replace, { new: true })
+          })
         }
-
-        const data = {
-          _id: post.id_user,
-          "posts.id_post": post.id_post
-        };
-        
-        const replace = {
-          $set: {
-            "posts.$.program_post": false
-          }
-        };
-
-        const user = await User.findOneAndUpdate(data, replace, { new: true })
       }
     }
-  }, 5000);
+  }, 1000);
 });

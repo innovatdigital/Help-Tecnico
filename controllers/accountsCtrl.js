@@ -7,27 +7,6 @@ const Historic = require('../models/Historic')
 const FacebookStrategy = require('passport-facebook').Strategy;
 const InstagramStrategy = require('passport-instagram').Strategy;
 
-// const passportAuthFacebook = passport.use(new FacebookStrategy({
-//     clientID: '540889994808844',
-//     clientSecret: '8f14320ee467d63b94aa48dc439734f7',
-//     callbackURL: 'https://localhost:5500/platform/accounts/auth/facebook/callback',
-//     profileFields: ['id', 'name', 'photos', 'email'],
-//     scope: ['email', 'public_profile']
-// }, function(accessToken, refreshToken, profile, done) {
-//     // Lógica de verificação do usuário aqui
-//     const requestUrl = `https://graph.facebook.com/v16.0/me/accounts?access_token=${accessToken}`;
-//     request(requestUrl, function(error, response, body) {
-//         if (!error && response.statusCode == 200) {
-//             const pages = JSON.parse(body).data;
-//             const newAccount = newAccountFb(accessToken, refreshToken, profile, profile.photos[0].value, pages)
-//         } else {
-//             console.log('Erro ao importar conta.')
-//         }
-//     });
-    
-//     done(null);
-// }));
-
 const passportAuthInstagram = passport.use(new InstagramStrategy({
     clientID: '873936987022758',
     clientSecret: 'edca2da17e56d5e9c67e3f07003b421f',
@@ -142,13 +121,12 @@ async function newAccountFb(id_user, accessToken, profile) {
                 groups.forEach(async group => {
                     axios.get(`https://graph.facebook.com/v16.0/${group.id}?fields=name,description,cover&access_token=${accessToken}`)
                     .then(response => {
-                        try {
-                            list.push({name: response.data.name, description: response.data.description, image: response.data.cover.source, id: response.data.id, account_name: profile.name, id_account: profile.id, account_photo: profile.picture.data.url});
-                        } catch (err) {
+                        if (response.data.hasOwnProperty("cover")) {
+                            list.push({name: response.data.name, description: response.data.description, image: response.data.cover.source, id: response.data.id, account_name: profile.name, id_account: profile.id, account_photo: profile.picture.data.url})
+                        } else {
                             list.push({name: response.data.name, id: response.data.id, account_name: profile.name, id_account: profile.id, account_photo: profile.picture.data.url});
                         }
         
-                        // Se a lista de grupos estiver completa, atualizar a conta do usuário
                         if (list.length === groupIds.length) {
                             list.forEach(async group => {
                                 const saveGroup = await User.findByIdAndUpdate(id_user, {
@@ -156,6 +134,8 @@ async function newAccountFb(id_user, accessToken, profile) {
                                         groups: {
                                             "name": group.name,
                                             "id": group.id,
+                                            "image": group.hasOwnProperty("image") ? group.image : "",
+                                            "description": group.description,
                                             "account_name": group.account_name,
                                             "id_account": group.id_account,
                                             "account_photo": group.account_photo

@@ -33,11 +33,11 @@
             <% groups.forEach(function(group) { %>
               <div class="col-md-6 col-xl-3">
                 <article class="stat-cards-item">
-                  <div class="stat-cards-icon warning">
-                    <% if (group.image) { %>
-                      <img style="height: 3rem" src="<%= group.image %>" alt="">
+                  <div class="stat-cards-icon">
+                    <% if (group.image != '') { %>
+                      <img style="border-radius: 4px; height: 3rem; margin-bottom: 5px;" src="<%= group.image %>" alt="">
                     <% } else { %>
-                      <img style="height: 3rem" src="/img/admin/Bulk/grupos.png" alt="">
+                      <img style="height: 3rem" src="/img/admin/Bulk/groups.png" alt="">
                     <% } %>
                   </div>
                   <div class="stat-cards-info">
@@ -80,12 +80,3 @@
 <script src="js/admin/feather.min.js"></script>
 </body>
 </html>
-
-<script>
-  function viewGroups() {
-    const id_account = document.querySelector('#accounts')
-    selectValue = id_account.value
-
-    window.location.href = "/platform/groups/" + selectValue;
-  }  
-</script>

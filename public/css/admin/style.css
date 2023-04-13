@@ -3764,10 +3764,11 @@ textarea {
   border-radius: 50px;
   height: 50px;
   box-shadow: 0 0 2px rgba(0, 0, 0, 0.3);
+  padding: 0px 5px;
 }
 
 .pages img {
-  height: 44px;
+  height: 40px;
   border-radius: 100%;
   margin-right: 5px;
 }
@@ -3783,7 +3784,7 @@ textarea {
   color: #752A7A;
   border-radius: 50px;
   height: 38px;
-  padding: 10px;
+  padding: 7px;
 }
 
 .pages button:hover {
@@ -3791,7 +3792,7 @@ textarea {
   color: #FFFFFF;
 }
 
-.min {
+.min, .min-img {
   display: flex;
   align-items: center;
 }
@@ -3802,11 +3803,11 @@ textarea {
   flex-direction: column;
   align-items: initial;
   border-radius: 12px;
-  width: 350px;
-  height: 380px;
+  width: 375px;
+  height: 418px;
   overflow-y: scroll;
   z-index: 1;
-  margin-top: 330px;
+  margin-top: 365px;
   box-shadow: 0 0 6px rgba(0, 0, 0, 0.3);
 }
 
@@ -4628,6 +4629,19 @@ textarea {
 @media (max-width: 575.98px) {
   .footer {
     position: relative;
+    bottom: -300px;
+  }
+
+  .empty {
+    margin-top: 40px !important;
+  }
+
+  .empty-account {
+    margin-top: 80px !important;
+  }
+
+  .account-col {
+    margin-top: 10rem !important;
   }
 
   .main-btns-wrapper {

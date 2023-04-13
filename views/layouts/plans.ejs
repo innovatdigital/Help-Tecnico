@@ -70,24 +70,3 @@
 <script src="js/admin/feather.min.js"></script>
 </body>
 </html>
-
-<script>
-    const btn = document.querySelector('#btn-add-link')
-
-    btn.addEventListener("click", function() {
-        const link = document.querySelector("#link");
-
-        if (link.length == 0) {
-          link.style.cssText = "background-color: red;"
-        }
-
-        fetch("groups/new/" + link.value, {
-            method: "POST",
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ id_user: '63ec3ca3bdeb832d9eb38322', id_account: 1 })
-        })
-
-        location.reload();
-    })
-  
-</script>
