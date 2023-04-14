@@ -8,10 +8,6 @@ const mercadopago = require('mercadopago');
 const fs = require('fs')
 const nodemailer = require('nodemailer');
 
-mercadopago.configure({
-    access_token: `${process.env.MERCADO_ACCESS}`
-});
-
 async function aprovedEmail(infos) {
     let transporter = nodemailer.createTransport({
         host: 'smtp.gmail.com',
@@ -37,7 +33,7 @@ async function aprovedEmail(infos) {
 
     transporter.sendMail(mailOptions, (error, info) => {
         if (error) {
-            return console.log(error);
+            console.log(error)
         }
     });
 }
@@ -48,97 +44,108 @@ const checkout = asyncHandler(async(req, res) => {
     res.render("layouts/checkout", {planInfo: findPlan, APP_USER: process.env.MERCADO_PUBLIC})
 })
 
-const processPayment = asyncHandler(async(req, res) => {
+const checkUser = asyncHandler(async(req, res) => {
     const find = await User.findOne({email: req.body.account.email, cpf: req.body.account.cpf})
     if (find) res.send('Usuário já cadastrado.')
-    else {
-        const paymentData = {
-            transaction_amount: req.body.cardFormData.amount,
-            token: req.body.cardFormData.token,
-            description: req.body.cardFormData.description,
-            installments: Number(req.body.cardFormData.installments),
-            payment_method_id: req.body.cardFormData.paymentMethodId,
-            issuer_id: req.body.cardFormData.issuerId,
-            payer: {
-                email: req.body.cardFormData.payer.email,
-                identification: {
-                    type: req.body.cardFormData.payer.identification.docType,
-                    number: req.body.cardFormData.payer.identification.docNumber
-                }
+})
+
+const processPayment = asyncHandler(async(req, res) => {
+    // const find = await User.findOne({email: req.body.account.email, cpf: req.body.account.cpf})
+    // if (find) res.send('Usuário já cadastrado.')
+    const paymentData = {
+        transaction_amount: parseFloat(req.body.account.amount),
+        token: req.body.cardFormData.token,
+        description: req.body.cardFormData.description,
+        installments: Number(req.body.cardFormData.installments),
+        payment_method_id: req.body.cardFormData.paymentMethodId,
+        issuer_id: req.body.cardFormData.issuerId,
+        payer: {
+            email: req.body.cardFormData.payer.email,
+            identification: {
+                type: req.body.cardFormData.payer.identification.docType,
+                number: req.body.cardFormData.payer.identification.docNumber
             }
-        };
-    
-        mercadopago.payment.save(paymentData)
-        .then(function(response) {
-            const { response: data } = response;
-    
-            axios.get(`https://api.mercadopago.com/v1/payments/${response.body.id}?access_token=APP_USR-1680886342878290-011613-a8697bc1e7bdc9a7003609de727629c1-810849321`)
-                .then(async(response) => {
-                    const payment = response.data;
-                    console.log(payment.status)
-                    if (payment.status === 'approved') {
-                        try {
-                            const data = Date.now();
-                            const options = { day: '2-digit', month: '2-digit', year: 'numeric' };
-                            const formater = new Intl.DateTimeFormat('pt-BR', options);
-                            const dataFormat = formater.format(data);
+        }
+    };
 
-                            var dataAtual = new Date();
-                            var day = dataAtual.getDate();
-                            var mes = dataAtual.getMonth() + 1;
-                            var ano = dataAtual.getFullYear()
+    mercadopago.configurations.setAccessToken(process.env.MERCADO_ACCESS)
 
-                            let plan = ''
+    mercadopago.payment.save(paymentData)
+    .then(function(response) {
+        const { response: data } = response;
 
-                            if (req.body.account.type_account == "BÁSICO") {
-                                plan = "Basico"
-                            } else if (req.body.account.type_account == "PRO") {
-                                plan = "Pro"
-                            } else if (req.body.account.type_account == "AVANÇADO") {
-                                plan = "Avançado"
-                            }
-                    
+        setTimeout(() => {
+            axios.get(`https://api.mercadopago.com/v1/payments/${response.body.id}?access_token=${process.env.MERCADO_ACCESS}`)
+            .then(async(data) => {
+                const payment = data.data;
+
+                if (payment.status == 'approved') {
+                    try {
+                        const data = Date.now();
+                        const options = { day: '2-digit', month: '2-digit', year: 'numeric' };
+                        const formater = new Intl.DateTimeFormat('pt-BR', options);
+                        const dataFormat = formater.format(data);
+
+                        var dataAtual = new Date();
+                        var day = dataAtual.getDate();
+                        var mes = dataAtual.getMonth() + 1;
+                        var ano = dataAtual.getFullYear()
+
+                        let plan = ''
+
+                        if (req.body.account.type_account == "BÁSICO") {
+                            plan = "Basico"
+                        } else if (req.body.account.type_account == "PRO") {
+                            plan = "Pro"
+                        } else if (req.body.account.type_account == "AVANÇADO") {
+                            plan = "Avançado"
+                        }
+                
+                        const find = await User.findOne({email: req.body.account.email.trim()})
+                        if (find) {
+                            const update = await User.findByIdAndUpdate(find._id, {name: req.body.account.name, cpf: req.body.account.cpf, number: req.body.account.number, email: req.body.account.email, date: dataFormat, password: req.body.account.password, type_account: plan})
+                            const saveFinance = await Finances.create({idUser: update._id, value: paymentData.transaction_amount, day: day, month: mes, year: ano, email: req.body.account.email, status: "Aprovado", plan: req.body.account.type_account})
+                        } else {
                             const newUser = await User.create({name: req.body.account.name, cpf: req.body.account.cpf, number: req.body.account.number, email: req.body.account.email, date: dataFormat, password: req.body.account.password, type_account: plan})
                             const saveFinance = await Finances.create({idUser: newUser._id, value: paymentData.transaction_amount, day: day, month: mes, year: ano, email: req.body.account.email, status: "Aprovado", plan: req.body.account.type_account})
- 
-                            let infos = {
-                                id: response.body.id,
-                                value: req.body.cardFormData.amount,
-                                name: req.body.account.name,
-                                cpf: req.body.account.cpf,
-                                date: dataFormat,
-                                plan: req.body.account.type_account,
-                                email: req.body.cardFormData.payer.email,
-                                password: req.body.account.password,
-                            }
+                        }
+                        
+                        let infos = {
+                            id: response.body.id,
+                            value: req.body.cardFormData.amount,
+                            name: req.body.account.name,
+                            cpf: req.body.account.cpf,
+                            date: dataFormat,
+                            plan: req.body.account.type_account,
+                            email: req.body.account.email,
+                            password: req.body.account.password,
+                        }
 
-                            aprovedEmail(infos)
+                        aprovedEmail(infos)
 
-                            res.send({approved: true})
+                        res.send({approved: true})
 
-                        } catch (err) {
-                            res.sendStatus(500)
-                        }     
-                    } else {
-                        try {
-                            res.send({approved: false})
-                        } catch (err) {
-                            res.send(err)
-                        }     
-                    }
-                })
-                .catch((error) => {
-                    res.send('Ocorreu um erro ao processar o pagamento, tente novamente mais tarde.')
-                });
-        })
-        .catch(function(error) {
-            console.log(error)
-        });       
-    
-    }
+                    } catch (err) {
+                        console.log(err)
+                        res.sendStatus(500)
+                    }     
+                } else {
+                    res.sendStatus(500)
+                }
+            })
+            .catch((error) => {
+                console.log(error)
+                res.send('Ocorreu um erro ao processar o pagamento, tente novamente mais tarde.')
+            });
+        }, 6000)
+    })
+    .catch(function(error) { 
+        console.log(error)
+    });       
 })
 
 module.exports = 
 {   checkout,
+    checkUser,
     processPayment
 }
