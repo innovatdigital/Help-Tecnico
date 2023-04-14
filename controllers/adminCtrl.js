@@ -49,7 +49,7 @@ const infoUser = asyncHandler(async(req, res) => {
 
 const updateUser = asyncHandler(async(req, res) => {
     try {
-        const updateUser = await User.findByIdAndUpdate(req.params.id, {name: req.body.name, cpf: req.body.cpf, number: req.body.number, email: req.body.email, password: req.body.password, type_account: req.body.type_account, isAdmin: req.body.admin})
+        const update = await User.findByIdAndUpdate(req.params.id, {name: req.body.name, cpf: req.body.cpf, number: req.body.number, email: req.body.email, password: req.body.password, type_account: req.body.type_account, isAdmin: req.body.admin})
 
         res.sendStatus(200)
     } catch (err) {
