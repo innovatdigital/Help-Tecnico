@@ -155,7 +155,6 @@ async function newAccountFb(id_user, accessToken, profile) {
                                         "access_token": accessToken,
                                         "posts": [],
                                         "pages": pages_user,
-                                        "comments": comments
                                     },
                                 }
                             }, {
@@ -184,7 +183,6 @@ async function newAccountFb(id_user, accessToken, profile) {
                             "access_token": accessToken,
                             "posts": [],
                             "pages": pages_user,
-                            "comments": comments
                         },
                     }
                 }, {
