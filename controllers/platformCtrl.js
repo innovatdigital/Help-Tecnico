@@ -13,9 +13,9 @@ const dashboard = asyncHandler(async(req, res) => {
         const postsRecents = await Posts.find({})
         const feedbacks = await Feedbacks.countDocuments({})
 
-        res.render('layouts/dashboard', {isAdmin: true, totalUsers: users, totalPosts: posts, totalFeedbacks: feedbacks, usersRecent: usersRecent, postsRecents: postsRecents, posts: find.posts.reverse(), notifications: find.notifications, historic: find.historic})
+        res.render('layouts/dashboard', {isAdmin: true, totalUsers: users, totalPosts: posts, totalFeedbacks: feedbacks, usersRecent: usersRecent, postsRecents: postsRecents, posts: find.posts.reverse().slice(0, 10), notifications: find.notifications.reverse().slice(0, 5), historic: find.historic.reverse().slice(0, 10)})
     } else {
-        res.render('layouts/dashboard', {isAdmin: false, type_account: find.type_account, posts: find.posts.reverse(), total_accounts: find.accountsFb.length + find.accountsIg.length, total_groups: find.groups.length, total_posts: find.posts.length, notifications: find.notifications, historic: find.historic})
+        res.render('layouts/dashboard', {isAdmin: false, type_account: find.type_account, posts: find.posts.reverse().slice(0, 10), total_accounts: find.accountsFb.length + find.accountsIg.length, total_groups: find.groups.length, total_posts: find.posts.length, notifications: find.notifications.reverse().slice(0, 5), historic: find.historic.reverse().slice(0, 10)})
     }
 })
 
@@ -23,16 +23,16 @@ const allPosts = asyncHandler(async(req, res) => {
     const find = await User.findById(req.cookies._id)
 
     if (find.isAdmin) {
-        res.render('layouts/posts', {isAdmin: true, posts: find.posts.reverse(), notifications: find.notifications})
+        res.render('layouts/posts', {isAdmin: true, posts: find.posts.reverse(), notifications: find.notifications.reverse().slice(0, 5)})
     } else {
-        res.render('layouts/posts', {isAdmin: false, posts: find.posts.reverse(), notifications: find.notifications})
+        res.render('layouts/posts', {isAdmin: false, posts: find.posts.reverse(), notifications: find.notifications.reverse().slice(0, 5)})
     }
 })
 
 const notifications = asyncHandler(async(req, res) => {
     const find = await User.findById(req.cookies._id)
 
-    res.render('layouts/notifications', {isAdmin: find.isAdmin, notifications: find.notifications})
+    res.render('layouts/notifications', {isAdmin: find.isAdmin, notifications: find.notifications.reverse()})
 
 })
 

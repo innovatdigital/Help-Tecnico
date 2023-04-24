@@ -140,12 +140,21 @@
                 </div>
               </article>
 
-              <article class="white-block" style="background-color: #faf613;">
-                <div class="top-cat-title">
-                  <h3>Faça upgrade da sua conta</h3>
-                  <p>Faça upgrade para cadastrar mais contas</p>
-                </div>
-              </article>
+              <% if (type_account != "Avançado") { %>
+                <article class="white-block" style="background-color: #f5f100;">
+                  <div class="top-cat-title">
+                    <h3>Faça upgrade da sua conta</h3>
+                    <p style="color: #8f8f8f; font-size: 14px;">Faça upgrade para cadastrar mais contas</p>
+                  </div>
+                </article>
+              <% } else { %>
+                <article class="white-block" style="background-color: #f5f100;">
+                  <div class="top-cat-title">
+                    <h3>Seu plano oferece contas ilimitadas</h3>
+                    <p style="color: #8f8f8f; font-size: 14px;">Aproveite todos os benefícios do seu plano.</p>
+                  </div>
+                </article>
+              <% } %>
             </div>
           </div>
         </div>

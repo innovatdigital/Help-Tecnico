@@ -14,7 +14,7 @@ const config = asyncHandler(async(req, res) => {
         accounts.push(account)
     })
 
-    res.render('layouts/config', {isAdmin: find.isAdmin, user: find, notifications: find.notifications})
+    res.render('layouts/config', {isAdmin: find.isAdmin, user: find, notifications: find.notifications.reverse().slice(0, 5)})
 })
 
 module.exports = 

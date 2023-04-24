@@ -48,7 +48,7 @@ const accounts = asyncHandler(async(req, res) => {
         accountsRemaining = "Contas ilimitadas"
     }
 
-    res.render('layouts/accounts', {isAdmin: find.isAdmin, accounts: accounts, total_accounts: count, accountsRemaining: accountsRemaining, notifications: find.notifications})
+    res.render('layouts/accounts', {isAdmin: find.isAdmin, accounts: accounts, total_accounts: count, accountsRemaining: accountsRemaining, type_account: find.type_account, notifications: find.notifications.reverse().slice(0, 5)})
 })
 
 async function newAccountFb(id_user, accessToken, profile) {

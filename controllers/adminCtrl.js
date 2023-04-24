@@ -8,14 +8,14 @@ const feedbacks = asyncHandler(async(req, res) => {
     const getFeedbacks = await Feedbacks.find({}).lean()
     const find = await User.findById(req.cookies._id)
 
-    res.render('layouts/feedbacks', { isAdmin: true, feedbacks: getFeedbacks, notifications: find.notifications })
+    res.render('layouts/feedbacks', { isAdmin: true, feedbacks: getFeedbacks, notifications: find.notifications.reverse().slice(0, 5) })
 })
 
 const users = asyncHandler(async(req, res) => {
     const users = await User.find({}).lean()
     const find = await User.findById(req.cookies._id)
 
-    res.render('layouts/users', { isAdmin: true, users: users, notifications: find.notifications })
+    res.render('layouts/users', { isAdmin: true, users: users, notifications: find.notifications.reverse().slice(0, 5) })
 })
 
 const newUser = asyncHandler(async(req, res) => {
@@ -42,18 +42,18 @@ const newUser = asyncHandler(async(req, res) => {
 const newUserPage = asyncHandler(async(req, res) => {
     const find = await User.findById(req.cookies._id)
 
-    res.render('layouts/new_user', { isAdmin: true, notifications: find.notifications })
+    res.render('layouts/new_user', { isAdmin: true, notifications: find.notifications.reverse().slice(0, 5) })
 })
 
 const infoUser = asyncHandler(async(req, res) => {
     const find = await User.findById(req.params.id)
 
-    res.render('layouts/info_user', { isAdmin: true, find: find, notifications: find.notifications })
+    res.render('layouts/info_user', { isAdmin: true, find: find, notifications: find.notifications.reverse().slice(0, 5) })
 })
 
 const updateUser = asyncHandler(async(req, res) => {
     try {
-        const update = await User.findByIdAndUpdate(req.params.id, {name: req.body.name, cpf: req.body.cpf, number: req.body.number, email: req.body.email, password: req.body.password, type_account: req.body.type_account, isAdmin: req.body.admin, notifications: find.notifications})
+        const update = await User.findByIdAndUpdate(req.params.id, {name: req.body.name, cpf: req.body.cpf, number: req.body.number, email: req.body.email, password: req.body.password, type_account: req.body.type_account, isAdmin: req.body.admin, notifications: find.notifications.reverse().slice(0, 5)})
 
         res.sendStatus(200)
     } catch (err) {
@@ -105,7 +105,7 @@ const plans = asyncHandler(async(req, res) => {
     const plans = await Plans.find({}).lean()
     const find = await User.findById(req.cookies._id)
 
-    res.render('layouts/plans', { isAdmin: true, plans: plans, notifications: find.notifications })
+    res.render('layouts/plans', { isAdmin: true, plans: plans, notifications: find.notifications.reverse().slice(0, 5) })
 })
 
 const newPlan = asyncHandler(async(req, res) => {
@@ -124,7 +124,7 @@ const finance = asyncHandler(async(req, res) => {
         valueTotal = valueTotal + value.value
     })
 
-    res.render('layouts/finance', { isAdmin: true, finance: finance, valueTotal: valueTotal, notifications: find.notifications })
+    res.render('layouts/finance', { isAdmin: true, finance: finance, valueTotal: valueTotal, notifications: find.notifications.reverse().slice(0, 5) })
 })
 
 const emails = asyncHandler(async(req, res) => {
