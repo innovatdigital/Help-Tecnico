@@ -39,7 +39,7 @@ db.once('open', function() {
             post.pages_ids.forEach((item) => {
               const promise = new Promise(async(resolve, reject) => {
                 formData.append('access_token', item.access_token);
-                
+      
                 axios({
                   method: 'POST',
                   url: `https://graph.facebook.com/v16.0/${item.id}/feed`,
@@ -52,7 +52,9 @@ db.once('open', function() {
                   ids_update.push(`${response.data.id}_${item.access_token}_page`)
                   resolve()
                 })
-                .catch(error => reject(error));
+                .catch(error => {
+                  resolve();
+                });
               })
               promises.push(promise)
             })
@@ -75,13 +77,13 @@ db.once('open', function() {
                   ids_update.push(`${response.data.id}_${item.access_token}_group`)
                   resolve()
                 })
-                .catch(error => reject(error));
+                .catch(error => resolve());
               })
               promises.push(promise)
             });
           }
 
-          await Promise.all(promises)
+          await Promise.allSettled(promises)
         
           const ids = post.ids_posts_pages_and_groups
           ids_update.forEach(id => {
@@ -172,7 +174,7 @@ db.once('open', function() {
                     }
                     resolve()
                   })
-                  .catch(error => reject(error));
+                  .catch(error => resolve());
                 })
               })
               promises.push(promise)
@@ -226,14 +228,14 @@ db.once('open', function() {
                     }
                     resolve()
                   })
-                  .catch(error => reject(error));
+                  .catch(error => resolve());
                 })
               })
               promises.push(promise)
             });
           }
 
-          await Promise.all(promises)
+          await Promise.allSettled(promises)
 
           // Pegar a imagem do post
           const filter = ids_update[0].split("_")

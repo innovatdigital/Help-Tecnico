@@ -6,12 +6,14 @@ const Finances = require('../models/Finances')
 
 const feedbacks = asyncHandler(async(req, res) => {
     const getFeedbacks = await Feedbacks.find({}).lean()
+    const find = await User.findById(req.cookies._id)
 
     res.render('layouts/feedbacks', { isAdmin: true, feedbacks: getFeedbacks, notifications: find.notifications })
 })
 
 const users = asyncHandler(async(req, res) => {
     const users = await User.find({}).lean()
+    const find = await User.findById(req.cookies._id)
 
     res.render('layouts/users', { isAdmin: true, users: users, notifications: find.notifications })
 })
@@ -38,6 +40,8 @@ const newUser = asyncHandler(async(req, res) => {
 })
 
 const newUserPage = asyncHandler(async(req, res) => {
+    const find = await User.findById(req.cookies._id)
+
     res.render('layouts/new_user', { isAdmin: true, notifications: find.notifications })
 })
 
@@ -99,6 +103,7 @@ const deleteUser = asyncHandler(async(req, res) => {
 
 const plans = asyncHandler(async(req, res) => {
     const plans = await Plans.find({}).lean()
+    const find = await User.findById(req.cookies._id)
 
     res.render('layouts/plans', { isAdmin: true, plans: plans, notifications: find.notifications })
 })
@@ -111,6 +116,7 @@ const newPlan = asyncHandler(async(req, res) => {
 
 const finance = asyncHandler(async(req, res) => {
     const finance = await Finances.find({}).lean()
+    const find = await User.findById(req.cookies._id)
 
     valueTotal = 0
 
