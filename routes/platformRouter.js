@@ -59,6 +59,7 @@ const {
 const { 
     dashboard,
     allPosts,
+    notifications,
     logout
 } = require('../controllers/platformCtrl')
 
@@ -138,8 +139,13 @@ router.get("/groups", auth, groups)
 
 
 
-// Historico
+// Historic
 router.get("/historic", auth, historic)
+
+
+
+// Notifications
+router.get("/notifications", auth, notifications)
 
 
 

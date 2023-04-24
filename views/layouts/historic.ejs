@@ -23,7 +23,7 @@
 
     <div class="main-wrapper">
       <!-- ! Main nav -->
-      <%- include('../partials/nav-platform', {isAdmin: isAdmin, title: "Histórico do usuário"}) %>
+      <%- include('../partials/nav-platform', {isAdmin: isAdmin, title: "Histórico do usuário", notifications: notifications}) %>
   
       <% if (historic.length > 0) { %>
       <main class="main users chart-page" id="skip-target">
@@ -34,10 +34,9 @@
                   <table class="campaings-table">
                     <thead>
                       <tr class="users-table-info">
+                        <th>Imagem</th>
                         <th>Ação</th>
-                        <th>Nome do usuário</th>
-                        <th>Créditos do WhatsApp</th>
-                        <th>Créditos de SMS</th>
+                        <th>Descrição</th>
                         <th>Data</th>
                       </tr>
                     </thead>
@@ -45,16 +44,17 @@
                         <% historic.forEach(function(item) { %>
                           <tr>
                             <td>
+                              <% if (item.type == "post") { %>
+                                <img style="border-radius: 0%;" src="/img/admin/post.png" alt="img">
+                              <% } else if (item.type == "account") { %>
+                                <img style="border-radius: 0%;" src="/img/admin/accounts.png" alt="img">
+                              <% } %>
+                            </td>
+                            <td>
                               <%= item.action %>
                             </td>
                             <td>
-                              <%= item.name %>
-                            </td>
-                            <td>
-                              <%= item.credits_whatsapp %>
-                            </td>
-                            <td>
-                              <%= item.credits_sms %>
+                              <%= item.subtitle %>
                             </td>
                             <td>
                               <%= item.date %>
@@ -72,7 +72,7 @@
         <div class="alert" style="display: none;"></div>
         <div class="empty">
           <img src="/img/admin/Bulk/historic-green.png" height="60" alt=""><br>
-          <h2>Nenhuma atividade recente</h2>
+          <h2 style="color: #752a7a">Nenhuma atividade recente.</h2>
         </div>
       <% } %>
 

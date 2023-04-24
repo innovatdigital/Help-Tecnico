@@ -45,10 +45,10 @@ const accounts = asyncHandler(async(req, res) => {
     } else if (find.type_account == "Pro") {
         accountsRemaining = 15 - count
     } else if (find.type_account == "Avançado") {
-        accountsRemaining = 30 - count
+        accountsRemaining = "Contas ilimitadas"
     }
 
-    res.render('layouts/accounts', {isAdmin: find.isAdmin, accounts: accounts, total_accounts: count, accountsRemaining: accountsRemaining})
+    res.render('layouts/accounts', {isAdmin: find.isAdmin, accounts: accounts, total_accounts: count, accountsRemaining: accountsRemaining, notifications: find.notifications})
 })
 
 async function newAccountFb(id_user, accessToken, profile) {
@@ -156,6 +156,13 @@ async function newAccountFb(id_user, accessToken, profile) {
                                         "posts": [],
                                         "pages": pages_user,
                                     },
+
+                                    historic: {
+                                        "action": "Nova conta adicionada.",
+                                        "subtitle": profile.name,
+                                        "date": dataFormat,
+                                        "type": "account"
+                                    }
                                 }
                             }, {
                                 new: true
@@ -184,6 +191,13 @@ async function newAccountFb(id_user, accessToken, profile) {
                             "posts": [],
                             "pages": pages_user,
                         },
+
+                        historic: {
+                            "action": "Nova conta adicionada.",
+                            "subtitle": profile.name,
+                            "date": dataFormat,
+                            "type": "account"
+                        }
                     }
                 }, {
                     new: true

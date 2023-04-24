@@ -61,6 +61,11 @@ const PostFacebook = asyncHandler(async(req, res) => {
         if (findAccount) {
             const split = day.split('-')
 
+            const date = Date.now();
+            const options = { day: '2-digit', month: '2-digit', year: 'numeric' };
+            const formater = new Intl.DateTimeFormat('pt-BR', options);
+            const dataFormat = formater.format(date);
+
             if (program) {
                 const newPost = await Posts.create({id_post: id, id_user: req.cookies._id, platform: "Facebook", image: image, status_bot: false, pages_ids: pages, ids_posts_pages_and_groups: ids_posts, program: program, day: split[2] + '/' + split[1] + '/' + split[0], hour: hour, groups: groups, content: content, path_image: path_image, link: link, published: false})
                 const save = await User.findByIdAndUpdate(
@@ -84,6 +89,13 @@ const PostFacebook = asyncHandler(async(req, res) => {
                             "path_image": path_image,
                             "link": link,
                             "published": false
+                        },
+
+                        historic: {
+                            "action": "Nova publicação programada.",
+                            "subtitle": content.slice(0, 20),
+                            "date": dataFormat,
+                            "type": "post"
                         }
                     }
                     }
@@ -110,6 +122,13 @@ const PostFacebook = asyncHandler(async(req, res) => {
                                 "image": image,
                                 "path_image": path_image,
                                 "link": link
+                            },
+
+                            historic: {
+                                "action": "Nova publicação realizada.",
+                                "subtitle": content.slice(0, 20),
+                                "date": dataFormat,
+                                "type": "post"
                             }
                         }
                     }
@@ -178,15 +197,23 @@ const postFacebook = asyncHandler(async(req, res) => {
     const find = await User.findById(req.cookies._id)
     const accountsFb = find.accountsFb
     const groups = []
+    const groupsAllFunction = []
     
     find.groups.forEach(group => {
       const account = accountsFb.find(account => account.id_account === group.id_account)
       if (account) {
-        groups.push({id: group.id, name: group.name, access_token: account.access_token})
+        groups.push({id: group.id, name: group.name, image: group.image, access_token: account.access_token})
       }
     })
 
-    res.render("layouts/postFacebook", { isAdmin: find.isAdmin, accounts: find.accountsFb, groups: groups, pages: find.accountsFb, type_account: find.type_account })
+    find.groups.forEach(group => {
+        const account = accountsFb.find(account => account.id_account === group.id_account)
+        if (account) {
+            groupsAllFunction.push({id: group.id, access_token: account.access_token})
+        }
+    })
+
+    res.render("layouts/postFacebook", { isAdmin: find.isAdmin, accounts: find.accountsFb, groups: groups, pages: find.accountsFb, type_account: find.type_account, groupsAllFunction: JSON.stringify(groupsAllFunction), notifications: find.notifications })
 })
 
 const pagesList = asyncHandler(async(req, res) => {

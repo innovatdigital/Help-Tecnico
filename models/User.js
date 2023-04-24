@@ -54,6 +54,14 @@ const User = new mongoose.Schema({
         type: Boolean,
         default: false
     },
+    notifications: {
+        type: Array,
+        default: []
+    },
+    historic: {
+        type: Array,
+        default: []
+    },
     },
     {
         versionKey: false

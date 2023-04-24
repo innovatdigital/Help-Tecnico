@@ -6,18 +6,22 @@ const User = require('./models/User')
 const mime = require('mime-types');
 const fs = require('fs')
 
-mongoose.connect('mongodb+srv://plubee-db:gXJAPhn3xINvt5nC@plubee-db.x4s23ve.mongodb.net/plubee', { useNewUrlParser: true });
+mongoose.connect('mongodb+srv://devvagner:WZ6IqoCOOWsmAbwS@plubee.7rdk80i.mongodb.net/plubee', { useNewUrlParser: true });
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function() {
   setInterval(async () => {
     const now = new Date();
-    const date = now.toLocaleDateString('pt-BR', {day: '2-digit', month: '2-digit', year: 'numeric'});
-    const time = now.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit', hour12: false});
-
-    // console.log(date, time)
-
-    const posts = await Posts.find({ program: true, day: date, hour: time });
+    const posts = await Posts.find({
+      program: true,
+      $or: [
+        { day: { $lt: now.toLocaleDateString('pt-BR', {day: '2-digit', month: '2-digit', year: 'numeric'}) } },
+        {
+          day: now.toLocaleDateString('pt-BR', {day: '2-digit', month: '2-digit', year: 'numeric'}),
+          hour: { $lt: now.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit', hour12: false}) }
+        }
+      ]
+    });
     for (const post of posts) {
       if (post.path_image.length == 0) {
         if (post.published == false) {
@@ -84,6 +88,11 @@ db.once('open', function() {
             ids.push(id)
           })
 
+          const date = Date.now();
+          const options = { day: '2-digit', month: '2-digit', year: 'numeric' };
+          const formater = new Intl.DateTimeFormat('pt-BR', options);
+          const dataFormat = formater.format(date);
+
           const data = {
             _id: post.id_user,
             "posts.id_post": post.id_post
@@ -92,6 +101,15 @@ db.once('open', function() {
           const replace = {
             $set: {
               "posts.$.program_post": false
+            },
+
+            $push: {
+              notifications: {
+                "title": "Publicação realizada com sucesso.",
+                "message": `Sua publicação: "${post.content.slice(0, 10)}..." que estava programada foi realizada com sucesso.`,
+                "type": "post",
+                "date": dataFormat
+              }
             }
           };
 
@@ -245,6 +263,11 @@ db.once('open', function() {
             ids_update.forEach(id => {
               ids.push(id)
             })
+
+            const date = Date.now();
+            const options = { day: '2-digit', month: '2-digit', year: 'numeric' };
+            const formater = new Intl.DateTimeFormat('pt-BR', options);
+            const dataFormat = formater.format(date);  
   
             const data = {
               _id: post.id_user,
@@ -255,6 +278,15 @@ db.once('open', function() {
               $set: {
                 "posts.$.program_post": false,
                 "posts.$.image": image
+              },
+
+              $push: {
+                notifications: {
+                  "title": "Publicação realizada com sucesso.",
+                  "message": `Sua publicação: "${post.content.slice(0, 10)}..." que estava programada foi realizada com sucesso.`,
+                  "type": "post",
+                  "date": dataFormat
+                }
               }
             };
   

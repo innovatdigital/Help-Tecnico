@@ -15,35 +15,55 @@
         <span class="sr-only">Toggle menu</span>
         <span class="icon menu-toggle--gray" aria-hidden="true"></span>
       </button>
-      <button class="theme-switcher gray-circle-btn" type="button" title="Switch theme">
+      <button style="border: 1px solid #752a7a" class="theme-switcher gray-circle-btn" type="button" title="Switch theme">
         <span class="sr-only">Switch theme</span>
         <i class="sun-icon" data-feather="sun" aria-hidden="true"></i>
         <i class="moon-icon" data-feather="moon" aria-hidden="true"></i>
       </button>
       <div class="notification-wrapper">
-        <button class="gray-circle-btn dropdown-btn" title="To messages" type="button">
+        <button style="border: 1px solid #752A7A;" class="gray-circle-btn dropdown-btn" title="To messages" type="button">
           <span class="sr-only">To messages</span>
           <span class="icon notification active" aria-hidden="true"></span>
         </button>
         <ul class="users-item-dropdown notification-dropdown dropdown">
-          <li>
-            <a href="">
-              <div class="notification-dropdown-icon info">
-                <i data-feather="check"></i>
-              </div>
-              <div class="notification-dropdown-text">
-                <span class="notification-dropdown__title">Nenhuma notificação</span>
-                <span class="notification-dropdown__subtitle">Você receberá todas as notificações aqui na plataforma.</span>
-              </div>
-            </a>
-          </li>
+          <% if (notifications.length == 0) { %>
+            <li>
+              <a href="">
+                <div class="notification-dropdown-icon info">
+                  <i data-feather="check"></i>
+                </div>
+                <div class="notification-dropdown-text">
+                  <span class="notification-dropdown__title">Nenhuma notificação</span>
+                  <span class="notification-dropdown__subtitle">Você receberá todas as notificações aqui na plataforma.</span>
+                </div>
+              </a>
+            </li>
+          <% } else { %>
+            <% notifications.forEach(function(item) { %>
+              <li>
+                <a href="">
+                  <div class="notification-dropdown-icon info">
+                    <% if (item.type == "post") { %>
+                      <img style="height: 24px;" src="/img/admin/post.png" alt="">
+                    <% } else if (item.type == "platform") { %>
+                      <img style="border-radius: 100%; height: 32px;" src="/img/platform/publi-logo-completa.png" alt="">
+                    <% } %>
+                  </div>
+                  <div class="notification-dropdown-text">
+                    <span class="notification-dropdown__title"><%= item.title %></span>
+                    <span class="notification-dropdown__subtitle"><%= item.message %></span>
+                  </div>
+                </a>
+              </li>
+            <% }) %>
+          <% } %> 
         </ul>
       </div>
       <div class="nav-user-wrapper">
         <button href="##" class="nav-user-btn dropdown-btn" title="My profile" type="button">
           <span class="sr-only">My profile</span>
           <span class="nav-user-img">
-            <picture><source srcset="/img/platform/publi-logo-completa.png" type="image/webp"><img src="/img/platform/publi-logo-completa.png" alt="User name"></picture>
+            <picture><source srcset="/img/platform/publi-logo-completa.png" type="image/webp"><img src="/img/platform/publi-logo-completa.png" alt="plubee account"></picture>
           </span>
         </button>
         <ul class="users-item-dropdown nav-user-dropdown dropdown">

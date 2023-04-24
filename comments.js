@@ -4,7 +4,7 @@ const Comments = require('./models/Comments');
 const Posts = require('./models/Posts')
 const axios = require('axios');
 
-mongoose.connect('mongodb+srv://plubee-db:gXJAPhn3xINvt5nC@plubee-db.x4s23ve.mongodb.net/plubee', { useNewUrlParser: true });
+mongoose.connect('mongodb+srv://devvagner:WZ6IqoCOOWsmAbwS@plubee.7rdk80i.mongodb.net/plubee', { useNewUrlParser: true });
 
 const db = mongoose.connection;
 

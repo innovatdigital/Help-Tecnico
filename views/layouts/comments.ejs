@@ -23,7 +23,7 @@
 
     <div class="main-wrapper">
       <!-- ! Main nav -->
-      <%- include('../partials/nav-platform', {isAdmin: isAdmin, title: "Comentários automáticos"}) %>
+      <%- include('../partials/nav-platform', {isAdmin: isAdmin, title: "Comentários automáticos", notifications: notifications}) %>
 
       <div class="enable" style="display: flex; align-items: initial;">
         <div style="margin-top: 130px;">
@@ -33,9 +33,13 @@
           <textarea type="text" style="width: 100%;" name="content" id="content-input" placeholder="Que legal o seu comentário!"></textarea><br>
 
           <h3>Limite de comentários</h3>
-          <input type="text" style="width: 100%;" name="limit" placeholder="Até 1000 comentários" id="limit-input">
+          <% if (type_account == "Avançado") { %>
+            <input type="text" style="width: 100%;" name="limit" placeholder="Digite a quantidade" id="limit-input">
+          <% } else { %>
+            <input type="text" style="width: 100%;" name="limit" placeholder="Até 1000 comentários" id="limit-input">
+          <% } %>
           <br>
-          <button class="event" id="btn-active" style="padding: 12px;" onclick="activeComment('<%= isAdmin %>')">Ativar</button>
+          <button class="event" id="btn-active" style="padding: 12px;" onclick="activeComment()">Ativar</button>
           <button class="event" id="btn-close" style="padding: 12px;" onclick="setHide()">Fechar</button>
         </div>
       </div>
@@ -122,7 +126,7 @@
       <div class="alert" style="display: none;"></div>
       <div class="empty">
         <img src="/img/admin/post.png" height="60" alt=""><br>
-        <h2>Nenhuma publicação adicionada.</h2>
+        <h2 style="color: #752a7a">Nenhuma publicação adicionada.</h2>
         <button style="padding: 13px 50px !important; margin-top: 30px;" class="event" id="btn-open"><a href="/platform/post_facebook">Criar publicação</a></button>
       </div>
       <% } %>
@@ -142,7 +146,148 @@
 </body>
 
 <script>
-  var _0xb017=["\x23\x62\x74\x6E\x2D\x61\x63\x74\x69\x76\x65","\x71\x75\x65\x72\x79\x53\x65\x6C\x65\x63\x74\x6F\x72","\x23\x62\x74\x6E\x2D\x6F\x70\x65\x6E","\x23\x62\x74\x6E\x2D\x63\x6C\x6F\x73\x65","\x2E\x65\x6E\x61\x62\x6C\x65","\x2E\x65\x6E\x61\x62\x6C\x65\x2D\x68\x31","\x2E\x65\x6E\x61\x62\x6C\x65\x2D\x70","\x23\x63\x6F\x6E\x74\x65\x6E\x74\x2D\x69\x6E\x70\x75\x74","\x23\x6C\x69\x6D\x69\x74\x2D\x69\x6E\x70\x75\x74","","\x64\x69\x73\x70\x6C\x61\x79","\x73\x74\x79\x6C\x65","\x6E\x6F\x6E\x65","\x66\x6C\x65\x78","\x69\x6E\x6E\x65\x72\x48\x54\x4D\x4C","\x41\x74\x69\x76\x61\x72\x20\x63\x6F\x6D\x65\x6E\x74\xE1\x72\x69\x6F\x73\x20\x61\x75\x74\x6F\x6D\xE1\x74\x69\x63\x6F\x73","\x73\x63\x72\x6F\x6C\x6C\x54\x6F","\x76\x61\x6C\x75\x65","\x65\x72\x72\x6F\x72","\x63\x61\x74\x63\x68","\x6F\x6B","\x2E\x61\x6C\x65\x72\x74","\x70","\x63\x72\x65\x61\x74\x65\x45\x6C\x65\x6D\x65\x6E\x74","\x69\x6D\x67","\x73\x72\x63","\x2F\x69\x6D\x67\x2F\x70\x6C\x61\x74\x66\x6F\x72\x6D\x2F\x63\x68\x65\x63\x6B\x65\x64\x2E\x70\x6E\x67","\x77\x69\x64\x74\x68","\x32\x38","\x68\x65\x69\x67\x68\x74","\x6D\x65\x73\x73\x61\x67\x65\x2D\x6E\x6F\x74\x69\x66\x79","\x61\x64\x64","\x63\x6C\x61\x73\x73\x4C\x69\x73\x74","\x69\x6E\x6E\x65\x72\x54\x65\x78\x74","\x42\x6F\x74\x20\x61\x74\x69\x76\x61\x64\x6F\x20\x63\x6F\x6D\x20\x73\x75\x63\x65\x73\x73\x6F\x2E","\x61\x70\x70\x65\x6E\x64\x43\x68\x69\x6C\x64","\x72\x65\x6C\x6F\x61\x64","\x74\x68\x65\x6E","\x63\x6F\x6D\x6D\x65\x6E\x74\x73\x2D\x61\x75\x74\x6F\x6D\x61\x74\x69\x63\x2F\x63\x6F\x6E\x66\x69\x67","\x50\x55\x54","\x61\x70\x70\x6C\x69\x63\x61\x74\x69\x6F\x6E\x2F\x6A\x73\x6F\x6E","\x73\x74\x72\x69\x6E\x67\x69\x66\x79","\x2E\x65\x72\x72\x6F\x72","\x2F\x69\x6D\x67\x2F\x61\x64\x6D\x69\x6E\x2F\x42\x75\x6C\x6B\x2F\x65\x72\x72\x6F\x72\x2E\x70\x6E\x67","\x4F\x20\x6C\x69\x6D\x69\x74\x65\x20\x6E\xE3\x6F\x20\x70\x6F\x64\x65\x20\x70\x61\x73\x73\x61\x72\x20\x64\x65\x20\x31\x30\x30\x30\x2E","\x4F\x20\x76\x61\x6C\x6F\x72\x20\x64\x65\x76\x65\x20\x73\x65\x72\x20\x75\x6D\x20\x6E\xFA\x6D\x65\x72\x6F\x2E","\x63\x6F\x6D\x6D\x65\x6E\x74\x73\x2D\x61\x75\x74\x6F\x6D\x61\x74\x69\x63\x2F\x64\x65\x6C\x65\x74\x65\x2F","\x44\x45\x4C\x45\x54\x45"];const btnActive=document[_0xb017[1]](_0xb017[0]);const btnOpen=document[_0xb017[1]](_0xb017[2]);const btnClose=document[_0xb017[1]](_0xb017[3]);const enable=document[_0xb017[1]](_0xb017[4]);const enableH1=document[_0xb017[1]](_0xb017[5]);const enableP=document[_0xb017[1]](_0xb017[6]);const content=document[_0xb017[1]](_0xb017[7]);const limit=document[_0xb017[1]](_0xb017[8]);let idPost=_0xb017[9];let platformPost=_0xb017[9];enable[_0xb017[11]][_0xb017[10]]= _0xb017[12];function openDiv(_0x5097xc,_0x5097xd){enable[_0xb017[11]][_0xb017[10]]= _0xb017[13];enableH1[_0xb017[14]]= _0xb017[15];idPost= _0x5097xc;platformPost= _0x5097xd;window[_0xb017[16]](0,0)}function activeComment(_0x5097xf){if(Number(limit[_0xb017[17]])){if(_0x5097xf== true){fetch(_0xb017[38],{method:_0xb017[39],headers:{'\x43\x6F\x6E\x74\x65\x6E\x74\x2D\x54\x79\x70\x65':_0xb017[40]},body:JSON[_0xb017[41]]({id_post:idPost,platform:platformPost,content_comment:content[_0xb017[17]],limit_comments:limit[_0xb017[17]]})})[_0xb017[37]]((_0x5097x11)=>{if(_0x5097x11[_0xb017[20]]){const _0x5097x12=document[_0xb017[1]](_0xb017[21]);_0x5097x12[_0xb017[11]][_0xb017[10]]= _0xb017[13];_0x5097x12[_0xb017[14]]= _0xb017[9];const _0x5097x13=document[_0xb017[23]](_0xb017[22]);const _0x5097x14=document[_0xb017[23]](_0xb017[24]);_0x5097x14[_0xb017[25]]= _0xb017[26];_0x5097x14[_0xb017[27]]= _0xb017[28];_0x5097x14[_0xb017[29]]= _0xb017[28];_0x5097x13[_0xb017[32]][_0xb017[31]](_0xb017[30]);_0x5097x13[_0xb017[33]]= _0xb017[34];_0x5097x12[_0xb017[35]](_0x5097x14);_0x5097x12[_0xb017[35]](_0x5097x13);setTimeout(()=>{enable[_0xb017[11]][_0xb017[10]]= _0xb017[12];_0x5097x12[_0xb017[11]][_0xb017[10]]= _0xb017[12];location[_0xb017[36]]()},1500)}})[_0xb017[19]]((_0x5097x10)=>{return console[_0xb017[18]](_0x5097x10)})}else {if(limit[_0xb017[17]]> 1000){const _0x5097x12=document[_0xb017[1]](_0xb017[42]);_0x5097x12[_0xb017[11]][_0xb017[10]]= _0xb017[13];_0x5097x12[_0xb017[14]]= _0xb017[9];const _0x5097x13=document[_0xb017[23]](_0xb017[22]);const _0x5097x14=document[_0xb017[23]](_0xb017[24]);_0x5097x14[_0xb017[25]]= _0xb017[43];_0x5097x14[_0xb017[27]]= _0xb017[28];_0x5097x14[_0xb017[29]]= _0xb017[28];_0x5097x13[_0xb017[32]][_0xb017[31]](_0xb017[30]);_0x5097x13[_0xb017[33]]= _0xb017[44];_0x5097x12[_0xb017[35]](_0x5097x14);_0x5097x12[_0xb017[35]](_0x5097x13);setTimeout(()=>{_0x5097x12[_0xb017[11]][_0xb017[10]]= _0xb017[12]},1500)}else {fetch(_0xb017[38],{method:_0xb017[39],headers:{'\x43\x6F\x6E\x74\x65\x6E\x74\x2D\x54\x79\x70\x65':_0xb017[40]},body:JSON[_0xb017[41]]({id_post:idPost,platform:platformPost,content_comment:content[_0xb017[17]],limit_comments:limit[_0xb017[17]]})})[_0xb017[37]]((_0x5097x11)=>{if(_0x5097x11[_0xb017[20]]){const _0x5097x12=document[_0xb017[1]](_0xb017[21]);_0x5097x12[_0xb017[11]][_0xb017[10]]= _0xb017[13];_0x5097x12[_0xb017[14]]= _0xb017[9];const _0x5097x13=document[_0xb017[23]](_0xb017[22]);const _0x5097x14=document[_0xb017[23]](_0xb017[24]);_0x5097x14[_0xb017[25]]= _0xb017[26];_0x5097x14[_0xb017[27]]= _0xb017[28];_0x5097x14[_0xb017[29]]= _0xb017[28];_0x5097x13[_0xb017[32]][_0xb017[31]](_0xb017[30]);_0x5097x13[_0xb017[33]]= _0xb017[34];_0x5097x12[_0xb017[35]](_0x5097x14);_0x5097x12[_0xb017[35]](_0x5097x13);setTimeout(()=>{enable[_0xb017[11]][_0xb017[10]]= _0xb017[12];_0x5097x12[_0xb017[11]][_0xb017[10]]= _0xb017[12];location[_0xb017[36]]()},1500)}})[_0xb017[19]]((_0x5097x10)=>{return console[_0xb017[18]](_0x5097x10)})}}}else {const _0x5097x12=document[_0xb017[1]](_0xb017[42]);_0x5097x12[_0xb017[11]][_0xb017[10]]= _0xb017[13];_0x5097x12[_0xb017[14]]= _0xb017[9];const _0x5097x13=document[_0xb017[23]](_0xb017[22]);const _0x5097x14=document[_0xb017[23]](_0xb017[24]);_0x5097x14[_0xb017[25]]= _0xb017[43];_0x5097x14[_0xb017[27]]= _0xb017[28];_0x5097x14[_0xb017[29]]= _0xb017[28];_0x5097x13[_0xb017[32]][_0xb017[31]](_0xb017[30]);_0x5097x13[_0xb017[33]]= _0xb017[45];_0x5097x12[_0xb017[35]](_0x5097x14);_0x5097x12[_0xb017[35]](_0x5097x13);setTimeout(()=>{_0x5097x12[_0xb017[11]][_0xb017[10]]= _0xb017[12]},1500)}}function disableComment(_0x5097xc){fetch(_0xb017[46]+ _0x5097xc,{method:_0xb017[47],headers:{'\x43\x6F\x6E\x74\x65\x6E\x74\x2D\x54\x79\x70\x65':_0xb017[40]}})[_0xb017[37]]((_0x5097x11)=>{return _0x5097x11[_0xb017[20]]})[_0xb017[37]]((_0x5097x16)=>{if(_0x5097x16){location[_0xb017[36]]()}})[_0xb017[19]]((_0x5097x10)=>{return console[_0xb017[18]](_0x5097x10)})}function setHide(){enable[_0xb017[11]][_0xb017[10]]= _0xb017[12];count= 0}
+  const btnActive = document.querySelector('#btn-active')
+  const btnOpen = document.querySelector('#btn-open')
+  const btnClose = document.querySelector('#btn-close')
+  const enable = document.querySelector('.enable')
+  const enableH1 = document.querySelector('.enable-h1')
+  const enableP = document.querySelector('.enable-p')
+  const content = document.querySelector('#content-input')
+  const limit = document.querySelector('#limit-input')
+  let idPost = ""
+  let platformPost = ""
+
+  enable.style.display = "none"
+
+  function openDiv(id_post, platform) {
+    enable.style.display = "flex"
+    enableH1.innerHTML = "Ativar comentários automáticos"
+
+    idPost = id_post
+    platformPost = platform
+
+    window.scrollTo(0, 0);
+  }
+
+  function activeComment() {
+    const type_account = '<%= type_account %>'
+
+    if (Number(limit.value)) {
+      if (type_account == "Avançado") {
+        fetch("comments-automatic/config", {
+          method: "PUT",
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ id_post: idPost, platform: platformPost, content_comment: content.value, limit_comments: limit.value })
+        })
+        .then(response => {
+          if (response.ok) {
+            const divMessage = document.querySelector(".alert");
+            divMessage.style.display = "flex";
+            divMessage.innerHTML = "";
+            const message = document.createElement("p");
+            const img = document.createElement("img");
+            img.src = "/img/platform/checked.png"
+            img.width = "28"
+            img.height = "28"
+            message.classList.add("message-notify");
+            message.innerText = "Bot ativado com sucesso.";
+            divMessage.appendChild(img);
+            divMessage.appendChild(message);
+
+            setTimeout(() => {
+              enable.style.display = "none"
+              divMessage.style.display = "none";
+              location.reload()
+            }, 1500);
+          }
+        })
+        .catch(error => console.error(error));
+      } else {
+        if (limit.value > 1000) {
+          const divMessage = document.querySelector(".error");
+          divMessage.style.display = "flex";
+          divMessage.innerHTML = "";
+          const message = document.createElement("p");
+          const img = document.createElement("img");
+          img.src = "/img/admin/Bulk/error.png"
+          img.width = "28"
+          img.height = "28"
+          message.classList.add("message-notify");
+          message.innerText = "O limite não pode passar de 1000.";
+          divMessage.appendChild(img);
+          divMessage.appendChild(message);
+
+          setTimeout(() => {
+            divMessage.style.display = "none";
+          }, 1500);
+        } else {
+          fetch("comments-automatic/config", {
+            method: "PUT",
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ id_post: idPost, platform: platformPost, content_comment: content.value, limit_comments: limit.value })
+          })
+          .then(response => {
+            if (response.ok) {
+              const divMessage = document.querySelector(".alert");
+              divMessage.style.display = "flex";
+              divMessage.innerHTML = "";
+              const message = document.createElement("p");
+              const img = document.createElement("img");
+              img.src = "/img/platform/checked.png"
+              img.width = "28"
+              img.height = "28"
+              message.classList.add("message-notify");
+              message.innerText = "Bot ativado com sucesso.";
+              divMessage.appendChild(img);
+              divMessage.appendChild(message);
+
+              setTimeout(() => {
+                enable.style.display = "none"
+                divMessage.style.display = "none";
+                location.reload()
+              }, 1500);
+            }
+          })
+          .catch(error => console.error(error));
+        }
+      }
+    } else {
+      const divMessage = document.querySelector(".error");
+      divMessage.style.display = "flex";
+      divMessage.innerHTML = "";
+      const message = document.createElement("p");
+      const img = document.createElement("img");
+      img.src = "/img/admin/Bulk/error.png"
+      img.width = "28"
+      img.height = "28"
+      message.classList.add("message-notify");
+      message.innerText = "O valor deve ser um número.";
+      divMessage.appendChild(img);
+      divMessage.appendChild(message);
+
+      setTimeout(() => {
+        divMessage.style.display = "none";
+      }, 1500);
+    }
+  }
+
+  function disableComment(id_post) {
+    fetch("comments-automatic/delete/" + id_post, {
+        method: "DELETE",
+        headers: { 'Content-Type': 'application/json' },
+    }).then(response => response.ok)
+      .then(data => {
+        if (data) {
+          location.reload()
+        }
+      })
+      .catch(error => console.error(error));
+  }
+
+  function setHide() {
+    enable.style.display = "none"
+    count = 0
+  }
 </script>
 
 </html>

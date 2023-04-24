@@ -7,13 +7,13 @@ const Finances = require('../models/Finances')
 const feedbacks = asyncHandler(async(req, res) => {
     const getFeedbacks = await Feedbacks.find({}).lean()
 
-    res.render('layouts/feedbacks', { isAdmin: true, feedbacks: getFeedbacks })
+    res.render('layouts/feedbacks', { isAdmin: true, feedbacks: getFeedbacks, notifications: find.notifications })
 })
 
 const users = asyncHandler(async(req, res) => {
     const users = await User.find({}).lean()
 
-    res.render('layouts/users', { isAdmin: true, users: users })
+    res.render('layouts/users', { isAdmin: true, users: users, notifications: find.notifications })
 })
 
 const newUser = asyncHandler(async(req, res) => {
@@ -38,18 +38,18 @@ const newUser = asyncHandler(async(req, res) => {
 })
 
 const newUserPage = asyncHandler(async(req, res) => {
-    res.render('layouts/new_user', { isAdmin: true })
+    res.render('layouts/new_user', { isAdmin: true, notifications: find.notifications })
 })
 
 const infoUser = asyncHandler(async(req, res) => {
     const find = await User.findById(req.params.id)
 
-    res.render('layouts/info_user', { isAdmin: true, find: find })
+    res.render('layouts/info_user', { isAdmin: true, find: find, notifications: find.notifications })
 })
 
 const updateUser = asyncHandler(async(req, res) => {
     try {
-        const update = await User.findByIdAndUpdate(req.params.id, {name: req.body.name, cpf: req.body.cpf, number: req.body.number, email: req.body.email, password: req.body.password, type_account: req.body.type_account, isAdmin: req.body.admin})
+        const update = await User.findByIdAndUpdate(req.params.id, {name: req.body.name, cpf: req.body.cpf, number: req.body.number, email: req.body.email, password: req.body.password, type_account: req.body.type_account, isAdmin: req.body.admin, notifications: find.notifications})
 
         res.sendStatus(200)
     } catch (err) {
@@ -100,7 +100,7 @@ const deleteUser = asyncHandler(async(req, res) => {
 const plans = asyncHandler(async(req, res) => {
     const plans = await Plans.find({}).lean()
 
-    res.render('layouts/plans', { isAdmin: true, plans: plans })
+    res.render('layouts/plans', { isAdmin: true, plans: plans, notifications: find.notifications })
 })
 
 const newPlan = asyncHandler(async(req, res) => {
@@ -118,7 +118,7 @@ const finance = asyncHandler(async(req, res) => {
         valueTotal = valueTotal + value.value
     })
 
-    res.render('layouts/finance', { isAdmin: true, finance: finance, valueTotal: valueTotal })
+    res.render('layouts/finance', { isAdmin: true, finance: finance, valueTotal: valueTotal, notifications: find.notifications })
 })
 
 const emails = asyncHandler(async(req, res) => {

@@ -23,7 +23,7 @@
 
     <div class="main-wrapper">
       <!-- ! Main nav -->
-      <%- include('../partials/nav-platform', {isAdmin: isAdmin, title: "Grupos importados"}) %>
+      <%- include('../partials/nav-platform', {isAdmin: isAdmin, title: "Grupos importados", notifications: notifications}) %>
   
       <!-- ! Main -->
       <% if (groups.length > 0) { %>
@@ -63,7 +63,7 @@
       <% } else { %>
       <div class="empty">
         <img src="/img/admin/groups.png" height="60" alt=""><br>
-        <h2>Nenhum grupo importado ainda.</h2>
+        <h2 style="color: #752a7a">Nenhum grupo importado ainda.</h2>
         <button style="padding: 13px 50px !important; margin-top: 30px;" class="event" id="btn-open"><a href="/platform/accounts">Adicionar conta</a></button>
       </div>
       <% } %>

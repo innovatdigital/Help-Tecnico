@@ -23,7 +23,7 @@
 
     <div class="main-wrapper">
       <!-- ! Main nav -->
-      <%- include('../partials/nav-platform', {isAdmin: isAdmin, title: "Todos os posts"}) %>
+      <%- include('../partials/nav-platform', {isAdmin: isAdmin, title: "Todos os posts", notifications: notifications}) %>
   
       <!-- ! Main -->
         <main class="main users chart-page" id="skip-target">
@@ -101,7 +101,7 @@
             <div class="alert" style="display: none;"></div>
             <div class="empty">
               <img src="/img/admin/post.png" height="60" alt=""><br>
-              <h2>Nenhuma publicação adicionada.</h2>
+              <h2 style="color: #752a7a">Nenhuma publicação adicionada.</h2>
               <button style="padding: 13px 50px !important; margin-top: 30px;" class="event" id="btn-open"><a href="/platform/post_facebook">Criar publicação</a></button>
             </div>
           <% } %>

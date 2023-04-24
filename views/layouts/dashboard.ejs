@@ -21,7 +21,7 @@
 
     <div class="main-wrapper">
       <!-- ! Main nav -->
-      <%- include('../partials/nav-platform', {isAdmin: isAdmin, title: "Dashboard do usuário:"}) %>
+      <%- include('../partials/nav-platform', {isAdmin: isAdmin, title: "Dashboard do usuário:", notifications: notifications}) %>
       
       <!-- ! Main -->
       <main class="main users chart-page" id="skip-target">
@@ -219,86 +219,22 @@
               <article class="white-block">
                 <div class="top-cat-title">
                   <h3>Histórico de atividades:</h3>
-                  <p>Funcionalidade em manutenção.</p>
+                  <p>Atividades recentes</p>
                 </div>
                 <ul class="top-cat-list">
-                    <!-- <li>
-                      <a href="##">
-                        <div class="top-cat-list__title">
-                          Muito legal o seu post
-                        </div>
-                        <div class="top-cat-list__subtitle">
-                          Tiago<span class="purple">02/01/2023</span>
-                        </div>
-                      </a>
-                    </li>
-
+                  <% historic.forEach(function(item) { %>
                     <li>
                       <a href="##">
                         <div class="top-cat-list__title">
-                          Adorei essa dica
+                          <%= item.action %>
                         </div>
                         <div class="top-cat-list__subtitle">
-                          Guilherme<span class="purple">04/01/2023</span>
+                          <%= item.subtitle %>
+                          <span class="purple"><%= item.date %></span>
                         </div>
                       </a>
                     </li>
-
-                    <li>
-                      <a href="##">
-                        <div class="top-cat-list__title">
-                          Muito bacana esse bolo!
-                        </div>
-                        <div class="top-cat-list__subtitle">
-                          Amanda<span class="purple">08/01/2023</span>
-                        </div>
-                      </a>
-                    </li>
-
-                    <li>
-                      <a href="##">
-                        <div class="top-cat-list__title">
-                          Que dica legal
-                        </div>
-                        <div class="top-cat-list__subtitle">
-                          Vanessa<span class="purple">25/01/2023</span>
-                        </div>
-                      </a>
-                    </li>
-
-                    <li>
-                      <a href="##">
-                        <div class="top-cat-list__title">
-                          Vou fazer aqui!
-                        </div>
-                        <div class="top-cat-list__subtitle">
-                          Marina<span class="purple">11/02/2023</span>
-                        </div>
-                      </a>
-                    </li>
-                    
-                    <li>
-                      <a href="##">
-                        <div class="top-cat-list__title">
-                          Compartilhei com todos aqui
-                        </div>
-                        <div class="top-cat-list__subtitle">
-                          Pedro<span class="purple">13/02/2023</span>
-                        </div>
-                      </a>
-                    </li>
-
-                    <li>
-                      <a href="##">
-                        <div class="top-cat-list__title">
-                          Acompanho vocês em tudo!
-                        </div>
-                        <div class="top-cat-list__subtitle">
-                          Larissa<span class="purple">14/02/2023</span>
-                        </div>
-                      </a>
-                    </li> -->
-
+                  <% }) %>
                 </ul>
               </article>
             </div>

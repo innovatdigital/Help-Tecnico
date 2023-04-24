@@ -23,7 +23,7 @@
 
     <div class="main-wrapper">
       <!-- ! Main nav -->
-      <%- include('../partials/nav-platform', {isAdmin: isAdmin, title: "Contas cadastradas"}) %>
+      <%- include('../partials/nav-platform', {isAdmin: isAdmin, title: "Contas cadastradas", notifications: notifications}) %>
   
       <!-- ! Main -->
       <main class="main users chart-page" id="skip-target">
@@ -100,7 +100,7 @@
               <% } else { %>
               <div class="empty empty-account">
                 <img src="/img/admin/accounts.png" height="60" alt=""><br>
-                <h2>Nenhuma conta adicionada.</h2>
+                <h2 style="color: #752a7a">Nenhuma conta adicionada.</h2>
               </div>
               <% } %>
             </div>
@@ -130,12 +130,12 @@
               <article class="white-block">
                 <div class="top-cat-title">
                   <h3>Contas restantes</h3>
-                  <% if (accountsRemaining === 1) { %>
+                  <% if (accountsRemaining == 1) { %>
                     <p style="font-size: 16px; color: #752A7A;"><%= accountsRemaining %> conta restante.</p>
                   <% } else if (accountsRemaining > 1) { %>
                     <p style="font-size: 16px; color: #752A7A;"><%= accountsRemaining %> contas restantes.</p>
                   <% } else { %>
-                    <p style="font-size: 16px; color: #752A7A;">Nenhuma conta cadastrada ainda.</p>
+                    <p style="font-size: 16px; color: #752A7A;"><%= accountsRemaining %></p>
                   <% } %>
                 </div>
               </article>
