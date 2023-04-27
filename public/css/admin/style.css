@@ -3701,6 +3701,15 @@ textarea {
   animation: time 3s forwards;
 }
 
+@keyframes slideoff {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(10000px);
+  }
+}
+
 @keyframes time {
   0% {
     width: 0;

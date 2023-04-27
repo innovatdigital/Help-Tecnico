@@ -22,11 +22,7 @@ const dashboard = asyncHandler(async(req, res) => {
 const allPosts = asyncHandler(async(req, res) => {
     const find = await User.findById(req.cookies._id)
 
-    if (find.isAdmin) {
-        res.render('layouts/posts', {isAdmin: true, posts: find.posts.reverse(), notifications: find.notifications.reverse().slice(0, 5)})
-    } else {
-        res.render('layouts/posts', {isAdmin: false, posts: find.posts.reverse(), notifications: find.notifications.reverse().slice(0, 5)})
-    }
+    res.render('layouts/posts', {isAdmin: find.isAdmin, posts: find.posts.reverse().slice(0, 50), notifications: find.notifications.reverse().slice(0, 5)})
 })
 
 const notifications = asyncHandler(async(req, res) => {
