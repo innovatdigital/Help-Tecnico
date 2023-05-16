@@ -62,6 +62,10 @@ const User = new mongoose.Schema({
         type: Array,
         default: []
     },
+    photo: {
+        type: String,
+        default: "" 
+    }
     },
     {
         versionKey: false

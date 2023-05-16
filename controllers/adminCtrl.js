@@ -124,7 +124,7 @@ const finance = asyncHandler(async(req, res) => {
         valueTotal = valueTotal + value.value
     })
 
-    res.render('layouts/finance', { isAdmin: true, finance: finance, valueTotal: valueTotal, notifications: find.notifications.reverse().slice(0, 5) })
+    res.render('layouts/finance', { isAdmin: true, finance: finance.reverse(), valueTotal: valueTotal, notifications: find.notifications.reverse().slice(0, 5) })
 })
 
 const emails = asyncHandler(async(req, res) => {

@@ -2,6 +2,7 @@ const express = require('express')
 const router = express.Router()
 const axios = require('axios')
 const cookie = require('cookie');
+const User = require('../models/User');
 const multer  = require('multer');
 const path = require('path')
 const fs = require('fs')
@@ -65,6 +66,7 @@ const {
 
 const { 
     config,
+    updateAccount
 } = require('../controllers/configAccountCtrl')
 
 const {
@@ -123,8 +125,8 @@ const upload = multer({ storage: storage });
 router.post('/post/upload', auth, upload.single('image'), function (req, res, next) {
   const filePath = path.join('uploads', req.file.filename);
   const extension = path.extname(req.file.originalname);
-  const newRandomNumber = Math.floor(Math.random() * 1000000000); // gera um novo número aleatório com até 9 dígitos
-  const newFilename = uuidv4() + '-' + Date.now() + '-' + newRandomNumber.toString() + extension; // concatena o identificador único, o timestamp e o novo número aleatório com a extensão do arquivo
+  const newRandomNumber = Math.floor(Math.random() * 1000000000);
+  const newFilename = uuidv4() + '-' + Date.now() + '-' + newRandomNumber.toString() + extension
   fs.rename(filePath, path.join('uploads', newFilename), function (err) {
     if (err) {
       return next(err);
@@ -234,6 +236,49 @@ router.get("/help", auth, tutorials)
 
 // Configurações da conta
 router.get("/config", auth, config)
+router.post("/config/update", auth, updateAccount)
+
+const storagePhoto = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, './public/img/photos')
+  },
+  filename: function (req, file, cb) {
+    const extension = path.extname(file.originalname);
+    const randomNumber = Math.floor(Math.random() * 1000000000); // gera um número aleatório com até 9 dígitos
+    const filename = randomNumber.toString() + extension; // concatena o número aleatório com a extensão do arquivo
+    cb(null, filename);
+  }
+});
+
+const uploadPhoto = multer({ storage: storagePhoto });
+
+router.post('/config/upload', auth, uploadPhoto.single('image'), function (req, res, next) {
+  const filePath = path.join('./public/img/photos', req.file.filename);
+  const extension = path.extname(req.file.originalname);
+  const newRandomNumber = Math.floor(Math.random() * 1000000000);
+  const newFilename = uuidv4() + '-' + Date.now() + '-' + newRandomNumber.toString() + extension
+  fs.rename(filePath, path.join('./public/img/photos', newFilename), async function (err) {
+    if (err) {
+      return next(err);
+    }
+
+    const find = await User.findById(req.cookies._id)
+
+    if (find.photo.length != 0) {
+      fs.unlink(`./public/img/photos/${find.photo}`, (err) => {
+        if (err) {
+          res.sendStatus(500)
+        }
+      });
+    }
+    
+    const update = await User.findByIdAndUpdate(req.cookies._id, {
+      photo: newFilename
+    })
+
+    res.send(newFilename);
+  });
+});
 
 
 

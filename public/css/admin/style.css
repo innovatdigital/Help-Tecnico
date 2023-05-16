@@ -1220,12 +1220,12 @@ body {
 }
 
 .theme-switcher circle {
-  fill: #D6D7E3;
-  stroke: #D6D7E3;
+  fill: #B6B6B6;
+  stroke: #B6B6B6;
 }
 
 .theme-switcher line {
-  stroke: #D6D7E3;
+  stroke: #B6B6B6;
 }
 
 .users .primary-white-btn svg {
@@ -2466,7 +2466,7 @@ button.event {
   overflow: hidden;
   width: 40px;
   height: 40px;
-  background-color: #F5EFFF;
+  background-color: transparent;
 }
 
 .main-nav .nav-user-img picture {
@@ -3538,7 +3538,6 @@ button.event {
   padding: 11px 8px;
   color: #767676;
   background-color: #FFFFFF;
-  border: 4px solid #ffffff;
   border-radius: 18px;
 }
 
@@ -3570,7 +3569,7 @@ select {
   border-radius: 10px;
 }
 
-description-group {
+.description-group {
   width: 10px !important; 
   height: 10px !important;
   white-space: nowrap !important;
@@ -3581,6 +3580,48 @@ description-group {
 textarea {
   border: 2px solid #752a7a;
   border-radius: 10px;
+}
+
+.photo-profile {
+  display: flex;
+  align-items: center;
+  margin: 16px 0 0 0;
+}
+
+.photo {
+  color: transparent;
+  width: 104px;
+  padding: 0;
+  height: 10px;
+}
+.photo::-webkit-file-upload-button {
+  visibility: hidden;
+}
+.photo::before {
+  content: 'Escolher foto';
+  color: #752a7a;
+  display: inline-block;
+  background: -webkit-linear-gradient(top, #ffffff, #ffffff);
+  border-radius: 3px;
+  padding: 10px 8px;
+  outline: none;
+  white-space: nowrap;
+  cursor: pointer;
+  text-shadow: 1px 1px #fff;
+  font-weight: 700;
+  font-size: 10pt;
+}
+.photo:active {
+  outline: 0;
+}
+.photo:active::before {
+  background: -webkit-linear-gradient(top, #ffffff, #ffffff); 
+}
+
+.photo-profile img {
+  width: 46px;
+  height: 46px;
+  border-radius: 100%;
 }
 
 .alert {

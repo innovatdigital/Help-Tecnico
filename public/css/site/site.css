@@ -736,7 +736,16 @@ i {
 	margin-left: 35vw;
 }
 
-@media (max-width: 500px) {
+@media (max-width: 360px) {
+	footer {
+		display: flex;
+		flex-direction: column;
+		justify-content: initial;
+		height: 330vw !important;
+	}
+}
+
+@media (max-width: 700px) {
 	nav {
 		width: 100%;
 		height: 80px;
@@ -753,7 +762,8 @@ i {
 		right: 0;
 		top: 0;
 		background-color: #ffffff;	
-		width: 45vw;
+		width: 54vw;
+		height: 100%;
 		border: 2px solid #752A7A;
 		border-radius: 4px;
 		opacity: 1;
@@ -765,7 +775,7 @@ i {
 	}
 
 	.a-nav-login-mobile {
-		padding: 1.4vw 2.8vw;
+		padding: 2vw 2.8vw;
 		background: #FFFFFF;
 		border: 3px solid #752A7A;
 		border-radius: 28px;
@@ -782,7 +792,7 @@ i {
 	}
 	
 	.a-nav-planos-mobile {
-		padding: 1.4vw 1.8vw;
+		padding: 2vw 1.8vw;
 		background: #752A7A;
 		border: 3px solid #752A7A;
 		border-radius: 28px;
@@ -810,16 +820,16 @@ i {
 	#close-menu {
 		position: absolute;
 		right: 0;
-		margin-right: 1vw;
+		margin-right: 3vw;
 		background-color: #752a7a00;
 		border: 3px solid #752A7A;
 		border-radius: 40px;
-		padding: 1vw;
+		padding: 2vw;
 		display: flex;
 		justify-content: center;
 		align-items: center;
-		width: 6vw;
-		height: 6vw;
+		width: 8vw;
+		height: 8vw;
 	}
 
 	.mobile {
@@ -841,7 +851,7 @@ i {
 	}
 
 	.home {
-		height: 430px;
+		height: 85vw;
 		display: flex;
 		justify-content: start;
 		align-content: start;
@@ -851,12 +861,12 @@ i {
 		width: 70vw;
 		font-size: 6vw;
 		margin: 0px;
-		margin-right: 10px;
-		margin-top: 5vw;
+		margin-top: 7vw;
 	}
 	
 	.home h3 {
-		width: 400px;
+		width: auto;
+		margin: 0px;
 		font-size: 4vw;
 	}
 	
@@ -900,11 +910,12 @@ i {
 	}
 
 	.a-plataforma-title {
-		height: 215px !important;
+		height: 120vw !important;
 	}
 	
 	.a-plataforma-title h1 {
 		font-size: 6vw;
+		margin-top: 6vw;
 	}
 	
 	.a-plataforma-title h2 {
@@ -922,7 +933,7 @@ i {
 	.a-plataforma-section {
 		display: flex;
 		flex-wrap: wrap;
-		height: 14vw;
+		height: 110vw;
 	}
 	
 	.a-plataforma-img {
@@ -931,6 +942,7 @@ i {
 	
 	.a-plataforma-infos-one {
 		margin-top: 6vw;
+		margin-left: 2vw;
 	}
 	
 	.a-plataforma-icon {
@@ -958,9 +970,9 @@ i {
 	}
 
 	.sobre {
-		height: 500px;
+		height: 130vw;
 		display: flex;
-		margin-top: 270px;
+		margin-top: 0px;
 		flex-direction: column;
 	}
 	
@@ -992,7 +1004,7 @@ i {
 	}
 
 	.depoimentos {
-		height: 960px;
+		height: 240vw;
 	}
 	
 	.depoimentos .title {
@@ -1071,8 +1083,8 @@ i {
 	}
 
 	.planos {
+		height: 310vw;
 		background: url("/img/login/back-branco.png") no-repeat;
-		margin-top: 1.8vw;
 	}
 	
 	.planos .title-planos {
@@ -1123,7 +1135,7 @@ i {
 	
 	.planos .flex-planos .div-big {
 		width: 70vw;
-		height: 90vw;
+		height: 94vw;
 		background-color: #752A7A;
 		border: 5px solid #752A7A;
 		box-shadow: 0px 4px 18px rgba(0, 0, 0, 0.25);
@@ -1222,6 +1234,10 @@ i {
 		margin-top: 3rem;
 		margin-bottom: 1.6rem;
 		margin-left: 7vw;
+	}
+
+	.rights {
+		margin-left: 20px;
 	}
 	
 	.p-1 {

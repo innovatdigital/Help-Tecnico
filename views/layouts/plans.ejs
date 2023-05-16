@@ -30,16 +30,15 @@
       <!-- ! Main -->
       <main class="main users chart-page" id="skip-target">
         <div class="container">
-          <% if (isAdmin) { %>
-            <h2 class="main-title">Planos - Administrador - Em manutenção</h2>
-          <% } %>
-          
           <div class="row" style="margin-top: 2rem">
             <% plans.forEach(item => { %>
               <div class="col-md-6 col-xl-3">
                 <article class="stat-cards-item plans">
-                  <h2 style="color: #752A7A;"><%= item.title %></h2>
-                  <h1 style="color: #752A7A; font-size: 15px; margin: 12px 0 8px 0">Valor mensal: R$<%= item.value_month %></h1><br>
+                  <div>
+                    <h2 style="color: #752A7A;"><%= item.title %></h2>
+                    <h1 style="color: #752A7A; font-size: 15px; margin: 12px 0 8px 0">Valor mensal: R$<%= item.value_month %></h1>
+                  </div>
+                  
                   <h4 style="margin: 22px 0px;">Descrição plano:</h4>
                   <div>
                     <% item.description.forEach(description => { %>

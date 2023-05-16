@@ -21,12 +21,12 @@
         <i class="moon-icon" data-feather="moon" aria-hidden="true"></i>
       </button>
       <div class="notification-wrapper">
-        <button style="border: 1px solid #752A7A;" class="gray-circle-btn dropdown-btn" title="To messages" type="button">
-          <span class="sr-only">To messages</span>
-          <span class="icon notification active" aria-hidden="true"></span>
-        </button>
-        <ul class="users-item-dropdown notification-dropdown dropdown">
-          <% if (notifications.length == 0) { %>
+        <% if (notifications.length == 0) { %>
+          <button style="border: 1px solid #752A7A;" class="gray-circle-btn dropdown-btn" title="To messages" type="button">
+            <span class="sr-only">To messages</span>
+            <span class="icon notification" aria-hidden="true"></span>
+          </button>
+          <ul class="users-item-dropdown notification-dropdown dropdown">
             <li>
               <a href="/platform/notifications">
                 <div class="notification-dropdown-icon info">
@@ -38,7 +38,13 @@
                 </div>
               </a>
             </li>
-          <% } else { %>
+          </ul>
+        <% } else { %>
+          <button style="border: 1px solid #752A7A;" class="gray-circle-btn dropdown-btn" title="To messages" type="button">
+            <span class="sr-only">To messages</span>
+            <span class="icon notification active" aria-hidden="true"></span>
+          </button>
+          <ul class="users-item-dropdown notification-dropdown dropdown">
             <% notifications.forEach(function(item) { %>
               <li>
                 <a href="/platform/notifications">
@@ -56,14 +62,18 @@
                 </a>
               </li>
             <% }) %>
-          <% } %> 
-        </ul>
+          </ul>
+        <% } %>
       </div>
       <div class="nav-user-wrapper">
         <button href="##" class="nav-user-btn dropdown-btn" title="My profile" type="button">
           <span class="sr-only">My profile</span>
           <span class="nav-user-img">
-            <picture><source srcset="/img/platform/publi-logo-completa.png" type="image/webp"><img src="/img/platform/publi-logo-completa.png" alt="plubee account"></picture>
+            <% if (photo.length != 0) { %>
+              <picture><source srcset="/img/photos/<%= photo %>" type="image/webp"><img src="/img/photos/<%= photo %>" alt="plubee account"></picture>
+            <% } else { %>
+              <picture><source srcset="/img/platform/profile.png" type="image/webp"><img src="/img/platform/profile.png" alt="plubee account"></picture>
+            <% } %>
           </span>
         </button>
         <ul class="users-item-dropdown nav-user-dropdown dropdown">

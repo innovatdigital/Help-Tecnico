@@ -24,10 +24,13 @@
 
     <div class="main-wrapper">
       <!-- ! Main nav -->
-      <%- include('../partials/nav-platform', {isAdmin: isAdmin, title: "Configurações da conta:", notifications: notifications}) %>
+      <%- include('../partials/nav-platform', {isAdmin: isAdmin, title: "Configurações da conta:", notifications: notifications, photo: user.photo}) %>
   
       <!-- ! Main -->
       <main class="main users chart-page" id="skip-target">
+        <div class="alert" style="display: none;"><div style="display: flex;" class="alert-text"></div></div>
+        <div class="error" style="display: none;"><div style="display: flex;" class="error-text"></div></div>
+
         <div class="container">
           <div class="row">
             <div class="col-lg-3" style="margin-top: 1.5rem;">
@@ -36,91 +39,117 @@
                   <h3 style="font-size: 20px">Selecione uma opção</h3>
                 </div>
                 <div class="config-div">
-                  <div><button><i class="bi bi-person"></i>Dados pessoais</button></div>
-                  <div><button><i class="bi bi-key"></i>Informações de login</button></div>
-                  <div><button><i class="bi bi-credit-card-2-front"></i>Pagamentos</button></div>
-                  <div><button><i class="bi bi-person-exclamation"></i>Suporte</button></div>
+                  <div><button onclick="visibleProfile()"><i class="bi bi-person"></i>Perfil</button></div>
+                  <div><button onclick="visibleLogin()"><i class="bi bi-key"></i>Informações de login</button></div>
+                  <div><button onclick="visiblePayments()"><i class="bi bi-credit-card-2-front"></i>Pagamentos</button></div>
+                  <div><a href="https://api.whatsapp.com/send?phone=558189230790"><button><i class="bi bi-person-exclamation"></i></a>Suporte</button></div>
                 </div>
               </article>
             </div>
 
             <div class="col-lg-8" id="dados-div" style="margin-top: 1.5rem;">
-              <article class="white-block">
+              <article class="white-block" id="profile">
                 <div class="top-cat-title">
-                  <h3 style="font-size: 20px">Dados pessoais</h3>
+                  <h3 style="color: #752A7A; font-size: 20px">Editar perfil</h3>
+                </div>
+                
+                <div style="margin: 16px 0;">
+                  <h3 style="font-size: 16px">Imagem de perfil</h3>
+                
+                  <div class="photo-profile">
+                    <div style="margin-right: 10px;">
+                      <% if (user.photo.length != 0) { %>
+                        <img class="preview" src="/img/photos/<%= user.photo %>" alt="imagem de perfil">
+                      <% } else { %>
+                        <img class="preview" src="/img/platform/profile.png" alt="imagem de perfil">
+                      <% } %>
+                    </div>
+                    
+                    <div>
+                      <input class="photo" type="file">
+                    </div>
+                  </div>
                 </div>
                 <div style="margin-top: 18px;">
                   <div style="display: flex; flex-wrap: wrap;">
                     <div style="margin-right: 40px;">
-                      <h4 style="font-size: 18px;">Nome:</h4>
-                      <input type="text" name="nome" id="nome" style="margin-top: 12px; width: 14.5vw;" value="<%= user.name %>">
+                      <h4 style="font-size: 16px;">Nome:</h4>
+                      <input type="text" name="name" id="name" style="margin-top: 12px; width: 14.5vw;" value="<%= user.name %>">
                     </div>
                     <div style="margin-right: 40px;">
-                      <h4 style="font-size: 18px">CPF:</h4>
+                      <h4 style="font-size: 16px">CPF:</h4>
                       <input type="text" name="cpf" id="cpf" style="margin-top: 12px; width: 14.5vw;" value="<%= user.cpf %>">
                     </div>
                     <div>
-                      <h4 style="font-size: 18px">Número de telefone:</h4>
+                      <h4 style="font-size: 16px">Número de telefone:</h4>
                       <input type="text" name="number" id="number" style="margin-top: 12px; width: 14.5vw;" value="<%= user.number %>">
                     </div>
                   </div>
                   <div style="display: flex; flex-wrap: wrap; margin-top: 35px;">
                     <div style="margin-right: 40px;">
-                      <h4 style="font-size: 18px;">Email:</h4>
-                      <input type="text" name="email" id="email" style="margin-top: 12px; width: 14.5vw;" value="<%= user.email %>">
+                      <h4 style="font-size: 16px;">Email:</h4>
+                      <input type="text" name="email" class="email" style="margin-top: 12px; width: 14.5vw;" value="<%= user.email %>">
                     </div>
                     <div style="margin-right: 40px;">
-                      <h4 style="font-size: 18px">Tipo de conta:</h4>
-                      <input type="text" name="type" id="type" style="margin-top: 12px; width: 14.5vw;" value="<%= user.type_account %>">
+                      <h4 style="font-size: 16px">Tipo de conta:</h4>
+                      <input type="text" name="type" readonly id="type" style="background-color: rgb(236, 236, 236); margin-top: 12px; width: 14.5vw;" value="<%= user.type_account %>">
                     </div>
-                  </div>
-                </div>
-              </article>
-
-              <article class="white-block">
-                <div class="top-cat-title">
-                  <h3 style="font-size: 20px">Informações de login</h3>
-                </div>
-                <div style="margin-top: 18px;">
-                  <div style="display: flex; flex-wrap: wrap;">
-                    <div style="margin-right: 40px;">
-                      <h4 style="font-size: 18px;">Email:</h4>
-                      <input type="text" name="email" id="email" style="margin-top: 12px; width: 14.5vw;" value="<%= user.email %>">
-                    </div>
-                    <div style="margin-right: 40px;">
-                      <h4 style="font-size: 18px">Senha:</h4>
-                      <input type="text" name="password" id="password" style="margin-top: 12px; width: 14.5vw;" value="<%= user.password %>">
+                    <div>
+                      <button style="color: #FFFFFF; background-color: #752A7A; padding: 10px; border-radius: 10px; margin-top: 30px;" onclick="saveProfile()">Atualizar informações</button>
                     </div>
                   </div>
                 </div>
               </article>
 
-              <article class="white-block">
+              <article style="display: none;" class="white-block" id="login">
                 <div class="top-cat-title">
-                  <h3 style="font-size: 20px">Pagamentos</h3>
+                  <h3 style="color: #752A7A; font-size: 20px">Informações de login</h3>
                 </div>
                 <div style="margin-top: 18px;">
                   <div style="display: flex; flex-wrap: wrap;">
                     <div style="margin-right: 40px;">
-                      <h4 style="font-size: 18px;">Nome do cartão</h4>
+                      <h4 style="font-size: 16px;">Email:</h4>
+                      <input type="text" name="email" class="email" style="margin-top: 12px; width: 14.5vw;" value="<%= user.email %>">
+                    </div>
+                    <div style="margin-right: 40px;">
+                      <h4 style="font-size: 16px">Senha:</h4>
+                      <input type="text" name="password" id="password" style="margin-top: 12px; width: 14.5vw;" value="*****">
+                      <button onclick="showPassword()" id="show" class="event">Ver</button>
+                      <button onclick="hidePassword()" style="display: none;" id="hide" class="event">Ocultar</button>
+                    </div>
+                    <div>
+                      <button style="color: #FFFFFF; background-color: #752A7A; padding: 10px; border-radius: 10px; margin-top: 30px;" onclick="saveLogin()">Atualizar informações</button>
+                    </div>
+                  </div>
+                </div>
+              </article>
+
+              <article style="display: none;" class="white-block" id="payments">
+                <div class="top-cat-title">
+                  <h3 style="color: #752A7A; font-size: 20px">Pagamentos</h3>
+                </div>
+                <div style="margin-top: 18px;">
+                  <div style="display: flex; flex-wrap: wrap;">
+                    <div style="margin-right: 40px;">
+                      <h4 style="font-size: 16px;">Nome do cartão</h4>
                       <input type="text" name="nome-card" id="nome-card" style="margin-top: 12px; width: 14.5vw;">
                     </div>
                     <div style="margin-right: 40px;">
-                      <h4 style="font-size: 18px">Número do cartão:</h4>
-                      <input type="text" name="number" id="number" style="margin-top: 12px; width: 14.5vw;">
+                      <h4 style="font-size: 16px">Número do cartão:</h4>
+                      <input type="text" name="number" id="number-card" style="margin-top: 12px; width: 14.5vw;">
                     </div>
                     <div>
-                      <h4 style="font-size: 18px">Data de validade:</h4>
+                      <h4 style="font-size: 16px">Data de validade:</h4>
                       <input type="text" name="data" id="data" style="margin-top: 12px; width: 14.5vw;">
                     </div>
                   </div>
                   <div style="display: flex; flex-wrap: wrap; margin-top: 35px;">
                     <div style="margin-right: 40px;">
-                      <h4 style="font-size: 18px;">CVV:</h4>
+                      <h4 style="font-size: 16px;">CVV:</h4>
                       <input type="text" name="cvv" id="cvv" style="margin-top: 12px; width: 14.5vw;">
                     </div>
                     <div style="margin-right: 40px; width: 14.5vw;">
-                      <h4 style="font-size: 18px">Pagamento automático:</h4>
+                      <h4 style="font-size: 16px">Pagamento automático:</h4>
                       <input type="checkbox" name="automatic" id="automatic" style="margin-top: 15px; margin-right: 12px;">Sim
                     </div>
                   </div>
@@ -142,5 +171,199 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <!-- Icons library -->
 <script src="js/admin/feather.min.js"></script>
+
+<script>
+  const photo = document.querySelector(".photo")
+  const preview = document.querySelector(".preview")
+  const name = document.querySelector("#name")
+  const email = document.querySelector(".email")
+  const number = document.querySelector("#number")
+  const cpf = document.querySelector("#cpf")
+  const password = document.querySelector("#password")
+  const show = document.querySelector("#show")
+  const hide = document.querySelector("#hide")
+
+  const profile = document.querySelector("#profile")
+  const login = document.querySelector("#login")
+  const payments = document.querySelector("#payments")
+
+  const upload = (e) => {
+    const formData = new FormData();
+    formData.append('image', photo.files[0]);
+
+    return fetch('/platform/config/upload', {
+      method: 'POST',
+      body: formData
+    })
+    .then((response) => {
+      return response.text()
+    })
+    .then((filename) => {
+      const newImagePath = "/img/photos/" + filename
+      preview.src = newImagePath;
+    })
+  }
+
+  photo.addEventListener('change', upload);
+  
+  function alert_message(type, content) {
+    if (type == 'error') {
+      const divMessage = document.querySelector(".error");
+      divMessage.style.display = "flex";
+
+      const divMessageText = document.querySelector(".error-text");
+      divMessageText.innerHTML = "";
+
+      const message = document.createElement("p");
+      const img = document.createElement("img");
+      img.width = "28"
+      img.height = "28"
+      img.src = "/img/admin/Bulk/error.png"
+      message.classList.add("message-notify");
+      message.innerText = content;
+      divMessageText.appendChild(img);
+      divMessageText.appendChild(message);
+
+      setTimeout(() => {
+        divMessage.style = "animation: slideoff 2s;"
+        setTimeout(() => {
+          divMessage.style = "display: none"
+        }, 800)
+      }, 2000);
+    } else if (type == "success") {
+      const divMessage = document.querySelector(".alert");
+      divMessage.style.display = "flex";
+
+      const divMessageText = document.querySelector(".alert-text");
+      divMessageText.innerHTML = "";
+      
+      const message = document.createElement("p");
+      const img = document.createElement("img");
+      img.width = "34"
+      img.height = "34"
+      img.src = "/img/admin/Bulk/checked.png"
+      message.classList.add("message-notify");
+      message.innerText = content;
+      divMessageText.appendChild(img);
+      divMessageText.appendChild(message);
+
+      setTimeout(() => {
+        divMessage.style = "animation: slideoff 2s;"
+        setTimeout(() => {
+          divMessage.style = "display: none"
+        }, 800)
+      }, 2000);
+    }
+  }
+  
+  async function saveProfile() {
+    const errors = []
+
+    if (name.value.length == 0) {
+      name.style = "border: 2px solid #e00d0d !important"
+      errors.push("error")
+    }
+
+    if (cpf.value.length == 0) {
+      cpf.style.border = "2px solid #e00d0d";
+      errors.push("error")
+    }
+
+    if (email.value.length == 0) {
+      email.style.border = "2px solid #e00d0d";
+      errors.push("error")
+    }
+
+    if (number.value.length == 0) {
+      number.style.border = "2px solid #e00d0d";
+      errors.push("error")
+    }
+
+    if (password.value.length == 0) {
+      password.style.border = "2px solid #e00d0d";
+      errors.push("error")
+    }
+
+    if (errors.length == 0) {
+      fetch('/platform/config/update', {
+        method: 'POST',
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({name: name.value, email: email.value, number: number.value, cpf: cpf.value})
+      })
+      .then((response) => {
+        alert_message("success", "Perfil atualizado com sucesso.")
+      })
+      .catch((error) => {
+        alert_message("error", "Erro ao atualizar perfil.")
+      })
+    }
+  }
+
+  async function saveLogin() {
+    const errors = []
+
+    if (email.value.length == 0) {
+      email.style.border = "2px solid #e00d0d";
+      errors.push("error")
+    }
+
+    if (password.value.length == 0) {
+      password.style.border = "2px solid #e00d0d";
+      errors.push("error")
+    }
+
+    if (errors.length == 0) {
+      fetch('/platform/config/update', {
+        method: 'POST',
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({email: email.value, password: password.value})
+      })
+      .then((response) => {
+        alert_message("success", "Perfil atualizado com sucesso.")
+      })
+      .catch((error) => {
+        alert_message("error", "Erro ao atualizar perfil.")
+      })
+    }
+  }
+  
+  function visibleProfile() {
+    profile.style.display = "flex"
+    
+    login.style.display = "none"
+    payments.style.display = "none"
+  }
+
+  function visibleLogin() {
+    login.style.display = "flex"
+    
+    profile.style.display = "none"
+    payments.style.display = "none"
+  }
+
+  function visiblePayments() {
+    payments.style.display = "flex"
+    
+    profile.style.display = "none"
+    login.style.display = "none"
+  }
+
+  function showPassword() {
+    password.value = "<%= user.password %>"
+    show.style.display = "none"
+    hide.style.display = "flex"
+  }
+
+  function hidePassword() {
+    password.value = "*****"
+    show.style.display = "flex"
+    hide.style.display = "none"
+  }
+</script>
+
 </body>
 </html>
