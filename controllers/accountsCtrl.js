@@ -19,9 +19,6 @@ const passportAuthInstagram = passport.use(new InstagramStrategy({
   }
 ));
 
-
-// Controller
-
 const accounts = asyncHandler(async(req, res) => {
     const find = await User.findById(req.cookies._id)
 
@@ -48,7 +45,7 @@ const accounts = asyncHandler(async(req, res) => {
         accountsRemaining = "Contas ilimitadas"
     }
 
-    res.render('layouts/accounts', {isAdmin: find.isAdmin, accounts: accounts, total_accounts: count, accountsRemaining: accountsRemaining, type_account: find.type_account, notifications: find.notifications.reverse().slice(0, 5)})
+    res.render('layouts/accounts', {isAdmin: find.isAdmin, accounts: accounts, total_accounts: count, accountsRemaining: accountsRemaining, type_account: find.type_account, notifications: find.notifications.reverse().slice(0, 5), photo: find.photo})
 })
 
 async function newAccountFb(id_user, accessToken, profile) {

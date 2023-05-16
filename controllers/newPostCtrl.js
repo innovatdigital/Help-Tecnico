@@ -213,7 +213,7 @@ const postFacebook = asyncHandler(async(req, res) => {
         }
     })
 
-    res.render("layouts/postFacebook", { isAdmin: find.isAdmin, accounts: find.accountsFb, groups: groups, pages: find.accountsFb, type_account: find.type_account, groupsAllFunction: JSON.stringify(groupsAllFunction), notifications: find.notifications.reverse().slice(0, 5) })
+    res.render("layouts/postFacebook", { isAdmin: find.isAdmin, accounts: find.accountsFb, groups: groups, pages: find.accountsFb, type_account: find.type_account, groupsAllFunction: JSON.stringify(groupsAllFunction), notifications: find.notifications.reverse().slice(0, 5), photo: find.photo})
 })
 
 const pagesList = asyncHandler(async(req, res) => {
