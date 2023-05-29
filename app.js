@@ -13,6 +13,7 @@ const ejs = require('ejs');
 const fs = require('fs')
 const https = require('https')
 const app = express();
+const helmet = require('helmet');
 
 app.use(bodyParser.urlencoded({extended: false}))
 app.use(bodyParser.json())
@@ -36,6 +37,8 @@ app.use("/login", login)
 app.use("/checkout", checkout)
 app.use("/platform", platform)
 
+app.use(helmet());
+
 const dbConnect = () => {
   try{
       mongoose.set("strictQuery", false);
@@ -48,15 +51,15 @@ const dbConnect = () => {
 
 dbConnect()
 
-// const options = {
-//   key: fs.readFileSync("localhost-key.pem"),
-//   cert: fs.readFileSync("localhost.pem"),
-// };
+const options = {
+  key: fs.readFileSync("localhost-key.pem"),
+  cert: fs.readFileSync("localhost.pem"),
+};
 
-// https.createServer(options, app).listen(5500, () => {
-//   console.log('Server listening on port ' + 5500);
-// });
+https.createServer(options, app).listen(5500, () => {
+  console.log('Server listening on port ' + 5500);
+});
 
-app.listen(3000, () => {
-  console.log('Server listening on port 3000')
-})
+// app.listen(3000, () => {
+//   console.log('Server listening on port 3000')
+// })

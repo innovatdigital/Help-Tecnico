@@ -24,6 +24,7 @@
     "fb": "^2.0.0",
     "file-type": "^18.2.1",
     "geoip-lite": "^1.4.7",
+    "helmet": "^7.0.0",
     "ip-regex": "^5.0.0",
     "ip-utils": "^2.4.0",
     "mercadopago": "^1.5.15",

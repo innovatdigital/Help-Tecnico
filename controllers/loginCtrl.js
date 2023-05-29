@@ -7,7 +7,7 @@ const Page = asyncHandler(async(req, res) => {
 })
 
 const Login = asyncHandler(async(req, res) => {
-    const find = await User.findOne({email: req.body.email, password: req.body.password})
+    const find = await User.findOne({email: req.body.email.trim(), password: req.body.password.trim()})
 
     if (find) {
         if (find.isBloqued == false) {
@@ -15,8 +15,8 @@ const Login = asyncHandler(async(req, res) => {
                 domain: 'plubee.net',
                 path: '/',
                 httpOnly: true,
-                secure: true, // ative o secure se o site usa HTTPS
-                sameSite: 'strict' // ou lax, dependendo dos requisitos de segurança
+                secure: true,
+                sameSite: 'strict'
             });
     
             // Define o cookie no cabeçalho da resposta
