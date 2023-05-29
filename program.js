@@ -7,7 +7,7 @@ const moment = require('moment-timezone');
 const mime = require('mime-types');
 const fs = require('fs').promises
 
-mongoose.connect('mongodb+srv://devvagner:WZ6IqoCOOWsmAbwS@plubee.7rdk80i.mongodb.net/plubee', { useNewUrlParser: true });
+mongoose.connect('mongodb+srv://plubee:xoUyEmgBaqEneCAL@plubee.wpa66od.mongodb.net/plubee', { useNewUrlParser: true });
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function() {
