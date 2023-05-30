@@ -22,9 +22,9 @@ router.get("/", async(req, res) => {
             const access = await Access.create({country: 'undefined', region: 'undefined', city: 'undefined', ll: 'undefined', date: dataFormat})
         }
     
-        res.render('layouts/main', { plans: plans })
+        res.render('layouts/main')
     } catch (err) {
-        res.render('layouts/main', { plans: plans })
+        res.render('layouts/main')
     }
 })
 

@@ -6,38 +6,55 @@
     <meta name="description" content="">
     <meta name="author" content="Rocket Sell">
     <meta name="generator" content="Disparos">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
     <title>pluBee Login</title>
     <link rel="shortcut icon" href="/img/site/plubee-icon.png" type="image/x-icon">
-    <link rel="stylesheet" href="/css/login/login.css">
-    <link rel="stylesheet" href="/css/site/nav.css">
-    <link rel="stylesheet" href="/css/site/footer.css">
-    <link rel="stylesheet" href="/css/site/site.css">
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/1.8.12/tailwind-experimental.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="/css/main/style.css">
   </head>
 
 <body>
   <%- include('../partials/nav-site') %>
 
-  <div class="main">
-    <div class="alert" style="display: none;"></div>
-
-    <div class="box" id="box">
-      <div class="login-box">
-        <h1>Login</h1>
-        <p class="p-dados">Preencha com os seus dados:</p>
-        <input type="text" placeholder="Email" id="inputEmail">
-        <input type="password" placeholder="Senha" id="inputPassword">
-        <p class="p-senha">Esqueceu a sua senha?</p>
-        <button class="btn-login" id="#btn-login">Entrar
+  <div id="login" class="flex min-h-full items-center justify-center px-4 py-20 sm:px-6 lg:px-8">
+    <div class="w-full max-w-sm space-y-10">
+      <div>
+        <img class="mx-auto h-24 w-auto" src="/img/site/nav.png" alt="plubee">
+        <h2 class="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900 made-tommy">Realize o login na sua conta</h2>
       </div>
-
-      <div class="register-box">
-        <img class="img-login" src="/img/login/PLUBEE-LOGO-E-NOME.png">
-        <h1 class="title-register">NOVO POR AQUI?</h1>
-        <p class="p-register">Adquira um plano e aproveite <br> todos os recursos da plataforma!</p>
-        <a href="/#planos" style="color: #ffffff"><button class="btn-register">Conferir</a>
+      <div class="space-y-6">
+        <div class="relative -space-y-px rounded-md shadow-sm">
+          <div class="pointer-events-none absolute inset-0 z-10 rounded-md ring-1 ring-inset ring-gray-300"></div>
+          <div>
+            <label for="email-address" class="sr-only">Endereço de email</label>
+            <input id="inputEmail" name="email" type="email" autocomplete="email" required class="relative block w-full rounded-t-lg border py-2 text-gray-900 ring-1 ring-inset ring-gray-100 placeholder:text-gray-400 focus:z-10 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 pl-2 made-tommy" placeholder="Endereço de email">
+          </div>
+          <div>
+            <label for="password" class="sr-only">Senha</label>
+            <input id="inputPassword" name="password" type="password" autocomplete="current-password" required class="relative block w-full rounded-b-lg border py-2 text-gray-900 ring-1 ring-inset ring-gray-100 placeholder:text-gray-400 focus:z-10 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 pl-2 made-tommy" placeholder="Sua senha">
+          </div>
+        </div>
+  
+        <div class="flex items-center justify-between">
+          <div class="flex items-center">
+            <input id="remember-me" name="remember-me" type="checkbox" class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600">
+            <label for="remember-me" class="ml-3 block text-sm leading-6 text-gray-900">Lembre-me</label>
+          </div>
+  
+          <div class="text-sm leading-6">
+            <a href="#" class="font-semibold color-purple">Esqueceu a senha?</a>
+          </div>
+        </div>
+  
+        <div>
+          <button type="submit" class="flex w-full justify-center rounded-lg px-3 py-2.5 text-sm font-semibold leading-6 text-white bg-purple made-tommy btn-login">Entrar</button>
+        </div>
       </div>
+  
+      <p class="text-center text-sm leading-6 text-gray-500">
+        Não é um membro?
+        <a href="#" class="font-semibold color-purple">Adquira um plano e obtenha 7 dias de garantia!</a>
+      </p>
     </div>
   </div>
 

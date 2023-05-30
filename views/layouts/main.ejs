@@ -6,202 +6,416 @@
     <meta name="description" content="">
     <meta name="author" content="pluBee.net">
     <meta name="generator" content="pluBee.net">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
     <title>pluBee</title>
 
     <link rel="shortcut icon" href="/img/site/plubee-icon.png" type="image/x-icon">
-    <link rel="stylesheet" href="/css/site/site.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/1.8.12/tailwind-experimental.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="/css/main/style.css">
   </head>
 
 <body style="margin: 0%;">
   <%- include('../partials/nav-site') %>
 
-  <section class="home" id="home">
-    <div class="home-infos">
-      <h1>Aumente os seus <br> leads com a PLUBEE!</h1>
-      <h3>Gerencie <span>TODAS</span> as suas publicações em um <br>único lugar.</h3>
-      <br>
-      <p><i class="bi bi-check2-square"></i>Publique em <span>quantos</span> grupos quiser!</p>
-      <p><i class="bi bi-check2-square"></i>Ative <span>bots</span> para responder automaticamente <br>os comentários!</p>
-      <p><i class="bi bi-check2-square"></i>Programe <span>posts</span> para ser publicados!</p>
-    </div>
-      
-    <div class="home-dash">
-      <img src="/img/site/plubee.png">
-    </div>
-  </section>
-
-  <div class="a-plataforma-title" id="a-plataforma">
-    <div>
-      <h1>PUBLIQUE QUANTOS POSTS QUISER!</h1>
-      <h2>no <span class="span-insta">Instagram</span> e <span class="span-facebook">Facebook.</span></h2>
-    </div>
-    <div class="a-plataforma-section" style="justify-content: center;">
-      <!-- <div>
-        <img class="a-plataforma-img" src="/img/site/plubee.png" alt="dash">
-      </div> -->
-
-      <div class="a-plataforma-infos-one">
-        <div class="a-plataforma-infos-two">
-          <div>
-            <img class="a-plataforma-icon" src="/img/site/robo.png" alt="">
-            <h3>Ative bots de comentários</h2>
-            <p>Deixe os bots responderem <br>automaticamente as suas publicações.</p>
-          </div>
-          
-          <div>
-            <img class="a-plataforma-icon" src="/img/site/despertador.png" alt="">
-            <h3>Programe as publicações</h2>
-            <p>Programe todas as suas publicações <br>na plataforma.</p>
-          </div>
-
-          <div>
-            <img class="a-plataforma-icon" src="/img/site/grupo.png" alt="">
-            <h3>Publique em todos os grupos</h2>
-            <p>A plataforma importará todos os seus <br>grupos do Facebook.</p>
-          </div>
-          
-          <div>
-            <img class="a-plataforma-icon" src="/img/site/modelo.png" alt="">
-            <h3>Acompanhe todo o processo</h2>
-            <p>Visualize em tempo real todos os <br>processos na plataforma.</p>
-          </div>
-        </div>
-      </div>
-
-
-    </div>
-  </div>
-
-  <section class="sobre" id="sobre">
-    <div> 
-      <img src="/img/site/plubee-fundo-branco-quadrado.png" alt="">
-    </div>
-
-    <div>
-      <h1>Sobre a plubee:</h1>
-      <span>-----------------------------</span>
-      <p>Seja bem vindo a pluBee! somos uma empresa focada na produtividade para pessoas que querem ter até 10x mais resultado nas redes sociais sem ter que passar horas e horas trabalhando nisso.</p>
-      <p>Acreditamos que o tempo é o ativo mais importante de todos, por isso usamos alta tecnologia pra te ajudar a usar melhor o seu tempo e te fazer ganhar ainda mais tempo.</p>
-      <p>Com a gente você pode programar seus posts nas redes sociais e responder os comentários desses posts publicados, de forma totalmente automática e com isso ter até 10x mais resultado com.</p>
-      <p>Alcance de publicações, engajamento orgânico, Captação de leads, Vendas e tudo mais através das redes sociais.</p>
-    </div>
-  </section>
-
-  <section class="depoimentos" id="depoimentos">
-    <div class="title">
-      <h1>Depoimentos dos clientes</h1>
-    </div>
-    <div class="flex">
-      <div class="depoimento-div">
-        <div class="content">
-          <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
-          <p>“a plubee me ajudou demais a gerenciar meu tempo com as publicações. obrigado por essa plataforma!”</p>
-          <div class="author">
-            <img src="/img/site/publi-logo-completa.png" alt="">
-            <h2>Vagner Lemos <br> <span>@dev.vagner</span></h2>
-          </div>
-        </div>
-      </div>
-
-      <div class="depoimento-div">
-        <div class="content">
-          <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
-          <p>“O tempo que eu economizo com a pluBee, não tem explicação. Simplesmente demais essa platforma. Recomendo!”</p>
-          <div class="author">
-            <img src="/img/site/publi-logo-completa.png" alt="">
-            <h2>Vanessa Santos <br> <span>@santos.vanessa</span></h2>
-          </div>
-        </div>
-      </div>
-
-      <div class="depoimento-div">
-        <div class="content">
-          <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
-          <p>“Desde que eu comecei a utilizar, tudo ficou mais fácil. Sem contar o bot de comentários que é excelente.”</p>
-          <div class="author">
-            <img src="/img/site/publi-logo-completa.png" alt="">
-            <h2>Rafael Soares <br> <span>@rafa.soares</span></h2>
-          </div>
-        </div>
-      </div>
-
-      <div class="depoimento-div">
-        <div class="content">
-          <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
-          <p>“a pluBee é uma ferramenta incrível, com um potencial enorme! Você gerencia tudo em um só lugar com a plataforma.”</p>
-          <div class="author">
-            <img src="/img/site/publi-logo-completa.png" alt="">
-            <h2>Tiago Sanches <br> <span>@tiago.sh</span></h2>
-          </div>
-        </div>
-      </div>
-  </section>
-
-  <section class="planos" id="planos">
-    <div class="title-planos">
-      <h1>Escolha o plano perfeito para você!</h1>
-    </div>
-
-    <div class="flex-planos">
-      <% plans.forEach(function(item) { %>
-        <% if (item.title == "PRO" || item.title == "Pro" || item.title == "pro") { %>
-          <div class="div-big"">
-            
-            <h2 style="color: #FFFFFF;">Plano <span style="color: #FFFFFF;"><%= item.title %></span></h2>
-            <h1 style="color: #FFFFFF;">R$<%= item.value_month %></h1>
-            <div>
-              <% item.description.forEach(function(item_details) { %>
-                <p style="color: #FFFFFF;"><i class="bi bi-check-lg"></i><%= item_details %></p>
-              <% }) %>
+  <section id="home">
+    <div class="overflow-hidden bg-gray-100 py-12 sm:py-20">
+      <div class="mx-auto max-w-8xl px-6 lg:px-8">
+        <div class="mx-auto grid max-w-2xl grid-cols-1 gap-x-8 gap-y-16 sm:gap-y-20 lg:mx-0 lg:max-w-none lg:grid-cols-2">
+          <div class="lg:pr-8 lg:pt-4">
+            <div class="lg:max-w-lg">
+              <p class="mt-8 text-4xl tracking-tight sm:text-4xl cavilant color-purple text-shadow">AUMENTE SEUS LEADS COM A PLUBEE!</p>
+              <p class="mt-6 text-2xl leading-8 color-pink made-tommy font-semibold text-shadow">Gerencie <span class="">TODAS</span> as suas publicações em um único lugar.</p>
+              <dl class="mt-10 max-w-xl space-y-8 text-base leading-7 text-gray-600 lg:max-w-none">
+                <div class="relative pl-9 made-tommy">
+                  <dt class="inline font-semibold text-gray-900">
+                    <img class="absolute left-1 top-1 h-6 w-6" src="/img/site/publicacao.png">
+                    Publique em quantos grupos e páginas quiser! <br>
+                  </dt>
+                  <dd class="inline">Realize publicações ilimitadas em páginas e grupos.</dd>
+                </div>
+                <div class="relative pl-9 made-tommy">
+                  <dt class="inline font-semibold text-gray-900">   
+                    <img class="absolute left-1 top-1 h-6 w-6" src="/img/site/comentarios.png">
+                    Ative bots para responder automaticamente os comentários! <br>
+                  </dt>
+                  <dd class="inline">Adicione as publicações que devem ser respondidas automaticamente.</dd>
+                </div>
+                <div class="relative pl-9 made-tommy">
+                  <dt class="inline font-semibold text-gray-900">
+                    <img class="absolute left-1 top-1 h-6 w-6" src="/img/site/time.png">
+                    Programe posts para ser publicados! <br>
+                  </dt>
+                  <dd class="inline">Programe todas as suas publicações na plataforma.</dd>
+                </div>
+              </dl>
             </div>
-            <a style="border: 3px solid #FFFFFF;" href="/checkout/<%= item._id %>">Adquirir</a>
-            <h3>Mais utilizado pelos clientes.</h3>
           </div>
-        <% } else { %>
-          <div class="div-small">
-            
-            <h2>Plano <span><%= item.title %></span></h2>
-            <h1>R$<%= item.value_month %></h1>
-            <div>
-              <% item.description.forEach(function(item_details) { %>
-                <p><i class="bi bi-check-lg"></i><%= item_details %></p>
-              <% }) %>
+          <img src="/img/site/plubee-demo.png" alt="Product screenshot" class="w-[48rem] max-w-none rounded-xl shadow-xl ring-1 ring-gray-400/10 sm:w-[57rem] md:-ml-4 lg:-ml-0" width="1200" height="600">
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <section id="platform">
+    <div class="bg-purple-transparent py-12 sm:py-28">
+      <div class="mx-auto max-w-7xl px-6 lg:px-8">
+        <div class="mx-auto max-w-4xl lg:text-center">
+          <!-- <h2 class="text-base font-semibold leading-7 text-white">Tudo em uma <span class="font-semibold">única plataforma</span></h2> -->
+          <p class="mt-2 text-3xl tracking-tight text-white sm:text-4xl cavilant text-shadow">PUBLIQUE QUANTOS POSTS QUISER!</p>
+          <p class="mt-4 text-1xl leading-8 text-white made-tommy">Realize publicações no Facebook ou no Instagram. Gerencie todos as suas postagens em uma única plataforma.</p>
+        </div>
+        <div class="mx-auto mt-12 sm:mt-20 lg:mt-24">
+          <dl class="grid max-w-xl grid-cols-1 gap-x-8 gap-y-10 lg:max-w-none lg:grid-cols-2 lg:gap-y-16">
+            <div class="relative pl-20">
+              <dt class="text-1xl font-semibold leading-7 text-white">
+                <div class="absolute left-0 top-0 flex h-13 w-13 items-center justify-center rounded-lg bg-white">
+                  <svg class="h-6 w-6 text-white" fill="#752a7a" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 16.5V9.75m0 0l3 3m-3-3l-3 3M6.75 19.5a4.5 4.5 0 01-1.41-8.775 5.25 5.25 0 0110.233-2.33 3 3 0 013.758 3.848A3.752 3.752 0 0118 19.5H6.75z" />
+                  </svg>
+                </div>
+                Acompanhe todo o processo
+              </dt>
+              <dd class="mt-2 text-base leading-7 text-white made-tommy">Visualize em tempo real todos os processos na plataforma.</dd>
             </div>
-            <a href="/checkout/<%= item._id %>">Adquirir</a>
+            <div class="relative pl-20">
+              <dt class="text-1xl font-semibold leading-7 text-white">
+                <div class="absolute left-0 top-0 flex h-13 w-13 items-center justify-center rounded-lg bg-white">
+                  <svg class="h-6 w-6 text-white" fill="#752a7a" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z" />
+                  </svg>
+                </div>
+                Importe várias contas
+              </dt>
+              <dd class="mt-2 text-base leading-7 text-white made-tommy">Você pode importar diferentes perfis para a plataforma.</dd>
+            </div>
+            <div class="relative pl-20">
+              <dt class="text-1xl font-semibold leading-7 text-white">
+                <div class="absolute left-0 top-0 flex h-13 w-13 items-center justify-center rounded-lg bg-white">
+                  <svg class="h-6 w-6 text-white" fill="#752a7a" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99" />
+                  </svg>
+                </div>
+                Comentários automáticos
+              </dt>
+              <dd class="mt-2 text-base leading-7 text-white made-tommy">Você pode ativar bots para responder os comentários da sua publicação.</dd>
+            </div>
+            <div class="relative pl-20">
+              <dt class="text-1xl font-semibold leading-7 text-white">
+                <div class="absolute left-0 top-0 flex h-13 w-13 items-center justify-center rounded-lg bg-white">
+                  <svg class="h-6 w-6 text-white" fill="#752a7a" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M7.864 4.243A7.5 7.5 0 0119.5 10.5c0 2.92-.556 5.709-1.568 8.268M5.742 6.364A7.465 7.465 0 004.5 10.5a7.464 7.464 0 01-1.15 3.993m1.989 3.559A11.209 11.209 0 008.25 10.5a3.75 3.75 0 117.5 0c0 .527-.021 1.049-.064 1.565M12 10.5a14.94 14.94 0 01-3.6 9.75m6.633-4.596a18.666 18.666 0 01-2.485 5.33" />
+                  </svg>
+                </div>
+                Exclua e edite os seus posts
+              </dt>
+              <dd class="mt-2 text-base leading-7 text-white made-tommy">Você pode editar e excluir rapidamente todos as suas publicações em nossa plataforma</dd>
+            </div>
+          </dl>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="about">
+    <div class="relative bg-gray-100">
+      <div class="absolute bottom-0 h-80 w-full xl:inset-0 xl:h-full">
+        <div class="h-full w-full xl:grid xl:grid-cols-2">
+          <div class="h-full xl:relative xl:col-start-2">
+            <img class="h-full w-full object-cover opacity-50 xl:absolute xl:inset-0" src="https://images.unsplash.com/photo-1521737852567-6949f3f9f2b5?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=2830&q=80&sat=-100" alt="People working on laptops">
+            <div aria-hidden="true" class="absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-gray-100 xl:inset-y-0 xl:left-0 xl:h-full xl:w-32 xl:bg-gradient-to-r"></div>
           </div>
-        <% } %>
-      <% }) %>
-
-      <!-- <div class="div-big">
-        <h2 style="color: #FFFFFF;">Plano <span style="color: #FFFFFF;">PRO</span></h2>
-        <h1 style="color: #FFFFFF;">R$100,00</h1>
-        <div>
-          <p style="color: #FFFFFF;"><i class="bi bi-check-lg"></i>Publique no Instagram e Facebook</p>
-          <p style="color: #FFFFFF;"><i class="bi bi-check-lg"></i>Suporte 24 horas</p>
-          <p style="color: #FFFFFF;"><i class="bi bi-check-lg"></i>50 publicações por mês</p>
-          <p style="color: #FFFFFF;"><i class="bi bi-check-lg"></i>Alterne entre contas</p>
-          <p style="color: #FFFFFF;"><i class="bi bi-check-lg"></i>Publique em mais de 20 grupos</p>
-          <p style="color: #FFFFFF;"><i class="bi bi-check-lg"></i>Programe todas as publicações</p>
         </div>
-        <button style="border: 3px solid #FFFFFF;">Adquirir</button>
-        <h3>Mais utilizado pelos clientes.</h3>
       </div>
-
-      <div class="div-small" style="margin-left: 4rem">
-        <h2>Plano <span>AVANÇADO</span></h2>
-        <h1>R$249,00</h1>
-        <div>
-          <p><i class="bi bi-check-lg"></i>Publique no Instagram e Facebook</p>
-          <p><i class="bi bi-check-lg"></i>Suporte em até 12 horas</p>
-          <p><i class="bi bi-check-lg"></i>Publicações ILIMITADAS</p>
-          <p><i class="bi bi-check-lg"></i>Alterne entre em contas</p>
-          <p><i class="bi bi-check-lg"></i>Publique em mais de 50 grupos</p>
-          <p><i class="bi bi-check-lg"></i>Programe todas as publicações</p>
+      <div class="mx-auto max-w-8xl px-6 lg:max-w-7xl lg:px-8 xl:grid xl:grid-flow-col-dense xl:grid-cols-2 xl:gap-x-8">
+        <div class="relative pb-64 pt-12 sm:pb-64 sm:pt-24 xl:col-start-1 xl:pb-24">
+          <h2 class="text-base font-semibold text-gray-800">Nosso objetivo</h2>
+          <p class="mt-3 text-3xl lg:text-5xl font-bold tracking-tight color-purple made-tommy">Sobre a pluBee</p>
+          <p class="mt-5 text-lg text-gray-500 made-tommy">Somos uma empresa focada na produtividade para pessoas que querem ter até 10x mais resultado nas redes sociais sem ter que passar horas e horas trabalhando nisso.</p>
+          <div class="mt-12 grid grid-cols-1 gap-x-6 gap-y-12 sm:grid-cols-2">
+            <p>
+              <span class="block text-2xl font-bold color-purple">6K+</span>
+              <span class="mt-1 block text-base text-gray-800 made-tommy"><span class="font-medium color-purple">Publicações por mês</span> dos usuários na plataforma. </span>
+            </p>
+            <p>
+              <span class="block text-2xl font-bold color-purple">1K+</span>
+              <span class="mt-1 block text-base text-gray-800 made-tommy"><span class="font-medium color-purple">Usuários por mês</span> ativos na plataforma.</span>
+            </p>
+            <p>
+              <span class="block text-2xl font-bold color-purple">98%</span>
+              <span class="mt-1 block text-base text-gray-800 made-tommy"><span class="font-medium color-purple">Satisfação</span> dos usuários com a nossa solução.</span>
+            </p>
+            <p>
+              <span class="block text-2xl font-bold color-purple">20K +</span>
+              <span class="mt-1 block text-base text-gray-800 made-tommy"><span class="font-medium color-purple">Comentários</span> respondidos todos os meses.</span>
+            </p>
+          </div>
         </div>
-        <button>Adquirir</button>
       </div>
-    </div> -->
+    </div>
+  </section>
+
+  <section id="testimonials">
+    <div class="bg-purple-transparent py-12 sm:py-24 border-top-purple">
+			<div class="mx-auto max-w-7xl px-6 lg:px-8">
+			<div class="mx-auto text-center">
+				<p class="text-3xl sm:text-4xl cavilant text-white text-shadow">Depoimentos dos clientes</p>
+        <h2 class="mt-2 text-base font-semibold text-gray-200">Estamos ganhando cada vez mais clientes com a nossa solução!</h2>
+			</div>
+			<div class="mx-auto mt-8 flow-root max-w-2xl sm:mt-20 lg:mx-0 lg:max-w-none">
+				<ul role="list" class="grid grid-cols-1 gap-12 sm:grid-cols-2 lg:grid-cols-3">
+					<li class="col-span-1 divide-y divide-gray-200 rounded-lg bg-white shadow-lg">
+						<figure class="rounded-xl bg-gray-50 p-8 text-sm">
+              <div class="flex gap-x-1 color-purple">
+                <svg class="h-6 w-6 flex-none" viewBox="0 0 20 20" fill="#ffb100" aria-hidden="true">
+                  <path fill-rule="evenodd" d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401z" clip-rule="evenodd" />
+                </svg>
+                <svg class="h-6 w-6 flex-none" viewBox="0 0 20 20" fill="#ffb100" aria-hidden="true">
+                  <path fill-rule="evenodd" d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401z" clip-rule="evenodd" />
+                </svg>
+                <svg class="h-6 w-6 flex-none" viewBox="0 0 20 20" fill="#ffb100" aria-hidden="true">
+                  <path fill-rule="evenodd" d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401z" clip-rule="evenodd" />
+                </svg>
+                <svg class="h-6 w-6 flex-none" viewBox="0 0 20 20" fill="#ffb100" aria-hidden="true">
+                  <path fill-rule="evenodd" d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401z" clip-rule="evenodd" />
+                </svg>
+                <svg class="h-6 w-6 flex-none" viewBox="0 0 20 20" fill="#ffb100" aria-hidden="true">
+                  <path fill-rule="evenodd" d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401z" clip-rule="evenodd" />
+                </svg>
+              </div>
+							<blockquote class="text-gray-900 mt-5">
+							<p class="made-tommy text-base">“A pluBee me ajudou demais a gerenciar meu tempo com as publicações. obrigada por essa plataforma!”</p>
+							</blockquote>
+							<figcaption class="mt-6 flex items-center gap-x-4">
+							<div>
+								<div class="font-semibold made-tommy color-purple">Vanessa Santos</div>
+								<div class="text-gray-600 made-tommy">@santos.vanessa</div>
+							</div>
+							</figcaption>
+						</figure>
+					</li>
+
+					<li class="col-span-1 divide-y divide-gray-200 rounded-lg bg-white shadow-lg">
+						<figure class="rounded-xl bg-gray-50 p-8 text-sm">
+              <div class="flex gap-x-1 color-purple">
+                <svg class="h-6 w-6 flex-none" viewBox="0 0 20 20" fill="#ffb100" aria-hidden="true">
+                  <path fill-rule="evenodd" d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401z" clip-rule="evenodd" />
+                </svg>
+                <svg class="h-6 w-6 flex-none" viewBox="0 0 20 20" fill="#ffb100" aria-hidden="true">
+                  <path fill-rule="evenodd" d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401z" clip-rule="evenodd" />
+                </svg>
+                <svg class="h-6 w-6 flex-none" viewBox="0 0 20 20" fill="#ffb100" aria-hidden="true">
+                  <path fill-rule="evenodd" d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401z" clip-rule="evenodd" />
+                </svg>
+                <svg class="h-6 w-6 flex-none" viewBox="0 0 20 20" fill="#ffb100" aria-hidden="true">
+                  <path fill-rule="evenodd" d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401z" clip-rule="evenodd" />
+                </svg>
+                <svg class="h-6 w-6 flex-none" viewBox="0 0 20 20" fill="#ffb100" aria-hidden="true">
+                  <path fill-rule="evenodd" d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401z" clip-rule="evenodd" />
+                </svg>
+              </div>
+							<blockquote class="text-gray-900 mt-5">
+							<p class="made-tommy text-base">“A pluBee é uma ferramenta incrível, com um potencial enorme! Você gerencia tudo em um só lugar com a plataforma.”</p>
+							</blockquote>
+							<figcaption class="mt-6 flex items-center gap-x-4">
+							<div>
+								<div class="font-semibold text-gray-900 made-tommy color-purple">Rafael Soares</div>
+								<div class="text-gray-600 made-tommy">@rafa.soares</div>
+							</div>
+							</figcaption>
+						</figure>
+					</li>
+
+					<li class="col-span-1 divide-y divide-gray-200 rounded-lg bg-white shadow-lg">
+						<figure class="rounded-xl bg-gray-50 p-8 text-sm">
+              <div class="flex gap-x-1 color-purple">
+                <svg class="h-6 w-6 flex-none" viewBox="0 0 20 20" fill="#ffb100" aria-hidden="true">
+                  <path fill-rule="evenodd" d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401z" clip-rule="evenodd" />
+                </svg>
+                <svg class="h-6 w-6 flex-none" viewBox="0 0 20 20" fill="#ffb100" aria-hidden="true">
+                  <path fill-rule="evenodd" d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401z" clip-rule="evenodd" />
+                </svg>
+                <svg class="h-6 w-6 flex-none" viewBox="0 0 20 20" fill="#ffb100" aria-hidden="true">
+                  <path fill-rule="evenodd" d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401z" clip-rule="evenodd" />
+                </svg>
+                <svg class="h-6 w-6 flex-none" viewBox="0 0 20 20" fill="#ffb100" aria-hidden="true">
+                  <path fill-rule="evenodd" d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401z" clip-rule="evenodd" />
+                </svg>
+                <svg class="h-6 w-6 flex-none" viewBox="0 0 20 20" fill="#ffb100" aria-hidden="true">
+                  <path fill-rule="evenodd" d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401z" clip-rule="evenodd" />
+                </svg>
+              </div>
+							<blockquote class="text-gray-900 mt-5">
+							<p class="made-tommy text-base">“A pluBee me ajudou demais a gerenciar meu tempo com as publicações. obrigada por essa plataforma!”</p>
+							</blockquote>
+							<figcaption class="mt-6 flex items-center gap-x-4">
+							<div>
+								<div class="font-semibold text-gray-900 made-tommy color-purple">Tiago Sanches</div>
+								<div class="text-gray-600 made-tommy">@tiago.sh</div>
+							</div>
+							</figcaption>
+						</figure>
+					</li>
+				</ul>
+			</div>
+			</div>
+		</div>
+  </section>
+
+  <section id="plans">
+    <div class="bg-gray-100 py-12 sm:py-24">
+      <div class="mx-auto max-w-7xl px-6 lg:px-8">
+        <div class="mx-auto text-center">
+          <h2 class="text-base font-semibold leading-7 text-gray-600">Qual o melhor plano para você?</h2>
+          <p class="mt-2 text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl made-tommy color-purple">Descubra os benefícios da nossa plataforma.</p>
+        </div>
+        <p class="mx-auto mt-6 max-w-2xl text-center text-lg leading-8 text-gray-600 made-tommy">Todos os nossos planos possuem garantia de 7 dias, para você testar o máximo a plataforma.</p>
+        <div class="isolate mx-auto mt-12 grid max-w-md grid-cols-1 gap-8 lg:mx-0 lg:max-w-none lg:grid-cols-3">
+          <div class="rounded-2xl border p-8 ring-1 xl:p-10">
+            <h3 id="tier-freelancer" class="text-2xl leading-8 color-purple font-semibold made-tommy">Plano Básico</span></h3>
+            <p class="mt-4 text-lg leading-6 text-gray-600 made-tommy">Essencial para quem quer obter mais leads.</p>
+            <p class="mt-6 flex items-baseline gap-x-1">
+              <span class="text-4xl font-bold tracking-tight text-gray-900 made-tommy">R$59,00</span>
+              <span class="text-sm font-semibold leading-6 text-gray-600">/mês</span>
+            </p>
+            <a href="#" aria-describedby="tier-freelancer" class="mt-6 block rounded-lg py-2 px-3 text-center text-sm font-semibold leading-6 text-white shadow-sm hover:bg-purple-focus bg-purple">Adquirir plano</a>
+            <ul role="list" class="mt-8 space-y-3 text-sm leading-6 xl:mt-10 text-gray-600">
+              <li class="flex gap-x-3 made-tommy text-md">
+                <svg class="h-6 w-5 flex-none text-indigo-600" viewBox="0 0 20 20" fill="#752a7a" aria-hidden="true">
+                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clip-rule="evenodd" />
+                </svg>
+                Publique apenas no Facebook
+              </li>
+              <li class="flex gap-x-3 made-tommy text-md">
+                <svg class="h-6 w-5 flex-none text-indigo-600" viewBox="0 0 20 20" fill="#752a7a" aria-hidden="true">
+                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clip-rule="evenodd" />
+                </svg>
+                Suporte em até 48 horas
+              </li>
+              <li class="flex gap-x-3 made-tommy text-md">
+                <svg class="h-6 w-5 flex-none text-indigo-600" viewBox="0 0 20 20" fill="#752a7a" aria-hidden="true">
+                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clip-rule="evenodd" />
+                </svg>
+                5 contas somente
+              </li>
+              <li class="flex gap-x-3 made-tommy text-md">
+                <svg class="h-6 w-5 flex-none text-indigo-600" viewBox="0 0 20 20" fill="#752a7a" aria-hidden="true">
+                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clip-rule="evenodd" />
+                </svg>
+                Publique em até 3 grupos
+              </li>
+              <li class="flex gap-x-3 made-tommy text-md">
+                <svg class="h-6 w-5 flex-none text-indigo-600" viewBox="0 0 20 20" fill="#752a7a" aria-hidden="true">
+                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clip-rule="evenodd" />
+                </svg>
+                100 publicações pendentes
+              </li>
+              <li class="flex gap-x-3 made-tommy text-md">
+                <svg class="h-6 w-5 flex-none text-indigo-600" viewBox="0 0 20 20" fill="#752a7a" aria-hidden="true">
+                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clip-rule="evenodd" />
+                </svg>
+                7 dias de garantia
+              </li>
+            </ul>
+          </div>
+
+          <div class="rounded-2xl border p-8 ring-1 xl:p-10 bg-purple">
+            <h3 id="tier-freelancer" class="text-2xl leading-8 text-white font-semibold made-tommy">Plano PRO</span></h3>
+            <p class="mt-4 text-lg leading-6 text-white made-tommy">O plano ideal para quem realiza muitas publicações.</p>
+            <p class="mt-6 flex items-baseline gap-x-1">
+              <span class="text-4xl font-bold tracking-tight text-white made-tommy">R$97,00</span>
+              <span class="text-sm font-semibold leading-6 text-white">/mês</span>
+            </p>
+            <a href="#" aria-describedby="tier-freelancer" class="mt-6 block rounded-lg py-2 px-3 text-center text-sm font-semibold leading-6 shadow-sm border-white hover:bg-purple-focus text-white">Adquirir plano</a>
+            <ul role="list" class="mt-8 space-y-3 text-sm leading-6 xl:mt-10 text-white">
+              <li class="flex gap-x-3 made-tommy text-md text-white">
+                <svg class="h-6 w-5 flex-none text-indigo-600" viewBox="0 0 20 20" fill="#fff" aria-hidden="true">
+                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clip-rule="evenodd" />
+                </svg>
+                Publique no Facebook e Instagram
+              </li>
+              <li class="flex gap-x-3 made-tommy text-md text-white">
+                <svg class="h-6 w-5 flex-none text-indigo-600" viewBox="0 0 20 20" fill="#fff" aria-hidden="true">
+                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clip-rule="evenodd" />
+                </svg>
+                Suporte em até 24 horas
+              </li>
+              <li class="flex gap-x-3 made-tommy text-md text-white">
+                <svg class="h-6 w-5 flex-none text-indigo-600" viewBox="0 0 20 20" fill="#fff" aria-hidden="true">
+                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clip-rule="evenodd" />
+                </svg>
+                15 contas somente
+              </li>
+              <li class="flex gap-x-3 made-tommy text-md text-white">
+                <svg class="h-6 w-5 flex-none text-indigo-600" viewBox="0 0 20 20" fill="#fff" aria-hidden="true">
+                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clip-rule="evenodd" />
+                </svg>
+                Publique em até 9 grupos
+              </li>
+              <li class="flex gap-x-3 made-tommy text-md text-white">
+                <svg class="h-6 w-5 flex-none text-indigo-600" viewBox="0 0 20 20" fill="#fff" aria-hidden="true">
+                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clip-rule="evenodd" />
+                </svg>
+                300 publicações pendentes
+              </li>
+              <li class="flex gap-x-3 made-tommy text-md text-white">
+                <svg class="h-6 w-5 flex-none text-indigo-600" viewBox="0 0 20 20" fill="#fff" aria-hidden="true">
+                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clip-rule="evenodd" />
+                </svg>
+                7 dias de garantia
+              </li>
+            </ul>
+          </div>
+
+          <div class="rounded-2xl border p-8 ring-1 xl:p-10">
+            <h3 id="tier-freelancer" class="text-2xl leading-8 color-purple font-semibold made-tommy">Plano Avançado</span></h3>
+            <p class="mt-4 text-lg leading-6 text-gray-600 made-tommy">Para aqueles que não possuem limites.</p>
+            <p class="mt-6 flex items-baseline gap-x-1">
+              <span class="text-4xl font-bold tracking-tight text-gray-900 made-tommy">R$297,00</span>
+              <span class="text-sm font-semibold leading-6 text-gray-600">/mês</span>
+            </p>
+            <a href="#" aria-describedby="tier-freelancer" class="mt-6 block rounded-lg py-2 px-3 text-center text-sm font-semibold leading-6 text-white shadow-sm hover:bg-purple-focus bg-purple">Adquirir plano</a>
+            <ul role="list" class="mt-8 space-y-3 text-sm leading-6 xl:mt-10 text-gray-600">
+              <li class="flex gap-x-3 made-tommy text-md">
+                <svg class="h-6 w-5 flex-none text-indigo-600" viewBox="0 0 20 20" fill="#752a7a" aria-hidden="true">
+                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clip-rule="evenodd" />
+                </svg>
+                Publique apenas no Facebook
+              </li>
+              <li class="flex gap-x-3 made-tommy text-md">
+                <svg class="h-6 w-5 flex-none text-indigo-600" viewBox="0 0 20 20" fill="#752a7a" aria-hidden="true">
+                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clip-rule="evenodd" />
+                </svg>
+                Suporte em até 12 horas
+              </li>
+              <li class="flex gap-x-3 made-tommy text-md">
+                <svg class="h-6 w-5 flex-none text-indigo-600" viewBox="0 0 20 20" fill="#752a7a" aria-hidden="true">
+                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clip-rule="evenodd" />
+                </svg>
+                Contas ilimitadas
+              </li>
+              <li class="flex gap-x-3 made-tommy text-md">
+                <svg class="h-6 w-5 flex-none text-indigo-600" viewBox="0 0 20 20" fill="#752a7a" aria-hidden="true">
+                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clip-rule="evenodd" />
+                </svg>
+                Publique em TODOS os grupos
+              </li>
+              <li class="flex gap-x-3 made-tommy text-md">
+                <svg class="h-6 w-5 flex-none text-indigo-600" viewBox="0 0 20 20" fill="#752a7a" aria-hidden="true">
+                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clip-rule="evenodd" />
+                </svg>
+                Publicações pendentes ilimitadas
+              </li>
+              <li class="flex gap-x-3 made-tommy text-md">
+                <svg class="h-6 w-5 flex-none text-indigo-600" viewBox="0 0 20 20" fill="#752a7a" aria-hidden="true">
+                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clip-rule="evenodd" />
+                </svg>
+                7 dias de garantia
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
   </section>
 
   <%- include('../partials/footer-site') %>

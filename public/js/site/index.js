@@ -1,11 +1,11 @@
-const mobile = document.querySelector('#btn-mobile')
-const close = document.querySelector('#close-menu')
-const menu = document.querySelector('.menu-div')
+const btnCloseMobile = document.querySelector('.close-menu')
+const btnOpenMobile = document.querySelector('.open-menu')
+const menuMobile = document.querySelector('.menu')
 
-mobile.addEventListener('click', function() {
-    menu.classList.add('menu-div-show')
+btnCloseMobile.addEventListener('click', () => {
+    menuMobile.style.visibility = "hidden"
 })
 
-close.addEventListener('click', function() {
-    menu.classList.remove('menu-div-show')
+btnOpenMobile.addEventListener('click', () => {
+    menuMobile.style.visibility = "visible"
 })
