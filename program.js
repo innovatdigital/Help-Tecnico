@@ -32,8 +32,6 @@ db.once('open', function() {
       for (const post of posts) {
         const postDateTime = moment.tz(`${post.day} ${post.hour}`, 'DD/MM/YYYY HH:mm', 'America/Sao_Paulo');
 
-        console.log(post.content, post.day, post.hour, now, postDateTime.isBefore(now), postDateTime)
-
         if (postDateTime.isBefore(now)) {
           if (post.published == false) {
             post.published = true
@@ -52,8 +50,6 @@ db.once('open', function() {
     }
 
     processFinished = false;
-
-    console.log(processFinished)
 
     const post = await findPost()
 
