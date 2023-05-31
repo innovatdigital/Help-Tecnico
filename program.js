@@ -28,6 +28,8 @@ db.once('open', function() {
       ]
     })
 
+    console.log(posts)
+
     if (posts) {
       for (const post in posts) {
         const postDateTime = moment.tz(`${post.day} ${post.hour}`, 'DD/MM/YYYY HH:mm', 'America/Sao_Paulo');
