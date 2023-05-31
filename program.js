@@ -16,7 +16,7 @@ db.once('open', function() {
   async function findPost() {
     const now = moment().tz('America/Sao_Paulo');
 
-    const post = await Posts.findOne({
+    const post = await Posts.find({
       program: true,
       published: false,
       $or: [
@@ -29,7 +29,7 @@ db.once('open', function() {
     })
 
     if (post) {
-      console.log(post.content, post.hour, now)
+      console.log(post.content, post.hour, post.hour, now.format('DD/MM/YYYY'), now)
 
       const postDateTime = moment.tz(`${post.day} ${post.hour}`, 'DD/MM/YYYY HH:mm', 'America/Sao_Paulo');
 
