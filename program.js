@@ -29,7 +29,7 @@ db.once('open', function() {
     })
 
     if (posts) {
-      for (const post in posts) {
+      for (const post of posts) {
         const postDateTime = moment.tz(`${post.day} ${post.hour}`, 'DD/MM/YYYY HH:mm', 'America/Sao_Paulo');
 
         console.log(post.content, post.day, post.hour, now, postDateTime.isBefore(now), postDateTime)
