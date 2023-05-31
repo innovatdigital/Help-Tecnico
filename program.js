@@ -22,15 +22,14 @@ db.once('open', function() {
       $or: [
         { day: { $lt: now.format('DD/MM/YYYY') } },
         {
-          day: now.format('DD/MM/YYYY'),
+          day: "31/05/2023",
           hour: { $lt: now.format('HH:mm') }
         }
       ]
     })
 
     if (post) {
-      console.log(post)
-      console.log(post.content, post.hour, post.hour, now.format('DD/MM/YYYY'), now)
+      console.log(post.content, post.hour, now)
 
       const postDateTime = moment.tz(`${post.day} ${post.hour}`, 'DD/MM/YYYY HH:mm', 'America/Sao_Paulo');
 
