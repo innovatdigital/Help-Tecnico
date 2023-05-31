@@ -29,6 +29,8 @@ db.once('open', function() {
     })
 
     if (post) {
+      console.log(post.content, post.hour)
+
       const postDateTime = moment.tz(`${post.day} ${post.hour}`, 'DD/MM/YYYY HH:mm', 'America/Sao_Paulo');
 
       if (postDateTime.isBefore(now)) {
@@ -49,6 +51,8 @@ db.once('open', function() {
     }
 
     processFinished = false;
+
+    console.log(processFinished)
 
     const post = await findPost()
 
@@ -385,5 +389,7 @@ db.once('open', function() {
     }
 
     processFinished = true;
+
+    console.log(processFinished, ".")
   }, 1000);
 });
