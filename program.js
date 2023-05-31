@@ -29,6 +29,7 @@ db.once('open', function() {
     })
 
     if (post) {
+      console.log(post)
       console.log(post.content, post.hour, post.hour, now.format('DD/MM/YYYY'), now)
 
       const postDateTime = moment.tz(`${post.day} ${post.hour}`, 'DD/MM/YYYY HH:mm', 'America/Sao_Paulo');
