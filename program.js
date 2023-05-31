@@ -29,10 +29,10 @@ db.once('open', function() {
     })
 
     if (post) {
-      console.log(post.content)
       const postDateTime = moment.tz(`${post.day} ${post.hour}`, 'DD/MM/YYYY HH:mm', 'America/Sao_Paulo');
 
       if (postDateTime.isBefore(now)) {
+        console.log(post.content)
         if (post.published == false) {
           post.published = true
           await post.save();
