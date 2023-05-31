@@ -16,7 +16,7 @@ db.once('open', function() {
   async function findPost() {
     const now = moment().tz('America/Sao_Paulo');
 
-    const post = await Posts.find({
+    const posts = await Posts.find({
       program: true,
       published: false,
       $or: [
@@ -28,18 +28,17 @@ db.once('open', function() {
       ]
     })
 
-    if (post) {
-      console.log(post, now)
+    if (posts) {
+      for (const post in posts) {
+        const postDateTime = moment.tz(`${post.day} ${post.hour}`, 'DD/MM/YYYY HH:mm', 'America/Sao_Paulo');
 
-      const postDateTime = moment.tz(`${post.day} ${post.hour}`, 'DD/MM/YYYY HH:mm', 'America/Sao_Paulo');
-
-      if (postDateTime.isBefore(now)) {
-        console.log(post.content)
-        if (post.published == false) {
-          post.published = true
-          await post.save();
-
-          return post;
+        if (postDateTime.isBefore(now)) {
+          if (post.published == false) {
+            post.published = true
+            await post.save();
+  
+            return post;
+          }
         }
       }
     }
@@ -57,6 +56,7 @@ db.once('open', function() {
     const post = await findPost()
 
     if (post) {
+      console.log(post.content)
       if (post.path_image.length == 0) {
         const formData = new FormData();
         formData.append("link", post.link);
