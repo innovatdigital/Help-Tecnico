@@ -16,7 +16,7 @@ db.once('open', function() {
   async function findPost() {
     const now = moment().tz('America/Sao_Paulo');
 
-    const post = await Posts.find({
+    const post = await Posts.findOne({
       program: true,
       published: false,
       $or: [
