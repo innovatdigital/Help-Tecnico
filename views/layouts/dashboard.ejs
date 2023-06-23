@@ -9,244 +9,300 @@
   <!-- Favicon -->
   <link rel="shortcut icon" href="/img/site/plubee-icon.png" type="image/x-icon">
   <!-- Custom styles -->
-  <link rel="stylesheet" href="/css/admin/style.css">
+  <link rel="stylesheet" href="/css/platform/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/1.8.12/tailwind-experimental.min.css">
 </head>
 
 <body>
-  <div class="layer"></div>
+  <%- include('../partials/sidebar-platform', {isAdmin: isAdmin}) %>
 
-  <div class="page-flex">
-    <!-- ! Sidebar -->
-    <%- include('../partials/sidebar-platform', {isAdmin: isAdmin}) %>
+  <div class="lg:pl-70">
+    <%- include('../partials/nav-platform', {isAdmin: isAdmin, title: "Dashboard da sua conta", notifications: notifications, photo: photo, name_user: name_user}) %>
 
-    <div class="main-wrapper">
-      <!-- ! Main nav -->
-      <%- include('../partials/nav-platform', {isAdmin: isAdmin, title: "Dashboard do usuário:", notifications: notifications, photo: photo}) %>
-      
-      <!-- ! Main -->
-      <main class="main users chart-page" id="skip-target">
-        <div class="container">          
-          <% if (isAdmin) { %>
-            <div class="row stat-cards">
-              <div class="col-md-6 col-xl-3">
-                <article class="stat-cards-item">
-                  <div class="stat-cards-icon primary">
-                    <img style="height: 2.5rem" src="/img/admin/internet.png" alt="">
-                  </div>
-                  <div class="stat-cards-info">
-                    <p class="stat-cards-info__num"><%= totalAccess %> acessos</p>
-                    <p class="stat-cards-info__title">Total de visitas</p>
-                    <p class="stat-cards-info__progress">
-                      <span class="stat-cards-info__profit success">
-                      Todo o período
-                      </span>
-                    </p>
-                  </div>
-                </article>
-              </div>
-
-              <div class="col-md-6 col-xl-3">
-                <article class="stat-cards-item">
-                  <div class="stat-cards-icon primary">
-                    <img style="height: 3rem" src="/img/admin/group.png" alt="">
-                  </div>
-                  <div class="stat-cards-info">
-                    <p class="stat-cards-info__num"><%- totalUsers %> ativos</p>
-                    <p class="stat-cards-info__title">Total de usuários</p>
-                    <p class="stat-cards-info__progress">
-                      <span class="stat-cards-info__profit success">
-                        Todo o período
-                      </span>
-                    </p>
-                  </div>
-                </article>
-              </div>
-
-              <div class="col-md-6 col-xl-3">
-                <article class="stat-cards-item">
-                  <div class="stat-cards-icon primary">
-                    <img style="height: 1.9rem" src="/img/admin/post.png" alt="">
-                  </div>
-                  <div class="stat-cards-info">
-                    <p class="stat-cards-info__num"><%- totalPosts %></p>
-                    <p class="stat-cards-info__title">Total posts (usuários)</p>
-                    <p class="stat-cards-info__progress">
-                      <span class="stat-cards-info__profit success">
-                        Todo o período
-                      </span>
-                    </p>
-                  </div>
-                </article>
-              </div>
-
-              <div class="col-md-6 col-xl-3">
-                <article class="stat-cards-item">
-                  <div class="stat-cards-icon primary">
-                    <img style="height: 2.1rem" src="/img/admin/estrela.png" alt="">
-                  </div>
-                  <div class="stat-cards-info">
-                    <p class="stat-cards-info__num"><%- totalFeedbacks %></p>
-                    <p class="stat-cards-info__title">Feedbacks</p>
-                    <p class="stat-cards-info__progress">
-                      <span class="stat-cards-info__profit success">
-                        Todo o período
-                      </span>
-                    </p>
-                  </div>
-                </article>
-              </div>
-            </div>
-          <% } else { %>
-            <div class="row stat-cards">
-              <div class="col-md-6 col-xl-3">
-                <article class="stat-cards-item">
-                  <div class="stat-cards-icon primary">
-                    <img style="height: 2rem" src="/img/admin/facebook.png" alt="">
-                  </div>
-                  <div class="stat-cards-info">
-                    <p class="stat-cards-info__num" style="color: #752a7a; font-weight: bold;"><%= total_accounts %> contas</p>
-                    <p class="stat-cards-info__title">Total na plataforma</p>
-                  </div>
-                </article>
-              </div>
-
-              <div class="col-md-6 col-xl-3">
-                <article class="stat-cards-item">
-                  <div class="stat-cards-icon primary">
-                    <img style="height: 3rem" src="/img/admin/group.png" alt="">
-                  </div>
-                  <div class="stat-cards-info">
-                    <p class="stat-cards-info__num" style="color: #752a7a; font-weight: bold;"><%= total_groups %> grupos</p>
-                    <p class="stat-cards-info__title">Total de grupos</p>
-                  </div>
-                </article>
-              </div>
-
-              <div class="col-md-6 col-xl-3">
-                <article class="stat-cards-item">
-                  <div class="stat-cards-icon primary">
-                    <img style="height: 1.9rem" src="/img/admin/post.png" alt="">
-                  </div>
-                  <div class="stat-cards-info">
-                    <p class="stat-cards-info__num" style="color: #752a7a; font-weight: bold;"><%= total_posts %> posts realizados</p>
-                    <p class="stat-cards-info__title">Total posts</p>
-                  </div>
-                </article>
-              </div>
-
-              <div class="col-md-6 col-xl-3">
-                <article class="stat-cards-item">
-                  <div class="stat-cards-icon primary">
-                    <img style="height: 2.1rem" src="/img/admin/tipo-conta.png" alt="">
-                  </div>
-                  <div class="stat-cards-info">
-                    <p class="stat-cards-info__num" style="font-weight: bold;"><%= type_account %></p>
-                    <p class="stat-cards-info__title">Tipo de conta</p>
-                  </div>
-                </article>
-              </div>
-            </div>
-          <% } %>
-
-          <div class="row">
-            <div class="col-lg-9">
-              <div class="users-table table-wrapper">
-                <table class="posts-table">
-                  <thead>
-                    <tr class="users-table-info">
-                      <th>Thumbnail</th>
-                      <th>Descrição</th>
-                      <th>Conta</th>
-                      <th>Páginas e Grupos</th>
-                      <th>Plataforma</th>
-                      <th>Status</th>
-                      <th>Data</th>
-                    </tr>
-                  </thead>
-                    <tbody>
-                      <% posts.forEach(function(item) { %>
-                        <tr>
-                          <td>
-                            <div class="categories-table-img">
-                              <% if (item.image == "program_image") { %>
-                                <picture><source srcset="/img/admin/program.png"><img style="width: 57px !important" src="/img/admin/program.png" alt="img"></picture>
-                              <% } else if (item.image == "link") { %>
-                                <picture><source srcset="/img/admin/link.png"><img src="/img/admin/link.png" alt="img"></picture>
-                              <% } else if (item.image == "post") { %>
-                                <picture><source srcset="/img/admin/post.png"><img style="width: 57px !important" src="/img/admin/post.png" alt="img"></picture>
-                              <% } else { %>
-                                <picture><source srcset="<%= item.image %>"><img src="<%= item.image %>" alt="img"></picture>
-                              <% } %>
-                            </div>
-                          </td>
-                          <td>
-                            <p style="width: 140px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"><%= item.content %></p>
-                          </td>
-                          <td>
-                            <div class="pages-table-img">
-                              <picture><source srcset="<%= item.image_account %>" type="image/webp"><img src="<%= item.image_account %>" alt="User Name"><%= item.name_account %></picture>
-                            </div>
-                          </td>
-                          <td>
-                            <%= item.groups_ids.length + item.pages_ids.length %> (Total)
-                          </td>
-                          <% if (item.platform == "Facebook") { %>
-                            <td>
-                              <div style="color: #1877F2; font-weight: bold;">
-                                <%= item.platform %>
-                              </div>
-                            </td>
-                          <% } else { %>
-                            <td>
-                              <div style="font-weight: bold; color: #C21F70">
-                                <%= item.platform %>
-                              </div>
-                            </td>
-                          <% } %>    
-                          <% if(item.program_post == true) { %>
-                            <td><span class="badge badge-pill badge-active">Programado</span></td>
-                            <td><%= item.day %> <%= item.hour %></td>
-                          <% } else { %>
-                            <td><span class="badge badge-pill badge-success">Publicado</span></td>
-                            <td>Não programado</td>
-                          <% } %>
-                        </tr>
-                      <% }); %>
-                    </tbody>
-                </table>
-              </div>
-            </div>
-            
-            <div class="col-lg-3">
-              <article class="white-block">
-                <div class="top-cat-title">
-                  <h3>Histórico de atividades:</h3>
-                  <p>Atividades recentes</p>
+    <main class="py-4 fade-in">
+      <div class="px-4 sm:px-6 lg:px-12">
+        <div>
+          <dl class="mt-5 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
+            <div class="relative overflow-hidden rounded-lg bg-white px-4 pt-5 shadow sm:px-6 sm:pt-6">
+              <dt>
+                <div class="absolute rounded-lg bg-purple p-3">
+                  <svg width="23" height="23" viewBox="0 0 23 23" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd" clip-rule="evenodd" d="M23 11.5703C23 5.18019 17.8512 0 11.5 0C5.14872 0 0 5.18019 0 11.5703C0 17.3453 4.20538 22.132 9.70307 23V14.9148H6.7832V11.5703H9.70307V9.02121C9.70307 6.1214 11.42 4.51964 14.0468 4.51964C15.305 4.51964 16.6211 4.74562 16.6211 4.74562V7.593H15.171C13.7424 7.593 13.2969 8.48488 13.2969 9.39988V11.5703H16.4863L15.9764 14.9148H13.2969V23C18.7947 22.132 23 17.3453 23 11.5703Z" fill="white"/>
+                  </svg>                    
                 </div>
-                <ul class="top-cat-list">
-                  <% historic.forEach(function(item) { %>
-                    <li>
-                      <a href="##">
-                        <div class="top-cat-list__title">
-                          <%= item.action %>
-                        </div>
-                        <div class="top-cat-list__subtitle">
-                          <%= item.subtitle %>
-                          <span class="purple"><%= item.date %></span>
-                        </div>
-                      </a>
-                    </li>
-                  <% }) %>
-                </ul>
-              </article>
+                <p class="ml-16 truncate text-sm inter font-medium text-gray-500">Total na plataforma</p>
+              </dt>
+              <dd class="ml-16 flex items-center pb-6 sm:pb-7">
+                <p class="text-xl font-semibold color-purple"><%= total_accounts %> contas</p>
+                <span class="ml-2 flex items-center gap-x-1.5 rounded-full badge color-purple px-2 py-0.5 text-xs font-medium mt-1.5">
+                  <svg class="h-1.5 w-1.5 fill-green-500" viewBox="0 0 6 6" aria-hidden="true">
+                    <circle cx="3" cy="3" r="3" />
+                  </svg>
+                  <% if (type_account == "Basico") { %>
+                    <%= 5 - total_accounts %> restantes
+                  <% } else if (type_account == "Pro") { %>
+                    <%= 15 - total_accounts %> restantes
+                  <% } else if (type_account == "Avançado") { %>
+                    Ilimitado
+                  <% } %>
+                </span>
+              </dd>
+            </div>
+
+            <div class="relative overflow-hidden rounded-lg bg-white px-4 pt-5 shadow sm:px-6 sm:pt-6">
+              <dt>
+                <div class="absolute rounded-lg bg-purple p-3 pb-3.5">
+                  <svg width="28" height="22" viewBox="0 0 28 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M17.4867 3.9059C17.9306 4.40345 18.2442 5.01794 18.4191 5.73235C18.5852 6.41049 18.6223 7.16475 18.5296 7.97447C18.4952 8.27396 18.4444 8.61316 18.3704 8.97195C18.9438 9.52714 19.6949 9.87962 20.6715 9.87957C23.381 9.87934 24.3559 7.16649 24.611 4.9381C24.9254 2.19281 23.6274 0.126709 20.6715 0.126709C18.352 0.126709 17.0535 1.39952 16.7539 3.27434C17.025 3.45373 17.2708 3.66387 17.4867 3.9059Z" fill="white"/>
+                    <path d="M27.9978 16.3394C27.9683 15.4748 27.8669 14.606 27.7159 13.7547C27.5333 12.7235 27.3005 11.2116 26.4001 10.5395C25.8795 10.151 25.2052 10.0235 24.6093 9.78924C24.3191 9.67522 24.0592 9.56199 23.8153 9.43311C22.992 10.336 21.9185 10.8082 20.6684 10.8083C19.6957 10.8083 18.8305 10.5209 18.1063 9.96835C17.9395 10.4841 17.7164 11.0034 17.418 11.4779C17.68 11.6357 17.9635 11.7617 18.3079 11.8971C18.4603 11.957 18.6277 12.0117 18.8049 12.0696C19.284 12.2262 19.827 12.4036 20.3145 12.7675C21.4733 13.6326 21.7586 15.2535 21.9669 16.4372L21.9893 16.5649C22.097 17.1718 22.1762 17.7681 22.2271 18.3474C23.1519 18.2527 24.0721 18.0908 24.9743 17.9003C25.7037 17.7463 26.4281 17.5584 27.1297 17.3053C27.6901 17.1032 28.0208 17.0092 27.9978 16.3394Z" fill="white"/>
+                    <path d="M7.32932 9.87962C8.30589 9.87971 9.05699 9.52719 9.6304 8.97199C9.55638 8.61325 9.50559 8.274 9.47123 7.97451C9.37854 7.16484 9.41569 6.41053 9.58168 5.7324C9.75659 5.01803 10.0703 4.40349 10.5141 3.90594C10.73 3.66387 10.9758 3.45373 11.2468 3.27434C10.9472 1.39952 9.6487 0.126709 7.32918 0.126709C4.37334 0.126709 3.07531 2.19286 3.38968 4.9381C3.64497 7.16658 4.6199 9.87943 7.32932 9.87962Z" fill="white"/>
+                    <path d="M7.6844 12.7675C8.17189 12.4036 8.71492 12.2262 9.19394 12.0696C9.37123 12.0117 9.53849 11.957 9.69099 11.8971C10.0354 11.7618 10.3189 11.6358 10.5809 11.4779C10.2826 11.0035 10.0593 10.4841 9.89266 9.96836C9.16845 10.5209 8.3032 10.8083 7.33051 10.8083C6.08048 10.8082 5.00687 10.3359 4.18361 9.43311C3.9398 9.56199 3.6798 9.67518 3.38964 9.78924C2.79367 10.0235 2.11943 10.151 1.59878 10.5395C0.698472 11.2116 0.465641 12.7234 0.283 13.7547C0.132019 14.606 0.0306328 15.4747 0.00112294 16.3394C-0.0218445 17.0092 0.308849 17.1032 0.869217 17.3053C1.57078 17.5584 2.2953 17.7463 3.02454 17.9003C3.92676 18.0908 4.84697 18.2527 5.7718 18.3474C5.82267 17.7681 5.90178 17.1719 6.00957 16.5649L6.03199 16.4372C6.24034 15.2536 6.52556 13.6326 7.6844 12.7675Z" fill="white"/>
+                    <path d="M21.5182 16.646L21.4956 16.5177C21.3008 15.4106 21.0339 13.8945 20.0228 13.1397C19.5964 12.8214 19.1136 12.6637 18.6467 12.5111C18.4628 12.451 18.2893 12.3942 18.1239 12.3293C17.8828 12.2346 17.6656 12.1418 17.4621 12.0393C16.6073 13.18 15.4225 13.7806 14.0132 13.7807C12.6043 13.7807 11.4197 13.1801 10.5649 12.0393C10.3613 12.1419 10.1441 12.2346 9.90297 12.3294C9.7378 12.3942 9.56413 12.451 9.3803 12.5111C8.91331 12.6637 8.43045 12.8215 8.00413 13.1397C6.9927 13.8946 6.72601 15.4111 6.53124 16.5183L6.50869 16.6462C6.34595 17.5652 6.24882 18.4567 6.22009 19.2959C6.18637 20.2804 6.79747 20.4999 7.33657 20.6936L7.39463 20.7145C8.04293 20.9484 8.76814 21.1488 9.61162 21.327C11.334 21.6906 12.7318 21.8641 14.0101 21.8732H14.0134H14.0167C15.2953 21.8641 16.6929 21.6906 18.415 21.327C19.2587 21.1489 19.9838 20.9485 20.6319 20.7145L20.6899 20.6937C21.2291 20.5 21.8404 20.2806 21.8067 19.2958C21.778 18.4544 21.6808 17.563 21.5182 16.646Z" fill="white"/>
+                    <path d="M10.1124 8.11814C10.3676 10.3467 11.3424 13.0597 14.0518 13.0596C16.7612 13.0595 17.7361 10.3467 17.9913 8.11814C18.3057 5.37294 17.0075 3.30688 14.0518 3.30688C11.0966 3.30679 9.79758 5.37272 10.1124 8.11814Z" fill="white"/>
+                  </svg>                    
+                </div>
+                <p class="ml-16 truncate text-sm inter font-medium text-gray-500">Grupos importados</p>
+              </dt>
+              <dd class="ml-16 flex items-baseline pb-6 sm:pb-7">
+                <p class="text-xl font-semibold color-purple"><%= total_accounts %> grupos</p>
+              </dd>
+            </div>
+
+            <div class="relative overflow-hidden rounded-lg bg-white px-4 pt-5 shadow sm:px-6 sm:pt-6">
+              <dt>
+                <div class="absolute rounded-lg bg-purple p-2.5">
+                  <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd" clip-rule="evenodd" d="M2.33203 5.83325C2.33203 3.90026 3.89904 2.33325 5.83203 2.33325H22.1654C24.0984 2.33325 25.6654 3.90026 25.6654 5.83325V22.1666C25.6654 24.0996 24.0984 25.6666 22.1654 25.6666H5.83203C3.89904 25.6666 2.33203 24.0996 2.33203 22.1666V5.83325ZM5.83203 4.66659C5.1877 4.66659 4.66536 5.18893 4.66536 5.83325V11.6666H23.332V5.83325C23.332 5.18893 22.8097 4.66659 22.1654 4.66659H5.83203ZM4.66536 13.9999V22.1666C4.66536 22.8109 5.1877 23.3333 5.83203 23.3333H22.1654C22.8097 23.3333 23.332 22.8109 23.332 22.1666V13.9999H4.66536ZM16.332 15.1666C16.6414 15.1666 16.9382 15.2896 17.157 15.5083L21.8236 20.175C22.2792 20.6306 22.2792 21.3693 21.8236 21.8249C21.3681 22.2805 20.6293 22.2805 20.1737 21.8249L16.332 17.9832L13.657 20.6582L12.4903 21.8249C12.0347 22.2805 11.296 22.2805 10.8404 21.8249C10.3848 21.3693 10.3848 20.6306 10.8404 20.175L11.1821 19.8333L10.4987 19.1498L7.82366 21.8249C7.36804 22.2805 6.62935 22.2805 6.17374 21.8249C5.71813 21.3693 5.71813 20.6306 6.17374 20.175L9.67374 16.675C9.89253 16.4562 10.1893 16.3333 10.4987 16.3333C10.8081 16.3333 11.1049 16.4562 11.3237 16.675L12.832 18.1834L15.5071 15.5083C15.7258 15.2896 16.0226 15.1666 16.332 15.1666ZM12.832 8.16659C12.832 7.52226 13.3543 6.99992 13.9987 6.99992H19.832C20.4764 6.99992 20.9987 7.52226 20.9987 8.16659C20.9987 8.81091 20.4764 9.33325 19.832 9.33325H13.9987C13.3543 9.33325 12.832 8.81091 12.832 8.16659ZM8.16536 10.2083C9.29295 10.2083 10.207 9.29417 10.207 8.16659C10.207 7.039 9.29295 6.12492 8.16536 6.12492C7.03778 6.12492 6.1237 7.039 6.1237 8.16659C6.1237 9.29417 7.03778 10.2083 8.16536 10.2083Z" fill="white"/>
+                  </svg>                    
+                </div>
+                <p class="ml-16 truncate text-sm inter font-medium text-gray-500">Publicações realizadas</p>
+              </dt>
+              <dd class="ml-16 flex items-baseline pb-6 sm:pb-7">
+                <p class="text-xl font-semibold color-purple"><%= total_posts %> publicações</p>
+                <span class="ml-2 flex items-center gap-x-1.5 rounded-full badge px-2 py-0.5 text-xs font-medium color-purple mt-0.5">
+                  <svg class="h-1.5 w-1.5 fill-green-500" viewBox="0 0 6 6" aria-hidden="true">
+                    <circle cx="3" cy="3" r="3" />
+                  </svg>
+                  <% if (type_account == "Basico") { %>
+                    <%= 100 - total_posts %> restantes
+                  <% } else if (type_account == "Pro") { %>
+                    <%= 300 - total_posts %> restantes
+                  <% } else if (type_account == "Avançado") { %>
+                    Ilimitado
+                  <% } %>
+                </span>
+              </dd>
+            </div>
+
+            <div class="relative overflow-hidden rounded-lg bg-white px-4 pt-5 shadow sm:px-6 sm:pt-6">
+              <dt>
+                <div class="absolute rounded-lg bg-purple p-2.5">
+                  <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M15 2.5C8.1 2.5 2.5 8.1 2.5 15C2.5 21.9 8.1 27.5 15 27.5C21.9 27.5 27.5 21.9 27.5 15C27.5 8.1 21.9 2.5 15 2.5ZM15 6.25C17.075 6.25 18.75 7.925 18.75 10C18.75 12.075 17.075 13.75 15 13.75C12.925 13.75 11.25 12.075 11.25 10C11.25 7.925 12.925 6.25 15 6.25ZM15 24C11.875 24 9.1125 22.4 7.5 19.975C7.5375 17.4875 12.5 16.125 15 16.125C17.4875 16.125 22.4625 17.4875 22.5 19.975C20.8875 22.4 18.125 24 15 24Z" fill="white"/>
+                  </svg>                    
+                </div>
+                <p class="ml-16 truncate text-sm inter font-medium text-gray-500">Plano atual</p>
+              </dt>
+              <dd class="ml-16 flex items-baseline pb-6 sm:pb-7">
+                <p class="text-xl font-semibold color-purple"><%= type_account %></p>
+                <a href="/#plans" class="ml-2 flex items-center gap-x-1.5 rounded-full badge px-2 py-0.5 text-xs font-medium color-purple mt-0.5">
+                  <svg class="h-1.5 w-1.5 fill-green-500" viewBox="0 0 6 6" aria-hidden="true">
+                    <circle cx="3" cy="3" r="3" />
+                  </svg>
+                  <% if (type_account == "Basico") { %>
+                    Faça upgrade
+                  <% } else if (type_account == "Pro") { %>
+                    Faça upgrade
+                  <% } else if (type_account == "Avançado") { %>
+                    Melhor plano
+                  <% } %>
+                </a>
+              </dd>
+            </div>
+          </dl>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-1 lg:grid-cols-4 lg:pr-12">
+        <div class="px-4 sm:px-6 lg:pl-12 mt-8 col-span-3">
+          <div class="sm:flex sm:items-center">
+            <div class="sm:flex-auto">
+              <h1 class="text-lg font-semibold leading-6 text-gray-900 inter">Publicações recentes:</h1>
+            </div>
+          </div>
+          
+          <div class="mt-4 flow-root">
+            <div class="lg:-mx-4 lg:-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+              <div class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
+                <% if (posts.length > 0) { %>
+                  <div class="overflow-hidden shadow ring-1 ring-black ring-opacity-5 rounded-lg">
+                    <table class="min-w-full divide-y divide-gray-300">
+                      <thead class="bg-gray-50">
+                        <tr>
+                          <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 inter">Imagem</th>
+                          <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 inter">Descrição</th>
+                          <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 inter">Conta</th>
+                          <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 inter">Grupos e páginas</th>
+                          <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 inter">Plataforma</th>
+                          <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 inter">Status</th>
+                        </tr>
+                      </thead>
+
+                      <tbody class="divide-y divide-gray-200 bg-white">
+                        <% posts.forEach(function(item) { %>
+                          <tr>
+                            <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6">
+                              <% if (item.image == "program_image") { %>
+                                <img class="h-10" src="/img/admin/program.png" alt="img">
+                              <% } else if (item.image == "link") { %>
+                                <img class="h-10" src="/img/platform/link-externo.png" alt="img">
+                              <% } else if (item.image == "post") { %>
+                                <img class="h-9" src="/img/admin/post.png" alt="img">
+                              <% } else { %>
+                                <img class="h-10 rounded-md" src="<%= item.image %>" alt="img">
+                              <% } %>
+                            </td>
+                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 inter">
+                              <p style="width: 140px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;" class="inter"><%= item.content %></p>
+                            </td>
+                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 inter">
+                              <div class="flex items-center mr-4">
+                                <img class="h-8 rounded-full" src="<%= item.image_account %>">
+                                <p class="inter ml-2"><%= item.name_account %></p>
+                              </div>
+                            </td>
+                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 inter color-purple font-semibold"><%= item.pages_ids.length + item.groups_ids.length %> no total</td>
+                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 inter color-purple font-semibold">
+                              <% if (item.platform == "Facebook") { %>
+                                <p style="color: #1877F2" class="inter font-semibold"><%= item.platform %></p>
+                              <% } else { %>
+                                <p style="color: #C21F70" class="inter font-semibold"><%= item.platform %></p>
+                              <% } %>
+                            </td>
+                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 inter color-purple font-semibold">
+                              <% if(item.program_post == false) { %>
+                                <div class="flex items-center justify-end gap-x-2 sm:justify-start">
+                                  <div class="flex-none rounded-full p-1 text-green-400 bg-green-opacity">
+                                    <div class="h-1.5 w-1.5 rounded-full bg-current"></div>
+                                  </div>
+                                  <div class="hidden text-green-400 sm:block">Publicado</div>
+                                </div>
+                              <% } else { %>
+                                <div class="flex items-center justify-end gap-x-2 sm:justify-start">
+                                  <div class="flex-none rounded-full p-1 text-blue-500 bg-blue-opacity">
+                                    <div class="h-1.5 w-1.5 rounded-full bg-current"></div>
+                                  </div>
+                                  <div class="hidden text-blue-500 sm:block">Programado</div>
+                                </div>
+                              <% } %>
+                            </td>
+                          </tr>
+                        <% }) %>
+                      </tbody>
+                    </table>
+                  </div>
+                <% } else { %>
+                  <div class="flex flex-col justify-center items-center px-4 sm:px-6 lg:pl-12 mt-2 col-span-3 mt-40">
+                    <svg width="284" height="215" viewBox="0 0 284 215" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <g clip-path="url(#clip0_135_57)">
+                      <g filter="url(#filter0_d_135_57)">
+                      <path d="M142.471 0H16.1539C11.8711 0.00482243 7.7651 1.70831 4.73669 4.73673C1.70829 7.76514 0.00481176 11.8712 0 16.154V164.477C0.00481265 168.76 1.70829 172.866 4.7367 175.894C7.76511 178.923 11.8711 180.626 16.1539 180.631H142.471C146.754 180.626 150.86 178.923 153.889 175.894C156.917 172.866 158.621 168.76 158.625 164.477V16.154C158.621 11.8712 156.917 7.76514 153.889 4.73673C150.86 1.70831 146.754 0.00482243 142.471 0Z" fill="#F2F2F2"/>
+                      </g>
+                      <path d="M142.47 4.65039H16.1521C13.1022 4.65381 10.1782 5.86689 8.02155 8.02349C5.86495 10.1801 4.65186 13.1041 4.64844 16.154V164.477C4.65187 167.527 5.86495 170.451 8.02156 172.607C10.1782 174.764 13.1022 175.977 16.1521 175.98H142.47C145.52 175.977 148.444 174.764 150.6 172.607C152.757 170.451 153.97 167.527 153.973 164.477V16.154C153.97 13.1041 152.757 10.1801 150.6 8.02354C148.444 5.86694 145.52 4.65384 142.47 4.65039Z" fill="white"/>
+                      <path d="M123.462 47.7788H59.5846C58.8711 47.7788 58.1869 47.4954 57.6824 46.9909C57.1779 46.4864 56.8945 45.8022 56.8945 45.0888C56.8945 44.3753 57.1779 43.6911 57.6824 43.1866C58.1869 42.6821 58.8711 42.3987 59.5846 42.3987H123.462C123.816 42.3987 124.166 42.4683 124.492 42.6035C124.818 42.7386 125.115 42.9368 125.365 43.1866C125.614 43.4364 125.813 43.7329 125.948 44.0593C126.083 44.3857 126.153 44.7355 126.153 45.0888C126.153 45.442 126.083 45.7918 125.948 46.1182C125.813 46.4446 125.614 46.7411 125.365 46.9909C125.115 47.2407 124.818 47.4389 124.492 47.574C124.166 47.7092 123.816 47.7788 123.462 47.7788Z" fill="#F2F2F2"/>
+                      <path d="M134.556 56.8577H59.5816C58.8687 56.8569 58.1852 56.5731 57.6814 56.0687C57.1775 55.5643 56.8945 54.8805 56.8945 54.1676C56.8945 53.4547 57.1775 52.7709 57.6814 52.2665C58.1852 51.7621 58.8687 51.4783 59.5816 51.4775H134.556C135.269 51.4783 135.952 51.7621 136.456 52.2665C136.96 52.7709 137.243 53.4547 137.243 54.1676C137.243 54.8805 136.96 55.5643 136.456 56.0687C135.952 56.5731 135.269 56.8569 134.556 56.8577Z" fill="#F2F2F2"/>
+                      <path d="M123.462 88.4661H59.5846C58.8711 88.4661 58.1869 88.1827 57.6824 87.6782C57.1779 87.1737 56.8945 86.4895 56.8945 85.776C56.8945 85.0626 57.1779 84.3783 57.6824 83.8738C58.1869 83.3694 58.8711 83.0859 59.5846 83.0859H123.462C123.816 83.0859 124.166 83.1555 124.492 83.2907C124.818 83.4259 125.115 83.624 125.365 83.8738C125.614 84.1236 125.813 84.4202 125.948 84.7466C126.083 85.0729 126.153 85.4227 126.153 85.776C126.153 86.1293 126.083 86.4791 125.948 86.8055C125.813 87.1318 125.614 87.4284 125.365 87.6782C125.115 87.928 124.818 88.1261 124.492 88.2613C124.166 88.3965 123.816 88.4661 123.462 88.4661Z" fill="#F2F2F2"/>
+                      <path d="M134.556 97.5449H59.5816C58.8687 97.5441 58.1852 97.2604 57.6814 96.756C57.1775 96.2516 56.8945 95.5678 56.8945 94.8549C56.8945 94.1419 57.1775 93.4582 57.6814 92.9538C58.1852 92.4494 58.8687 92.1656 59.5816 92.1648H134.556C135.269 92.1656 135.952 92.4494 136.456 92.9538C136.96 93.4582 137.243 94.1419 137.243 94.8549C137.243 95.5678 136.96 96.2516 136.456 96.756C135.952 97.2604 135.269 97.5441 134.556 97.5449Z" fill="#F2F2F2"/>
+                      <path d="M123.462 129.153H59.5846C58.8711 129.153 58.1869 128.87 57.6824 128.365C57.1779 127.861 56.8945 127.177 56.8945 126.463C56.8945 125.75 57.1779 125.066 57.6824 124.561C58.1869 124.057 58.8711 123.773 59.5846 123.773H123.462C123.816 123.773 124.166 123.842 124.493 123.977C124.82 124.112 125.116 124.31 125.367 124.56C125.617 124.81 125.815 125.107 125.951 125.433C126.086 125.76 126.156 126.11 126.156 126.463C126.156 126.817 126.086 127.167 125.951 127.493C125.815 127.82 125.617 128.117 125.367 128.366C125.116 128.616 124.82 128.814 124.493 128.949C124.166 129.084 123.816 129.154 123.462 129.153Z" fill="#F2F2F2"/>
+                      <path d="M134.556 138.232H59.5816C58.8687 138.231 58.1852 137.948 57.6814 137.443C57.1775 136.939 56.8945 136.255 56.8945 135.542C56.8945 134.829 57.1775 134.145 57.6814 133.641C58.1852 133.137 58.8687 132.853 59.5816 132.852H134.556C135.269 132.853 135.952 133.137 136.456 133.641C136.96 134.145 137.243 134.829 137.243 135.542C137.243 136.255 136.96 136.939 136.456 137.443C135.952 137.948 135.269 138.231 134.556 138.232Z" fill="#F2F2F2"/>
+                      <path d="M45.2746 60.9792H22.6688C22.3268 60.9788 21.9989 60.8428 21.7571 60.6009C21.5153 60.3591 21.3793 60.0313 21.3789 59.6893V39.567C21.3793 39.225 21.5153 38.8971 21.7571 38.6553C21.9989 38.4135 22.3268 38.2775 22.6688 38.2771H45.2746C45.6166 38.2775 45.9444 38.4135 46.1862 38.6553C46.4281 38.8971 46.5641 39.225 46.5645 39.567V59.6893C46.5641 60.0313 46.4281 60.3591 46.1862 60.6009C45.9444 60.8428 45.6166 60.9788 45.2746 60.9792Z" fill="#E6E6E6"/>
+                      <path d="M45.2746 101.666H22.6688C22.3268 101.666 21.9989 101.53 21.7571 101.288C21.5153 101.046 21.3793 100.719 21.3789 100.377V80.2542C21.3793 79.9123 21.5153 79.5844 21.7571 79.3426C21.9989 79.1008 22.3268 78.9647 22.6688 78.9644H45.2746C45.6166 78.9647 45.9444 79.1008 46.1862 79.3426C46.4281 79.5844 46.5641 79.9123 46.5645 80.2542V100.377C46.5641 100.719 46.4281 101.046 46.1862 101.288C45.9444 101.53 45.6166 101.666 45.2746 101.666Z" fill="#E6E6E6"/>
+                      <path d="M45.2746 142.354H22.6688C22.3268 142.353 21.9989 142.217 21.7571 141.975C21.5153 141.734 21.3793 141.406 21.3789 141.064V120.942C21.3793 120.6 21.5153 120.272 21.7571 120.03C21.9989 119.788 22.3268 119.652 22.6688 119.652H45.2746C45.6166 119.652 45.9444 119.788 46.1862 120.03C46.4281 120.272 46.5641 120.6 46.5645 120.942V141.064C46.5641 141.406 46.4281 141.734 46.1862 141.975C45.9444 142.217 45.6166 142.353 45.2746 142.354Z" fill="#E6E6E6"/>
+                      <g filter="url(#filter1_d_135_57)">
+                      <path d="M253.75 140.279L254.752 131.515L259.777 87.5734L260.779 78.8096C261.261 74.554 260.035 70.281 257.37 66.9282C254.705 63.5753 250.819 61.4164 246.565 60.9251L132.551 47.8879C128.296 47.4061 124.023 48.632 120.67 51.2968C117.317 53.9615 115.158 57.8474 114.667 62.102L114.664 62.1246L107.64 123.548L107.638 123.571C107.156 127.827 108.382 132.1 111.047 135.452C113.712 138.805 117.597 140.964 121.852 141.455L235.865 154.493C240.121 154.974 244.394 153.749 247.747 151.084C251.1 148.419 253.259 144.533 253.75 140.279Z" fill="#E6E6E6"/>
+                      </g>
+                      <path d="M249.128 139.75L250.315 129.37L254.97 88.6612L256.157 78.2812C256.5 75.2507 255.627 72.2078 253.73 69.8201C251.832 67.4325 249.065 65.8951 246.035 65.5452L132.022 52.508C128.991 52.1649 125.948 53.0379 123.561 54.9356C121.173 56.8332 119.635 59.6004 119.286 62.6302L119.283 62.6528L112.259 124.077L112.257 124.099C111.914 127.13 112.787 130.173 114.684 132.56C116.582 134.948 119.349 136.485 122.379 136.835L236.392 149.872C239.423 150.215 242.466 149.342 244.853 147.445C247.241 145.547 248.778 142.78 249.128 139.75Z" fill="white"/>
+                      <path d="M230.465 84.0563L167 76.7993C166.649 76.7595 166.309 76.6509 166 76.4796C165.691 76.3083 165.418 76.0778 165.198 75.8012C164.978 75.5246 164.815 75.2073 164.717 74.8674C164.62 74.5276 164.591 74.1719 164.631 73.8207C164.671 73.4695 164.78 73.1297 164.951 72.8206C165.123 72.5116 165.354 72.2394 165.631 72.0196C165.908 71.7998 166.225 71.6367 166.565 71.5396C166.905 71.4426 167.261 71.4135 167.612 71.454L231.076 78.711C231.784 78.7928 232.431 79.1523 232.874 79.7107C233.318 80.2691 233.521 80.9806 233.44 81.689C233.359 82.3974 233 83.0446 232.442 83.4885C231.885 83.9324 231.173 84.1366 230.465 84.0563Z" fill="#E6E6E6"/>
+                      <path d="M240.458 94.3372L165.969 85.8196C165.618 85.7797 165.278 85.6711 164.969 85.4998C164.659 85.3285 164.387 85.098 164.167 84.8214C163.947 84.5447 163.783 84.2275 163.686 83.8877C163.589 83.5479 163.559 83.1922 163.599 82.841C163.64 82.4898 163.749 82.15 163.92 81.8409C164.092 81.5319 164.323 81.2597 164.599 81.0399C164.876 80.8201 165.194 80.657 165.534 80.5599C165.873 80.4629 166.229 80.4338 166.58 80.4742L241.069 88.9919C241.42 89.0321 241.76 89.1409 242.069 89.3123C242.378 89.4837 242.65 89.7143 242.87 89.9908C243.089 90.2674 243.253 90.5845 243.35 90.9242C243.447 91.2638 243.476 91.6192 243.436 91.9702C243.396 92.3212 243.287 92.6608 243.116 92.9697C242.945 93.2786 242.714 93.5507 242.437 93.7705C242.161 93.9903 241.844 94.1535 241.504 94.2508C241.164 94.348 240.809 94.3774 240.458 94.3372Z" fill="#E6E6E6"/>
+                      <path d="M238.381 112.328L128.561 99.7701C127.853 99.6884 127.206 99.3289 126.763 98.7705C126.32 98.2121 126.116 97.5005 126.197 96.7922C126.278 96.0838 126.637 95.4366 127.195 94.9927C127.753 94.5488 128.464 94.3446 129.173 94.4248L238.993 106.983C239.344 107.022 239.684 107.131 239.993 107.302C240.302 107.474 240.575 107.704 240.795 107.981C241.015 108.257 241.178 108.575 241.275 108.914C241.373 109.254 241.402 109.61 241.362 109.961C241.322 110.312 241.213 110.652 241.041 110.961C240.87 111.27 240.639 111.542 240.362 111.762C240.085 111.982 239.768 112.145 239.428 112.242C239.088 112.339 238.732 112.368 238.381 112.328Z" fill="#E6E6E6"/>
+                      <path d="M237.703 121.388L127.53 108.79C126.822 108.708 126.175 108.349 125.732 107.79C125.288 107.232 125.085 106.521 125.166 105.812C125.247 105.104 125.606 104.457 126.164 104.013C126.722 103.569 127.433 103.365 128.141 103.445L238.314 116.043C239.022 116.125 239.669 116.484 240.113 117.043C240.556 117.601 240.76 118.312 240.679 119.021C240.598 119.729 240.239 120.376 239.681 120.82C239.123 121.264 238.411 121.468 237.703 121.388Z" fill="#E6E6E6"/>
+                      <path d="M236.363 130.003L126.543 117.445C126.192 117.405 125.852 117.297 125.543 117.125C125.234 116.954 124.961 116.724 124.741 116.447C124.521 116.17 124.358 115.853 124.26 115.513C124.163 115.173 124.134 114.818 124.174 114.466C124.214 114.115 124.323 113.775 124.494 113.466C124.666 113.157 124.897 112.885 125.174 112.665C125.45 112.445 125.768 112.282 126.108 112.185C126.448 112.088 126.803 112.059 127.155 112.1L236.975 124.657C237.683 124.739 238.33 125.099 238.773 125.657C239.216 126.216 239.42 126.927 239.339 127.635C239.258 128.344 238.899 128.991 238.341 129.435C237.783 129.879 237.072 130.083 236.363 130.003Z" fill="#E6E6E6"/>
+                      <path d="M235.683 139.063L125.511 126.465C124.802 126.384 124.156 126.024 123.712 125.466C123.269 124.907 123.065 124.196 123.146 123.487C123.227 122.779 123.586 122.132 124.144 121.688C124.702 121.244 125.413 121.04 126.122 121.12L236.295 133.718C236.646 133.758 236.986 133.867 237.295 134.038C237.604 134.209 237.877 134.44 238.097 134.716C238.317 134.993 238.48 135.31 238.578 135.65C238.675 135.99 238.705 136.346 238.664 136.697C238.624 137.048 238.515 137.388 238.344 137.697C238.172 138.006 237.941 138.278 237.664 138.498C237.388 138.718 237.07 138.881 236.73 138.978C236.39 139.075 236.035 139.104 235.683 139.063Z" fill="#E6E6E6"/>
+                      <path d="M151.286 88.2887L128.827 85.7205C128.487 85.6813 128.177 85.5089 127.964 85.2412C127.751 84.9735 127.653 84.6322 127.692 84.2924L129.978 64.3004C130.017 63.9607 130.189 63.6504 130.457 63.4376C130.725 63.2248 131.066 63.127 131.406 63.1654L153.865 65.7336C154.205 65.7728 154.515 65.9452 154.728 66.213C154.941 66.4807 155.039 66.8219 155 67.1617L152.714 87.1537C152.675 87.4934 152.503 87.8037 152.235 88.0165C151.967 88.2293 151.626 88.3272 151.286 88.2887Z" fill="#752A7A"/>
+                      <path d="M282.827 214.947H209.316C209.227 214.947 209.142 214.911 209.079 214.848C209.016 214.785 208.98 214.7 208.98 214.611C208.98 214.522 209.016 214.437 209.079 214.374C209.142 214.311 209.227 214.275 209.316 214.275H282.827C282.916 214.275 283.001 214.311 283.064 214.374C283.127 214.437 283.163 214.522 283.163 214.611C283.163 214.7 283.127 214.785 283.064 214.848C283.001 214.911 282.916 214.947 282.827 214.947Z" fill="#3F3D56"/>
+                      <path d="M255.221 86.7096C255.108 87.1557 255.095 87.6211 255.181 88.0731C255.267 88.525 255.452 88.9526 255.721 89.3256C255.99 89.6986 256.338 90.008 256.74 90.232C257.142 90.456 257.589 90.5891 258.047 90.622L260.322 97.4457L264.805 97.0751L261.459 87.4838C261.463 86.7091 261.183 85.9598 260.671 85.3779C260.16 84.7959 259.453 84.4218 258.684 84.3264C257.915 84.2309 257.138 84.4208 256.5 84.8601C255.862 85.2993 255.407 85.9574 255.221 86.7096Z" fill="#FFB8B8"/>
+                      <path d="M258.656 131.395C259.182 131.878 259.825 132.213 260.522 132.368C261.218 132.522 261.943 132.49 262.624 132.275C263.304 132.059 263.915 131.669 264.396 131.141C264.877 130.614 265.21 129.97 265.363 129.273L268.914 113.002C269.521 110.22 269.378 107.326 268.5 104.617L264.343 91.8027C264.284 91.6188 264.185 91.4499 264.054 91.3077C263.923 91.1654 263.763 91.0531 263.585 90.9784C263.406 90.9038 263.214 90.8685 263.021 90.875C262.827 90.8816 262.638 90.9298 262.465 91.0163L259.752 92.3744C259.472 92.515 259.249 92.7497 259.123 93.0375C258.997 93.3254 258.977 93.6482 259.064 93.9499L259.338 94.8904C261.612 102.712 261.731 111.002 259.683 118.885L257.474 127.388C257.289 128.1 257.301 128.849 257.509 129.555C257.718 130.261 258.114 130.897 258.656 131.395Z" fill="#752A7A"/>
+                      <path d="M244.447 211.437L240.61 211.436L238.785 196.635L244.449 196.635L244.447 211.437Z" fill="#FFB8B8"/>
+                      <path d="M237.867 210.34H245.267V215H233.207C233.207 214.388 233.328 213.782 233.562 213.216C233.796 212.651 234.139 212.137 234.572 211.705C235.005 211.272 235.518 210.929 236.084 210.695C236.649 210.46 237.255 210.34 237.867 210.34Z" fill="#2F2E41"/>
+                      <path d="M265.131 211.437L261.294 211.436L259.469 196.635L265.132 196.635L265.131 211.437Z" fill="#FFB8B8"/>
+                      <path d="M258.554 210.34H265.955V215H253.895C253.895 214.388 254.015 213.782 254.249 213.216C254.483 212.651 254.827 212.137 255.259 211.705C255.692 211.272 256.206 210.929 256.771 210.695C257.336 210.46 257.942 210.34 258.554 210.34Z" fill="#2F2E41"/>
+                      <path d="M253.893 106.213C258.446 106.213 262.137 102.522 262.137 97.9692C262.137 93.416 258.446 89.7249 253.893 89.7249C249.34 89.7249 245.648 93.416 245.648 97.9692C245.648 102.522 249.34 106.213 253.893 106.213Z" fill="#FFB8B8"/>
+                      <path d="M225.703 151.736C225.761 151.279 225.918 150.841 226.163 150.451C226.408 150.062 226.736 149.731 227.123 149.482C227.51 149.233 227.947 149.072 228.403 149.01C228.859 148.949 229.323 148.987 229.762 149.124L234.37 143.601L238.409 145.582L231.793 153.291C231.514 154.014 230.98 154.609 230.291 154.964C229.603 155.319 228.808 155.41 228.057 155.218C227.307 155.026 226.652 154.566 226.219 153.924C225.785 153.282 225.601 152.504 225.703 151.736Z" fill="#FFB8B8"/>
+                      <path d="M255.901 106.213C257.142 106.24 258.374 106.004 259.517 105.521C260.66 105.037 261.688 104.317 262.533 103.408C263.378 102.499 264.021 101.422 264.42 100.247C264.819 99.0714 264.965 97.825 264.848 96.5895C264.731 95.3539 264.353 94.1571 263.741 93.0777C263.128 91.9983 262.294 91.0608 261.294 90.3267C260.293 89.5926 259.148 89.0786 257.935 88.8184C256.721 88.5583 255.466 88.5578 254.253 88.8172C252.44 87.7164 250.332 86.9756 248.219 87.164C246.106 87.3524 244.017 88.6067 243.227 90.5751C242.437 92.5435 243.286 95.1382 245.25 95.9382C246.509 96.451 247.932 96.2023 249.276 95.9955C250.62 95.7887 252.086 95.6537 253.255 96.3472C254.425 97.0406 254.951 98.9001 253.903 99.7671C253.348 100.245 252.951 100.881 252.767 101.589C252.582 102.298 252.617 103.047 252.868 103.735C253.395 105.096 254.831 106.19 255.901 106.213Z" fill="#2F2E41"/>
+                      <path d="M266.129 151.41L267.592 206.908C267.597 207.093 267.563 207.277 267.494 207.449C267.424 207.62 267.32 207.776 267.187 207.905C267.055 208.034 266.897 208.135 266.724 208.2C266.551 208.265 266.366 208.294 266.181 208.285L261.364 208.039C261.056 208.023 260.764 207.902 260.535 207.697C260.306 207.491 260.154 207.213 260.106 206.909L254.376 170.862C254.351 170.708 254.274 170.567 254.157 170.464C254.039 170.36 253.89 170.301 253.734 170.296C253.578 170.291 253.425 170.341 253.301 170.437C253.178 170.533 253.092 170.668 253.058 170.821L245.301 205.528C245.26 205.713 245.18 205.888 245.066 206.04C244.952 206.192 244.807 206.318 244.64 206.41C244.474 206.502 244.29 206.558 244.1 206.573C243.911 206.589 243.72 206.564 243.541 206.5L238.76 206.208C238.483 206.11 238.247 205.923 238.086 205.678C237.925 205.432 237.85 205.14 237.871 204.847L242.044 150.884L266.129 151.41Z" fill="#2F2E41"/>
+                      <path d="M268.474 125.049C269.281 116.639 263.097 109.032 254.67 108.434C251.038 108.176 245.401 108.084 243.543 112.843C237.945 127.181 247.745 126.832 244.368 139.254C240.992 151.677 238.01 152.388 242.642 153.285C247.275 154.182 268.108 159.477 267.253 150.734C266.727 145.36 267.67 133.439 268.474 125.049Z" fill="#752A7A"/>
+                      <path d="M245.205 111.385C245.87 111.127 246.592 111.05 247.297 111.16C248.001 111.271 248.665 111.565 249.22 112.014C249.774 112.462 250.201 113.049 250.456 113.716C250.712 114.382 250.787 115.104 250.674 115.808L248.043 132.253C247.593 135.065 246.404 137.707 244.597 139.908L236.051 150.322C235.928 150.472 235.775 150.593 235.601 150.677C235.427 150.762 235.237 150.808 235.044 150.813C234.851 150.817 234.659 150.78 234.481 150.703C234.304 150.627 234.145 150.513 234.015 150.369L231.986 148.115C231.775 147.881 231.654 147.581 231.642 147.267C231.63 146.954 231.728 146.645 231.92 146.397L232.518 145.621C237.489 139.169 240.626 131.494 241.596 123.407L242.642 114.684C242.729 113.954 243.014 113.26 243.466 112.679C243.917 112.098 244.518 111.651 245.205 111.385Z" fill="#752A7A"/>
+                      </g>
+                      <defs>
+                      <filter id="filter0_d_135_57" x="-4" y="0" width="166.625" height="188.631" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+                      <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+                      <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+                      <feOffset dy="4"/>
+                      <feGaussianBlur stdDeviation="2"/>
+                      <feComposite in2="hardAlpha" operator="out"/>
+                      <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"/>
+                      <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_135_57"/>
+                      <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_135_57" result="shape"/>
+                      </filter>
+                      <filter id="filter1_d_135_57" x="103.535" y="47.7852" width="161.348" height="114.81" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+                      <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+                      <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+                      <feOffset dy="4"/>
+                      <feGaussianBlur stdDeviation="2"/>
+                      <feComposite in2="hardAlpha" operator="out"/>
+                      <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"/>
+                      <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_135_57"/>
+                      <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_135_57" result="shape"/>
+                      </filter>
+                      <clipPath id="clip0_135_57">
+                      <rect width="283.161" height="215" fill="white"/>
+                      </clipPath>
+                      </defs>
+                    </svg>                                          
+                    <h2 class="inter text-xl font-semibold mt-4">Você ainda não possui nenhuma publicação</h2>
+                    <p class="inter">Realize uma publicação para visualizar.</p>           
+                  </div>
+                <% } %>
+              </div>
             </div>
           </div>
         </div>
-      </main>
 
-      <!-- ! Footer -->
-      <%- include('../partials/footer-platform') %>
-    </div>
+        <div class="col-span-1 mt-10 mx-4">
+          <article class="bg-white p-4 rounded-lg shadow">
+            <div class="top-cat-title">
+              <h3 class="inter font-semibold">Histórico de atividades:</h3>
+              <p class="inter text-sm">Atividades recentes</p>
+            </div>
+            <ul class="mt-4">
+              <% historic.forEach(function(item) { %>
+                <li class="mt-3 border-b pb-3">
+                  <a href="##">
+                    <div class="inter font-semibold action">
+                      <%= item.action %>
+                    </div>
+                    <div class="flex justify-between items-center inter subtitle">
+                      <%= item.subtitle %>
+                      <span class="date px-1 py-0.5 font-semibold"><%= item.date %></span>
+                    </div>
+                  </a>
+                </li>
+              <% }) %>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </main>
   </div>
 </body>
 </html>

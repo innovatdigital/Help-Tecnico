@@ -5,153 +5,132 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>pluBee | Contas conectadas</title>
+  <title>pluBee | Todos os usuários</title>
   <!-- Favicon -->
   <link rel="shortcut icon" href="/img/site/plubee-icon.png" type="image/x-icon">
   <!-- Custom styles -->
-  <link rel="stylesheet" href="/css/admin/style.css">
+  <link rel="stylesheet" href="/css/platform/style.css">
+  <link rel="stylesheet" href="/css/platform/notify.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/1.8.12/tailwind-experimental.min.css">
 </head>
 
 <body>
-  <div class="layer"></div>
-  
-  <!-- ! Body -->
-  <div class="page-flex">
+  <%- include('../partials/sidebar-platform', {isAdmin: isAdmin}) %>
 
-    <!-- ! Sidebar -->
-    <%- include('../partials/sidebar-platform', {isAdmin: isAdmin}) %>
+  <div class="lg:pl-70">
+    <%- include('../partials/nav-platform', {isAdmin: isAdmin, title: "Todos os usuários", notifications: notifications, photo: photo, name_user: name_user}) %>
 
-    <div class="main-wrapper">
-      <!-- !  Main nav -->
-      <%- include('../partials/nav-platform', {isAdmin: isAdmin, title: "Usuários cadastrados na plataforma:", notifications: notifications}) %>
-  
-      <!-- ! Main -->
-      <main class="main users chart-page" id="skip-target">
-        <div class="container">
-          <div class="row">
-            <div class="col-lg">
-              <div class="users-table table-wrapper">
-                <table class="posts-table">
-                  <thead>
-                    <tr class="users-table-info">
-                      <th>Nome</th>
-                      <th>Email</th>
-                      <th>Tipo de conta</th>
-                      <th>Data de cadastro</th>
-                      <th>Bloqueado</th>
-                      <th>Ações</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <% users.forEach(function(item) { %>
-                      <tr>
-                        <td>
-                          <div>
-                            <%= item.name %>
-                          </div>
-                        </td>
+    <main class="py-5 fade-in">
+      <div class="alert mt-14" style="display: none;"><div style="display: flex;" class="alert-text"></div></div>
+      <div class="error mt-14" style="display: none;"><div style="display: flex;" class="error-text"></div></div>
 
-                        <td>
-                          <div>
-                            <%= item.email %>
-                          </div>
-                        </td>
-
-                        <td>
-                          <div>
-                            <%= item.type_account %>
-                          </div>
-                        </td>
-                        
-                        <td>
-                          <div>
-                            <%= item.date %>
-                          </div>
-                        </td>
-
-                        <% if (item.isBloqued == false) { %>
-                          <td>
-                            <div style="font-weight: bold; color: rgb(52, 175, 15);">
-                              Não
-                            </div>
-                          </td>
-                        <% } else { %>
-                          <td>
-                            <div style="font-weight: bold; color: rgb(194, 18, 18);">
-                              Sim
-                            </div>
-                          </td>
-                        <% } %>
-
-                        <td>
-                          <div>
-                            <% if (item.isBloqued == false) { %>
-                              <button class="event" onclick="blockUser('<%= item._id %>')">Bloquear</button>
-                            <% } else { %>
-                              <button class="event" onclick="unlockUser('<%= item._id %>')">Desbloquear</button>
-                            <% } %>
-                            <button class="event" onclick="deleteUser('<%= item._id %>')">Excluir</button>
-                            <a href="/platform/users/<%= item._id %>"><button class="event">Modificar</button></a>
-                          </div>
-                        </td>
-                      </tr>
-                    <% }); %>
-                  </tbody>
-                </table>
-              </div>
-            </div>
-
-            <!-- <div class="col-lg-3" style="margin-top: 3rem">
-              <article class="white-block">
-                <div class="top-cat-title">
-                  <h3>Filtrar</h3>
-                  <p style="font-size: 15px;">Total de usuários: 100</p>
-                </div>
-                <input type="text" placeholder="Enter keywords ..." style="margin-bottom: 18px;" required>
-                <div style="display: flex; justify-content: space-between; margin: 10px 0px">
-                  <p>Todos os usuários</p>
-                  <input type="checkbox" name="Plano Pro" id="" class="check" checked>
-                </div>
-                <div style="display: flex; justify-content: space-between; margin: 10px 0px">
-                  <p>Usuários com plano Básico</p>
-                  <input type="checkbox" name="Plano Pro" id="" class="check">
-                </div>
-                <div style="display: flex; justify-content: space-between; margin: 10px 0px">
-                  <p>Usuários com plano Avançado</p>
-                  <input type="checkbox" name="Plano Pro" id="" class="check">
-                </div>
-                <div style="display: flex; justify-content: space-between; margin: 10px 0px">
-                  <p>Usuários com plano Pro</p>
-                  <input type="checkbox" name="Plano Pro" id="" class="check">
-                </div>
-                <div style="display: flex; justify-content: space-between; margin: 10px 0px">
-                  <p>Usuários bloqueados</p>
-                  <input type="checkbox" name="Plano Pro" id="" class="check">
-                </div>
-                <div style="display: flex; justify-content: space-between; margin: 10px 0px">
-                  <p>Usuários com plano Pro</p>
-                  <input type="checkbox" name="Plano Pro" id="" class="check">
-                </div>
-                <br>
-                <button style="color: #FFFFFF; background-color: #752A7A; padding: 10px; border-radius: 10px">Filtrar usuários</button>
-              </article>
-            </div> -->
+      <div class="px-4 sm:px-6 lg:pl-12 mt-2 col-span-3">
+        <div class="sm:flex sm:items-center">
+          <div class="sm:flex-auto">
+            <h1 class="text-lg font-semibold leading-6 text-gray-900 inter color-purple">Todas os usuários:</h1>
           </div>
         </div>
-      </main>
-
-      <%- include('../partials/footer-platform') %>
-    </div>
+        
+        <div class="mt-4">
+          <ul role="list" class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            <% users.forEach(function(item) { %>
+              <li class="col-span-1 divide-y divide-gray-200 rounded-lg bg-white shadow">
+                <div class="flex w-full items-center space-x-6 p-6">
+                  <% if (item.photo) { %>
+                    <img class="h-11 w-11 flex-shrink-0 rounded-full" src="/img/photos/<%= item.photo %>" alt="">
+                  <% } else { %>
+                    <img class="h-11 w-11 flex-shrink-0 rounded-full" src="/img/platform/profile.png" alt="">
+                  <% } %>
+                  <div class="flex-1 truncate">
+                    <div class="flex items-center space-x-2">
+                      <h3 class="truncate text-md font-medium text-gray-900 inter"><%= item.name %></h3>
+                      <% if (item.isAdmin) { %>
+                        <span class="inline-flex flex-shrink-0 items-center rounded-full px-1.5 py-0.5 text-xs font-medium badge inter color-purple">Admin</span>
+                      <% } else { %>
+                        <span class="inline-flex flex-shrink-0 items-center rounded-full px-1.5 py-0.5 text-xs font-medium badge inter color-purple"><%= item.type_account %></span>
+                      <% } %>
+                    </div>
+                    <p class="mt-1 truncate text-sm text-gray-500 inter"><%= item.email %></p>
+                  </div>
+                </div>
+                <div>
+                  <div class="-mt-px flex divide-x divide-gray-200">
+                    <div class="flex w-0 flex-1">
+                      <a href="/platform/users/<%= item._id %>" class="relative -mr-px inter inline-flex w-0 flex-1 items-center justify-center gap-x-3 rounded-bl-lg border border-transparent py-4 text-sm font-semibold color-purple">
+                        <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path d="M19.25 19.25H2.75" stroke="#752A7A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                          <path d="M18.2246 6.41665L10.0846 14.5108L6.41797 15.5833L7.49047 11.9166L15.6305 3.77665C15.9748 3.40397 16.4528 3.1831 16.9598 3.16247C17.4668 3.14185 17.9612 3.32317 18.3346 3.66665C18.5117 3.8525 18.6497 4.07204 18.7403 4.31225C18.8309 4.55246 18.8723 4.80843 18.862 5.06495C18.8518 5.32147 18.7901 5.57331 18.6806 5.80551C18.5711 6.03772 18.416 6.24554 18.2246 6.41665Z" stroke="#752A7A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        Editar
+                      </a>
+                    </div>
+                    <% if (item.isBloqued) { %>
+                      <div class="-ml-px flex w-0 flex-1">
+                        <button onclick="unlockUser('<%= item._id %>')" class="relative inter inline-flex w-0 flex-1 items-center justify-center gap-x-3 rounded-br-lg border border-transparent py-4 text-sm font-semibold text-yellow-500">
+                          <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M10.9991 20.46C9.28306 20.46 7.69173 20.0274 6.22506 19.162C4.8024 18.326 3.67306 17.1967 2.83706 15.774C1.97173 14.3074 1.53906 12.716 1.53906 11C1.53906 9.28404 1.97173 7.69271 2.83706 6.22604C3.67306 4.80337 4.8024 3.67404 6.22506 2.83804C7.69173 1.97271 9.28306 1.54004 10.9991 1.54004C12.7151 1.54004 14.3064 1.97271 15.7731 2.83804C17.1957 3.67404 18.3251 4.80337 19.1611 6.22604C20.0264 7.69271 20.4591 9.28404 20.4591 11C20.4591 12.716 20.0264 14.3074 19.1611 15.774C18.3251 17.1967 17.1957 18.326 15.7731 19.162C14.3064 20.0274 12.7151 20.46 10.9991 20.46ZM7.03906 16.72C7.61106 17.1307 8.23806 17.4424 8.92006 17.655C9.60206 17.8677 10.2951 17.974 10.9991 17.974C12.2604 17.974 13.4337 17.6514 14.5191 17.006C15.5604 16.39 16.3891 15.5614 17.0051 14.52C17.6504 13.4347 17.9731 12.2614 17.9731 11C17.9731 10.296 17.8667 9.60304 17.6541 8.92104C17.4414 8.23904 17.1297 7.61204 16.7191 7.04004L7.03906 16.72ZM10.9991 4.02604C9.73773 4.02604 8.5644 4.34871 7.47906 4.99404C6.43773 5.61004 5.60906 6.43871 4.99306 7.48004C4.34773 8.56537 4.02506 9.73871 4.02506 11C4.02506 11.704 4.1314 12.397 4.34406 13.079C4.55673 13.761 4.8684 14.388 5.27906 14.96L14.9591 5.28004C14.3871 4.86937 13.7601 4.55771 13.0781 4.34504C12.3961 4.13237 11.7031 4.02604 10.9991 4.02604Z" fill="#C27803"/>
+                          </svg>                                                      
+                          Desbloquear
+                        </button>
+                      </div>
+                    <% } else { %>
+                      <div class="-ml-px flex w-0 flex-1">
+                        <button onclick="blockUser('<%= item._id %>')" class="relative inter inline-flex w-0 flex-1 items-center justify-center gap-x-3 rounded-br-lg border border-transparent py-4 text-sm font-semibold text-gray-900">
+                          <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M10.9991 20.46C9.28306 20.46 7.69173 20.0274 6.22506 19.162C4.8024 18.326 3.67306 17.1967 2.83706 15.774C1.97173 14.3074 1.53906 12.716 1.53906 11C1.53906 9.28404 1.97173 7.69271 2.83706 6.22604C3.67306 4.80337 4.8024 3.67404 6.22506 2.83804C7.69173 1.97271 9.28306 1.54004 10.9991 1.54004C12.7151 1.54004 14.3064 1.97271 15.7731 2.83804C17.1957 3.67404 18.3251 4.80337 19.1611 6.22604C20.0264 7.69271 20.4591 9.28404 20.4591 11C20.4591 12.716 20.0264 14.3074 19.1611 15.774C18.3251 17.1967 17.1957 18.326 15.7731 19.162C14.3064 20.0274 12.7151 20.46 10.9991 20.46ZM7.03906 16.72C7.61106 17.1307 8.23806 17.4424 8.92006 17.655C9.60206 17.8677 10.2951 17.974 10.9991 17.974C12.2604 17.974 13.4337 17.6514 14.5191 17.006C15.5604 16.39 16.3891 15.5614 17.0051 14.52C17.6504 13.4347 17.9731 12.2614 17.9731 11C17.9731 10.296 17.8667 9.60304 17.6541 8.92104C17.4414 8.23904 17.1297 7.61204 16.7191 7.04004L7.03906 16.72ZM10.9991 4.02604C9.73773 4.02604 8.5644 4.34871 7.47906 4.99404C6.43773 5.61004 5.60906 6.43871 4.99306 7.48004C4.34773 8.56537 4.02506 9.73871 4.02506 11C4.02506 11.704 4.1314 12.397 4.34406 13.079C4.55673 13.761 4.8684 14.388 5.27906 14.96L14.9591 5.28004C14.3871 4.86937 13.7601 4.55771 13.0781 4.34504C12.3961 4.13237 11.7031 4.02604 10.9991 4.02604Z" fill="#5F5F5F"/>
+                          </svg>                          
+                          Bloquear
+                        </button>
+                      </div>
+                    <% } %>
+                    <div class="-ml-px flex w-0 flex-1">
+                      <button onclick="deleteUser('<%= item._id %>')" class="relative inter inline-flex w-0 flex-1 items-center justify-center gap-x-3 rounded-br-lg border border-transparent py-4 text-sm font-semibold text-red-700">
+                        <svg class="mt-0.5" width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path d="M15.75 1.125H10.5C10.5 0.926088 10.421 0.735322 10.2803 0.59467C10.1397 0.454018 9.94891 0.375 9.75 0.375H8.25C8.05109 0.375 7.86032 0.454018 7.71967 0.59467C7.57902 0.735322 7.5 0.926088 7.5 1.125H2.25C2.05109 1.125 1.86032 1.20402 1.71967 1.34467C1.57902 1.48532 1.5 1.67609 1.5 1.875C1.5 2.07391 1.57902 2.26468 1.71967 2.40533C1.86032 2.54598 2.05109 2.625 2.25 2.625H15.75C15.9489 2.625 16.1397 2.54598 16.2803 2.40533C16.421 2.26468 16.5 2.07391 16.5 1.875C16.5 1.67609 16.421 1.48532 16.2803 1.34467C16.1397 1.20402 15.9489 1.125 15.75 1.125Z" fill="#AA2222"/>
+                          <path d="M14.625 3.375C14.4261 3.375 14.2353 3.45402 14.0947 3.59467C13.954 3.73532 13.875 3.92609 13.875 4.125V16.125H4.125V4.125C4.125 3.92609 4.04598 3.73532 3.90533 3.59467C3.76468 3.45402 3.57391 3.375 3.375 3.375C3.17609 3.375 2.98532 3.45402 2.84467 3.59467C2.70402 3.73532 2.625 3.92609 2.625 4.125V16.875C2.625 17.0739 2.70402 17.2647 2.84467 17.4053C2.98532 17.546 3.17609 17.625 3.375 17.625H14.625C14.8239 17.625 15.0147 17.546 15.1553 17.4053C15.296 17.2647 15.375 17.0739 15.375 16.875V4.125C15.375 3.92609 15.296 3.73532 15.1553 3.59467C15.0147 3.45402 14.8239 3.375 14.625 3.375Z" fill="#AA2222"/>
+                          <path d="M7.875 13.875V7.125C7.875 6.92609 7.79598 6.73532 7.65533 6.59467C7.51468 6.45402 7.32391 6.375 7.125 6.375C6.92609 6.375 6.73532 6.45402 6.59467 6.59467C6.45402 6.73532 6.375 6.92609 6.375 7.125V13.875C6.375 14.0739 6.45402 14.2647 6.59467 14.4053C6.73532 14.546 6.92609 14.625 7.125 14.625C7.32391 14.625 7.51468 14.546 7.65533 14.4053C7.79598 14.2647 7.875 14.0739 7.875 13.875Z" fill="#AA2222"/>
+                          <path d="M11.625 13.875V7.125C11.625 6.92609 11.546 6.73532 11.4053 6.59467C11.2647 6.45402 11.0739 6.375 10.875 6.375C10.6761 6.375 10.4853 6.45402 10.3447 6.59467C10.204 6.73532 10.125 6.92609 10.125 7.125V13.875C10.125 14.0739 10.204 14.2647 10.3447 14.4053C10.4853 14.546 10.6761 14.625 10.875 14.625C11.0739 14.625 11.2647 14.546 11.4053 14.4053C11.546 14.2647 11.625 14.0739 11.625 13.875Z" fill="#AA2222"/>
+                        </svg>
+                        Excluir
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </li>
+            <% }) %>
+          </ul>
+        </div>
+      </div>
+    </main>
   </div>
-
-
-<!-- Chart library -->
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<!-- Icons library -->
-<script src="js/admin/feather.min.js"></script>
 </body>
-</html>
 
 <script>
-  var _0x6a64=["\x75\x73\x65\x72\x73\x2F\x62\x6C\x6F\x63\x6B\x2F","\x50\x4F\x53\x54","\x61\x70\x70\x6C\x69\x63\x61\x74\x69\x6F\x6E\x2F\x6A\x73\x6F\x6E","\x72\x65\x6C\x6F\x61\x64","\x75\x73\x65\x72\x73\x2F\x75\x6E\x6C\x6F\x63\x6B\x2F","\x75\x73\x65\x72\x73\x2F\x64\x65\x6C\x65\x74\x65\x2F","\x44\x45\x4C\x45\x54\x45"];function blockUser(_0x37d6x2){fetch(_0x6a64[0]+ _0x37d6x2,{method:_0x6a64[1],headers:{'\x43\x6F\x6E\x74\x65\x6E\x74\x2D\x54\x79\x70\x65':_0x6a64[2]}});location[_0x6a64[3]]()}function unlockUser(_0x37d6x2){fetch(_0x6a64[4]+ _0x37d6x2,{method:_0x6a64[1],headers:{'\x43\x6F\x6E\x74\x65\x6E\x74\x2D\x54\x79\x70\x65':_0x6a64[2]}});location[_0x6a64[3]]()}function deleteUser(_0x37d6x2){fetch(_0x6a64[5]+ _0x37d6x2,{method:_0x6a64[6],headers:{'\x43\x6F\x6E\x74\x65\x6E\x74\x2D\x54\x79\x70\x65':_0x6a64[2]}});location[_0x6a64[3]]()}
+  function blockUser(id_user) {
+    fetch("users/block/" + id_user, {
+      method: "POST",
+      headers: { 'Content-Type': 'application/json' },
+    })
+
+    location.reload();
+  }
+
+  function unlockUser(id_user) {
+    fetch("users/unlock/" + id_user, {
+      method: "POST",
+      headers: { 'Content-Type': 'application/json' },
+    })
+
+    location.reload();
+  }
+
+  function deleteUser(id_user) {
+    fetch("users/delete/" + id_user, {
+      method: "DELETE",
+      headers: { 'Content-Type': 'application/json' },
+    })
+
+    location.reload();
+  }
 </script>
+</html>

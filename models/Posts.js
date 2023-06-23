@@ -49,6 +49,10 @@ const Posts = new mongoose.Schema({
         type: Array,
         require: true
     },
+    results: {
+        type: Array,
+        default: []
+    },
     platform: {
         type: String,
         require: true

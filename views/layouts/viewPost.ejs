@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>pluBee | Todos os posts</title>
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="/img/site/plubee-icon.png" type="image/x-icon">
+  <!-- Custom styles -->
+  <link rel="stylesheet" href="/css/platform/style.css">
+  <link rel="stylesheet" href="/css/platform/notify.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/1.8.12/tailwind-experimental.min.css">
+</head>
+
+<body>
+  <%- include('../partials/sidebar-platform', {isAdmin: isAdmin}) %>
+
+  <div class="lg:pl-70">
+    <%- include('../partials/nav-platform', {isAdmin: isAdmin, title: "Todas as publicações:", notifications: notifications, photo: photo, name_user: name_user}) %>
+
+    <main class="py-4 fade-in">
+      <div class="alert mt-10" style="display: none;"><div style="display: flex;" class="alert-text"></div></div>
+      <div class="error" style="display: none;"><div style="display: flex;" class="error-text"></div></div>
+
+      <header class="px-12">
+        <!-- Heading -->
+        <div class="flex flex-col items-start justify-between gap-x-8 gap-y-4 bg-gray-700/10 py-4 sm:flex-row sm:items-center">
+          <div class="flex items-center">
+            <div>
+              <% if (post.image == "program_image") { %>
+                <img class="h-12" src="/img/admin/program.png" alt="img">
+              <% } else if (post.image == "link") { %>
+                <img class="h-11" src="/img/platform/link-externo.png" alt="img">
+              <% } else if (post.image == "post") { %>
+                <img class="h-12" src="/img/admin/post.png" alt="img">
+              <% } else { %>
+                <img src="<%= post.image %>" alt="img">
+              <% } %>
+            </div>
+
+            <div class="flex flex-col gap-x-3 ml-4">
+              <h2 class="text-xl color-purple inter font-bold"><%= post.content %></h2>
+              <p class="inter text-md font-semibold mt-2 text-gray-500">Publicação realizada via aplicativo da pluBee.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Stats -->
+        <div class="grid grid-cols-1 bg-gray-700/10 sm:grid-cols-2 lg:grid-cols-4 mt-6 pb-4">
+          <div class="py-2">
+            <p class="text-md font-semibold leading-6 inter color-purple">Número de grupos:</p>
+            <p class="mt-2 flex items-baseline gap-x-2">
+              <span class="text-sm font-medium font-medium inter"><%= post.groups_ids.length %> grupos</span>
+            </p>
+          </div>
+
+          <div class="py-2">
+            <p class="text-md font-semibold leading-6 inter color-purple">Número de páginas:</p>
+            <p class="mt-2 flex items-baseline gap-x-2">
+              <span class="text-sm font-medium font-medium inter"><%= post.pages_ids.length %> páginas</span>
+            </p>
+          </div>
+
+          <div class="py-2">
+            <p class="text-md font-semibold leading-6 inter color-purple">Conta:</p>
+            <p class="mt-2 flex items-baseline gap-x-2">
+              <span class="text-sm font-medium font-medium inter"><%= post.name_account %></span>
+            </p>
+          </div>
+
+          <div class="py-2">
+            <p class="text-md font-semibold leading-6 inter color-purple">Programado:</p>
+            <p class="mt-2 flex items-baseline gap-x-2">
+              <% if (post.program_post) { %>
+                <span class="text-sm font-medium font-medium inter"><%= post.day %> - <%= post.hour %></span>
+              <% } else if (post.program_post == false) { %>
+                <span class="text-sm font-medium font-medium inter">Não</span>
+              <% } %>
+            </p>
+          </div>
+        </div>
+      </header>
+
+      <div class="border-t border-white/10 pt-4 px-12">
+        <div class="mt-4 flow-root">
+          <div class="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+            <div class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
+              <div class="overflow-hidden shadow ring-1 ring-black ring-opacity-5 sm:rounded-lg">
+                <table class="min-w-full divide-y divide-gray-300">
+                  <thead class="bg-gray-50">
+                    <tr>
+                      <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 inter">Foto</th>
+                      <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 inter">Nome</th>
+                      <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 inter">Tipo</th>
+                      <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 inter">Status</th>
+                      <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 inter">Conferir</th>
+                      <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 inter">Observações</th>
+                    </tr>
+                  </thead>
+                  <tbody class="divide-y divide-gray-200 bg-white">
+                    <% post.results.forEach(function(item) { %>
+                      <tr>
+                        <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 inter">
+                          <% if (item.type == "group") { %>
+                            <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+                              <g clip-path="url(#clip0_111_100)">
+                              <path d="M14.9212 4.71216C12.3376 4.71216 10.2432 7.15741 10.2432 10.1738C10.2432 12.2657 11.2506 14.0826 12.7299 15L11.0145 15.795L6.44948 17.9122C6.00848 18.1327 5.78838 18.5066 5.78838 19.0359C5.78838 20.7117 5.78838 22.3875 5.78838 24.0634C5.82465 24.692 6.2018 25.2778 6.81328 25.2878H23.0538C23.7519 25.2271 24.105 24.6648 24.1119 24.0634C24.1119 22.3876 24.1119 20.7117 24.1119 19.0359C24.1119 18.5066 23.8918 18.1327 23.4508 17.9122L19.0511 15.795L17.2227 14.9287C18.6413 13.9907 19.5992 12.2131 19.5992 10.1738C19.5992 7.15741 17.5047 4.71216 14.9212 4.71216ZM7.37558 6.63276C6.26375 6.67498 5.3826 7.15608 4.71315 7.92266C3.97265 8.84561 3.61165 9.94141 3.60467 11.0315C3.65015 12.6435 4.3714 14.1695 5.6554 14.9677L0.529075 17.3499C0.17625 17.4822 0 17.7909 0 18.276V22.3109C0.02755 22.8461 0.3054 23.2958 0.826375 23.3035H4.23348V19.0359C4.28985 17.8949 4.82565 16.9726 5.78838 16.5226L9.19455 14.9022C9.45915 14.7478 9.71283 14.538 9.95538 14.2734C8.55098 12.1065 8.35595 9.51108 9.26105 7.22833C8.67237 6.86806 8.0108 6.63653 7.37558 6.63276ZM22.5902 6.63276C21.8632 6.64798 21.1912 6.91573 20.6393 7.29386C21.5197 9.59728 21.2768 12.1943 19.9772 14.2069C20.2639 14.5376 20.5623 14.7913 20.871 14.9677L24.1452 16.5226C25.1426 17.0696 25.6569 18 25.6668 19.0359V23.3036H29.1727C29.7492 23.2538 29.995 22.7939 30 22.311V18.276C30 17.835 29.8238 17.5263 29.4709 17.3499L24.4102 14.9344C25.7226 13.9667 26.3816 12.5164 26.3944 11.0315C26.3595 9.85621 26.0004 8.76491 25.2859 7.92266C24.5392 7.11268 23.6132 6.64133 22.5902 6.63276Z" fill="#752A7A"/>
+                              </g>
+                              <defs>
+                              <clipPath id="clip0_111_100">
+                              <rect width="30" height="30" fill="white"/>
+                              </clipPath>
+                              </defs>
+                            </svg>
+                          <% } else if (item.type == "page") { %>
+                            <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+                              <g clip-path="url(#clip0_110_88)">
+                              <path d="M4.9349 1.66663C4.71388 1.66663 4.50192 1.75442 4.34564 1.9107C4.18936 2.06698 4.10156 2.27895 4.10156 2.49996V27.5C4.10156 27.721 4.18936 27.9329 4.34564 28.0892C4.50192 28.2455 4.71388 28.3333 4.9349 28.3333C5.15591 28.3333 5.36787 28.2455 5.52415 28.0892C5.68043 27.9329 5.76823 27.721 5.76823 27.5V2.49996C5.76823 2.27895 5.68043 2.06698 5.52415 1.9107C5.36787 1.75442 5.15591 1.66663 4.9349 1.66663Z" fill="#752A7A"/>
+                              <path d="M25.4167 3.18329C25.29 3.11015 25.1463 3.07165 25 3.07165C24.8537 3.07165 24.71 3.11015 24.5833 3.18329C22.9678 3.86238 21.2269 4.19183 19.475 4.14996C17.9656 4.03952 16.4957 3.6167 15.1583 2.90829C13.8721 2.21338 12.4566 1.79072 11 1.66663C9.79787 1.66794 8.60804 1.90873 7.5 2.37496V16.6666C8.5857 16.0726 9.80408 15.763 11.0417 15.7666C12.2672 15.8882 13.4566 16.2507 14.5417 16.8333C16.0918 17.6427 17.7959 18.1142 19.5417 18.2166C21.5454 18.2583 23.5348 17.8689 25.375 17.075C25.5124 17.0057 25.628 16.8998 25.7089 16.7688C25.7898 16.6379 25.8329 16.4872 25.8333 16.3333V3.89163C25.831 3.74762 25.7914 3.60667 25.7184 3.48253C25.6454 3.35838 25.5414 3.25529 25.4167 3.18329Z" fill="#752A7A"/>
+                              </g>
+                              <defs>
+                              <clipPath id="clip0_110_88">
+                              <rect width="30" height="30" fill="white"/>
+                              </clipPath>
+                              </defs>
+                            </svg>                              
+                          <% } %>
+                        </td>
+                        
+                        <% if (item.type == "page") { %>
+                          <td class="whitespace-nowrap px-3 py-4 text-sm font-semibold text-blue-500 inter"><a target="_blank" class="underline" href="https://www.facebook.com/<%= item.page_id %>"><%= item.name %></a></td>
+                        <% } else if (item.type == "group") { %>
+                          <td class="whitespace-nowrap px-3 py-4 text-sm font-semibold text-blue-500 inter"><a target="_blank" class="underline" href="https://www.facebook.com/<%= item.group_id %>"><%= item.name %></a></td>
+                        <% } %>
+
+                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 inter">
+                          <% if (item.type == "page") { %>
+                            Página
+                          <% } else if (item.type == "group") { %>
+                            Grupo
+                          <% } %>
+                        </td>
+
+                        <% if (item.status == "published") { %>
+                          <td class="whitespace-nowrap px-3 py-4 text-sm text-green-400 inter font-semibold">Publicado</td>
+                          <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 inter font-semibold text-blue-500">
+                            <div class="flex space-x-2">
+                              <button onclick="copyLink('https://www.facebook.com/<%= item.id %>')">
+                                <svg width="19" height="19" viewBox="0 0 19 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                  <path d="M1.58203 3.16671C1.58203 2.74678 1.74885 2.34405 2.04578 2.04712C2.34271 1.75019 2.74544 1.58337 3.16536 1.58337H11.082C11.502 1.58337 11.9047 1.75019 12.2016 2.04712C12.4985 2.34405 12.6654 2.74678 12.6654 3.16671V6.33337H15.832C16.252 6.33337 16.6547 6.50019 16.9516 6.79712C17.2485 7.09405 17.4154 7.49678 17.4154 7.91671V15.8334C17.4154 16.2533 17.2485 16.656 16.9516 16.953C16.6547 17.2499 16.252 17.4167 15.832 17.4167H7.91536C7.49544 17.4167 7.09271 17.2499 6.79578 16.953C6.49885 16.656 6.33203 16.2533 6.33203 15.8334V12.6667H3.16536C2.74544 12.6667 2.34271 12.4999 2.04578 12.203C1.74885 11.906 1.58203 11.5033 1.58203 11.0834V3.16671ZM7.91536 12.6667V15.8334H15.832V7.91671H12.6654V11.0834C12.6654 11.5033 12.4985 11.906 12.2016 12.203C11.9047 12.4999 11.502 12.6667 11.082 12.6667H7.91536ZM11.082 11.0834V3.16671H3.16536V11.0834H11.082Z" fill="#727272"/>
+                                </svg>
+                              </button>
+                              <a target="_blank" href="https://www.facebook.com/<%= item.id %>">Clique para conferir</a>                   
+                            </div>
+                          </td>
+                          <td></td>
+                        <% } else if (item.status == "error") { %>
+                          <td class="whitespace-nowrap px-3 py-4 text-sm text-red-600 inter">Erro</td>
+                          <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 inter">Nenhum link disponível</td>
+                          <% if (item.type == "page") { %>
+                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 inter font-semibold">Temporariamente bloqueado.</td>
+                          <% } else if (item.type == "group") { %>
+                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 inter font-semibold">Aplicativo ausente no grupo ou temporariamente bloqueado.</td>
+                          <% } %>
+                        <% } %>
+                      </tr>
+                    <% }) %>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+</body>
+</html>
+
+<script>
+  function alert_message(type, content) {
+    if (type == 'error') {
+      const divMessage = document.querySelector(".error");
+      divMessage.style.display = "flex";
+      divMessage.innerHTML = "";
+      const message = document.createElement("p");
+      const img = document.createElement("img");
+      img.width = "28"
+      img.height = "28"
+      img.src = "/img/admin/Bulk/error.png"
+      message.classList.add("message-notify");
+      message.innerText = content;
+      divMessage.appendChild(img);
+      divMessage.appendChild(message);
+
+      setTimeout(() => {
+        divMessage.style = "animation: slideoff 2s;"
+        setTimeout(() => {
+          divMessage.style = "display: none"
+        }, 800)
+      }, 2000);
+    } else if (type == "success") {
+      const divMessage = document.querySelector(".alert");
+      divMessage.style.display = "flex";
+      divMessage.innerHTML = "";
+      const message = document.createElement("p");
+      const img = document.createElement("img");
+      img.width = "28"
+      img.height = "28"
+      img.src = "/img/admin/Bulk/checked.png"
+      message.classList.add("message-notify");
+      message.innerText = content;
+      divMessage.appendChild(img);
+      divMessage.appendChild(message);
+
+      setTimeout(() => {
+        divMessage.style = "animation: slideoff 2s;"
+        setTimeout(() => {
+          divMessage.style = "display: none"
+        }, 800)
+      }, 2000);
+    }
+  }
+
+  function openEdit(id_post, content_post, link_post, program, day, hour) {
+    const edit = document.querySelector("#popup_edit")
+    const content = document.querySelector("#content")
+    const divLink = document.querySelector("#div-link")
+    const divImage = document.querySelector("#div-image")
+    const divDate = document.querySelector("#div-date")
+    const link = document.querySelector("#link")
+    const image = document.querySelector("#image")
+    const date = document.querySelector("#date")
+    const time = document.querySelector("#time")
+
+    // Insert content
+    content.value = content_post
+
+    if (link_post.length > 1) {
+      link.value = link_post
+      divImage.classList.add("hidden")
+    } else {
+      divLink.classList.add("hidden")
+    }
+
+    if (program == true) {
+      divDate.classList.add("block")
+
+      const today = new Date(`${day.slice(6, 10)}-${day.slice(3, 5)}-${day.slice(0, 2)}`);
+      date.valueAsDate = today;
+      time.value = hour
+    } else {
+      divDate.classList.add("hidden")
+    }
+
+    edit.classList.remove("hidden")
+  }
+
+  function closeEdit() {
+    const edit = document.querySelector("#popup_edit")
+    const divLink = document.querySelector("#div-link")
+    const divImage = document.querySelector("#div-image")
+    const divDate = document.querySelector("#div-date")
+
+    divLink.classList.remove("hidden")
+    divImage.classList.remove("hidden")
+    divImage.classList.remove("hidden")
+    edit.classList.add("hidden")
+  }
+
+  link.addEventListener('input', function() {
+    const valor = link.value;
+
+    const linkValid = /^(http|https):\/\/[a-zA-Z0-9\-\.]+\.[a-zA-Z]{2,}(\/\S*)?$/;
+
+    if (linkValid.test(valor)) {
+      file_input.disabled = true
+      file_input.readOnly = true
+      file_input.style.display = "none"
+      
+      fetch(`https://graph.facebook.com/v12.0/?id=${link.value}&fields=og_object{title,description,image}`, { method: 'GET' })
+        .then(response => {
+          if (response.ok) {
+            return response.json()
+          } else {
+            img_post.style.display = "none"
+            div_link.style.display = "flex"
+            link_error.style.display = "flex"
+          }
+        })
+        .then(data => {
+          const title = data.og_object.title;
+          const description = data.og_object.description;
+          const image = data.og_object.image.url;
+          
+          img_post.style.display = "none"
+          link_error.style.display = "none"
+          link_image.src = image
+          link_h3.innerText = title
+          link_p.innerText = description
+          link_content.innerText = link.value
+        })
+        .catch(error => {
+          // div_link.style.display = "flex"
+        });        
+    } else {
+      link.style.border = "2px solid #e00d0d"
+    }
+  })
+
+  function update(id_post) {
+    let time_interval = 0
+
+    if (type_time.value == "seconds") {
+      time_interval = time.value
+    } else if (type_time.value == "minuts") {
+      time_interval = time.value * 60
+    } else {
+      time_interval = 0
+    }
+
+    const errors = []
+
+    const linkValid = /^(http|https):\/\/[a-zA-Z0-9\-\.]+\.[a-zA-Z]{2,}(\/\S*)?$/;
+
+    if (linkValid.test(link.value) == false) {
+      if (images.length == 0) {
+        link.style.border = "2px solid #e00d0d";
+        files.style = "border: 2px dashed #e00d0d !important;";
+        errors.push("error")
+      }
+    }
+
+    if (content.value.length == 0) {
+      content.style.border = "2px solid #e00d0d";
+      errors.push("error")
+    }
+
+    if (day.value == "") {
+      day.style.border = "2px solid #e00d0d";
+      errors.push("Selecione o dia")
+    }
+
+    if (hour.value == "") {
+      hour.style.border = "2px solid #e00d0d";
+      errors.push("Selecione a hora")
+    }
+
+    if (errors.length == 0) {
+      fetch('/platform/all-posts/edit_post/' + id_post, {
+        method: 'PUT',
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({content: content.value, day: day.value, hour: hour.value, link: link.value, time: time_interval, type_time: type_time.value})
+      })
+      .then(response => {
+        const divMessage = document.querySelector(".alert");
+        divMessage.style.display = "flex";
+
+        const divMessageText = document.querySelector(".alert-text");
+        divMessageText.innerHTML = "";
+        
+        const message = document.createElement("p");
+        const img = document.createElement("img");
+        img.width = "28"
+        img.height = "28"
+        img.src = "/img/admin/Bulk/checked.png"
+        message.classList.add("message-notify");
+        message.innerText = "Publicação atualizada com sucesso.";
+        divMessageText.appendChild(img);
+        divMessageText.appendChild(message);
+
+        setTimeout(() => {
+          divMessage.style = "animation: slideoff 2s;"
+          setTimeout(() => {
+            divMessage.style = "display: none"
+            location.reload()
+          }, 800)
+        }, 2000);
+      })
+      .catch(err => {
+        const divMessage = document.querySelector(".alert");
+        divMessage.style.display = "flex";
+
+        const divMessageText = document.querySelector(".alert-text");
+        divMessageText.innerHTML = "";
+        
+        const message = document.createElement("p");
+        const img = document.createElement("img");
+        img.width = "28"
+        img.height = "28"
+        img.src = "/img/admin/Bulk/checked.png"
+        message.classList.add("message-notify");
+        message.innerText = "Erro ao atualizar publicação.";
+        divMessageText.appendChild(img);
+        divMessageText.appendChild(message);
+
+        setTimeout(() => {
+          divMessage.style = "animation: slideoff 2s;"
+          setTimeout(() => {
+            divMessage.style = "display: none"
+          }, 800)
+        }, 2000);
+      })
+    }
+  }
+
+  function copyLink(link) {
+    const tempElement = document.createElement("textarea");
+    tempElement.value = link;
+
+    document.body.appendChild(tempElement);
+
+    tempElement.select();
+
+    document.execCommand("copy");
+
+    document.body.removeChild(tempElement);
+
+    alert_message("success", "Link copiado")
+  }
+</script>

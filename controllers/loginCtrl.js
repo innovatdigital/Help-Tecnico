@@ -12,14 +12,13 @@ const Login = asyncHandler(async(req, res) => {
     if (find) {
         if (find.isBloqued == false) {
             const cookieObj = cookie.serialize('_id', find._id, {
-                domain: 'plubee.net',
+                domain: 'localhost',
                 path: '/',
                 httpOnly: true,
                 secure: true,
                 sameSite: 'strict'
             });
     
-            // Define o cookie no cabeçalho da resposta
             res.setHeader('Set-Cookie', cookieObj);
     
             res.send({auth: true})
@@ -33,10 +32,6 @@ const Login = asyncHandler(async(req, res) => {
 
 const Register = asyncHandler(async(req, res) => {
     const { name, cpf, number, email, password, type_account } = req.body
-
-    console.log(req.body)
-    console.log(cpf)
-
 
     // const encryptPassword = bcrypt.hash(password, 10)
 

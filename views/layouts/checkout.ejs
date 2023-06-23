@@ -1,182 +1,389 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>pluBee</title>
-    <link rel="stylesheet" href="/css/checkout/checkout.css">
-    <link rel="stylesheet" href="/css/site/nav.css">
-    <link rel="stylesheet" href="/css/site/footer.css">
-    <link rel="stylesheet" href="/css/site/site.css">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="pluBee.net">
+    <meta name="generator" content="pluBee.net">
+    <title>pluBee | Adquirir um plano</title>
+
     <link rel="shortcut icon" href="/img/site/plubee-icon.png" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/1.8.12/tailwind-experimental.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="/css/main/style.css">
 
 </head>
-<body>
+<body class="bg-gray-100">
     <%- include('../partials/nav-site') %>
+    <div class="alert" style="display: none;"><div style="display: flex;" class="alert-text"></div></div>
+    <div class="error" style="display: none;"><div style="display: flex;" class="error-text"></div></div>
 
-    <div class="content">
-        <div class="top">
-            <img src="/img/checkout/nav.png" alt="">
+		<div class="wait-process hidden flex-col items-center justify-center">
+			<img class="w-80" src="/img/site/process.svg" alt="Processando pagamento">
+			<h1 class="text-2xl made-tommy color-purple font-semibold mt-12">Aguarde. Estamos processando o seu pagamentos...</h1>
+		</div>
+
+    <main class="data-user mx-auto max-w-7xl px-4 pb-24 pt-16 sm:px-6 lg:px-8">
+      <div class="mx-auto max-w-2xl lg:max-w-none">
+        <h1 class="sr-only">Checkout</h1>
+  
+        <div class="lg:grid lg:grid-cols-2 lg:gap-x-12 xl:gap-x-16">
+          <div>
+            <div>
+              <h2 class="text-1xl font-medium text-gray-900 made-tommy color-purple">1. Preencha com as suas informações:</h2>
+              <p class="text-lg text-gray-900 font-medium made-tommy" id="text-temp">Complete a primeira etapa.</p>
+            </div>
+  
+            <div class="mt-6 border-t border-gray-400 pt-10">
+              <div class="grid grid-cols-1 gap-y-6 sm:grid-cols-2 sm:gap-x-4">
+                <div>
+                  <label for="first-name" class="block text-sm font-medium text-gray-700">Primeiro nome</label>
+                  <div class="mt-2">
+                    <input type="text" id="first-name" name="first-name" placeholder="Seu primeiro nome" class="block pl-2 made-tommy w-full py-1.5 border rounded-lg border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
+                  </div>
+                </div>
+  
+                <div>
+                  <label for="last-name" class="block text-sm font-medium text-gray-700">Segundo nome</label>
+                  <div class="mt-2">
+                    <input type="text" id="last-name" name="last-name" placeholder="Seu segundo nome" class="block pl-2 made-tommy w-full py-1.5 border rounded-lg border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
+                  </div>
+                </div>
+  
+                <div>
+                  <label for="cpf-name" class="block text-sm font-medium text-gray-700">CPF</label>
+                  <div class="mt-2">
+                    <input type="text" id="cpf" name="cpf" placeholder="Seu CPF" class="block pl-2 made-tommy w-full py-1.5 border rounded-lg border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
+                  </div>
+                </div>
+  
+                <div>
+                  <label for="number-name" class="block text-sm font-medium text-gray-700">Número de telefone</label>
+                  <div class="mt-2">
+                    <input type="text" id="number" name="number" placeholder="Seu número de telefone" class="block pl-2 made-tommy w-full py-1.5 border rounded-lg border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
+                  </div>
+                </div>
+  
+                <div>
+                  <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
+                  <div class="mt-2">
+                    <input type="text" id="email" name="email" placeholder="Seu email" class="block pl-2 made-tommy w-full py-1.5 border rounded-lg border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
+                  </div>
+                </div>
+  
+                <div>
+                  <label for="password" class="block text-sm font-medium text-gray-700">Senha</label>
+                  <div class="mt-2">
+                    <input type="password" id="password" name="password" placeholder="Crie uma senha" class="block pl-2 made-tommy w-full py-1.5 border rounded-lg border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
+                  </div>
+                </div>
+              </div>
+
+              <div class="mt-4">
+                <button id="formSubmitOneMobile" type="submit" class="w-full lg:hidden rounded-md border border-transparent px-4 py-2 text-base font-medium text-white shadow-sm bg-purple">Continuar</button>
+              </div>
+            </div>
+
+            <div class="mt-6 border-t border-gray-200 pt-10">
+              <h2 id="title-payment" class="text-1xl font-medium text-gray-900 made-tommy color-purple mb-4">2. Realize o pagamento:</h2>
+              <p class="text-lg text-gray-900 font-medium made-tommy" id="text-temp">Complete a primeira etapa.</p>
+
+              <div class="mt-6 grid grid-cols-1 gap-x-4 gap-y-6" id="form-checkout">
+                <form id="payment-form">
+                  <div id="payment-element">
+                    <!--Stripe.js injects the Payment Element-->
+                  </div>
+                  <div class="spinner hidden" id="spinner"></div>
+                  <div id="payment-message" class="hidden"></div>
+                </form>
+              </div>
+            </div>
+          </div>
+  
+          <!-- Order summary -->
+          <div class="mt-10 lg:mt-0">
+            <h2 class="text-lg font-medium text-gray-900">Informações do plano:</h2>
+  
+            <div class="mt-4 rounded-lg border border-gray-200 bg-white shadow-sm">
+              <h3 class="sr-only">Items in your cart</h3>
+              <ul role="list" class="divide-y divide-gray-200">
+                <li class="flex px-4 py-6 sm:px-6"> 
+                  <div class="flex flex-1 flex-col">
+                    <div class="flex">
+                      <div class="min-w-0 flex-1">
+                        <h4 class="text-sm">
+                          <h2 class="text-1xl font-medium text-gray-700 made-tommy color-purple">Plano <%= plan.title %></h2>
+                        </h4>
+                      </div>
+                    </div>
+  
+                    <div class="flex flex-col pt-2">
+                      <% plan.description.forEach(function(item) { %>
+                        <div class="flex items-center mt-2">
+                          <svg class="h-6 w-5 flex-none text-indigo-600" viewBox="0 0 20 20" fill="#752a7a" aria-hidden="true">
+                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clip-rule="evenodd" />
+                          </svg>
+                          <p class="text-md font-medium text-gray-900 ml-2"><%= item %></p>
+                        </div>
+                      <% }) %>
+                    </div>
+                  </div>
+                </li>
+              </ul>
+
+              <dl class="space-y-6 py-6">
+                <div class="flex items-center px-6 justify-between border-t border-gray-200 pt-6">
+                  <dt class="text-base font-medium">Total (Mensal)</dt>
+                  <dd class="text-base font-medium text-gray-900 font-semibold color-purple">R$<%= plan.value_month %>,00</dd>
+                </div>
+
+                <div class="flex items-center px-6 justify-between border-t border-gray-200 pt-6">
+                  <dt class="text-base font-medium">Forma de pagamento:</dt>
+                  <dd class="text-base font-medium text-gray-900 font-semibold color-purple">Cartão de crédito</dd>
+                </div>
+              </dl>
+  
+              <div class="border-t border-gray-200 px-6 py-6 sm:px-6" id="div-confirm">
+                <button id="formSubmitOne" type="submit" class="w-full hidden lg:block rounded-md border border-transparent px-4 py-2 text-base font-medium text-white shadow-sm bg-purple">Continuar</button>
+              </div>
+            </div>
+          </div>
         </div>
-        
-        <div class="container">
-            <div class="box-option">
-                <div class="title-options">
-                    <h1 class="title">Realize o seu cadastro primeiro:</h1>
-                </div>
-    
-                <div class="div-options">
-                    <div class="form-floating" style="margin-left: 5px;">
-                        <div>
-                            <p class="p-dados" style="font-weight: bold;">Preencha com os seus dados para criar o seu login:</p>
-                            <input class="form" type="text" name="nome" id="name" placeholder="Nome completo:">
-                            <input class="form" type="text" name="telefone" id="number" placeholder="Telefone:">
-                            <input class="form" type="text" name="cpf" id="cpf" onkeyup="validCpf()" placeholder="CPF:">
-                            <input class="form" type="text" name="email" id="email" placeholder="Email">
-                            <input class="form" type="password" name="senha" id="password" placeholder="Senha">
-                            <button class="btn-continue">Prosseguir</button>
-                        </div>
-                        
-                        <p class="privacy">Ao clicar no botão abaixo, você concorda com as nossas políticas <a href="/policy">termos de privacidade</a> e utilização de cookies.</p>
-
-                        <img src="/img/checkout/seguro.png" class="security" alt="compra segura">
-                    </div>
-    
-                    <div class="card">
-                        <div>
-                            <img src="/img/checkout/card.jpg" alt="">
-                            <p id="title-paragraph">Pagamento via Cartão de crédito</p>
-                        </div>
-                        <div>
-                            <input type="radio" name="pag" id="card" value="CARD" tabindex="2">
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="pag-card" style="display: none;">
-                <div class="title-options">
-                    <h1 class="title">Complete com os dados do seu cartão:</h1>
-                </div>
-
-                <div id="cardPaymentBrick_container"></div>      
-            </div>
-    
-            <div class="box-details">
-                <div class="title-details">
-                    <h1>Resumo do pedido</h1>
-                </div>
-                <h2>Tem um cupom? Insira aqui:</h2>
-                <div class="cupom-div">
-                    <input type="text" class="cupom-input" placeholder="Cupom de desconto aqui">
-                    <button class="btn-cupom">Adicionar</button>
-                </div>
-                <div class="itens">
-                    <h2>1 item selecionado:</h2>
-                    <p>- Plano <span><%= planInfo.title %></span></p>
-                </div>
-                <div class="infos">
-                    <div class="space">
-                        <h1>Método de pagamento:</h1>
-                        <h2>Cartão</h2>
-                    </div>
-                    <div class="space">
-                        <h1>Tipo:</h1>
-                        <h2>Crédito ou débito</h2>
-                    </div>
-                    <div class="space-two">
-                        <h1>Valor total:</h1>
-                        <h2>R$<%= planInfo.value_month %></h2>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+      </div>
+    </main>
     
     <%- include('../partials/footer-site') %>
 
-<script src="https://sdk.mercadopago.com/js/v2"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
-<script type="text/javascript" src="/js/checkout/index.js"></script>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://js.stripe.com/v3/"></script>
 <script>
-    const div = document.querySelector('.div-options')
-    div.style.height = "10px"
-    const mp = new MercadoPago('<%= APP_USER %>');
-    const bricksBuilder = mp.bricks();
-    const renderCardPaymentBrick = async (bricksBuilder) => {
-    const settings = {
-        initialization: {
-        amount: 1,
-        payer: {
-            email: 'contato@plubee.net',
-        },
-        },
-        customization: {
-        visual: {
-            style: {
-            theme: 'flat'
-            }
-        }
-        },        
-        callbacks: {
-        onReady: () => {
-        },
-        onSubmit: (cardFormData) => {
-            const account = {
-                name: document.querySelector('#name').value,
-                number: document.querySelector('#number').value,
-                cpf: document.querySelector('#cpf').value,
-                email: document.querySelector('#email').value,
-                password: document.querySelector('#password').value,
-                type_account: '<%= planInfo.title %>',
-                amount: '<%= planInfo.value_month %>'
-            }
+  const stripe = Stripe("pk_live_51NGjrrATsTjVvAV2Ty6X5LkBlOmq7tmdFblT8N1MrSSjzuwn596kJcFiEAxWjprZYYmmJDVc3JAFiDnhJveq4vua00qnSzsyxN");
 
-            const data = {
-                cardFormData,
-                account
-            }
+  function alert_message(type, content) {
+    if (type == 'error') {
+      const divMessage = document.querySelector(".error");
+      divMessage.style.display = "flex";
+      divMessage.innerHTML = "";
+      const message = document.createElement("p");
+      const img = document.createElement("img");
+      img.width = "28"
+      img.height = "28"
+      img.src = "/img/admin/Bulk/error.png"
+      message.classList.add("message-notify");
+      message.innerText = content;
+      divMessage.appendChild(img);
+      divMessage.appendChild(message);
 
-            return new Promise((resolve, reject) => {
-            fetch("/checkout/process_payment", {
-                method: "POST",
-                headers: {
-                "Content-Type": "application/json",
-                },
-                body: JSON.stringify(data)
-            })
-            .then((response) => {
-                if (response.ok) {
-                    return response.json();
-                }
-                throw new Error("Erro ao processar a resposta da requisição");
-            })
-            .then((data) => {
-                if (data.approved) {
-                    $(".container").hide()
-                    $("#title").text("Pagamento aprovado com sucesso!")
-                    $(".content").append(`<p class="p-approved">Olá ${document.querySelector('#name').value}, seu pagamento foi aprovado com sucesso.</p>`)
-                    $(".content").append("<p class='p-approved'>Você receberá um email com todos os dados da sua compra.</p>")
-                    $(".content").append("<p class='p-approved'>Faça login agora mesmo na sua conta clicando no botão abaxo.</p>")
-                }
-                resolve();
-            })
-            .catch((error) => {
-                console.log(error)
-                reject();
-            })
-        });
-        },
-        onError: (error) => {
-            console.error(error);
-        },
-        },
+      setTimeout(() => {
+        divMessage.style = "animation: slideoff 2s;"
+        setTimeout(() => {
+          divMessage.style = "display: none"
+        }, 800)
+      }, 4000);
+    } else if (type == "success") {
+      const divMessage = document.querySelector(".alert");
+      divMessage.style.display = "flex";
+      divMessage.innerHTML = "";
+      const message = document.createElement("p");
+      const img = document.createElement("img");
+      img.width = "28"
+      img.height = "28"
+      img.src = "/img/admin/Bulk/checked.png"
+      message.classList.add("message-notify");
+      message.innerText = content;
+      divMessage.appendChild(img);
+      divMessage.appendChild(message);
+
+      setTimeout(() => {
+        divMessage.style = "animation: slideoff 2s;"
+        setTimeout(() => {
+          divMessage.style = "display: none"
+        }, 800)
+      }, 4000);
+    }
+  }
+
+  const buttonOne = document.querySelector("#formSubmitOne").addEventListener("click", payment)
+  const buttonOneMobile = document.querySelector("#formSubmitOneMobile").addEventListener("click", payment)
+
+  async function payment() {
+    const firstName = document.querySelector("#first-name")
+    const lastName = document.querySelector("#last-name")
+    const email = document.querySelector("#email")
+    const cpf = document.querySelector("#cpf")
+    const phone = document.querySelector("#number")
+    const password = document.querySelector("#password")
+
+    const data = {
+      firstName: firstName.value,
+      lastName: lastName.value,
+      email: email.value,
+      cpf: cpf.value,
+      phone: phone.value,
+      password: password.value
+    }
+
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const cpfPattern = /^\d{11}$/;
+    const phonePattern = /^\d{11}$/;
+
+    if (!emailPattern.test(email.value)) {
+      alert_message("error", "Email inválido")
+      return
+    }
+
+    if (!cpfPattern.test(cpf.value)) {
+      alert_message("error", "CPF inválido")
+      return
+    }
+
+    if (!phonePattern.test(phone.value)) {
+      alert_message("error", "Telefone inválido")
+      return
+    }
+
+    const response = await fetch("/checkout/validate-data/", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email: email.value, cpf: cpf.value, phone: phone.value })
+    });
+
+    const { valid } = await response.json();
+
+    if (valid) {
+      initialize(data);
+      checkStatus();
+
+      const buttonSubmit = document.querySelector("#formSubmitOne")
+      const parentElement = buttonSubmit.parentNode
+      parentElement.removeChild(buttonSubmit);
+
+      const buttonSubmitMobile = document.querySelector("#formSubmitOneMobile")
+      const parentElementMobile = buttonSubmitMobile.parentNode
+      parentElementMobile.removeChild(buttonSubmitMobile);
+
+      document.querySelector("#text-temp").style.display = "none"
+
+      const divConfirm = document.querySelector("#div-confirm")
+
+      const button = document.createElement("button");
+      button.id = "formSubmitTwo";
+      button.type = "submit";
+      button.className = "w-full rounded-md border border-transparent px-4 py-2 text-base font-medium text-white shadow-sm bg-purple";
+      button.innerText = "Confirmar compra";
+
+      button.addEventListener("click", handleSubmit)
+
+      divConfirm.appendChild(button)
+    } else {
+      alert_message("error", "Dados incorretos.")
+    }
+  }
+
+  let elements;
+
+  document
+    .querySelector("#payment-form")
+
+  async function initialize(data) {
+    const response = await fetch("/checkout/create-payment-intent/" + "<%= name_checkout %>", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({user: data})
+    });
+    const { clientSecret } = await response.json();
+
+    const appearance = {
+      theme: 'stripe',
     };
-    window.cardPaymentBrickController = await bricksBuilder.create('cardPayment', 'cardPaymentBrick_container', settings);
+    elements = stripe.elements({ appearance, clientSecret });
+
+
+    const paymentElementOptions = {
+      layout: "tabs",
     };
-    renderCardPaymentBrick(bricksBuilder);
+
+    const paymentElement = elements.create("payment", paymentElementOptions);
+    paymentElement.mount("#payment-element");
+
+    document.querySelector("#title-payment").innerText = "2. Realize o pagamento:"
+  }
+
+  async function handleSubmit(e) {
+    e.preventDefault();
+
+    setLoading(true);
+
+    const { error } = await stripe.confirmPayment({
+      elements,
+      confirmParams: {
+        return_url: "https://localhost:5500/checkout/success",
+      }
+    });
+
+    if (error.type === "card_error" || error.type === "validation_error") {
+      alert_message("error", error.message)
+    } else {
+      alert_message("error", "Ocorreu um erro no pagamento.")
+    }
+
+    setLoading(false);
+  }
+
+  async function checkStatus() {
+    const clientSecret = new URLSearchParams(window.location.search).get(
+      "payment_intent_client_secret"
+    );
+
+    if (!clientSecret) {
+      return;
+    }
+
+    const { paymentIntent } = await stripe.retrievePaymentIntent(clientSecret);
+
+    switch (paymentIntent.status) {
+      case "succeeded":
+        alert_message("success", "Pagamento aprovado com sucesso!")
+        break;
+      case "processing":
+        alert_message("success", "Seu pagamento está sendo processado.")
+        break;
+      case "requires_payment_method":
+        alert_message("error", "Pagamento não aprovado.")
+        break;
+      default:
+        alert_message("error", "Tente novamente mais tarde.")
+        break;
+    }
+  }
+
+  // ------- UI helpers -------
+
+  function showMessage(messageText) {
+    const messageContainer = document.querySelector("#payment-message");
+
+    messageContainer.classList.remove("hidden");
+    messageContainer.textContent = messageText;
+
+    setTimeout(function () {
+      messageContainer.classList.add("hidden");
+      messageContainer.textContent = "";
+    }, 4000);
+  }
+
+  // Show a spinner on payment submission
+  function setLoading(isLoading) {
+    if (isLoading) {
+      // Disable the button and show a spinner
+      document.querySelector("#formSubmitTwo").disabled = true;
+      document.querySelector("#spinner").classList.remove("hidden");
+      document.querySelector("#formSubmitTwo").classList.add("hidden");
+    } else {
+      document.querySelector("#formSubmitTwo").disabled = false;
+      document.querySelector("#spinner").classList.add("hidden");
+      document.querySelector("#formSubmitTwo").classList.remove("hidden");
+    }
+  }
 </script>
 </body>
 </html>

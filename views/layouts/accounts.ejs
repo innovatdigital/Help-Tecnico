@@ -9,166 +9,148 @@
   <!-- Favicon -->
   <link rel="shortcut icon" href="/img/site/plubee-icon.png" type="image/x-icon">
   <!-- Custom styles -->
-  <link rel="stylesheet" href="/css/admin/style.css">
+  <link rel="stylesheet" href="/css/platform/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/1.8.12/tailwind-experimental.min.css">
 </head>
 
 <body>
-  <div class="layer"></div>
-  
-  <!-- ! Body -->
-  <div class="page-flex">
+  <%- include('../partials/sidebar-platform', {isAdmin: isAdmin}) %>
 
-    <!-- ! Sidebar -->
-    <%- include('../partials/sidebar-platform', {isAdmin: isAdmin}) %>
+  <div class="lg:pl-70">
+    <%- include('../partials/nav-platform', {isAdmin: isAdmin, title: "Contas importadas", notifications: notifications, photo: photo, name_user: name_user}) %>
 
-    <div class="main-wrapper">
-      <!-- ! Main nav -->
-      <%- include('../partials/nav-platform', {isAdmin: isAdmin, title: "Contas cadastradas", notifications: notifications, photo: photo}) %>
-  
-      <!-- ! Main -->
-      <main class="main users chart-page" id="skip-target">
-        <div class="container">
-          <div class="row">
-            <div class="col-lg">
-              <% if (accounts.length > 0) { %>
-              <div class="users-table table-wrapper">
-                <table class="posts-table">
-                  <thead>
-                    <tr class="users-table-info">
-                      <th style="font-weight: bold">
-                        <label class="users-table__checkbox">
-                          ID da conta
-                        </label>
-                      </th>
-                      <th>Foto</th>
-                      <th>Nome da conta</th>
-                      <th>Plataforma</th>
-                      <th>Data de cadastro</th>
-                      <th>Ações</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <% accounts.forEach(function(item) { %>
-                      <tr>
-                        <td>
-                          <div style="font-weight: bold">
-                            <%= item.id_account %>
-                          </div>
-                        </td>
-
-                        <td>
-                          <div class="categories-table-img">
-                            <img src="<%= item.photo %>" alt="foto-de-perfil" style="width: 40px; height: 40px; border-radius: 50px;">
-                          </div>
-                        </td>
-
-                        <td>
-                          <div>
-                            <%= item.name %>
-                          </div>
-                        </td>
-
-                        <% if (item.platform == "Facebook") { %>
-                          <td>
-                            <div style="color: #1877F2; font-weight: bold;">
-                              <%= item.platform %>
-                            </div>
-                          </td>
-                        <% } else { %>
-                          <td>
-                            <div style="font-weight: bold; color: #C21F70">
-                              <%= item.platform %>
-                            </div>
-                          </td>
-                        <% } %>
-                        <td>
-                          <div>
-                            <%= item.date %>
-                          </div>
-                        </td>
-
-                        <td>
-                          <div> 
-                            <button class="event" id="delete-account" onclick="deleteAccount('<%= item.id_account %>', '<%= item.platform %>')">Excluir conta</button>
-                          </div>
-                        </td>                                                    
-                      </tr>
-                    <% }); %>
-                  </tbody>
-                </table>
-              </div>
-              <% } else { %>
-              <div class="empty empty-account">
-                <img src="/img/admin/accounts.png" height="60" alt=""><br>
-                <h2 style="color: #752a7a">Nenhuma conta adicionada.</h2>
-              </div>
-              <% } %>
+    <main class="py-8 px-8 fade-in">
+      <div class="grid grid-cols-1 sm:grid-cols-1 lg:grid-cols-4 lg:pr-12">
+        <div class="px-4 sm:px-6 lg:pl-12 col-span-3">
+          <div class="sm:flex sm:items-center">
+            <div class="sm:flex-auto">
+              <h1 class="text-lg font-semibold leading-6 text-gray-900 inter">Contas importadas</h1>
             </div>
+          </div>
+          
+          <div class="mt-4 flow-root">
+            <div class="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+              <div class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
+                <div class="overflow-hidden shadow ring-1 ring-black ring-opacity-5 sm:rounded-lg">
+                  <table class="min-w-full divide-y divide-gray-300">
+                    <thead class="bg-gray-50">
+                      <tr>
+                        <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 inter">Foto</th>
+                        <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 inter">Nome da conta</th>
+                        <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 inter">Grupos</th>
+                        <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 inter">Páginas</th>
+                        <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 inter">Plataforma</th>
+                        <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 inter">Data de cadastro</th>
+                        <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 inter">Ações</th>
+                      </tr>
+                    </thead>
 
-            <div class="col-lg-3 account-col" style="margin-top: 3rem">
-              <article class="white-block">
-                <a href="accounts/auth/facebook/"><button style="width: 100%; color: #FFFFFF; background-color: #752A7A; padding: 10px; border-radius: 10px">Adicionar conta Facebook</button></a>
-              </article>
-
-              <!-- <article class="white-block">
-                <button style="color: #FFFFFF; background-color: #777777; padding: 10px; border-radius: 10px">Adicionar conta Instagram</button>
-              </article> -->
-
-              <article class="white-block">
-                <div class="top-cat-title">
-                  <h3>Contas cadastradas</h3>
-                  <% if (total_accounts === 1) { %>
-                    <p style="font-size: 16px; color: #752A7A;"><%= total_accounts %> conta cadastrada.</p>
-                  <% } else if (total_accounts > 1) { %>
-                    <p style="font-size: 16px; color: #752A7A;"><%= total_accounts %> contas cadastradas.</p>
-                  <% } else { %>
-                    <p style="font-size: 16px; color: #752A7A;">Nenhuma conta cadastrada ainda.</p>
-                  <% } %>
+                    <tbody class="divide-y divide-gray-200 bg-white">
+                      <% accounts.forEach(function(item) { %>
+                        <tr>
+                          <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6">
+                            <img class="h-10 rounded-full" src="<%= item.photo %>" alt="img">
+                          </td>
+                          <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium inter text-gray-900 sm:pl-6">
+                            <%= item.name %>
+                          </td>
+                          <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium inter text-gray-900 sm:pl-6">
+                            Quantidade de grupos
+                          </td>
+                          <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium inter text-gray-900 sm:pl-6">
+                            <%= item.pages.length %> páginas
+                          </td>
+                          <% if (item.platform == "Facebook") { %>
+                            <td style="color: #1877F2;" class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium inter text-gray-900 sm:pl-6">
+                              <%= item.platform %>
+                            </td>
+                          <% } else { %>
+                            <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium inter text-gray-900 sm:pl-6">
+                              <%= item.platform %>
+                            </td>
+                          <% } %>
+                          <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium inter text-gray-900 sm:pl-6">
+                            <%= item.date %>
+                          </td>
+                          <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium inter text-gray-900 sm:pl-6">
+                            <div class="flex">
+                              <button onclick="deleteAccount('<%= item.id_account %>', '<%= item.platform %>')" class="flex items-center rounded-r-lg">
+                                <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                  <path d="M15.75 1.125H10.5C10.5 0.926088 10.421 0.735322 10.2803 0.59467C10.1397 0.454018 9.94891 0.375 9.75 0.375H8.25C8.05109 0.375 7.86032 0.454018 7.71967 0.59467C7.57902 0.735322 7.5 0.926088 7.5 1.125H2.25C2.05109 1.125 1.86032 1.20402 1.71967 1.34467C1.57902 1.48532 1.5 1.67609 1.5 1.875C1.5 2.07391 1.57902 2.26468 1.71967 2.40533C1.86032 2.54598 2.05109 2.625 2.25 2.625H15.75C15.9489 2.625 16.1397 2.54598 16.2803 2.40533C16.421 2.26468 16.5 2.07391 16.5 1.875C16.5 1.67609 16.421 1.48532 16.2803 1.34467C16.1397 1.20402 15.9489 1.125 15.75 1.125Z" fill="#AA2222"/>
+                                  <path d="M14.625 3.375C14.4261 3.375 14.2353 3.45402 14.0947 3.59467C13.954 3.73532 13.875 3.92609 13.875 4.125V16.125H4.125V4.125C4.125 3.92609 4.04598 3.73532 3.90533 3.59467C3.76468 3.45402 3.57391 3.375 3.375 3.375C3.17609 3.375 2.98532 3.45402 2.84467 3.59467C2.70402 3.73532 2.625 3.92609 2.625 4.125V16.875C2.625 17.0739 2.70402 17.2647 2.84467 17.4053C2.98532 17.546 3.17609 17.625 3.375 17.625H14.625C14.8239 17.625 15.0147 17.546 15.1553 17.4053C15.296 17.2647 15.375 17.0739 15.375 16.875V4.125C15.375 3.92609 15.296 3.73532 15.1553 3.59467C15.0147 3.45402 14.8239 3.375 14.625 3.375Z" fill="#AA2222"/>
+                                  <path d="M7.875 13.875V7.125C7.875 6.92609 7.79598 6.73532 7.65533 6.59467C7.51468 6.45402 7.32391 6.375 7.125 6.375C6.92609 6.375 6.73532 6.45402 6.59467 6.59467C6.45402 6.73532 6.375 6.92609 6.375 7.125V13.875C6.375 14.0739 6.45402 14.2647 6.59467 14.4053C6.73532 14.546 6.92609 14.625 7.125 14.625C7.32391 14.625 7.51468 14.546 7.65533 14.4053C7.79598 14.2647 7.875 14.0739 7.875 13.875Z" fill="#AA2222"/>
+                                  <path d="M11.625 13.875V7.125C11.625 6.92609 11.546 6.73532 11.4053 6.59467C11.2647 6.45402 11.0739 6.375 10.875 6.375C10.6761 6.375 10.4853 6.45402 10.3447 6.59467C10.204 6.73532 10.125 6.92609 10.125 7.125V13.875C10.125 14.0739 10.204 14.2647 10.3447 14.4053C10.4853 14.546 10.6761 14.625 10.875 14.625C11.0739 14.625 11.2647 14.546 11.4053 14.4053C11.546 14.2647 11.625 14.0739 11.625 13.875Z" fill="#AA2222"/>
+                                </svg>
+                                <p class="inter text-red-700 ml-1">Remover</p>                                                                                                
+                              </button>
+                            </div>
+                          </td>
+                        </tr>
+                      <% }) %>
+                    </tbody>
+                  </table>
                 </div>
-              </article>
-
-              <article class="white-block">
-                <div class="top-cat-title">
-                  <h3>Contas restantes</h3>
-                  <% if (accountsRemaining == 1) { %>
-                    <p style="font-size: 16px; color: #752A7A;"><%= accountsRemaining %> conta restante.</p>
-                  <% } else if (accountsRemaining > 1) { %>
-                    <p style="font-size: 16px; color: #752A7A;"><%= accountsRemaining %> contas restantes.</p>
-                  <% } else { %>
-                    <p style="font-size: 16px; color: #752A7A;"><%= accountsRemaining %></p>
-                  <% } %>
-                </div>
-              </article>
-
-              <% if (type_account != "Avançado") { %>
-                <article class="white-block" style="background-color: #f5f100;">
-                  <div class="top-cat-title">
-                    <h3>Faça upgrade da sua conta</h3>
-                    <p style="color: #8f8f8f; font-size: 14px;">Faça upgrade para cadastrar mais contas</p>
-                  </div>
-                </article>
-              <% } else { %>
-                <article class="white-block" style="background-color: #f5f100;">
-                  <div class="top-cat-title">
-                    <h3>Seu plano oferece contas ilimitadas</h3>
-                    <p style="color: #8f8f8f; font-size: 14px;">Aproveite todos os benefícios do seu plano.</p>
-                  </div>
-                </article>
-              <% } %>
+              </div>
             </div>
           </div>
         </div>
-      </main>
 
-      <%- include('../partials/footer-platform') %>
-    </div>
+        <div class="col-span-1 mt-10">
+          <article class="bg-white p-4 rounded-lg shadow">
+            <div>
+              <h3 class="inter font-semibold text-lg">Informações disponíveis:</h3>
+              <p class="inter text-md mt-2">Contas importadas: <span class="color-purple font-semibold"><%= accounts.length %> importadas</span></p>
+              <% if (type_account == "Basico") { %>
+                <p class="inter text-md mt-2">Contas restantes: <span class="color-purple font-semibold"><%= 5 - total_accounts %> restantes</span></p>
+              <% } else if (type_account == "Pro") { %>
+                <p class="inter text-md mt-2">Contas restantes: <span class="color-purple font-semibold"><%= 15 - total_accounts %> restantes</span></p>
+              <% } else if (type_account == "Avançado") { %>
+                <p class="inter text-md mt-2">Contas restantes: <span class="color-purple font-semibold">Ilimitado</span></p>
+              <% } %>
+            </div>
+          </article>
+
+          <article class="bg-white p-4 rounded-lg shadow mt-4">
+            <div>
+              <a href="accounts/auth/facebook/" class="w-full inline-flex items-center justify-center gap-x-1.5 rounded-lg px-2.5 py-2 font-semibold text-md shadow-sm inter facebook">
+                <svg class="mr-0.5" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path fill-rule="evenodd" clip-rule="evenodd" d="M20 10.0611C20 4.50451 15.5228 0 10 0C4.47715 0 0 4.50451 0 10.0611C0 15.0829 3.65686 19.2452 8.43746 20V12.9694H5.89844V10.0611H8.43746V7.84453C8.43746 5.32295 9.93045 3.93012 12.2146 3.93012C13.3087 3.93012 14.4531 4.12663 14.4531 4.12663V6.60261H13.1922C11.9499 6.60261 11.5625 7.37815 11.5625 8.17381V10.0611H14.3359L13.8925 12.9694H11.5625V20C16.3432 19.2452 20 15.0829 20 10.0611Z" fill="#1877F2"/>
+                </svg>                                    
+                Adicionar nova conta
+              </a>
+            </div>
+          </article>
+
+          <article class="bg-white p-4 rounded-lg shadow mt-4">
+            <div>
+              <button type="button" class="w-full inline-flex items-center justify-center gap-x-1.5 rounded-lg px-2.5 py-2 font-semibold text-md shadow-sm inter instagram">
+                <svg class="mr-0.5" width="19" height="19" viewBox="0 0 19 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M14.573 3.287C14.3475 3.287 14.1271 3.35386 13.9396 3.47912C13.7522 3.60439 13.6061 3.78243 13.5198 3.99074C13.4335 4.19905 13.4109 4.42826 13.4549 4.6494C13.4989 4.87054 13.6075 5.07367 13.7669 5.2331C13.9263 5.39253 14.1295 5.50111 14.3506 5.5451C14.5717 5.58908 14.801 5.56651 15.0093 5.48022C15.2176 5.39394 15.3956 5.24782 15.5209 5.06035C15.6461 4.87288 15.713 4.65247 15.713 4.427C15.713 4.12465 15.5929 3.83469 15.3791 3.6209C15.1653 3.40711 14.8753 3.287 14.573 3.287ZM18.943 5.586C18.9245 4.79778 18.7769 4.01793 18.506 3.2775C18.2644 2.64398 17.8885 2.07031 17.404 1.596C16.9336 1.10905 16.3586 0.735468 15.7225 0.5035C14.984 0.224353 14.2033 0.0733495 13.414 0.0569999C12.407 -5.30854e-08 12.084 0 9.5 0C6.916 0 6.593 -5.30854e-08 5.586 0.0569999C4.79669 0.0733495 4.01598 0.224353 3.2775 0.5035C2.64259 0.737816 2.06809 1.11108 1.596 1.596C1.10905 2.06642 0.735468 2.64142 0.5035 3.2775C0.224353 4.01598 0.0733495 4.79669 0.0569999 5.586C-5.30854e-08 6.593 0 6.916 0 9.5C0 12.084 -5.30854e-08 12.407 0.0569999 13.414C0.0733495 14.2033 0.224353 14.984 0.5035 15.7225C0.735468 16.3586 1.10905 16.9336 1.596 17.404C2.06809 17.8889 2.64259 18.2622 3.2775 18.4965C4.01598 18.7756 4.79669 18.9267 5.586 18.943C6.593 19 6.916 19 9.5 19C12.084 19 12.407 19 13.414 18.943C14.2033 18.9267 14.984 18.7756 15.7225 18.4965C16.3586 18.2645 16.9336 17.8909 17.404 17.404C17.8906 16.9315 18.2669 16.3573 18.506 15.7225C18.7769 14.9821 18.9245 14.2022 18.943 13.414C18.943 12.407 19 12.084 19 9.5C19 6.916 19 6.593 18.943 5.586ZM17.233 13.3C17.2261 13.903 17.1169 14.5005 16.91 15.067C16.7583 15.4804 16.5147 15.854 16.1975 16.1595C15.8894 16.4735 15.5166 16.7166 15.105 16.872C14.5385 17.0789 13.941 17.1881 13.338 17.195C12.388 17.2425 12.0365 17.252 9.538 17.252C7.0395 17.252 6.688 17.252 5.738 17.195C5.11185 17.2067 4.48836 17.1103 3.895 16.91C3.50149 16.7467 3.14579 16.5041 2.85 16.1975C2.53468 15.8923 2.2941 15.5184 2.147 15.105C1.91506 14.5304 1.78642 13.9193 1.767 13.3C1.767 12.35 1.71 11.9985 1.71 9.5C1.71 7.0015 1.71 6.65 1.767 5.7C1.77126 5.0835 1.8838 4.47255 2.0995 3.895C2.26674 3.49402 2.52345 3.13658 2.85 2.85C3.13862 2.52336 3.49532 2.26394 3.895 2.09C4.47407 1.88104 5.0844 1.77183 5.7 1.767C6.65 1.767 7.0015 1.71 9.5 1.71C11.9985 1.71 12.35 1.71 13.3 1.767C13.903 1.77392 14.5005 1.88313 15.067 2.09C15.4987 2.25022 15.8862 2.5107 16.1975 2.85C16.5088 3.14182 16.7521 3.4986 16.91 3.895C17.1211 4.47349 17.2304 5.08419 17.233 5.7C17.2805 6.65 17.29 7.0015 17.29 9.5C17.29 11.9985 17.2805 12.35 17.233 13.3ZM9.5 4.6265C8.53652 4.62838 7.59521 4.9158 6.79502 5.45245C5.99483 5.98909 5.37166 6.75089 5.00425 7.64157C4.63684 8.53225 4.54169 9.51184 4.7308 10.4566C4.91992 11.4013 5.38482 12.2688 6.06677 12.9494C6.74872 13.6301 7.61711 14.0933 8.56222 14.2805C9.50732 14.4678 10.4867 14.3708 11.3767 14.0016C12.2667 13.6325 13.0272 13.0078 13.5623 12.2066C14.0974 11.4053 14.383 10.4635 14.383 9.5C14.3843 8.85885 14.2587 8.22378 14.0137 7.63131C13.7686 7.03884 13.4088 6.50067 12.955 6.04775C12.5012 5.59483 11.9624 5.23609 11.3694 4.99218C10.7765 4.74827 10.1411 4.62399 9.5 4.6265ZM9.5 12.6635C8.87432 12.6635 8.26269 12.478 7.74245 12.1304C7.22222 11.7827 6.81674 11.2887 6.57731 10.7106C6.33787 10.1326 6.27522 9.49649 6.39729 8.88283C6.51935 8.26917 6.82064 7.70549 7.26307 7.26307C7.70549 6.82064 8.26917 6.51935 8.88283 6.39729C9.49649 6.27522 10.1326 6.33787 10.7106 6.57731C11.2887 6.81674 11.7827 7.22222 12.1304 7.74245C12.478 8.26269 12.6635 8.87432 12.6635 9.5C12.6635 9.91544 12.5817 10.3268 12.4227 10.7106C12.2637 11.0944 12.0307 11.4432 11.7369 11.7369C11.4432 12.0307 11.0944 12.2637 10.7106 12.4227C10.3268 12.5817 9.91544 12.6635 9.5 12.6635Z" fill="#C21F70"/>
+                </svg>                                                      
+                Adicionar nova conta
+              </button>
+            </div>
+          </article>
+
+          <% if (type_account != "Avançado") { %>
+            <article class="bg-white p-4 rounded-lg shadow mt-4 border-purple">
+              <div>
+                <h3 class="inter font-semibold text-md color-purple">Importe quantas contas quiser!</h3>
+                <p class="inter text-sm mt-2 color-purple">Faça o upgrade do seu plano e importe contas ilimitadas.</p>
+              </div>
+            </article>
+          <% } else { %>
+            <article class="bg-white p-4 rounded-lg shadow mt-4 border-purple">
+              <div>
+                <h3 class="inter font-semibold text-md color-purple">Seu plano oferece contas ilimitadas!</h3>
+                <p class="inter text-sm mt-2 color-purple">Aproveite todos os benefícios do seu plano.</p>
+              </div>
+            </article>
+          <% } %>
+        </div>
+      </div>
+    </main>
   </div>
-
-
-<!-- Chart library -->
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<!-- Icons library -->
-<script src="js/admin/feather.min.js"></script>
 </body>
 </html>
 

@@ -1,117 +1,60 @@
-<!-- ! Nav -->
-<nav class="main-nav--bg">
-  <div class="container main-nav">
-    <div class="main-nav-start">
-      <div class="search-wrapper">
-        <% if (isAdmin) { %>
-          <h3 style="font-size: 22px; color: #752A7A;"><%= title %> - Administrador</h3>
-        <% } else { %>
-          <h3 style="font-size: 22px; color: #752A7A;"><%= title %></h3>
-        <% } %>
-      </div>
+<div class="sticky top-0 z-40 flex h-16 shrink-0 items-center gap-x-4 border-b border-gray-200 bg-white px-4 shadow-sm sm:gap-x-6 sm:px-6 lg:px-8">
+  <button type="button" id="open-sidebar-mobile" class="-m-2.5 p-2.5 text-gray-700 lg:hidden">
+    <span class="sr-only">Open sidebar</span>
+    <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+    </svg>
+  </button>
+
+  <!-- Separator -->
+  <div class="h-6 w-px bg-gray-900/10 lg:hidden" aria-hidden="true"></div>
+
+  <div class="flex flex-1 gap-x-4 self-stretch lg:gap-x-6">
+    <div class="relative flex items-center flex-1" action="#" method="GET">
+      <h2 class="inter font-semibold color-purple text-lg"><%= title %></h2>
     </div>
-    <div class="main-nav-end">
-      <button class="sidebar-toggle transparent-btn" title="Menu" type="button">
-        <span class="sr-only">Toggle menu</span>
-        <span class="icon menu-toggle--gray" aria-hidden="true"></span>
+    <div class="flex items-center gap-x-4 lg:gap-x-6">
+      <button type="button" class="-m-2.5 p-2.5 text-gray-400 hover:text-gray-500">
+        <span class="sr-only">Mode</span>
+        <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M5.8737 17.7083L5.13411 18.4478C4.9401 18.643 4.83121 18.907 4.83121 19.1822C4.83121 19.4574 4.9401 19.7214 5.13411 19.9166C5.32928 20.1106 5.5933 20.2195 5.86849 20.2195C6.14368 20.2195 6.4077 20.1106 6.60286 19.9166L7.34245 19.177C7.5131 18.9777 7.60227 18.7214 7.59215 18.4592C7.58202 18.1971 7.47334 17.9484 7.28783 17.7629C7.10231 17.5774 6.85362 17.4687 6.59146 17.4586C6.3293 17.4484 6.07297 17.5376 5.8737 17.7083ZM5.20703 12.4999C5.20703 12.2237 5.09728 11.9587 4.90193 11.7633C4.70658 11.568 4.44163 11.4583 4.16536 11.4583H3.1237C2.84743 11.4583 2.58248 11.568 2.38713 11.7633C2.19178 11.9587 2.08203 12.2237 2.08203 12.4999C2.08203 12.7762 2.19178 13.0411 2.38713 13.2365C2.58248 13.4318 2.84743 13.5416 3.1237 13.5416H4.16536C4.44163 13.5416 4.70658 13.4318 4.90193 13.2365C5.09728 13.0411 5.20703 12.7762 5.20703 12.4999ZM12.4987 5.20825C12.775 5.20825 13.0399 5.0985 13.2353 4.90315C13.4306 4.7078 13.5404 4.44285 13.5404 4.16659V3.12492C13.5404 2.84865 13.4306 2.5837 13.2353 2.38835C13.0399 2.193 12.775 2.08325 12.4987 2.08325C12.2224 2.08325 11.9575 2.193 11.7621 2.38835C11.5668 2.5837 11.457 2.84865 11.457 3.12492V4.16659C11.457 4.44285 11.5668 4.7078 11.7621 4.90315C11.9575 5.0985 12.2224 5.20825 12.4987 5.20825ZM5.8737 7.34367C6.06772 7.53611 6.32959 7.6446 6.60286 7.64575C6.73995 7.64654 6.87585 7.62027 7.00277 7.56843C7.12968 7.51659 7.24511 7.44021 7.34245 7.34367C7.53646 7.1485 7.64536 6.88449 7.64536 6.60929C7.64536 6.3341 7.53646 6.07009 7.34245 5.87492L6.60286 5.13533C6.40359 4.96468 6.14726 4.87551 5.8851 4.88564C5.62294 4.89576 5.37425 5.00444 5.18874 5.18996C5.00322 5.37547 4.89454 5.62416 4.88442 5.88632C4.87429 6.14848 4.96346 6.40481 5.13411 6.60409L5.8737 7.34367ZM18.3737 7.64575C18.647 7.6446 18.9088 7.53611 19.1029 7.34367L19.8424 6.60409C19.9515 6.5107 20.0401 6.39579 20.1026 6.26655C20.1651 6.13732 20.2002 5.99656 20.2058 5.8531C20.2113 5.70964 20.1871 5.56659 20.1348 5.43292C20.0824 5.29924 20.003 5.17784 19.9015 5.07632C19.7999 4.97481 19.6785 4.89537 19.5449 4.843C19.4112 4.79064 19.2681 4.76646 19.1247 4.772C18.9812 4.77754 18.8405 4.81268 18.7112 4.8752C18.582 4.93773 18.4671 5.02629 18.3737 5.13533L17.707 5.87492C17.513 6.07009 17.4041 6.3341 17.4041 6.60929C17.4041 6.88449 17.513 7.1485 17.707 7.34367C17.8907 7.52634 18.1358 7.63404 18.3945 7.64575H18.3737ZM21.8737 11.4583H20.832C20.5558 11.4583 20.2908 11.568 20.0955 11.7633C19.9001 11.9587 19.7904 12.2237 19.7904 12.4999C19.7904 12.7762 19.9001 13.0411 20.0955 13.2365C20.2908 13.4318 20.5558 13.5416 20.832 13.5416H21.8737C22.15 13.5416 22.4149 13.4318 22.6103 13.2365C22.8056 13.0411 22.9154 12.7762 22.9154 12.4999C22.9154 12.2237 22.8056 11.9587 22.6103 11.7633C22.4149 11.568 22.15 11.4583 21.8737 11.4583ZM12.4987 19.7916C12.2224 19.7916 11.9575 19.9013 11.7621 20.0967C11.5668 20.292 11.457 20.557 11.457 20.8333V21.8749C11.457 22.1512 11.5668 22.4161 11.7621 22.6115C11.9575 22.8068 12.2224 22.9166 12.4987 22.9166C12.775 22.9166 13.0399 22.8068 13.2353 22.6115C13.4306 22.4161 13.5404 22.1512 13.5404 21.8749V20.8333C13.5404 20.557 13.4306 20.292 13.2353 20.0967C13.0399 19.9013 12.775 19.7916 12.4987 19.7916ZM19.1237 17.7083C18.9258 17.5982 18.6974 17.5556 18.4731 17.5869C18.2489 17.6183 18.0409 17.7219 17.8808 17.882C17.7207 18.0421 17.6171 18.2501 17.5857 18.4744C17.5544 18.6986 17.597 18.927 17.707 19.1249L18.4466 19.8645C18.6418 20.0585 18.9058 20.1674 19.181 20.1674C19.4562 20.1674 19.7202 20.0585 19.9154 19.8645C20.1094 19.6693 20.2183 19.4053 20.2183 19.1301C20.2183 18.8549 20.1094 18.5909 19.9154 18.3958L19.1237 17.7083ZM12.4987 6.77075C11.3656 6.77075 10.2579 7.10676 9.31574 7.73629C8.37359 8.36582 7.63926 9.26059 7.20564 10.3075C6.77201 11.3543 6.65855 12.5063 6.87962 13.6176C7.10068 14.729 7.64633 15.7498 8.44756 16.5511C9.2488 17.3523 10.2696 17.8979 11.381 18.119C12.4923 18.3401 13.6443 18.2266 14.6912 17.793C15.738 17.3594 16.6328 16.625 17.2623 15.6829C17.8919 14.7407 18.2279 13.633 18.2279 12.4999C18.2251 10.9813 17.6206 9.52566 16.5468 8.45183C15.473 7.378 14.0173 6.77351 12.4987 6.77075ZM12.4987 16.1458C11.7776 16.1458 11.0727 15.9319 10.4732 15.5313C9.87363 15.1307 9.40633 14.5613 9.13039 13.8951C8.85444 13.2289 8.78224 12.4959 8.92292 11.7887C9.06359 11.0814 9.41083 10.4318 9.9207 9.92193C10.4306 9.41205 11.0802 9.06481 11.7874 8.92414C12.4947 8.78346 13.2277 8.85566 13.8939 9.13161C14.5601 9.40755 15.1295 9.87485 15.5301 10.4744C15.9307 11.074 16.1445 11.7788 16.1445 12.4999C16.1445 13.4669 15.7604 14.3942 15.0767 15.0779C14.393 15.7616 13.4656 16.1458 12.4987 16.1458Z" fill="#7B7B7B"/>
+        </svg>                                                
       </button>
-      <button style="border: 1px solid #752a7a" class="theme-switcher gray-circle-btn" type="button" title="Switch theme">
-        <span class="sr-only">Switch theme</span>
-        <i class="sun-icon" data-feather="sun" aria-hidden="true"></i>
-        <i class="moon-icon" data-feather="moon" aria-hidden="true"></i>
+
+      <button type="button" class="-m-2.5 p-2.5 text-gray-400 hover:text-gray-500">
+        <span class="sr-only">View notifications</span>
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M14.8565 17.082C16.7197 16.8614 18.5504 16.4217 20.3105 15.772C18.8199 14.1208 17.9962 11.9745 17.9995 9.75V9.05V9C17.9995 7.4087 17.3674 5.88258 16.2421 4.75736C15.1169 3.63214 13.5908 3 11.9995 3C10.4082 3 8.88208 3.63214 7.75686 4.75736C6.63164 5.88258 5.9995 7.4087 5.9995 9V9.75C6.00252 11.9746 5.17849 14.121 3.6875 15.772C5.4205 16.412 7.2475 16.857 9.1425 17.082M14.8565 17.082C12.9585 17.3071 11.0405 17.3071 9.1425 17.082M14.8565 17.082C15.0006 17.5319 15.0364 18.0094 14.9611 18.4757C14.8857 18.942 14.7013 19.384 14.4229 19.7656C14.1444 20.1472 13.7798 20.4576 13.3587 20.6716C12.9376 20.8856 12.4719 20.9972 11.9995 20.9972C11.5271 20.9972 11.0614 20.8856 10.6403 20.6716C10.2192 20.4576 9.85457 20.1472 9.57612 19.7656C9.29767 19.384 9.11326 18.942 9.03791 18.4757C8.96256 18.0094 8.9984 17.5319 9.1425 17.082" stroke="#7B7B7B" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>                
       </button>
-      <div class="notification-wrapper">
-        <% if (notifications.length == 0) { %>
-          <button style="border: 1px solid #752A7A;" class="gray-circle-btn dropdown-btn" title="To messages" type="button">
-            <span class="sr-only">To messages</span>
-            <span class="icon notification" aria-hidden="true"></span>
-          </button>
-          <ul class="users-item-dropdown notification-dropdown dropdown">
-            <li>
-              <a href="/platform/notifications">
-                <div class="notification-dropdown-icon info">
-                  <i data-feather="check"></i>
-                </div>
-                <div class="notification-dropdown-text">
-                  <span class="notification-dropdown__title">Nenhuma notificação</span>
-                  <span class="notification-dropdown__subtitle">Você receberá todas as notificações aqui na plataforma.</span>
-                </div>
-              </a>
-            </li>
-          </ul>
-        <% } else { %>
-          <button style="border: 1px solid #752A7A;" class="gray-circle-btn dropdown-btn" title="To messages" type="button">
-            <span class="sr-only">To messages</span>
-            <span class="icon notification active" aria-hidden="true"></span>
-          </button>
-          <ul class="users-item-dropdown notification-dropdown dropdown">
-            <% notifications.forEach(function(item) { %>
-              <li>
-                <a href="/platform/notifications">
-                  <div class="notification-dropdown-icon info">
-                    <% if (item.type == "post") { %>
-                      <img style="height: 24px;" src="/img/admin/post.png" alt="">
-                    <% } else if (item.type == "platform") { %>
-                      <img style="border-radius: 100%; height: 32px;" src="/img/platform/publi-logo-completa.png" alt="">
-                    <% } %>
-                  </div>
-                  <div class="notification-dropdown-text">
-                    <span class="notification-dropdown__title"><%= item.title %></span>
-                    <span class="notification-dropdown__subtitle"><%= item.message %></span>
-                  </div>
-                </a>
-              </li>
-            <% }) %>
-          </ul>
-        <% } %>
-      </div>
-      <div class="nav-user-wrapper">
-        <button href="##" class="nav-user-btn dropdown-btn" title="My profile" type="button">
-          <span class="sr-only">My profile</span>
-          <span class="nav-user-img">
-            <% if (photo.length != 0) { %>
-              <picture><source srcset="/img/photos/<%= photo %>" type="image/webp"><img src="/img/photos/<%= photo %>" alt="plubee account"></picture>
-            <% } else { %>
-              <picture><source srcset="/img/platform/profile.png" type="image/webp"><img src="/img/platform/profile.png" alt="plubee account"></picture>
-            <% } %>
+
+      <!-- Separator -->
+      <div class="hidden lg:block lg:h-6 lg:w-px lg:bg-gray-300" aria-hidden="true"></div>
+
+      <!-- Profile dropdown -->
+      <div class="relative">
+        <button type="button" class="-m-1.5 flex items-center p-1.5" id="open-menu" aria-expanded="false" aria-haspopup="true">
+          <span class="sr-only">Open user menu</span>
+          <% if (photo.length != 0) { %>
+            <img class="h-8 w-8 rounded-full bg-gray-50" src="/img/photos/<%= photo %>" alt="">
+          <% } else { %>
+            <img class="h-8 w-8 rounded-full bg-gray-50" src="/img/platform/profile.png" alt="">
+          <% } %>
+          <span class="hidden lg:flex lg:items-center">
+            <span class="ml-2 text-sm font-semibold leading-6 text-gray-900 inter" aria-hidden="true"><%= name_user %></span>
+            <svg class="ml-2 h-5 w-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+              <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clip-rule="evenodd" />
+            </svg>
           </span>
         </button>
-        <ul class="users-item-dropdown nav-user-dropdown dropdown">
-          <li><a href="##">
-              <i data-feather="user" aria-hidden="true"></i>
-              <span>Perfil</span>
-            </a></li>
-          <li><a href="/platform/config/">
-              <i data-feather="settings" aria-hidden="true"></i>
-              <span>Configurações</span>
-            </a></li>
-          <li><a class="danger btn-logout" href="">
-              <i data-feather="log-out" aria-hidden="true"></i>
-              <span>Sair</span>
-            </a>
-          </li>
-        </ul>
+
+        <div id="user-menu" class="hidden absolute right-0 z-10 mt-2.5 w-40 origin-top-right rounded-md bg-white py-2 shadow-lg ring-1 ring-gray-900/5 focus:outline-none fade-in" role="menu" aria-orientation="vertical" aria-labelledby="user-menu-button" tabindex="-1">
+          <a href="/platform/config" class="inter block px-3 py-1 text-sm leading-6 text-gray-900" role="menuitem" tabindex="-1" id="user-menu-item-0">Meu perfil</a>
+          <a href="/platform/logout" class="inter block px-3 py-1 text-sm leading-6 text-gray-900 font-semibold text-red-600" role="menuitem" tabindex="-1" id="user-menu-item-1">Sair</a>
+        </div>
       </div>
     </div>
   </div>
-</nav>
+</div>
 
-<!-- Icons library -->
-<script src="/js/admin/feather.min.js"></script>
-<!-- Custom scripts -->
-<script src="/js/admin/script.js"></script>
-
-<script>
-  const logout = document.querySelector('.btn-logout')
-  
-  logout.addEventListener('click', function() {
-    fetch('/platform/logout/', {
-      method: 'GET',
-    })
-    .then((response) => {
-      location.href = "https://plubee.net/login"
-    })
-    .catch((error) => {
-    })
-  })
-</script>
+<script src="/js/platform/nav.js"></script>

@@ -65,7 +65,15 @@ const User = new mongoose.Schema({
     photo: {
         type: String,
         default: "" 
-    }
+    },
+    customer: {
+        type: String,
+        default: ""
+    },
+    notificationEmail: {
+        type: Boolean,
+        default: true
+    },
     },
     {
         versionKey: false

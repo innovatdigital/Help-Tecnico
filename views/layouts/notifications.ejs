@@ -9,62 +9,46 @@
   <!-- Favicon -->
   <link rel="shortcut icon" href="/img/site/plubee-icon.png" type="image/x-icon">
   <!-- Custom styles -->
-  <link rel="stylesheet" href="/css/admin/style.css">
+  <link rel="stylesheet" href="/css/platform/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/1.8.12/tailwind-experimental.min.css">
 </head>
 
 <body>
-  <div class="layer"></div>
-  
-  <!-- ! Body -->
-  <div class="page-flex">
+  <%- include('../partials/sidebar-platform', {isAdmin: isAdmin}) %>
 
-    <!-- ! Sidebar -->
-    <%- include('../partials/sidebar-platform', {isAdmin: isAdmin}) %>
+  <div class="lg:pl-70">
+    <%- include('../partials/nav-platform', {isAdmin: isAdmin, title: "Notificações", notifications: notifications, photo: photo, name_user: name_user}) %>
 
-    <div class="main-wrapper">
-      <!-- ! Main nav -->
-      <%- include('../partials/nav-platform', {isAdmin: isAdmin, title: "Notificações", notifications: notifications, photo: photo}) %>
-  
+    <main class="py-8 px-8 fade-in">
       <% if (notifications.length > 0) { %>
-      <main class="main users chart-page" id="skip-target">
-        <div class="container">
-          <div class="row" style="margin-top: 16px">
-            <% notifications.forEach(function(item) { %>
-              <div class="col-md-6 col-xl-3">
-                <article class="stat-cards-item">
-                  <div class="stat-cards-icon">
-                    <% if (item.type == "post") { %>
-                      <img style="height: 39px;" src="/img/admin/post.png" alt="">
-                    <% } else if (item.type == "platform") { %>
-                      <img style="border-radius: 100%; height: 3.5rem; margin-bottom: 7px;" src="/img/platform/publi-logo-completa.png" alt="">
-                    <% } %>
-                  </div>
-                  <div class="stat-cards-info">
-                    <p style="margin-top: 5px; font-weight: bold; color: #752a7a;" class="stat-cards-info__num"><%= item.title %></p>
-                    <p class="stat-cards-info__title description-group"><%= item.message %></p>
-                  </div>
-                </article>
+        <div class="grid grid-cols-1 gap-4 sm:grid-cols-4 mt-4">
+          <% notifications.forEach(function(item) { %>
+            <div class="relative flex items-center space-x-3 rounded-lg border border-gray-300 bg-white px-6 py-5 shadow-sm focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2 hover:border-gray-400">
+              <div class="flex-shrink-0">
+                <svg width="31" height="31" viewBox="0 0 31 31" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M24.9793 18.7162L23.6877 16.572C23.4164 16.0941 23.171 15.1899 23.171 14.6603V11.3924C23.171 8.357 21.3885 5.73492 18.8181 4.50784C18.1464 3.3195 16.9064 2.58325 15.4856 2.58325C14.0777 2.58325 12.8119 3.34534 12.1402 4.54659C9.62146 5.7995 7.87771 8.39575 7.87771 11.3924V14.6603C7.87771 15.1899 7.63229 16.0941 7.36104 16.5591L6.05646 18.7162C5.53979 19.5816 5.42354 20.5374 5.74646 21.4158C6.05646 22.2812 6.79271 22.9528 7.74854 23.2758C10.2544 24.1283 12.8894 24.5416 15.5243 24.5416C18.1593 24.5416 20.7943 24.1283 23.3002 23.2887C24.2043 22.9916 24.9018 22.307 25.2377 21.4158C25.5735 20.5245 25.4831 19.5428 24.9793 18.7162Z" fill="#752A7A"/>
+                  <path d="M19.1534 25.8462C18.6109 27.3445 17.1771 28.4166 15.498 28.4166C14.4776 28.4166 13.4701 28.0033 12.7596 27.267C12.3463 26.8795 12.0363 26.3628 11.8555 25.8333C12.0234 25.8591 12.1913 25.872 12.3721 25.8978C12.6692 25.9366 12.9792 25.9753 13.2892 26.0012C14.0255 26.0658 14.7746 26.1045 15.5238 26.1045C16.2601 26.1045 16.9963 26.0658 17.7196 26.0012C17.9909 25.9753 18.2621 25.9624 18.5205 25.9237C18.7271 25.8978 18.9338 25.872 19.1534 25.8462Z" fill="#752A7A"/>
+                </svg>                                                          
               </div>
-            <% }) %>
+              <div class="min-w-0 flex-1">
+                <div>
+                  <span class="absolute inset-0" aria-hidden="true"></span>
+                  <p class="text-md font-semibold text-gray-900 inter"><%= item.title %></p>
+                  <p class="truncate text-sm text-gray-500 inter"><%= item.message %></p>
+                </div>
+              </div>
+            </div>
+          <% }) %>
+        </div>
+      <% } else { %>
+        <div style="z-index: 0;" class="fixed inset-0 overflow-y-auto p-4 sm:p-6 md:p-20 mt-40">
+          <div class="flex flex-col justify-center items-center">
+            <h1 class="text-xl inter color-purple font-semibold">Nenhuma notificação</h1>
+            <p class="text-lg inter text-gray-600 font-medium">Você receberá todas as notificações na plataforma e no email.</p>
           </div>
         </div>
-      </main>
-      <% } else { %>
-      <div class="empty">
-        <img src="/img/platform/none-notify.png" height="60" alt=""><br>
-        <h2 style="color: #752a7a">Nenhuma notificação recebida ainda.</h2>
-      </div>
       <% } %>
-
-      <!-- ! Footer -->
-      <%- include('../partials/footer-platform') %>
-    </div>
+    </main>
   </div>
-
-
-<!-- Chart library -->
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<!-- Icons library -->
-<script src="js/admin/feather.min.js"></script>
 </body>
 </html>

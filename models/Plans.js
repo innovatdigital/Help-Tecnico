@@ -5,6 +5,10 @@ const Plans = new mongoose.Schema({
         type: String,
         require: true
     },
+    name_checkout: {
+        type: String,
+        require: true
+    },
     value_month: {
         type: String,
         require: true

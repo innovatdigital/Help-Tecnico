@@ -1,135 +1,318 @@
-<!-- ! Sidebar -->
-<aside class="sidebar" >
-    <div class="sidebar-start">
-        <div class="sidebar-head">
-            <a href="/" class="logo-wrapper" title="Home">
-                <span class="sr-only">Home</span>
-                <img class="logo-nav" src="/img/admin/PLUBEE-LOGO-E-NOME.png">
-                <div class="logo-text"></div>
-            </a>
-            <button class="sidebar-toggle transparent-btn" title="Menu" type="button">
-                <span class="sr-only">Toggle menu</span>
-                <span class="icon menu-toggle" aria-hidden="true"></span>
+  <div class="relative z-50 lg:hidden hidden fade-in" id="sidebar-mobile" role="dialog" aria-modal="true">
+    <div class="fixed inset-0 flex">
+      <div class="relative mr-16 flex w-full max-w-xs flex-1">
+        <div class="flex grow flex-col gap-y-5 overflow-y-auto bg-purple px-6 pb-4">
+          <div class="flex justify-between h-16 shrink-0 items-center mt-4">
+            <img class="h-9 w-auto" src="/img/admin/PLUBEE-LOGO-E-NOME.png" alt="plubee.net">
+            <button type="button" id="close-sidebar-mobile" class="-m-2.5 p-2.5">
+              <span class="sr-only">Close sidebar</span>
+              <svg class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+              </svg>
             </button>
-        </div>
-        <div class="sidebar-body">
-            <ul class="sidebar-body-menu">
+          </div>
+          <nav class="flex flex-1 flex-col">
+            <ul role="list" class="flex flex-1 flex-col gap-y-4">
+              <li>
+                <a href="/platform" class="inter bg-purple text-white group flex gap-x-3 rounded-md text-sm leading-6 font-semibold">
+                  <svg class="h-6 w-6 shrink-0 text-white" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
+                  </svg>
+                  Dashboard
+                </a>
+              </li>
+              <li>
+                <a href="/platform/all-posts" class="inter text-gray-300 hover:text-white hover:bg-purple group flex gap-x-3 rounded-md text-sm leading-6 font-semibold">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M18.75 20.25H5.25C3.6 20.25 2.25 18.9 2.25 17.25V6.75C2.25 5.1 3.6 3.75 5.25 3.75H18.75C20.4 3.75 21.75 5.1 21.75 6.75V17.25C21.75 18.9 20.4 20.25 18.75 20.25Z" stroke="white" stroke-width="1.3" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M10.5 8.25H6V12.75H10.5V8.25Z" stroke="white" stroke-width="1.3" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M13.5 12.75H18" stroke="white" stroke-width="1.3" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M6 15.75H18" stroke="white" stroke-width="1.3" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>                                                                  
+                  Publicações
+                </a>
+              </li>
+              <li>
+                <a href="/platform/post_facebook" class="inter text-gray-300 hover:text-white hover:bg-purple group flex gap-x-3 rounded-md text-sm leading-6 font-semibold">
+                  <svg width="20" height="20" class="ml-0.5 mr-0.5" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd" clip-rule="evenodd" d="M20 10.0611C20 4.50451 15.5228 0 10 0C4.47715 0 0 4.50451 0 10.0611C0 15.0829 3.65686 19.2452 8.43746 20V12.9694H5.89844V10.0611H8.43746V7.84453C8.43746 5.32295 9.93045 3.93012 12.2146 3.93012C13.3087 3.93012 14.4531 4.12663 14.4531 4.12663V6.60261H13.1922C11.9499 6.60261 11.5625 7.37815 11.5625 8.17381V10.0611H14.3359L13.8925 12.9694H11.5625V20C16.3432 19.2452 20 15.0829 20 10.0611Z" fill="white"/>
+                  </svg>                      
+                  Novo post no Facebook
+                </a>
+              </li>
+              <li>
+                <a href="/platform/post_instagram" class="inter text-gray-300 hover:text-white hover:bg-purple group flex gap-x-3 rounded-md text-sm leading-6 font-semibold">
+                  <svg width="19" height="19" class="ml-0.5 mr-0.5" viewBox="0 0 19 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M14.573 3.287C14.3475 3.287 14.1271 3.35386 13.9396 3.47912C13.7522 3.60439 13.6061 3.78243 13.5198 3.99074C13.4335 4.19905 13.4109 4.42826 13.4549 4.6494C13.4989 4.87054 13.6075 5.07367 13.7669 5.2331C13.9263 5.39253 14.1295 5.50111 14.3506 5.5451C14.5717 5.58908 14.801 5.56651 15.0093 5.48022C15.2176 5.39394 15.3956 5.24782 15.5209 5.06035C15.6461 4.87288 15.713 4.65247 15.713 4.427C15.713 4.12465 15.5929 3.83469 15.3791 3.6209C15.1653 3.40711 14.8753 3.287 14.573 3.287ZM18.943 5.586C18.9245 4.79778 18.7769 4.01793 18.506 3.2775C18.2644 2.64398 17.8885 2.07031 17.404 1.596C16.9336 1.10905 16.3586 0.735468 15.7225 0.5035C14.984 0.224353 14.2033 0.0733495 13.414 0.0569999C12.407 -5.30854e-08 12.084 0 9.5 0C6.916 0 6.593 -5.30854e-08 5.586 0.0569999C4.79669 0.0733495 4.01598 0.224353 3.2775 0.5035C2.64259 0.737816 2.06809 1.11108 1.596 1.596C1.10905 2.06642 0.735468 2.64142 0.5035 3.2775C0.224353 4.01598 0.0733495 4.79669 0.0569999 5.586C-5.30854e-08 6.593 0 6.916 0 9.5C0 12.084 -5.30854e-08 12.407 0.0569999 13.414C0.0733495 14.2033 0.224353 14.984 0.5035 15.7225C0.735468 16.3586 1.10905 16.9336 1.596 17.404C2.06809 17.8889 2.64259 18.2622 3.2775 18.4965C4.01598 18.7756 4.79669 18.9267 5.586 18.943C6.593 19 6.916 19 9.5 19C12.084 19 12.407 19 13.414 18.943C14.2033 18.9267 14.984 18.7756 15.7225 18.4965C16.3586 18.2645 16.9336 17.8909 17.404 17.404C17.8906 16.9315 18.2669 16.3573 18.506 15.7225C18.7769 14.9821 18.9245 14.2022 18.943 13.414C18.943 12.407 19 12.084 19 9.5C19 6.916 19 6.593 18.943 5.586ZM17.233 13.3C17.2261 13.903 17.1169 14.5005 16.91 15.067C16.7583 15.4804 16.5147 15.854 16.1975 16.1595C15.8894 16.4735 15.5166 16.7166 15.105 16.872C14.5385 17.0789 13.941 17.1881 13.338 17.195C12.388 17.2425 12.0365 17.252 9.538 17.252C7.0395 17.252 6.688 17.252 5.738 17.195C5.11185 17.2067 4.48836 17.1103 3.895 16.91C3.50149 16.7467 3.14579 16.5041 2.85 16.1975C2.53468 15.8923 2.2941 15.5184 2.147 15.105C1.91506 14.5304 1.78642 13.9193 1.767 13.3C1.767 12.35 1.71 11.9985 1.71 9.5C1.71 7.0015 1.71 6.65 1.767 5.7C1.77126 5.0835 1.8838 4.47255 2.0995 3.895C2.26674 3.49402 2.52345 3.13658 2.85 2.85C3.13862 2.52336 3.49532 2.26394 3.895 2.09C4.47407 1.88104 5.0844 1.77183 5.7 1.767C6.65 1.767 7.0015 1.71 9.5 1.71C11.9985 1.71 12.35 1.71 13.3 1.767C13.903 1.77392 14.5005 1.88313 15.067 2.09C15.4987 2.25022 15.8862 2.5107 16.1975 2.85C16.5088 3.14182 16.7521 3.4986 16.91 3.895C17.1211 4.47349 17.2304 5.08419 17.233 5.7C17.2805 6.65 17.29 7.0015 17.29 9.5C17.29 11.9985 17.2805 12.35 17.233 13.3ZM9.5 4.6265C8.53652 4.62838 7.59521 4.9158 6.79502 5.45245C5.99483 5.98909 5.37166 6.75089 5.00425 7.64157C4.63684 8.53225 4.54169 9.51184 4.7308 10.4566C4.91992 11.4013 5.38482 12.2688 6.06677 12.9494C6.74872 13.6301 7.61711 14.0933 8.56222 14.2805C9.50732 14.4678 10.4867 14.3708 11.3767 14.0016C12.2667 13.6325 13.0272 13.0078 13.5623 12.2066C14.0974 11.4053 14.383 10.4635 14.383 9.5C14.3843 8.85885 14.2587 8.22378 14.0137 7.63131C13.7686 7.03884 13.4088 6.50067 12.955 6.04775C12.5012 5.59483 11.9624 5.23609 11.3694 4.99218C10.7765 4.74827 10.1411 4.62399 9.5 4.6265ZM9.5 12.6635C8.87432 12.6635 8.26269 12.478 7.74245 12.1304C7.22222 11.7827 6.81674 11.2887 6.57731 10.7106C6.33787 10.1326 6.27522 9.49649 6.39729 8.88283C6.51935 8.26917 6.82064 7.70549 7.26307 7.26307C7.70549 6.82064 8.26917 6.51935 8.88283 6.39729C9.49649 6.27522 10.1326 6.33787 10.7106 6.57731C11.2887 6.81674 11.7827 7.22222 12.1304 7.74245C12.478 8.26269 12.6635 8.87432 12.6635 9.5C12.6635 9.91544 12.5817 10.3268 12.4227 10.7106C12.2637 11.0944 12.0307 11.4432 11.7369 11.7369C11.4432 12.0307 11.0944 12.2637 10.7106 12.4227C10.3268 12.5817 9.91544 12.6635 9.5 12.6635Z" fill="white"/>
+                  </svg>                                          
+                  Novo post no Instagram
+                </a>
+              </li>
+              <li>
+                <a href="/platform/accounts" class="inter text-gray-300 hover:text-white hover:bg-purple group flex gap-x-3 rounded-md text-sm leading-6 font-semibold">
+                  <svg width="20" height="20" class="ml-0.5 mr-0.2" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <g clip-path="url(#clip0_67_81)">
+                    <path d="M20 9.99C20 4.475 15.52 0 10 0C4.48 0 0 4.475 0 9.99C0 13.0275 1.38 15.765 3.54 17.6025C3.56 17.6225 3.58 17.6225 3.58 17.6425C3.76 17.7825 3.94 17.9225 4.14 18.0625C4.24 18.1225 4.32 18.2012 4.42 18.2812C6.07258 19.4017 8.02339 20.0004 10.02 20C12.0166 20.0004 13.9674 19.4017 15.62 18.2812C15.72 18.2212 15.8 18.1425 15.9 18.0813C16.08 17.9425 16.28 17.8025 16.46 17.6625C16.48 17.6425 16.5 17.6425 16.5 17.6225C18.62 15.7637 20 13.0275 20 9.99ZM10 18.7413C8.12 18.7413 6.4 18.1412 4.98 17.1425C5 16.9825 5.04 16.8238 5.08 16.6638C5.19917 16.2301 5.37396 15.8138 5.6 15.425C5.82 15.045 6.08 14.705 6.4 14.405C6.7 14.105 7.06 13.8263 7.42 13.6063C7.8 13.3863 8.2 13.2262 8.64 13.1062C9.08342 12.9867 9.54075 12.9266 10 12.9275C11.3633 12.9178 12.6765 13.4408 13.66 14.385C14.12 14.845 14.48 15.385 14.74 16.0038C14.88 16.3638 14.98 16.7437 15.04 17.1425C13.564 18.1802 11.8043 18.7384 10 18.7413ZM6.94 9.49125C6.76378 9.08777 6.67516 8.6515 6.68 8.21125C6.68 7.7725 6.76 7.3325 6.94 6.9325C7.12 6.5325 7.36 6.17375 7.66 5.87375C7.96 5.57375 8.32 5.335 8.72 5.155C9.12 4.975 9.56 4.895 10 4.895C10.46 4.895 10.88 4.975 11.28 5.155C11.68 5.335 12.04 5.575 12.34 5.87375C12.64 6.17375 12.88 6.53375 13.06 6.9325C13.24 7.3325 13.32 7.7725 13.32 8.21125C13.32 8.67125 13.24 9.09125 13.06 9.49C12.8863 9.88408 12.6423 10.2433 12.34 10.55C12.0332 10.8519 11.674 11.0954 11.28 11.2688C10.4535 11.6084 9.52647 11.6084 8.7 11.2688C8.30601 11.0954 7.94684 10.8519 7.64 10.55C7.33727 10.2477 7.09912 9.88836 6.94 9.49125ZM16.22 16.1238C16.22 16.0838 16.2 16.0638 16.2 16.0238C16.0033 15.398 15.7134 14.8055 15.34 14.2663C14.9663 13.723 14.507 13.2438 13.98 12.8475C13.5775 12.5447 13.1413 12.2897 12.68 12.0875C12.8899 11.9491 13.0843 11.7886 13.26 11.6087C13.5582 11.3144 13.82 10.9854 14.04 10.6288C14.4829 9.90101 14.7117 9.06311 14.7 8.21125C14.7062 7.58064 14.5837 6.9554 14.34 6.37375C14.0994 5.8133 13.7531 5.30445 13.32 4.875C12.8876 4.45004 12.3786 4.11074 11.82 3.875C11.2374 3.63174 10.6113 3.50968 9.98 3.51625C9.34859 3.51007 8.72253 3.63256 8.14 3.87625C7.57657 4.11148 7.06639 4.45798 6.64 4.895C6.21505 5.32698 5.87574 5.83552 5.64 6.39375C5.39631 6.9754 5.27381 7.60064 5.28 8.23125C5.28 8.67125 5.34 9.09125 5.46 9.49C5.58 9.91 5.74 10.29 5.96 10.6488C6.16 11.0088 6.44 11.3288 6.74 11.6288C6.92 11.8088 7.12 11.9675 7.34 12.1075C6.87729 12.3151 6.4409 12.5769 6.04 12.8875C5.52 13.2875 5.06 13.7662 4.68 14.2862C4.30282 14.8233 4.0126 15.4164 3.82 16.0438C3.8 16.0838 3.8 16.1237 3.8 16.1437C2.22 14.545 1.24 12.3875 1.24 9.99C1.24 5.175 5.18 1.23875 10 1.23875C14.82 1.23875 18.76 5.175 18.76 9.99C18.7574 12.2899 17.8441 14.4953 16.22 16.1238Z" fill="white"/>
+                    </g>
+                    <defs>
+                    <clipPath id="clip0_67_81">
+                    <rect width="20" height="20" fill="white"/>
+                    </clipPath>
+                    </defs>
+                  </svg>                                                                              
+                  Contas importadas
+                </a>
+              </li>
+              <li>
+                <a href="/platform/groups" class="inter text-gray-300 hover:text-white hover:bg-purple group flex gap-x-3 rounded-md text-sm leading-6 font-semibold">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M17.25 13.5C19.3211 13.5 21 11.8211 21 9.75C21 7.67893 19.3211 6 17.25 6C15.1789 6 13.5 7.67893 13.5 9.75C13.5 11.8211 15.1789 13.5 17.25 13.5Z" stroke="white" stroke-width="1.4" stroke-miterlimit="10"/>
+                    <path d="M12 18.75C12 15.8505 14.3505 13.5 17.25 13.5C20.1495 13.5 22.5 15.8505 22.5 18.75" stroke="white" stroke-width="1.4" stroke-miterlimit="10"/>
+                    <path d="M6.75 13.5C8.82107 13.5 10.5 11.8211 10.5 9.75C10.5 7.67893 8.82107 6 6.75 6C4.67893 6 3 7.67893 3 9.75C3 11.8211 4.67893 13.5 6.75 13.5Z" stroke="white" stroke-width="1.4" stroke-miterlimit="10"/>
+                    <path d="M1.5 18.75C1.5 15.8505 3.8505 13.5 6.75 13.5C9.6495 13.5 12 15.8505 12 18.75" stroke="white" stroke-width="1.4" stroke-miterlimit="10"/>
+                  </svg>                                            
+                  Grupos
+                </a>
+              </li>
+              <li>
+                <a href="/platform/pages" class="inter text-gray-300 hover:text-white hover:bg-purple group flex gap-x-3 rounded-md text-sm leading-6 font-semibold">
+                  <svg width="20" height="20" viewBox="0 0 20 20" fill="none" class="ml-0.5" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M3.33203 12.5001C3.33203 12.5001 4.16536 11.6667 6.66536 11.6667C9.16536 11.6667 10.832 13.3334 13.332 13.3334C15.832 13.3334 16.6654 12.5001 16.6654 12.5001V2.50008C16.6654 2.50008 15.832 3.33341 13.332 3.33341C10.832 3.33341 9.16536 1.66675 6.66536 1.66675C4.16536 1.66675 3.33203 2.50008 3.33203 2.50008V12.5001Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M3.33203 18.3333V12.5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>                                                                  
+                  Páginas
+                </a>
+              </li>
+              <li>
+                <a href="/platform/comments-automatic" class="inter text-gray-300 hover:text-white hover:bg-purple group flex gap-x-3 rounded-md text-sm leading-6 font-semibold">
+                  <svg width="19" height="19" class="ml-0.5" viewBox="0 0 19 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M17.6809 16.3318C18.2759 15.5342 18.6843 14.6131 18.8758 13.6365C19.0673 12.66 19.0371 11.6529 18.7874 10.6896C18.5376 9.72625 18.0748 8.8313 17.4331 8.07076C16.7913 7.31022 15.9869 6.70351 15.0793 6.29539C14.8817 5.15796 14.4273 4.08055 13.7509 3.14504C13.0744 2.20952 12.1936 1.44051 11.1754 0.896438C10.1572 0.352363 9.02845 0.0475389 7.87481 0.00512785C6.72116 -0.0372831 5.57303 0.183834 4.51765 0.651679C3.46226 1.11952 2.5274 1.82179 1.78408 2.70511C1.04077 3.58843 0.508558 4.62957 0.227898 5.74941C-0.0527629 6.86926 -0.074492 8.03835 0.164362 9.16785C0.403215 10.2974 0.896367 11.3576 1.60635 12.2679L0.28658 13.5782C0.154834 13.7118 0.0655874 13.8813 0.0301018 14.0655C-0.00538388 14.2497 0.0144816 14.4403 0.0871915 14.6132C0.158421 14.7866 0.279381 14.935 0.434829 15.0398C0.590277 15.1446 0.773255 15.201 0.960705 15.2019H6.36319C6.90121 16.3362 7.74946 17.2949 8.80974 17.9671C9.87003 18.6393 11.099 18.9974 12.3544 19H18.0512C18.2386 18.9991 18.4216 18.9427 18.5771 18.8379C18.7325 18.7331 18.8535 18.5847 18.9247 18.4113C18.9974 18.2384 19.0173 18.0478 18.9818 17.8636C18.9463 17.6794 18.8571 17.5098 18.7253 17.3763L17.6809 16.3318ZM5.70806 12.3533C5.70936 12.6713 5.73476 12.9887 5.78402 13.3029H3.24893L3.58125 12.98C3.67024 12.8918 3.74087 12.7867 3.78908 12.671C3.83728 12.5553 3.8621 12.4312 3.8621 12.3059C3.8621 12.1805 3.83728 12.0564 3.78908 11.9407C3.74087 11.825 3.67024 11.72 3.58125 11.6317C3.04912 11.1054 2.62726 10.4783 2.34034 9.787C2.05341 9.09573 1.90717 8.35419 1.91018 7.60573C1.91018 6.09476 2.51038 4.64567 3.57874 3.57725C4.6471 2.50883 6.09611 1.9086 7.607 1.9086C8.78595 1.90151 9.93747 2.26409 10.8997 2.94535C11.8619 3.62661 12.5865 4.59231 12.9715 5.70669C12.7626 5.70669 12.5632 5.70669 12.3544 5.70669C10.5916 5.70669 8.90114 6.40696 7.65472 7.65345C6.40829 8.89994 5.70806 10.5905 5.70806 12.3533ZM15.7155 17.101L15.763 17.1484H12.3544C11.2561 17.1465 10.1926 16.7638 9.34484 16.0656C8.4971 15.3674 7.91764 14.3969 7.70517 13.3193C7.4927 12.2418 7.66037 11.1239 8.1796 10.1562C8.69884 9.1884 9.53753 8.43059 10.5528 8.01184C11.568 7.5931 12.6971 7.53932 13.7475 7.85966C14.798 8.18001 15.7049 8.85466 16.3138 9.7687C16.9227 10.6827 17.1958 11.7796 17.0867 12.8724C16.9776 13.9653 16.493 14.9865 15.7155 15.7621C15.5366 15.9374 15.4342 16.1763 15.4306 16.4268C15.4312 16.5524 15.4566 16.6767 15.5055 16.7924C15.5544 16.9081 15.6258 17.013 15.7155 17.101Z" fill="white"/>
+                  </svg>                                            
+                  Bot de comentários
+                </a>
+              </li>
+              <li>
+                <a href="/platform/notifications" class="inter text-gray-300 hover:text-white hover:bg-purple group flex gap-x-3 rounded-md text-sm leading-6 font-semibold">
+                  <svg width="21" height="21" viewBox="0 0 21 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M10.5 2.29688C7.26071 2.29688 4.92188 4.26562 4.92188 6.89062V10.8281L2.29688 15.4219H18.7031L16.0781 10.8281V6.89062C16.0781 4.26562 14.5477 2.29688 10.5 2.29688Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M7.54688 16.0781C7.54688 20.0156 13.4531 20.0156 13.4531 16.0781" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>                                                                                    
+                  Notificações
+                </a>
+              </li>
+              <li>
+                <a href="/platform/help" class="inter text-gray-300 hover:text-white hover:bg-purple group flex gap-x-3 rounded-md text-sm leading-6 font-semibold">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C17.5228 2 22 6.47715 22 12C22 17.5228 17.5228 22 12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2ZM12 4C7.58172 4 4 7.58172 4 12C4 16.4183 7.58172 20 12 20C16.4183 20 20 16.4183 20 12C20 7.58172 16.4183 4 12 4ZM12 16C12.5523 16 13 16.4477 13 17C13 17.5523 12.5523 18 12 18C11.4477 18 11 17.5523 11 17C11 16.4477 11.4477 16 12 16ZM12 6C14.2091 6 16 7.79086 16 10C16 11.7948 14.8179 13.3135 13.1898 13.8201L13 13.874V14C13 14.5523 12.5523 15 12 15C11.4872 15 11.0645 14.614 11.0067 14.1166L11 14V13C11 12.4872 11.386 12.0645 11.8834 12.0067L12.1493 11.9945C13.1841 11.9182 14 11.0544 14 10C14 8.89543 13.1046 8 12 8C10.8954 8 10 8.89543 10 10C10 10.5523 9.55228 11 9 11C8.44772 11 8 10.5523 8 10C8 7.79086 9.79086 6 12 6Z" fill="white"/>
+                  </svg>                                            
+                  Ajuda
+                </a>
+              </li>
+              <% if (isAdmin) { %>
                 <li>
-                    <a class="show-cat-btn" href="/platform">
-                        <span class="icon" aria-hidden="true"><img src="/img/admin/Bulk/home.png" alt=""></span>Dashboard
-                    </a>
-                    <ul class="cat-sub-menu">
-                    </ul>
+                  <a href="/platform/new_user" class="inter text-gray-300 hover:text-white hover:bg-purple group flex gap-x-3 rounded-md text-sm leading-6 font-semibold">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <g clip-path="url(#clip0_127_59)">
+                      <path d="M10 18.75C14.8325 18.75 18.75 14.8325 18.75 10C18.75 5.16751 14.8325 1.25 10 1.25C5.16751 1.25 1.25 5.16751 1.25 10C1.25 14.8325 5.16751 18.75 10 18.75Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                      <path d="M6.25 10H13.75" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                      <path d="M10 6.25V13.75" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                      </g>
+                      <defs>
+                      <clipPath id="clip0_127_59">
+                      <rect width="20" height="20" fill="white"/>
+                      </clipPath>
+                      </defs>
+                    </svg>                                                                  
+                    Adicionar usuário
+                  </a>
                 </li>
-
                 <li>
-                    <a class="show-cat-btn" href="/platform/all-posts">
-                        <span class="icon" aria-hidden="true"><img src="/img/admin/Bulk/posts.png" alt=""></span>Posts
-                    </a>
+                  <a href="/platform/users" class="inter text-gray-300 hover:text-white hover:bg-purple group flex gap-x-3 rounded-md text-sm leading-6 font-semibold">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <g clip-path="url(#clip0_129_87)">
+                      <path d="M15.832 12.5C17.6729 12.5 19.1654 13.9924 19.1654 15.8333V17.5H17.4987M13.332 9.06167C14.7697 8.69158 15.832 7.38652 15.832 5.83332C15.832 4.28012 14.7697 2.97504 13.332 2.60501M10.832 5.83333C10.832 7.67428 9.33961 9.16667 7.4987 9.16667C5.65775 9.16667 4.16536 7.67428 4.16536 5.83333C4.16536 3.99238 5.65775 2.5 7.4987 2.5C9.33961 2.5 10.832 3.99238 10.832 5.83333ZM4.16536 12.5H10.832C12.6729 12.5 14.1654 13.9924 14.1654 15.8333V17.5H0.832031V15.8333C0.832031 13.9924 2.32441 12.5 4.16536 12.5Z" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                      </g>
+                      <defs>
+                      <clipPath id="clip0_129_87">
+                      <rect width="20" height="20" fill="white"/>
+                      </clipPath>
+                      </defs>
+                    </svg>                                                                                                              
+                    Usuários
+                  </a>
                 </li>
-
-                
-                <li>
-                    <a class="show-cat-btn" href="/platform/post_facebook">
-                        <span class="icon" aria-hidden="true"><img src="/img/admin/Bulk/facebook.png" alt=""></span>Novo post Facebook
-                    </a>
-                </li>
-
-                
-                <!-- <li>
-                    <a class="show-cat-btn" href="/platform/post_instagram">
-                        <span class="icon" aria-hidden="true"><img src="/img/admin/Bulk/instagram.png" alt=""></span>Novo post Instagram
-                    </a>
-                </li> -->
-                
-                <li>
-                    <a class="show-cat-btn" href="/platform/accounts">
-                        <span class="icon" aria-hidden="true"><img src="/img/admin/Bulk/perfil.png" alt=""></span>Contas inseridas
-                    </a>
-                </li>
-                
-                <li>
-                    <a class="show-cat-btn" href="/platform/groups">
-                        <span class="icon" aria-hidden="true"><img src="/img/admin/Bulk/grupos.png" alt=""></span>Grupos
-                    </a>
-                </li>
-
-                <li>
-                    <a class="show-cat-btn" href="/platform/pages">
-                        <span class="icon" aria-hidden="true"><img src="/img/admin/Bulk/pagina.png" alt=""></span>Páginas
-                    </a>
-                </li>
-                
-                <li>
-                    <a class="show-cat-btn" href="/platform/comments-automatic">
-                        <span class="icon" aria-hidden="true"><img src="/img/admin/Bulk/comentario.png" alt=""></span>Bot de comentários
-                    </a>
-                </li>
-
-                <li>
-                    <a class="show-cat-btn" href="/platform/notifications">
-                        <span class="icon" aria-hidden="true"><img src="/img/platform/notifications.png" alt=""></span>Notificações
-                    </a>
-                </li>
-
-                <li>
-                    <a class="show-cat-btn" href="/platform/historic">
-                        <span class="icon" aria-hidden="true"><img src="/img/admin/Bulk/historic.png" alt=""></span>Histórico
-                    </a>
-                </li>
-
-                <li>
-                    <a class="show-cat-btn" href="/platform/help">
-                        <span class="icon" aria-hidden="true"><img src="/img/admin/help.png" alt=""></span>Tutoriais
-                    </a>
-                </li>
-
-                <li>
-                    <a class="show-cat-btn" href="/platform/config">
-                        <span class="icon" aria-hidden="true"><img src="/img/admin/Bulk/config.png" alt=""></span>Configurações
-                    </a>
-                </li>
-
-                <% if (isAdmin) { %>
-                    <br>
-                    <span class="system-menu__title">Funções admin</span>
-                    
-                    <li>
-                        <a class="show-cat-btn" href="/platform/new_user">
-                            <span class="icon" aria-hidden="true"><img src="/img/admin/Bulk/mais.png" alt=""></span>Adicionar usuário
-                        </a>
-                    </li>
-
-                    <li>
-                        <a class="show-cat-btn" href="/platform/users">
-                            <span class="icon" aria-hidden="true"><img src="/img/admin/Bulk/usuarios.png" alt=""></span>Usuários
-                        </a>
-                    </li>
-
-                    <li>
-                        <a class="show-cat-btn" href="/platform/feedbacks">
-                            <span class="icon" aria-hidden="true"><img src="/img/admin/Bulk/feedbacks.png" alt=""></span>Feedbacks
-                        </a>
-                    </li>
-
-                    <li>
-                        <a class="show-cat-btn" href="/platform/plans">
-                            <span class="icon" aria-hidden="true"><img src="/img/admin/Bulk/precos.png" alt=""></span>Planos
-                        </a>
-                    </li>
-
-                    <li>
-                        <a class="show-cat-btn" href="/platform/finance">
-                            <span class="icon" aria-hidden="true"><img src="/img/admin/Bulk/dinheiro.png" alt=""></span>Finanças
-                        </a>
-                    </li>
-                <% } %>
+              <% } %>
+              <li class="mt-auto">
+                <a href="/platform/config" class="inter group -mx-2 flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 text-gray-300 hover:bg-purple hover:text-white">
+                  <svg class="h-6 w-6 shrink-0 text-gray-300 group-hover:text-white" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M9.594 3.94c.09-.542.56-.94 1.11-.94h2.593c.55 0 1.02.398 1.11.94l.213 1.281c.063.374.313.686.645.87.074.04.147.083.22.127.324.196.72.257 1.075.124l1.217-.456a1.125 1.125 0 011.37.49l1.296 2.247a1.125 1.125 0 01-.26 1.431l-1.003.827c-.293.24-.438.613-.431.992a6.759 6.759 0 010 .255c-.007.378.138.75.43.99l1.005.828c.424.35.534.954.26 1.43l-1.298 2.247a1.125 1.125 0 01-1.369.491l-1.217-.456c-.355-.133-.75-.072-1.076.124a6.57 6.57 0 01-.22.128c-.331.183-.581.495-.644.869l-.213 1.28c-.09.543-.56.941-1.11.941h-2.594c-.55 0-1.02-.398-1.11-.94l-.213-1.281c-.062-.374-.312-.686-.644-.87a6.52 6.52 0 01-.22-.127c-.325-.196-.72-.257-1.076-.124l-1.217.456a1.125 1.125 0 01-1.369-.49l-1.297-2.247a1.125 1.125 0 01.26-1.431l1.004-.827c.292-.24.437-.613.43-.992a6.932 6.932 0 010-.255c.007-.378-.138-.75-.43-.99l-1.004-.828a1.125 1.125 0 01-.26-1.43l1.297-2.247a1.125 1.125 0 011.37-.491l1.216.456c.356.133.751.072 1.076-.124.072-.044.146-.087.22-.128.332-.183.582-.495.644-.869l.214-1.281z" />
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                  </svg>
+                  Configurações
+                </a>
+              </li>
             </ul>
+          </nav>
         </div>
+      </div>
     </div>
-</aside>
+  </div>
 
-<!-- Icons library -->
-<script src="plugins/feather.min.js"></script>
-<!-- Custom scripts -->
-<script src="js/script.js"></script>
+  <div class="hidden lg:fixed lg:inset-y-0 lg:z-50 lg:flex lg:w-70 lg:flex-col">
+    <div class="flex grow h-full flex-col gap-y-5 overflow-y-auto bg-purple px-6 pb-4">
+      <div class="flex justify-between h-16 shrink-0 items-center mt-4">
+        <img class="h-10 w-auto" src="/img/admin/PLUBEE-LOGO-E-NOME.png" alt="plubee.net">
+        <button>
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M4.15382 6.10865C4.15415 5.76381 4.29137 5.4332 4.53533 5.18948C4.77929 4.94576 5.11003 4.80886 5.45487 4.80886H18.545C18.7192 4.80343 18.8927 4.83305 19.0552 4.89596C19.2177 4.95887 19.3659 5.05378 19.491 5.17508C19.6162 5.29637 19.7157 5.44156 19.7836 5.60204C19.8516 5.76252 19.8866 5.93501 19.8866 6.10928C19.8866 6.28355 19.8516 6.45604 19.7836 6.61652C19.7157 6.777 19.6162 6.92219 19.491 7.04348C19.3659 7.16478 19.2177 7.25969 19.0552 7.3226C18.8927 7.38551 18.7192 7.41513 18.545 7.4097H5.45361C5.10898 7.40903 4.7787 7.27166 4.53525 7.02774C4.29181 6.78382 4.15508 6.45327 4.15508 6.10865H4.15382ZM19.8448 11.5996C19.8444 11.9444 19.7072 12.275 19.4632 12.5188C19.2193 12.7625 18.8886 12.8994 18.5437 12.8994H5.45487C5.11699 12.8889 4.79648 12.7472 4.5612 12.5045C4.32592 12.2618 4.19435 11.937 4.19435 11.599C4.19435 11.2609 4.32592 10.9362 4.5612 10.6934C4.79648 10.4507 5.11699 10.3091 5.45487 10.2985H18.5462C18.8911 10.2989 19.2217 10.4361 19.4654 10.6801C19.7091 10.924 19.8448 11.2548 19.8448 11.5996ZM19.8448 17.088C19.8448 17.4331 19.7077 17.764 19.4637 18.008C19.2197 18.252 18.8888 18.3891 18.5437 18.3891H5.45487C5.28068 18.3945 5.10718 18.3649 4.94467 18.302C4.78215 18.2391 4.63393 18.1441 4.5088 18.0229C4.38366 17.9016 4.28417 17.7564 4.21623 17.5959C4.14829 17.4354 4.11328 17.2629 4.11328 17.0886C4.11328 16.9144 4.14829 16.7419 4.21623 16.5814C4.28417 16.4209 4.38366 16.2757 4.5088 16.1544C4.63393 16.0332 4.78215 15.9382 4.94467 15.8753C5.10718 15.8124 5.28068 15.7828 5.45487 15.7882H18.5462C18.8911 15.7886 19.2217 15.9258 19.4654 16.1697C19.7091 16.4137 19.846 16.7444 19.846 17.0893L19.8448 17.088Z" fill="white"/>
+          </svg>            
+        </button>
+      </div>
+      <nav class="flex flex-1 flex-col">
+        <ul role="list" class="flex flex-1 flex-col gap-y-7">
+          <li>
+            <ul role="list" class="-mx-2 space-y-1">
+              <li>
+                <a href="/platform" class="inter bg-purple text-white group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold">
+                  <svg class="h-6 w-6 shrink-0 text-white" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
+                  </svg>
+                  Dashboard
+                </a>
+              </li>
+              <li>
+                <a href="/platform/all-posts" class="inter text-gray-300 hover:text-white hover:bg-purple group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M18.75 20.25H5.25C3.6 20.25 2.25 18.9 2.25 17.25V6.75C2.25 5.1 3.6 3.75 5.25 3.75H18.75C20.4 3.75 21.75 5.1 21.75 6.75V17.25C21.75 18.9 20.4 20.25 18.75 20.25Z" stroke="white" stroke-width="1.3" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M10.5 8.25H6V12.75H10.5V8.25Z" stroke="white" stroke-width="1.3" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M13.5 12.75H18" stroke="white" stroke-width="1.3" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M6 15.75H18" stroke="white" stroke-width="1.3" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>                                                                  
+                  Publicações
+                </a>
+              </li>
+              <li>
+                <a href="/platform/post_facebook" class="inter text-gray-300 hover:text-white hover:bg-purple group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold">
+                  <svg width="20" height="20" class="ml-0.5 mr-0.5" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd" clip-rule="evenodd" d="M20 10.0611C20 4.50451 15.5228 0 10 0C4.47715 0 0 4.50451 0 10.0611C0 15.0829 3.65686 19.2452 8.43746 20V12.9694H5.89844V10.0611H8.43746V7.84453C8.43746 5.32295 9.93045 3.93012 12.2146 3.93012C13.3087 3.93012 14.4531 4.12663 14.4531 4.12663V6.60261H13.1922C11.9499 6.60261 11.5625 7.37815 11.5625 8.17381V10.0611H14.3359L13.8925 12.9694H11.5625V20C16.3432 19.2452 20 15.0829 20 10.0611Z" fill="white"/>
+                  </svg>                      
+                  Novo post no Facebook
+                </a>
+              </li>
+              <li>
+                <a href="/platform/post_instagram" class="inter text-gray-300 hover:text-white hover:bg-purple group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold">
+                  <svg width="19" height="19" class="ml-0.5 mr-0.5" viewBox="0 0 19 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M14.573 3.287C14.3475 3.287 14.1271 3.35386 13.9396 3.47912C13.7522 3.60439 13.6061 3.78243 13.5198 3.99074C13.4335 4.19905 13.4109 4.42826 13.4549 4.6494C13.4989 4.87054 13.6075 5.07367 13.7669 5.2331C13.9263 5.39253 14.1295 5.50111 14.3506 5.5451C14.5717 5.58908 14.801 5.56651 15.0093 5.48022C15.2176 5.39394 15.3956 5.24782 15.5209 5.06035C15.6461 4.87288 15.713 4.65247 15.713 4.427C15.713 4.12465 15.5929 3.83469 15.3791 3.6209C15.1653 3.40711 14.8753 3.287 14.573 3.287ZM18.943 5.586C18.9245 4.79778 18.7769 4.01793 18.506 3.2775C18.2644 2.64398 17.8885 2.07031 17.404 1.596C16.9336 1.10905 16.3586 0.735468 15.7225 0.5035C14.984 0.224353 14.2033 0.0733495 13.414 0.0569999C12.407 -5.30854e-08 12.084 0 9.5 0C6.916 0 6.593 -5.30854e-08 5.586 0.0569999C4.79669 0.0733495 4.01598 0.224353 3.2775 0.5035C2.64259 0.737816 2.06809 1.11108 1.596 1.596C1.10905 2.06642 0.735468 2.64142 0.5035 3.2775C0.224353 4.01598 0.0733495 4.79669 0.0569999 5.586C-5.30854e-08 6.593 0 6.916 0 9.5C0 12.084 -5.30854e-08 12.407 0.0569999 13.414C0.0733495 14.2033 0.224353 14.984 0.5035 15.7225C0.735468 16.3586 1.10905 16.9336 1.596 17.404C2.06809 17.8889 2.64259 18.2622 3.2775 18.4965C4.01598 18.7756 4.79669 18.9267 5.586 18.943C6.593 19 6.916 19 9.5 19C12.084 19 12.407 19 13.414 18.943C14.2033 18.9267 14.984 18.7756 15.7225 18.4965C16.3586 18.2645 16.9336 17.8909 17.404 17.404C17.8906 16.9315 18.2669 16.3573 18.506 15.7225C18.7769 14.9821 18.9245 14.2022 18.943 13.414C18.943 12.407 19 12.084 19 9.5C19 6.916 19 6.593 18.943 5.586ZM17.233 13.3C17.2261 13.903 17.1169 14.5005 16.91 15.067C16.7583 15.4804 16.5147 15.854 16.1975 16.1595C15.8894 16.4735 15.5166 16.7166 15.105 16.872C14.5385 17.0789 13.941 17.1881 13.338 17.195C12.388 17.2425 12.0365 17.252 9.538 17.252C7.0395 17.252 6.688 17.252 5.738 17.195C5.11185 17.2067 4.48836 17.1103 3.895 16.91C3.50149 16.7467 3.14579 16.5041 2.85 16.1975C2.53468 15.8923 2.2941 15.5184 2.147 15.105C1.91506 14.5304 1.78642 13.9193 1.767 13.3C1.767 12.35 1.71 11.9985 1.71 9.5C1.71 7.0015 1.71 6.65 1.767 5.7C1.77126 5.0835 1.8838 4.47255 2.0995 3.895C2.26674 3.49402 2.52345 3.13658 2.85 2.85C3.13862 2.52336 3.49532 2.26394 3.895 2.09C4.47407 1.88104 5.0844 1.77183 5.7 1.767C6.65 1.767 7.0015 1.71 9.5 1.71C11.9985 1.71 12.35 1.71 13.3 1.767C13.903 1.77392 14.5005 1.88313 15.067 2.09C15.4987 2.25022 15.8862 2.5107 16.1975 2.85C16.5088 3.14182 16.7521 3.4986 16.91 3.895C17.1211 4.47349 17.2304 5.08419 17.233 5.7C17.2805 6.65 17.29 7.0015 17.29 9.5C17.29 11.9985 17.2805 12.35 17.233 13.3ZM9.5 4.6265C8.53652 4.62838 7.59521 4.9158 6.79502 5.45245C5.99483 5.98909 5.37166 6.75089 5.00425 7.64157C4.63684 8.53225 4.54169 9.51184 4.7308 10.4566C4.91992 11.4013 5.38482 12.2688 6.06677 12.9494C6.74872 13.6301 7.61711 14.0933 8.56222 14.2805C9.50732 14.4678 10.4867 14.3708 11.3767 14.0016C12.2667 13.6325 13.0272 13.0078 13.5623 12.2066C14.0974 11.4053 14.383 10.4635 14.383 9.5C14.3843 8.85885 14.2587 8.22378 14.0137 7.63131C13.7686 7.03884 13.4088 6.50067 12.955 6.04775C12.5012 5.59483 11.9624 5.23609 11.3694 4.99218C10.7765 4.74827 10.1411 4.62399 9.5 4.6265ZM9.5 12.6635C8.87432 12.6635 8.26269 12.478 7.74245 12.1304C7.22222 11.7827 6.81674 11.2887 6.57731 10.7106C6.33787 10.1326 6.27522 9.49649 6.39729 8.88283C6.51935 8.26917 6.82064 7.70549 7.26307 7.26307C7.70549 6.82064 8.26917 6.51935 8.88283 6.39729C9.49649 6.27522 10.1326 6.33787 10.7106 6.57731C11.2887 6.81674 11.7827 7.22222 12.1304 7.74245C12.478 8.26269 12.6635 8.87432 12.6635 9.5C12.6635 9.91544 12.5817 10.3268 12.4227 10.7106C12.2637 11.0944 12.0307 11.4432 11.7369 11.7369C11.4432 12.0307 11.0944 12.2637 10.7106 12.4227C10.3268 12.5817 9.91544 12.6635 9.5 12.6635Z" fill="white"/>
+                  </svg>                                          
+                  Novo post no Instagram
+                </a>
+              </li>
+              <li>
+                <a href="/platform/accounts" class="inter text-gray-300 hover:text-white hover:bg-purple group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold">
+                  <svg width="20" height="20" class="ml-0.5 mr-0.2" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <g clip-path="url(#clip0_67_81)">
+                    <path d="M20 9.99C20 4.475 15.52 0 10 0C4.48 0 0 4.475 0 9.99C0 13.0275 1.38 15.765 3.54 17.6025C3.56 17.6225 3.58 17.6225 3.58 17.6425C3.76 17.7825 3.94 17.9225 4.14 18.0625C4.24 18.1225 4.32 18.2012 4.42 18.2812C6.07258 19.4017 8.02339 20.0004 10.02 20C12.0166 20.0004 13.9674 19.4017 15.62 18.2812C15.72 18.2212 15.8 18.1425 15.9 18.0813C16.08 17.9425 16.28 17.8025 16.46 17.6625C16.48 17.6425 16.5 17.6425 16.5 17.6225C18.62 15.7637 20 13.0275 20 9.99ZM10 18.7413C8.12 18.7413 6.4 18.1412 4.98 17.1425C5 16.9825 5.04 16.8238 5.08 16.6638C5.19917 16.2301 5.37396 15.8138 5.6 15.425C5.82 15.045 6.08 14.705 6.4 14.405C6.7 14.105 7.06 13.8263 7.42 13.6063C7.8 13.3863 8.2 13.2262 8.64 13.1062C9.08342 12.9867 9.54075 12.9266 10 12.9275C11.3633 12.9178 12.6765 13.4408 13.66 14.385C14.12 14.845 14.48 15.385 14.74 16.0038C14.88 16.3638 14.98 16.7437 15.04 17.1425C13.564 18.1802 11.8043 18.7384 10 18.7413ZM6.94 9.49125C6.76378 9.08777 6.67516 8.6515 6.68 8.21125C6.68 7.7725 6.76 7.3325 6.94 6.9325C7.12 6.5325 7.36 6.17375 7.66 5.87375C7.96 5.57375 8.32 5.335 8.72 5.155C9.12 4.975 9.56 4.895 10 4.895C10.46 4.895 10.88 4.975 11.28 5.155C11.68 5.335 12.04 5.575 12.34 5.87375C12.64 6.17375 12.88 6.53375 13.06 6.9325C13.24 7.3325 13.32 7.7725 13.32 8.21125C13.32 8.67125 13.24 9.09125 13.06 9.49C12.8863 9.88408 12.6423 10.2433 12.34 10.55C12.0332 10.8519 11.674 11.0954 11.28 11.2688C10.4535 11.6084 9.52647 11.6084 8.7 11.2688C8.30601 11.0954 7.94684 10.8519 7.64 10.55C7.33727 10.2477 7.09912 9.88836 6.94 9.49125ZM16.22 16.1238C16.22 16.0838 16.2 16.0638 16.2 16.0238C16.0033 15.398 15.7134 14.8055 15.34 14.2663C14.9663 13.723 14.507 13.2438 13.98 12.8475C13.5775 12.5447 13.1413 12.2897 12.68 12.0875C12.8899 11.9491 13.0843 11.7886 13.26 11.6087C13.5582 11.3144 13.82 10.9854 14.04 10.6288C14.4829 9.90101 14.7117 9.06311 14.7 8.21125C14.7062 7.58064 14.5837 6.9554 14.34 6.37375C14.0994 5.8133 13.7531 5.30445 13.32 4.875C12.8876 4.45004 12.3786 4.11074 11.82 3.875C11.2374 3.63174 10.6113 3.50968 9.98 3.51625C9.34859 3.51007 8.72253 3.63256 8.14 3.87625C7.57657 4.11148 7.06639 4.45798 6.64 4.895C6.21505 5.32698 5.87574 5.83552 5.64 6.39375C5.39631 6.9754 5.27381 7.60064 5.28 8.23125C5.28 8.67125 5.34 9.09125 5.46 9.49C5.58 9.91 5.74 10.29 5.96 10.6488C6.16 11.0088 6.44 11.3288 6.74 11.6288C6.92 11.8088 7.12 11.9675 7.34 12.1075C6.87729 12.3151 6.4409 12.5769 6.04 12.8875C5.52 13.2875 5.06 13.7662 4.68 14.2862C4.30282 14.8233 4.0126 15.4164 3.82 16.0438C3.8 16.0838 3.8 16.1237 3.8 16.1437C2.22 14.545 1.24 12.3875 1.24 9.99C1.24 5.175 5.18 1.23875 10 1.23875C14.82 1.23875 18.76 5.175 18.76 9.99C18.7574 12.2899 17.8441 14.4953 16.22 16.1238Z" fill="white"/>
+                    </g>
+                    <defs>
+                    <clipPath id="clip0_67_81">
+                    <rect width="20" height="20" fill="white"/>
+                    </clipPath>
+                    </defs>
+                  </svg>                                                                              
+                  Contas importadas
+                </a>
+              </li>
+              <li>
+                <a href="/platform/groups" class="inter text-gray-300 hover:text-white hover:bg-purple group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M17.25 13.5C19.3211 13.5 21 11.8211 21 9.75C21 7.67893 19.3211 6 17.25 6C15.1789 6 13.5 7.67893 13.5 9.75C13.5 11.8211 15.1789 13.5 17.25 13.5Z" stroke="white" stroke-width="1.4" stroke-miterlimit="10"/>
+                    <path d="M12 18.75C12 15.8505 14.3505 13.5 17.25 13.5C20.1495 13.5 22.5 15.8505 22.5 18.75" stroke="white" stroke-width="1.4" stroke-miterlimit="10"/>
+                    <path d="M6.75 13.5C8.82107 13.5 10.5 11.8211 10.5 9.75C10.5 7.67893 8.82107 6 6.75 6C4.67893 6 3 7.67893 3 9.75C3 11.8211 4.67893 13.5 6.75 13.5Z" stroke="white" stroke-width="1.4" stroke-miterlimit="10"/>
+                    <path d="M1.5 18.75C1.5 15.8505 3.8505 13.5 6.75 13.5C9.6495 13.5 12 15.8505 12 18.75" stroke="white" stroke-width="1.4" stroke-miterlimit="10"/>
+                  </svg>                                            
+                  Grupos
+                </a>
+              </li>
+              <li>
+                <a href="/platform/pages" class="inter text-gray-300 hover:text-white hover:bg-purple group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold">
+                  <svg width="20" height="20" viewBox="0 0 20 20" fill="none" class="ml-0.5" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M3.33203 12.5001C3.33203 12.5001 4.16536 11.6667 6.66536 11.6667C9.16536 11.6667 10.832 13.3334 13.332 13.3334C15.832 13.3334 16.6654 12.5001 16.6654 12.5001V2.50008C16.6654 2.50008 15.832 3.33341 13.332 3.33341C10.832 3.33341 9.16536 1.66675 6.66536 1.66675C4.16536 1.66675 3.33203 2.50008 3.33203 2.50008V12.5001Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M3.33203 18.3333V12.5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>                                                                  
+                  Páginas
+                </a>
+              </li>
+              <li>
+                <a href="/platform/comments-automatic" class="inter text-gray-300 hover:text-white hover:bg-purple group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold">
+                  <svg width="19" height="19" class="ml-0.5" viewBox="0 0 19 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M17.6809 16.3318C18.2759 15.5342 18.6843 14.6131 18.8758 13.6365C19.0673 12.66 19.0371 11.6529 18.7874 10.6896C18.5376 9.72625 18.0748 8.8313 17.4331 8.07076C16.7913 7.31022 15.9869 6.70351 15.0793 6.29539C14.8817 5.15796 14.4273 4.08055 13.7509 3.14504C13.0744 2.20952 12.1936 1.44051 11.1754 0.896438C10.1572 0.352363 9.02845 0.0475389 7.87481 0.00512785C6.72116 -0.0372831 5.57303 0.183834 4.51765 0.651679C3.46226 1.11952 2.5274 1.82179 1.78408 2.70511C1.04077 3.58843 0.508558 4.62957 0.227898 5.74941C-0.0527629 6.86926 -0.074492 8.03835 0.164362 9.16785C0.403215 10.2974 0.896367 11.3576 1.60635 12.2679L0.28658 13.5782C0.154834 13.7118 0.0655874 13.8813 0.0301018 14.0655C-0.00538388 14.2497 0.0144816 14.4403 0.0871915 14.6132C0.158421 14.7866 0.279381 14.935 0.434829 15.0398C0.590277 15.1446 0.773255 15.201 0.960705 15.2019H6.36319C6.90121 16.3362 7.74946 17.2949 8.80974 17.9671C9.87003 18.6393 11.099 18.9974 12.3544 19H18.0512C18.2386 18.9991 18.4216 18.9427 18.5771 18.8379C18.7325 18.7331 18.8535 18.5847 18.9247 18.4113C18.9974 18.2384 19.0173 18.0478 18.9818 17.8636C18.9463 17.6794 18.8571 17.5098 18.7253 17.3763L17.6809 16.3318ZM5.70806 12.3533C5.70936 12.6713 5.73476 12.9887 5.78402 13.3029H3.24893L3.58125 12.98C3.67024 12.8918 3.74087 12.7867 3.78908 12.671C3.83728 12.5553 3.8621 12.4312 3.8621 12.3059C3.8621 12.1805 3.83728 12.0564 3.78908 11.9407C3.74087 11.825 3.67024 11.72 3.58125 11.6317C3.04912 11.1054 2.62726 10.4783 2.34034 9.787C2.05341 9.09573 1.90717 8.35419 1.91018 7.60573C1.91018 6.09476 2.51038 4.64567 3.57874 3.57725C4.6471 2.50883 6.09611 1.9086 7.607 1.9086C8.78595 1.90151 9.93747 2.26409 10.8997 2.94535C11.8619 3.62661 12.5865 4.59231 12.9715 5.70669C12.7626 5.70669 12.5632 5.70669 12.3544 5.70669C10.5916 5.70669 8.90114 6.40696 7.65472 7.65345C6.40829 8.89994 5.70806 10.5905 5.70806 12.3533ZM15.7155 17.101L15.763 17.1484H12.3544C11.2561 17.1465 10.1926 16.7638 9.34484 16.0656C8.4971 15.3674 7.91764 14.3969 7.70517 13.3193C7.4927 12.2418 7.66037 11.1239 8.1796 10.1562C8.69884 9.1884 9.53753 8.43059 10.5528 8.01184C11.568 7.5931 12.6971 7.53932 13.7475 7.85966C14.798 8.18001 15.7049 8.85466 16.3138 9.7687C16.9227 10.6827 17.1958 11.7796 17.0867 12.8724C16.9776 13.9653 16.493 14.9865 15.7155 15.7621C15.5366 15.9374 15.4342 16.1763 15.4306 16.4268C15.4312 16.5524 15.4566 16.6767 15.5055 16.7924C15.5544 16.9081 15.6258 17.013 15.7155 17.101Z" fill="white"/>
+                  </svg>                                            
+                  Bot de comentários
+                </a>
+              </li>
+              <li>
+                <a href="/platform/notifications" class="inter text-gray-300 hover:text-white hover:bg-purple group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold">
+                  <svg width="21" height="21" viewBox="0 0 21 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M10.5 2.29688C7.26071 2.29688 4.92188 4.26562 4.92188 6.89062V10.8281L2.29688 15.4219H18.7031L16.0781 10.8281V6.89062C16.0781 4.26562 14.5477 2.29688 10.5 2.29688Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M7.54688 16.0781C7.54688 20.0156 13.4531 20.0156 13.4531 16.0781" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>                                                                                    
+                  Notificações
+                </a>
+              </li>
+              <li>
+                <a href="/platform/help" class="inter text-gray-300 hover:text-white hover:bg-purple group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C17.5228 2 22 6.47715 22 12C22 17.5228 17.5228 22 12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2ZM12 4C7.58172 4 4 7.58172 4 12C4 16.4183 7.58172 20 12 20C16.4183 20 20 16.4183 20 12C20 7.58172 16.4183 4 12 4ZM12 16C12.5523 16 13 16.4477 13 17C13 17.5523 12.5523 18 12 18C11.4477 18 11 17.5523 11 17C11 16.4477 11.4477 16 12 16ZM12 6C14.2091 6 16 7.79086 16 10C16 11.7948 14.8179 13.3135 13.1898 13.8201L13 13.874V14C13 14.5523 12.5523 15 12 15C11.4872 15 11.0645 14.614 11.0067 14.1166L11 14V13C11 12.4872 11.386 12.0645 11.8834 12.0067L12.1493 11.9945C13.1841 11.9182 14 11.0544 14 10C14 8.89543 13.1046 8 12 8C10.8954 8 10 8.89543 10 10C10 10.5523 9.55228 11 9 11C8.44772 11 8 10.5523 8 10C8 7.79086 9.79086 6 12 6Z" fill="white"/>
+                  </svg>                                            
+                  Ajuda
+                </a>
+              </li>
+              <% if (isAdmin) { %>
+                <li>
+                  <a href="/platform/new_user" class="inter text-gray-300 hover:text-white hover:bg-purple group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <g clip-path="url(#clip0_127_59)">
+                      <path d="M10 18.75C14.8325 18.75 18.75 14.8325 18.75 10C18.75 5.16751 14.8325 1.25 10 1.25C5.16751 1.25 1.25 5.16751 1.25 10C1.25 14.8325 5.16751 18.75 10 18.75Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                      <path d="M6.25 10H13.75" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                      <path d="M10 6.25V13.75" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                      </g>
+                      <defs>
+                      <clipPath id="clip0_127_59">
+                      <rect width="20" height="20" fill="white"/>
+                      </clipPath>
+                      </defs>
+                    </svg>                                                                  
+                    Adicionar usuário
+                  </a>
+                </li>
+                <li>
+                  <a href="/platform/users" class="inter text-gray-300 hover:text-white hover:bg-purple group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <g clip-path="url(#clip0_129_87)">
+                      <path d="M15.832 12.5C17.6729 12.5 19.1654 13.9924 19.1654 15.8333V17.5H17.4987M13.332 9.06167C14.7697 8.69158 15.832 7.38652 15.832 5.83332C15.832 4.28012 14.7697 2.97504 13.332 2.60501M10.832 5.83333C10.832 7.67428 9.33961 9.16667 7.4987 9.16667C5.65775 9.16667 4.16536 7.67428 4.16536 5.83333C4.16536 3.99238 5.65775 2.5 7.4987 2.5C9.33961 2.5 10.832 3.99238 10.832 5.83333ZM4.16536 12.5H10.832C12.6729 12.5 14.1654 13.9924 14.1654 15.8333V17.5H0.832031V15.8333C0.832031 13.9924 2.32441 12.5 4.16536 12.5Z" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                      </g>
+                      <defs>
+                      <clipPath id="clip0_129_87">
+                      <rect width="20" height="20" fill="white"/>
+                      </clipPath>
+                      </defs>
+                    </svg>                                                                                                              
+                    Usuários
+                  </a>
+                </li>
+              <% } %>
+            </ul>
+          </li>
+          <li class="mt-auto">
+            <a href="/platform/config" class="inter group -mx-2 flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 text-gray-300 hover:bg-purple hover:text-white">
+              <svg class="h-6 w-6 shrink-0 text-gray-300 group-hover:text-white" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M9.594 3.94c.09-.542.56-.94 1.11-.94h2.593c.55 0 1.02.398 1.11.94l.213 1.281c.063.374.313.686.645.87.074.04.147.083.22.127.324.196.72.257 1.075.124l1.217-.456a1.125 1.125 0 011.37.49l1.296 2.247a1.125 1.125 0 01-.26 1.431l-1.003.827c-.293.24-.438.613-.431.992a6.759 6.759 0 010 .255c-.007.378.138.75.43.99l1.005.828c.424.35.534.954.26 1.43l-1.298 2.247a1.125 1.125 0 01-1.369.491l-1.217-.456c-.355-.133-.75-.072-1.076.124a6.57 6.57 0 01-.22.128c-.331.183-.581.495-.644.869l-.213 1.28c-.09.543-.56.941-1.11.941h-2.594c-.55 0-1.02-.398-1.11-.94l-.213-1.281c-.062-.374-.312-.686-.644-.87a6.52 6.52 0 01-.22-.127c-.325-.196-.72-.257-1.076-.124l-1.217.456a1.125 1.125 0 01-1.369-.49l-1.297-2.247a1.125 1.125 0 01.26-1.431l1.004-.827c.292-.24.437-.613.43-.992a6.932 6.932 0 010-.255c.007-.378-.138-.75-.43-.99l-1.004-.828a1.125 1.125 0 01-.26-1.43l1.297-2.247a1.125 1.125 0 011.37-.491l1.216.456c.356.133.751.072 1.076-.124.072-.044.146-.087.22-.128.332-.183.582-.495.644-.869l.214-1.281z" />
+                <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+              </svg>
+              Configurações
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+</div>

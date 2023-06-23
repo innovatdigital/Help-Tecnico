@@ -5,11 +5,10 @@ const checkAdmin = asyncHandler(async(req, res, next) => {
     try {
         const findTypeAccount = await User.findById(req.cookies._id)
 
-        if (findTypeAccount.isAdmin == true) {
+        if (findTypeAccount.isAdmin) {
             next()
-
         } else {
-            res.send("Acesso não autorizado.")
+            res.status(404).render('layouts/not_found')
         }
     } catch (err) {
         res.send(err)

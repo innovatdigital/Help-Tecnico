@@ -2,11 +2,13 @@ const asyncHandler = require('express-async-handler')
 const User = require('../models/User')
 const Plans = require('../models/Plans')
 const Finances = require('../models/Finances')
+const Checkout = require('../models/Checkout')
 const axios = require('axios')
 const ejs = require('ejs');
 const mercadopago = require('mercadopago');
 const fs = require('fs')
 const nodemailer = require('nodemailer');
+const stripe = require("stripe")("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")
 
 async function aprovedEmail(infos) {
     let transporter = nodemailer.createTransport({
@@ -32,120 +34,180 @@ async function aprovedEmail(infos) {
     };
 
     transporter.sendMail(mailOptions, (error, info) => {
-        if (error) {
-            console.log(error)
-        }
     });
 }
 
 const checkout = asyncHandler(async(req, res) => {
-    const findPlan = await Plans.findById(req.params.id)
+    const findPlan = await Plans.findOne({"name_checkout": req.params.name_checkout})
 
-    res.render("layouts/checkout", {planInfo: findPlan, APP_USER: process.env.MERCADO_PUBLIC})
+    if (findPlan) {
+        res.render("layouts/checkout", {name_checkout: findPlan.name_checkout, plan: findPlan})
+    } else {
+        res.render("layouts/notFound")
+    }
 })
 
-const checkUser = asyncHandler(async(req, res) => {
-    const find = await User.findOne({email: req.body.account.email, cpf: req.body.account.cpf})
-    if (find) res.send('Usuário já cadastrado.')
-})
+const createPayment = asyncHandler(async(req, res) => {
+    try {
+        const findPlan = await Plans.findOne({"name_checkout": req.params.name_checkout})
 
-const processPayment = asyncHandler(async(req, res) => {
-    // const find = await User.findOne({email: req.body.account.email, cpf: req.body.account.cpf})
-    // if (find) res.send('Usuário já cadastrado.')
-    const paymentData = {
-        transaction_amount: parseFloat(req.body.account.amount),
-        token: req.body.cardFormData.token,
-        description: req.body.cardFormData.description,
-        installments: Number(req.body.cardFormData.installments),
-        payment_method_id: req.body.cardFormData.paymentMethodId,
-        issuer_id: req.body.cardFormData.issuerId,
-        payer: {
-            email: req.body.cardFormData.payer.email,
-            identification: {
-                type: req.body.cardFormData.payer.identification.docType,
-                number: req.body.cardFormData.payer.identification.docNumber
+        const customer = await stripe.customers.create({
+            name: `${req.body.user.firstName} ${req.body.user.lastName}`,
+            email: req.body.user.email,
+            phone: req.body.user.phone
+        });
+
+        const paymentIntent = await stripe.paymentIntents.create({
+            customer: customer.id,
+            setup_future_usage: 'off_session',
+            amount: parseFloat(findPlan.value_month) * 100,
+            currency: "brl",
+            automatic_payment_methods: {
+                enabled: true,
+            },
+        });
+        
+        const saveDetails = await Checkout.create({first_name: req.body.user.firstName, last_name: req.body.user.lastName, password: req.body.user.password, email: req.body.user.email, number: req.body.user.phone, cpf: req.body.user.cpf, id_payment: paymentIntent.client_secret.split("_")[1], plan: findPlan.name_checkout, amount: findPlan.value_month, customer: customer.id})
+    
+        res.send({
+            clientSecret: paymentIntent.client_secret,
+        });
+    } catch (err) {
+        console.log(err)
+        res.sendStatus(500)
+    }
+});
+
+const success = asyncHandler(async(req, res) => {
+  try {
+    const paymentIntent = await stripe.paymentIntents.retrieve(req.query.payment_intent);
+
+    if (paymentIntent.status === 'succeeded') {
+        const findData = await Checkout.findOneAndDelete({id_payment: req.query.payment_intent.split("_")[1]})
+
+        if (findData) {
+            const data = Date.now();
+            const options = { day: '2-digit', month: '2-digit', year: 'numeric' };
+            const formater = new Intl.DateTimeFormat('pt-BR', options);
+            const dataFormat = formater.format(data);
+
+            var dataAtual = new Date();
+            var day = dataAtual.getDate();
+            var mes = dataAtual.getMonth() + 1;
+            var ano = dataAtual.getFullYear()
+
+            let plan;
+
+            if (findData.plan == "plano-basico") {
+                plan = "Basico"
+            } else if (findData.plan == "plano-pro") {
+                plan = "Pro"
+            } else if (findData.plan == "plano-avancado") {
+                plan = "Avançado"
             }
+
+            const find = await User.findOne({email: findData.email.trim()})
+            
+            if (find) {
+                const update = await User.findByIdAndUpdate(find._id, {name: `${findData.first_name.trim()} ${findData.last_name.trim()}`, cpf: findData.cpf, number: findData.number, email: findData.email, date: dataFormat, password: findData.password, customer: findData.customer, type_account: plan})
+                const saveFinance = await Finances.create({idUser: update._id, value: findData.amount, day: day, month: mes, year: ano, email: findData.email, status: "Aprovado", plan: findData.type_account})
+            } else {
+                const newUser = await User.create({name: `${findData.first_name.trim()} ${findData.last_name.trim()}`, cpf: findData.cpf, number: findData.number, email: findData.email, date: dataFormat, password: findData.password, customer: findData.customer, type_account: plan})
+                const saveFinance = await Finances.create({idUser: newUser._id, value: findData.amount, day: day, month: mes, year: ano, email: findData.email, status: "Aprovado", plan: findData.type_account})
+            }
+            
+            let infos = {
+                id: findData.id_payment,
+                value: findData.amount,
+                name: `${findData.first_name} ${findData.last_name}`,
+                cpf: findData.cpf,
+                date: dataFormat,
+                plan: findData.type_account,
+                email: findData.email,
+                password: findData.password,
+            }
+
+            aprovedEmail(infos)
+
+            res.render("layouts/success")
+        } else {
+            res.render("layouts/notFound")
         }
-    };
+    } else {
+        res.render("layouts/notFound")
+    }
+  } catch (err) {
+    console.log(err)
+    res.sendStatus(500)
+  }
+})
 
-    mercadopago.configurations.setAccessToken(process.env.MERCADO_ACCESS)
 
-    mercadopago.payment.save(paymentData)
-    .then(function(response) {
-        const { response: data } = response;
+// Validate informations
 
-        setTimeout(() => {
-            axios.get(`https://api.mercadopago.com/v1/payments/${response.body.id}?access_token=${process.env.MERCADO_ACCESS}`)
-            .then(async(data) => {
-                const payment = data.data;
+async function validateEmail(email) {
+  const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  return emailPattern.test(email);
+}
 
-                if (payment.status == 'approved') {
-                    try {
-                        const data = Date.now();
-                        const options = { day: '2-digit', month: '2-digit', year: 'numeric' };
-                        const formater = new Intl.DateTimeFormat('pt-BR', options);
-                        const dataFormat = formater.format(data);
+async function validatePhoneNumber(phoneNumber) {
+  const phonePattern = /^\d{11}$/;
+  return phonePattern.test(phoneNumber);
+}
 
-                        var dataAtual = new Date();
-                        var day = dataAtual.getDate();
-                        var mes = dataAtual.getMonth() + 1;
-                        var ano = dataAtual.getFullYear()
+async function validateCPF(cpf) {
+  const cleanedCPF = cpf.replace(/\D/g, '');
 
-                        let plan = ''
+  if (cleanedCPF.length !== 11) {
+    return false;
+  }
 
-                        if (req.body.account.type_account == "BÁSICO") {
-                            plan = "Basico"
-                        } else if (req.body.account.type_account == "PRO") {
-                            plan = "Pro"
-                        } else if (req.body.account.type_account == "AVANÇADO") {
-                            plan = "Avançado"
-                        }
-                
-                        const find = await User.findOne({email: req.body.account.email.trim()})
-                        if (find) {
-                            const update = await User.findByIdAndUpdate(find._id, {name: req.body.account.name, cpf: req.body.account.cpf, number: req.body.account.number, email: req.body.account.email, date: dataFormat, password: req.body.account.password, type_account: plan})
-                            const saveFinance = await Finances.create({idUser: update._id, value: paymentData.transaction_amount, day: day, month: mes, year: ano, email: req.body.account.email, status: "Aprovado", plan: req.body.account.type_account})
-                        } else {
-                            const newUser = await User.create({name: req.body.account.name, cpf: req.body.account.cpf, number: req.body.account.number, email: req.body.account.email, date: dataFormat, password: req.body.account.password, type_account: plan})
-                            const saveFinance = await Finances.create({idUser: newUser._id, value: paymentData.transaction_amount, day: day, month: mes, year: ano, email: req.body.account.email, status: "Aprovado", plan: req.body.account.type_account})
-                        }
-                        
-                        let infos = {
-                            id: response.body.id,
-                            value: req.body.cardFormData.amount,
-                            name: req.body.account.name,
-                            cpf: req.body.account.cpf,
-                            date: dataFormat,
-                            plan: req.body.account.type_account,
-                            email: req.body.account.email,
-                            password: req.body.account.password,
-                        }
+  let sum = 0;
+  let remainder;
+  for (let i = 1; i <= 9; i++) {
+    sum += parseInt(cleanedCPF.substring(i - 1, i)) * (11 - i);
+  }
+  remainder = (sum * 10) % 11;
+  if (remainder === 10 || remainder === 11) {
+    remainder = 0;
+  }
+  if (remainder !== parseInt(cleanedCPF.substring(9, 10))) {
+    return false;
+  }
+  sum = 0;
+  for (let i = 1; i <= 10; i++) {
+    sum += parseInt(cleanedCPF.substring(i - 1, i)) * (12 - i);
+  }
+  remainder = (sum * 10) % 11;
+  if (remainder === 10 || remainder === 11) {
+    remainder = 0;
+  }
+  if (remainder !== parseInt(cleanedCPF.substring(10, 11))) {
+    return false;
+  }
 
-                        aprovedEmail(infos)
+  return true;
+}
 
-                        res.send({approved: true})
-
-                    } catch (err) {
-                        console.log(err)
-                        res.sendStatus(500)
-                    }     
-                } else {
-                    res.sendStatus(500)
-                }
-            })
-            .catch((error) => {
-                console.log(error)
-                res.send('Ocorreu um erro ao processar o pagamento, tente novamente mais tarde.')
-            });
-        }, 6000)
-    })
-    .catch(function(error) { 
-        console.log(error)
-    });       
+const validateData = asyncHandler(async(req, res) => {
+    try {
+        const isEmailValid = await validateEmail(req?.body?.email);
+        const isPhoneNumberValid = await validatePhoneNumber(req?.body?.phone);
+        const isCPFValid = await validateCPF(req?.body?.cpf);
+        
+        if (isEmailValid && isPhoneNumberValid && isCPFValid) {
+            return res.json({valid: true})
+        } else {
+            return res.json({valid: false})
+        }
+    } catch (err) {
+        res.sendStatus(500)
+    }
 })
 
 module.exports = 
 {   checkout,
-    checkUser,
-    processPayment
+    success,
+    createPayment,
+    validateData
 }

@@ -45,22 +45,11 @@ const accounts = asyncHandler(async(req, res) => {
         accountsRemaining = "Contas ilimitadas"
     }
 
-    res.render('layouts/accounts', {isAdmin: find.isAdmin, accounts: accounts, total_accounts: count, accountsRemaining: accountsRemaining, type_account: find.type_account, notifications: find.notifications.reverse().slice(0, 5), photo: find.photo})
+    res.render('layouts/accounts', {isAdmin: find.isAdmin, accounts: accounts, total_accounts: count, accountsRemaining: accountsRemaining, type_account: find.type_account, notifications: find.notifications.reverse().slice(0, 5), photo: find.photo, name_user: find.name})
 })
 
 async function newAccountFb(id_user, accessToken, profile) {
     try {
-        const requestUrl = `https://graph.facebook.com/v16.0/me/accounts?access_token=${accessToken}`;
-        let pages = ""
-
-        request(requestUrl, function(error, response, body) {
-            if (!error && response.statusCode == 200) {
-                pages = JSON.parse(body).data;
-            } else {
-                console.log('Erro ao importar conta.')
-            }
-        });    
-
         const findAccount = await User.findById({_id: id_user, accountsFb: Array})
         const count = findAccount.accountsFb.length
 
@@ -78,138 +67,32 @@ async function newAccountFb(id_user, accessToken, profile) {
         if (accounts.includes(profile.name)) {
             return "Conta já existente"
         } else {
-            axios.get(`https://graph.facebook.com/v16.0/me/groups?access_token=${accessToken}&fields=privacy,name,icon,description,id`)
-            .then(async response => {
-              const groups = response.data.data;
-              const groupIds = groups
-                .map(group => group.id);
-          
-              const list = [];
+            User.findByIdAndUpdate(id_user, {
+                $push: {
+                    accountsFb: {
+                        "id_account": profile.id,
+                        "name": profile.name,
+                        "platform": "Facebook",
+                        "photo": profile.picture.data.url,
+                        "date": dataFormat,
+                        "access_token": accessToken,
+                        "pages": [],
+                    },
 
-              const pages_user = []
-              const comments = []
-
-              for (const page of pages) {
-                  try {
-                      const response = await axios.get(`https://graph.facebook.com/v16.0/${page.id}/picture?redirect=false&type=large&access_token=${page.access_token}`);
-                      const pageImage = response.data.data.url;
-      
-                      const postResponse = await axios.get(`https://graph.facebook.com/v16.0/${page.id}/posts`, {
-                          params: {
-                              fields: 'comments',
-                              access_token: page.access_token,
-                              limit: 20
-                          }
-                      });
-                      postResponse.data.data.forEach(post => {
-                          if (post.comments?.data) {
-                              comments.push(...post.comments.data);
-                          }
-                      });
-      
-                      pages_user.push({name: page.name, id_page: page.id, access_token: page.access_token, image: pageImage});
-                  } catch (err) {
-                      pages_user.push({name: page.name, id_page: page.id, access_token: page.access_token});
-                  }
-              }
-          
-              // Loop através dos IDs de grupo e buscar informações de cada grupo]
-              if (groups.length > 0) {
-                groups.forEach(async group => {
-                    axios.get(`https://graph.facebook.com/v16.0/${group.id}?fields=name,description,cover&access_token=${accessToken}`)
-                    .then(response => {
-                        if (response.data.hasOwnProperty("cover")) {
-                            list.push({name: response.data.name, description: response.data.description, image: response.data.cover.source, id: response.data.id, account_name: profile.name, id_account: profile.id, account_photo: profile.picture.data.url})
-                        } else {
-                            list.push({name: response.data.name, id: response.data.id, account_name: profile.name, id_account: profile.id, account_photo: profile.picture.data.url});
-                        }
-        
-                        if (list.length === groupIds.length) {
-                            list.forEach(async group => {
-                                const saveGroup = await User.findByIdAndUpdate(id_user, {
-                                    $push: {
-                                        groups: {
-                                            "name": group.name,
-                                            "id": group.id,
-                                            "image": group.hasOwnProperty("image") ? group.image : "",
-                                            "description": group.description,
-                                            "account_name": group.account_name,
-                                            "id_account": group.id_account,
-                                            "account_photo": group.account_photo
-                                        }
-                                    }
-                                })
-                            })
-
-                            User.findByIdAndUpdate(id_user, {
-                                $push: {
-                                    accountsFb: {
-                                        "id_account": profile.id,
-                                        "name": profile.name,
-                                        "platform": "Facebook",
-                                        "photo": profile.picture.data.url,
-                                        "date": dataFormat,
-                                        "access_token": accessToken,
-                                        "posts": [],
-                                        "pages": pages_user,
-                                    },
-
-                                    historic: {
-                                        "action": "Nova conta adicionada.",
-                                        "subtitle": profile.name,
-                                        "date": dataFormat,
-                                        "type": "account"
-                                    }
-                                }
-                            }, {
-                                new: true
-                            })
-                            .then(result => {
-                            })
-                            .catch(error => {
-                                console.error(error);
-                            });
-                        }
-                    })
-                    .catch(error => {
-                        console.error(error);
-                    })
-                })
-              } else {
-                User.findByIdAndUpdate(id_user, {
-                    $push: {
-                        accountsFb: {
-                            "id_account": profile.id,
-                            "name": profile.name,
-                            "platform": "Facebook",
-                            "photo": profile.picture.data.url,
-                            "date": dataFormat,
-                            "access_token": accessToken,
-                            "posts": [],
-                            "pages": pages_user,
-                        },
-
-                        historic: {
-                            "action": "Nova conta adicionada.",
-                            "subtitle": profile.name,
-                            "date": dataFormat,
-                            "type": "account"
-                        }
+                    historic: {
+                        "action": "Nova conta adicionada.",
+                        "subtitle": profile.name,
+                        "date": dataFormat,
+                        "type": "account"
                     }
-                }, {
-                    new: true
-                })
-                .then(result => {
-                    const find = User.findById(id_user)
-                    // const historic = Historic.create({"action": `Nova conta adicionada: ${profile.name}`, "name": find.name, "id_user": find._id, "date": dataFormat})
-                })
-                .catch(error => {
-                    console.error(error);
-                });
-              }
+                }
+            }, {
+                new: true
+            })
+            .then(result => {
             })
             .catch(error => {
-              console.error(error);
+                console.error(error);
             });
         }
 

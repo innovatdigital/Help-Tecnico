@@ -33,7 +33,7 @@ const PostFacebook = asyncHandler(async(req, res) => {
         let name_account = ''
         let image_account = ''
 
-        const { pages, groups, ids_posts, content, program, day, hour, image, path_image, link } = req.body
+        const { pages, groups, ids_posts, content, program, day, hour, image, path_image, link, results } = req.body
 
         const findAccount = await User.findById({_id: req.cookies._id})
         if (pages.length > 0) {
@@ -67,7 +67,24 @@ const PostFacebook = asyncHandler(async(req, res) => {
             const dataFormat = formater.format(date);
 
             if (program) {
-                const newPost = await Posts.create({id_post: id, id_user: req.cookies._id, platform: "Facebook", image: image, status_bot: false, pages_ids: pages, ids_posts_pages_and_groups: ids_posts, program: program, day: split[2] + '/' + split[1] + '/' + split[0], hour: hour, groups: groups, content: content, path_image: path_image, link: link, published: false})
+                const newPost = await Posts.create({
+                    id_post: id, 
+                    id_user: req.cookies._id, 
+                    platform: "Facebook", 
+                    image: image, 
+                    status_bot: false, 
+                    pages_ids: pages, 
+                    ids_posts_pages_and_groups: ids_posts, 
+                    program: program, 
+                    day: split[2] + '/' + split[1] + '/' + split[0], 
+                    hour: hour, 
+                    groups: groups, 
+                    content: content, 
+                    path_image: path_image, 
+                    link: link, 
+                    published: false
+                })
+                
                 const save = await User.findByIdAndUpdate(
                     { _id: req.cookies._id },
                     {
@@ -86,6 +103,7 @@ const PostFacebook = asyncHandler(async(req, res) => {
                             "name_account": name_account,
                             "image_account": image_account,
                             "image": image,
+                            "results": [],
                             "path_image": path_image,
                             "link": link,
                             "published": false
@@ -104,6 +122,7 @@ const PostFacebook = asyncHandler(async(req, res) => {
                 res.sendStatus(200)
             } else {
                 const newPost = await Posts.create({id_post: id, id_user: req.cookies._id, platform: "Facebook", image: image, status_bot: false, pages_ids: pages, ids_posts_pages_and_groups: ids_posts, groups: groups, content: content})
+                
                 const save = await User.findByIdAndUpdate(
                     { _id: req.cookies._id },
                     {
@@ -120,6 +139,7 @@ const PostFacebook = asyncHandler(async(req, res) => {
                                 "name_account": name_account,
                                 "image_account": image_account,
                                 "image": image,
+                                "results": results,
                                 "path_image": path_image,
                                 "link": link
                             },
@@ -209,11 +229,11 @@ const postFacebook = asyncHandler(async(req, res) => {
     find.groups.forEach(group => {
         const account = accountsFb.find(account => account.id_account === group.id_account)
         if (account) {
-            groupsAllFunction.push({id: group.id, access_token: account.access_token})
+            groupsAllFunction.push({id: group.id, access_token: account.access_token, image: group.image, name: group.name})
         }
     })
 
-    res.render("layouts/postFacebook", { isAdmin: find.isAdmin, accounts: find.accountsFb, groups: groups, pages: find.accountsFb, type_account: find.type_account, groupsAllFunction: JSON.stringify(groupsAllFunction), notifications: find.notifications.reverse().slice(0, 5), photo: find.photo})
+    res.render("layouts/postFacebook", { isAdmin: find.isAdmin, accounts: find.accountsFb, groups: groups, pages: find.accountsFb, type_account: find.type_account, groupsAllFunction: JSON.stringify(groupsAllFunction), notifications: find.notifications.reverse().slice(0, 5), photo: find.photo, name_user: find.name})
 })
 
 const pagesList = asyncHandler(async(req, res) => {
@@ -239,7 +259,7 @@ const access_token = asyncHandler(async(req, res) => {
 const postInstagram = asyncHandler(async(req, res) => {
     const find = await User.findById(req.cookies._id)
 
-    res.render("layouts/postInstagram", { isAdmin: find.isAdmin })
+    res.render("layouts/postInstagram", { isAdmin: find.isAdmin, notifications: find.notifications.reverse().slice(0, 5), photo: find.photo, name_user: find.name })
 })
 
 module.exports = {

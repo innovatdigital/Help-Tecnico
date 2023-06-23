@@ -1,33 +1,13 @@
 const asyncHandler = require('express-async-handler')
 const User = require('../models/User')
 const Posts = require('../models/Posts')
-const Comments = require('../models/Comments')
 const Access = require('../models/Access')
 const Feedbacks = require('../models/Feedbacks')
 
 const dashboard = asyncHandler(async(req, res) => {
-    const checkIsAdmin = await User.findById(req.cookies._id).select("isAdmin")
-
-    if (checkIsAdmin.isAdmin) {
-        const find = await User.findById(req.cookies._id).select("photo posts notifications historic")
-
-        const access = await Access.countDocuments({})
-        const users = await User.countDocuments({})
-        const posts = await Posts.countDocuments({})
-        const feedbacks = await Feedbacks.countDocuments({})
-
-        res.render('layouts/dashboard', {isAdmin: true, totalAccess: access, totalUsers: users, totalPosts: posts, totalFeedbacks: feedbacks, posts: find.posts.reverse().slice(0, 10), notifications: find.notifications.reverse().slice(0, 5), historic: find.historic.reverse().slice(0, 10), photo: find.photo})
-    } else {
-        const find = await User.findById(req.cookies._id)
-
-        res.render('layouts/dashboard', {isAdmin: false, type_account: find.type_account, posts: find.posts.reverse().slice(0, 10), total_accounts: find.accountsFb.length + find.accountsIg.length, total_groups: find.groups.length, total_posts: find.posts.length, notifications: find.notifications.reverse().slice(0, 5), historic: find.historic.reverse().slice(0, 10), photo: find.photo})
-    }
-})
-
-const allPosts = asyncHandler(async(req, res) => {
     const find = await User.findById(req.cookies._id)
 
-    res.render('layouts/posts', {isAdmin: find.isAdmin, posts: find.posts.reverse().slice(0, 50), notifications: find.notifications.reverse().slice(0, 5), photo: find.photo})
+    res.render('layouts/dashboard', {isAdmin: find.isAdmin, type_account: find.type_account, posts: find.posts.reverse().slice(0, 10), total_accounts: find.accountsFb.length + find.accountsIg.length, total_groups: find.groups.length, total_posts: find.posts.length, notifications: find.notifications.reverse().slice(0, 5), historic: find.historic.reverse().slice(0, 10), photo: find.photo, name_user: find.name})
 })
 
 const notifications = asyncHandler(async(req, res) => {
@@ -38,7 +18,7 @@ const notifications = asyncHandler(async(req, res) => {
         }
     });
 
-    res.render('layouts/notifications', {isAdmin: find.isAdmin, notifications: find.notifications.reverse(), photo: find.photo})
+    res.render('layouts/notifications', {isAdmin: find.isAdmin, notifications: find.notifications.reverse(), photo: find.photo, name_user: find.name})
 })
 
 const logout = asyncHandler(async(req, res) => {
@@ -55,7 +35,6 @@ const logout = asyncHandler(async(req, res) => {
 
 module.exports = 
 {   dashboard,
-    allPosts,
     notifications,
     logout
 }

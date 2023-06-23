@@ -5,228 +5,335 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>pluBee | Contas conectadas</title>
+  <title>pluBee | Nova publicação</title>
   <!-- Favicon -->
   <link rel="shortcut icon" href="/img/site/plubee-icon.png" type="image/x-icon">
   <!-- Custom styles -->
-  <link rel="stylesheet" href="/css/admin/style.css">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.4/font/bootstrap-icons.css">
+  <link rel="stylesheet" href="/css/platform/style.css">
+  <link rel="stylesheet" href="/css/platform/notify.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/1.8.12/tailwind-experimental.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
 </head>
 
 <body>
-  <div class="layer"></div>
-  
-  <!-- ! Body -->
-  <div class="page-flex">
+  <%- include('../partials/sidebar-platform', {isAdmin: isAdmin}) %>
 
-    <!-- ! Sidebar -->
-    <%- include('../partials/sidebar-platform', {isAdmin: isAdmin}) %>
+  <div class="lg:pl-70">
+    <%- include('../partials/nav-platform', {isAdmin: isAdmin, title: "Nova publicação no Facebook", notifications: notifications, photo: photo, name_user: name_user}) %>
 
-    <div class="main-wrapper">
-      <!-- ! Main nav -->
-      <%- include('../partials/nav-platform', {isAdmin: isAdmin, title: "Nova publicação", notifications: notifications, photo: photo}) %>
-      <div style="display: none; align-items: start;" class="enable pre close">
-        <div style="height: 70%; margin-top: 40px; overflow: scroll;">
-          <div style="display: flex; align-items: center; padding-bottom: 14px; border-bottom: 2px solid #8b8b8b; width: 100%;">
-            <img style="margin-right: 9px; height: 1.8vw" src="/img/admin/post.png" alt="">
-            <h2 class="enable-h1">Pré-visualização:</h2>
-          </div>
-          <br>
-          <p class="content-p">Imagem selecionada:</p>
-          <div style="display: flex; flex-wrap: wrap; margin-top: 15px; width: 100%;">
-            <img class="img-post" style="display: none" alt="">
-            
-            <div class="div-link" style="display: none; align-items: center; width: 100%; background-color: rgb(238, 238, 238); margin-left: 8px; border-radius: 12px">
-              <p class="link_error" style="padding: 20px">Importador de link indisponível. (Mas ele será importado na sua publicação mesmo assim)</p>
+    <main class="py-8 px-12 fade-in">
+      <div class="alert mt-10" style="display: none;"><div style="display: flex;" class="alert-text"></div></div>
+      <div class="error" style="display: none;"><div style="display: flex;" class="error-text"></div></div>
 
-              <div>
-                <img class="link_image" src="" alt="" height="120px">
-              </div>
-
-              <div class="link" style="margin-left: 12px; margin-top: 14px;">
-                <h3 class="link_h3"></h3>
-                <p class="link_p"></p>
-                <p class="link_content"></p>
-              </div>
+      <div class="hidden relative z-10 fade-in" id="popup_post" role="dialog" aria-modal="true">
+        <div class="fixed inset-0 bg-gray-500 bg-opacity-25 transition-opacity"></div>
+      
+        <div class="fixed inset-0 z-10 overflow-y-auto p-4 sm:p-6 md:p-20 mt-20">
+          <div class="mx-auto accounts transform divide-y divide-gray-100 overflow-hidden rounded-xl bg-white shadow-2xl ring-1 ring-black ring-opacity-5 transition-all">
+            <div class="flex justify-between py-3 px-6">
+              <h2 class="color-purple inter font-semibold text-lg">Pré-visualizar</h2>
+              <button onclick="closePost()">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M14.3075 11.7231L20.3075 5.67693C20.5844 5.4 20.5844 4.98462 20.3075 4.7077L19.3844 3.73847C19.1075 3.46154 18.6921 3.46154 18.4151 3.73847L12.369 9.78462C12.1844 9.96923 11.9075 9.96923 11.7228 9.78462L5.67668 3.69231C5.39976 3.41539 4.98438 3.41539 4.70745 3.69231L3.73822 4.66154C3.4613 4.93847 3.4613 5.35385 3.73822 5.63077L9.78438 11.6769C9.96899 11.8615 9.96899 12.1385 9.78438 12.3231L3.69207 18.4154C3.41514 18.6923 3.41514 19.1077 3.69207 19.3846L4.6613 20.3538C4.93822 20.6308 5.35361 20.6308 5.63053 20.3538L11.6767 14.3077C11.8613 14.1231 12.1382 14.1231 12.3228 14.3077L18.369 20.3538C18.6459 20.6308 19.0613 20.6308 19.3382 20.3538L20.3075 19.3846C20.5844 19.1077 20.5844 18.6923 20.3075 18.4154L14.3075 12.3692C14.1228 12.1846 14.1228 11.9077 14.3075 11.7231Z" fill="#752A7A"/>
+                </svg>                  
+              </button>
             </div>
-          </div>
-          <div style="margin-top: 20px;">
-            <p class="content-p">Conteúdo da publicação:</p>
-            <p class="description"></p>
-          </div>
-          <div style="display: flex; justify-content: end; margin-top: 62px; margin-left: 10px;">
-            <button class="event" id="btn-close" style="background-color: #bb0404 !important; padding: 12px 30px; margin-right: 5px;" onclick="setHide()">Fechar</button>
-            <button class="event" id="btn-active" style="padding: 12px 30px" onclick="post()">Inserir post</button>
-          </div>
-        </div>
-      </div>
 
-      <div style="display: none; align-items: start;" class="enable pre loader-div">
-        <div class="loader">
-          <div class="loader-wheel"></div>
-          <p style="font-size: 18px; color: #752a7a;">Criando publicação. Por favor não feche a janela.</p>
-        </div>
-      </div>
-  
-      <!-- ! Main -->
-      <% if (accounts.length > 0) { %>
-      <main class="main users chart-page" id="skip-target">
-        <div class="container">
-          <div class="alert" style="display: none;"><div style="display: flex;" class="alert-text"></div></div>
-          <div class="error" style="display: none;"><div style="display: flex;" class="error-text"></div></div>
-          <br>
+            <div class="flex flex-col divide-y divide-gray-100">
+              <div id="img-pre" class="min-w-0 hidden flex-auto scroll-py-4 overflow-y-auto px-6 py-4">
+                <div class="flex flex-col mb-2">
+                  <h2 class="text-lg font-semibold color-purple">Imagem selecionada:</h2>
+                  <img id="img-src" class="w-60 mt-2 rounded-lg" src="" alt="pre-visualização da publicação">     
+                </div>
+              </div>
 
-          <div class="row">
-            <div class="col-lg-12">
-              <article class="white-block">
-                <div class="top-cat-title" style="display: flex; justify-content: space-between;">
-                  <div>
-                    <h2 style="color: #1877F2; display: flex; align-items: center;"><img src="/img/platform/facebook.png" width=40 height=40 alt="Facebook icon" style="margin-right: 12px;">Nova publicação</h2>
-                  </div>
-      
-                  <div class="pages">
-                    <div class="min">
-                      <div class="min-img">
-                      </div>
-                      <button class="open-pages" onclick="open_pages()"><i class="bi bi-plus-circle-fill"></i></button>
-                    </div>
-      
-                    <div class="options">
-                      <div style="display: flex; align-items: center; justify-content: space-between;" class="close-btn">
-                        <div>
-                          <p style="font-weight: bold; font-size: 17px; margin-left: 10px; color: #752A7A;">Selecione:</p>
-                        </div>
-      
-                        <div>
-                          <button class="close-pages" style="width: 37px; margin: 4px;" onclick="close_pages()"><i class="bi bi-x-circle-fill"></i></button>
-                        </div>
-                      </div>
-                      <div>
-                        <div class="selects-pages">
-                          <% accounts.forEach(function(item) { %>
-                            <div style="display: flex; align-items: center; margin-top: 10px; margin-bottom: 10px;">
-                              <img style="margin-left: 3px; border: 1px solid #1877F2;" src="<%= item.photo %>" alt="">
-                              <p><%= item.name %></p>
-                            </div>
-                            <% item.pages.forEach(function(page) { %>
-                            <div style="margin-left: 14px;" class="page">
-                              <div style="display: flex; align-items: center; margin-top: 10px; margin-bottom: 10px;">
-                                <img style="height: 36px !important" src="<%= page.image %>" alt="">
-                                <p style="color: #747474 !important; font-size: 15px !important;"><%= page.name %></p>
-                              </div>
-      
-                              <div style="padding-right: 3px;">
-                                <button id="add-page<%= page.id_page %>" style="font-size: 15px; padding: 9px !important;" onclick="add_page('<%= page.id_page %>', '<%= page.name %>', '<%= page.image %>', '<%= page.access_token %>')"><i class="bi bi-plus-lg"></i></button>
-                                <button id="del-page<%= page.id_page %>" style="display: none; padding: 11px !important; background-color: #bb0404 !important; color: #FFFFFF; border: 0px !important; font-size: 15px;" onclick="del_page('<%= page.id_page %>', '<%= page.image %>')"><i class="bi bi-x-lg"></i></button>
-                              </div>
-                            </div>
-                            <% }) %>
-                            <br>
-                          <% }) %>
-                          <br>
-                          <br>
-                          <br>
-                          <% if (type_account == "Avançado") { %>
-                            <div style="display: flex; align-items: center; justify-content: space-between;">
-                              <p style="font-weight: bold; font-size: 17px; margin-bottom: 10px; margin-left: 4px; color: #752A7A;">Grupos:</p>
-                              <button onclick="add_all_groups()" class="event-all">Todos</button>
-                              <button style="display: none; background-color: #bb0404;" class="event-delete" onclick="delete_all_groups()">Desfazer</button>
-                            </div>
-                          <% } else { %>
-                            <div style="display: flex; align-items: center">
-                              <p style="font-weight: bold; font-size: 17px; margin-bottom: 10px; margin-left: 4px; color: #752A7A;">Grupos:</p>
-                            </div>
-                          <% } %>
+              <div id="link-pre" class="min-w-0 hidden flex-auto scroll-py-4 overflow-y-auto px-6 py-4">
+                <div class="flex flex-col mb-2 p-3 bg-gray-200 rounded-lg border-gray">
+                  <h2 class="text-sm font-semibold text-gray-800">Link importado:</h2>
+                  <p class="inter text-md link-content font-medium"></p>      
+                </div>
+              </div>
 
-                          <% groups.forEach(function(item) { %>
-                            <div class="page">
-                              <div style="display: flex; align-items: center; margin-top: 10px; margin-bottom: 10px;">
-                                <% if (item.image) { %>
-                                  <img style="height: 36px !important; width: 36px !important; border-radius: 100%;" src="<%= item.image %>" alt="">
-                                <% } else { %>
-                                  <img style="padding: 3px; border: 1px solid #752A7A;" src="/img/admin/Bulk/groups.png" alt="">
-                                <% } %>
-                                <p><%= item.name %></p>
-                              </div>
-      
-                              <div style="padding-right: 3px;">
-                                <button class="add-group" id="add-group<%= item.id %>" style="font-size: 15px; padding: 9px !important;" onclick="add_group('<%= item.id %>', '<%= item.name %>', '<%= item.image %>', '<%= item.access_token %>')"><i class="bi bi-plus-lg"></i></button>
-                                <button class="delete-group" id="del-group<%= item.id %>" style="display: none; background-color: #bb0404 !important; padding: 11px !important; color: #FFFFFF; border: 0px !important; font-size: 15px;" onclick="del_group('<%= item.id %>', '<%= item.image %>')"><i class="bi bi-x-lg"></i></button>
-                              </div>
-                            </div>
-                          <% }) %>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>      
-                <p style="font-size: 20px; margin-bottom: 10px; margin-top: 19px; font-weight: bold; border-bottom: 2.5px solid #63636360; padding-bottom: 15px; color: #752A7A; display: flex; align-items: center;"><img src="/img/admin/post.png" width=28 height=28 alt="" style="margin-right: 12px;">Descreva o post:</p>
-                <p style="font-size: 15px; margin-bottom: 10px; font-weight: bold;">Escreva o post aqui:</p>
-                <textarea name="" id="content-post" cols="30" rows="4" style="transition: none; padding: 10px;" placeholder="Hoje vamos aprender a preparar um café!"></textarea>
-                <br>
-                <br>
-                <p style="font-size: 15px; margin-bottom: 10px; font-weight: bold;">Importe um link</p>
-                <input type="text" name="link" class="link" id="link" placeholder="https://www.facebook.com/photo/..." style="border: 2px solid #752A7A !important">
-                <br>
-                <br>
-
-                <p class="images-text" style="font-size: 15px; margin-bottom: 10px; font-weight: bold;">Inserir imagens:</p>
-                <div class="div-img">
-                  <input type="file" name="files" class="files" id="files" style="width: 100%; border: 2px dashed #752A7A !important">
+              <div class="min-w-0 flex-auto scroll-py-4 overflow-y-auto px-6 py-4">
+                <div class="flex mb-2">
+                  <h2 class="text-lg font-semibold color-purple">Conteúdo da publicação:</h2>      
                 </div>
                 
-                <br>
-                <br>
-                <p class="preview-image" style="font-size: 15px; margin-bottom: 10px">Visualização:</p>
-                <div class="results">
+                <p class="description inter text-gray-700 text-md font-medium"></p>
+              </div>
+
+              <div class="min-w-0 flex-auto scroll-py-4 overflow-y-auto px-6 py-4">
+                <div class="flex mb-2">
+                  <h2 class="text-lg font-bold color-purple inter">Programar publicação:</h2>      
                 </div>
-                <br>
-                <br>
-                <p style="font-size: 20px; margin-bottom: 10px; font-weight: bold; border-bottom: 2.5px solid #63636360; padding-bottom: 15px; color: #752A7A; display: flex; align-items: center;"><img src="/img/platform/tempo.png" width=28 height=28 alt="" style="margin-right: 12px;">Programar post</p>
-                <div style="display: flex;">
-                  <input type="radio" name="program" id="program-yes" value="yes" tabindex="1" onclick="show()"><p style="display: flex; justify-content: center; align-items: center; margin-right: 10px;">Programar</p>
-                  <input type="radio" name="program" id="program-no" value="no" tabindex="2" onclick="hide()" checked><p style="display: flex; justify-content: center; align-items: center;">Não programar</p>
-                </div>
-                <div class="program-div" style="margin-top: 30px; display: none; flex-direction: column;">
-                  <div style="margin-right: 16px;">
-                    <p style="color: #752A7A; font-weight: bold; margin-bottom: 5px;">Escolha o dia:</p>
-                    <input style="width: 100%;" type="date" id="day">
+
+                <div class="flex mt-2">
+                  <div class="flex items-center">
+                    <input name="program" id="program-yes" value="yes" tabindex="1" onclick="show()" type="radio" checked class="h-4 w-4 border-gray-300 text-indigo-600">
+                    <label for="program-yes" class="ml-3 block text-sm font-medium leading-6 text-gray-900 inter">Programar</label>
                   </div>
-                  <br>
-                  <div>
-                    <p style="color: #752A7A; font-weight: bold; margin-bottom: 5px;">Escolha a hora:</p>
-                    <input style="width: 100%;" type="time" id="hour">
+      
+                  <div class="flex items-center ml-6">
+                    <input name="program" id="program-no" value="no" tabindex="2" onclick="hide()" type="radio" checked class="h-4 w-4 border-gray-300 text-indigo-600">
+                    <label for="program-no" class="ml-3 block text-sm font-medium leading-6 text-gray-900 inter">Não programar</label>
                   </div>
                 </div>
-                <br>
-                <br>
-                <button style="color: #FFFFFF; background-color: #752A7A; padding: 13px; border-radius: 10px" onclick="continue_options()">Continuar</button>
-              </article>
+                
+                <div class="hidden mt-2 -space-y-px rounded-md bg-white shadow-sm program">
+                  <div class="flex -space-x-px">
+                    <div class="w-1/2 min-w-0 flex-1">
+                      <input type="date" id="day" class="relative block inter w-full rounded-none rounded-l-lg border-purple px-2 bg-transparent py-1 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:z-10 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" placeholder="MM / YY">
+                    </div>
+                    <div class="min-w-0 flex-1">
+                      <input type="time" id="hour" class="relative block inter w-full rounded-none rounded-r-lg border-purple px-2 bg-transparent py-1 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:z-10 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" placeholder="CVC">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="pb-3 px-6">
+              <button onclick="post()" class="w-full py-2.5 inter bg-purple text-white text-sm rounded-lg mt-4">Confirmar</button>
             </div>
           </div>
         </div>
-      </main>
-      <% } else { %>
-      <div class="empty empty-account">
-        <img src="/img/admin/accounts.png" height="60" alt=""><br>
-        <h2 style="color: #752a7a">Você precisa adicionar uma conta.</h2>
-        <button style="padding: 13px 50px !important; margin-top: 30px;" class="event" id="btn-open"><a href="/platform/accounts">Adicionar conta</a></button>
       </div>
-      <% } %>
 
-      <%- include('../partials/footer-platform') %>
-    </div>
+      <div class="hidden relative z-10 fade-in" id="popup_accounts" role="dialog" aria-modal="true">
+        <div class="fixed inset-0 bg-gray-500 bg-opacity-25 transition-opacity"></div>
+      
+        <div class="fixed inset-0 z-10 overflow-y-auto p-4 sm:p-6 md:p-20 mt-20">
+          <div class="mx-auto accounts transform divide-y divide-gray-100 overflow-hidden rounded-xl bg-white shadow-2xl ring-1 ring-black ring-opacity-5 transition-all">
+            <div class="flex justify-between py-3 px-6">
+              <h2 class="color-purple inter font-semibold text-lg">Selecionar contas:</h2>
+              <button onclick="closeAccounts()">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M14.3075 11.7231L20.3075 5.67693C20.5844 5.4 20.5844 4.98462 20.3075 4.7077L19.3844 3.73847C19.1075 3.46154 18.6921 3.46154 18.4151 3.73847L12.369 9.78462C12.1844 9.96923 11.9075 9.96923 11.7228 9.78462L5.67668 3.69231C5.39976 3.41539 4.98438 3.41539 4.70745 3.69231L3.73822 4.66154C3.4613 4.93847 3.4613 5.35385 3.73822 5.63077L9.78438 11.6769C9.96899 11.8615 9.96899 12.1385 9.78438 12.3231L3.69207 18.4154C3.41514 18.6923 3.41514 19.1077 3.69207 19.3846L4.6613 20.3538C4.93822 20.6308 5.35361 20.6308 5.63053 20.3538L11.6767 14.3077C11.8613 14.1231 12.1382 14.1231 12.3228 14.3077L18.369 20.3538C18.6459 20.6308 19.0613 20.6308 19.3382 20.3538L20.3075 19.3846C20.5844 19.1077 20.5844 18.6923 20.3075 18.4154L14.3075 12.3692C14.1228 12.1846 14.1228 11.9077 14.3075 11.7231Z" fill="#752A7A"/>
+                </svg>                  
+              </button>
+            </div>
+      
+            <% if (accounts.length > 0) { %>
+              <div class="flex flex-col divide-y divide-gray-100">
+                <div class="min-w-0 flex-auto scroll-py-4 overflow-y-auto px-6 py-4">
+                  <div class="flex mb-2">
+                    <h2 class="text-lg font-semibold">Páginas importadas:</h2>      
+                  </div>
+                  
+                  <ul class="-mx-2 text-sm text-gray-700 overflow-y-auto h-48" id="options" role="listbox">
+                    <% accounts.forEach(function(item) { %>
+                      <li class="group flex flex-col cursor-default select-none rounded-md p-2 mb-4" id="option-1" role="option" tabindex="-1">
+                        <div>
+                          <div class="flex items-center">
+                            <img src="<%= item.photo %>" alt="" class="h-9 flex-none rounded-full border-purple">
+                            <span style="font-size: 15px;" class="ml-3 flex-auto truncate inter font-semibold color-purple"><%= item.name %></span>
+                          </div>
+                        </div>
+
+                        <ul class="ml-3 mt-1">
+                          <% item.pages.forEach(function(page) { %>
+                            <li class="flex justify-between items-center mt-2">
+                              <div class="flex items-center">
+                                <img src="<%= page.image %>" class="w-7 h-7 flex-none rounded-full">
+                                <span class="ml-3 flex-auto truncate inter"><%= page.name %></span>
+                              </div>
+
+                              <div>
+                                <button id="add-page<%= page.id_page %>" onclick="add_page('<%= page.id_page %>', '<%= page.name %>', '<%= page.image %>', '<%= page.access_token %>')">
+                                  <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <g clip-path="url(#clip0_82_87)">
+                                    <path d="M11 20.625C16.3158 20.625 20.625 16.3158 20.625 11C20.625 5.68426 16.3158 1.375 11 1.375C5.68426 1.375 1.375 5.68426 1.375 11C1.375 16.3158 5.68426 20.625 11 20.625Z" stroke="#752A7A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    <path d="M6.875 11H15.125" stroke="#752A7A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    <path d="M11 6.875V15.125" stroke="#752A7A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </g>
+                                    <defs>
+                                    <clipPath id="clip0_82_87">
+                                    <rect width="22" height="22" fill="white"/>
+                                    </clipPath>
+                                    </defs>
+                                  </svg>                                                                        
+                                </button>
+                                
+                                <button id="del-page<%= page.id_page %>" style="display: none;" onclick="del_page('<%= page.id_page %>', '<%= page.image %>')">
+                                  <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M13.1165 10.7461L18.6165 5.20383C18.8703 4.94998 18.8703 4.56921 18.6165 4.31537L17.7703 3.42691C17.5165 3.17306 17.1357 3.17306 16.8819 3.42691L11.3395 8.96921C11.1703 9.13844 10.9165 9.13844 10.7472 8.96921L5.20493 3.3846C4.95108 3.13075 4.57031 3.13075 4.31647 3.3846L3.42801 4.27306C3.17416 4.52691 3.17416 4.90768 3.42801 5.16152L8.97031 10.7038C9.13954 10.8731 9.13954 11.1269 8.97031 11.2961L3.3857 16.8808C3.13185 17.1346 3.13185 17.5154 3.3857 17.7692L4.27416 18.6577C4.52801 18.9115 4.90877 18.9115 5.16262 18.6577L10.7049 13.1154C10.8742 12.9461 11.128 12.9461 11.2972 13.1154L16.8395 18.6577C17.0934 18.9115 17.4742 18.9115 17.728 18.6577L18.6165 17.7692C18.8703 17.5154 18.8703 17.1346 18.6165 16.8808L13.1165 11.3384C12.9472 11.1692 12.9472 10.9154 13.1165 10.7461Z" fill="#A31313"/>
+                                  </svg>                                    
+                                </button>
+                              </div>
+                            </li>
+                          <% }) %>
+                        </ul>
+                      </li>
+                    <% }) %>
+                  </ul>
+                </div>
+
+                <div class="min-w-0 flex-auto scroll-py-4 overflow-y-auto px-6 py-4">
+                  <div class="flex justify-between mb-2">
+                    <h2 class="text-lg font-semibold">Grupos importados:</h2>
+                    <% if (type_account == "Avançado") { %>
+                      <button onclick="add_all_groups()" class="event-all px-1.5 py-0.5 rounded-full inter font-semibold text-sm">Todos</button>     
+                      <button style="display: none;" class="event-delete px-1.5 py-0.5 rounded-full inter font-semibold text-sm" onclick="delete_all_groups()">Desfazer</button>
+                    <% } %> 
+                  </div>
+                  
+                  <ul class="-mx-2 text-sm text-gray-700 overflow-y-auto h-48" id="options" role="listbox">
+                    <% groups.forEach(function(item) { %>
+                      <li class="group flex justify-between items-center cursor-default select-none rounded-md px-2 py-1" id="option-1" role="option" tabindex="-1">
+                        <div class="flex items-center">
+                          <% if (item.image) { %>
+                            <img src="<%= item.image %>" class="w-8 h-8 flex-none rounded-full">
+                          <% } else { %>
+                            <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+                              <g clip-path="url(#clip0_111_100)">
+                              <path d="M14.9212 4.71216C12.3376 4.71216 10.2432 7.15741 10.2432 10.1738C10.2432 12.2657 11.2506 14.0826 12.7299 15L11.0145 15.795L6.44948 17.9122C6.00848 18.1327 5.78838 18.5066 5.78838 19.0359C5.78838 20.7117 5.78838 22.3875 5.78838 24.0634C5.82465 24.692 6.2018 25.2778 6.81328 25.2878H23.0538C23.7519 25.2271 24.105 24.6648 24.1119 24.0634C24.1119 22.3876 24.1119 20.7117 24.1119 19.0359C24.1119 18.5066 23.8918 18.1327 23.4508 17.9122L19.0511 15.795L17.2227 14.9287C18.6413 13.9907 19.5992 12.2131 19.5992 10.1738C19.5992 7.15741 17.5047 4.71216 14.9212 4.71216ZM7.37558 6.63276C6.26375 6.67498 5.3826 7.15608 4.71315 7.92266C3.97265 8.84561 3.61165 9.94141 3.60467 11.0315C3.65015 12.6435 4.3714 14.1695 5.6554 14.9677L0.529075 17.3499C0.17625 17.4822 0 17.7909 0 18.276V22.3109C0.02755 22.8461 0.3054 23.2958 0.826375 23.3035H4.23348V19.0359C4.28985 17.8949 4.82565 16.9726 5.78838 16.5226L9.19455 14.9022C9.45915 14.7478 9.71283 14.538 9.95538 14.2734C8.55098 12.1065 8.35595 9.51108 9.26105 7.22833C8.67237 6.86806 8.0108 6.63653 7.37558 6.63276ZM22.5902 6.63276C21.8632 6.64798 21.1912 6.91573 20.6393 7.29386C21.5197 9.59728 21.2768 12.1943 19.9772 14.2069C20.2639 14.5376 20.5623 14.7913 20.871 14.9677L24.1452 16.5226C25.1426 17.0696 25.6569 18 25.6668 19.0359V23.3036H29.1727C29.7492 23.2538 29.995 22.7939 30 22.311V18.276C30 17.835 29.8238 17.5263 29.4709 17.3499L24.4102 14.9344C25.7226 13.9667 26.3816 12.5164 26.3944 11.0315C26.3595 9.85621 26.0004 8.76491 25.2859 7.92266C24.5392 7.11268 23.6132 6.64133 22.5902 6.63276Z" fill="#752A7A"/>
+                              </g>
+                              <defs>
+                              <clipPath id="clip0_111_100">
+                              <rect width="30" height="30" fill="white"/>
+                              </clipPath>
+                              </defs>
+                            </svg>                              
+                          <% } %>
+                          <span class="ml-3 flex-auto truncate inter font-semibold"><%= item.name %></span>
+                        </div>
+                        
+                        <div class="flex items-center">
+                          <button class="add-group" id="add-group<%= item.id %>" onclick="add_group('<%= item.id %>', '<%= item.name.replace(/'/g, '&#39;').replace(/"/g, '&quot;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/&/g, '&amp;').replace(/á/g, '&aacute;').replace(/é/g, '&eacute;').replace(/í/g, '&iacute;').replace(/ó/g, '&oacute;').replace(/ú/g, '&uacute;').replace(/ã/g, '&atilde;').replace(/õ/g, '&otilde;') %>', '<%= item.image %>', '<%= item.access_token %>')">
+                            <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+                              <g clip-path="url(#clip0_82_87)">
+                              <path d="M11 20.625C16.3158 20.625 20.625 16.3158 20.625 11C20.625 5.68426 16.3158 1.375 11 1.375C5.68426 1.375 1.375 5.68426 1.375 11C1.375 16.3158 5.68426 20.625 11 20.625Z" stroke="#752A7A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                              <path d="M6.875 11H15.125" stroke="#752A7A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                              <path d="M11 6.875V15.125" stroke="#752A7A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                              </g>
+                              <defs>
+                              <clipPath id="clip0_82_87">
+                              <rect width="22" height="22" fill="white"/>
+                              </clipPath>
+                              </defs>
+                            </svg>
+                          </button>
+
+                          <button class="delete-group" id="del-group<%= item.id %>" style="display: none;" onclick="del_group('<%= item.id %>', '<%= item.image %>')">
+                            <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+                              <path d="M13.1165 10.7461L18.6165 5.20383C18.8703 4.94998 18.8703 4.56921 18.6165 4.31537L17.7703 3.42691C17.5165 3.17306 17.1357 3.17306 16.8819 3.42691L11.3395 8.96921C11.1703 9.13844 10.9165 9.13844 10.7472 8.96921L5.20493 3.3846C4.95108 3.13075 4.57031 3.13075 4.31647 3.3846L3.42801 4.27306C3.17416 4.52691 3.17416 4.90768 3.42801 5.16152L8.97031 10.7038C9.13954 10.8731 9.13954 11.1269 8.97031 11.2961L3.3857 16.8808C3.13185 17.1346 3.13185 17.5154 3.3857 17.7692L4.27416 18.6577C4.52801 18.9115 4.90877 18.9115 5.16262 18.6577L10.7049 13.1154C10.8742 12.9461 11.128 12.9461 11.2972 13.1154L16.8395 18.6577C17.0934 18.9115 17.4742 18.9115 17.728 18.6577L18.6165 17.7692C18.8703 17.5154 18.8703 17.1346 18.6165 16.8808L13.1165 11.3384C12.9472 11.1692 12.9472 10.9154 13.1165 10.7461Z" fill="#A31313"/>
+                            </svg>                              
+                          </button>
+                        </div>
+                      </li>
+                    <% }) %>
+                  </ul>
+                </div>
+              </div>
+            <% } else { %>
+              <div class="px-6 py-14 text-center text-sm sm:px-14">
+                <svg class="mx-auto h-6 w-6 text-gray-400" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M15 19.128a9.38 9.38 0 002.625.372 9.337 9.337 0 004.121-.952 4.125 4.125 0 00-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 018.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0111.964-3.07M12 6.375a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zm8.25 2.25a2.625 2.625 0 11-5.25 0 2.625 2.625 0 015.25 0z" />
+                </svg>
+                <p class="mt-4 font-semibold inter color-purple">Nenhuma conta encontrada</p>
+                <p class="mt-2 text-gray-500">Para fazer uma publicação, você precisará importar uma conta primeiro.</p>
+              </div>
+            <% } %>
+          </div>
+        </div>
+      </div>
+
+      <div style="z-index: 1;" class="hidden relative z-10 fade-in" id="popup_await" role="dialog" aria-modal="true">
+        <div class="fixed inset-0 bg-gray-500 bg-opacity-25 transition-opacity"></div>
+      
+        <div class="fixed inset-0 z-10 overflow-y-auto p-4 sm:p-6 md:p-20 mt-40">
+          <div class="mx-auto accounts transform divide-y divide-gray-100 overflow-hidden rounded-xl bg-white shadow-2xl ring-1 ring-black ring-opacity-5 transition-all">      
+            <div class="flex flex-col divide-y divide-gray-100">
+              <div class="min-w-0 flex-auto scroll-py-4 overflow-y-auto px-6 py-4">
+                <div class="flex flex-col divide-y divide-gray-100 px-6">
+                  <div>
+                    <div class="flex flex-col items-center justify-center mt-6 py-4">
+                      <div class="c-loader"></div>                                        
+                      <h2 for="content" class="block text-lg font-semibold leading-6 text-gray-900 inter mt-6">Realizando a publicação</h2>
+                      <p class="inter text-center text-md font-medium">Por favor, não feche a janela ou troque de página.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-white rounded-xl shadow p-4 px-5">
+        <div class="flex justify-between items-center border-b pb-3">
+          <div>
+            <h2 class="text-xl color-purple inter font-bold">Criar nova publicação:</h2>
+          </div>
+
+          <div class="flex items-center">
+            <div class="min-img flex gap-x-2 mr-2">
+            </div>
+            <!-- <div class="mr-2">
+              <p class="text-sm inter">0 contas</p>
+            </div> -->
+            <button type="button" onclick="openAccounts()" class="rounded-full px-2.5 py-1 inter text-sm font-semibold shadow-sm border-purple color-purple">Selecionar contas</button>
+          </div>
+        </div>
+
+        <div class="mt-4">
+          <label for="comment" class="block text-md font-medium leading-6 text-gray-900 inter font-semibold">Conteúdo da publicação</label>
+          <div class="mt-2">
+            <textarea rows="3" id="content-post" class="block w-full border-purple rounded-lg p-1.5 text-gray-900 shadow-sm ring-1 inter ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" placeholder="Essa receita especial possui diversos benefícios para a nossa saúde."></textarea>
+          </div>
+        </div>
+
+        <div class="mt-8 div-link">
+          <label for="link" class="block text-md font-medium leading-6 text-gray-900 inter font-semibold">Importar um link</label>
+          <div class="relative mt-2 rounded-md shadow-sm">
+            <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
+              <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M7.33203 7.33333C5.27136 7.33333 3.66536 8.93933 3.66536 11C3.66536 13.0607 5.27136 14.6667 7.33203 14.6667H9.16536C9.40848 14.6667 9.64164 14.7632 9.81355 14.9352C9.98545 15.1071 10.082 15.3402 10.082 15.5833C10.082 15.8264 9.98545 16.0596 9.81355 16.2315C9.64164 16.4034 9.40848 16.5 9.16536 16.5H7.33203C4.25936 16.5 1.83203 14.0727 1.83203 11C1.83203 7.92733 4.25936 5.5 7.33203 5.5H9.16536C9.40848 5.5 9.64164 5.59658 9.81355 5.76849C9.98545 5.94039 10.082 6.17355 10.082 6.41667C10.082 6.65978 9.98545 6.89294 9.81355 7.06485C9.64164 7.23676 9.40848 7.33333 9.16536 7.33333H7.33203ZM11.9154 6.41667C11.9154 6.17355 12.0119 5.94039 12.1839 5.76849C12.3558 5.59658 12.5889 5.5 12.832 5.5H14.6654C17.738 5.5 20.1654 7.92733 20.1654 11C20.1654 14.0727 17.738 16.5 14.6654 16.5H12.832C12.5889 16.5 12.3558 16.4034 12.1839 16.2315C12.0119 16.0596 11.9154 15.8264 11.9154 15.5833C11.9154 15.3402 12.0119 15.1071 12.1839 14.9352C12.3558 14.7632 12.5889 14.6667 12.832 14.6667H14.6654C16.726 14.6667 18.332 13.0607 18.332 11C18.332 8.93933 16.726 7.33333 14.6654 7.33333H12.832C12.5889 7.33333 12.3558 7.23676 12.1839 7.06485C12.0119 6.89294 11.9154 6.65978 11.9154 6.41667ZM6.41536 11C6.41536 10.7569 6.51194 10.5237 6.68385 10.3518C6.85576 10.1799 7.08892 10.0833 7.33203 10.0833H14.6654C14.9085 10.0833 15.1416 10.1799 15.3135 10.3518C15.4855 10.5237 15.582 10.7569 15.582 11C15.582 11.2431 15.4855 11.4763 15.3135 11.6482C15.1416 11.8201 14.9085 11.9167 14.6654 11.9167H7.33203C7.08892 11.9167 6.85576 11.8201 6.68385 11.6482C6.51194 11.4763 6.41536 11.2431 6.41536 11Z" fill="#752A7A"/>
+              </svg>                                
+            </div>
+            <input type="text" name="link" id="link" class="block link w-full rounded-lg inter py-1.5 mt-2 pl-10 text-gray-900 ring-1 ring-inset ring-gray-300 sm:text-sm sm:leading-6 border-purple" placeholder="Insira o link">
+          </div>
+        </div>
+
+        <div class="mt-8 div-image">
+          <label for="files" class="block text-md font-medium leading-6 text-gray-900 inter font-semibold color-purple">Imagem da publicação</label>
+          <label for="files" style="border: 2px dashed #752a7a; cursor: pointer;" class="relative block mt-2 w-full rounded-lg p-4 text-center hover:border-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
+            <div class="flex justify-center">
+              <svg width="45" height="45" viewBox="0 0 45 45" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M5.625 2.25C4.72989 2.25 3.87145 2.60558 3.23851 3.23851C2.60558 3.87145 2.25 4.72989 2.25 5.625V39.375C2.25 40.2701 2.60558 41.1285 3.23851 41.7615C3.87145 42.3944 4.72989 42.75 5.625 42.75H39.375C40.2701 42.75 41.1285 42.3944 41.7615 41.7615C42.3944 41.1285 42.75 40.2701 42.75 39.375V5.625C42.75 4.72989 42.3944 3.87145 41.7615 3.23851C41.1285 2.60558 40.2701 2.25 39.375 2.25H5.625ZM16.875 10.125C19.35 10.125 21.375 12.15 21.375 14.625C21.375 17.1 19.35 19.125 16.875 19.125C14.4 19.125 12.375 17.1 12.375 14.625C12.375 12.15 14.4 10.125 16.875 10.125ZM37.1227 38.25H7.86825C6.94575 38.25 6.42825 37.215 6.96825 36.4725L14.9625 27.3577C15.39 26.8852 16.1325 26.8852 16.5825 27.3352L20.25 31.5L27.135 20.7427C27.2407 20.5872 27.3837 20.4607 27.5509 20.3746C27.7181 20.2886 27.9043 20.2459 28.0923 20.2504C28.2803 20.2549 28.4641 20.3064 28.6271 20.4003C28.79 20.4941 28.9268 20.6274 29.025 20.7877L38.1127 36.5625C38.5177 37.3275 37.9777 38.25 37.1227 38.25Z" fill="#752A7A"/>
+              </svg>
+            </div>
+            <span class="mt-2 files block text-sm font-semibold text-gray-900 inter">Selecione uma imagem</span>
+            <input type="file" name="files" id="files" class="hidden">
+          </label>
+        </div>
+
+        <div class="hidden mt-4 link-success">
+          <h2 class="block text-md font-medium leading-6 inter font-semibold color-purple">Você importou um link</h2>
+        </div>
+
+        <div class="hidden mt-4 image-success">
+          <h2 class="block text-md font-medium leading-6 inter font-semibold color-purple">Imagem importada com sucesso.</h2>
+        </div>
+
+        <div>
+          <button class="w-full py-3 inter bg-purple text-white text-sm rounded-lg mt-4" onclick="continue_options()">Continuar</button>
+        </div>
+      </div>
+    </main>
   </div>
+</body>
 
-
-<!-- Chart library -->
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/blueimp-file-upload/9.28.0/js/jquery.fileupload.min.js"></script>
-<script src="https://widget.cloudinary.com/v2.0/global/all.js" type="text/javascript"></script>
-<!-- Icons library -->
-<script src="js/admin/feather.min.js"></script>
 <script>
+  const div_image = document.querySelector('.div-image')
+  const link_success = document.querySelector('.link-success')
+  const image_success = document.querySelector('.image-success')
+  let file_input = document.querySelector('#files');
+  const min_img = document.querySelector('.min-img')
+  let groups = []
+  let images = [];
+  let pages = []
+
   const today = new Date();
   const dayInput = document.getElementById("day");
   dayInput.valueAsDate = today;
@@ -236,8 +343,6 @@
   const hourInput = document.getElementById("hour");
   hourInput.value = now.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
 
-  let file_input = document.querySelector('#files');
-  const image_text = document.querySelector('.images-text')
   const link_image = document.querySelector('.link_image')
   const div_link = document.querySelector('.div-link')
   const img_post = document.querySelector('.img-post')
@@ -246,14 +351,52 @@
   const div_img = document.querySelector('.div-img')
   const link_content = document.querySelector('.link_content')
   const link_error = document.querySelector('.link_error')
-  const preview_image = document.querySelector('.preview-image')
   let image_preview = document.querySelector('.results');
   const enable = document.querySelector('.enable')
   const link = document.querySelector('#link')
-  const min_img = document.querySelector('.min-img')
-  let images = [];
-  let pages = []
-  let groups = []
+
+  function openAccounts() {
+    const popup = document.querySelector("#popup_accounts")
+    popup.classList.remove("hidden")
+  }
+
+  function closeAccounts() {
+    const popup = document.querySelector("#popup_accounts")
+
+    popup.classList.add("hidden")
+  }
+
+  function openPost() {
+    const popup = document.querySelector("#popup_post")
+
+    popup.classList.remove("hidden")
+
+    const pre_img = document.querySelector("#img-pre")
+    const img_src = document.querySelector("#img-src")
+    const link_pre = document.querySelector("#link-pre")
+    const link_content = document.querySelector(".link-content")
+    const description = document.querySelector(".description")
+    const content = document.querySelector('#content-post');
+    
+    pre_img.classList.add("hidden")
+    link_pre.classList.add("hidden")
+    
+    description.innerText = content.value
+
+    if (images.length > 0) {
+      pre_img.classList.remove("hidden")
+      img_src.src = window.URL.createObjectURL(files.files[0])
+    } else {
+      link_pre.classList.remove("hidden")
+      link_content.innerText = link.value
+    }
+  }
+
+  function closePost() {
+    const popup = document.querySelector("#popup_post")
+
+    popup.classList.add("hidden")
+  }
 
   link.addEventListener('input', function() {
     const valor = link.value;
@@ -264,45 +407,27 @@
       file_input.disabled = true
       file_input.readOnly = true
       file_input.style.display = "none"
-      preview_image.style.display = "none"
+      div_image.classList.add("hidden")
       
       fetch(`https://graph.facebook.com/v12.0/?id=${link.value}&fields=og_object{title,description,image}`, { method: 'GET' })
         .then(response => {
           if (response.ok) {
             return response.json()
-          } else {
-            img_post.style.display = "none"
-            div_link.style.display = "flex"
-            link_error.style.display = "flex"
           }
         })
         .then(data => {
           const title = data.og_object.title;
           const description = data.og_object.description;
           const image = data.og_object.image.url;
-          
-          img_post.style.display = "none"
-          link_error.style.display = "none"
-          link_image.src = image
-          link_h3.innerText = title
-          link_p.innerText = description
-          link_content.innerText = link.value
         })
-        .catch(error => {
-          img_post.style.display = "none"
-          div_link.style.display = "flex"
-          link_error.style.display = "flex"
-        });
         
-      image_text.innerText = "Você importou um link, não será possível inserir imagens."
+      link_success.classList.remove("hidden")
     } else {
-      div_link.style.display = "none"
-      img_post.style.display = "flex"
       file_input.disabled = false
       file_input.readOnly = false
-      file_input.style.display = "block"
-      preview_image.style.display = "flex"
-      image_text.innerText = "Inserir imagens:"
+      div_image.classList.add("flex", "flex-col")
+      div_image.classList.remove("hidden")
+      link_success.classList.add("hidden")
     }
   })
   
@@ -353,25 +478,18 @@
   const handle_file_preview = (e) => {
     let files = e.target.files;
     let length = files.length;
-    // let image = 
 
     for(let i = 0; i < length; i++) {
-      image_preview.innerHTML = ""
-      let image = document.createElement('img');
-      image.setAttribute('width', '80');
-      image.setAttribute('height', '80');
-      image.setAttribute('style', 'margin-right: 1rem; border-radius: 20px; border: 2px solid #752a7a');
-      // use the DOMstring for source
-      image.src = window.URL.createObjectURL(files[i]);
-      image_preview.appendChild(image);
-      
-      link.disabled = true
-      link.readOnly = true
+      images = []
 
-      // add image to images array
+      div_link.classList.add("hidden")
+      image_success.classList.remove("hidden")
+
       images.push(files[i]);
     }
   }
+
+  file_input.addEventListener('change', handle_file_preview);
 
   function open_pages() {
     const min = document.querySelector('.min')
@@ -394,10 +512,11 @@
     add.style.display = "none";
     const remove = document.querySelector(`#del-page${id}`)
     remove.style.display = "flex";
-    pages.push({id: id, name: name, access_token: access_token})
+    pages.push({id: id, name: name, icon: icon, access_token: access_token})
     const selects = document.querySelector(".selects-page")
 
     let image = document.createElement('img')
+    image.classList.add("w-8", "h-8", "rounded-full", `img${id}`)
     image.src = icon
     min_img.appendChild(image);
   }
@@ -410,7 +529,7 @@
     pages.pop({id: id})
     const selects = document.querySelector(".selects-page")
 
-    const imageToDelete = document.querySelector(`img[src="${icon}"]`);
+    const imageToDelete = document.querySelector(`.img${id}`);
     imageToDelete.remove();
   }
 
@@ -425,14 +544,47 @@
             add.style.display = "none";
             const remove = document.querySelector(`#del-group${id}`)
             remove.style.display = "flex";
-            groups.push({id: id, access_token: access_token})
+            groups.push({id: id, name: name, icon: icon, access_token: access_token})
 
             let image = document.createElement('img')
-            image.src = icon
-            image.width = "38"
-            image.height = "34"
-            image.classList.add(`img${id}`)
-            min_img.appendChild(image);
+            image.classList.add("w-8", "h-8", "rounded-full", `img${id}`)
+            
+            if (icon.length > 1) {
+              image.src = icon
+
+              min_img.appendChild(image);
+            } else {
+              const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+              svg.setAttribute("width", "30");
+              svg.setAttribute("height", "30");
+              svg.setAttribute("viewBox", "0 0 30 30");
+              svg.setAttribute("fill", "none");
+              svg.classList.add(`img${id}`)
+
+              const group = document.createElementNS("http://www.w3.org/2000/svg", "g");
+              group.setAttribute("clip-path", "url(#clip0_111_100)");
+
+              const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
+              path.setAttribute("d", "M14.9212 4.71216C12.3376 4.71216 10.2432 7.15741 10.2432 10.1738C10.2432 12.2657 11.2506 14.0826 12.7299 15L11.0145 15.795L6.44948 17.9122C6.00848 18.1327 5.78838 18.5066 5.78838 19.0359C5.78838 20.7117 5.78838 22.3875 5.78838 24.0634C5.82465 24.692 6.2018 25.2778 6.81328 25.2878H23.0538C23.7519 25.2271 24.105 24.6648 24.1119 24.0634C24.1119 22.3876 24.1119 20.7117 24.1119 19.0359C24.1119 18.5066 23.8918 18.1327 23.4508 17.9122L19.0511 15.795L17.2227 14.9287C18.6413 13.9907 19.5992 12.2131 19.5992 10.1738C19.5992 7.15741 17.5047 4.71216 14.9212 4.71216ZM7.37558 6.63276C6.26375 6.67498 5.3826 7.15608 4.71315 7.92266C3.97265 8.84561 3.61165 9.94141 3.60467 11.0315C3.65015 12.6435 4.3714 14.1695 5.6554 14.9677L0.529075 17.3499C0.17625 17.4822 0 17.7909 0 18.276V22.3109C0.02755 22.8461 0.3054 23.2958 0.826375 23.3035H4.23348V19.0359C4.28985 17.8949 4.82565 16.9726 5.78838 16.5226L9.19455 14.9022C9.45915 14.7478 9.71283 14.538 9.95538 14.2734C8.55098 12.1065 8.35595 9.51108 9.26105 7.22833C8.67237 6.86806 8.0108 6.63653 7.37558 6.63276ZM22.5902 6.63276C21.8632 6.64798 21.1912 6.91573 20.6393 7.29386C21.5197 9.59728 21.2768 12.1943 19.9772 14.2069C20.2639 14.5376 20.5623 14.7913 20.871 14.9677L24.1452 16.5226C25.1426 17.0696 25.6569 18 25.6668 19.0359V23.3036H29.1727C29.7492 23.2538 29.995 22.7939 30 22.311V18.276C30 17.835 29.8238 17.5263 29.4709 17.3499L24.4102 14.9344C25.7226 13.9667 26.3816 12.5164 26.3944 11.0315C26.3595 9.85621 26.0004 8.76491 25.2859 7.92266C24.5392 7.11268 23.6132 6.64133 22.5902 6.63276Z");
+              path.setAttribute("fill", "#752A7A");
+
+              const defs = document.createElementNS("http://www.w3.org/2000/svg", "defs");
+              const clipPath = document.createElementNS("http://www.w3.org/2000/svg", "clipPath");
+              clipPath.setAttribute("id", "clip0_111_100");
+
+              const rect = document.createElementNS("http://www.w3.org/2000/svg", "rect");
+              rect.setAttribute("width", "30");
+              rect.setAttribute("height", "30");
+              rect.setAttribute("fill", "white");
+
+              clipPath.appendChild(rect);
+              defs.appendChild(clipPath);
+              group.appendChild(path);
+              svg.appendChild(group);
+              svg.appendChild(defs);
+
+              min_img.appendChild(svg)
+            }
         }
     } else if (type_account == "Pro") {
         if (groups.length >= 9) {
@@ -442,28 +594,94 @@
             add.style.display = "none";
             const remove = document.querySelector(`#del-group${id}`)
             remove.style.display = "flex";
-            groups.push({id: id, access_token: access_token})
+            groups.push({id: id, name: name, icon: icon, access_token: access_token})
 
             let image = document.createElement('img')
-            image.src = icon
-            image.width = "38"
-            image.height = "34"
-            image.classList.add(`img${id}`)
-            min_img.appendChild(image);
+            image.classList.add("w-8", "h-8", "rounded-full", `img${id}`)
+            
+            if (icon.length > 1) {
+              image.src = icon
+
+              min_img.appendChild(image);
+            } else {
+              const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+              svg.setAttribute("width", "30");
+              svg.setAttribute("height", "30");
+              svg.setAttribute("viewBox", "0 0 30 30");
+              svg.setAttribute("fill", "none");
+              svg.classList.add(`img${id}`)
+
+              const group = document.createElementNS("http://www.w3.org/2000/svg", "g");
+              group.setAttribute("clip-path", "url(#clip0_111_100)");
+
+              const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
+              path.setAttribute("d", "M14.9212 4.71216C12.3376 4.71216 10.2432 7.15741 10.2432 10.1738C10.2432 12.2657 11.2506 14.0826 12.7299 15L11.0145 15.795L6.44948 17.9122C6.00848 18.1327 5.78838 18.5066 5.78838 19.0359C5.78838 20.7117 5.78838 22.3875 5.78838 24.0634C5.82465 24.692 6.2018 25.2778 6.81328 25.2878H23.0538C23.7519 25.2271 24.105 24.6648 24.1119 24.0634C24.1119 22.3876 24.1119 20.7117 24.1119 19.0359C24.1119 18.5066 23.8918 18.1327 23.4508 17.9122L19.0511 15.795L17.2227 14.9287C18.6413 13.9907 19.5992 12.2131 19.5992 10.1738C19.5992 7.15741 17.5047 4.71216 14.9212 4.71216ZM7.37558 6.63276C6.26375 6.67498 5.3826 7.15608 4.71315 7.92266C3.97265 8.84561 3.61165 9.94141 3.60467 11.0315C3.65015 12.6435 4.3714 14.1695 5.6554 14.9677L0.529075 17.3499C0.17625 17.4822 0 17.7909 0 18.276V22.3109C0.02755 22.8461 0.3054 23.2958 0.826375 23.3035H4.23348V19.0359C4.28985 17.8949 4.82565 16.9726 5.78838 16.5226L9.19455 14.9022C9.45915 14.7478 9.71283 14.538 9.95538 14.2734C8.55098 12.1065 8.35595 9.51108 9.26105 7.22833C8.67237 6.86806 8.0108 6.63653 7.37558 6.63276ZM22.5902 6.63276C21.8632 6.64798 21.1912 6.91573 20.6393 7.29386C21.5197 9.59728 21.2768 12.1943 19.9772 14.2069C20.2639 14.5376 20.5623 14.7913 20.871 14.9677L24.1452 16.5226C25.1426 17.0696 25.6569 18 25.6668 19.0359V23.3036H29.1727C29.7492 23.2538 29.995 22.7939 30 22.311V18.276C30 17.835 29.8238 17.5263 29.4709 17.3499L24.4102 14.9344C25.7226 13.9667 26.3816 12.5164 26.3944 11.0315C26.3595 9.85621 26.0004 8.76491 25.2859 7.92266C24.5392 7.11268 23.6132 6.64133 22.5902 6.63276Z");
+              path.setAttribute("fill", "#752A7A");
+
+              const defs = document.createElementNS("http://www.w3.org/2000/svg", "defs");
+              const clipPath = document.createElementNS("http://www.w3.org/2000/svg", "clipPath");
+              clipPath.setAttribute("id", "clip0_111_100");
+
+              const rect = document.createElementNS("http://www.w3.org/2000/svg", "rect");
+              rect.setAttribute("width", "30");
+              rect.setAttribute("height", "30");
+              rect.setAttribute("fill", "white");
+
+              clipPath.appendChild(rect);
+              defs.appendChild(clipPath);
+              group.appendChild(path);
+              svg.appendChild(group);
+              svg.appendChild(defs);
+
+              min_img.appendChild(svg)
+            }
         }
     } else if (type_account == "Avançado") {
       const add = document.querySelector(`#add-group${id}`)
       add.style.display = "none";
       const remove = document.querySelector(`#del-group${id}`)
       remove.style.display = "flex";
-      groups.push({id: id, access_token: access_token})
+      groups.push({id: id, name: name, icon: icon, access_token: access_token})
 
       let image = document.createElement('img')
-      image.src = icon
-      image.width = "38"
-      image.height = "34"
-      image.classList.add(`img${id}`)
-      min_img.appendChild(image);
+      image.classList.add("w-8", "h-8", "rounded-full", `img${id}`)
+      
+      if (icon.length > 1) {
+        image.src = icon
+
+        min_img.appendChild(image);
+      } else {
+        const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+        svg.setAttribute("width", "30");
+        svg.setAttribute("height", "30");
+        svg.setAttribute("viewBox", "0 0 30 30");
+        svg.setAttribute("fill", "none");
+        svg.classList.add(`img${id}`)
+
+        const group = document.createElementNS("http://www.w3.org/2000/svg", "g");
+        group.setAttribute("clip-path", "url(#clip0_111_100)");
+
+        const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
+        path.setAttribute("d", "M14.9212 4.71216C12.3376 4.71216 10.2432 7.15741 10.2432 10.1738C10.2432 12.2657 11.2506 14.0826 12.7299 15L11.0145 15.795L6.44948 17.9122C6.00848 18.1327 5.78838 18.5066 5.78838 19.0359C5.78838 20.7117 5.78838 22.3875 5.78838 24.0634C5.82465 24.692 6.2018 25.2778 6.81328 25.2878H23.0538C23.7519 25.2271 24.105 24.6648 24.1119 24.0634C24.1119 22.3876 24.1119 20.7117 24.1119 19.0359C24.1119 18.5066 23.8918 18.1327 23.4508 17.9122L19.0511 15.795L17.2227 14.9287C18.6413 13.9907 19.5992 12.2131 19.5992 10.1738C19.5992 7.15741 17.5047 4.71216 14.9212 4.71216ZM7.37558 6.63276C6.26375 6.67498 5.3826 7.15608 4.71315 7.92266C3.97265 8.84561 3.61165 9.94141 3.60467 11.0315C3.65015 12.6435 4.3714 14.1695 5.6554 14.9677L0.529075 17.3499C0.17625 17.4822 0 17.7909 0 18.276V22.3109C0.02755 22.8461 0.3054 23.2958 0.826375 23.3035H4.23348V19.0359C4.28985 17.8949 4.82565 16.9726 5.78838 16.5226L9.19455 14.9022C9.45915 14.7478 9.71283 14.538 9.95538 14.2734C8.55098 12.1065 8.35595 9.51108 9.26105 7.22833C8.67237 6.86806 8.0108 6.63653 7.37558 6.63276ZM22.5902 6.63276C21.8632 6.64798 21.1912 6.91573 20.6393 7.29386C21.5197 9.59728 21.2768 12.1943 19.9772 14.2069C20.2639 14.5376 20.5623 14.7913 20.871 14.9677L24.1452 16.5226C25.1426 17.0696 25.6569 18 25.6668 19.0359V23.3036H29.1727C29.7492 23.2538 29.995 22.7939 30 22.311V18.276C30 17.835 29.8238 17.5263 29.4709 17.3499L24.4102 14.9344C25.7226 13.9667 26.3816 12.5164 26.3944 11.0315C26.3595 9.85621 26.0004 8.76491 25.2859 7.92266C24.5392 7.11268 23.6132 6.64133 22.5902 6.63276Z");
+        path.setAttribute("fill", "#752A7A");
+
+        const defs = document.createElementNS("http://www.w3.org/2000/svg", "defs");
+        const clipPath = document.createElementNS("http://www.w3.org/2000/svg", "clipPath");
+        clipPath.setAttribute("id", "clip0_111_100");
+
+        const rect = document.createElementNS("http://www.w3.org/2000/svg", "rect");
+        rect.setAttribute("width", "30");
+        rect.setAttribute("height", "30");
+        rect.setAttribute("fill", "white");
+
+        clipPath.appendChild(rect);
+        defs.appendChild(clipPath);
+        group.appendChild(path);
+        svg.appendChild(group);
+        svg.appendChild(defs);
+
+        min_img.appendChild(svg)
+      }
     }
   }
 
@@ -478,6 +696,8 @@
       group = group.replaceAll('}', '')
       group = group.replaceAll(']', '')
       group = group.replaceAll('access_token:', '')
+      group = group.replaceAll('name:', '')
+      group = group.replaceAll('image:', '')
       
       const array = group.split(',')
 
@@ -487,7 +707,7 @@
 
         if (findTrue) {
         } else {
-          groups.push({ id: array[0], access_token: array[1] });
+          groups.push({ id: array[0], name: array[3], icon: array[2], access_token: array[1] });
         }
       }
     })
@@ -509,8 +729,8 @@
     });
 
     let p = document.createElement('p')
-    p.innerText = "Maioria dos grupos"
-    p.style = "padding: 0 4px"
+    p.classList.add("inter", "font-semibold")
+    p.innerText = "Todos os grupos"
     min_img.appendChild(p);
   }
 
@@ -538,7 +758,7 @@
     for (let i = 0; i < paragraphs.length; i++) {
       const paragraph = paragraphs[i];
       
-      if (paragraph.textContent == "Maioria dos grupos") {
+      if (paragraph.textContent == "Todos os grupos") {
         
         paragraph.parentNode.removeChild(paragraph);
       }
@@ -554,20 +774,6 @@
 
     const imageToDelete = document.querySelector(`.img${id}`);
     imageToDelete.remove();
-  }
-  
-  async function createAlbum(albumName, accessToken) {
-    const formData = new FormData();
-    formData.append('name', albumName);
-    formData.append('access_token', accessToken);
-
-    const response = await fetch('https://graph.facebook.com/v12.0/me/albums', {
-      method: 'POST',
-      body: formData
-    });
-
-    const data = await response.json();
-    return data.id;
   }
   
   function find_pages(id_account) {
@@ -648,11 +854,11 @@
   }
 
   function show() {
-    const divProgram = document.querySelector('.program-div').style.display = "flex"
+    const divProgram = document.querySelector('.program').classList.remove("hidden")
   }
   
   function hide() {
-    const divProgram = document.querySelector('.program-div').style.display = "none"
+    const divProgram = document.querySelector('.program').classList.add("hidden")
   }
   
   function setHide() {
@@ -662,9 +868,6 @@
     })
   }
 
-  // listen for file input changes
-  file_input.addEventListener('change', handle_file_preview);
-
   function continue_options() {
     const errors = []
     const content = document.querySelector('#content-post');
@@ -673,68 +876,25 @@
     const hour = document.querySelector('#hour');
     const link = document.querySelector('#link')
     const files = document.querySelector('#files');
-    const program = document.querySelector('#program-yes');
-    const no_program = document.querySelector('#program-no');
 
     const linkValid = /^(http|https):\/\/[a-zA-Z0-9\-\.]+\.[a-zA-Z]{2,}(\/\S*)?$/;
 
     if (groups.length == 0 && pages.length == 0) {
-      const pages = document.querySelector('.pages')
-      pages.style = "background-color: #e00d0d50"
-
       alert_message("error", "Selecione pelo menos um grupo ou página")
       
-      errors.push('Selecione pelo uma conta')
+      errors.push("error")
     }
+
     if (linkValid.test(link.value) == false) {
       if (images.length == 0) {
-        files.style = "border: 2px dashed #e00d0d !important;";
-        errors.push("Insira uma imagem ou link")
-      }
-    }
-    if (program.checked) {
-      if (day.value == "") {
-        day.style.border = "2px solid #e00d0d";
-        errors.push("Selecione o dia")
-      }
-      if (hour.value == "") {
-        hour.style.border = "2px solid #e00d0d";
-        errors.push("Selecione a hora")
+        alert_message("error", "Insira uma imagem ou link")
+        errors.push("error")
       }
     }
 
     if (errors.length == 0) {
-      if (linkValid.test(link.value)) {
-        div_link.style.display = "flex"
-        img.style.display = "none"
-        const pre = document.querySelector(".pre")
-        const description = document.querySelector(".description")
-        description.innerText = content.value
-        pre.style.display = "flex"
-      } else {
-        img.style.display = "flex"
-        div_link.style.display = "none"
-        img.src = window.URL.createObjectURL(files.files[0]);
-        const pre = document.querySelector(".pre")
-        const description = document.querySelector(".description")
-        description.innerText = content.value
-        pre.style.display = "flex"
-      }
+      openPost()
     }
-  }
-
-  async function createAlbum(albumName, accessToken) {
-    const formData = new FormData();
-    formData.append('name', albumName);
-    formData.append('access_token', accessToken);
-
-    const response = await fetch('https://graph.facebook.com/v12.0/me/albums', {
-      method: 'POST',
-      body: formData
-    });
-
-    const data = await response.json();
-    return data.id;
   }
 
   async function post() {
@@ -747,6 +907,11 @@
     const program = document.querySelector('#program-yes');
     const no_program = document.querySelector('#program-no');
 
+    closePost()
+
+    const popup = document.querySelector("#popup_await")
+    popup.classList.remove("hidden")
+
     const linkValid = /^(http|https):\/\/[a-zA-Z0-9\-\.]+\.[a-zA-Z]{2,}(\/\S*)?$/;
 
     if (groups.length == 0 && pages.length == 0) {
@@ -755,19 +920,16 @@
 
       alert_message("error", "Selecione pelo menos um grupo ou página")
       
-      errors.push('Selecione pelo uma conta')
+      errors.push('error')
     }
 
-    if (content.value.length == 0) {
-      content.style.border = "2px solid #e00d0d";
-      errors.push("Preencha o campo conteúdo")
-    }
     if (linkValid.test(link.value) == false) {
       if (images.length == 0) {
         files.style = "border: 2px dashed #e00d0d !important;";
         errors.push("Preencha o campo conteúdo")
       }
     }
+
     if (program.checked) {
       if (day.value == "") {
         day.style.border = "2px solid #e00d0d";
@@ -783,15 +945,10 @@
       const content_post = document.querySelector('#content-post');
       const groups_pages = []
 
-      // const access_token = access(account.value)
-      // const albumId = await createAlbum(content_post.value, access_token);
-      const loader = document.querySelector('.loader-div')
-      const pre = document.querySelector('.pre')
       const list = pages.length + groups.length
       const check = []
       const ids = []
-      pre.style.display = "none"
-      loader.style.display = "flex"
+      const results = []
 
       pages.forEach((page) => {
         groups_pages.push({content: page, type: "page"})
@@ -865,7 +1022,17 @@
             .then(data => {
               if (data.id == undefined) {
                 alert_message("error", `Você deve adicionar "pluBee" aos aplicativos do grupo: ${item.content.name}`)
+                if (item.type == "group") {
+                  results.push({id: "", name: item.content.name, icon: item.content.icon, status: "error", type: item.type, group_id: item.content.id})
+                } else if (item.type == "page") {
+                  results.push({id: "", name: item.content.name, icon: item.content.icon, status: "error", type: item.type, page_id: item.content.id})
+                }
               } else {
+                if (item.type == "group") {
+                  results.push({id: `${data.id}`, name: item.content.name, icon: item.content.icon, status: "published", type: item.type, group_id: item.content.id})
+                } else if (item.type == "page"){
+                  results.push({id: `${data.id}`, name: item.content.name, icon: item.content.icon, status: "published", type: item.type, page_id: item.content.id})
+                }
                 ids.push(`${data.id}_${item.content.access_token}_${item.type}`)
               }
 
@@ -881,7 +1048,7 @@
         .then(response => {
           groups_pages.pop()
           if (groups_pages.length == 0) {
-            loader.style.display = "none"
+            popup.classList.add("hidden")
             alert_message("success", "Sucesso!")
 
             let path_image = '';
@@ -905,26 +1072,19 @@
                   headers: {
                     "Content-Type": "application/json",
                   },
-                  body: JSON.stringify({pages: pages, groups: groups, content: content.value, program: program.checked, day: day.value, hour: hour.value, image: "program_image", ids_posts: ids, path_image: path_image, link: link.value})
+                  body: JSON.stringify({pages: pages, groups: groups, content: content.value, program: program.checked, day: day.value, hour: hour.value, image: "program_image", ids_posts: ids, path_image: path_image, link: link.value, results: results})
                 })
                 .then(response => {
                   content.value = ''
-                  
-                  div_img.innerHTML = ''
-                  const input = document.createElement('input');
-                  input.type = 'file';
-                  input.id = 'files';
-                  input.className = 'files';
-                  input.style = "border: 2px dashed #752A7A !important"
-                  div_img.appendChild(input)
-
                   link.value = ''
-                  image_preview.innerHTML = ''
+                  div_image.classList.remove("hidden")
+                  div_link.classList.remove("hidden")
+                  image_success.classList.add("hidden")
+                  link_success.classList.add("hidden")
                   file_input.disabled = false
                   file_input.readOnly = false
-                  file_input.style.display = "block"
-                  preview_image.style.display = "flex"
-                  image_text.innerText = "Inserir imagens:"
+                  div_image.classList.add("flex", "flex-col")
+                  images = []
                 })
                 .catch(err => {
                   console.error(err)
@@ -942,27 +1102,20 @@
                   headers: {
                     "Content-Type": "application/json",
                   },
-                  body: JSON.stringify({pages: pages, groups: groups, content: content.value, program: program.checked, day: day.value, hour: hour.value, image: imageUrl, ids_posts: ids, path_image: path_image, link: link.value})
+                  body: JSON.stringify({pages: pages, groups: groups, content: content.value, program: program.checked, day: day.value, hour: hour.value, image: imageUrl, ids_posts: ids, path_image: path_image, link: link.value, results: results})
                 })
               })
               .then(response => {
                 content.value = ''
-                
-                div_img.innerHTML = ''
-                const input = document.createElement('input');
-                input.type = 'file';
-                input.id = 'files';
-                input.className = 'files';
-                input.style = "border: 2px dashed #752A7A !important"
-                div_img.appendChild(input)
-
                 link.value = ''
-                image_preview.innerHTML = ''
+                div_image.classList.remove("hidden")
+                div_link.classList.remove("hidden")
+                image_success.classList.add("hidden")
+                link_success.classList.add("hidden")
                 file_input.disabled = false
                 file_input.readOnly = false
-                file_input.style.display = "block"
-                preview_image.style.display = "flex"
-                image_text.innerText = "Inserir imagens:"
+                div_image.classList.add("flex", "flex-col")
+                images = []
               })
               .catch(err => {
                 console.error(err)
@@ -973,26 +1126,19 @@
                 headers: {
                   "Content-Type": "application/json",
                 },
-                body: JSON.stringify({pages: pages, groups: groups, content: content.value, program: program.checked, day: day.value, hour: hour.value, image: 'link', ids_posts: ids, path_image: path_image, link: link.value})
+                body: JSON.stringify({pages: pages, groups: groups, content: content.value, program: program.checked, day: day.value, hour: hour.value, image: 'link', ids_posts: ids, path_image: path_image, link: link.value, results: results})
               })
               .then(response => {
                 content.value = ''
-                
-                div_img.innerHTML = ''
-                const input = document.createElement('input');
-                input.type = 'file';
-                input.id = 'files';
-                input.className = 'files';
-                input.style = "border: 2px dashed #752A7A !important"
-                div_img.appendChild(input)
-
                 link.value = ''
-                image_preview.innerHTML = ''
+                div_image.classList.remove("hidden")
+                div_link.classList.remove("hidden")
+                image_success.classList.add("hidden")
+                link_success.classList.add("hidden")
                 file_input.disabled = false
                 file_input.readOnly = false
-                file_input.style.display = "block"
-                preview_image.style.display = "flex"
-                image_text.innerText = "Inserir imagens:"
+                div_image.classList.add("flex", "flex-col")
+                images = []
               })
             }
           }
@@ -1005,5 +1151,4 @@
     }
   }
 </script>
-</body>
 </html>

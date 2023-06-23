@@ -5,69 +5,238 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>pluBee | Todos os posts</title>
+  <title>pluBee | Páginas importadas</title>
   <!-- Favicon -->
   <link rel="shortcut icon" href="/img/site/plubee-icon.png" type="image/x-icon">
   <!-- Custom styles -->
-  <link rel="stylesheet" href="/css/admin/style.css">
+  <link rel="stylesheet" href="/css/platform/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/1.8.12/tailwind-experimental.min.css">
 </head>
 
 <body>
-  <div class="layer"></div>
-  
-  <!-- ! Body -->
-  <div class="page-flex">
+  <%- include('../partials/sidebar-platform', {isAdmin: isAdmin}) %>
 
-    <!-- ! Sidebar -->
-    <%- include('../partials/sidebar-platform', {isAdmin: isAdmin}) %>
+  <div class="lg:pl-70">
+    <%- include('../partials/nav-platform', {isAdmin: isAdmin, title: "Páginas importadas", notifications: notifications, photo: photo, name_user: name_user}) %>
 
-    <div class="main-wrapper">
-      <!-- ! Main nav -->
-      <%- include('../partials/nav-platform', {isAdmin: isAdmin, title: "Páginas importadas", notifications: notifications, photo: photo}) %>
-  
-      <!-- ! Main -->
-      <% if (pages.length > 0) { %>
-      <main class="main users chart-page" id="skip-target">
-        <div class="container">
-          <div class="row" style="margin-top: 16px">
-            <% pages.forEach(function(item) { %>
-              <% item.pages.forEach(function(page) { %>
-                <div class="col-md-6 col-xl-3">
-                  <article class="stat-cards-item">
-                    <div class="stat-cards-icon warning">
-                      <img style="border-radius: 5rem;" src="<%= page.image %>" alt="">
+    <main class="py-8 px-8 fade-in">
+      <div style="z-index: 1;" class="hidden relative z-10 fade-in" id="popup_await" role="dialog" aria-modal="true">
+        <div class="fixed inset-0 bg-gray-500 bg-opacity-25 transition-opacity"></div>
+      
+        <div class="fixed inset-0 z-10 overflow-y-auto p-4 sm:p-6 md:p-20 mt-40">
+          <div class="mx-auto accounts transform divide-y divide-gray-100 overflow-hidden rounded-xl bg-white shadow-2xl ring-1 ring-black ring-opacity-5 transition-all">      
+            <% if (accounts.length > 0) { %>
+              <div class="flex flex-col divide-y divide-gray-100">
+                <div class="min-w-0 flex-auto scroll-py-4 overflow-y-auto px-6 py-4">
+                  <div class="flex flex-col divide-y divide-gray-100 px-6">
+                    <div>
+                      <div class="flex flex-col items-center justify-center mt-6 py-4">
+                        <div class="c-loader"></div>                                        
+                        <h2 for="content" class="block text-lg font-semibold leading-6 text-gray-900 inter mt-6">Importando páginas</h2>
+                        <p class="inter text-center text-md font-medium">Por favor, não feche a janela ou troque de página.</p>
+                      </div>
                     </div>
-                    <div class="stat-cards-info">
-                      <p class="stat-cards-info__num"><%= page.name %></p>
-                      <p class="stat-cards-info__title description-group">ID da página:</p>
-                      <p class="stat-cards-info__title description-group"><%= page.id_page %></p>
-                      <p class="stat-cards-info__title description-group" style="font-weight: bold; color: #1877F2">Conta: <%= item.name %></p>
-                    </div>
-                  </article>
+                  </div>
                 </div>
-              <% }) %>
-            <% }) %>
+              </div>
+            <% } else { %>
+              <div class="px-6 py-14 text-center text-sm sm:px-14">
+                <svg class="mx-auto h-6 w-6 text-gray-400" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M15 19.128a9.38 9.38 0 002.625.372 9.337 9.337 0 004.121-.952 4.125 4.125 0 00-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 018.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0111.964-3.07M12 6.375a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zm8.25 2.25a2.625 2.625 0 11-5.25 0 2.625 2.625 0 015.25 0z" />
+                </svg>
+                <p class="mt-4 font-semibold inter color-purple">Nenhuma conta encontrada</p>
+                <p class="mt-2 text-gray-500">Para importar páginas, você precisará importar uma conta primeiro.</p>
+              </div>
+            <% } %>
           </div>
         </div>
-      </main>
-      <% } else { %>
-      <div class="empty">
-        <img src="/img/admin/page.png" height="60" alt=""><br>
-        <h2 style="color: #752a7a">Nenhuma página importada ainda.</h2>
-        <p style="margin-top: 4px;">Você precisa adicionar uma conta para ver as suas páginas.</p>
-        <button style="padding: 13px 50px !important; margin-top: 30px;" class="event" id="btn-open"><a href="/platform/accounts">Adicionar conta</a></button>
       </div>
+
+      <div style="z-index: 1;" class="hidden relative z-10 fade-in" id="popup_import" role="dialog" aria-modal="true">
+        <div class="fixed inset-0 bg-gray-500 bg-opacity-25 transition-opacity"></div>
+      
+        <div class="fixed inset-0 z-10 overflow-y-auto p-4 sm:p-6 md:p-20 mt-40">
+          <div class="mx-auto accounts transform divide-y divide-gray-100 overflow-hidden rounded-xl bg-white shadow-2xl ring-1 ring-black ring-opacity-5 transition-all">
+            <div class="flex justify-between py-3 px-6">
+              <h2 class="color-purple inter font-semibold text-lg">Importar páginas</h2>
+              <button onclick="closeImport()">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M14.3075 11.7231L20.3075 5.67693C20.5844 5.4 20.5844 4.98462 20.3075 4.7077L19.3844 3.73847C19.1075 3.46154 18.6921 3.46154 18.4151 3.73847L12.369 9.78462C12.1844 9.96923 11.9075 9.96923 11.7228 9.78462L5.67668 3.69231C5.39976 3.41539 4.98438 3.41539 4.70745 3.69231L3.73822 4.66154C3.4613 4.93847 3.4613 5.35385 3.73822 5.63077L9.78438 11.6769C9.96899 11.8615 9.96899 12.1385 9.78438 12.3231L3.69207 18.4154C3.41514 18.6923 3.41514 19.1077 3.69207 19.3846L4.6613 20.3538C4.93822 20.6308 5.35361 20.6308 5.63053 20.3538L11.6767 14.3077C11.8613 14.1231 12.1382 14.1231 12.3228 14.3077L18.369 20.3538C18.6459 20.6308 19.0613 20.6308 19.3382 20.3538L20.3075 19.3846C20.5844 19.1077 20.5844 18.6923 20.3075 18.4154L14.3075 12.3692C14.1228 12.1846 14.1228 11.9077 14.3075 11.7231Z" fill="#752A7A"/>
+                </svg>                  
+              </button>
+            </div>
+      
+            <% if (accounts.length > 0) { %>
+              <div class="flex flex-col divide-y divide-gray-100">
+                <div class="min-w-0 flex-auto scroll-py-4 overflow-y-auto px-6 py-4">
+                  <div class="flex mb-2">
+                    <h2 class="text-lg font-semibold">Selecione uma conta:</h2>      
+                  </div>
+                  
+                  <ul class="-mx-2 text-sm text-gray-700 overflow-y-auto h-48" id="options" role="listbox">
+                    <% accounts.forEach(function(item) { %>
+                      <li class="group flex flex-col cursor-default select-none rounded-md p-2 mb-4" id="option-1" role="option" tabindex="-1">
+                        <div class="flex justify-between items-center">
+                          <div class="flex items-center">
+                            <img src="<%= item.photo %>" alt="" class="h-9 flex-none rounded-full border-purple">
+                            <span style="font-size: 15px;" class="ml-3 flex-auto truncate inter font-semibold color-purple"><%= item.name %></span>
+                          </div>
+                          
+                          <div>
+                            <button onclick="importFunction('<%= item.id_account %>')" class="event-all px-1.5 py-0.5 rounded-full inter font-semibold text-sm">Importar</button>
+                          </div>
+                        </div>
+                      </li>
+                    <% }) %>
+                  </ul>
+                </div>
+              </div>
+            <% } else { %>
+              <div class="px-6 py-14 text-center text-sm sm:px-14">
+                <svg class="mx-auto h-6 w-6 text-gray-400" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M15 19.128a9.38 9.38 0 002.625.372 9.337 9.337 0 004.121-.952 4.125 4.125 0 00-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 018.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0111.964-3.07M12 6.375a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zm8.25 2.25a2.625 2.625 0 11-5.25 0 2.625 2.625 0 015.25 0z" />
+                </svg>
+                <p class="mt-4 font-semibold inter color-purple">Nenhuma conta encontrada</p>
+                <p class="mt-2 text-gray-500">Para fazer uma publicação, você precisará importar uma conta primeiro.</p>
+              </div>
+            <% } %>
+          </div>
+        </div>
+      </div>
+
+      <% if (totalPages > 0) { %>
+        <div class="sm:flex sm:items-center">
+          <div class="sm:flex-auto">
+            <h1 class="text-lg font-semibold leading-6 text-gray-900 inter">Todas as páginas:</h1>
+          </div>
+          <div class="mt-4 sm:ml-16 sm:mt-0 sm:flex-none">
+            <button onclick="openImport()" class="inter text-sm font-semibold bg-purple text-white py-2 px-3 rounded-lg">Importar páginas</button>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 gap-4 sm:grid-cols-4 mt-4">
+          <% pages.forEach(function(item) { %>
+            <% item.pages.forEach(function(page) { %>
+              <div class="relative flex items-center space-x-3 rounded-lg border border-gray-300 bg-white px-6 py-5 shadow-sm focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2 hover:border-gray-400">
+                <div class="flex-shrink-0">
+                  <% if (page.image.length > 0) { %>
+                    <img class="w-13 h-13 rounded-full" src="<%= page.image %>" alt="">
+                  <% } else { %>
+                    <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <g clip-path="url(#clip0_110_88)">
+                      <path d="M4.9349 1.66663C4.71388 1.66663 4.50192 1.75442 4.34564 1.9107C4.18936 2.06698 4.10156 2.27895 4.10156 2.49996V27.5C4.10156 27.721 4.18936 27.9329 4.34564 28.0892C4.50192 28.2455 4.71388 28.3333 4.9349 28.3333C5.15591 28.3333 5.36787 28.2455 5.52415 28.0892C5.68043 27.9329 5.76823 27.721 5.76823 27.5V2.49996C5.76823 2.27895 5.68043 2.06698 5.52415 1.9107C5.36787 1.75442 5.15591 1.66663 4.9349 1.66663Z" fill="#752A7A"/>
+                      <path d="M25.4167 3.18329C25.29 3.11015 25.1463 3.07165 25 3.07165C24.8537 3.07165 24.71 3.11015 24.5833 3.18329C22.9678 3.86238 21.2269 4.19183 19.475 4.14996C17.9656 4.03952 16.4957 3.6167 15.1583 2.90829C13.8721 2.21338 12.4566 1.79072 11 1.66663C9.79787 1.66794 8.60804 1.90873 7.5 2.37496V16.6666C8.5857 16.0726 9.80408 15.763 11.0417 15.7666C12.2672 15.8882 13.4566 16.2507 14.5417 16.8333C16.0918 17.6427 17.7959 18.1142 19.5417 18.2166C21.5454 18.2583 23.5348 17.8689 25.375 17.075C25.5124 17.0057 25.628 16.8998 25.7089 16.7688C25.7898 16.6379 25.8329 16.4872 25.8333 16.3333V3.89163C25.831 3.74762 25.7914 3.60667 25.7184 3.48253C25.6454 3.35838 25.5414 3.25529 25.4167 3.18329Z" fill="#752A7A"/>
+                      </g>
+                      <defs>
+                      <clipPath id="clip0_110_88">
+                      <rect width="30" height="30" fill="white"/>
+                      </clipPath>
+                      </defs>
+                    </svg>                                        
+                  <% } %>
+                </div>
+                <div class="min-w-0 flex-1">
+                  <div>
+                    <span class="absolute inset-0" aria-hidden="true"></span>
+                    <div class="flex items-center">
+                      <p class="text-md font-semibold text-gray-900 inter"><%= page.name %></p>
+                    </div>
+                    <p class="truncate text-sm text-gray-500 inter">ID: <%= page.id_page %></p>
+                    <p style="color: #1877F2;" class="truncate text-sm text-gray-500 inter font-medium"><%= item.name %></p>
+                  </div>
+                </div>
+              </div>
+            <% }) %>
+          <% }) %>
+        </div>
+      <% } else { %>
+        <div style="z-index: 0;" class="fixed inset-0 overflow-y-auto p-4 sm:p-6 md:p-20 mt-40">
+          <div class="flex flex-col justify-center items-center">
+            <h1 class="text-xl inter color-purple font-semibold">Nenhuma página importada ainda.</h1>
+            <p class="text-lg inter text-gray-600 font-medium">Clique no botão abaixo e importa suas páginas</p>
+            <button onclick="openImport()" class="bg-purple py-2 px-4 inter text-white rounded-lg mt-4">Importar páginas</button>
+          </div>
+        </div>
       <% } %>
-
-      <!-- ! Footer -->
-      <%- include('../partials/footer-platform') %>
-    </div>
+    </main>
   </div>
-
-
-<!-- Chart library -->
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<!-- Icons library -->
-<script src="js/admin/feather.min.js"></script>
 </body>
+
+<script>
+  function alert_message(type, content) {
+    if (type == 'error') {
+      const divMessage = document.querySelector(".error");
+      divMessage.style.display = "flex";
+      divMessage.innerHTML = "";
+      const message = document.createElement("p");
+      const img = document.createElement("img");
+      img.width = "28"
+      img.height = "28"
+      img.src = "/img/admin/Bulk/error.png"
+      message.classList.add("message-notify");
+      message.innerText = content;
+      divMessage.appendChild(img);
+      divMessage.appendChild(message);
+
+      setTimeout(() => {
+        divMessage.style = "animation: slideoff 2s;"
+        setTimeout(() => {
+          divMessage.style = "display: none"
+        }, 800)
+      }, 2000);
+    } else if (type == "success") {
+      const divMessage = document.querySelector(".alert");
+      divMessage.style.display = "flex";
+      divMessage.innerHTML = "";
+      const message = document.createElement("p");
+      const img = document.createElement("img");
+      img.width = "28"
+      img.height = "28"
+      img.src = "/img/admin/Bulk/checked.png"
+      message.classList.add("message-notify");
+      message.innerText = content;
+      divMessage.appendChild(img);
+      divMessage.appendChild(message);
+
+      setTimeout(() => {
+        divMessage.style = "animation: slideoff 2s;"
+        setTimeout(() => {
+          divMessage.style = "display: none"
+        }, 800)
+      }, 2000);
+    }
+  }
+
+  function openImport() {
+    const popup = document.querySelector("#popup_import")
+
+    popup.classList.remove("hidden")
+  }
+
+  function closeImport() {
+    const popup = document.querySelector("#popup_import")
+
+    popup.classList.add("hidden")
+  }
+
+  function importFunction(id) {
+    closeImport()
+
+    const popup = document.querySelector("#popup_await")
+    popup.classList.remove("hidden")
+
+    fetch("/platform/import-pages/" + id, {
+      method: "POST"
+    })
+    .then((response) => {
+      if (response.ok) {
+        location.reload()
+      }
+    })
+    .catch((error) => {
+      alert_message("error", "Tente novamente mais tarde.")
+    })
+  }
+</script>
+
 </html>

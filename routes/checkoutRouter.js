@@ -3,12 +3,14 @@ const router = express.Router()
 
 const {
     checkout,
-    checkUser,
-    processPayment
+    success,
+    createPayment,
+    validateData,
 } = require('../controllers/checkoutCtrl')
 
-router.get("/:id", checkout)
-router.post("/check_user", checkUser)
-router.post("/process_payment", processPayment)
+router.get("/payment/:name_checkout", checkout)
+router.get("/success", success)
+router.post("/validate-data", validateData)
+router.post("/create-payment-intent/:name_checkout", createPayment)
 
 module.exports = router
