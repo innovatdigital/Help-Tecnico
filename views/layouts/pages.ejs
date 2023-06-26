@@ -119,7 +119,7 @@
             <% item.pages.forEach(function(page) { %>
               <div class="relative flex items-center space-x-3 rounded-lg border border-gray-300 bg-white px-6 py-5 shadow-sm focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2 hover:border-gray-400">
                 <div class="flex-shrink-0">
-                  <% if (page.image.length > 0) { %>
+                  <% if (page.image) { %>
                     <img class="w-13 h-13 rounded-full" src="<%= page.image %>" alt="">
                   <% } else { %>
                     <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
