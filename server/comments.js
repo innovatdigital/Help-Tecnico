@@ -20,16 +20,16 @@ db.once('open', function() {
   }
 
   setInterval(async () => {
-    try {
-      if (!processFinished) {
-        return
-      }
+    if (!processFinished) {
+      return
+    }
 
-      processFinished = false;
+    processFinished = false;
 
-      const comments = await findComments()
+    const comments = await findComments()
 
-      for (const comment of comments) {
+    for (const comment of comments) {
+      try {
         if (comment.contents) {
           const find_post = await Posts.findOne({ id_post: comment.id_post });
 
@@ -45,11 +45,11 @@ db.once('open', function() {
                 continue;
               }
 
-              const isPage = split[2] === 'page';
+              const isPage = split[2] === 'page' || split[3] === 'page';
 
-              const url = isPage
-                ? `https://graph.facebook.com/v13.0/${split[0]}/comments?fields=from{id,name},message&access_token=${split[1]}`
-                : `https://graph.facebook.com/v13.0/${split[0]}_${split[1]}/comments?fields=from{id,name},message&access_token=${split[2]}`;
+              if (!isPage) continue
+
+              const url = `https://graph.facebook.com/v13.0/${split[0]}_${split[1]}/comments?fields=from{id,name},message&access_token=${split[2]}`
 
               const res = await axios.get(url);
               const exists = [];
@@ -89,7 +89,7 @@ db.once('open', function() {
                     const randomIndex = Math.floor(Math.random() * comment.contents.length);
                     const randomContent = comment.contents[randomIndex];
 
-                    const responseUrl = `https://graph.facebook.com/${response.id}/comments?access_token=${isPage ? split[1] : split[2]}`;
+                    const responseUrl = `https://graph.facebook.com/${response.id}/comments?access_token=${split[2]}`;
 
                     await axios.post(responseUrl, { message: randomContent });
 
@@ -113,12 +113,12 @@ db.once('open', function() {
         } else {
           continue
         }
+      } catch (err) {
+        console.log(err)
+        continue
       }
-
-      processFinished = true;
-    } catch (err) {
-      console.log(err)
-      processFinished = true;
     }
+
+    processFinished = true;
   }, 1000);
 });
