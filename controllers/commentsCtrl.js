@@ -11,15 +11,15 @@ const comments = asyncHandler(async(req, res) => {
 
 const activeBot = asyncHandler(async(req, res) => {
     try {
-        const { id_post, content_comment, limit_comments } = req.body
+        const { id_post, contents, limit_comments } = req.body
 
         User.findOneAndUpdate(
             { _id: req.cookies._id, 'posts.id_post': id_post },
-            { $set: { 'posts.$.status_bot': true, 'posts.$.comment_content': content_comment } },
+            { $set: { 'posts.$.status_bot': true, 'posts.$.contents': contents } },
             { new: true }
         )
         .then(result => {
-            const newActiveBot = Comments.create({id_user: req.cookies._id, id_post: id_post, content_comment: content_comment, limit_comments: parseInt(limit_comments)}, async(error, result) => {
+            const newActiveBot = Comments.create({id_user: req.cookies._id, id_post: id_post, contents: contents, limit_comments: parseInt(limit_comments)}, async(error, result) => {
                 if (error) {
                     console.error(error);
                     res.sendStatus(500)

@@ -1021,6 +1021,7 @@
             .then(response => response.json())
             .then(data => {
               if (data.id == undefined) {
+                console.log(data)
                 alert_message("error", `Você deve adicionar "pluBee" aos aplicativos do grupo: ${item.content.name}`)
                 if (item.type == "group") {
                   results.push({id: "", name: item.content.name, icon: item.content.icon, status: "error", type: item.type, group_id: item.content.id})

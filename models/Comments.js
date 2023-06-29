@@ -13,8 +13,8 @@ const Comments = new mongoose.Schema({
         type: Number,
         require: true
     },
-    content_comment: {
-        type: String,
+    contents: {
+        type: Array,
         require: true
     },
     limit_comments: {

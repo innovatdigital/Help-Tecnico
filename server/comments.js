@@ -11,156 +11,113 @@ const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 
 db.once('open', function() {
-  setInterval(() => {
-    Comments.find({}, (err, doc) => {
-      if (err) {
-        console.log('Erro ao buscar dados do MongoDB:', err);
-      } else if (doc) {
-        doc.forEach(async comment => {
-          const find_post = await Posts.findOne({id_post: comment.id_post})
+  let processFinished = true;
+
+  async function findComments() {
+    const comments = await Comments.find({});
+
+    return comments
+  }
+
+  setInterval(async () => {
+    try {
+      if (!processFinished) {
+        return
+      }
+
+      processFinished = false;
+
+      const comments = await findComments()
+
+      for (const comment of comments) {
+        if (comment.contents) {
+          const find_post = await Posts.findOne({ id_post: comment.id_post });
+
           if (find_post) {
-            find_post.ids_posts_pages_and_groups.forEach(post => {
-              if (post == "xxxxxx_xxxxxxxx") {
-                return
-              } else {
-                const split = post.split('_')
-                if (split.length == 3) {
-                  if (split[2] == "page") {
-                    axios.get(`https://graph.facebook.com/v13.0/${split[0]}/comments?fields=from{id,name},message&access_token=${split[1]}`)
-                    .then((res) => {
-                      const exists = []
-                      
-                      comment.comments.forEach(comment => {
-                        exists.push(comment.id_comment)
-                      })
-        
-                      let count = 1
-        
-                      res.data.data.forEach(async(response) => {
-                        if (exists.includes(response.id)) {
-                          count += 1
-                        } else {
-                          if (comment.count == comment.limit_comments) {
-                            const disableBot = await Comments.findByIdAndDelete(comment._id)
+            for (const post of find_post.ids_posts_pages_and_groups) {
+              if (post === 'xxxxxx_xxxxxxxx') {
+                continue;
+              }
 
-                            const updatePost = await Posts.findOne({id_post: comment.id_post}, {
-                              status_bot: false
-                            })
+              const split = post.split('_');
 
-                            const data = {
-                              _id: updatePost.id_user,
-                              "posts.id_post": updatePost.id_post
-                            };
-                            
-                            const replace = {
-                              $set: {
-                                "posts.$.status_bot": false,
-                                "posts.$.comment_content": ""
-                              }
-                            };
-                  
-                            const user = await User.findOneAndUpdate(data, replace, { new: true })
-                          } else {
-                            axios.post(`https://graph.facebook.com/${response.id}/comments?access_token=${split[1]}`, { message: comment.content_comment })
-                            .then(async(res) => {
-                              console.log('Comentário respondido:', response.id);
+              if (split.length !== 3 && split.length !== 4) {
+                continue;
+              }
 
-                              const update = await Comments.findByIdAndUpdate(comment._id, {
-                                "count": comment.count + 1,
-        
-                                $push: {
-                                  comments: {
-                                    "id_comment": response.id
-                                  }
-                                }
-                              })
-                            })
-                            .catch((err) => {
-                            });
-                          }
-                        }
-                      })              
-                    })
-                    .catch((err) => {
-                      console.log('Erro ao obter detalhes do post do Facebook');
-                      return
-                    });
+              const isPage = split[2] === 'page';
+
+              const url = isPage
+                ? `https://graph.facebook.com/v13.0/${split[0]}/comments?fields=from{id,name},message&access_token=${split[1]}`
+                : `https://graph.facebook.com/v13.0/${split[0]}_${split[1]}/comments?fields=from{id,name},message&access_token=${split[2]}`;
+
+              const res = await axios.get(url);
+              const exists = [];
+
+              for (const response of res.data.data) {
+                exists.push(response.id);
+
+                if (!comment.comments.some((c) => c.id_comment === response.id)) {
+                  if (comment.count === comment.limit_comments) {
+                    await Comments.findByIdAndDelete(comment._id);
+
+                    await Posts.findOneAndUpdate(
+                      { id_post: comment.id_post },
+                      {
+                        $set: {
+                          status_bot: false,
+                          'posts.$.status_bot': false,
+                          'posts.$.contents': [],
+                        },
+                      }
+                    );
+
+                    const user = await User.findOneAndUpdate(
+                      {
+                        _id: updatePost.id_user,
+                        'posts.id_post': updatePost.id_post,
+                      },
+                      {
+                        $set: {
+                          'posts.$.status_bot': false,
+                          'posts.$.contents': [],
+                        },
+                      },
+                      { new: true }
+                    );
                   } else {
-                    return
-                  } 
-                } else {
-                  if (split[3] == "page") {
-                    axios.get(`https://graph.facebook.com/v13.0/${split[0]}_${split[1]}/comments?fields=from{id,name},message&access_token=${split[2]}`)
-                    .then((res) => {
-                      const exists = []
-                      
-                      comment.comments.forEach(comment => {
-                        exists.push(comment.id_comment)
-                      })
-        
-                      let count = 1
-        
-                      res.data.data.forEach(async(response) => {
-                        if (exists.includes(response.id)) {
-                          count += 1
-                        } else {
-                          if (comment.count == comment.limit_comments) {
-                            const disableBot = await Comments.findByIdAndDelete(comment._id)
+                    const randomIndex = Math.floor(Math.random() * comment.contents.length);
+                    const randomContent = comment.contents[randomIndex];
 
-                            const updatePost = await Posts.findOne({id_post: comment.id_post}, {
-                              status_bot: false
-                            })
-                            
-                            const data = {
-                              _id: updatePost.id_user,
-                              "posts.id_post": updatePost.id_post
-                            };
-                            
-                            const replace = {
-                              $set: {
-                                "posts.$.status_bot": false,
-                                "posts.$.comment_content": ""
-                              }
-                            };
-                  
-                            const user = await User.findOneAndUpdate(data, replace, { new: true })
-                          } else {
-                            axios.post(`https://graph.facebook.com/${response.id}/comments?access_token=${split[2]}`, { message: comment.content_comment })
-                            .then(async(res) => {
-                              console.log('Comentário respondido:', response.id);
+                    const responseUrl = `https://graph.facebook.com/${response.id}/comments?access_token=${isPage ? split[1] : split[2]}`;
 
-                              const update = await Comments.findByIdAndUpdate(comment._id, {
-                                "count": comment.count + 1,
-        
-                                $push: {
-                                  comments: {
-                                    "id_comment": response.id
-                                  }
-                                }
-                              })
-                            })
-                            .catch((err) => {
-                            });
-                          }
-                        }
-                      })              
-                    })
-                    .catch((err) => {
-                      console.log('Erro ao obter detalhes do post do Facebook');
-                      return
+                    await axios.post(responseUrl, { message: randomContent });
+
+                    console.log('Comentário respondido:', response.id);
+
+                    await Comments.findByIdAndUpdate(comment._id, {
+                      $push: {
+                        comments: {
+                          id_comment: response.id,
+                        },
+                      },
+                      $inc: {
+                        count: 1,
+                      },
                     });
-                  } else {
-                    return
                   }
                 }
               }
-            })
-          } else {
-            return
+            }
           }
-        })
+        } else {
+          continue
+        }
       }
-      }
-    );
-  }, 15000);
+
+      processFinished = true;
+    } catch (err) {
+      processFinished = true;
+    }
+  }, 1000);
 });

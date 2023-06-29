@@ -3,9 +3,41 @@ const User = require('../models/User')
 const axios = require('axios')
 
 const groups = asyncHandler(async(req, res) => {
-    const findGroups = await User.findById({_id: req.cookies._id})
+  const findGroups = await User.findById({_id: req.cookies._id})
+  const groups = []
 
-    res.render('layouts/groups', { isAdmin: findGroups.isAdmin, groups: findGroups.groups, notifications: findGroups.notifications.reverse().slice(0, 5), photo: findGroups.photo, accounts: findGroups.accountsFb, name_user: findGroups.name })
+  findGroups.accountsFb.forEach(account => {
+    const accounts = []
+
+    const foundAccount = accounts.find(a => a.id === account.id_account);
+  
+    if (foundAccount) {
+      findGroups.groups.forEach(group => {
+        if (group.id_account === account.id_account) {
+          foundAccount.groups.push(group);
+        }
+      });
+    } else {
+      const newAccount = {
+        id: account.id_account,
+        name: account.name,
+        photo: account.photo,
+        groups: []
+      };
+  
+      findGroups.groups.forEach(group => {
+        if (group.id_account === account.id_account) {
+          newAccount.groups.push(group);
+        }
+      });
+  
+      accounts.push(newAccount);
+    }
+
+    groups.push(accounts);
+  });
+
+  res.render('layouts/groups', { isAdmin: findGroups.isAdmin, groups: findGroups.groups, notifications: findGroups.notifications.reverse().slice(0, 5), photo: findGroups.photo, accounts: findGroups.accountsFb, name_user: findGroups.name })
 })
 
 const importGroups = asyncHandler(async (req, res) => {
@@ -112,7 +144,19 @@ const importGroups = asyncHandler(async (req, res) => {
       })),
     }, { upsert: true });
 
-    res.sendStatus(200)
+    User.findOneAndUpdate({ _id: req.cookies._id, "accountsFb.id_account": id_account }, {
+      $set: {
+        "accountsFb.$.groups_length": updatedGroups.length
+      }
+    }, {
+      new: true
+    })
+    .then(result => {
+      res.sendStatus(200)
+    })
+    .catch(error => {
+      res.sendStatus(500)
+    });
   
   } catch (error) {
     res.sendStatus(500)

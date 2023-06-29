@@ -55,7 +55,11 @@
                             <%= item.name %>
                           </td>
                           <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium inter text-gray-900 sm:pl-6">
-                            Quantidade de grupos
+                            <% if (item.groups_length) { %>
+                              <%= item.groups_length %> grupos
+                            <% } else { %>
+                              0 grupos
+                            <% } %>
                           </td>
                           <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium inter text-gray-900 sm:pl-6">
                             <%= item.pages.length %> páginas

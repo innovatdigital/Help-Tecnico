@@ -41,13 +41,29 @@
             <div class="flex flex-col divide-y divide-gray-100 px-6">
               <div>
                 <div class="mt-4">
-                  <label for="content" class="block text-md font-medium leading-6 text-gray-900 inter mt-2">Conteúdo do comentário:</label>
-                  <div class="mt-2">
-                    <textarea rows="3" name="content" id="content" class="block w-full rounded-lg p-1.5 text-sm text-gray-900 border-purple shadow-sm ring-1 ring-inset inter" placeholder="Obrigado por comentar em nossa publicação..."></textarea>
+                  <label for="content" class="block text-md font-medium leading-6 text-gray-900 inter mt-2">Insira uma ou várias opções de resposta:</label>
+                  <div id="options">
+                    <div class="flex items-center option mt-2">
+                      <h2 class="mr-2 font-semibold inter">1.</h2>
+                      <textarea rows="1" name="content" id="content" class="block w-full rounded-lg p-1.5 text-sm text-gray-900 border-purple shadow-sm ring-1 ring-inset inter" placeholder="Obrigado por comentar em nossa publicação..."></textarea>
+                    </div>
                   </div>
                 </div>
 
-                <div class="mt-6">
+                <div style="cursor: pointer;" class="flex mt-6" id="newOption">          
+                  <div class="relative flex items-center">
+                    <div class="flex h-6 items-center">
+                      <svg width="15" height="16" viewBox="0 0 15 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M7.5 15.5C11.6421 15.5 15 12.1421 15 8C15 3.85786 11.6421 0.5 7.5 0.5C3.35786 0.5 0 3.85786 0 8C0 12.1421 3.35786 15.5 7.5 15.5ZM6.80429 7.48215V5.05966H8.67095V7.48215H11.0888V9.34881H8.67095V11.7667H6.80429V9.34881H4.38179V7.48215H6.80429Z" fill="#752A7A"/>
+                      </svg>                               
+                    </div>
+                    <div class="ml-3 text-sm leading-6">
+                      <p class="block text-sm font-medium leading-6 text-gray-900 inter">Adicionar nova opção</p>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="mt-10">
                   <h2 for="link" class="block text-md font-medium leading-6 text-gray-900 inter">Limite de comentários:</h2>
                   <% if (type_account == "Avançado") { %>
                     <p class="block w-full rounded-lg inter py-1.5 mt-2 pl-2 ring-1 ring-inset ring-gray-300 sm:text-sm sm:leading-6 border-purple color-purple font-semibold">Comentários ilimitados</p>
@@ -293,6 +309,57 @@
 
 <script>
   let idPost;
+  let numberOption = 2
+  const divOptions = document.querySelector("#options")
+  const newOptionButton = document.querySelector("#newOption")
+
+  function newOption() {
+    if (numberOption <= 10) {
+      var chars = 'abcdefghijklmnopqrstuvwxyz';
+      var id = '';
+
+      for (var i = 0; i < chars.length; i++) {
+        var random = Math.floor(Math.random() * chars.length);
+        id += chars.charAt(random);
+      }
+
+      const html = `
+        <div class="flex items-center option mt-2" id="${id}">
+          <h2 class="mr-2 font-semibold inter">${numberOption}</h2>
+          <textarea rows="1" name="content" id="content" class="block w-full rounded-lg p-1.5 text-sm text-gray-900 border-purple shadow-sm ring-1 ring-inset inter" placeholder="Nova opção de comentário"></textarea>
+
+          <button onclick="deleteOption(${id})" class="ml-2 mr-1">
+            <svg width="16" height="18" viewBox="0 0 16 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <g clip-path="url(#clip0_28_3492)">
+              <path d="M14.125 4.625L13.3661 15.2497C13.3007 16.1655 12.5387 16.875 11.6205 16.875H4.37946C3.46134 16.875 2.69932 16.1655 2.63391 15.2497L1.875 4.625M6.25 8.125V13.375M9.75 8.125V13.375M10.625 4.625V2C10.625 1.51675 10.2332 1.125 9.75 1.125H6.25C5.76675 1.125 5.375 1.51675 5.375 2V4.625M1 4.625H15" stroke="#752A7A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </g>
+              <defs>
+              <clipPath id="clip0_28_3492">
+              <rect width="16" height="18" fill="white"/>
+              </clipPath>
+              </defs>
+            </svg>
+          </button>
+        </div>
+      `;
+
+      numberOption += 1
+
+      divOptions.insertAdjacentHTML("beforeend", html);
+    } else {
+      alert_message("error", "Limite atingido")
+    }
+  }
+
+  function deleteOption(id) {
+    id.remove()
+
+    numberOption -= 1
+  }
+
+  newOptionButton.addEventListener("click", function() {
+    newOption()
+  })
 
   function alert_message(type, content) {
     if (type == 'error') {
@@ -352,10 +419,23 @@
 
   function activeComment(id) {
     const content = document.querySelector("#content")
+    const options = document.getElementsByClassName('option')
+    const contents = []
     const type_account = '<%= type_account %>'
 
-    if (content.value.length == 0) {
-      alert_message("error", "Insira o conteúdo")
+    for (var i = 0; i < options.length; i++) {
+      const content = options[i].querySelector("#content");
+
+      if (content.value.length < 1) {
+        alertMessage("error", "Preencha o campo conteúdo")
+        return
+      }
+      
+      contents.push(content.value)
+    }
+
+    if (contents.length < 1) {
+      alert_message("error", "Adicione pelo menos uma opção")
       return
     }
 
@@ -363,7 +443,7 @@
       fetch("comments-automatic/config", {
         method: "PUT",
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ id_post: idPost, content_comment: content.value, limit_comments: 10000000 })
+        body: JSON.stringify({ id_post: idPost, contents: contents, limit_comments: 10000000 })
       })
       .then(response => {
         if (response.ok) {
@@ -371,7 +451,7 @@
 
           setTimeout(() => {
             location.reload()
-          }, 1500);
+          }, 500);
         }
       })
       .catch(error => console.error(error));
@@ -379,7 +459,7 @@
       fetch("comments-automatic/config", {
         method: "PUT",
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ id_post: idPost, content_comment: content.value, limit_comments: 5000 })
+        body: JSON.stringify({ id_post: idPost, contents: contents, limit_comments: 5000 })
       })
       .then(response => {
         if (response.ok) {
@@ -394,7 +474,7 @@
       fetch("comments-automatic/config", {
         method: "PUT",
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ id_post: idPost, content_comment: content.value, limit_comments: 1000 })
+        body: JSON.stringify({ id_post: idPost, contents: contents, limit_comments: 1000 })
       })
       .then(response => {
         if (response.ok) {
