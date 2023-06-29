@@ -114,7 +114,7 @@ db.once('open', function() {
           continue
         }
       } catch (err) {
-        console.log(err)
+        // console.log(err)
         continue
       }
     }
