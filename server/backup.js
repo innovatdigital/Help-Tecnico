@@ -1,8 +1,8 @@
 const axios = require('axios');
 
 // Configurações
-const ACCESS_TOKEN = 'EAAHr78QAzgwBACy98BxZB5aRwkZCxMYffRCCqOvnOVxUS7FP14mlJVURessVIWhM08I3On4VfkDIwLJIVS1q2jk3aLJr8a0hEVu3WB4BTRZCN9vddwjfZA4CEznZAHo3BawLq2gfERDpTXF0SBGNtIntakJaGGVlUh6NPde6u4qCEPVT9dn8XQYpKMfkVvVUdyWSFKBhkpSfjUJCJ9ZCZBo6Giwb1KVHW3fHEn9YRs6XBszJzyA4BB1';  // Token de acesso da sua aplicação
-const USER_ID = '114124414953036';  // ID do usuário para quem você deseja enviar a mensagem
+const ACCESS_TOKEN = 'EAAHr78QAzgwBAFOZB8U6uO633bp3kuiU0a3m5evpDKHgdMkYhW6p4fQ2tpZCVbE0e1QkrTZC41Arms14Y2nHeTP3KnBZBtrzgWI3Pvn4zJXla4U4k3LAUG4PtaehYWrHrfcZAwnZBlviTSNq2wZCrug78AvyXbhQiuaW8fVBrGZCNrOaoSmrPYMUw5nWCS84K5FFFcbyP3eTinQRpo8E3s0ZAurARBFZCDg1h3HrIcvYuoFTtZAa0gwm8pX';  // Token de acesso da sua aplicação
+const USER_ID = '2204320113087639';  // ID do usuário para quem você deseja enviar a mensagem
 
 // Corpo da mensagem
 const messageBody = {

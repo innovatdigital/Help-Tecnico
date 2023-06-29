@@ -117,6 +117,7 @@ db.once('open', function() {
 
       processFinished = true;
     } catch (err) {
+      console.log(err)
       processFinished = true;
     }
   }, 1000);
