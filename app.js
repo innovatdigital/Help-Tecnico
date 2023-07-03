@@ -3,8 +3,6 @@ const mongoose = require('mongoose')
 const bodyParser = require('body-parser')
 const session = require('express-session');
 const path = require('path')
-const main = require('./routes/main')
-const checkout = require('./routes/checkoutRouter')
 const login = require('./routes/loginRouter')
 const platform = require('./routes/platformRouter')
 const cookieParser = require('cookie-parser');
@@ -34,9 +32,7 @@ app.use(session({
   saveUninitialized: true
 }));
  
-app.use("/", main)
 app.use("/login", login)
-app.use("/checkout", checkout)
 app.use("/platform", platform)
 
 app.use((req, res, next) => {
@@ -69,6 +65,6 @@ dbConnect()
 
 // Production server
 
-app.listen(3000, () => {
+app.listen(process.env.PORT || 3000, () => {
   console.log('Server listening on port 3000')
 })

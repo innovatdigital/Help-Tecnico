@@ -12,7 +12,8 @@ const Login = asyncHandler(async(req, res) => {
     if (find) {
         if (find.isBloqued == false) {
             const cookieObj = cookie.serialize('_id', find._id, {
-                domain: 'plubee.net',
+                // domain: 'localhost',
+                domain: 'helptecnico.herokuapp.com',
                 path: '/',
                 httpOnly: true,
                 secure: true,

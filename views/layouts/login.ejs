@@ -3,63 +3,159 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="Rocket Sell">
-    <meta name="generator" content="Disparos">
-    <title>pluBee Login</title>
-    <link rel="shortcut icon" href="/img/site/plubee-icon.png" type="image/x-icon">
+    <meta name="description" content="Moreira Refrigeração - Help Técnico">
+    <meta name="author" content="Moreira Refrigeração">
+    <meta name="generator" content="Moreira Refrigeração">
+    <title>Help Técnico - Moreira Refrigeração</title>
+    <link rel="shortcut icon" href="/img/login/icon.png" type="image/x-icon">
+    <link rel="stylesheet" href="/css/platform/style.css">
+    <link rel="stylesheet" href="/css/platform/notify.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/1.8.12/tailwind-experimental.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
-    <link rel="stylesheet" href="/css/main/style.css">
   </head>
 
-<body>
-  <%- include('../partials/nav-site') %>
+<body style="height: 100vh;">
+  <div class="alert mt-14" style="display: none;"><div style="display: flex;" class="alert-text"></div></div>
+  <div class="error mt-14" style="display: none;"><div style="display: flex;" class="error-text"></div></div>
 
-  <div id="login" class="flex min-h-full items-center justify-center px-4 py-20 sm:px-6 lg:px-8">
-    <div class="alert" style="display: none;"><div style="display: flex;" class="alert-text"></div></div>
-    <div class="error" style="display: none;"><div style="display: flex;" class="error-text"></div></div>
-
-    <div class="w-full max-w-sm space-y-10">
-      <div>
-        <img class="mx-auto h-24 w-auto" src="/img/site/nav.png" alt="plubee">
-        <h2 class="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900 made-tommy">Realize o login na sua conta</h2>
-      </div>
-      <div class="space-y-6">
-        <div class="relative -space-y-px rounded-md shadow-sm">
-          <div class="pointer-events-none absolute inset-0 z-10 rounded-md ring-1 ring-inset ring-gray-300"></div>
-          <div>
-            <label for="email-address" class="sr-only">Endereço de email</label>
-            <input id="inputEmail" name="email" type="email" autocomplete="email" required class="relative block w-full rounded-t-lg border py-2 text-gray-900 ring-1 ring-inset ring-gray-100 placeholder:text-gray-400 focus:z-10 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 pl-2 made-tommy" placeholder="Endereço de email">
-          </div>
-          <div>
-            <label for="password" class="sr-only">Senha</label>
-            <input id="inputPassword" name="password" type="password" autocomplete="current-password" required class="relative block w-full rounded-b-lg border py-2 text-gray-900 ring-1 ring-inset ring-gray-100 placeholder:text-gray-400 focus:z-10 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 pl-2 made-tommy" placeholder="Sua senha">
-          </div>
-        </div>
-  
-        <div class="flex items-center justify-center">
-          <div class="text-sm leading-6">
-            <a href="#" class="font-semibold color-purple">Esqueceu a senha?</a>
-          </div>
-        </div>
-  
+  <div class="flex h-full">
+    <div class="flex flex-1 flex-col justify-center px-4 py-12 sm:px-6 lg:flex-none lg:px-20 xl:px-60">
+      <div class="mx-auto w-full max-w-sm lg:w-96">
         <div>
-          <button type="submit" class="flex w-full justify-center rounded-lg px-3 py-2.5 text-sm font-semibold leading-6 text-white bg-purple made-tommy btn-login">Entrar</button>
+          <img class="h-28 w-auto" src="/img/login/logo.png" alt="Logo Moreira Refrigeração">
+          <h2 class="mt-8 text-2xl font-extrabold text-blue leading-9 tracking-tight nunito">Entre na sua conta:</h2>
+        </div>
+
+        <div class="mt-10">
+          <div class="space-y-6">
+            <div>
+              <label for="email" class="block nunito text-sm font-medium leading-6 text-gray-900">Seu email</label>
+              <div class="mt-2">
+                <input id="email" name="email" type="email" autocomplete="email" required class="block w-full nunito login-input rounded-lg py-1.5 px-2 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+              </div>
+            </div>
+
+            <div>
+              <label for="password" class="block nunito text-sm font-medium leading-6 text-gray-900">Sua senha</label>
+              <div class="mt-2">
+                <input id="password" name="password" type="password" autocomplete="current-password" required class="block w-full nunito login-input rounded-lg py-1.5 px-2 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+              </div>
+            </div>
+
+            <div class="flex items-center justify-between">
+              <div class="flex items-center">
+                <input id="remember-me" name="remember-me" type="checkbox" class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600">
+                <label for="remember-me" class="ml-3 block text-sm leading-6 text-gray-700 nunito">Lembrar de mim</label>
+              </div>
+
+              <div class="text-sm leading-6">
+                <a href="#" class="font-bold text-blue nunito">Esqueceu a senha?</a>
+              </div>
+            </div>
+
+            <div>
+              <button id="btn-login" class="flex w-full justify-center bg-blue rounded-md px-3 py-2 text-sm font-semibold leading-6 text-white shadow-sm nunito">Entrar</button>
+            </div>
+          </div>
+
+          <div class="mt-10">
+            <div class="flex flex-col items-center justify-center">
+              <span class="bg-white px-6 text-md text-gray-500 nunito font-extrabold">Precisa de suporte?</span>
+              <span class="bg-white px-6 text-sm text-gray-500 nunito font-bold">Ligue: 51 99542-0261</span>
+            </div>
+          </div>
         </div>
       </div>
-  
-      <p class="text-center text-sm leading-6 text-gray-500">
-        Não é um membro?
-        <a href="/#plans" class="font-semibold color-purple">Adquira um plano e obtenha 7 dias de garantia!</a>
-      </p>
+    </div>
+    
+    <div class="relative hidden w-0 flex-1 lg:block">
+      <img class="absolute inset-0 h-full w-full object-cover" src="/img/login/photo.jpg" alt="">
     </div>
   </div>
-
-  <%- include('../partials/footer-site') %>
-</body>
-</html>
+</div>
 
 <script>
-  const _0x52ccf7=_0x3fae;(function(_0x19fa2e,_0x33312d){const _0x45665e=_0x3fae,_0x3935ef=_0x19fa2e();while(!![]){try{const _0x5610ea=-parseInt(_0x45665e(0x8c))/(0x6ad+0x2d+-0x6d9)*(parseInt(_0x45665e(0xb4))/(0x296*0x4+-0x9ad*0x4+0x1c5e))+parseInt(_0x45665e(0xc4))/(0x1c*-0x6d+-0xd*-0x213+0x3c2*-0x4)*(parseInt(_0x45665e(0x74))/(0xf6a*0x1+-0x1*0x13ab+0x445))+-parseInt(_0x45665e(0xd3))/(0x2545+0xe81+0x33c1*-0x1)*(parseInt(_0x45665e(0x9a))/(-0x1b0f+-0x203f+0x3b54))+-parseInt(_0x45665e(0x8f))/(0x17*-0x167+0x119+0x1f2f*0x1)+-parseInt(_0x45665e(0xc6))/(0x23ae+0x1631+-0x43*0xdd)*(-parseInt(_0x45665e(0x89))/(0xe*-0x1bb+0x4*-0xb0+0x1b03))+-parseInt(_0x45665e(0xba))/(0x806*0x4+-0x67*-0x24+-0x2e8a)+parseInt(_0x45665e(0x7d))/(0x1e3f+0x22ed+-0x4121);if(_0x5610ea===_0x33312d)break;else _0x3935ef['push'](_0x3935ef['shift']());}catch(_0xee1453){_0x3935ef['push'](_0x3935ef['shift']());}}}(_0x9ca8,-0x1179ea+0x18b15*-0x5+-0x46050*-0x8),document[_0x52ccf7(0x71)+_0x52ccf7(0x79)](_0x52ccf7(0x77),function(_0x440e7b){const _0x3ce652=_0x52ccf7,_0x159f93={'uJITV':function(_0x375dd0,_0x7c4062){return _0x375dd0==_0x7c4062;},'aXnzG':function(_0x5b0d4a){return _0x5b0d4a();}};_0x159f93[_0x3ce652(0xb8)](_0x440e7b[_0x3ce652(0xbb)],-0x874+0x106a+0x4b*-0x1b)&&_0x159f93[_0x3ce652(0xca)](login);},![]));window[_0x52ccf7(0xab)][_0x52ccf7(0xc5)]&&window[_0x52ccf7(0xab)][_0x52ccf7(0xc5)]===_0x52ccf7(0xd1)&&(window[_0x52ccf7(0xab)][_0x52ccf7(0xc5)]='',location[_0x52ccf7(0xaf)]=_0x52ccf7(0x7c)+_0x52ccf7(0xd7));function _0x3fae(_0x1952f6,_0x3c7749){const _0x89da4=_0x9ca8();return _0x3fae=function(_0x5a91c9,_0x1c1146){_0x5a91c9=_0x5a91c9-(-0x716+-0x2*-0x10de+-0x5*0x53f);let _0x2698b2=_0x89da4[_0x5a91c9];return _0x2698b2;},_0x3fae(_0x1952f6,_0x3c7749);}function alert_message(_0x4d94f4,_0x402baf){const _0x3d575f=_0x52ccf7,_0x188322={'ExORI':_0x3d575f(0xa3)+_0x3d575f(0xd5),'WhJnV':_0x3d575f(0xbd)+_0x3d575f(0xa8)+_0x3d575f(0x6f),'SzVaj':function(_0x3ed569,_0x54f611,_0x5e8b84){return _0x3ed569(_0x54f611,_0x5e8b84);},'ubSdc':function(_0xde96bb,_0x2b94c2,_0x4274a0){return _0xde96bb(_0x2b94c2,_0x4274a0);},'lUSat':function(_0x535ed6,_0x4fc830){return _0x535ed6==_0x4fc830;},'bqqqD':_0x3d575f(0xc7),'AunaL':_0x3d575f(0x72),'hVLaE':_0x3d575f(0x70),'vwHaE':_0x3d575f(0x82),'woxrh':_0x3d575f(0x84)+_0x3d575f(0xd9)+_0x3d575f(0x80),'QnNSE':_0x3d575f(0xac)+_0x3d575f(0xb5),'TWQJT':_0x3d575f(0xa5),'SiDQs':_0x3d575f(0xa2),'sWVVf':_0x3d575f(0x84)+_0x3d575f(0x8b)+_0x3d575f(0xc8),'kBZIV':function(_0x2a4fe9,_0x23a129,_0x3a336c){return _0x2a4fe9(_0x23a129,_0x3a336c);}};if(_0x188322[_0x3d575f(0xbe)](_0x4d94f4,_0x188322[_0x3d575f(0xce)])){const _0x2a7d2d=document[_0x3d575f(0x9b)+_0x3d575f(0x75)](_0x188322[_0x3d575f(0xc2)]);_0x2a7d2d[_0x3d575f(0xae)][_0x3d575f(0x81)]=_0x188322[_0x3d575f(0x6e)],_0x2a7d2d[_0x3d575f(0x9f)]='';const _0x4045a5=document[_0x3d575f(0xb2)+_0x3d575f(0x96)]('p'),_0x43b6ff=document[_0x3d575f(0xb2)+_0x3d575f(0x96)](_0x188322[_0x3d575f(0x8a)]);_0x43b6ff[_0x3d575f(0x94)]='28',_0x43b6ff[_0x3d575f(0x6c)]='28',_0x43b6ff[_0x3d575f(0x99)]=_0x188322[_0x3d575f(0xcb)],_0x4045a5[_0x3d575f(0xd0)][_0x3d575f(0x7a)](_0x188322[_0x3d575f(0x8e)]),_0x4045a5[_0x3d575f(0xbc)]=_0x402baf,_0x2a7d2d[_0x3d575f(0x7e)+'d'](_0x43b6ff),_0x2a7d2d[_0x3d575f(0x7e)+'d'](_0x4045a5),_0x188322[_0x3d575f(0xd2)](setTimeout,()=>{const _0x68efe1=_0x3d575f,_0x55ae86={'qgjUv':_0x188322[_0x68efe1(0x9d)]};_0x2a7d2d[_0x68efe1(0xae)]=_0x188322[_0x68efe1(0xb7)],_0x188322[_0x68efe1(0x98)](setTimeout,()=>{const _0x3fea13=_0x68efe1;_0x2a7d2d[_0x3fea13(0xae)]=_0x55ae86[_0x3fea13(0x7f)];},-0x1b39+0x107*-0x17+0x149*0x2a);},-0x236+0x59*-0x61+0x2bbf);}else{if(_0x188322[_0x3d575f(0xbe)](_0x4d94f4,_0x188322[_0x3d575f(0x88)])){const _0x58afdf=document[_0x3d575f(0x9b)+_0x3d575f(0x75)](_0x188322[_0x3d575f(0xd4)]);_0x58afdf[_0x3d575f(0xae)][_0x3d575f(0x81)]=_0x188322[_0x3d575f(0x6e)],_0x58afdf[_0x3d575f(0x9f)]='';const _0x321704=document[_0x3d575f(0xb2)+_0x3d575f(0x96)]('p'),_0x1ed745=document[_0x3d575f(0xb2)+_0x3d575f(0x96)](_0x188322[_0x3d575f(0x8a)]);_0x1ed745[_0x3d575f(0x94)]='28',_0x1ed745[_0x3d575f(0x6c)]='28',_0x1ed745[_0x3d575f(0x99)]=_0x188322[_0x3d575f(0x73)],_0x321704[_0x3d575f(0xd0)][_0x3d575f(0x7a)](_0x188322[_0x3d575f(0x8e)]),_0x321704[_0x3d575f(0xbc)]=_0x402baf,_0x58afdf[_0x3d575f(0x7e)+'d'](_0x1ed745),_0x58afdf[_0x3d575f(0x7e)+'d'](_0x321704),_0x188322[_0x3d575f(0xa6)](setTimeout,()=>{const _0x45e146=_0x3d575f;_0x58afdf[_0x45e146(0xae)]=_0x188322[_0x45e146(0xb7)],_0x188322[_0x45e146(0xd2)](setTimeout,()=>{const _0x2c99cb=_0x45e146;_0x58afdf[_0x2c99cb(0xae)]=_0x188322[_0x2c99cb(0x9d)];},-0x7*-0x137+-0x1f01+-0xa*-0x290);},0x3e+-0x1bbe+0x28*0xe2);}}}const btn=document[_0x52ccf7(0x9b)+_0x52ccf7(0x75)](_0x52ccf7(0x91));btn[_0x52ccf7(0x71)+_0x52ccf7(0x79)](_0x52ccf7(0xb3),function(){const _0x4bc510=_0x52ccf7,_0x15c73a={'tdOBj':function(_0x5d7fc3){return _0x5d7fc3();}};_0x15c73a[_0x4bc510(0x87)](login);});function login(){const _0x31aedb=_0x52ccf7,_0x6f38={'mzWNS':_0x31aedb(0xaa)+_0x31aedb(0x78)+_0x31aedb(0x7b)+_0x31aedb(0x90)+'ão','PADKh':_0x31aedb(0xda)+_0x31aedb(0x85)+_0x31aedb(0xc0),'pZcJK':function(_0xa9d785,_0x18e154,_0x4e20d5){return _0xa9d785(_0x18e154,_0x4e20d5);},'UVTJi':_0x31aedb(0xc7),'lrMUt':_0x31aedb(0xb9)+_0x31aedb(0x86)+_0x31aedb(0x8d),'qkhcT':_0x31aedb(0x92)+'l','XScfj':_0x31aedb(0xb1)+_0x31aedb(0x9c),'qKTMN':function(_0x2d2d91,_0x762fa1){return _0x2d2d91==_0x762fa1;},'kEaOE':_0x31aedb(0x76)+_0x31aedb(0xcf)+'d;','NExsc':_0x31aedb(0x6b)+'h','LDYvH':_0x31aedb(0x6d),'cwuPa':_0x31aedb(0xc9)+_0x31aedb(0x97)},_0x5e0d15=document[_0x31aedb(0x9b)+_0x31aedb(0x75)](_0x6f38[_0x31aedb(0xa1)])[_0x31aedb(0xd8)],_0x51f4da=document[_0x31aedb(0x9b)+_0x31aedb(0x75)](_0x6f38[_0x31aedb(0xd6)])[_0x31aedb(0xd8)];_0x6f38[_0x31aedb(0xa0)](_0x5e0d15[_0x31aedb(0xbf)],0xb*-0x52+-0x4b*-0x7+-0x179*-0x1)&&(_0x5e0d15[_0x31aedb(0xae)]=_0x6f38[_0x31aedb(0xad)]),_0x6f38[_0x31aedb(0xa0)](_0x51f4da[_0x31aedb(0xbf)],-0xa*-0xa1+-0x160a+-0x10*-0xfc)&&(_0x51f4da[_0x31aedb(0xae)]=_0x6f38[_0x31aedb(0xad)]),_0x6f38[_0x31aedb(0x83)](fetch,_0x6f38[_0x31aedb(0x9e)],{'method':_0x6f38[_0x31aedb(0xcd)],'headers':{'Content-Type':_0x6f38[_0x31aedb(0xa9)]},'body':JSON[_0x31aedb(0xc3)]({'email':_0x5e0d15,'password':_0x51f4da})})[_0x31aedb(0xc1)](_0x47f9b5=>{const _0x2206f6=_0x31aedb;if(_0x47f9b5['ok'])return _0x47f9b5[_0x2206f6(0xdb)]();throw new Error(_0x6f38[_0x2206f6(0x95)]);})[_0x31aedb(0xc1)](_0x359e7f=>{const _0x5dec58=_0x31aedb;_0x359e7f[_0x5dec58(0x93)]?window[_0x5dec58(0xab)][_0x5dec58(0xaf)]=_0x6f38[_0x5dec58(0xcc)]:_0x6f38[_0x5dec58(0x83)](alert_message,_0x6f38[_0x5dec58(0xb0)],_0x6f38[_0x5dec58(0xa7)]);})[_0x31aedb(0xb6)](_0x2db579=>{const _0x1a21dd=_0x31aedb;console[_0x1a21dd(0xa4)](_0x2db579);});}function _0x9ca8(){const _0x59d050=['3790860VOkMGg','querySelec','word','ExORI','NExsc','innerHTML','qKTMN','qkhcT','.alert','display:\x20n','log','success','kBZIV','lrMUt','\x20slideoff\x20','cwuPa','Erro\x20ao\x20pr','location','message-no','kEaOE','style','href','UVTJi','#inputPass','createElem','click','353580kcPdci','tify','catch','WhJnV','uJITV','Nenhum\x20usu','7519750DtxWel','which','innerText','animation:','lUSat','length','latform/','then','AunaL','stringify','663339MUtnKB','hash','8YKbgXV','error','ked.png','applicatio','aXnzG','woxrh','PADKh','LDYvH','bqqqD','x\x20solid\x20re','classList','#_=_','ubSdc','10wnCNHM','SiDQs','one','XScfj','accounts','value','/Bulk/erro','https://pl','json','/login/aut','height','POST','hVLaE','2s;','flex','addEventLi','.error','sWVVf','8QemsiL','tor','border:\x202p','keypress','ocessar\x20a\x20','stener','add','resposta\x20d','/platform/','35693581yrQmxj','appendChil','qgjUv','r.png','display','img','pZcJK','/img/admin','ubee.net/p','ário\x20no\x20si','tdOBj','TWQJT','2132307grccYj','vwHaE','/Bulk/chec','2OveSpC','stema','QnNSE','6380304LxWhir','a\x20requisiç','.btn-login','#inputEmai','auth','width','mzWNS','ent','n/json','SzVaj','src'];_0x9ca8=function(){return _0x59d050;};return _0x9ca8();}
+function alert_message(type, content) {
+    if (type == 'error') {
+      const divMessage = document.querySelector(".error");
+      divMessage.style.display = "flex";
+      divMessage.innerHTML = "";
+      const message = document.createElement("p");
+      const img = document.createElement("img");
+      img.width = "28"
+      img.height = "28"
+      img.src = "/img/platform/notify-error.png"
+      message.classList.add("message-notify");
+      message.innerText = content;
+      divMessage.appendChild(img);
+      divMessage.appendChild(message);
+
+      setTimeout(() => {
+        divMessage.style = "animation: slideoff 2s;"
+        setTimeout(() => {
+          divMessage.style = "display: none"
+        }, 800)
+      }, 2000);
+    } else if (type == "success") {
+      const divMessage = document.querySelector(".alert");
+      divMessage.style.display = "flex";
+      divMessage.innerHTML = "";
+      const message = document.createElement("p");
+      const img = document.createElement("img");
+      img.width = "28"
+      img.height = "28"
+      img.src = "/img/platform/notify-success.png"
+      message.classList.add("message-notify");
+      message.innerText = content;
+      divMessage.appendChild(img);
+      divMessage.appendChild(message);
+
+      setTimeout(() => {
+        divMessage.style = "animation: slideoff 2s;"
+        setTimeout(() => {
+          divMessage.style = "display: none"
+        }, 800)
+      }, 2000);
+    }
+  }
+
+  const btn = document.querySelector('#btn-login')
+
+  btn.addEventListener("click", function() {
+    login()
+  })
+
+  function login() {
+    const email = document.querySelector("#email").value;
+    const password = document.querySelector("#password").value;
+
+    if (email.length == 0) { 
+      email.style = "border: 2px solid red;"
+    }
+
+    if (password.length == 0) {
+      password.style = "border: 2px solid red;"
+    }
+
+    fetch("/login/auth", {
+      method: "POST",
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email: email, password: password })
+    })
+    .then((response) => {
+      if (response.ok) {
+        return response.json();
+      }
+      throw new Error("Erro ao processar a resposta da requisição");
+    })
+    .then((data) => {
+      if (data.auth) {
+        window.location.href = "https://helptecnico.herokuapp.com/platform/"
+      } else {
+        alert_message("error", "Nenhum usuário no sistema")
+      }
+    })
+    .catch((error) => {
+      console.log(error)
+    })
+  }
 </script>
