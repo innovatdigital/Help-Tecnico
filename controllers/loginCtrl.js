@@ -13,7 +13,7 @@ const Login = asyncHandler(async(req, res) => {
         if (find.isBloqued == false) {
             const cookieObj = cookie.serialize('_id', find._id, {
                 // domain: 'localhost',
-                domain: 'helptecnico.herokuapp.com',
+                domain: 'helptecnico-b760a39fe14b.herokuapp.com',
                 path: '/',
                 httpOnly: true,
                 secure: true,
