@@ -8,27 +8,22 @@
   <meta name="generator" content="pluBee.net">
   <meta name="robots" content="noindex">
   <title>404</title>
-  <link rel="shortcut icon" href="/img/site/plubee-icon.png" type="image/x-icon">
+  <link rel="shortcut icon" href="/img/login/icon.png" type="image/x-icon">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/1.8.12/tailwind-experimental.min.css">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
-  <link rel="stylesheet" href="/css/main/style.css">
+  <link rel="stylesheet" href="/css/platform/style.css">
 </head>
 
 <body>
-<%- include('../partials/nav-site') %>
-
-<div class="flex h-full  flex-col justify-center py-60 px-6 lg:px-8">
-  <div class="sm:mx-auto sm:w-full title">
-    <div class="flex items-center justify-center mb-3">
-      <a href="#" class="ml-1.5 p-1.5">
-        <img class="h-16 lg:h-24 w-auto" src="/img/site/nav.png" alt="">
-      </a>
-    </div>     
-    <h2 style="color: #752a7a" class="flex flex-col text-center text-2xl font-bold leading-9 text-gray-900 inter">Página não encontrada</h2>
-    <p class="mt-2 text-center text-1xl text-gray-900 inter">A página que você procura não existe.</p>
-    <a style="color: #752a7a; font-weight: bold;" href="/platform" class="mt-6 flex items-center justify-center inter">Voltar ao início →</a>
+<main class="grid min-h-full mt-40 place-items-center bg-white px-6 py-24 sm:py-32 lg:px-8">
+  <div class="text-center">
+    <p class="text-base font-semibold text-blue">404</p>
+    <h1 class="mt-4 text-3xl font-bold tracking-tight text-gray-900 sm:text-5xl nunito">Página não encontrada</h1>
+    <p class="mt-6 text-base leading-7 text-gray-600 nunito">Desculpa, essa página não está disponível no momento.</p>
+    <div class="mt-10 flex items-center justify-center gap-x-6">
+      <a href="/login" class="rounded-md bg-blue px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm">Faça o login</a>
+    </div>
   </div>
-</div>
+</main>
 
 </body>
 </html>

@@ -74,88 +74,99 @@
 </div>
 
 <script>
-function alert_message(type, content) {
-    if (type == 'error') {
-      const divMessage = document.querySelector(".error");
-      divMessage.style.display = "flex";
-      divMessage.innerHTML = "";
-      const message = document.createElement("p");
-      const img = document.createElement("img");
-      img.width = "28"
-      img.height = "28"
-      img.src = "/img/platform/notify-error.png"
-      message.classList.add("message-notify");
-      message.innerText = content;
-      divMessage.appendChild(img);
-      divMessage.appendChild(message);
+const btn = document.querySelector('#btn-login')
 
-      setTimeout(() => {
-        divMessage.style = "animation: slideoff 2s;"
-        setTimeout(() => {
-          divMessage.style = "display: none"
-        }, 800)
-      }, 2000);
-    } else if (type == "success") {
-      const divMessage = document.querySelector(".alert");
-      divMessage.style.display = "flex";
-      divMessage.innerHTML = "";
-      const message = document.createElement("p");
-      const img = document.createElement("img");
-      img.width = "28"
-      img.height = "28"
-      img.src = "/img/platform/notify-success.png"
-      message.classList.add("message-notify");
-      message.innerText = content;
-      divMessage.appendChild(img);
-      divMessage.appendChild(message);
+function alertMessage(type, content) {
+  if (type == 'error') {
+    const divMessage = document.querySelector(".error");
+    divMessage.style.display = "flex";
+    divMessage.innerHTML = "";
+    const message = document.createElement("p");
+    const img = document.createElement("img");
+    img.width = "22"
+    img.height = "22"
+    img.src = "/img/error.svg"
+    message.classList.add("message-notify");
+    message.innerText = content;
+    divMessage.appendChild(img);
+    divMessage.appendChild(message);
 
+    setTimeout(() => {
+      divMessage.style = "animation: slideoff 2s;"
       setTimeout(() => {
-        divMessage.style = "animation: slideoff 2s;"
-        setTimeout(() => {
-          divMessage.style = "display: none"
-        }, 800)
-      }, 2000);
-    }
+        divMessage.style = "display: none"
+      }, 800)
+    }, 3000);
+  } else if (type == "success") {
+    const divMessage = document.querySelector(".alert");
+    divMessage.style.display = "flex";
+    divMessage.innerHTML = "";
+    const message = document.createElement("p");
+    const img = document.createElement("img");
+    img.width = "28"
+    img.height = "28"
+    img.src = "/img/correct.svg"
+    message.classList.add("message-notify");
+    message.innerText = content;
+    divMessage.appendChild(img);
+    divMessage.appendChild(message);
+
+    setTimeout(() => {
+      divMessage.style = "animation: slideoff 2s;"
+      setTimeout(() => {
+        divMessage.style = "display: none"
+      }, 800)
+    }, 3000);
+  }
+}
+
+btn.addEventListener("click", function() {
+  const emailInput = document.querySelector("#email");
+  const passwordInput = document.querySelector("#password");
+  const email = emailInput.value;
+  const password = passwordInput.value;
+
+  if (email.length == 0) { 
+    emailInput.style.border = "2px solid red";
+    return;
   }
 
-  const btn = document.querySelector('#btn-login')
+  if (password.length == 0) {
+    passwordInput.style.border = "2px solid red";
+    return;
+  }
 
-  btn.addEventListener("click", function() {
-    login()
+  fetch("/login/auth", {
+    method: "POST",
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ email: email, password: password })
   })
-
-  function login() {
-    const email = document.querySelector("#email").value;
-    const password = document.querySelector("#password").value;
-
-    if (email.length == 0) { 
-      email.style = "border: 2px solid red;"
+  .then((response) => {
+    if (response.ok) {
+      return response.json();
+    } else {
+      alertMessage("error", "Dados incorretos")
     }
-
-    if (password.length == 0) {
-      password.style = "border: 2px solid red;"
+  })
+  .then((data) => {
+    if (data.token) {
+      const now = new Date();
+      const expires = new Date(now.getTime() + 1 * 24 * 60 * 60 * 1000);
+      document.cookie = `token=${data.token}; expires=${expires.toUTCString()}; path=/`
+      
+      if (data.roles.includes("ADMIN")) {
+        location.href = "/admin/"
+      } else if (data.roles.includes("COMPANY")) {
+        location.href = "/company/"
+      } else if (data.roles.includes("TECHNICIAN")) {
+        location.href = "/technician/"
+      }
+    } else {
+      alertMessage("error", "Dados incorretos")
     }
-
-    fetch("/login/auth", {
-      method: "POST",
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ email: email, password: password })
-    })
-    .then((response) => {
-      if (response.ok) {
-        return response.json();
-      }
-      throw new Error("Erro ao processar a resposta da requisição");
-    })
-    .then((data) => {
-      if (data.auth) {
-        window.location.href = "https://helptecnico-b760a39fe14b.herokuapp.com/platform/"
-      } else {
-        alert_message("error", "Nenhum usuário no sistema")
-      }
-    })
-    .catch((error) => {
-      console.log(error)
-    })
-  }
+  })
+  .catch((error) => {
+    console.log(error)
+  })
+})
 </script>

@@ -6,6 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Help Técnico | Dashboard</title>
+  <link rel="shortcut icon" href="/img/login/icon.png" type="image/x-icon">
   <!-- Favicon -->
   <link rel="shortcut icon" href="/img/site/plubee-icon.png" type="image/x-icon">
   <!-- Custom styles -->
@@ -178,7 +179,7 @@ opacity: 0.45;
         </div>
       </div>
 
-      <div class="grid grid-cols-1 sm:grid-cols-1 lg:grid-cols-4 lg:pr-12">
+      <div class="grid grid-cols-1 sm:grid-cols-1 lg:grid-cols-1 lg:pr-12">
         <div class="px-4 sm:px-6 lg:pl-12 mt-8 col-span-3">
           <div class="sm:flex sm:items-center">
             <div class="sm:flex-auto">
@@ -187,8 +188,105 @@ opacity: 0.45;
           </div>
           
           <div class="mt-4 flow-root">
-            <div class="lg:-mx-4 lg:-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
-
+            <div class="-mx-4 -my-2">
+              <div class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-5">
+                <% if (calls.length > 0) { %>
+                  <div class="overflow-hidden shadow ring-1 ring-black ring-opacity-5 sm:rounded-lg">
+                    <table class="min-w-full divide-y divide-gray-300">
+                      <thead class="bg-gray-50">
+                        <tr>
+                          <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 nunito">ID</th>
+                          <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 nunito">Empresa</th>
+                          <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 nunito">Atender até</th>
+                          <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 nunito">SLA</th>
+                          <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 nunito">Início em</th>
+                          <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 nunito">Status</th>
+                          <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 nunito">Técnico</th>
+                          <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 nunito">Ações</th>
+                        </tr>
+                      </thead>
+  
+                      <tbody class="divide-y divide-gray-200 bg-white">
+                        <% calls.forEach(function(item) { %>
+                          <tr>
+                            <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium sm:pl-6 text-indigo-600">
+                              #284525
+                            </td>
+                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 nunito">
+                              <div class="flex items-center mr-6">
+                                <svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                                  <rect width="36" height="36" rx="18" fill="#888EA8" fill-opacity="0.4"/>
+                                  <rect x="7" y="8" width="22.8571" height="20" fill="url(#pattern0)"/>
+                                  <defs>
+                                  <pattern id="pattern0" patternContentUnits="objectBoundingBox" width="1" height="1">
+                                  <use xlink:href="#image0_155_54" transform="matrix(0.00911458 0 0 0.0104167 0.0625001 0)"/>
+                                  </pattern>
+                                  <image id="image0_155_54" width="96" height="96" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAAACXBIWXMAAAsTAAALEwEAmpwYAAABvElEQVR4nO3ZPU7DYBCE4S0QVwEJjkoQP+IqVHAK4CJAR9CLIqWgQVvEw6438/SJZr6xHUWOMDMzMzMzMzMz+wNwCdwAr8An/X3us+4yX652WOAUeAC+Wa8tcL/rEis8/GfmeFrVCPsrf5q7WNEzf3frTrMFLqI74Ja5rqM74I25XqI74IO53qM7hovuGC66Y7jojuGiO4aL7hguumO46I7hojt1QcSf/6f3DS/ABjhf7OCXKnjo94c438K+9kOceIBaj4uNcGiSI7sDftt4gPrH0ZnvgFpXHmDt7xsOTXDEvwHLvG9guBCfjwdIeIBiHqCYByjmAYp5gGIeoNj4AdQFEFPnT3UvgJg6f6p7AcTU+VPdCyCmzp/qXgAxdf5U9wKIqfOnuhdATJ0/1b0AYur8UV2wmvp8PEDCAxTzAMU8QDEPUMwDFPMAxcYPoC6AmDp/qnsBxNT5U90LIKbOn+peADF1/lT3Aoip86e6F0BMnT/VvQBi6vyp7gUQU+eP6oLV1OfjARIeoJgHKOYBinmAYh6gmAco5gGG8/+AYh6gmAco5gGKeYBiHqCYB1j7AGZmZmZmZmZmFlP8AN3fTDc25TqSAAAAAElFTkSuQmCC"/>
+                                  </defs>
+                                </svg>                                                                    
+                                <p class="nunito ml-2">Empresa {x}</p>
+                              </div>
+                            </td>
+                            <td class="whitespace-nowrap px-3 py-4 text-sm nunito text-green-500 font-bold">
+                              Em atendimento
+                            </td>
+                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 nunito color-purple font-semibold">16 min</td>
+                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 nunito color-purple font-semibold">
+                              <p style="color: #398bf7" class="nunito font-bold">14:11</p>
+                            </td>
+                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 nunito color-purple font-semibold">
+                              <div class="flex items-center justify-end gap-x-2 sm:justify-start">
+                                <div class="flex-none rounded-full p-1 text-green-400 bg-green-opacity">
+                                  <div class="h-1.5 w-1.5 rounded-full bg-current"></div>
+                                </div>
+                                <div class="hidden text-green-400 sm:block">Executando</div>
+                              </div>
+                            </td>
+                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 nunito color-purple">
+                              <div class="flex items-center mr-6">
+                                <img class="h-8 rounded-full" src="<%= item.image_account %>">
+                                <p class="inter ml-2"><%= item.name_account %></p>
+                              </div>
+                            </td>
+                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 nunito color-purple font-semibold">
+                              <div class="flex items-center">
+                                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" class="mr-2">
+                                  <path opacity="0.5" d="M2.73038 12.7463C2.0221 11.8262 1.66797 11.3661 1.66797 9.99992C1.66797 8.63375 2.0221 8.17369 2.73038 7.25353C4.1446 5.41622 6.51639 3.33325 10.0013 3.33325C13.4862 3.33325 15.858 5.41622 17.2722 7.25353C17.9805 8.17369 18.3346 8.63375 18.3346 9.99992C18.3346 11.3661 17.9805 11.8262 17.2722 12.7463C15.858 14.5836 13.4862 16.6666 10.0013 16.6666C6.51639 16.6666 4.1446 14.5836 2.73038 12.7463Z" stroke="#0E1726" stroke-width="1.25"/>
+                                  <path d="M12.5 10C12.5 11.3807 11.3807 12.5 10 12.5C8.61925 12.5 7.5 11.3807 7.5 10C7.5 8.61925 8.61925 7.5 10 7.5C11.3807 7.5 12.5 8.61925 12.5 10Z" stroke="#0E1726" stroke-width="1.25"/>
+                                </svg>
+                                Visualizar                                  
+                              </div>
+                            </td>
+                          </tr>
+                        <% }) %>
+                      </tbody>
+                    </table>
+                  </div>
+                <% } else { %>
+                  <div class="flex flex-col justify-center items-center px-4 sm:px-2 col-span-3 mt-10">
+                    <svg width="245" height="239" viewBox="0 0 245 239" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <g clip-path="url(#clip0_232_2)">
+                      <path d="M155.439 53.7504H89.4637C87.9602 53.7522 86.5189 54.3503 85.4558 55.4134C84.3927 56.4765 83.7946 57.9179 83.7928 59.4213V206.052L83.0367 206.283L66.8519 211.239C66.0848 211.473 65.2563 211.393 64.5482 211.017C63.8402 210.64 63.3104 209.998 63.0751 209.232L14.9328 51.9773C14.6985 51.2102 14.7783 50.3816 15.1548 49.6734C15.5312 48.9651 16.1734 48.4354 16.9403 48.2005L41.881 40.5636L114.185 18.432L139.126 10.7951C139.505 10.6783 139.904 10.6375 140.299 10.675C140.695 10.7125 141.079 10.8276 141.43 11.0137C141.78 11.1998 142.091 11.4533 142.344 11.7596C142.597 12.0659 142.787 12.4191 142.903 12.7989L155.208 52.9943L155.439 53.7504Z" fill="#F2F2F2"/>
+                      <path d="M169.836 52.9965L155.005 4.55181C154.758 3.74463 154.355 2.99399 153.818 2.34277C153.281 1.69155 152.621 1.15252 151.876 0.756489C151.13 0.360454 150.314 0.11517 149.474 0.0346625C148.634 -0.045845 147.786 0.0400014 146.979 0.287288L111.914 11.0204L39.6136 33.1559L4.54843 43.8928C2.91949 44.393 1.55556 45.5191 0.756014 47.0239C-0.0435315 48.5286 -0.213366 50.2892 0.283796 51.919L50.9742 217.483C51.3781 218.799 52.193 219.95 53.2994 220.769C54.4057 221.587 55.7453 222.03 57.1216 222.031C57.7585 222.032 58.3919 221.936 59.0004 221.748L83.0375 214.391L83.7937 214.156V213.366L83.0375 213.597L58.7774 221.026C57.3396 221.464 55.7866 221.314 54.4591 220.609C53.1317 219.904 52.1381 218.701 51.6963 217.264L1.00983 51.696C0.790964 50.9841 0.714685 50.236 0.785354 49.4945C0.856023 48.7531 1.07225 48.0329 1.42166 47.3751C1.77107 46.7173 2.2468 46.135 2.82161 45.6613C3.39641 45.1877 4.05899 44.8321 4.77142 44.6149L39.8365 33.878L112.137 11.7463L147.202 1.00939C147.742 0.84448 148.304 0.760396 148.869 0.759869C150.082 0.762592 151.261 1.15349 152.236 1.87531C153.21 2.59713 153.927 3.61194 154.283 4.77109L169.046 52.9965L169.281 53.7526H170.067L169.836 52.9965Z" fill="#3F3D56"/>
+                      <path d="M46.3798 48.324C45.6511 48.3235 44.9418 48.0895 44.3559 47.6563C43.7699 47.2231 43.3383 46.6135 43.1242 45.917L38.2546 30.0113C38.1238 29.5841 38.0784 29.1352 38.121 28.6904C38.1636 28.2456 38.2935 27.8136 38.5031 27.4189C38.7127 27.0243 38.9981 26.6749 39.3428 26.3905C39.6875 26.1062 40.0848 25.8926 40.5121 25.7618L107.028 5.39805C107.891 5.13474 108.823 5.22455 109.619 5.64775C110.416 6.07095 111.012 6.79297 111.277 7.65534L116.147 23.5612C116.41 24.4241 116.32 25.3561 115.897 26.1528C115.474 26.9495 114.752 27.5458 113.89 27.8109L47.3738 48.1747C47.0517 48.2735 46.7167 48.3238 46.3798 48.324Z" fill="#239CFF"/>
+                      <path d="M71.8893 16.9956C76.0653 16.9956 79.4505 13.6103 79.4505 9.43438C79.4505 5.25844 76.0653 1.87317 71.8893 1.87317C67.7134 1.87317 64.3281 5.25844 64.3281 9.43438C64.3281 13.6103 67.7134 16.9956 71.8893 16.9956Z" fill="#239CFF"/>
+                      <path d="M71.8896 14.2223C74.5339 14.2223 76.6775 12.0787 76.6775 9.43436C76.6775 6.79002 74.5339 4.64636 71.8896 4.64636C69.2452 4.64636 67.1016 6.79002 67.1016 9.43436C67.1016 12.0787 69.2452 14.2223 71.8896 14.2223Z" fill="white"/>
+                      <path d="M227.834 220.097H100.049C99.1975 220.096 98.3807 219.757 97.7782 219.155C97.1758 218.552 96.8369 217.735 96.8359 216.883V63.7689C96.8369 62.9169 97.1758 62.1001 97.7782 61.4977C98.3806 60.8952 99.1975 60.5564 100.049 60.5554H227.834C228.686 60.5564 229.503 60.8953 230.105 61.4977C230.708 62.1002 231.046 62.917 231.047 63.7689V216.883C231.046 217.735 230.708 218.552 230.105 219.155C229.503 219.757 228.686 220.096 227.834 220.097Z" fill="#E6E6E6"/>
+                      <path d="M169.044 52.9943H89.4622C87.7584 52.9967 86.125 53.6746 84.9203 54.8794C83.7155 56.0841 83.0376 57.7175 83.0352 59.4213V213.594L83.7913 213.364V59.4213C83.7931 57.9178 84.3912 56.4765 85.4543 55.4134C86.5174 54.3503 87.9587 53.7522 89.4622 53.7504H169.278L169.044 52.9943ZM238.418 52.9943H89.4622C87.7584 52.9967 86.125 53.6746 84.9203 54.8794C83.7155 56.0841 83.0376 57.7175 83.0352 59.4213V232.573C83.0376 234.277 83.7155 235.91 84.9203 237.115C86.125 238.32 87.7584 238.998 89.4622 239H238.418C240.122 238.998 241.755 238.32 242.96 237.115C244.165 235.91 244.843 234.277 244.845 232.573V59.4213C244.843 57.7175 244.165 56.0841 242.96 54.8794C241.755 53.6746 240.122 52.9967 238.418 52.9943ZM244.089 232.573C244.087 234.076 243.489 235.518 242.426 236.581C241.363 237.644 239.922 238.242 238.418 238.244H89.4622C87.9587 238.242 86.5174 237.644 85.4543 236.581C84.3912 235.518 83.7931 234.076 83.7913 232.573V59.4213C83.7931 57.9178 84.3912 56.4765 85.4543 55.4134C86.5174 54.3503 87.9587 53.7522 89.4622 53.7504H238.418C239.922 53.7522 241.363 54.3503 242.426 55.4134C243.489 56.4765 244.087 57.9178 244.089 59.4213V232.573Z" fill="#3F3D56"/>
+                      <path d="M198.724 69.6288H129.16C128.258 69.6278 127.393 69.269 126.756 68.6311C126.118 67.9932 125.759 67.1284 125.758 66.2263V49.5916C125.759 48.6895 126.118 47.8247 126.756 47.1868C127.393 46.5489 128.258 46.1901 129.16 46.1891H198.724C199.626 46.1901 200.49 46.5489 201.128 47.1868C201.766 47.8247 202.125 48.6895 202.126 49.5916V66.2263C202.125 67.1284 201.766 67.9932 201.128 68.6311C200.49 69.269 199.626 69.6278 198.724 69.6288Z" fill="#239CFF"/>
+                      <path d="M163.94 47.3232C168.116 47.3232 171.501 43.938 171.501 39.762C171.501 35.5861 168.116 32.2008 163.94 32.2008C159.764 32.2008 156.379 35.5861 156.379 39.762C156.379 43.938 159.764 47.3232 163.94 47.3232Z" fill="#239CFF"/>
+                      <path d="M163.941 44.3676C166.485 44.3676 168.547 42.3056 168.547 39.7621C168.547 37.2186 166.485 35.1566 163.941 35.1566C161.398 35.1566 159.336 37.2186 159.336 39.7621C159.336 42.3056 161.398 44.3676 163.941 44.3676Z" fill="white"/>
+                      </g>
+                      <defs>
+                      <clipPath id="clip0_232_2">
+                      <rect width="244.846" height="239" fill="white"/>
+                      </clipPath>
+                      </defs>
+                    </svg>                                                                                                          
+                    <h2 class="nunito text-xl font-semibold mt-4">Nenhum chamado disponível</h2>           
+                  </div>
+                <% } %>
+              </div>
             </div>
           </div>
         </div> 

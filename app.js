@@ -3,8 +3,10 @@ const mongoose = require('mongoose')
 const bodyParser = require('body-parser')
 const session = require('express-session');
 const path = require('path')
-const login = require('./routes/loginRouter')
-const platform = require('./routes/platformRouter')
+const auth = require('./routes/authRouter')
+const admin = require('./routes/adminRouter')
+const company = require('./routes/companyRouter')
+const technician = require('./routes/technicianRouter')
 const cookieParser = require('cookie-parser');
 const dotenv = require('dotenv').config()
 const ejs = require('ejs');
@@ -32,12 +34,14 @@ app.use(session({
   saveUninitialized: true
 }));
  
-app.use("/login", login)
-app.use("/platform", platform)
+app.use("/login", auth)
+app.use("/company", company)
+app.use("/technician", technician)
+app.use("/admin", admin)
 
-// app.use((req, res, next) => {
-//   res.status(404).render('layouts/notFound')
-// });
+app.use((req, res, next) => {
+  res.status(404).render('layouts/notFound')
+});
 
 app.use(helmet());
 
@@ -54,17 +58,17 @@ const dbConnect = () => {
 dbConnect()
 
 // Dev server
-// const options = {
-//   key: fs.readFileSync("./keys/localhost-key.pem"),
-//   cert: fs.readFileSync("./keys/localhost.pem"),
-// };
+const options = {
+  key: fs.readFileSync("./keys/localhost-key.pem"),
+  cert: fs.readFileSync("./keys/localhost.pem"),
+};
 
-// https.createServer(options, app).listen(5500, () => {
-//   console.log('Server listening on port ' + 5500);
-// });
+https.createServer(options, app).listen(5500, () => {
+  console.log('Server listening on port ' + 5500);
+});
 
 // Production server
 
-app.listen(process.env.PORT || 3000, () => {
-  console.log('Server listening on port 3000')
-})
+// app.listen(process.env.PORT || 3000, () => {
+//   console.log('Server listening on port 3000')
+// })
