@@ -29,9 +29,17 @@ const Technician = new mongoose.Schema({
         type: Array,
         default: ["TECHNICIAN"]
     },
-    isAdmin: {
-        type: Boolean,
-        default: false
+    address: {
+        type: String,
+        require: true
+    },
+    city: {
+        type: String,
+        require: true
+    },
+    cep: {
+        type: String,
+        require: true
     },
     isBlocked: {
         type: Boolean,
@@ -48,6 +56,10 @@ const Technician = new mongoose.Schema({
     notificationEmail: {
         type: Boolean,
         default: true
+    },
+    comments: {
+        type: String,
+        require: true
     },
     calls: {
         type: Array,

@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Help Técnico | Novo administrador</title>
+  <title>Help Técnico | Novo técnico</title>
   <link rel="shortcut icon" href="/img/login/icon.png" type="image/x-icon">
   <!-- Custom styles -->
   <link rel="stylesheet" href="/css/platform/style.css">
@@ -18,29 +18,28 @@
   <%- include('../partials/sidebar-platform', {isAdmin: isAdmin}) %>
 
   <div class="lg:pl-70">
-    <%- include('../partials/nav-platform', {isAdmin: isAdmin, title: "Adicionar novo usuário", notifications: notifications, photo: photo, name_user: name_user}) %>
+    <%- include('../partials/nav-platform', {isAdmin: isAdmin, title: "Adicionar novo fornecedor", notifications: notifications, photo: photo, name_user: name_user}) %>
 
     <main class="py-8 px-12 fade-in">
       <div class="alert mt-10" style="display: none;"><div style="display: flex;" class="alert-text"></div></div>
       <div class="error" style="display: none;"><div style="display: flex;" class="error-text"></div></div>
 
       <div class="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-x-6">
-        <div class="bg-white rounded-xl shadow p-4 px-5 col-span-3">
-          <div class="flex space-x-2 items-center border-b pb-3">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M10.1075 17.0775C10.1075 15.8313 10.5229 14.4006 11.169 13.2929C11.9536 11.9083 12.8305 11.3544 13.5229 10.339C14.6767 8.63133 14.9075 6.18518 14.169 4.33902C13.4305 2.44672 11.6767 1.33902 9.64593 1.38518C7.61516 1.43133 5.95362 2.67749 5.30747 4.56979C4.56901 6.64672 4.89208 9.13902 6.55362 10.7083C7.24593 11.3544 7.89208 12.3698 7.52285 13.339C7.19977 14.2621 6.09208 14.6775 5.30747 15.0467C3.50747 15.8313 1.33824 16.939 0.969005 19.0621C0.599775 20.816 1.79977 22.616 3.69208 22.616H11.5382C11.9075 22.616 12.1382 22.1544 11.9075 21.8775C10.7536 20.539 10.1075 18.8313 10.1075 17.0775Z" fill="black"/>
-              <path d="M17.4916 11.5391C14.4454 11.5391 11.9531 14.0314 11.9531 17.0775C11.9531 20.1237 14.4454 22.616 17.4916 22.616C20.5377 22.616 23.03 20.1237 23.03 17.0775C23.03 14.0314 20.5377 11.5391 17.4916 11.5391ZM20.307 17.5391C20.307 17.816 20.0762 18.0006 19.7993 18.0006H18.4608V19.3852C18.4608 19.6622 18.23 19.8468 17.9531 19.8468H17.03C16.7531 19.8468 16.6147 19.6622 16.6147 19.3852V18.0006H15.1839C14.907 18.0006 14.7685 17.816 14.7685 17.5391V16.616C14.7685 16.3391 14.907 16.1545 15.1839 16.1545H16.6147V14.7698C16.6147 14.4929 16.7531 14.3083 17.03 14.3083H17.9531C18.23 14.3083 18.4608 14.4929 18.4608 14.7698V16.1545H19.7993C20.0762 16.1545 20.307 16.3391 20.307 16.616V17.5391Z" fill="black"/>
-            </svg>                                        
-            <h2 class="text-xl inter font-bold">Adicionar novo <span class="text-blue">administrador</span></h2>
-          </div>
-
-          <div class="col-span-full flex items-center gap-x-6 mt-6">
+        <div class="bg-white rounded-xl shadow-lg border p-4 px-5 col-span-3">
+          <div class="col-span-full flex items-center gap-x-6 mt-4">
             <svg width="67" height="67" viewBox="0 0 67 67" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <circle cx="33.5" cy="33.5" r="33.5" fill="#239CFF"/>
-              <path d="M34.4707 17L38.831 29.9868H52.9413L41.5258 38.0131L45.8862 51L34.4707 42.9737L23.0552 51L27.4155 38.0131L16 29.9868H30.1103L34.4707 17Z" fill="white"/>
-            </svg>                              
+              <g clip-path="url(#clip0_253_37)">
+              <path d="M33.5 67C52.0015 67 67 52.0015 67 33.5C67 14.9985 52.0015 0 33.5 0C14.9985 0 0 14.9985 0 33.5C0 52.0015 14.9985 67 33.5 67Z" fill="#239CFF"/>
+              <path d="M34.014 15L38.5025 28.3688H53.0278L41.2766 36.6311L45.7652 50L34.014 41.7376L22.2627 50L26.7513 36.6311L15 28.3688H29.5253L34.014 15Z" fill="white"/>
+              </g>
+              <defs>
+              <clipPath id="clip0_253_37">
+              <rect width="67" height="67" fill="white"/>
+              </clipPath>
+              </defs>
+            </svg>                                                                        
                                       
-            <div class="items-center">
+            <div class="items-center mt-2">
               <label style="cursor: pointer;" for="picture" class="rounded-md px-3 py-2 text-sm font-semibold border-blue color-blue shadow-sm inter">Inserir foto</label>
               <p class="mt-4 text-xs leading-5 text-gray-600 inter">JPG, GIF or PNG. 1MB max.</p>
               <input type="file" id="picture" class="hidden" name="picture">
@@ -49,49 +48,49 @@
 
           <div class="grid grid-cols-2 mt-12 gap-x-4">
             <div>
-              <label for="name" class="block text-md font-medium leading-6 text-gray-900 inter font-semibold">Nome</label>
+              <label for="name" class="block text-md font-medium leading-6 text-gray-900 inter font-semibold">Nome do técnico</label>
               <div class="relative mt-2 rounded-md shadow-sm">
-                <input type="text" name="name" id="name" class="block w-full rounded-lg inter py-1.5 mt-2 pl-2 text-gray-900 ring-1 ring-inset ring-gray-300 sm:text-sm sm:leading-6 border-blue" placeholder="Insira o nome">
+                <input type="text" name="name" id="name" class="block w-full rounded-lg inter py-1.5 mt-2 pl-2 text-gray-900 ring-1 ring-inset ring-gray-300 sm:text-sm sm:leading-6 border-blue-1" placeholder="Insira o nome">
               </div>
             </div>
 
             <div>
-              <label for="name" class="block text-md font-medium leading-6 text-gray-900 inter font-semibold">CPF</label>
+              <label for="cpf" class="block text-md font-medium leading-6 text-gray-900 inter font-semibold">CPF</label>
               <div class="relative mt-2 rounded-md shadow-sm">
-                <input type="text" name="name" id="name" class="block w-full rounded-lg inter py-1.5 mt-2 pl-2 text-gray-900 ring-1 ring-inset ring-gray-300 sm:text-sm sm:leading-6 border-blue" placeholder="Insira o nome">
-              </div>
-            </div>
-          </div>
-
-          <div class="grid grid-cols-2 mt-12 gap-x-4">
-            <div>
-              <label for="name" class="block text-md font-medium leading-6 text-gray-900 inter font-semibold">Email</label>
-              <div class="relative mt-2 rounded-md shadow-sm">
-                <input type="text" name="name" id="name" class="block w-full rounded-lg inter py-1.5 mt-2 pl-2 text-gray-900 ring-1 ring-inset ring-gray-300 sm:text-sm sm:leading-6 border-blue" placeholder="Insira o nome">
-              </div>
-            </div>
-
-            <div>
-              <label for="name" class="block text-md font-medium leading-6 text-gray-900 inter font-semibold">Senha</label>
-              <div class="relative mt-2 rounded-md shadow-sm">
-                <input type="text" name="name" id="name" class="block w-full rounded-lg inter py-1.5 mt-2 pl-2 text-gray-900 ring-1 ring-inset ring-gray-300 sm:text-sm sm:leading-6 border-blue" placeholder="Insira o nome">
+                <input type="text" name="cpf" id="cpf" class="block w-full rounded-lg inter py-1.5 mt-2 pl-2 text-gray-900 ring-1 ring-inset ring-gray-300 sm:text-sm sm:leading-6 border-blue-1" placeholder="Insira o CPF">
               </div>
             </div>
           </div>
 
           <div class="grid grid-cols-2 mt-12 gap-x-4">
             <div>
-              <label for="name" class="block text-md font-medium leading-6 text-gray-900 inter font-semibold">Telefone</label>
+              <label for="email" class="block text-md font-medium leading-6 text-gray-900 inter font-semibold">Email</label>
               <div class="relative mt-2 rounded-md shadow-sm">
-                <input type="text" name="name" id="name" class="block w-full rounded-lg inter py-1.5 mt-2 pl-2 text-gray-900 ring-1 ring-inset ring-gray-300 sm:text-sm sm:leading-6 border-blue" placeholder="Insira o nome">
+                <input type="text" name="email" id="email" class="block w-full rounded-lg inter py-1.5 mt-2 pl-2 text-gray-900 ring-1 ring-inset ring-gray-300 sm:text-sm sm:leading-6 border-blue-1" placeholder="Insira o email">
+              </div>
+            </div>
+
+            <div>
+              <label for="password" class="block text-md font-medium leading-6 text-gray-900 inter font-semibold">Senha</label>
+              <div class="relative mt-2 rounded-md shadow-sm">
+                <input type="text" name="password" id="password" class="block w-full rounded-lg inter py-1.5 mt-2 pl-2 text-gray-900 ring-1 ring-inset ring-gray-300 sm:text-sm sm:leading-6 border-blue-1" placeholder="Insira a senha">
+              </div>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-2 mt-12 gap-x-4">
+            <div>
+              <label for="phone" class="block text-md font-medium leading-6 text-gray-900 inter font-semibold">Telefone</label>
+              <div class="relative mt-2 rounded-md shadow-sm">
+                <input type="number" name="phone" id="phone" class="block w-full rounded-lg inter py-1.5 mt-2 pl-2 text-gray-900 ring-1 ring-inset ring-gray-300 sm:text-sm sm:leading-6 border-blue-1" placeholder="Insira o número de celular">
               </div>
             </div>
           </div>
         </div>
 
-        <div class="bg-white rounded-xl shadow p-4 px-5 col-span-1">
+        <div class="bg-white rounded-xl shadow-lg border p-4 px-5 col-span-1">
           <div class="space-y-4">
-            <button type="button" onclick="newUser()" style="background-color: #00AB55;" class="w-full inline-flex justify-center items-center gap-x-1.5 rounded-md px-3 py-3 text-sm font-semibold text-white nunito shadow-sm">
+            <button type="button" onclick="newAdmin()" style="background-color: #00AB55;" class="w-full inline-flex justify-center items-center gap-x-1.5 rounded-md px-3 py-3 text-sm font-semibold text-white nunito shadow-sm">
               <svg width="21" height="20" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <g clip-path="url(#clip0_156_9768)">
                 <path d="M3.46649 17.1132C4.68687 18.3337 6.65105 18.3337 10.5794 18.3337C14.5078 18.3337 16.472 18.3337 17.6923 17.1132C18.9128 15.8929 18.9128 13.9287 18.9128 10.0003C18.9128 9.71574 18.9128 9.57349 18.9001 9.42883C18.8413 8.75441 18.5678 8.09413 18.1325 7.57561C18.0391 7.46438 17.9361 7.3613 17.7299 7.15514L13.4246 2.84986C13.2184 2.64371 13.1153 2.54062 13.0042 2.44725C12.4856 2.01199 11.8253 1.7385 11.1509 1.67962C11.0063 1.66699 10.864 1.66699 10.5794 1.66699C6.65105 1.66699 4.68687 1.66699 3.46649 2.88738C2.24609 4.10777 2.24609 6.07195 2.24609 10.0003C2.24609 13.9287 2.24609 15.8929 3.46649 17.1132Z" stroke="white" stroke-width="1.25"/>
@@ -109,24 +108,23 @@
 
             <button type="button" style="background-color: #2196F3;" class="w-full inline-flex justify-center items-center gap-x-1.5 rounded-md px-3 py-3 text-sm font-semibold text-white nunito shadow-sm">
               <svg width="21" height="20" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <g clip-path="url(#clip0_156_9768)">
-                <path d="M3.46649 17.1132C4.68687 18.3337 6.65105 18.3337 10.5794 18.3337C14.5078 18.3337 16.472 18.3337 17.6923 17.1132C18.9128 15.8929 18.9128 13.9287 18.9128 10.0003C18.9128 9.71574 18.9128 9.57349 18.9001 9.42883C18.8413 8.75441 18.5678 8.09413 18.1325 7.57561C18.0391 7.46438 17.9361 7.3613 17.7299 7.15514L13.4246 2.84986C13.2184 2.64371 13.1153 2.54062 13.0042 2.44725C12.4856 2.01199 11.8253 1.7385 11.1509 1.67962C11.0063 1.66699 10.864 1.66699 10.5794 1.66699C6.65105 1.66699 4.68687 1.66699 3.46649 2.88738C2.24609 4.10777 2.24609 6.07195 2.24609 10.0003C2.24609 13.9287 2.24609 15.8929 3.46649 17.1132Z" stroke="white" stroke-width="1.25"/>
-                <path d="M14.7435 18.3337V17.5003C14.7435 15.929 14.7435 15.1433 14.2553 14.6552C13.7672 14.167 12.9815 14.167 11.4102 14.167H9.74349C8.17214 14.167 7.38646 14.167 6.89831 14.6552C6.41016 15.1433 6.41016 15.929 6.41016 17.5003V18.3337" stroke="white" stroke-width="1.25"/>
-                <path opacity="0.5" d="M6.41016 6.66699H11.4102" stroke="white" stroke-width="1.25" stroke-linecap="round"/>
+                <g clip-path="url(#clip0_156_9775)">
+                <path d="M15.3833 15.4046L17.9922 7.57843C19.0324 4.45761 19.5526 2.89719 18.7289 2.07351C17.9052 1.24982 16.3447 1.76996 13.2237 2.81023L5.44772 5.40214C3.71287 5.98041 2.84544 6.26953 2.58215 6.90563C2.52026 7.05513 2.48285 7.21363 2.47134 7.37502C2.42236 8.0617 3.0689 8.70824 4.36198 10.0012L4.59751 10.2367C4.80976 10.449 4.91587 10.5552 4.9961 10.6732C5.15432 10.9062 5.24413 11.1789 5.25536 11.4602C5.26105 11.603 5.23877 11.7514 5.19422 12.0482C5.03115 13.1347 4.94961 13.6779 5.04566 14.0959C5.23712 14.9292 5.88207 15.5832 6.71256 15.7864C7.12921 15.8883 7.67355 15.8145 8.76225 15.6667L8.82177 15.6587C9.12867 15.617 9.28216 15.5962 9.4295 15.6051C9.69691 15.6212 9.95525 15.7083 10.1779 15.8574C10.3005 15.9396 10.41 16.0491 10.629 16.2681L10.8384 16.4774C12.097 17.736 12.7262 18.3652 13.3938 18.3324C13.5778 18.3234 13.7587 18.2807 13.9273 18.2065C14.5391 17.9373 14.8205 17.0931 15.3833 15.4046Z" stroke="white" stroke-width="1.25"/>
+                <path opacity="0.5" d="M5.80078 15L18.3008 2.5" stroke="white" stroke-width="1.25" stroke-linecap="round"/>
                 </g>
                 <defs>
-                <clipPath id="clip0_156_9768">
-                <rect width="20" height="20" fill="white" transform="translate(0.578125)"/>
+                <clipPath id="clip0_156_9775">
+                <rect width="20" height="20" fill="white" transform="translate(0.800781)"/>
                 </clipPath>
                 </defs>
-              </svg>                
+              </svg>                                                
               Enviar por email
             </button>
+          </div>
 
-            <div class="mt-8">
-              <h2 class="text-sm nunito font-semibold">Observações internas</h2>
-              <textarea class="w-full rounded-lg border-blue mt-2" name="" id="" cols="4" rows="4"></textarea>
-            </div>
+          <div class="mt-8">
+            <h2 class="text-sm nunito font-semibold">Observações internas</h2>
+            <textarea class="w-full rounded-lg border-blue text-sm mt-2 nunito p-2" name="comments" id="comments" cols="4" rows="6"></textarea>
           </div>
         </div>
       </div>
@@ -135,17 +133,7 @@
 </body>
 
 <script>
-  const name = document.querySelector("#name")
-  const cpf = document.querySelector("#cpf")
-  const email = document.querySelector("#email")
-  const password = document.querySelector("#password")
-  const number = document.querySelector("#number")
-  const type = document.querySelector("#type_account")
-  const adminTrue = document.querySelector("#admin-true")
-  const adminFalse = document.querySelector("#admin-false")
-  let admin = false
-
-  function alert_message(type, content) {
+  function alertMessage(type, content) {
     if (type == 'error') {
       const divMessage = document.querySelector(".error");
       divMessage.style.display = "flex";
@@ -154,7 +142,7 @@
       const img = document.createElement("img");
       img.width = "28"
       img.height = "28"
-      img.src = "/img/admin/Bulk/error.png"
+      img.src = "/img/platform/notify-error.png"
       message.classList.add("message-notify");
       message.innerText = content;
       divMessage.appendChild(img);
@@ -174,7 +162,7 @@
       const img = document.createElement("img");
       img.width = "28"
       img.height = "28"
-      img.src = "/img/admin/Bulk/checked.png"
+      img.src = "/img/platform/notify-success.png"
       message.classList.add("message-notify");
       message.innerText = content;
       divMessage.appendChild(img);
@@ -189,72 +177,56 @@
     }
   }
 
-  function newUser() {
-    const errors = []
+  function newAdmin() {
+    const name = document.querySelector("#name")
+    const cpf = document.querySelector("#cpf")
+    const email = document.querySelector("#email")
+    const password = document.querySelector("#password")
+    const phone = document.querySelector("#phone")
+    const comments = document.querySelector("#comments")
 
     if (name.value.length == 0) {
-      name.style = "border: 2px solid #e00d0d !important"
-      errors.push("error")
-    }
-
-    if (password.value.length == 0) {
-      password.style.border = "2px solid #e00d0d";
-      errors.push("error")
+      name.style = "border: 1px solid #e00d0d !important"
+      return
     }
 
     if (cpf.value.length == 0) {
-      password.style.border = "2px solid #e00d0d";
-      errors.push("error")
+      cpf.style.border = "1px solid #e00d0d";
+      return
     }
 
     if (email.value.length == 0) {
-      email.style.border = "2px solid #e00d0d";
-      errors.push("error")
+      email.style.border = "1px solid #e00d0d";
+      return
     }
 
-    if (number.value.length == 0) {
-      number.style.border = "2px solid #e00d0d";
-      errors.push("error")
+    if (password.value.length == 0) {
+      password.style.border = "1px solid #e00d0d";
+      return
     }
 
-    if (type.value == "select") {
-      type.style.border = "2px solid #e00d0d"
-      errors.push("error")
-    }
-    
-    if (adminTrue.checked == false && adminFalse.checked == false) {
-      p_false.color = "#e00d0d !important";
-      p_true.color = "#e00d0d !important";
-      errors.push("error")
+    if (phone.value.length == 0) {
+      phone.style.border = "1px solid #e00d0d";
+      return
     }
 
-    if (adminFalse.checked == false) {
-      admin = false
-    }
-
-    if (adminTrue.checked == true) {
-      admin = true
-    }
-
-    if (errors.length == 0) {
-      fetch('/platform/new_user/save', {
-        method: 'POST',
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({name: name.value, cpf: cpf.value, email: email.value, password: password.value, number: number.value, admin: admin, type_account: type.value})
-      })
-      .then((response) => {
-        if (response.ok) {
-          alert_message("success", "Usuário adicionado com sucesso.")
-        } else {
-          alert_message("error", "Erro ao adicionar usuário")
-        }
-      })
-      .catch((error) => {
-        alert_message("error", "Tente novamente mais tarde")
-      })
-    }
+    fetch('/admin/new-admin/save', {
+      method: 'POST',
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({name: name.value, cpf: cpf.value, email: email.value, password: password.value, phone: phone.value, comments: comments.value})
+    })
+    .then((response) => {
+      if (response.ok) {
+        alertMessage("success", "Admin adicionado com sucesso.")
+      } else {
+        alertMessage("error", "Erro ao adicionar admin")
+      }
+    })
+    .catch((error) => {
+      alertMessage("error", "Tente novamente mais tarde")
+    })
   }
 </script>
 </html>

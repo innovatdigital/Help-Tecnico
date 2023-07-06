@@ -41,15 +41,47 @@ const newUser = asyncHandler(async(req, res) => {
 })
 
 const newTechnician = asyncHandler(async(req, res) => {
-    const find = await User.findById(req.cookies._id)
+    res.render('layouts/newTechnician', { isAdmin: true, notifications: req.user.notifications.reverse().slice(0, 5), photo: req.user.photo, name_user: req.user.name })
+})
 
-    res.render('layouts/newTechnician', { isAdmin: true, notifications: find.notifications.reverse().slice(0, 5), photo: find.photo, name_user: find.name })
+const saveTechnician = asyncHandler(async(req, res) => {
+    try {
+        const data = Date.now();
+        const options = { day: '2-digit', month: '2-digit', year: 'numeric' };
+        const formater = new Intl.DateTimeFormat('pt-BR', options);
+        const dataFormat = formater.format(data);
+
+        req.body.date = dataFormat
+
+        const save = await Technician.create(req.body)
+
+        res.sendStatus(200)
+    } catch (err) {
+        console.log(err)
+        res.sendStatus(500)
+    }
 })
 
 const newCompany = asyncHandler(async(req, res) => {
-    const find = await User.findById(req.cookies._id)
+    res.render('layouts/newCompany', { isAdmin: true, notifications: req.user.notifications.reverse().slice(0, 5), photo: req.user.photo, name_user: req.user.name })
+})
 
-    res.render('layouts/newCompany', { isAdmin: true, notifications: find.notifications.reverse().slice(0, 5), photo: find.photo, name_user: find.name })
+const saveCompany = asyncHandler(async(req, res) => {
+    try {
+        const data = Date.now();
+        const options = { day: '2-digit', month: '2-digit', year: 'numeric' };
+        const formater = new Intl.DateTimeFormat('pt-BR', options);
+        const dataFormat = formater.format(data);
+
+        req.body.date = dataFormat
+
+        const save = await Company.create(req.body)
+
+        res.sendStatus(200)
+    } catch (err) {
+        console.log(err)
+        res.sendStatus(500)
+    }
 })
 
 const newSupplier = asyncHandler(async(req, res) => {
@@ -65,7 +97,7 @@ const saveSupplier = asyncHandler(async(req, res) => {
 
         req.body.date = dataFormat
 
-        const newSuppliers = await Suppliers.create(req.body)
+        const save = await Suppliers.create(req.body)
 
         res.sendStatus(200)
     } catch (err) {
@@ -75,9 +107,25 @@ const saveSupplier = asyncHandler(async(req, res) => {
 })
 
 const newAdmin = asyncHandler(async(req, res) => {
-    const find = await User.findById(req.cookies._id)
+    res.render('layouts/newAdmin', { isAdmin: true, notifications: req.user.notifications.reverse().slice(0, 5), photo: req.user.photo, name_user: req.user.name })
+})
 
-    res.render('layouts/newAdmin', { isAdmin: true, notifications: find.notifications.reverse().slice(0, 5), photo: find.photo, name_user: find.name })
+const saveAdmin = asyncHandler(async(req, res) => {
+    try {
+        const data = Date.now();
+        const options = { day: '2-digit', month: '2-digit', year: 'numeric' };
+        const formater = new Intl.DateTimeFormat('pt-BR', options);
+        const dataFormat = formater.format(data);
+
+        req.body.date = dataFormat
+
+        const save = await Admin.create(req.body)
+
+        res.sendStatus(200)
+    } catch (err) {
+        console.log(err)
+        res.sendStatus(500)
+    }
 })
 
 const newTest = asyncHandler(async(req, res) => {
@@ -152,6 +200,9 @@ module.exports = {
     newAdmin,
     newSupplier,
     saveSupplier,
+    saveTechnician,
+    saveCompany,
+    saveAdmin,
     updateUser,
     blockUser,
     unlockUser,

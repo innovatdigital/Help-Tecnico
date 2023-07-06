@@ -227,7 +227,7 @@
     newItem()
   })
 
-  function alert_message(type, content) {
+  function alertMessage(type, content) {
     if (type == 'error') {
       const divMessage = document.querySelector(".error");
       divMessage.style.display = "flex";
@@ -236,7 +236,7 @@
       const img = document.createElement("img");
       img.width = "28"
       img.height = "28"
-      img.src = "/img/admin/Bulk/error.png"
+      img.src = "/img/platform/notify-error.png"
       message.classList.add("message-notify");
       message.innerText = content;
       divMessage.appendChild(img);
@@ -256,7 +256,7 @@
       const img = document.createElement("img");
       img.width = "28"
       img.height = "28"
-      img.src = "/img/admin/Bulk/checked.png"
+      img.src = "/img/platform/notify-success.png"
       message.classList.add("message-notify");
       message.innerText = content;
       divMessage.appendChild(img);
@@ -288,7 +288,7 @@
       const item = items[i].querySelector("#item-content");
 
       if (item.value.length < 1) {
-        alertMessage("error", "Preencha o campo corretamente")
+        alertMessage("error", "Nenhum item adicionado")
         return
       }
       
@@ -296,7 +296,7 @@
     }
 
     if (contents.length < 1) {
-      alert_message("error", "Adicione pelo menos um item")
+      alertMessage("error", "Adicione pelo menos um item")
       return
     }
 
@@ -339,13 +339,13 @@
     })
     .then((response) => {
       if (response.ok) {
-        alert_message("success", "Usuário adicionado com sucesso.")
+        alertMessage("success", "Fornecedor adicionado com sucesso.")
       } else {
-        alert_message("error", "Erro ao adicionar usuário")
+        alertMessage("error", "Erro ao adicionar fornecedor")
       }
     })
     .catch((error) => {
-      alert_message("error", "Tente novamente mais tarde")
+      alertMessage("error", "Tente novamente mais tarde")
     })
   }
 </script>

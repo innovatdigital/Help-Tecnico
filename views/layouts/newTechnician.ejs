@@ -18,29 +18,21 @@
   <%- include('../partials/sidebar-platform', {isAdmin: isAdmin}) %>
 
   <div class="lg:pl-70">
-    <%- include('../partials/nav-platform', {isAdmin: isAdmin, title: "Adicionar novo usuário", notifications: notifications, photo: photo, name_user: name_user}) %>
+    <%- include('../partials/nav-platform', {isAdmin: isAdmin, title: "Adicionar novo fornecedor", notifications: notifications, photo: photo, name_user: name_user}) %>
 
     <main class="py-8 px-12 fade-in">
       <div class="alert mt-10" style="display: none;"><div style="display: flex;" class="alert-text"></div></div>
       <div class="error" style="display: none;"><div style="display: flex;" class="error-text"></div></div>
 
       <div class="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-x-6">
-        <div class="bg-white rounded-xl shadow p-4 px-5 col-span-3">
-          <div class="flex space-x-2 items-center border-b pb-3">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M10.1075 17.0775C10.1075 15.8313 10.5229 14.4006 11.169 13.2929C11.9536 11.9083 12.8305 11.3544 13.5229 10.339C14.6767 8.63133 14.9075 6.18518 14.169 4.33902C13.4305 2.44672 11.6767 1.33902 9.64593 1.38518C7.61516 1.43133 5.95362 2.67749 5.30747 4.56979C4.56901 6.64672 4.89208 9.13902 6.55362 10.7083C7.24593 11.3544 7.89208 12.3698 7.52285 13.339C7.19977 14.2621 6.09208 14.6775 5.30747 15.0467C3.50747 15.8313 1.33824 16.939 0.969005 19.0621C0.599775 20.816 1.79977 22.616 3.69208 22.616H11.5382C11.9075 22.616 12.1382 22.1544 11.9075 21.8775C10.7536 20.539 10.1075 18.8313 10.1075 17.0775Z" fill="black"/>
-              <path d="M17.4916 11.5391C14.4454 11.5391 11.9531 14.0314 11.9531 17.0775C11.9531 20.1237 14.4454 22.616 17.4916 22.616C20.5377 22.616 23.03 20.1237 23.03 17.0775C23.03 14.0314 20.5377 11.5391 17.4916 11.5391ZM20.307 17.5391C20.307 17.816 20.0762 18.0006 19.7993 18.0006H18.4608V19.3852C18.4608 19.6622 18.23 19.8468 17.9531 19.8468H17.03C16.7531 19.8468 16.6147 19.6622 16.6147 19.3852V18.0006H15.1839C14.907 18.0006 14.7685 17.816 14.7685 17.5391V16.616C14.7685 16.3391 14.907 16.1545 15.1839 16.1545H16.6147V14.7698C16.6147 14.4929 16.7531 14.3083 17.03 14.3083H17.9531C18.23 14.3083 18.4608 14.4929 18.4608 14.7698V16.1545H19.7993C20.0762 16.1545 20.307 16.3391 20.307 16.616V17.5391Z" fill="black"/>
-            </svg>                                        
-            <h2 class="text-xl inter font-bold">Adicionar novo <span class="text-blue">técnico</span></h2>
-          </div>
-
-          <div class="col-span-full flex items-center gap-x-6 mt-6">
+        <div class="bg-white rounded-xl shadow-lg border p-4 px-5 col-span-3">
+          <div class="col-span-full flex items-center gap-x-6 mt-4">
             <svg width="74" height="73" viewBox="0 0 74 73" fill="none" xmlns="http://www.w3.org/2000/svg">
               <ellipse cx="37" cy="36.5" rx="37" ry="36.5" fill="#0EA5E9"/>
-              <path d="M37 38C41.9688 38 46 33.9688 46 29C46 24.0312 41.9688 20 37 20C32.0312 20 28 24.0312 28 29C28 33.9688 32.0312 38 37 38ZM45 40H41.5562C40.1687 40.6375 38.625 41 37 41C35.375 41 33.8375 40.6375 32.4437 40H29C24.5813 40 21 43.5812 21 48V49C21 50.6562 22.3438 52 24 52H50C51.6562 52 53 50.6562 53 49V48C53 43.5812 49.4187 40 45 40Z" fill="white"/>
-            </svg>  
+              <path d="M53.7921 26.6151C53.8836 26.7946 53.9385 26.9905 53.9535 27.1914C53.9684 27.3924 53.9432 27.5943 53.8793 27.7853C53.8153 27.9764 53.7139 28.1528 53.581 28.3042C53.4481 28.4557 53.2864 28.5791 53.1053 28.6673C52.9241 28.7555 52.7272 28.8067 52.526 28.818C52.3249 28.8292 52.1235 28.8002 51.9336 28.7328C51.7438 28.6653 51.5693 28.5606 51.4204 28.4249C51.2714 28.2893 51.151 28.1252 51.0662 27.9425C50.1572 26.0774 48.8766 24.4177 47.303 23.0654C46.8025 22.7863 46.2377 22.6428 45.6646 22.6494C45.0916 22.6559 44.5302 22.8121 44.0361 23.1026C43.5421 23.393 43.1326 23.8076 42.8482 24.3052C42.5638 24.8027 42.4145 25.366 42.415 25.9391V27.6086C42.4143 27.9532 42.2771 28.2834 42.0335 28.527C41.7898 28.7707 41.4596 28.9079 41.115 28.9086H34.3277C33.9831 28.9079 33.6529 28.7707 33.4092 28.527C33.1656 28.2834 33.0284 27.9532 33.0277 27.6086V27.8002C33.0285 27.1613 32.842 26.5361 32.4912 26.0021C32.4113 25.9015 32.3346 25.7984 32.2614 25.6928C31.928 25.295 31.5052 24.9817 31.0276 24.7785C30.5499 24.5753 30.031 24.4881 29.5132 24.5238C28.9954 24.5596 28.4934 24.7174 28.0482 24.9843C27.6031 25.2512 27.2274 25.6197 26.9519 26.0595C26.8101 26.3777 26.563 26.6374 26.2522 26.7949C25.9414 26.9523 25.5859 26.9979 25.2455 26.924C24.905 26.8502 24.6004 26.6613 24.3828 26.3892C24.1653 26.1171 24.048 25.7784 24.0508 25.4301V19.1901C24.0506 18.8366 24.1739 18.4941 24.3994 18.2219C24.6249 17.9497 24.9384 17.7648 25.2858 17.6992C25.6331 17.6336 25.9925 17.6915 26.3017 17.8628C26.6109 18.034 26.8506 18.308 26.9793 18.6372C27.2537 19.0613 27.6223 19.4164 28.0563 19.6749C28.4903 19.9334 28.9781 20.0882 29.4818 20.1274C29.9854 20.1666 30.4913 20.0891 30.9601 19.9009C31.4289 19.7127 31.848 19.4188 32.1847 19.0423C32.3006 18.8661 32.4258 18.6962 32.5597 18.5332L32.5788 18.5031H32.587C33.1443 17.8334 33.8422 17.2947 34.6312 16.9253C35.4202 16.5558 36.2809 16.3648 37.1521 16.3656H37.2342C37.2869 16.3599 37.3399 16.3572 37.3929 16.3574C40.8138 16.3564 44.1661 17.3177 47.0665 19.1316C49.9669 20.9455 52.2985 23.5388 53.7948 26.6151H53.7921ZM41.1014 32.4035C41.1006 32.059 40.9634 31.7287 40.7198 31.4851C40.4761 31.2415 40.1459 31.1043 39.8014 31.1035H35.1077C34.7633 31.105 34.4335 31.2424 34.19 31.4859C33.9465 31.7294 33.8091 32.0592 33.8077 32.4035V58.253C33.8084 58.5976 33.9456 58.9278 34.1892 59.1715C34.4329 59.4151 34.7631 59.5523 35.1077 59.553H39.8014C40.1459 59.5523 40.4761 59.4151 40.7198 59.1715C40.9634 58.9278 41.1006 58.5976 41.1014 58.253V32.4035Z" fill="white"/>
+            </svg>                                                          
                                       
-            <div class="items-center">
+            <div class="items-center mt-2">
               <label style="cursor: pointer;" for="picture" class="rounded-md px-3 py-2 text-sm font-semibold border-blue color-blue shadow-sm inter">Inserir foto</label>
               <p class="mt-4 text-xs leading-5 text-gray-600 inter">JPG, GIF or PNG. 1MB max.</p>
               <input type="file" id="picture" class="hidden" name="picture">
@@ -49,79 +41,72 @@
 
           <div class="grid grid-cols-2 mt-12 gap-x-4">
             <div>
-              <label for="name" class="block text-md font-medium leading-6 text-gray-900 inter font-semibold">Nome</label>
+              <label for="name" class="block text-md font-medium leading-6 text-gray-900 inter font-semibold">Nome do técnico</label>
               <div class="relative mt-2 rounded-md shadow-sm">
-                <input type="text" name="name" id="name" class="block w-full rounded-lg inter py-1.5 mt-2 pl-2 text-gray-900 ring-1 ring-inset ring-gray-300 sm:text-sm sm:leading-6 border-blue" placeholder="Insira o nome">
+                <input type="text" name="name" id="name" class="block w-full rounded-lg inter py-1.5 mt-2 pl-2 text-gray-900 ring-1 ring-inset ring-gray-300 sm:text-sm sm:leading-6 border-blue-1" placeholder="Insira o nome">
               </div>
             </div>
 
             <div>
-              <label for="name" class="block text-md font-medium leading-6 text-gray-900 inter font-semibold">CPF</label>
+              <label for="cpf" class="block text-md font-medium leading-6 text-gray-900 inter font-semibold">CPF</label>
               <div class="relative mt-2 rounded-md shadow-sm">
-                <input type="text" name="name" id="name" class="block w-full rounded-lg inter py-1.5 mt-2 pl-2 text-gray-900 ring-1 ring-inset ring-gray-300 sm:text-sm sm:leading-6 border-blue" placeholder="Insira o nome">
-              </div>
-            </div>
-          </div>
-
-          <div class="grid grid-cols-2 mt-12 gap-x-4">
-            <div>
-              <label for="name" class="block text-md font-medium leading-6 text-gray-900 inter font-semibold">Email</label>
-              <div class="relative mt-2 rounded-md shadow-sm">
-                <input type="text" name="name" id="name" class="block w-full rounded-lg inter py-1.5 mt-2 pl-2 text-gray-900 ring-1 ring-inset ring-gray-300 sm:text-sm sm:leading-6 border-blue" placeholder="Insira o nome">
-              </div>
-            </div>
-
-            <div>
-              <label for="name" class="block text-md font-medium leading-6 text-gray-900 inter font-semibold">Senha</label>
-              <div class="relative mt-2 rounded-md shadow-sm">
-                <input type="text" name="name" id="name" class="block w-full rounded-lg inter py-1.5 mt-2 pl-2 text-gray-900 ring-1 ring-inset ring-gray-300 sm:text-sm sm:leading-6 border-blue" placeholder="Insira o nome">
+                <input type="text" name="cpf" id="cpf" class="block w-full rounded-lg inter py-1.5 mt-2 pl-2 text-gray-900 ring-1 ring-inset ring-gray-300 sm:text-sm sm:leading-6 border-blue-1" placeholder="Insira o CPF">
               </div>
             </div>
           </div>
 
           <div class="grid grid-cols-2 mt-12 gap-x-4">
             <div>
-              <label for="name" class="block text-md font-medium leading-6 text-gray-900 inter font-semibold">Telefone</label>
+              <label for="email" class="block text-md font-medium leading-6 text-gray-900 inter font-semibold">Email</label>
               <div class="relative mt-2 rounded-md shadow-sm">
-                <input type="text" name="name" id="name" class="block w-full rounded-lg inter py-1.5 mt-2 pl-2 text-gray-900 ring-1 ring-inset ring-gray-300 sm:text-sm sm:leading-6 border-blue" placeholder="Insira o nome">
+                <input type="text" name="email" id="email" class="block w-full rounded-lg inter py-1.5 mt-2 pl-2 text-gray-900 ring-1 ring-inset ring-gray-300 sm:text-sm sm:leading-6 border-blue-1" placeholder="Insira o email">
               </div>
             </div>
 
             <div>
-              <label for="name" class="block text-md font-medium leading-6 text-gray-900 inter font-semibold">Cidade</label>
+              <label for="password" class="block text-md font-medium leading-6 text-gray-900 inter font-semibold">Senha</label>
               <div class="relative mt-2 rounded-md shadow-sm">
-                <input type="text" name="name" id="name" class="block w-full rounded-lg inter py-1.5 mt-2 pl-2 text-gray-900 ring-1 ring-inset ring-gray-300 sm:text-sm sm:leading-6 border-blue" placeholder="Insira o nome">
+                <input type="text" name="password" id="password" class="block w-full rounded-lg inter py-1.5 mt-2 pl-2 text-gray-900 ring-1 ring-inset ring-gray-300 sm:text-sm sm:leading-6 border-blue-1" placeholder="Insira a senha">
               </div>
             </div>
           </div>
 
-          <div class="grid grid-cols-3 mt-12 gap-x-4">
+          <div class="grid grid-cols-2 mt-12 gap-x-4">
             <div>
-              <label for="name" class="block text-md font-medium leading-6 text-gray-900 inter font-semibold">Endereço</label>
+              <label for="phone" class="block text-md font-medium leading-6 text-gray-900 inter font-semibold">Telefone</label>
               <div class="relative mt-2 rounded-md shadow-sm">
-                <input type="text" name="name" id="name" class="block w-full rounded-lg inter py-1.5 mt-2 pl-2 text-gray-900 ring-1 ring-inset ring-gray-300 sm:text-sm sm:leading-6 border-blue" placeholder="Insira o nome">
+                <input type="number" name="phone" id="phone" class="block w-full rounded-lg inter py-1.5 mt-2 pl-2 text-gray-900 ring-1 ring-inset ring-gray-300 sm:text-sm sm:leading-6 border-blue-1" placeholder="Insira o número de celular">
               </div>
             </div>
 
             <div>
-              <label for="name" class="block text-md font-medium leading-6 text-gray-900 inter font-semibold">CEP</label>
+              <label for="city" class="block text-md font-medium leading-6 text-gray-900 inter font-semibold">Cidade</label>
               <div class="relative mt-2 rounded-md shadow-sm">
-                <input type="text" name="name" id="name" class="block w-full rounded-lg inter py-1.5 mt-2 pl-2 text-gray-900 ring-1 ring-inset ring-gray-300 sm:text-sm sm:leading-6 border-blue" placeholder="Insira o nome">
+                <input type="text" name="city" id="city" class="block w-full rounded-lg inter py-1.5 mt-2 pl-2 text-gray-900 ring-1 ring-inset ring-gray-300 sm:text-sm sm:leading-6 border-blue-1" placeholder="Insira o celular">
+              </div>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-2 mt-12 gap-x-4">
+            <div>
+              <label for="address" class="block text-md font-medium leading-6 text-gray-900 inter font-semibold">Endereço</label>
+              <div class="relative mt-2 rounded-md shadow-sm">
+                <input type="text" name="address" id="address" class="block w-full rounded-lg inter py-1.5 mt-2 pl-2 text-gray-900 ring-1 ring-inset ring-gray-300 sm:text-sm sm:leading-6 border-blue-1" placeholder="Insira o endereço">
               </div>
             </div>
 
             <div>
-              <label for="name" class="block text-md font-medium leading-6 text-gray-900 inter font-semibold">Número</label>
+              <label for="cep" class="block text-md font-medium leading-6 text-gray-900 inter font-semibold">CEP</label>
               <div class="relative mt-2 rounded-md shadow-sm">
-                <input type="text" name="name" id="name" class="block w-full rounded-lg inter py-1.5 mt-2 pl-2 text-gray-900 ring-1 ring-inset ring-gray-300 sm:text-sm sm:leading-6 border-blue" placeholder="Insira o nome">
+                <input type="number" name="cep" id="cep" class="block w-full rounded-lg inter py-1.5 mt-2 pl-2 text-gray-900 ring-1 ring-inset ring-gray-300 sm:text-sm sm:leading-6 border-blue-1" placeholder="Insira o CEP">
               </div>
             </div>
           </div>
         </div>
 
-        <div class="bg-white rounded-xl shadow p-4 px-5 col-span-1">
+        <div class="bg-white rounded-xl shadow-lg border p-4 px-5 col-span-1">
           <div class="space-y-4">
-            <button type="button" onclick="newUser()" style="background-color: #00AB55;" class="w-full inline-flex justify-center items-center gap-x-1.5 rounded-md px-3 py-3 text-sm font-semibold text-white nunito shadow-sm">
+            <button type="button" onclick="newTechnician()" style="background-color: #00AB55;" class="w-full inline-flex justify-center items-center gap-x-1.5 rounded-md px-3 py-3 text-sm font-semibold text-white nunito shadow-sm">
               <svg width="21" height="20" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <g clip-path="url(#clip0_156_9768)">
                 <path d="M3.46649 17.1132C4.68687 18.3337 6.65105 18.3337 10.5794 18.3337C14.5078 18.3337 16.472 18.3337 17.6923 17.1132C18.9128 15.8929 18.9128 13.9287 18.9128 10.0003C18.9128 9.71574 18.9128 9.57349 18.9001 9.42883C18.8413 8.75441 18.5678 8.09413 18.1325 7.57561C18.0391 7.46438 17.9361 7.3613 17.7299 7.15514L13.4246 2.84986C13.2184 2.64371 13.1153 2.54062 13.0042 2.44725C12.4856 2.01199 11.8253 1.7385 11.1509 1.67962C11.0063 1.66699 10.864 1.66699 10.5794 1.66699C6.65105 1.66699 4.68687 1.66699 3.46649 2.88738C2.24609 4.10777 2.24609 6.07195 2.24609 10.0003C2.24609 13.9287 2.24609 15.8929 3.46649 17.1132Z" stroke="white" stroke-width="1.25"/>
@@ -139,24 +124,23 @@
 
             <button type="button" style="background-color: #2196F3;" class="w-full inline-flex justify-center items-center gap-x-1.5 rounded-md px-3 py-3 text-sm font-semibold text-white nunito shadow-sm">
               <svg width="21" height="20" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <g clip-path="url(#clip0_156_9768)">
-                <path d="M3.46649 17.1132C4.68687 18.3337 6.65105 18.3337 10.5794 18.3337C14.5078 18.3337 16.472 18.3337 17.6923 17.1132C18.9128 15.8929 18.9128 13.9287 18.9128 10.0003C18.9128 9.71574 18.9128 9.57349 18.9001 9.42883C18.8413 8.75441 18.5678 8.09413 18.1325 7.57561C18.0391 7.46438 17.9361 7.3613 17.7299 7.15514L13.4246 2.84986C13.2184 2.64371 13.1153 2.54062 13.0042 2.44725C12.4856 2.01199 11.8253 1.7385 11.1509 1.67962C11.0063 1.66699 10.864 1.66699 10.5794 1.66699C6.65105 1.66699 4.68687 1.66699 3.46649 2.88738C2.24609 4.10777 2.24609 6.07195 2.24609 10.0003C2.24609 13.9287 2.24609 15.8929 3.46649 17.1132Z" stroke="white" stroke-width="1.25"/>
-                <path d="M14.7435 18.3337V17.5003C14.7435 15.929 14.7435 15.1433 14.2553 14.6552C13.7672 14.167 12.9815 14.167 11.4102 14.167H9.74349C8.17214 14.167 7.38646 14.167 6.89831 14.6552C6.41016 15.1433 6.41016 15.929 6.41016 17.5003V18.3337" stroke="white" stroke-width="1.25"/>
-                <path opacity="0.5" d="M6.41016 6.66699H11.4102" stroke="white" stroke-width="1.25" stroke-linecap="round"/>
+                <g clip-path="url(#clip0_156_9775)">
+                <path d="M15.3833 15.4046L17.9922 7.57843C19.0324 4.45761 19.5526 2.89719 18.7289 2.07351C17.9052 1.24982 16.3447 1.76996 13.2237 2.81023L5.44772 5.40214C3.71287 5.98041 2.84544 6.26953 2.58215 6.90563C2.52026 7.05513 2.48285 7.21363 2.47134 7.37502C2.42236 8.0617 3.0689 8.70824 4.36198 10.0012L4.59751 10.2367C4.80976 10.449 4.91587 10.5552 4.9961 10.6732C5.15432 10.9062 5.24413 11.1789 5.25536 11.4602C5.26105 11.603 5.23877 11.7514 5.19422 12.0482C5.03115 13.1347 4.94961 13.6779 5.04566 14.0959C5.23712 14.9292 5.88207 15.5832 6.71256 15.7864C7.12921 15.8883 7.67355 15.8145 8.76225 15.6667L8.82177 15.6587C9.12867 15.617 9.28216 15.5962 9.4295 15.6051C9.69691 15.6212 9.95525 15.7083 10.1779 15.8574C10.3005 15.9396 10.41 16.0491 10.629 16.2681L10.8384 16.4774C12.097 17.736 12.7262 18.3652 13.3938 18.3324C13.5778 18.3234 13.7587 18.2807 13.9273 18.2065C14.5391 17.9373 14.8205 17.0931 15.3833 15.4046Z" stroke="white" stroke-width="1.25"/>
+                <path opacity="0.5" d="M5.80078 15L18.3008 2.5" stroke="white" stroke-width="1.25" stroke-linecap="round"/>
                 </g>
                 <defs>
-                <clipPath id="clip0_156_9768">
-                <rect width="20" height="20" fill="white" transform="translate(0.578125)"/>
+                <clipPath id="clip0_156_9775">
+                <rect width="20" height="20" fill="white" transform="translate(0.800781)"/>
                 </clipPath>
                 </defs>
-              </svg>                
+              </svg>                                                
               Enviar por email
             </button>
+          </div>
 
-            <div class="mt-8">
-              <h2 class="text-sm nunito font-semibold">Observações internas</h2>
-              <textarea class="w-full rounded-lg border-blue mt-2" name="" id="" cols="4" rows="4"></textarea>
-            </div>
+          <div class="mt-8">
+            <h2 class="text-sm nunito font-semibold">Observações internas</h2>
+            <textarea class="w-full rounded-lg border-blue text-sm mt-2 nunito p-2" name="comments" id="comments" cols="4" rows="6"></textarea>
           </div>
         </div>
       </div>
@@ -165,17 +149,7 @@
 </body>
 
 <script>
-  const name = document.querySelector("#name")
-  const cpf = document.querySelector("#cpf")
-  const email = document.querySelector("#email")
-  const password = document.querySelector("#password")
-  const number = document.querySelector("#number")
-  const type = document.querySelector("#type_account")
-  const adminTrue = document.querySelector("#admin-true")
-  const adminFalse = document.querySelector("#admin-false")
-  let admin = false
-
-  function alert_message(type, content) {
+  function alertMessage(type, content) {
     if (type == 'error') {
       const divMessage = document.querySelector(".error");
       divMessage.style.display = "flex";
@@ -184,7 +158,7 @@
       const img = document.createElement("img");
       img.width = "28"
       img.height = "28"
-      img.src = "/img/admin/Bulk/error.png"
+      img.src = "/img/platform/notify-error.png"
       message.classList.add("message-notify");
       message.innerText = content;
       divMessage.appendChild(img);
@@ -204,7 +178,7 @@
       const img = document.createElement("img");
       img.width = "28"
       img.height = "28"
-      img.src = "/img/admin/Bulk/checked.png"
+      img.src = "/img/platform/notify-success.png"
       message.classList.add("message-notify");
       message.innerText = content;
       divMessage.appendChild(img);
@@ -219,72 +193,74 @@
     }
   }
 
-  function newUser() {
-    const errors = []
+  function newTechnician() {
+    const name = document.querySelector("#name")
+    const cpf = document.querySelector("#cpf")
+    const email = document.querySelector("#email")
+    const password = document.querySelector("#password")
+    const phone = document.querySelector("#phone")
+    const city = document.querySelector("#city")
+    const address = document.querySelector("#address")
+    const cep = document.querySelector("#cep")
+    const comments = document.querySelector("#comments")
 
     if (name.value.length == 0) {
-      name.style = "border: 2px solid #e00d0d !important"
-      errors.push("error")
-    }
-
-    if (password.value.length == 0) {
-      password.style.border = "2px solid #e00d0d";
-      errors.push("error")
+      name.style = "border: 1px solid #e00d0d !important"
+      return
     }
 
     if (cpf.value.length == 0) {
-      password.style.border = "2px solid #e00d0d";
-      errors.push("error")
+      cpf.style.border = "1px solid #e00d0d";
+      return
     }
 
     if (email.value.length == 0) {
-      email.style.border = "2px solid #e00d0d";
-      errors.push("error")
+      email.style.border = "1px solid #e00d0d";
+      return
     }
 
-    if (number.value.length == 0) {
-      number.style.border = "2px solid #e00d0d";
-      errors.push("error")
+    if (password.value.length == 0) {
+      password.style.border = "1px solid #e00d0d";
+      return
     }
 
-    if (type.value == "select") {
-      type.style.border = "2px solid #e00d0d"
-      errors.push("error")
-    }
-    
-    if (adminTrue.checked == false && adminFalse.checked == false) {
-      p_false.color = "#e00d0d !important";
-      p_true.color = "#e00d0d !important";
-      errors.push("error")
+    if (phone.value.length == 0) {
+      phone.style.border = "1px solid #e00d0d";
+      return
     }
 
-    if (adminFalse.checked == false) {
-      admin = false
+    if (city.value.length == 0) {
+      city.style.border = "1px solid #e00d0d";
+      return
     }
 
-    if (adminTrue.checked == true) {
-      admin = true
+    if (address.value.length == 0) {
+      address.style.border = "1px solid #e00d0d";
+      return
     }
 
-    if (errors.length == 0) {
-      fetch('/platform/new_user/save', {
-        method: 'POST',
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({name: name.value, cpf: cpf.value, email: email.value, password: password.value, number: number.value, admin: admin, type_account: type.value})
-      })
-      .then((response) => {
-        if (response.ok) {
-          alert_message("success", "Usuário adicionado com sucesso.")
-        } else {
-          alert_message("error", "Erro ao adicionar usuário")
-        }
-      })
-      .catch((error) => {
-        alert_message("error", "Tente novamente mais tarde")
-      })
+    if (cep.value.length == 0) {
+      cep.style.border = "1px solid #e00d0d";
+      return
     }
+
+    fetch('/admin/new-technician/save', {
+      method: 'POST',
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({name: name.value, cpf: cpf.value, email: email.value, password: password.value, phone: phone.value, city: city.value, address: address.value, cep: cep.value, comments: comments.value})
+    })
+    .then((response) => {
+      if (response.ok) {
+        alertMessage("success", "Técnico adicionado com sucesso.")
+      } else {
+        alertMessage("error", "Erro ao adicionar técnico")
+      }
+    })
+    .catch((error) => {
+      alertMessage("error", "Tente novamente mais tarde")
+    })
   }
 </script>
 </html>

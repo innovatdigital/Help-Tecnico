@@ -25,13 +25,17 @@ const Admin = new mongoose.Schema({
         type: String,
         require: true
     },
+    comments: {
+        type: String,
+        require: true
+    },
     roles: {
         type: Array,
         default: ["ADMIN"]
     },
     isAdmin: {
         type: Boolean,
-        default: false
+        default: true
     },
     isBlocked: {
         type: Boolean,

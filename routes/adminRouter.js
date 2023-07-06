@@ -21,6 +21,9 @@ const {
   newSupplier,
   saveSupplier,
   infoUser,
+  saveTechnician,
+  saveAdmin,
+  saveCompany,
   updateUser,
   blockUser,
   unlockUser,
@@ -100,9 +103,15 @@ router.post('/config/upload', authMiddleware, uploadPhoto.single('image'), funct
 
 
 // Functions
-router.get("/new_technician", authMiddleware, isAdmin, newTechnician)
-router.get("/new_company", authMiddleware, isAdmin, newCompany)
-router.get("/new_admin", authMiddleware, isAdmin, newAdmin)
+router.get("/new-technician", authMiddleware, isAdmin, newTechnician)
+router.post("/new-technician/save", authMiddleware, isAdmin, saveTechnician)
+
+router.get("/new-company", authMiddleware, isAdmin, newCompany)
+router.post("/new-company/save", authMiddleware, isAdmin, saveCompany)
+
+router.get("/new-admin", authMiddleware, isAdmin, newAdmin)
+router.post("/new-admin/save", authMiddleware, isAdmin, saveAdmin)
+
 router.get("/new_test", authMiddleware, isAdmin, newTest)
 
 router.get("/new-supplier", authMiddleware, isAdmin, newSupplier)

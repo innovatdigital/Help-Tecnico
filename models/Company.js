@@ -29,9 +29,25 @@ const Company = new mongoose.Schema({
         type: Array,
         default: ["COMPANY"]
     },
-    isAdmin: {
-        type: Boolean,
-        default: false
+    address: {
+        type: String,
+        require: true
+    },
+    city: {
+        type: String,
+        require: true
+    },
+    cep: {
+        type: String,
+        require: true
+    },
+    number: {
+        type: String,
+        require: true
+    },
+    comments: {
+        type: String,
+        require: true
     },
     isBlocked: {
         type: Boolean,
@@ -60,7 +76,20 @@ const Company = new mongoose.Schema({
     equipments: {
         type: Array,
         default: []
-    }
+    },
+    token: {
+        value: {
+          type: String,
+          default: null
+        },
+        expiration: {
+          type: Date,
+          default: null
+        }
+    },
+    refreshToken: {
+        type: String,
+    },
     },
     {
         versionKey: false
