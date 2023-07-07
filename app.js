@@ -58,17 +58,17 @@ const dbConnect = () => {
 dbConnect()
 
 // Dev server
-const options = {
-  key: fs.readFileSync("./keys/localhost-key.pem"),
-  cert: fs.readFileSync("./keys/localhost.pem"),
-};
+// const options = {
+//   key: fs.readFileSync("./keys/localhost-key.pem"),
+//   cert: fs.readFileSync("./keys/localhost.pem"),
+// };
 
-https.createServer(options, app).listen(5500, () => {
-  console.log('Server listening on port ' + 5500);
-});
+// https.createServer(options, app).listen(5500, () => {
+//   console.log('Server listening on port ' + 5500);
+// });
 
 // Production server
 
-// app.listen(process.env.PORT || 3000, () => {
-//   console.log('Server listening on port 3000')
-// })
+app.listen(process.env.PORT || 3000, () => {
+  console.log('Server listening on port 3000')
+})
