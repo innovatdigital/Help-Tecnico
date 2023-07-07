@@ -14,6 +14,8 @@ const {
 const {
   dashboard,
   users,
+  allCalls,
+  allCompanies,
   newTechnician,
   newCompany,
   newAdmin,
@@ -43,8 +45,8 @@ router.get("/", authMiddleware, dashboard)
 
 
 // Infos
-router.get("/all-calls", authMiddleware)
-router.get("/all-companies", authMiddleware)
+router.get("/all-calls", authMiddleware, allCalls)
+router.get("/all-companies", authMiddleware, allCompanies)
 
 // router.delete("/all-posts/delete-post/:id", authMiddleware)
 // router.put("/all-posts/edit-post-schedule-link/:id", authMiddleware, editPostScheduleLink)

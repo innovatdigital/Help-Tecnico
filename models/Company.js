@@ -9,7 +9,11 @@ const Company = new mongoose.Schema({
         type: String,
         require: true
     },
-    phone: {
+    phoneResponsible: {
+        type: Number,
+        require: true
+    },
+    phoneCompany: {
         type: Number,
         require: true
     },

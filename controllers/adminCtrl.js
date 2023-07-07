@@ -6,10 +6,21 @@ const Suppliers = require('../models/Suppliers')
 const Calls = require('../models/Calls')
 
 const dashboard = asyncHandler(async(req, res) => {
-    const find = await Admin.findById(req.user._id)
     const calls = await Calls.find({})
 
-    res.render('layouts/dashboard', {isAdmin: find.isAdmin, notifications: find.notifications.reverse().slice(0, 5), photo: find.photo, name_user: find.name, calls: calls.reverse()})
+    res.render('layouts/dashboard', {isAdmin: true, notifications: req.user.notifications.reverse().slice(0, 5), photo: req.user.photo, name_user: req.user.name, calls: calls.reverse()})
+})
+
+const allCalls = asyncHandler(async(req, res) => {
+    const calls = await Calls.find({})
+
+    res.render('layouts/all-calls', {isAdmin: true, notifications: req.user.notifications.reverse().slice(0, 5), photo: req.user.photo, name_user: req.user.name, calls: calls.reverse()})
+})
+
+const allCompanies = asyncHandler(async(req, res) => {
+    const companies = await Company.find({})
+
+    res.render('layouts/all-companies', {isAdmin: true, notifications: req.user.notifications.reverse().slice(0, 5), photo: req.user.photo, name_user: req.user.name, companies: companies.reverse()})
 })
 
 const users = asyncHandler(async(req, res) => {
@@ -193,6 +204,8 @@ const deleteUser = asyncHandler(async(req, res) => {
 
 module.exports = {
     dashboard,
+    allCalls,
+    allCompanies,
     users,
     newTechnician,
     newCompany,
