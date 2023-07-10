@@ -21,6 +21,18 @@ const newCall = asyncHandler(async(req, res) => {
     res.render('layouts/company/new-call', {notifications: req.user.notifications.reverse().slice(0, 5), photo: req.user.photo, name_user: req.user.name})
 })
 
+const viewCall = asyncHandler(async(req, res) => {
+    res.render('layouts/company/view-call', {notifications: req.user.notifications.reverse().slice(0, 5), photo: req.user.photo, name_user: req.user.name})
+})
+
+const viewEquipment = asyncHandler(async(req, res) => {
+    res.render('layouts/company/view-equipment', {notifications: req.user.notifications.reverse().slice(0, 5), photo: req.user.photo, name_user: req.user.name})
+})
+
+const notifications = asyncHandler(async(req, res) => {
+    res.render('layouts/company/notifications', {notifications: req.user.notifications.reverse().slice(0, 5), photo: req.user.photo, name_user: req.user.name})
+})
+
 const myEquipments = asyncHandler(async(req, res) => {
     res.render('layouts/company/my-equipments', {notifications: req.user.notifications.reverse().slice(0, 5), photo: req.user.photo, name_user: req.user.name})
 })
@@ -295,5 +307,8 @@ module.exports = {
     account,
     updateAccount,
     newPassword,
+    viewCall,
+    viewEquipment,
+    notifications,
     notificationsEmail
 }

@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>pluBee | Notificações</title>
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="/img/site/plubee-icon.png" type="image/x-icon">
+  <!-- Custom styles -->
+  <link rel="stylesheet" href="/css/platform/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/1.8.12/tailwind-experimental.min.css">
+</head>
+
+<body>
+  <%- include('../partials/company/sidebar-company') %>
+
+  <div class="lg:pl-70">
+    <%- include('../partials/company/nav-company', {title: "Notificações", notifications: notifications, photo: photo, name_user: name_user}) %>
+
+    <main class="py-8 px-8 fade-in">
+      <div class="grid grid-cols-1 gap-4 sm:grid-cols-4">
+        <div class="relative flex items-center space-x-3 rounded-lg border border-gray-300 bg-white px-6 py-5 shadow-sm focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2 hover:border-gray-400">
+          <div class="flex-shrink-0">
+            <svg width="31" height="31" viewBox="0 0 31 31" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M24.9793 18.716L23.6877 16.5718C23.4164 16.0939 23.171 15.1897 23.171 14.6601V11.3922C23.171 8.35676 21.3885 5.73468 18.8181 4.5076C18.1464 3.31926 16.9064 2.58301 15.4856 2.58301C14.0777 2.58301 12.8119 3.3451 12.1402 4.54635C9.62146 5.79926 7.87771 8.39551 7.87771 11.3922V14.6601C7.87771 15.1897 7.63229 16.0939 7.36104 16.5589L6.05646 18.716C5.53979 19.5814 5.42354 20.5372 5.74646 21.4156C6.05646 22.281 6.79271 22.9526 7.74854 23.2756C10.2544 24.1281 12.8894 24.5414 15.5243 24.5414C18.1593 24.5414 20.7943 24.1281 23.3002 23.2885C24.2043 22.9914 24.9018 22.3068 25.2377 21.4156C25.5735 20.5243 25.4831 19.5426 24.9793 18.716Z" fill="#1F8CE6"/>
+              <path d="M19.1534 25.8464C18.6109 27.3447 17.1771 28.4168 15.498 28.4168C14.4776 28.4168 13.4701 28.0035 12.7596 27.2672C12.3463 26.8797 12.0363 26.363 11.8555 25.8335C12.0234 25.8593 12.1913 25.8722 12.3721 25.898C12.6692 25.9368 12.9792 25.9755 13.2892 26.0014C14.0255 26.066 14.7746 26.1047 15.5238 26.1047C16.2601 26.1047 16.9963 26.066 17.7196 26.0014C17.9909 25.9755 18.2621 25.9626 18.5205 25.9239C18.7271 25.898 18.9338 25.8722 19.1534 25.8464Z" fill="#1F8CE6"/>
+            </svg>                                                                                      
+          </div>
+          <div class="min-w-0 flex-1">
+            <div>
+              <span class="absolute inset-0" aria-hidden="true"></span>
+              <p class="text-md font-semibold text-gray-900 inter">Chamado aceito por Anderson Moreira</p>
+              <p class="truncate text-sm text-gray-500 inter">Seu chamado foi aceito por Anderson Moreira</p>
+            </div>
+          </div>
+        </div>
+        
+        <div class="relative flex items-center space-x-3 rounded-lg border border-gray-300 bg-white px-6 py-5 shadow-sm focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2 hover:border-gray-400">
+          <div class="flex-shrink-0">
+            <svg width="31" height="31" viewBox="0 0 31 31" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M24.9793 18.716L23.6877 16.5718C23.4164 16.0939 23.171 15.1897 23.171 14.6601V11.3922C23.171 8.35676 21.3885 5.73468 18.8181 4.5076C18.1464 3.31926 16.9064 2.58301 15.4856 2.58301C14.0777 2.58301 12.8119 3.3451 12.1402 4.54635C9.62146 5.79926 7.87771 8.39551 7.87771 11.3922V14.6601C7.87771 15.1897 7.63229 16.0939 7.36104 16.5589L6.05646 18.716C5.53979 19.5814 5.42354 20.5372 5.74646 21.4156C6.05646 22.281 6.79271 22.9526 7.74854 23.2756C10.2544 24.1281 12.8894 24.5414 15.5243 24.5414C18.1593 24.5414 20.7943 24.1281 23.3002 23.2885C24.2043 22.9914 24.9018 22.3068 25.2377 21.4156C25.5735 20.5243 25.4831 19.5426 24.9793 18.716Z" fill="#1F8CE6"/>
+              <path d="M19.1534 25.8464C18.6109 27.3447 17.1771 28.4168 15.498 28.4168C14.4776 28.4168 13.4701 28.0035 12.7596 27.2672C12.3463 26.8797 12.0363 26.363 11.8555 25.8335C12.0234 25.8593 12.1913 25.8722 12.3721 25.898C12.6692 25.9368 12.9792 25.9755 13.2892 26.0014C14.0255 26.066 14.7746 26.1047 15.5238 26.1047C16.2601 26.1047 16.9963 26.066 17.7196 26.0014C17.9909 25.9755 18.2621 25.9626 18.5205 25.9239C18.7271 25.898 18.9338 25.8722 19.1534 25.8464Z" fill="#1F8CE6"/>
+            </svg>                                                                                      
+          </div>
+          <div class="min-w-0 flex-1">
+            <div>
+              <span class="absolute inset-0" aria-hidden="true"></span>
+              <p class="text-md font-semibold text-gray-900 inter">Novo orçamento corretivo</p>
+              <p class="truncate text-sm text-gray-500 inter">Você possui um novo orçamento corretivo</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="relative flex items-center space-x-3 rounded-lg border border-gray-300 bg-white px-6 py-5 shadow-sm focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2 hover:border-gray-400">
+          <div class="flex-shrink-0">
+            <svg width="31" height="31" viewBox="0 0 31 31" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M24.9793 18.716L23.6877 16.5718C23.4164 16.0939 23.171 15.1897 23.171 14.6601V11.3922C23.171 8.35676 21.3885 5.73468 18.8181 4.5076C18.1464 3.31926 16.9064 2.58301 15.4856 2.58301C14.0777 2.58301 12.8119 3.3451 12.1402 4.54635C9.62146 5.79926 7.87771 8.39551 7.87771 11.3922V14.6601C7.87771 15.1897 7.63229 16.0939 7.36104 16.5589L6.05646 18.716C5.53979 19.5814 5.42354 20.5372 5.74646 21.4156C6.05646 22.281 6.79271 22.9526 7.74854 23.2756C10.2544 24.1281 12.8894 24.5414 15.5243 24.5414C18.1593 24.5414 20.7943 24.1281 23.3002 23.2885C24.2043 22.9914 24.9018 22.3068 25.2377 21.4156C25.5735 20.5243 25.4831 19.5426 24.9793 18.716Z" fill="#1F8CE6"/>
+              <path d="M19.1534 25.8464C18.6109 27.3447 17.1771 28.4168 15.498 28.4168C14.4776 28.4168 13.4701 28.0035 12.7596 27.2672C12.3463 26.8797 12.0363 26.363 11.8555 25.8335C12.0234 25.8593 12.1913 25.8722 12.3721 25.898C12.6692 25.9368 12.9792 25.9755 13.2892 26.0014C14.0255 26.066 14.7746 26.1047 15.5238 26.1047C16.2601 26.1047 16.9963 26.066 17.7196 26.0014C17.9909 25.9755 18.2621 25.9626 18.5205 25.9239C18.7271 25.898 18.9338 25.8722 19.1534 25.8464Z" fill="#1F8CE6"/>
+            </svg>                                                                                      
+          </div>
+          <div class="min-w-0 flex-1">
+            <div>
+              <span class="absolute inset-0" aria-hidden="true"></span>
+              <p class="text-md font-semibold text-gray-900 inter">Seu chamado foi finalizado com sucesso</p>
+              <p class="truncate text-sm text-gray-500 inter">Chamado finalizado por Anderson Moreira</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="relative flex items-center space-x-3 rounded-lg border border-gray-300 bg-white px-6 py-5 shadow-sm focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2 hover:border-gray-400">
+          <div class="flex-shrink-0">
+            <svg width="31" height="31" viewBox="0 0 31 31" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M24.9793 18.716L23.6877 16.5718C23.4164 16.0939 23.171 15.1897 23.171 14.6601V11.3922C23.171 8.35676 21.3885 5.73468 18.8181 4.5076C18.1464 3.31926 16.9064 2.58301 15.4856 2.58301C14.0777 2.58301 12.8119 3.3451 12.1402 4.54635C9.62146 5.79926 7.87771 8.39551 7.87771 11.3922V14.6601C7.87771 15.1897 7.63229 16.0939 7.36104 16.5589L6.05646 18.716C5.53979 19.5814 5.42354 20.5372 5.74646 21.4156C6.05646 22.281 6.79271 22.9526 7.74854 23.2756C10.2544 24.1281 12.8894 24.5414 15.5243 24.5414C18.1593 24.5414 20.7943 24.1281 23.3002 23.2885C24.2043 22.9914 24.9018 22.3068 25.2377 21.4156C25.5735 20.5243 25.4831 19.5426 24.9793 18.716Z" fill="#1F8CE6"/>
+              <path d="M19.1534 25.8464C18.6109 27.3447 17.1771 28.4168 15.498 28.4168C14.4776 28.4168 13.4701 28.0035 12.7596 27.2672C12.3463 26.8797 12.0363 26.363 11.8555 25.8335C12.0234 25.8593 12.1913 25.8722 12.3721 25.898C12.6692 25.9368 12.9792 25.9755 13.2892 26.0014C14.0255 26.066 14.7746 26.1047 15.5238 26.1047C16.2601 26.1047 16.9963 26.066 17.7196 26.0014C17.9909 25.9755 18.2621 25.9626 18.5205 25.9239C18.7271 25.898 18.9338 25.8722 19.1534 25.8464Z" fill="#1F8CE6"/>
+            </svg>                                                                                      
+          </div>
+          <div class="min-w-0 flex-1">
+            <div>
+              <span class="absolute inset-0" aria-hidden="true"></span>
+              <p class="text-md font-semibold text-gray-900 inter">Orçamento preventivo enviado</p>
+              <p class="truncate text-sm text-gray-500 inter">Você recebeu um novo orçamento preventivo</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="relative flex items-center space-x-3 rounded-lg border border-gray-300 bg-white px-6 py-5 shadow-sm focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2 hover:border-gray-400">
+          <div class="flex-shrink-0">
+            <svg width="31" height="31" viewBox="0 0 31 31" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M24.9793 18.716L23.6877 16.5718C23.4164 16.0939 23.171 15.1897 23.171 14.6601V11.3922C23.171 8.35676 21.3885 5.73468 18.8181 4.5076C18.1464 3.31926 16.9064 2.58301 15.4856 2.58301C14.0777 2.58301 12.8119 3.3451 12.1402 4.54635C9.62146 5.79926 7.87771 8.39551 7.87771 11.3922V14.6601C7.87771 15.1897 7.63229 16.0939 7.36104 16.5589L6.05646 18.716C5.53979 19.5814 5.42354 20.5372 5.74646 21.4156C6.05646 22.281 6.79271 22.9526 7.74854 23.2756C10.2544 24.1281 12.8894 24.5414 15.5243 24.5414C18.1593 24.5414 20.7943 24.1281 23.3002 23.2885C24.2043 22.9914 24.9018 22.3068 25.2377 21.4156C25.5735 20.5243 25.4831 19.5426 24.9793 18.716Z" fill="#1F8CE6"/>
+              <path d="M19.1534 25.8464C18.6109 27.3447 17.1771 28.4168 15.498 28.4168C14.4776 28.4168 13.4701 28.0035 12.7596 27.2672C12.3463 26.8797 12.0363 26.363 11.8555 25.8335C12.0234 25.8593 12.1913 25.8722 12.3721 25.898C12.6692 25.9368 12.9792 25.9755 13.2892 26.0014C14.0255 26.066 14.7746 26.1047 15.5238 26.1047C16.2601 26.1047 16.9963 26.066 17.7196 26.0014C17.9909 25.9755 18.2621 25.9626 18.5205 25.9239C18.7271 25.898 18.9338 25.8722 19.1534 25.8464Z" fill="#1F8CE6"/>
+            </svg>                                                                                      
+          </div>
+          <div class="min-w-0 flex-1">
+            <div>
+              <span class="absolute inset-0" aria-hidden="true"></span>
+              <p class="text-md font-semibold text-gray-900 inter">Status do chamado atualizado</p>
+              <p class="truncate text-sm text-gray-500 inter">O status do seu chamado foi atualizado por Anderson Moreira</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="relative flex items-center space-x-3 rounded-lg border border-gray-300 bg-white px-6 py-5 shadow-sm focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2 hover:border-gray-400">
+          <div class="flex-shrink-0">
+            <svg width="31" height="31" viewBox="0 0 31 31" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M24.9793 18.716L23.6877 16.5718C23.4164 16.0939 23.171 15.1897 23.171 14.6601V11.3922C23.171 8.35676 21.3885 5.73468 18.8181 4.5076C18.1464 3.31926 16.9064 2.58301 15.4856 2.58301C14.0777 2.58301 12.8119 3.3451 12.1402 4.54635C9.62146 5.79926 7.87771 8.39551 7.87771 11.3922V14.6601C7.87771 15.1897 7.63229 16.0939 7.36104 16.5589L6.05646 18.716C5.53979 19.5814 5.42354 20.5372 5.74646 21.4156C6.05646 22.281 6.79271 22.9526 7.74854 23.2756C10.2544 24.1281 12.8894 24.5414 15.5243 24.5414C18.1593 24.5414 20.7943 24.1281 23.3002 23.2885C24.2043 22.9914 24.9018 22.3068 25.2377 21.4156C25.5735 20.5243 25.4831 19.5426 24.9793 18.716Z" fill="#1F8CE6"/>
+              <path d="M19.1534 25.8464C18.6109 27.3447 17.1771 28.4168 15.498 28.4168C14.4776 28.4168 13.4701 28.0035 12.7596 27.2672C12.3463 26.8797 12.0363 26.363 11.8555 25.8335C12.0234 25.8593 12.1913 25.8722 12.3721 25.898C12.6692 25.9368 12.9792 25.9755 13.2892 26.0014C14.0255 26.066 14.7746 26.1047 15.5238 26.1047C16.2601 26.1047 16.9963 26.066 17.7196 26.0014C17.9909 25.9755 18.2621 25.9626 18.5205 25.9239C18.7271 25.898 18.9338 25.8722 19.1534 25.8464Z" fill="#1F8CE6"/>
+            </svg>                                                                                      
+          </div>
+          <div class="min-w-0 flex-1">
+            <div>
+              <span class="absolute inset-0" aria-hidden="true"></span>
+              <p class="text-md font-semibold text-gray-900 inter">Orçamento preventivo enviado</p>
+              <p class="truncate text-sm text-gray-500 inter">Você recebeu um novo orçamento preventivo</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+</body>
+</html>

@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Help Técnico | Todos os chamados</title>
+  <link rel="shortcut icon" href="/img/login/icon.png" type="image/x-icon">
+  <!-- Custom styles -->
+  <link rel="stylesheet" href="/css/platform/style.css">
+  <link rel="stylesheet" href="/css/platform/notify.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/1.8.12/tailwind-experimental.min.css">
+</head>
+
+<body>
+  <%- include('../partials/company/sidebar-company') %>
+
+  <div class="lg:pl-70">
+    <%- include('../partials/company/nav-company', {title: "Todos os chamados", notifications: notifications, photo: photo, name_user: name_user}) %>
+
+    <main class="py-5 fade-in">
+      <div class="alert mt-14" style="display: none;"><div style="display: flex;" class="alert-text"></div></div>
+      <div class="error mt-14" style="display: none;"><div style="display: flex;" class="error-text"></div></div>
+
+      <div class="px-4 sm:px-6 lg:pl-12 mt-2 col-span-3">
+        <div class="min-h-full">
+          <main class="py-10">
+            <!-- Page header -->
+            <div class="mx-auto max-w-3xl px-4 sm:px-6 md:flex md:items-center md:justify-between md:space-x-5 lg:max-w-7xl lg:px-8">
+              <div class="flex items-center space-x-5">
+                <div class="flex-shrink-0">
+                  <div class="relative">
+                    <img class="h-16 w-16 rounded-full" src="/img/photos/<%= photo %>" alt="">
+                    <span class="absolute inset-0 rounded-full shadow-inner" aria-hidden="true"></span>
+                  </div>
+                </div>
+                <div>
+                  <h1 class="text-2xl font-bold text-gray-900 nunito">Chamado <span class="text-indigo-600">#32455</span></h1>
+                  <p class="text-sm font-semibold text-gray-500 nunito">Aberto por você em: <time datetime="2020-08-25">Julho 10, 2023</time></p>
+                </div>
+              </div>
+              <div class="mt-6 flex flex-col-reverse justify-stretch space-y-4 space-y-reverse sm:flex-row-reverse sm:justify-end sm:space-x-3 sm:space-y-0 sm:space-x-reverse md:mt-0 md:flex-row md:space-x-3">
+                <button type="button" class="inline-flex items-center justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50">Preciso de ajuda</button>
+                <button type="button" class="inline-flex items-center justify-center rounded-md px-3 py-2 text-sm font-semibold text-white shadow-sm bg-red-600">Cancelar chamado</button>
+              </div>
+            </div>
+
+            <div class="mx-auto mt-8 grid max-w-3xl grid-cols-1 gap-6 sm:px-6 lg:max-w-7xl lg:grid-flow-col-dense lg:grid-cols-3">
+              <div class="space-y-6 lg:col-span-2 lg:col-start-1">
+                <!-- Description list-->
+                <section aria-labelledby="applicant-information-title">
+                  <div class="bg-white shadow sm:rounded-lg">
+                    <div class="px-4 py-5 sm:px-6">
+                      <h2 id="applicant-information-title" class="text-lg font-semibold leading-6 text-gray-900 nunito">Informações do chamado:</h2>
+                      <p class="mt-1 max-w-2xl text-sm text-gray-500 nunito">Confira todos os detalhes do seu chamado.</p>
+                    </div>
+                    <div class="border-t border-gray-200 px-4 py-5 sm:px-6">
+                      <dl class="grid grid-cols-1 gap-x-4 gap-y-8 sm:grid-cols-2">
+                        <div class="sm:col-span-1">
+                          <dt class="text-sm font-semibold text-gray-500 nunito">Chamado aberto por:</dt>
+                          <dd class="mt-1 text-sm text-gray-900 nunito">Unimed POA (Você)</dd>
+                        </div>
+                        <div class="sm:col-span-1">
+                          <dt class="text-sm font-semibold text-gray-500 nunito">Endereço de email:</dt>
+                          <dd class="mt-1 text-sm text-gray-900 nunito">contato@unimedpoa.com.br</dd>
+                        </div>
+                        <div class="sm:col-span-1">
+                          <dt class="text-sm font-semibold text-gray-500 nunito">Data</dt>
+                          <dd class="mt-1 text-sm text-gray-900 nunito">10/07/2023</dd>
+                        </div>
+                        <div class="sm:col-span-1">
+                          <dt class="text-sm font-semibold text-gray-500 nunito">Telefone</dt>
+                          <dd class="mt-1 text-sm text-gray-900 nunito">(51) 4004-2040</dd>
+                        </div>
+                        <div class="sm:col-span-2">
+                          <dt class="text-md font-medium text-gray-500">Descrição do chamado:</dt>
+                          <dd class="mt-1 text-sm text-gray-900 nunito nunito font-medium">Estamos enfrentando problemas significativos com os aparelhos de climatização, pois eles não estão conseguindo desempenhar adequadamente a sua função de proporcionar um ambiente climatizado e confortável. Os sistemas de refrigeração estão apresentando falhas que resultam em temperaturas inadequadas e desconfortáveis, afetando negativamente a produtividade e o bem-estar dos ocupantes.</dd>
+                        </div>
+                        <div class="sm:col-span-2">
+                          <dt class="text-sm font-semibold text-gray-500 nunito">Anexos do chamado:</dt>
+                          <dd class="mt-1 text-sm text-gray-900 nunito">
+                            <ul role="list" class="divide-y divide-gray-200 rounded-md border border-gray-200">
+                              <li class="flex items-center justify-between py-3 pl-3 pr-4 text-sm">
+                                <div class="flex w-0 flex-1 items-center">
+                                  <svg class="h-5 w-5 flex-shrink-0 text-gray-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                                    <path fill-rule="evenodd" d="M15.621 4.379a3 3 0 00-4.242 0l-7 7a3 3 0 004.241 4.243h.001l.497-.5a.75.75 0 011.064 1.057l-.498.501-.002.002a4.5 4.5 0 01-6.364-6.364l7-7a4.5 4.5 0 016.368 6.36l-3.455 3.553A2.625 2.625 0 119.52 9.52l3.45-3.451a.75.75 0 111.061 1.06l-3.45 3.451a1.125 1.125 0 001.587 1.595l3.454-3.553a3 3 0 000-4.242z" clip-rule="evenodd" />
+                                  </svg>
+                                  <span class="ml-2 w-0 flex-1 truncate">imagem_do_cliente-1.jpeg</span>
+                                </div>
+                                <div class="ml-4 flex-shrink-0">
+                                  <a href="#" class="font-medium color-blue">Download</a>
+                                </div>
+                              </li>
+                              <li class="flex items-center justify-between py-3 pl-3 pr-4 text-sm">
+                                <div class="flex w-0 flex-1 items-center">
+                                  <svg class="h-5 w-5 flex-shrink-0 text-gray-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                                    <path fill-rule="evenodd" d="M15.621 4.379a3 3 0 00-4.242 0l-7 7a3 3 0 004.241 4.243h.001l.497-.5a.75.75 0 011.064 1.057l-.498.501-.002.002a4.5 4.5 0 01-6.364-6.364l7-7a4.5 4.5 0 016.368 6.36l-3.455 3.553A2.625 2.625 0 119.52 9.52l3.45-3.451a.75.75 0 111.061 1.06l-3.45 3.451a1.125 1.125 0 001.587 1.595l3.454-3.553a3 3 0 000-4.242z" clip-rule="evenodd" />
+                                  </svg>
+                                  <span class="ml-2 w-0 flex-1 truncate">imagem_do_cliente-2.jpeg</span>
+                                </div>
+                                <div class="ml-4 flex-shrink-0">
+                                  <a href="#" class="font-medium color-blue">Download</a>
+                                </div>
+                              </li>
+                            </ul>
+                          </dd>
+                        </div>
+                      </dl>
+                    </div>
+                  </div>
+                </section>
+
+                <!-- Comments-->
+                <section aria-labelledby="notes-title">
+                  <div class="bg-white shadow sm:overflow-hidden sm:rounded-lg">
+                    <div class="divide-y divide-gray-200">
+                      <div class="px-4 py-5 sm:px-6">
+                        <h2 id="notes-title" class="text-lg font-medium text-gray-900">Relatórios do chamado:</h2>
+                      </div>
+                      <div class="px-4 py-6 sm:px-6">
+                        <ul role="list" class="space-y-8">
+                          <li>
+                            <div class="flex space-x-3">
+                              <div class="flex-shrink-0">
+                                <img class="h-10 w-10 rounded-full" src="https://pps.whatsapp.net/v/t61.24694-24/309612029_1303621463511201_2184499647973530355_n.jpg?ccb=11-4&oh=01_AdTLj4igz1k4OkKVwtf5wwXyceqwcgJlQGxo3JG6sDOlTQ&oe=64B44F62" alt="">
+                              </div>
+                              <div>
+                                <div class="text-sm">
+                                  <a href="#" class="font-bold text-md nunito text-gray-900">Anderson Moreira</a>
+                                </div>
+                                <div class="mt-1 text-sm text-gray-700">
+                                  <p class="font-semibold nunito">O chamado a seguir foi atendido com excelência. Deixo aqui o relatório caso a empresa queira conferir.</p>
+                                </div>
+                                <div class="mt-2 space-x-2 text-sm">
+                                  <span class="font-medium text-gray-500">15:44</span>
+                                </div>
+                                <ul role="list" class="divide-y divide-gray-200 rounded-md border border-gray-200 mt-4">
+                                  <li class="flex items-center justify-between py-6 pl-3 pr-4 text-sm">
+                                    <div class="flex w-0 flex-1 items-center">
+                                      <svg class="h-5 w-5 flex-shrink-0 text-gray-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                                        <path fill-rule="evenodd" d="M15.621 4.379a3 3 0 00-4.242 0l-7 7a3 3 0 004.241 4.243h.001l.497-.5a.75.75 0 011.064 1.057l-.498.501-.002.002a4.5 4.5 0 01-6.364-6.364l7-7a4.5 4.5 0 016.368 6.36l-3.455 3.553A2.625 2.625 0 119.52 9.52l3.45-3.451a.75.75 0 111.061 1.06l-3.45 3.451a1.125 1.125 0 001.587 1.595l3.454-3.553a3 3 0 000-4.242z" clip-rule="evenodd" />
+                                      </svg>
+                                      <span class="ml-2 w-0 flex-1 nunito text-md font-bold truncate">Relatório do chamado #32455</span>
+                                    </div>
+                                    <div class="ml-4 flex-shrink-0">
+                                      <a href="#" class="font-medium color-blue">Download</a>
+                                    </div>
+                                  </li>
+                                </ul>
+                              </div>
+                            </div>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </section>
+              </div>
+
+              <section aria-labelledby="timeline-title" class="lg:col-span-1 lg:col-start-3">
+                <div class="bg-white px-4 py-5 shadow sm:rounded-lg sm:px-6">
+                  <h2 id="timeline-title" class="text-lg font-medium text-gray-900">Linha do tempo</h2>
+
+                  <!-- Activity Feed -->
+                  <div class="mt-6 flow-root">
+                    <ul role="list" class="-mb-8">
+                      <li>
+                        <div class="relative pb-8">
+                          <span class="absolute left-4 top-4 -ml-px h-full w-0.5 bg-gray-200" aria-hidden="true"></span>
+                          <div class="relative flex space-x-3">
+                            <div>
+                              <span class="h-8 w-8 rounded-full bg-gray-400 flex items-center justify-center ring-8 ring-white">
+                                <svg class="h-5 w-5 text-white" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                                  <path d="M10 8a3 3 0 100-6 3 3 0 000 6zM3.465 14.493a1.23 1.23 0 00.41 1.412A9.957 9.957 0 0010 18c2.31 0 4.438-.784 6.131-2.1.43-.333.604-.903.408-1.41a7.002 7.002 0 00-13.074.003z" />
+                                </svg>
+                              </span>
+                            </div>
+                            <div class="flex min-w-0 flex-1 justify-between space-x-4 pt-1.5">
+                              <div>
+                                <p class="text-sm nunito font-semibold text-gray-500">Chamado <span class="font-bold">aberto</span> por Unimed POA</a></p>
+                              </div>
+                              <div class="whitespace-nowrap text-right text-sm text-gray-500">
+                                <time datetime="2020-09-20">14:20</time>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </li>
+                      <li>
+                        <div class="relative pb-8">
+                          <span class="absolute left-4 top-4 -ml-px h-full w-0.5 bg-gray-200" aria-hidden="true"></span>
+                          <div class="relative flex space-x-3">
+                            <div>
+                              <span class="h-8 w-8 rounded-full bg-blue-500 flex items-center justify-center ring-8 ring-white">
+                                <img class="h-8 w-8 rounded-full" src="https://pps.whatsapp.net/v/t61.24694-24/309612029_1303621463511201_2184499647973530355_n.jpg?ccb=11-4&oh=01_AdTLj4igz1k4OkKVwtf5wwXyceqwcgJlQGxo3JG6sDOlTQ&oe=64B44F62" alt="">
+                              </span>
+                            </div>
+                            <div class="flex min-w-0 flex-1 justify-between space-x-4 pt-1.5">
+                              <div>
+                                <p class="text-sm nunito font-semibold text-gray-500">Chamado aceito por <span class="font-bold">Anderson Moreira</span></p>
+                              </div>
+                              <div class="whitespace-nowrap text-right text-sm text-gray-500">
+                                <time datetime="2020-09-22">14:24</time>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </li>
+                      <li>
+                        <div class="relative pb-8">
+                          <span class="absolute left-4 top-4 -ml-px h-full w-0.5 bg-gray-200" aria-hidden="true"></span>
+                          <div class="relative flex space-x-3">
+                            <div>
+                              <span class="h-8 w-8 rounded-full bg-green-500 flex items-center justify-center ring-8 ring-white">
+                                <svg class="h-5 w-5 text-white" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                                  <path d="M1 8.25a1.25 1.25 0 112.5 0v7.5a1.25 1.25 0 11-2.5 0v-7.5zM11 3V1.7c0-.268.14-.526.395-.607A2 2 0 0114 3c0 .995-.182 1.948-.514 2.826-.204.54.166 1.174.744 1.174h2.52c1.243 0 2.261 1.01 2.146 2.247a23.864 23.864 0 01-1.341 5.974C17.153 16.323 16.072 17 14.9 17h-3.192a3 3 0 01-1.341-.317l-2.734-1.366A3 3 0 006.292 15H5V8h.963c.685 0 1.258-.483 1.612-1.068a4.011 4.011 0 012.166-1.73c.432-.143.853-.386 1.011-.814.16-.432.248-.9.248-1.388z" />
+                                </svg>
+                              </span>
+                            </div>
+                            <div class="flex min-w-0 flex-1 justify-between space-x-4 pt-1.5">
+                              <div>
+                                <p class="text-sm nunito font-semibold text-gray-500">Técnico <span class="font-bold">Anderson Moreira</span> a caminho do local.</p>
+                              </div>
+                              <div class="whitespace-nowrap text-right text-sm text-gray-500">
+                                <time datetime="2020-09-28">14:26</time>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </li>
+                      <li>
+                        <div class="relative pb-8">
+                          <span class="absolute left-4 top-4 -ml-px h-full w-0.5 bg-gray-200" aria-hidden="true"></span>
+                          <div class="relative flex space-x-3">
+                            <div>
+                              <span class="h-8 w-8 rounded-full bg-blue-500 flex items-center justify-center ring-8 ring-white">
+                                <svg class="h-5 w-5 text-white" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                                  <path d="M1 8.25a1.25 1.25 0 112.5 0v7.5a1.25 1.25 0 11-2.5 0v-7.5zM11 3V1.7c0-.268.14-.526.395-.607A2 2 0 0114 3c0 .995-.182 1.948-.514 2.826-.204.54.166 1.174.744 1.174h2.52c1.243 0 2.261 1.01 2.146 2.247a23.864 23.864 0 01-1.341 5.974C17.153 16.323 16.072 17 14.9 17h-3.192a3 3 0 01-1.341-.317l-2.734-1.366A3 3 0 006.292 15H5V8h.963c.685 0 1.258-.483 1.612-1.068a4.011 4.011 0 012.166-1.73c.432-.143.853-.386 1.011-.814.16-.432.248-.9.248-1.388z" />
+                                </svg>
+                              </span>
+                            </div>
+                            <div class="flex min-w-0 flex-1 justify-between space-x-4 pt-1.5">
+                              <div>
+                                <p class="text-sm nunito font-semibold text-gray-500">Iniciado o atendimento pelo Técnico. (SLA em andamento)</p>
+                              </div>
+                              <div class="whitespace-nowrap text-right text-sm text-gray-500">
+                                <time datetime="2020-09-30">14:40</time>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </li>
+                      <li>
+                        <div class="relative pb-8">
+                          <span class="absolute left-4 top-4 -ml-px h-full w-0.5 bg-gray-200" aria-hidden="true"></span>
+                          <div class="relative flex space-x-3">
+                            <div>
+                              <span class="h-8 w-8 rounded-full bg-blue-500 flex items-center justify-center ring-8 ring-white">
+                                <svg class="h-5 w-5 text-white" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                                  <path d="M1 8.25a1.25 1.25 0 112.5 0v7.5a1.25 1.25 0 11-2.5 0v-7.5zM11 3V1.7c0-.268.14-.526.395-.607A2 2 0 0114 3c0 .995-.182 1.948-.514 2.826-.204.54.166 1.174.744 1.174h2.52c1.243 0 2.261 1.01 2.146 2.247a23.864 23.864 0 01-1.341 5.974C17.153 16.323 16.072 17 14.9 17h-3.192a3 3 0 01-1.341-.317l-2.734-1.366A3 3 0 006.292 15H5V8h.963c.685 0 1.258-.483 1.612-1.068a4.011 4.011 0 012.166-1.73c.432-.143.853-.386 1.011-.814.16-.432.248-.9.248-1.388z" />
+                                </svg>
+                              </span>
+                            </div>
+                            <div class="flex min-w-0 flex-1 justify-between space-x-4 pt-1.5">
+                              <div>
+                                <p class="text-sm nunito font-semibold text-gray-500">Terminado o atendimento pelo Técnico. (SLA concluído) <span class="color-blue">1 hora</span></p>
+                              </div>
+                              <div class="whitespace-nowrap text-right text-sm text-gray-500">
+                                <time datetime="2020-09-30">15:40</time>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </li>
+                      <li>
+                        <div class="relative pb-8">
+                          <div class="relative flex space-x-3">
+                            <div>
+                              <span class="h-8 w-8 rounded-full bg-green-500 flex items-center justify-center ring-8 ring-white">
+                                <svg class="h-5 w-5 text-white" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                                  <path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z" clip-rule="evenodd" />
+                                </svg>
+                              </span>
+                            </div>
+                            <div class="flex min-w-0 flex-1 justify-between space-x-4 pt-1.5">
+                              <div>
+                                <p class="text-sm nunito font-semibold text-gray-500">Chamado concluído com sucesso.<span class="font-bold color-blue">1 relatório</span> gerado.</p>
+                              </div>
+                              <div class="whitespace-nowrap text-right text-sm text-gray-500">
+                                <time datetime="2020-10-04">15:44</time>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </section>
+            </div>
+          </main>
+        </div>
+      </div>
+    </main>
+  </div>
+</body>
+</html>

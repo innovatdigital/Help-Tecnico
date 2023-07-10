@@ -31,13 +31,16 @@ const {
   deleteCompany,
   viewCompany,
   viewSupplier,
+  viewEquipment,
   myEquipments,
   reports,
   account,
   updateAccount,
   newCall,
+  viewCall,
   newPassword,
-  notificationsEmail
+  notificationsEmail,
+  notifications
 } = require('../controllers/companyCtrl')
 
 
@@ -46,6 +49,9 @@ router.get("/", authMiddleware, dashboard)
 
 router.get("/all-calls", authMiddleware, allCalls)
 router.get("/new-call", authMiddleware, newCall)
+router.get("/view-call", authMiddleware, viewCall)
+router.get("/view-equipment", authMiddleware, viewEquipment)
+router.get("/notifications", authMiddleware, notifications)
 router.get("/my-equipments", authMiddleware, myEquipments)
 router.get("/reports", authMiddleware, reports)
 
