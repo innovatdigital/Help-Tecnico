@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Help Técnico | Todas as empresas</title>
+  <link rel="shortcut icon" href="/img/login/icon.png" type="image/x-icon">
+  <!-- Custom styles -->
+  <link rel="stylesheet" href="/css/platform/style.css">
+  <link rel="stylesheet" href="/css/platform/notify.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/1.8.12/tailwind-experimental.min.css">
+</head>
+
+<body>
+  <%- include('../partials/company/sidebar-company') %>
+
+  <div class="lg:pl-70">
+    <%- include('../partials/company/nav-company', {title: "Todas as empresas", notifications: notifications, photo: photo, name_user: name_user}) %>
+
+    <main class="py-5 fade-in">
+      <div class="alert mt-14" style="display: none;"><div style="display: flex;" class="alert-text"></div></div>
+      <div class="error mt-14" style="display: none;"><div style="display: flex;" class="error-text"></div></div>
+
+      <div class="px-4 sm:px-6 lg:pl-12 mt-2 col-span-3">
+        <div class="sm:flex sm:items-center">
+          <div class="w-full flex justify-between items-center">
+            <h1 class="text-lg font-semibold leading-6 text-gray-900 inter color-purple">Total de relatórios: 4 unidades</h1>
+            <div class="relative mt-2 rounded-md shadow-sm">
+              <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
+                <svg width="17" height="17" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M6.1088 4.25001C6.1088 4.39091 6.05283 4.52603 5.9532 4.62566C5.85357 4.72529 5.71845 4.78126 5.57755 4.78126C5.22531 4.78126 4.8875 4.92119 4.63843 5.17026C4.38936 5.41933 4.24943 5.75715 4.24943 6.10939C4.24943 6.25028 4.19346 6.38541 4.09383 6.48504C3.9942 6.58467 3.85907 6.64064 3.71818 6.64064C3.57728 6.64064 3.44216 6.58467 3.34253 6.48504C3.2429 6.38541 3.18693 6.25028 3.18693 6.10939C3.18693 5.47535 3.4388 4.86729 3.88713 4.41896C4.33546 3.97063 4.94352 3.71876 5.57755 3.71876C5.71845 3.71876 5.85357 3.77473 5.9532 3.87436C6.05283 3.97399 6.1088 4.10912 6.1088 4.25001ZM15.1135 13.456C15.1135 13.5969 15.0575 13.732 14.9578 13.8316L13.8305 14.9584C13.7309 15.058 13.5958 15.114 13.4549 15.114C13.3141 15.114 13.179 15.058 13.0793 14.9584L8.94727 10.8264C8.84768 10.7267 8.79173 10.5916 8.79173 10.4508C8.79173 10.3099 8.84768 10.1748 8.94727 10.0752L9.13533 9.88711L8.27843 9.03126C7.53405 9.71913 6.5561 10.0984 5.54259 10.0924C4.52907 10.0864 3.55571 9.69544 2.81957 8.99876C2.08344 8.30207 1.63954 7.3517 1.57775 6.34004C1.51596 5.32839 1.84089 4.33106 2.48676 3.54996C3.13263 2.76886 4.05117 2.26237 5.05642 2.13303C6.06167 2.00368 7.07851 2.26116 7.90108 2.85331C8.72364 3.44547 9.29045 4.32807 9.48677 5.32241C9.68308 6.31676 9.49422 7.34855 8.95843 8.20889L9.88652 9.13751L10.0746 8.94998C10.1742 8.85039 10.3093 8.79444 10.4502 8.79444C10.591 8.79444 10.7261 8.85039 10.8258 8.94998L14.9578 13.082C15.0571 13.1813 15.113 13.3157 15.1135 13.456ZM8.49943 6.10939C8.49943 5.53149 8.32806 4.96658 8.007 4.48608C7.68594 4.00558 7.22961 3.63108 6.69571 3.40993C6.1618 3.18878 5.57431 3.13091 5.00752 3.24365C4.44074 3.3564 3.92011 3.63468 3.51148 4.04331C3.10284 4.45194 2.82456 4.97257 2.71182 5.53936C2.59908 6.10615 2.65694 6.69364 2.87809 7.22754C3.09924 7.76144 3.47375 8.21778 3.95425 8.53884C4.43475 8.8599 4.99966 9.03126 5.57755 9.03126C6.35218 9.03028 7.0948 8.72212 7.64254 8.17438C8.19029 7.62663 8.49844 6.88401 8.49943 6.10939ZM13.8311 13.456L10.4502 10.0752L10.0741 10.4508L13.4549 13.8316L13.8311 13.456Z" fill="black"/>
+                </svg>                  
+              </div>
+              <input type="text" name="find" id="find" class="block border-blue w-full rounded-lg py-1.5 pl-10 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 pr-10" placeholder="Pesquise por nomes de peças">
+            </div>
+          </div>
+        </div>
+
+        <ul role="list" class="grid grid-cols-1 gap-x-6 gap-y-8 lg:grid-cols-4 xl:gap-x-8 mt-8">
+          <li class="overflow-hidden rounded-xl border border-gray-200">
+            <div class="flex items-center gap-x-4 border-b border-gray-900/5 bg-gray-50 p-6">
+              <img src="https://tailwindui.com/img/logos/48x48/tuple.svg" alt="Tuple" class="h-12 w-12 flex-none rounded-lg bg-white object-cover ring-1 ring-gray-900/10">
+              <div>
+                <h2 class="text-md font-semibold leading-6 text-gray-900 nunito">Relatório de chamado</h2>
+                <p class="text-sm font-medium leading-6 text-gray-900 nunito">ID do relatório: <span class="text-indigo-600">#52923</span></p>
+              </div>
+              <div class="relative ml-auto">
+                <button type="button" class="-m-2.5 block p-2.5 text-gray-400 hover:text-gray-500" id="options-menu-0-button" aria-expanded="false" aria-haspopup="true">
+                  <span class="sr-only">Open options</span>
+                  <svg class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                    <path d="M3 10a1.5 1.5 0 113 0 1.5 1.5 0 01-3 0zM8.5 10a1.5 1.5 0 113 0 1.5 1.5 0 01-3 0zM15.5 8.5a1.5 1.5 0 100 3 1.5 1.5 0 000-3z" />
+                  </svg>
+                </button>
+        
+                <!--
+                  Dropdown menu, show/hide based on menu state.
+        
+                  Entering: "transition ease-out duration-100"
+                    From: "transform opacity-0 scale-95"
+                    To: "transform opacity-100 scale-100"
+                  Leaving: "transition ease-in duration-75"
+                    From: "transform opacity-100 scale-100"
+                    To: "transform opacity-0 scale-95"
+                -->
+              </div>
+            </div>
+            <dl class="-my-3 divide-y divide-gray-100 px-6 py-4 text-sm leading-6">
+              <div class="flex justify-between gap-x-4 py-3">
+                <dt class="text-gray-500 font-bold nunito">Data do relatório</dt>
+                <dd class="text-gray-700"><time datetime="2022-12-13">14/05/2023</time></dd>
+              </div>
+              <div class="flex justify-between gap-x-4 py-3">
+                <dt class="text-gray-500 font-bold nunito">Chamado</dt>
+                <dd class="text-gray-700"><time datetime="2022-12-13">#239CFF</time></dd>
+              </div>
+              <div>
+                <a class="flex justify-center items-center bg-blue text-white mt-4 rounded-lg nunito py-1.5 mb-2" href="">Ver relatório</a>
+              </div>
+            </dl>
+          </li>
+
+          <li class="overflow-hidden rounded-xl border border-gray-200">
+            <div class="flex items-center gap-x-4 border-b border-gray-900/5 bg-gray-50 p-6">
+              <img src="https://tailwindui.com/img/logos/48x48/tuple.svg" alt="Tuple" class="h-12 w-12 flex-none rounded-lg bg-white object-cover ring-1 ring-gray-900/10">
+              <div>
+                <h2 class="text-md font-semibold leading-6 text-gray-900 nunito">Relatório de chamado</h2>
+                <p class="text-sm font-medium leading-6 text-gray-900 nunito">ID do relatório: <span class="text-indigo-600">#52923</span></p>
+              </div>
+              <div class="relative ml-auto">
+                <button type="button" class="-m-2.5 block p-2.5 text-gray-400 hover:text-gray-500" id="options-menu-0-button" aria-expanded="false" aria-haspopup="true">
+                  <span class="sr-only">Open options</span>
+                  <svg class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                    <path d="M3 10a1.5 1.5 0 113 0 1.5 1.5 0 01-3 0zM8.5 10a1.5 1.5 0 113 0 1.5 1.5 0 01-3 0zM15.5 8.5a1.5 1.5 0 100 3 1.5 1.5 0 000-3z" />
+                  </svg>
+                </button>
+        
+                <!--
+                  Dropdown menu, show/hide based on menu state.
+        
+                  Entering: "transition ease-out duration-100"
+                    From: "transform opacity-0 scale-95"
+                    To: "transform opacity-100 scale-100"
+                  Leaving: "transition ease-in duration-75"
+                    From: "transform opacity-100 scale-100"
+                    To: "transform opacity-0 scale-95"
+                -->
+              </div>
+            </div>
+            <dl class="-my-3 divide-y divide-gray-100 px-6 py-4 text-sm leading-6">
+              <div class="flex justify-between gap-x-4 py-3">
+                <dt class="text-gray-500 font-bold nunito">Data do relatório</dt>
+                <dd class="text-gray-700"><time datetime="2022-12-13">14/05/2023</time></dd>
+              </div>
+              <div class="flex justify-between gap-x-4 py-3">
+                <dt class="text-gray-500 font-bold nunito">Chamado</dt>
+                <dd class="text-gray-700"><time datetime="2022-12-13">#239CFF</time></dd>
+              </div>
+              <div>
+                <a class="flex justify-center items-center bg-blue text-white mt-4 rounded-lg nunito py-1.5 mb-2" href="">Ver relatório</a>
+              </div>
+            </dl>
+          </li>
+
+          <li class="overflow-hidden rounded-xl border border-gray-200">
+            <div class="flex items-center gap-x-4 border-b border-gray-900/5 bg-gray-50 p-6">
+              <img src="https://tailwindui.com/img/logos/48x48/tuple.svg" alt="Tuple" class="h-12 w-12 flex-none rounded-lg bg-white object-cover ring-1 ring-gray-900/10">
+              <div>
+                <h2 class="text-md font-semibold leading-6 text-gray-900 nunito">Relatório de chamado</h2>
+                <p class="text-sm font-medium leading-6 text-gray-900 nunito">ID do relatório: <span class="text-indigo-600">#52923</span></p>
+              </div>
+              <div class="relative ml-auto">
+                <button type="button" class="-m-2.5 block p-2.5 text-gray-400 hover:text-gray-500" id="options-menu-0-button" aria-expanded="false" aria-haspopup="true">
+                  <span class="sr-only">Open options</span>
+                  <svg class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                    <path d="M3 10a1.5 1.5 0 113 0 1.5 1.5 0 01-3 0zM8.5 10a1.5 1.5 0 113 0 1.5 1.5 0 01-3 0zM15.5 8.5a1.5 1.5 0 100 3 1.5 1.5 0 000-3z" />
+                  </svg>
+                </button>
+        
+                <!--
+                  Dropdown menu, show/hide based on menu state.
+        
+                  Entering: "transition ease-out duration-100"
+                    From: "transform opacity-0 scale-95"
+                    To: "transform opacity-100 scale-100"
+                  Leaving: "transition ease-in duration-75"
+                    From: "transform opacity-100 scale-100"
+                    To: "transform opacity-0 scale-95"
+                -->
+              </div>
+            </div>
+            <dl class="-my-3 divide-y divide-gray-100 px-6 py-4 text-sm leading-6">
+              <div class="flex justify-between gap-x-4 py-3">
+                <dt class="text-gray-500 font-bold nunito">Data do relatório</dt>
+                <dd class="text-gray-700"><time datetime="2022-12-13">14/05/2023</time></dd>
+              </div>
+              <div class="flex justify-between gap-x-4 py-3">
+                <dt class="text-gray-500 font-bold nunito">Chamado</dt>
+                <dd class="text-gray-700"><time datetime="2022-12-13">#239CFF</time></dd>
+              </div>
+              <div>
+                <a class="flex justify-center items-center bg-blue text-white mt-4 rounded-lg nunito py-1.5 mb-2" href="">Ver relatório</a>
+              </div>
+            </dl>
+          </li>
+
+          <li class="overflow-hidden rounded-xl border border-gray-200">
+            <div class="flex items-center gap-x-4 border-b border-gray-900/5 bg-gray-50 p-6">
+              <img src="https://tailwindui.com/img/logos/48x48/tuple.svg" alt="Tuple" class="h-12 w-12 flex-none rounded-lg bg-white object-cover ring-1 ring-gray-900/10">
+              <div>
+                <h2 class="text-md font-semibold leading-6 text-gray-900 nunito">Relatório de chamado</h2>
+                <p class="text-sm font-medium leading-6 text-gray-900 nunito">ID do relatório: <span class="text-indigo-600">#52923</span></p>
+              </div>
+              <div class="relative ml-auto">
+                <button type="button" class="-m-2.5 block p-2.5 text-gray-400 hover:text-gray-500" id="options-menu-0-button" aria-expanded="false" aria-haspopup="true">
+                  <span class="sr-only">Open options</span>
+                  <svg class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                    <path d="M3 10a1.5 1.5 0 113 0 1.5 1.5 0 01-3 0zM8.5 10a1.5 1.5 0 113 0 1.5 1.5 0 01-3 0zM15.5 8.5a1.5 1.5 0 100 3 1.5 1.5 0 000-3z" />
+                  </svg>
+                </button>
+        
+                <!--
+                  Dropdown menu, show/hide based on menu state.
+        
+                  Entering: "transition ease-out duration-100"
+                    From: "transform opacity-0 scale-95"
+                    To: "transform opacity-100 scale-100"
+                  Leaving: "transition ease-in duration-75"
+                    From: "transform opacity-100 scale-100"
+                    To: "transform opacity-0 scale-95"
+                -->
+              </div>
+            </div>
+            <dl class="-my-3 divide-y divide-gray-100 px-6 py-4 text-sm leading-6">
+              <div class="flex justify-between gap-x-4 py-3">
+                <dt class="text-gray-500 font-bold nunito">Data do relatório</dt>
+                <dd class="text-gray-700"><time datetime="2022-12-13">14/05/2023</time></dd>
+              </div>
+              <div class="flex justify-between gap-x-4 py-3">
+                <dt class="text-gray-500 font-bold nunito">Chamado</dt>
+                <dd class="text-gray-700"><time datetime="2022-12-13">#239CFF</time></dd>
+              </div>
+              <div>
+                <a class="flex justify-center items-center bg-blue text-white mt-4 rounded-lg nunito py-1.5 mb-2" href="">Ver relatório</a>
+              </div>
+            </dl>
+          </li>
+
+        </ul>
+      </div>
+    </main>
+  </div>
+</body>
+</html>

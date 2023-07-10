@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Help Técnico | Visualizar empresa</title>
+  <link rel="shortcut icon" href="/img/login/icon.png" type="image/x-icon">
+  <!-- Custom styles -->
+  <link rel="stylesheet" href="/css/platform/style.css">
+  <link rel="stylesheet" href="/css/platform/notify.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/1.8.12/tailwind-experimental.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+</head>
+
+<body>
+  <%- include('../partials/sidebar-platform', {isAdmin: isAdmin}) %>
+
+  <div class="lg:pl-70">
+    <%- include('../partials/nav-platform', {isAdmin: isAdmin, title: "Adicionar novo fornecedor", notifications: notifications, photo: photo, name_user: name_user}) %>
+
+    <main class="py-8 px-12 fade-in">
+      <div class="alert mt-10" style="display: none;"><div style="display: flex;" class="alert-text"></div></div>
+      <div class="error" style="display: none;"><div style="display: flex;" class="error-text"></div></div>
+
+      <!-- Excluir -->
+      <div class="hidden fade-in relative z-10" id="popup_delete" role="dialog" aria-modal="true">
+        <div class="fixed inset-0 bg-gray-500 bg-opacity-25 transition-opacity"></div>
+      
+        <div class="fixed inset-0 z-10 overflow-y-auto p-4 mt-40 ml-40 sm:p-6 md:p-20">
+          <div class="mx-auto accounts transform divide-y divide-gray-100 overflow-hidden rounded-xl bg-white shadow-2xl ring-1 ring-black ring-opacity-5 transition-all">
+            <div class="flex justify-between py-3 px-6">
+              <h2 class="color-red nunito font-bold text-lg">Excluir empresa:</h2>
+              <button onclick="closeDelete()">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M14.3075 11.7231L20.3075 5.67693C20.5844 5.4 20.5844 4.98462 20.3075 4.7077L19.3844 3.73847C19.1075 3.46154 18.6921 3.46154 18.4151 3.73847L12.369 9.78462C12.1844 9.96923 11.9075 9.96923 11.7228 9.78462L5.67668 3.69231C5.39976 3.41539 4.98438 3.41539 4.70745 3.69231L3.73822 4.66154C3.4613 4.93847 3.4613 5.35385 3.73822 5.63077L9.78438 11.6769C9.96899 11.8615 9.96899 12.1385 9.78438 12.3231L3.69207 18.4154C3.41514 18.6923 3.41514 19.1077 3.69207 19.3846L4.6613 20.3538C4.93822 20.6308 5.35361 20.6308 5.63053 20.3538L11.6767 14.3077C11.8613 14.1231 12.1382 14.1231 12.3228 14.3077L18.369 20.3538C18.6459 20.6308 19.0613 20.6308 19.3382 20.3538L20.3075 19.3846C20.5844 19.1077 20.5844 18.6923 20.3075 18.4154L14.3075 12.3692C14.1228 12.1846 14.1228 11.9077 14.3075 11.7231Z" fill="#A31313"/>
+                </svg>                                    
+              </button>
+            </div>
+
+            <div class="flex flex-col divide-y divide-gray-100 px-6">
+              <div>
+                <div class="flex flex-col items-center justify-center mt-6 py-4">
+                  <svg width="46" height="46" viewBox="0 0 46 46" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M40.2487 2.87504H26.832C26.832 2.36671 26.6301 1.8792 26.2706 1.51975C25.9112 1.16031 25.4237 0.958374 24.9154 0.958374H21.082C20.5737 0.958374 20.0862 1.16031 19.7267 1.51975C19.3673 1.8792 19.1654 2.36671 19.1654 2.87504H5.7487C5.24037 2.87504 4.75285 3.07697 4.39341 3.43642C4.03397 3.79586 3.83203 4.28338 3.83203 4.79171C3.83203 5.30004 4.03397 5.78755 4.39341 6.147C4.75285 6.50644 5.24037 6.70837 5.7487 6.70837H40.2487C40.757 6.70837 41.2445 6.50644 41.604 6.147C41.9634 5.78755 42.1654 5.30004 42.1654 4.79171C42.1654 4.28338 41.9634 3.79586 41.604 3.43642C41.2445 3.07697 40.757 2.87504 40.2487 2.87504Z" fill="#AA2222"/>
+                    <path d="M37.3737 8.625C36.8654 8.625 36.3779 8.82693 36.0184 9.18638C35.659 9.54582 35.457 10.0333 35.457 10.5417V41.2083H10.5404V10.5417C10.5404 10.0333 10.3384 9.54582 9.97899 9.18638C9.61954 8.82693 9.13203 8.625 8.6237 8.625C8.11537 8.625 7.62785 8.82693 7.26841 9.18638C6.90897 9.54582 6.70703 10.0333 6.70703 10.5417V43.125C6.70703 43.6333 6.90897 44.1208 7.26841 44.4803C7.62785 44.8397 8.11537 45.0417 8.6237 45.0417H37.3737C37.882 45.0417 38.3695 44.8397 38.729 44.4803C39.0884 44.1208 39.2904 43.6333 39.2904 43.125V10.5417C39.2904 10.0333 39.0884 9.54582 38.729 9.18638C38.3695 8.82693 37.882 8.625 37.3737 8.625Z" fill="#AA2222"/>
+                    <path d="M20.1263 35.4583V18.2083C20.1263 17.7 19.9244 17.2125 19.5649 16.853C19.2055 16.4936 18.718 16.2916 18.2096 16.2916C17.7013 16.2916 17.2138 16.4936 16.8543 16.853C16.4949 17.2125 16.293 17.7 16.293 18.2083V35.4583C16.293 35.9666 16.4949 36.4541 16.8543 36.8136C17.2138 37.173 17.7013 37.375 18.2096 37.375C18.718 37.375 19.2055 37.173 19.5649 36.8136C19.9244 36.4541 20.1263 35.9666 20.1263 35.4583Z" fill="#AA2222"/>
+                    <path d="M29.7083 35.4583V18.2083C29.7083 17.7 29.5064 17.2125 29.147 16.853C28.7875 16.4936 28.3 16.2916 27.7917 16.2916C27.2833 16.2916 26.7958 16.4936 26.4364 16.853C26.0769 17.2125 25.875 17.7 25.875 18.2083V35.4583C25.875 35.9666 26.0769 36.4541 26.4364 36.8136C26.7958 37.173 27.2833 37.375 27.7917 37.375C28.3 37.375 28.7875 37.173 29.147 36.8136C29.5064 36.4541 29.7083 35.9666 29.7083 35.4583Z" fill="#AA2222"/>
+                  </svg>                                        
+                  <h2 for="content" class="block text-md font-bold leading-6 text-gray-900 nunito mt-4">Tem certeza que deseja excluir a empresa?</h2>
+                  <p class="nunito text-center text-sm font-semibold">Essa ação é irreversível, e todos os dados associados a ela serão apagados.</p>
+                </div>
+
+                <div class="pb-4">
+                  <button class="w-full py-2.5 nunito bg-red text-white text-sm rounded-lg mt-4 font-bold" onclick="deleteCompany()">Confirmar minha escolha</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-x-6">
+        <div class="bg-white rounded-xl shadow-lg border p-4 px-5 col-span-1">
+          <div class="flex items-center justify-between">
+            <h2 class="nunito font-bold text-gray-700 text-lg">Perfil da empresa</h2>
+
+            <button class="rounded-full bg-indigo-600 p-2">
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <g opacity="0.8" clip-path="url(#clip0_152_3047)">
+                <path d="M4.16667 11.6667C5.08714 11.6667 5.83333 10.9205 5.83333 10C5.83333 9.07957 5.08714 8.33337 4.16667 8.33337C3.24619 8.33337 2.5 9.07957 2.5 10C2.5 10.9205 3.24619 11.6667 4.16667 11.6667Z" stroke="white" stroke-width="1.25"/>
+                <path d="M10.0007 11.6667C10.9211 11.6667 11.6673 10.9205 11.6673 10C11.6673 9.07957 10.9211 8.33337 10.0007 8.33337C9.08018 8.33337 8.33398 9.07957 8.33398 10C8.33398 10.9205 9.08018 11.6667 10.0007 11.6667Z" stroke="white" stroke-width="1.25"/>
+                <path d="M15.8327 11.6667C16.7532 11.6667 17.4993 10.9205 17.4993 10C17.4993 9.07957 16.7532 8.33337 15.8327 8.33337C14.9122 8.33337 14.166 9.07957 14.166 10C14.166 10.9205 14.9122 11.6667 15.8327 11.6667Z" stroke="white" stroke-width="1.25"/>
+                </g>
+                <defs>
+                <clipPath id="clip0_152_3047">
+                <rect width="20" height="20" fill="white"/>
+                </clipPath>
+                </defs>
+              </svg>                                
+            </button>
+          </div>
+
+          <div class="flex flex-col items-center justify-center mt-8">
+            <svg width="74" height="73" viewBox="0 0 74 73" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+              <ellipse cx="37" cy="36.5" rx="37" ry="36.5" fill="#0EA5E9"/>
+              <rect x="17" y="17" width="40" height="40" fill="url(#pattern0)"/>
+              <defs>
+              <pattern id="pattern0" patternContentUnits="objectBoundingBox" width="1" height="1">
+              <use xlink:href="#image0_0_1" transform="scale(0.0104167)"/>
+              </pattern>
+              <image id="image0_0_1" width="96" height="96" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAAACXBIWXMAAAsTAAALEwEAmpwYAAABvElEQVR4nO3ZPU7DYBCE4S0QVwEJjkoQP+IqVHAK4CJAR9CLIqWgQVvEw6438/SJZr6xHUWOMDMzMzMzMzMz+wNwCdwAr8An/X3us+4yX652WOAUeAC+Wa8tcL/rEis8/GfmeFrVCPsrf5q7WNEzf3frTrMFLqI74Ja5rqM74I25XqI74IO53qM7hovuGC66Y7jojuGiO4aL7hguumO46I7hojt1QcSf/6f3DS/ABjhf7OCXKnjo94c438K+9kOceIBaj4uNcGiSI7sDftt4gPrH0ZnvgFpXHmDt7xsOTXDEvwHLvG9guBCfjwdIeIBiHqCYByjmAYp5gGIeoNj4AdQFEFPnT3UvgJg6f6p7AcTU+VPdCyCmzp/qXgAxdf5U9wKIqfOnuhdATJ0/1b0AYur8UV2wmvp8PEDCAxTzAMU8QDEPUMwDFPMAxcYPoC6AmDp/qnsBxNT5U90LIKbOn+peADF1/lT3Aoip86e6F0BMnT/VvQBi6vyp7gUQU+eP6oLV1OfjARIeoJgHKOYBinmAYh6gmAco5gGG8/+AYh6gmAco5gGKeYBiHqCYB1j7AGZmZmZmZmZmFlP8AN3fTDc25TqSAAAAAElFTkSuQmCC"/>
+              </defs>
+            </svg>
+            
+            <h1 class="nunito text-xl text-blue font-semibold mt-4"><%= company.name %></h1>
+            
+            <div class="flex items-center space-x-2 mt-4">
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M1.66602 10C1.66602 6.85734 1.66602 5.286 2.64232 4.30968C3.61864 3.33337 5.18998 3.33337 8.33268 3.33337H11.666C14.8087 3.33337 16.3801 3.33337 17.3563 4.30968C18.3327 5.286 18.3327 6.85734 18.3327 10V11.6667C18.3327 14.8094 18.3327 16.3808 17.3563 17.357C16.3801 18.3334 14.8087 18.3334 11.666 18.3334H8.33268C5.18998 18.3334 3.61864 18.3334 2.64232 17.357C1.66602 16.3808 1.66602 14.8094 1.66602 11.6667V10Z" stroke="#888EA8" stroke-width="1.25"/>
+                <path opacity="0.5" d="M5.83398 3.33337V2.08337" stroke="#888EA8" stroke-width="1.25" stroke-linecap="round"/>
+                <path opacity="0.5" d="M14.166 3.33337V2.08337" stroke="#888EA8" stroke-width="1.25" stroke-linecap="round"/>
+                <path opacity="0.5" d="M1.66602 7.5H18.3327" stroke="#888EA8" stroke-width="1.25" stroke-linecap="round"/>
+              </svg>                
+              <p class="nunito text-sm font-semibold text-gray-600">Cadastrada em <%= company.date %></p>
+            </div>
+
+            <div class="flex items-center space-x-2 mt-4">
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path opacity="0.5" d="M3.33398 8.45271C3.33398 4.70486 6.31875 1.66663 10.0007 1.66663C13.6826 1.66663 16.6673 4.70486 16.6673 8.45271C16.6673 12.1712 14.5396 16.5103 11.2197 18.062C10.4459 18.4237 9.5554 18.4237 8.78157 18.062C5.46175 16.5103 3.33398 12.1712 3.33398 8.45271Z" stroke="#3C487B" stroke-width="1.25"/>
+                <path d="M10 10.8334C11.3807 10.8334 12.5 9.71409 12.5 8.33337C12.5 6.95266 11.3807 5.83337 10 5.83337C8.61929 5.83337 7.5 6.95266 7.5 8.33337C7.5 9.71409 8.61929 10.8334 10 10.8334Z" stroke="#888EA8" stroke-width="1.25"/>
+              </svg>                                                
+              <p class="nunito text-sm font-semibold text-gray-600"><%= company.city %></p>
+            </div>
+
+            <div class="flex items-center space-x-2 mt-4">
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path opacity="0.5" d="M1.66602 10C1.66602 6.85734 1.66602 5.286 2.64232 4.30968C3.61864 3.33337 5.18998 3.33337 8.33268 3.33337H11.666C14.8087 3.33337 16.3801 3.33337 17.3563 4.30968C18.3327 5.286 18.3327 6.85734 18.3327 10C18.3327 13.1427 18.3327 14.7141 17.3563 15.6904C16.3801 16.6667 14.8087 16.6667 11.666 16.6667H8.33268C5.18998 16.6667 3.61864 16.6667 2.64232 15.6904C1.66602 14.7141 1.66602 13.1427 1.66602 10Z" stroke="#3C487B" stroke-width="1.25"/>
+                <path d="M5 6.66663L6.79908 8.16586C8.32961 9.44129 9.09492 10.079 10 10.079C10.9051 10.079 11.6704 9.44129 13.2009 8.16586L15 6.66663" stroke="#888EA8" stroke-width="1.25" stroke-linecap="round"/>
+              </svg>                                
+              <p class="nunito text-sm font-semibold text-gray-600"><%= company.email %></p>
+            </div>
+
+            <div class="flex items-center space-x-2 mt-4">
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M13.4039 11.1317L13.7831 10.7546C14.3073 10.2333 15.1243 10.1262 15.7949 10.4908L17.3854 11.3557C18.4068 11.911 18.6319 13.2721 17.8336 14.066L16.651 15.2421C16.3503 15.5412 15.9772 15.7598 15.5481 15.7998M3.33248 4.79212C3.30315 4.27584 3.54505 3.81045 3.90604 3.45143L5.21273 2.15187C5.94076 1.42781 7.16813 1.53992 7.80331 2.38856L8.85305 3.79113C9.36628 4.47678 9.31084 5.41599 8.72259 6.00099L8.48383 6.23846" stroke="#888EA8" stroke-width="1.24902"/>
+                <path opacity="0.5" d="M15.5476 15.7998C14.1911 15.9262 10.8739 15.7865 7.33841 12.2704C4.00455 8.95477 3.40708 6.11292 3.33203 4.79211" stroke="#3C487B" stroke-width="1.24902"/>
+                <path opacity="0.5" d="M13.4035 11.1315C13.4035 11.1315 12.5023 12.0278 10.0422 9.58124C7.58215 7.13461 8.48344 6.23828 8.48344 6.23828" stroke="#3C487B" stroke-width="1.24902" stroke-linecap="round"/>
+              </svg>                                
+              <p class="nunito text-sm font-semibold text-gray-600"><%= company.phoneResponsible %></p>
+            </div>
+
+            <div class="flex items-center space-x-2 mt-4">
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M13.4039 11.1317L13.7831 10.7546C14.3073 10.2333 15.1243 10.1262 15.7949 10.4908L17.3854 11.3557C18.4068 11.911 18.6319 13.2721 17.8336 14.066L16.651 15.2421C16.3503 15.5412 15.9772 15.7598 15.5481 15.7998M3.33248 4.79212C3.30315 4.27584 3.54505 3.81045 3.90604 3.45143L5.21273 2.15187C5.94076 1.42781 7.16813 1.53992 7.80331 2.38856L8.85305 3.79113C9.36628 4.47678 9.31084 5.41599 8.72259 6.00099L8.48383 6.23846" stroke="#888EA8" stroke-width="1.24902"/>
+                <path opacity="0.5" d="M15.5476 15.7998C14.1911 15.9262 10.8739 15.7865 7.33841 12.2704C4.00455 8.95477 3.40708 6.11292 3.33203 4.79211" stroke="#3C487B" stroke-width="1.24902"/>
+                <path opacity="0.5" d="M13.4035 11.1315C13.4035 11.1315 12.5023 12.0278 10.0422 9.58124C7.58215 7.13461 8.48344 6.23828 8.48344 6.23828" stroke="#3C487B" stroke-width="1.24902" stroke-linecap="round"/>
+              </svg>                                
+              <p class="nunito text-sm font-semibold text-gray-600"><%= company.phoneCompany %></p>
+            </div>
+
+            <div class="flex items-center mt-8">
+              <a href="tel:<%= company.phoneCompany %>">
+                <svg width="60" height="60" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <g filter="url(#filter0_d_152_3086)">
+                  <rect x="10" width="40" height="40" rx="20" fill="#2196F3"/>
+                  <g clip-path="url(#clip0_152_3086)">
+                  <path d="M32.7709 22.9145L33.2454 22.4432C33.9012 21.7915 34.9235 21.6577 35.7627 22.1134L37.7528 23.1945C39.0308 23.8886 39.3125 25.59 38.3136 26.5825L36.8338 28.0526C36.4576 28.4264 35.9907 28.6997 35.4538 28.7496M20.169 14.9901C20.1323 14.3447 20.435 13.763 20.8867 13.3142L22.5217 11.6897C23.4326 10.7847 24.9684 10.9248 25.7632 11.9856L27.0766 13.7388C27.7188 14.5959 27.6494 15.7699 26.9134 16.5011L26.6147 16.798" stroke="white" stroke-width="1.24902"/>
+                  <path d="M35.4547 28.7497C33.7574 28.9078 29.6067 28.7331 25.1829 24.338C21.0114 20.1934 20.2638 16.6411 20.1699 14.9901" stroke="white" stroke-width="1.24902"/>
+                  <path d="M32.772 22.9144C32.772 22.9144 31.6443 24.0348 28.5661 20.9765C25.488 17.9183 26.6157 16.7979 26.6157 16.7979" stroke="white" stroke-width="1.24902" stroke-linecap="round"/>
+                  </g>
+                  <rect x="10.5" y="0.5" width="39" height="39" rx="19.5" stroke="#2196F3"/>
+                  </g>
+                  <defs>
+                  <filter id="filter0_d_152_3086" x="0" y="0" width="60" height="60" filterUnits="userSpaceOnUse" color-nunitopolation-filters="sRGB">
+                  <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+                  <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+                  <feMorphology radius="10" operator="erode" in="SourceAlpha" result="effect1_dropShadow_152_3086"/>
+                  <feOffset dy="10"/>
+                  <feGaussianBlur stdDeviation="10"/>
+                  <feComposite in2="hardAlpha" operator="out"/>
+                  <feColorMatrix type="matrix" values="0 0 0 0 0.129412 0 0 0 0 0.588235 0 0 0 0 0.952941 0 0 0 0.6 0"/>
+                  <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_152_3086"/>
+                  <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_152_3086" result="shape"/>
+                  </filter>
+                  <clipPath id="clip0_152_3086">
+                  <rect width="22" height="20" fill="white" transform="translate(19 10)"/>
+                  </clipPath>
+                  </defs>
+                </svg>
+              </a>
+              
+              <a href="/admin/update-company/<%= company._id %>">
+                <svg width="60" height="60" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <g filter="url(#filter0_d_152_3096)">
+                  <rect x="10" width="40" height="40" rx="20" fill="#3B3F5C"/>
+                  <g clip-path="url(#clip0_152_3096)">
+                  <path opacity="0.5" d="M23.334 28.3334H36.6673" stroke="white" stroke-width="1.25" stroke-linecap="round"/>
+                  <path d="M32.192 12.4345L31.5741 13.0524L25.8932 18.7332C25.5084 19.118 25.316 19.3104 25.1506 19.5225C24.9554 19.7727 24.7881 20.0435 24.6515 20.33C24.5358 20.5728 24.4498 20.831 24.2777 21.3472L23.5485 23.5347L23.3703 24.0694C23.2856 24.3235 23.3517 24.6035 23.5411 24.7929C23.7304 24.9822 24.0105 25.0484 24.2645 24.9636L24.7993 24.7855L26.9868 24.0562C27.503 23.8842 27.7611 23.7981 28.004 23.6824C28.2904 23.5459 28.5612 23.3785 28.8114 23.1834C29.0236 23.0179 29.2159 22.8255 29.6007 22.4408L35.2816 16.7599L35.8995 16.142C36.9232 15.1182 36.9232 13.4583 35.8995 12.4345C34.8757 11.4107 33.2157 11.4107 32.192 12.4345Z" stroke="white" stroke-width="1.25"/>
+                  <path opacity="0.5" d="M31.5724 13.0533C31.5724 13.0533 31.6496 14.3664 32.8082 15.525C33.9669 16.6836 35.2799 16.7609 35.2799 16.7609M24.7976 24.7864L23.5469 23.5356" stroke="white" stroke-width="1.25"/>
+                  </g>
+                  <rect x="10.5" y="0.5" width="39" height="39" rx="19.5" stroke="#3B3F5C"/>
+                  </g>
+                  <defs>
+                  <filter id="filter0_d_152_3096" x="0" y="0" width="60" height="60" filterUnits="userSpaceOnUse" color-nunitopolation-filters="sRGB">
+                  <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+                  <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+                  <feMorphology radius="10" operator="erode" in="SourceAlpha" result="effect1_dropShadow_152_3096"/>
+                  <feOffset dy="10"/>
+                  <feGaussianBlur stdDeviation="10"/>
+                  <feComposite in2="hardAlpha" operator="out"/>
+                  <feColorMatrix type="matrix" values="0 0 0 0 0.231373 0 0 0 0 0.247059 0 0 0 0 0.360784 0 0 0 0.6 0"/>
+                  <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_152_3096"/>
+                  <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_152_3096" result="shape"/>
+                  </filter>
+                  <clipPath id="clip0_152_3096">
+                  <rect width="20" height="20" fill="white" transform="translate(20 10)"/>
+                  </clipPath>
+                  </defs>
+                </svg>                  
+              </a>
+
+              <button onclick="openDelete()">
+                <svg width="60" height="60" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <g filter="url(#filter0_d_152_3092)">
+                  <rect x="10" width="40" height="40" rx="20" fill="#D90C18"/>
+                  <path d="M38.5001 14H21.5" stroke="white" stroke-width="1.25" stroke-linecap="round"/>
+                  <path d="M36.8327 16.5L36.3728 23.3991C36.1958 26.054 36.1073 27.3815 35.2423 28.1907C34.3773 29 33.0469 29 30.3861 29H29.6127C26.9519 29 25.6215 29 24.7565 28.1907C23.8914 27.3815 23.8029 26.054 23.626 23.3991L23.166 16.5" stroke="white" stroke-width="1.25" stroke-linecap="round"/>
+                  <path opacity="0.5" d="M27.5 19L28 24" stroke="white" stroke-width="1.25" stroke-linecap="round"/>
+                  <path opacity="0.5" d="M32.5 19L32 24" stroke="white" stroke-width="1.25" stroke-linecap="round"/>
+                  <path opacity="0.5" d="M24.5 14C24.5559 14 24.5838 14 24.6091 13.9994C25.4326 13.9785 26.159 13.4549 26.4392 12.6803C26.4478 12.6565 26.4567 12.63 26.4743 12.577L26.5714 12.2857C26.6543 12.0371 26.6957 11.9128 26.7507 11.8072C26.97 11.3861 27.3757 11.0936 27.8446 11.0188C27.9621 11 28.0932 11 28.3553 11H31.6447C31.9068 11 32.0379 11 32.1554 11.0188C32.6243 11.0936 33.03 11.3861 33.2493 11.8072C33.3043 11.9128 33.3457 12.0371 33.4286 12.2857L33.5257 12.577C33.5433 12.6299 33.5522 12.6565 33.5608 12.6803C33.841 13.4549 34.5674 13.9785 35.3909 13.9994C35.4162 14 35.4441 14 35.5 14" stroke="white" stroke-width="1.25"/>
+                  <rect x="10.5" y="0.5" width="39" height="39" rx="19.5" stroke="#D90C18"/>
+                  </g>
+                  <defs>
+                  <filter id="filter0_d_152_3092" x="0" y="0" width="60" height="60" filterUnits="userSpaceOnUse" color-nunitopolation-filters="sRGB">
+                  <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+                  <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+                  <feMorphology radius="10" operator="erode" in="SourceAlpha" result="effect1_dropShadow_152_3092"/>
+                  <feOffset dy="10"/>
+                  <feGaussianBlur stdDeviation="10"/>
+                  <feComposite in2="hardAlpha" operator="out"/>
+                  <feColorMatrix type="matrix" values="0 0 0 0 0.905882 0 0 0 0 0.317647 0 0 0 0 0.352941 0 0 0 0.6 0"/>
+                  <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_152_3092"/>
+                  <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_152_3092" result="shape"/>
+                  </filter>
+                  </defs>
+                </svg>                  
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-white rounded-xl shadow-lg border p-4 px-5 col-span-3">
+          <div class="mt-4 flow-root">
+            <div class="-mx-4 -my-2">
+              <div class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-5">
+                <% if (company.calls.length > 0) { %>
+                  <div class="overflow-hidden shadow ring-1 ring-black ring-opacity-5 sm:rounded-lg">
+                    <table class="min-w-full divide-y divide-gray-300">
+                      <thead class="bg-gray-50">
+                        <tr>
+                          <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 nunito">ID</th>
+                          <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 nunito">Empresa</th>
+                          <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 nunito">Atender até</th>
+                          <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 nunito">SLA</th>
+                          <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 nunito">Início em</th>
+                          <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 nunito">Status</th>
+                          <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 nunito">Técnico</th>
+                          <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 nunito">Ações</th>
+                        </tr>
+                      </thead>
+  
+                      <tbody class="divide-y divide-gray-200 bg-white">
+                        <% company.calls.forEach(function(item) { %>
+                          <tr>
+                            <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium sm:pl-6 text-indigo-600">
+                              #284525
+                            </td>
+                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 nunito">
+                              <div class="flex items-center mr-6">
+                                <svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                                  <rect width="36" height="36" rx="18" fill="#888EA8" fill-opacity="0.4"/>
+                                  <rect x="7" y="8" width="22.8571" height="20" fill="url(#pattern0)"/>
+                                  <defs>
+                                  <pattern id="pattern0" patternContentUnits="objectBoundingBox" width="1" height="1">
+                                  <use xlink:href="#image0_155_54" transform="matrix(0.00911458 0 0 0.0104167 0.0625001 0)"/>
+                                  </pattern>
+                                  <image id="image0_155_54" width="96" height="96" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAAACXBIWXMAAAsTAAALEwEAmpwYAAABvElEQVR4nO3ZPU7DYBCE4S0QVwEJjkoQP+IqVHAK4CJAR9CLIqWgQVvEw6438/SJZr6xHUWOMDMzMzMzMzMz+wNwCdwAr8An/X3us+4yX652WOAUeAC+Wa8tcL/rEis8/GfmeFrVCPsrf5q7WNEzf3frTrMFLqI74Ja5rqM74I25XqI74IO53qM7hovuGC66Y7jojuGiO4aL7hguumO46I7hojt1QcSf/6f3DS/ABjhf7OCXKnjo94c438K+9kOceIBaj4uNcGiSI7sDftt4gPrH0ZnvgFpXHmDt7xsOTXDEvwHLvG9guBCfjwdIeIBiHqCYByjmAYp5gGIeoNj4AdQFEFPnT3UvgJg6f6p7AcTU+VPdCyCmzp/qXgAxdf5U9wKIqfOnuhdATJ0/1b0AYur8UV2wmvp8PEDCAxTzAMU8QDEPUMwDFPMAxcYPoC6AmDp/qnsBxNT5U90LIKbOn+peADF1/lT3Aoip86e6F0BMnT/VvQBi6vyp7gUQU+eP6oLV1OfjARIeoJgHKOYBinmAYh6gmAco5gGG8/+AYh6gmAco5gGKeYBiHqCYB1j7AGZmZmZmZmZmFlP8AN3fTDc25TqSAAAAAElFTkSuQmCC"/>
+                                  </defs>
+                                </svg>                                                                    
+                                <p class="nunito ml-2">Empresa {x}</p>
+                              </div>
+                            </td>
+                            <td class="whitespace-nowrap px-3 py-4 text-sm nunito text-green-500 font-bold">
+                              Em atendimento
+                            </td>
+                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 nunito color-purple font-semibold">16 min</td>
+                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 nunito color-purple font-semibold">
+                              <p style="color: #398bf7" class="nunito font-bold">14:11</p>
+                            </td>
+                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 nunito color-purple font-semibold">
+                              <div class="flex items-center justify-end gap-x-2 sm:justify-start">
+                                <div class="flex-none rounded-full p-1 text-green-400 bg-green-opacity">
+                                  <div class="h-1.5 w-1.5 rounded-full bg-current"></div>
+                                </div>
+                                <div class="hidden text-green-400 sm:block">Executando</div>
+                              </div>
+                            </td>
+                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 nunito color-purple">
+                              <div class="flex items-center mr-6">
+                                <img class="h-8 rounded-full" src="<%= item.image_account %>">
+                                <p class="nunito ml-2"><%= item.name_account %></p>
+                              </div>
+                            </td>
+                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 nunito color-purple font-semibold">
+                              <div class="flex items-center">
+                                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" class="mr-2">
+                                  <path opacity="0.5" d="M2.73038 12.7463C2.0221 11.8262 1.66797 11.3661 1.66797 9.99992C1.66797 8.63375 2.0221 8.17369 2.73038 7.25353C4.1446 5.41622 6.51639 3.33325 10.0013 3.33325C13.4862 3.33325 15.858 5.41622 17.2722 7.25353C17.9805 8.17369 18.3346 8.63375 18.3346 9.99992C18.3346 11.3661 17.9805 11.8262 17.2722 12.7463C15.858 14.5836 13.4862 16.6666 10.0013 16.6666C6.51639 16.6666 4.1446 14.5836 2.73038 12.7463Z" stroke="#0E1726" stroke-width="1.25"/>
+                                  <path d="M12.5 10C12.5 11.3807 11.3807 12.5 10 12.5C8.61925 12.5 7.5 11.3807 7.5 10C7.5 8.61925 8.61925 7.5 10 7.5C11.3807 7.5 12.5 8.61925 12.5 10Z" stroke="#0E1726" stroke-width="1.25"/>
+                                </svg>
+                                Visualizar                                  
+                              </div>
+                            </td>
+                          </tr>
+                        <% }) %>
+                      </tbody>
+                    </table>
+                  </div>
+                <% } else { %>
+                  <div class="flex flex-col justify-center items-center px-4 sm:px-2 mt-2 col-span-3 mt-14">
+                    <svg width="245" height="239" viewBox="0 0 245 239" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <g clip-path="url(#clip0_232_2)">
+                      <path d="M155.439 53.7504H89.4637C87.9602 53.7522 86.5189 54.3503 85.4558 55.4134C84.3927 56.4765 83.7946 57.9179 83.7928 59.4213V206.052L83.0367 206.283L66.8519 211.239C66.0848 211.473 65.2563 211.393 64.5482 211.017C63.8402 210.64 63.3104 209.998 63.0751 209.232L14.9328 51.9773C14.6985 51.2102 14.7783 50.3816 15.1548 49.6734C15.5312 48.9651 16.1734 48.4354 16.9403 48.2005L41.881 40.5636L114.185 18.432L139.126 10.7951C139.505 10.6783 139.904 10.6375 140.299 10.675C140.695 10.7125 141.079 10.8276 141.43 11.0137C141.78 11.1998 142.091 11.4533 142.344 11.7596C142.597 12.0659 142.787 12.4191 142.903 12.7989L155.208 52.9943L155.439 53.7504Z" fill="#F2F2F2"/>
+                      <path d="M169.836 52.9965L155.005 4.55181C154.758 3.74463 154.355 2.99399 153.818 2.34277C153.281 1.69155 152.621 1.15252 151.876 0.756489C151.13 0.360454 150.314 0.11517 149.474 0.0346625C148.634 -0.045845 147.786 0.0400014 146.979 0.287288L111.914 11.0204L39.6136 33.1559L4.54843 43.8928C2.91949 44.393 1.55556 45.5191 0.756014 47.0239C-0.0435315 48.5286 -0.213366 50.2892 0.283796 51.919L50.9742 217.483C51.3781 218.799 52.193 219.95 53.2994 220.769C54.4057 221.587 55.7453 222.03 57.1216 222.031C57.7585 222.032 58.3919 221.936 59.0004 221.748L83.0375 214.391L83.7937 214.156V213.366L83.0375 213.597L58.7774 221.026C57.3396 221.464 55.7866 221.314 54.4591 220.609C53.1317 219.904 52.1381 218.701 51.6963 217.264L1.00983 51.696C0.790964 50.9841 0.714685 50.236 0.785354 49.4945C0.856023 48.7531 1.07225 48.0329 1.42166 47.3751C1.77107 46.7173 2.2468 46.135 2.82161 45.6613C3.39641 45.1877 4.05899 44.8321 4.77142 44.6149L39.8365 33.878L112.137 11.7463L147.202 1.00939C147.742 0.84448 148.304 0.760396 148.869 0.759869C150.082 0.762592 151.261 1.15349 152.236 1.87531C153.21 2.59713 153.927 3.61194 154.283 4.77109L169.046 52.9965L169.281 53.7526H170.067L169.836 52.9965Z" fill="#3F3D56"/>
+                      <path d="M46.3798 48.324C45.6511 48.3235 44.9418 48.0895 44.3559 47.6563C43.7699 47.2231 43.3383 46.6135 43.1242 45.917L38.2546 30.0113C38.1238 29.5841 38.0784 29.1352 38.121 28.6904C38.1636 28.2456 38.2935 27.8136 38.5031 27.4189C38.7127 27.0243 38.9981 26.6749 39.3428 26.3905C39.6875 26.1062 40.0848 25.8926 40.5121 25.7618L107.028 5.39805C107.891 5.13474 108.823 5.22455 109.619 5.64775C110.416 6.07095 111.012 6.79297 111.277 7.65534L116.147 23.5612C116.41 24.4241 116.32 25.3561 115.897 26.1528C115.474 26.9495 114.752 27.5458 113.89 27.8109L47.3738 48.1747C47.0517 48.2735 46.7167 48.3238 46.3798 48.324Z" fill="#239CFF"/>
+                      <path d="M71.8893 16.9956C76.0653 16.9956 79.4505 13.6103 79.4505 9.43438C79.4505 5.25844 76.0653 1.87317 71.8893 1.87317C67.7134 1.87317 64.3281 5.25844 64.3281 9.43438C64.3281 13.6103 67.7134 16.9956 71.8893 16.9956Z" fill="#239CFF"/>
+                      <path d="M71.8896 14.2223C74.5339 14.2223 76.6775 12.0787 76.6775 9.43436C76.6775 6.79002 74.5339 4.64636 71.8896 4.64636C69.2452 4.64636 67.1016 6.79002 67.1016 9.43436C67.1016 12.0787 69.2452 14.2223 71.8896 14.2223Z" fill="white"/>
+                      <path d="M227.834 220.097H100.049C99.1975 220.096 98.3807 219.757 97.7782 219.155C97.1758 218.552 96.8369 217.735 96.8359 216.883V63.7689C96.8369 62.9169 97.1758 62.1001 97.7782 61.4977C98.3806 60.8952 99.1975 60.5564 100.049 60.5554H227.834C228.686 60.5564 229.503 60.8953 230.105 61.4977C230.708 62.1002 231.046 62.917 231.047 63.7689V216.883C231.046 217.735 230.708 218.552 230.105 219.155C229.503 219.757 228.686 220.096 227.834 220.097Z" fill="#E6E6E6"/>
+                      <path d="M169.044 52.9943H89.4622C87.7584 52.9967 86.125 53.6746 84.9203 54.8794C83.7155 56.0841 83.0376 57.7175 83.0352 59.4213V213.594L83.7913 213.364V59.4213C83.7931 57.9178 84.3912 56.4765 85.4543 55.4134C86.5174 54.3503 87.9587 53.7522 89.4622 53.7504H169.278L169.044 52.9943ZM238.418 52.9943H89.4622C87.7584 52.9967 86.125 53.6746 84.9203 54.8794C83.7155 56.0841 83.0376 57.7175 83.0352 59.4213V232.573C83.0376 234.277 83.7155 235.91 84.9203 237.115C86.125 238.32 87.7584 238.998 89.4622 239H238.418C240.122 238.998 241.755 238.32 242.96 237.115C244.165 235.91 244.843 234.277 244.845 232.573V59.4213C244.843 57.7175 244.165 56.0841 242.96 54.8794C241.755 53.6746 240.122 52.9967 238.418 52.9943ZM244.089 232.573C244.087 234.076 243.489 235.518 242.426 236.581C241.363 237.644 239.922 238.242 238.418 238.244H89.4622C87.9587 238.242 86.5174 237.644 85.4543 236.581C84.3912 235.518 83.7931 234.076 83.7913 232.573V59.4213C83.7931 57.9178 84.3912 56.4765 85.4543 55.4134C86.5174 54.3503 87.9587 53.7522 89.4622 53.7504H238.418C239.922 53.7522 241.363 54.3503 242.426 55.4134C243.489 56.4765 244.087 57.9178 244.089 59.4213V232.573Z" fill="#3F3D56"/>
+                      <path d="M198.724 69.6288H129.16C128.258 69.6278 127.393 69.269 126.756 68.6311C126.118 67.9932 125.759 67.1284 125.758 66.2263V49.5916C125.759 48.6895 126.118 47.8247 126.756 47.1868C127.393 46.5489 128.258 46.1901 129.16 46.1891H198.724C199.626 46.1901 200.49 46.5489 201.128 47.1868C201.766 47.8247 202.125 48.6895 202.126 49.5916V66.2263C202.125 67.1284 201.766 67.9932 201.128 68.6311C200.49 69.269 199.626 69.6278 198.724 69.6288Z" fill="#239CFF"/>
+                      <path d="M163.94 47.3232C168.116 47.3232 171.501 43.938 171.501 39.762C171.501 35.5861 168.116 32.2008 163.94 32.2008C159.764 32.2008 156.379 35.5861 156.379 39.762C156.379 43.938 159.764 47.3232 163.94 47.3232Z" fill="#239CFF"/>
+                      <path d="M163.941 44.3676C166.485 44.3676 168.547 42.3056 168.547 39.7621C168.547 37.2186 166.485 35.1566 163.941 35.1566C161.398 35.1566 159.336 37.2186 159.336 39.7621C159.336 42.3056 161.398 44.3676 163.941 44.3676Z" fill="white"/>
+                      </g>
+                      <defs>
+                      <clipPath id="clip0_232_2">
+                      <rect width="244.846" height="239" fill="white"/>
+                      </clipPath>
+                      </defs>
+                    </svg>                                                              
+                    <h2 class="nunito text-xl font-semibold mt-10">Nenhum chamado disponível</h2>
+                    <p class="nunito">Essa empresa não realizou nenhum chamado.</p>           
+                  </div>
+                <% } %>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-x-6 mt-6">
+        <div class="bg-white rounded-xl shadow-lg border p-4 px-5 col-span-1">
+          <div class="flex">
+            <h2 class="nunito font-bold text-gray-700 text-lg">PMOC da empresa:</h2>
+          </div>
+
+          <div class="mt-4 flow-root">
+            <div class="-mx-4 -my-2">
+              <div class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-5">
+                <% if (company.calls.length > 0) { %>
+                  <div class="overflow-hidden shadow ring-1 ring-black ring-opacity-5 sm:rounded-lg">
+                    <table class="min-w-full divide-y divide-gray-300">
+                      <thead class="bg-gray-50">
+                        <tr>
+                          <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 nunito">ID</th>
+                          <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 nunito">Empresa</th>
+                          <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 nunito">Atender até</th>
+                          <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 nunito">SLA</th>
+                          <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 nunito">Início em</th>
+                          <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 nunito">Status</th>
+                          <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 nunito">Técnico</th>
+                          <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 nunito">Ações</th>
+                        </tr>
+                      </thead>
+  
+                      <tbody class="divide-y divide-gray-200 bg-white">
+                        <% company.calls.forEach(function(item) { %>
+                          <tr>
+                            <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium sm:pl-6 text-indigo-600">
+                              #284525
+                            </td>
+                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 nunito">
+                              <div class="flex items-center mr-6">
+                                <svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                                  <rect width="36" height="36" rx="18" fill="#888EA8" fill-opacity="0.4"/>
+                                  <rect x="7" y="8" width="22.8571" height="20" fill="url(#pattern0)"/>
+                                  <defs>
+                                  <pattern id="pattern0" patternContentUnits="objectBoundingBox" width="1" height="1">
+                                  <use xlink:href="#image0_155_54" transform="matrix(0.00911458 0 0 0.0104167 0.0625001 0)"/>
+                                  </pattern>
+                                  <image id="image0_155_54" width="96" height="96" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAAACXBIWXMAAAsTAAALEwEAmpwYAAABvElEQVR4nO3ZPU7DYBCE4S0QVwEJjkoQP+IqVHAK4CJAR9CLIqWgQVvEw6438/SJZr6xHUWOMDMzMzMzMzMz+wNwCdwAr8An/X3us+4yX652WOAUeAC+Wa8tcL/rEis8/GfmeFrVCPsrf5q7WNEzf3frTrMFLqI74Ja5rqM74I25XqI74IO53qM7hovuGC66Y7jojuGiO4aL7hguumO46I7hojt1QcSf/6f3DS/ABjhf7OCXKnjo94c438K+9kOceIBaj4uNcGiSI7sDftt4gPrH0ZnvgFpXHmDt7xsOTXDEvwHLvG9guBCfjwdIeIBiHqCYByjmAYp5gGIeoNj4AdQFEFPnT3UvgJg6f6p7AcTU+VPdCyCmzp/qXgAxdf5U9wKIqfOnuhdATJ0/1b0AYur8UV2wmvp8PEDCAxTzAMU8QDEPUMwDFPMAxcYPoC6AmDp/qnsBxNT5U90LIKbOn+peADF1/lT3Aoip86e6F0BMnT/VvQBi6vyp7gUQU+eP6oLV1OfjARIeoJgHKOYBinmAYh6gmAco5gGG8/+AYh6gmAco5gGKeYBiHqCYB1j7AGZmZmZmZmZmFlP8AN3fTDc25TqSAAAAAElFTkSuQmCC"/>
+                                  </defs>
+                                </svg>                                                                    
+                                <p class="nunito ml-2">Empresa {x}</p>
+                              </div>
+                            </td>
+                            <td class="whitespace-nowrap px-3 py-4 text-sm nunito text-green-500 font-bold">
+                              Em atendimento
+                            </td>
+                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 nunito color-purple font-semibold">16 min</td>
+                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 nunito color-purple font-semibold">
+                              <p style="color: #398bf7" class="nunito font-bold">14:11</p>
+                            </td>
+                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 nunito color-purple font-semibold">
+                              <div class="flex items-center justify-end gap-x-2 sm:justify-start">
+                                <div class="flex-none rounded-full p-1 text-green-400 bg-green-opacity">
+                                  <div class="h-1.5 w-1.5 rounded-full bg-current"></div>
+                                </div>
+                                <div class="hidden text-green-400 sm:block">Executando</div>
+                              </div>
+                            </td>
+                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 nunito color-purple">
+                              <div class="flex items-center mr-6">
+                                <img class="h-8 rounded-full" src="<%= item.image_account %>">
+                                <p class="nunito ml-2"><%= item.name_account %></p>
+                              </div>
+                            </td>
+                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 nunito color-purple font-semibold">
+                              <div class="flex items-center">
+                                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" class="mr-2">
+                                  <path opacity="0.5" d="M2.73038 12.7463C2.0221 11.8262 1.66797 11.3661 1.66797 9.99992C1.66797 8.63375 2.0221 8.17369 2.73038 7.25353C4.1446 5.41622 6.51639 3.33325 10.0013 3.33325C13.4862 3.33325 15.858 5.41622 17.2722 7.25353C17.9805 8.17369 18.3346 8.63375 18.3346 9.99992C18.3346 11.3661 17.9805 11.8262 17.2722 12.7463C15.858 14.5836 13.4862 16.6666 10.0013 16.6666C6.51639 16.6666 4.1446 14.5836 2.73038 12.7463Z" stroke="#0E1726" stroke-width="1.25"/>
+                                  <path d="M12.5 10C12.5 11.3807 11.3807 12.5 10 12.5C8.61925 12.5 7.5 11.3807 7.5 10C7.5 8.61925 8.61925 7.5 10 7.5C11.3807 7.5 12.5 8.61925 12.5 10Z" stroke="#0E1726" stroke-width="1.25"/>
+                                </svg>
+                                Visualizar                                  
+                              </div>
+                            </td>
+                          </tr>
+                        <% }) %>
+                      </tbody>
+                    </table>
+                  </div>
+                <% } else { %>
+                  <div class="flex flex-col justify-center items-center px-4 sm:px-2 mt-2 col-span-3 mt-14">
+                    <svg width="245" height="239" viewBox="0 0 245 239" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <g clip-path="url(#clip0_232_2)">
+                      <path d="M155.439 53.7504H89.4637C87.9602 53.7522 86.5189 54.3503 85.4558 55.4134C84.3927 56.4765 83.7946 57.9179 83.7928 59.4213V206.052L83.0367 206.283L66.8519 211.239C66.0848 211.473 65.2563 211.393 64.5482 211.017C63.8402 210.64 63.3104 209.998 63.0751 209.232L14.9328 51.9773C14.6985 51.2102 14.7783 50.3816 15.1548 49.6734C15.5312 48.9651 16.1734 48.4354 16.9403 48.2005L41.881 40.5636L114.185 18.432L139.126 10.7951C139.505 10.6783 139.904 10.6375 140.299 10.675C140.695 10.7125 141.079 10.8276 141.43 11.0137C141.78 11.1998 142.091 11.4533 142.344 11.7596C142.597 12.0659 142.787 12.4191 142.903 12.7989L155.208 52.9943L155.439 53.7504Z" fill="#F2F2F2"/>
+                      <path d="M169.836 52.9965L155.005 4.55181C154.758 3.74463 154.355 2.99399 153.818 2.34277C153.281 1.69155 152.621 1.15252 151.876 0.756489C151.13 0.360454 150.314 0.11517 149.474 0.0346625C148.634 -0.045845 147.786 0.0400014 146.979 0.287288L111.914 11.0204L39.6136 33.1559L4.54843 43.8928C2.91949 44.393 1.55556 45.5191 0.756014 47.0239C-0.0435315 48.5286 -0.213366 50.2892 0.283796 51.919L50.9742 217.483C51.3781 218.799 52.193 219.95 53.2994 220.769C54.4057 221.587 55.7453 222.03 57.1216 222.031C57.7585 222.032 58.3919 221.936 59.0004 221.748L83.0375 214.391L83.7937 214.156V213.366L83.0375 213.597L58.7774 221.026C57.3396 221.464 55.7866 221.314 54.4591 220.609C53.1317 219.904 52.1381 218.701 51.6963 217.264L1.00983 51.696C0.790964 50.9841 0.714685 50.236 0.785354 49.4945C0.856023 48.7531 1.07225 48.0329 1.42166 47.3751C1.77107 46.7173 2.2468 46.135 2.82161 45.6613C3.39641 45.1877 4.05899 44.8321 4.77142 44.6149L39.8365 33.878L112.137 11.7463L147.202 1.00939C147.742 0.84448 148.304 0.760396 148.869 0.759869C150.082 0.762592 151.261 1.15349 152.236 1.87531C153.21 2.59713 153.927 3.61194 154.283 4.77109L169.046 52.9965L169.281 53.7526H170.067L169.836 52.9965Z" fill="#3F3D56"/>
+                      <path d="M46.3798 48.324C45.6511 48.3235 44.9418 48.0895 44.3559 47.6563C43.7699 47.2231 43.3383 46.6135 43.1242 45.917L38.2546 30.0113C38.1238 29.5841 38.0784 29.1352 38.121 28.6904C38.1636 28.2456 38.2935 27.8136 38.5031 27.4189C38.7127 27.0243 38.9981 26.6749 39.3428 26.3905C39.6875 26.1062 40.0848 25.8926 40.5121 25.7618L107.028 5.39805C107.891 5.13474 108.823 5.22455 109.619 5.64775C110.416 6.07095 111.012 6.79297 111.277 7.65534L116.147 23.5612C116.41 24.4241 116.32 25.3561 115.897 26.1528C115.474 26.9495 114.752 27.5458 113.89 27.8109L47.3738 48.1747C47.0517 48.2735 46.7167 48.3238 46.3798 48.324Z" fill="#239CFF"/>
+                      <path d="M71.8893 16.9956C76.0653 16.9956 79.4505 13.6103 79.4505 9.43438C79.4505 5.25844 76.0653 1.87317 71.8893 1.87317C67.7134 1.87317 64.3281 5.25844 64.3281 9.43438C64.3281 13.6103 67.7134 16.9956 71.8893 16.9956Z" fill="#239CFF"/>
+                      <path d="M71.8896 14.2223C74.5339 14.2223 76.6775 12.0787 76.6775 9.43436C76.6775 6.79002 74.5339 4.64636 71.8896 4.64636C69.2452 4.64636 67.1016 6.79002 67.1016 9.43436C67.1016 12.0787 69.2452 14.2223 71.8896 14.2223Z" fill="white"/>
+                      <path d="M227.834 220.097H100.049C99.1975 220.096 98.3807 219.757 97.7782 219.155C97.1758 218.552 96.8369 217.735 96.8359 216.883V63.7689C96.8369 62.9169 97.1758 62.1001 97.7782 61.4977C98.3806 60.8952 99.1975 60.5564 100.049 60.5554H227.834C228.686 60.5564 229.503 60.8953 230.105 61.4977C230.708 62.1002 231.046 62.917 231.047 63.7689V216.883C231.046 217.735 230.708 218.552 230.105 219.155C229.503 219.757 228.686 220.096 227.834 220.097Z" fill="#E6E6E6"/>
+                      <path d="M169.044 52.9943H89.4622C87.7584 52.9967 86.125 53.6746 84.9203 54.8794C83.7155 56.0841 83.0376 57.7175 83.0352 59.4213V213.594L83.7913 213.364V59.4213C83.7931 57.9178 84.3912 56.4765 85.4543 55.4134C86.5174 54.3503 87.9587 53.7522 89.4622 53.7504H169.278L169.044 52.9943ZM238.418 52.9943H89.4622C87.7584 52.9967 86.125 53.6746 84.9203 54.8794C83.7155 56.0841 83.0376 57.7175 83.0352 59.4213V232.573C83.0376 234.277 83.7155 235.91 84.9203 237.115C86.125 238.32 87.7584 238.998 89.4622 239H238.418C240.122 238.998 241.755 238.32 242.96 237.115C244.165 235.91 244.843 234.277 244.845 232.573V59.4213C244.843 57.7175 244.165 56.0841 242.96 54.8794C241.755 53.6746 240.122 52.9967 238.418 52.9943ZM244.089 232.573C244.087 234.076 243.489 235.518 242.426 236.581C241.363 237.644 239.922 238.242 238.418 238.244H89.4622C87.9587 238.242 86.5174 237.644 85.4543 236.581C84.3912 235.518 83.7931 234.076 83.7913 232.573V59.4213C83.7931 57.9178 84.3912 56.4765 85.4543 55.4134C86.5174 54.3503 87.9587 53.7522 89.4622 53.7504H238.418C239.922 53.7522 241.363 54.3503 242.426 55.4134C243.489 56.4765 244.087 57.9178 244.089 59.4213V232.573Z" fill="#3F3D56"/>
+                      <path d="M198.724 69.6288H129.16C128.258 69.6278 127.393 69.269 126.756 68.6311C126.118 67.9932 125.759 67.1284 125.758 66.2263V49.5916C125.759 48.6895 126.118 47.8247 126.756 47.1868C127.393 46.5489 128.258 46.1901 129.16 46.1891H198.724C199.626 46.1901 200.49 46.5489 201.128 47.1868C201.766 47.8247 202.125 48.6895 202.126 49.5916V66.2263C202.125 67.1284 201.766 67.9932 201.128 68.6311C200.49 69.269 199.626 69.6278 198.724 69.6288Z" fill="#239CFF"/>
+                      <path d="M163.94 47.3232C168.116 47.3232 171.501 43.938 171.501 39.762C171.501 35.5861 168.116 32.2008 163.94 32.2008C159.764 32.2008 156.379 35.5861 156.379 39.762C156.379 43.938 159.764 47.3232 163.94 47.3232Z" fill="#239CFF"/>
+                      <path d="M163.941 44.3676C166.485 44.3676 168.547 42.3056 168.547 39.7621C168.547 37.2186 166.485 35.1566 163.941 35.1566C161.398 35.1566 159.336 37.2186 159.336 39.7621C159.336 42.3056 161.398 44.3676 163.941 44.3676Z" fill="white"/>
+                      </g>
+                      <defs>
+                      <clipPath id="clip0_232_2">
+                      <rect width="244.846" height="239" fill="white"/>
+                      </clipPath>
+                      </defs>
+                    </svg>                                                              
+                    <h2 class="nunito text-xl font-semibold mt-10">Nenhum chamado disponível</h2>
+                    <p class="nunito">Essa empresa não realizou nenhum chamado.</p>           
+                  </div>
+                <% } %>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-white rounded-xl shadow-lg border p-4 px-5 col-span-1">
+          <div class="flex">
+            <h2 class="nunito font-bold text-gray-700 text-lg">Equipamentos da empresa:</h2>
+          </div>
+
+          <div class="mt-4 flow-root">
+            <div class="-mx-4 -my-2">
+              <div class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-5">
+                <% if (company.calls.length > 0) { %>
+                  <div class="overflow-hidden shadow ring-1 ring-black ring-opacity-5 sm:rounded-lg">
+                    <table class="min-w-full divide-y divide-gray-300">
+                      <thead class="bg-gray-50">
+                        <tr>
+                          <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 nunito">ID</th>
+                          <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 nunito">Empresa</th>
+                          <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 nunito">Atender até</th>
+                          <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 nunito">SLA</th>
+                          <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 nunito">Início em</th>
+                          <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 nunito">Status</th>
+                          <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 nunito">Técnico</th>
+                          <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 nunito">Ações</th>
+                        </tr>
+                      </thead>
+  
+                      <tbody class="divide-y divide-gray-200 bg-white">
+                        <% company.calls.forEach(function(item) { %>
+                          <tr>
+                            <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium sm:pl-6 text-indigo-600">
+                              #284525
+                            </td>
+                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 nunito">
+                              <div class="flex items-center mr-6">
+                                <svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                                  <rect width="36" height="36" rx="18" fill="#888EA8" fill-opacity="0.4"/>
+                                  <rect x="7" y="8" width="22.8571" height="20" fill="url(#pattern0)"/>
+                                  <defs>
+                                  <pattern id="pattern0" patternContentUnits="objectBoundingBox" width="1" height="1">
+                                  <use xlink:href="#image0_155_54" transform="matrix(0.00911458 0 0 0.0104167 0.0625001 0)"/>
+                                  </pattern>
+                                  <image id="image0_155_54" width="96" height="96" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAAACXBIWXMAAAsTAAALEwEAmpwYAAABvElEQVR4nO3ZPU7DYBCE4S0QVwEJjkoQP+IqVHAK4CJAR9CLIqWgQVvEw6438/SJZr6xHUWOMDMzMzMzMzMz+wNwCdwAr8An/X3us+4yX652WOAUeAC+Wa8tcL/rEis8/GfmeFrVCPsrf5q7WNEzf3frTrMFLqI74Ja5rqM74I25XqI74IO53qM7hovuGC66Y7jojuGiO4aL7hguumO46I7hojt1QcSf/6f3DS/ABjhf7OCXKnjo94c438K+9kOceIBaj4uNcGiSI7sDftt4gPrH0ZnvgFpXHmDt7xsOTXDEvwHLvG9guBCfjwdIeIBiHqCYByjmAYp5gGIeoNj4AdQFEFPnT3UvgJg6f6p7AcTU+VPdCyCmzp/qXgAxdf5U9wKIqfOnuhdATJ0/1b0AYur8UV2wmvp8PEDCAxTzAMU8QDEPUMwDFPMAxcYPoC6AmDp/qnsBxNT5U90LIKbOn+peADF1/lT3Aoip86e6F0BMnT/VvQBi6vyp7gUQU+eP6oLV1OfjARIeoJgHKOYBinmAYh6gmAco5gGG8/+AYh6gmAco5gGKeYBiHqCYB1j7AGZmZmZmZmZmFlP8AN3fTDc25TqSAAAAAElFTkSuQmCC"/>
+                                  </defs>
+                                </svg>                                                                    
+                                <p class="nunito ml-2">Empresa {x}</p>
+                              </div>
+                            </td>
+                            <td class="whitespace-nowrap px-3 py-4 text-sm nunito text-green-500 font-bold">
+                              Em atendimento
+                            </td>
+                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 nunito color-purple font-semibold">16 min</td>
+                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 nunito color-purple font-semibold">
+                              <p style="color: #398bf7" class="nunito font-bold">14:11</p>
+                            </td>
+                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 nunito color-purple font-semibold">
+                              <div class="flex items-center justify-end gap-x-2 sm:justify-start">
+                                <div class="flex-none rounded-full p-1 text-green-400 bg-green-opacity">
+                                  <div class="h-1.5 w-1.5 rounded-full bg-current"></div>
+                                </div>
+                                <div class="hidden text-green-400 sm:block">Executando</div>
+                              </div>
+                            </td>
+                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 nunito color-purple">
+                              <div class="flex items-center mr-6">
+                                <img class="h-8 rounded-full" src="<%= item.image_account %>">
+                                <p class="nunito ml-2"><%= item.name_account %></p>
+                              </div>
+                            </td>
+                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 nunito color-purple font-semibold">
+                              <div class="flex items-center">
+                                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" class="mr-2">
+                                  <path opacity="0.5" d="M2.73038 12.7463C2.0221 11.8262 1.66797 11.3661 1.66797 9.99992C1.66797 8.63375 2.0221 8.17369 2.73038 7.25353C4.1446 5.41622 6.51639 3.33325 10.0013 3.33325C13.4862 3.33325 15.858 5.41622 17.2722 7.25353C17.9805 8.17369 18.3346 8.63375 18.3346 9.99992C18.3346 11.3661 17.9805 11.8262 17.2722 12.7463C15.858 14.5836 13.4862 16.6666 10.0013 16.6666C6.51639 16.6666 4.1446 14.5836 2.73038 12.7463Z" stroke="#0E1726" stroke-width="1.25"/>
+                                  <path d="M12.5 10C12.5 11.3807 11.3807 12.5 10 12.5C8.61925 12.5 7.5 11.3807 7.5 10C7.5 8.61925 8.61925 7.5 10 7.5C11.3807 7.5 12.5 8.61925 12.5 10Z" stroke="#0E1726" stroke-width="1.25"/>
+                                </svg>
+                                Visualizar                                  
+                              </div>
+                            </td>
+                          </tr>
+                        <% }) %>
+                      </tbody>
+                    </table>
+                  </div>
+                <% } else { %>
+                  <div class="flex flex-col justify-center items-center px-4 sm:px-2 mt-2 col-span-3 mt-14">
+                    <svg width="245" height="239" viewBox="0 0 245 239" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <g clip-path="url(#clip0_232_2)">
+                      <path d="M155.439 53.7504H89.4637C87.9602 53.7522 86.5189 54.3503 85.4558 55.4134C84.3927 56.4765 83.7946 57.9179 83.7928 59.4213V206.052L83.0367 206.283L66.8519 211.239C66.0848 211.473 65.2563 211.393 64.5482 211.017C63.8402 210.64 63.3104 209.998 63.0751 209.232L14.9328 51.9773C14.6985 51.2102 14.7783 50.3816 15.1548 49.6734C15.5312 48.9651 16.1734 48.4354 16.9403 48.2005L41.881 40.5636L114.185 18.432L139.126 10.7951C139.505 10.6783 139.904 10.6375 140.299 10.675C140.695 10.7125 141.079 10.8276 141.43 11.0137C141.78 11.1998 142.091 11.4533 142.344 11.7596C142.597 12.0659 142.787 12.4191 142.903 12.7989L155.208 52.9943L155.439 53.7504Z" fill="#F2F2F2"/>
+                      <path d="M169.836 52.9965L155.005 4.55181C154.758 3.74463 154.355 2.99399 153.818 2.34277C153.281 1.69155 152.621 1.15252 151.876 0.756489C151.13 0.360454 150.314 0.11517 149.474 0.0346625C148.634 -0.045845 147.786 0.0400014 146.979 0.287288L111.914 11.0204L39.6136 33.1559L4.54843 43.8928C2.91949 44.393 1.55556 45.5191 0.756014 47.0239C-0.0435315 48.5286 -0.213366 50.2892 0.283796 51.919L50.9742 217.483C51.3781 218.799 52.193 219.95 53.2994 220.769C54.4057 221.587 55.7453 222.03 57.1216 222.031C57.7585 222.032 58.3919 221.936 59.0004 221.748L83.0375 214.391L83.7937 214.156V213.366L83.0375 213.597L58.7774 221.026C57.3396 221.464 55.7866 221.314 54.4591 220.609C53.1317 219.904 52.1381 218.701 51.6963 217.264L1.00983 51.696C0.790964 50.9841 0.714685 50.236 0.785354 49.4945C0.856023 48.7531 1.07225 48.0329 1.42166 47.3751C1.77107 46.7173 2.2468 46.135 2.82161 45.6613C3.39641 45.1877 4.05899 44.8321 4.77142 44.6149L39.8365 33.878L112.137 11.7463L147.202 1.00939C147.742 0.84448 148.304 0.760396 148.869 0.759869C150.082 0.762592 151.261 1.15349 152.236 1.87531C153.21 2.59713 153.927 3.61194 154.283 4.77109L169.046 52.9965L169.281 53.7526H170.067L169.836 52.9965Z" fill="#3F3D56"/>
+                      <path d="M46.3798 48.324C45.6511 48.3235 44.9418 48.0895 44.3559 47.6563C43.7699 47.2231 43.3383 46.6135 43.1242 45.917L38.2546 30.0113C38.1238 29.5841 38.0784 29.1352 38.121 28.6904C38.1636 28.2456 38.2935 27.8136 38.5031 27.4189C38.7127 27.0243 38.9981 26.6749 39.3428 26.3905C39.6875 26.1062 40.0848 25.8926 40.5121 25.7618L107.028 5.39805C107.891 5.13474 108.823 5.22455 109.619 5.64775C110.416 6.07095 111.012 6.79297 111.277 7.65534L116.147 23.5612C116.41 24.4241 116.32 25.3561 115.897 26.1528C115.474 26.9495 114.752 27.5458 113.89 27.8109L47.3738 48.1747C47.0517 48.2735 46.7167 48.3238 46.3798 48.324Z" fill="#239CFF"/>
+                      <path d="M71.8893 16.9956C76.0653 16.9956 79.4505 13.6103 79.4505 9.43438C79.4505 5.25844 76.0653 1.87317 71.8893 1.87317C67.7134 1.87317 64.3281 5.25844 64.3281 9.43438C64.3281 13.6103 67.7134 16.9956 71.8893 16.9956Z" fill="#239CFF"/>
+                      <path d="M71.8896 14.2223C74.5339 14.2223 76.6775 12.0787 76.6775 9.43436C76.6775 6.79002 74.5339 4.64636 71.8896 4.64636C69.2452 4.64636 67.1016 6.79002 67.1016 9.43436C67.1016 12.0787 69.2452 14.2223 71.8896 14.2223Z" fill="white"/>
+                      <path d="M227.834 220.097H100.049C99.1975 220.096 98.3807 219.757 97.7782 219.155C97.1758 218.552 96.8369 217.735 96.8359 216.883V63.7689C96.8369 62.9169 97.1758 62.1001 97.7782 61.4977C98.3806 60.8952 99.1975 60.5564 100.049 60.5554H227.834C228.686 60.5564 229.503 60.8953 230.105 61.4977C230.708 62.1002 231.046 62.917 231.047 63.7689V216.883C231.046 217.735 230.708 218.552 230.105 219.155C229.503 219.757 228.686 220.096 227.834 220.097Z" fill="#E6E6E6"/>
+                      <path d="M169.044 52.9943H89.4622C87.7584 52.9967 86.125 53.6746 84.9203 54.8794C83.7155 56.0841 83.0376 57.7175 83.0352 59.4213V213.594L83.7913 213.364V59.4213C83.7931 57.9178 84.3912 56.4765 85.4543 55.4134C86.5174 54.3503 87.9587 53.7522 89.4622 53.7504H169.278L169.044 52.9943ZM238.418 52.9943H89.4622C87.7584 52.9967 86.125 53.6746 84.9203 54.8794C83.7155 56.0841 83.0376 57.7175 83.0352 59.4213V232.573C83.0376 234.277 83.7155 235.91 84.9203 237.115C86.125 238.32 87.7584 238.998 89.4622 239H238.418C240.122 238.998 241.755 238.32 242.96 237.115C244.165 235.91 244.843 234.277 244.845 232.573V59.4213C244.843 57.7175 244.165 56.0841 242.96 54.8794C241.755 53.6746 240.122 52.9967 238.418 52.9943ZM244.089 232.573C244.087 234.076 243.489 235.518 242.426 236.581C241.363 237.644 239.922 238.242 238.418 238.244H89.4622C87.9587 238.242 86.5174 237.644 85.4543 236.581C84.3912 235.518 83.7931 234.076 83.7913 232.573V59.4213C83.7931 57.9178 84.3912 56.4765 85.4543 55.4134C86.5174 54.3503 87.9587 53.7522 89.4622 53.7504H238.418C239.922 53.7522 241.363 54.3503 242.426 55.4134C243.489 56.4765 244.087 57.9178 244.089 59.4213V232.573Z" fill="#3F3D56"/>
+                      <path d="M198.724 69.6288H129.16C128.258 69.6278 127.393 69.269 126.756 68.6311C126.118 67.9932 125.759 67.1284 125.758 66.2263V49.5916C125.759 48.6895 126.118 47.8247 126.756 47.1868C127.393 46.5489 128.258 46.1901 129.16 46.1891H198.724C199.626 46.1901 200.49 46.5489 201.128 47.1868C201.766 47.8247 202.125 48.6895 202.126 49.5916V66.2263C202.125 67.1284 201.766 67.9932 201.128 68.6311C200.49 69.269 199.626 69.6278 198.724 69.6288Z" fill="#239CFF"/>
+                      <path d="M163.94 47.3232C168.116 47.3232 171.501 43.938 171.501 39.762C171.501 35.5861 168.116 32.2008 163.94 32.2008C159.764 32.2008 156.379 35.5861 156.379 39.762C156.379 43.938 159.764 47.3232 163.94 47.3232Z" fill="#239CFF"/>
+                      <path d="M163.941 44.3676C166.485 44.3676 168.547 42.3056 168.547 39.7621C168.547 37.2186 166.485 35.1566 163.941 35.1566C161.398 35.1566 159.336 37.2186 159.336 39.7621C159.336 42.3056 161.398 44.3676 163.941 44.3676Z" fill="white"/>
+                      </g>
+                      <defs>
+                      <clipPath id="clip0_232_2">
+                      <rect width="244.846" height="239" fill="white"/>
+                      </clipPath>
+                      </defs>
+                    </svg>                                                              
+                    <h2 class="nunito text-xl font-semibold mt-10">Nenhum chamado disponível</h2>
+                    <p class="nunito">Essa empresa não realizou nenhum chamado.</p>           
+                  </div>
+                <% } %>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-white rounded-xl shadow-lg border p-4 px-5 col-span-1">
+          <div class="flex">
+            <h2 class="nunito font-bold text-gray-700 text-lg">Orçamentos da empresa:</h2>
+          </div>
+
+          <div class="mt-4 flow-root">
+            <div class="-mx-4 -my-2">
+              <div class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-5">
+                <% if (company.calls.length > 0) { %>
+                  <div class="overflow-hidden shadow ring-1 ring-black ring-opacity-5 sm:rounded-lg">
+                    <table class="min-w-full divide-y divide-gray-300">
+                      <thead class="bg-gray-50">
+                        <tr>
+                          <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 nunito">ID</th>
+                          <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 nunito">Empresa</th>
+                          <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 nunito">Atender até</th>
+                          <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 nunito">SLA</th>
+                          <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 nunito">Início em</th>
+                          <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 nunito">Status</th>
+                          <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 nunito">Técnico</th>
+                          <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 nunito">Ações</th>
+                        </tr>
+                      </thead>
+  
+                      <tbody class="divide-y divide-gray-200 bg-white">
+                        <% company.calls.forEach(function(item) { %>
+                          <tr>
+                            <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium sm:pl-6 text-indigo-600">
+                              #284525
+                            </td>
+                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 nunito">
+                              <div class="flex items-center mr-6">
+                                <svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                                  <rect width="36" height="36" rx="18" fill="#888EA8" fill-opacity="0.4"/>
+                                  <rect x="7" y="8" width="22.8571" height="20" fill="url(#pattern0)"/>
+                                  <defs>
+                                  <pattern id="pattern0" patternContentUnits="objectBoundingBox" width="1" height="1">
+                                  <use xlink:href="#image0_155_54" transform="matrix(0.00911458 0 0 0.0104167 0.0625001 0)"/>
+                                  </pattern>
+                                  <image id="image0_155_54" width="96" height="96" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAAACXBIWXMAAAsTAAALEwEAmpwYAAABvElEQVR4nO3ZPU7DYBCE4S0QVwEJjkoQP+IqVHAK4CJAR9CLIqWgQVvEw6438/SJZr6xHUWOMDMzMzMzMzMz+wNwCdwAr8An/X3us+4yX652WOAUeAC+Wa8tcL/rEis8/GfmeFrVCPsrf5q7WNEzf3frTrMFLqI74Ja5rqM74I25XqI74IO53qM7hovuGC66Y7jojuGiO4aL7hguumO46I7hojt1QcSf/6f3DS/ABjhf7OCXKnjo94c438K+9kOceIBaj4uNcGiSI7sDftt4gPrH0ZnvgFpXHmDt7xsOTXDEvwHLvG9guBCfjwdIeIBiHqCYByjmAYp5gGIeoNj4AdQFEFPnT3UvgJg6f6p7AcTU+VPdCyCmzp/qXgAxdf5U9wKIqfOnuhdATJ0/1b0AYur8UV2wmvp8PEDCAxTzAMU8QDEPUMwDFPMAxcYPoC6AmDp/qnsBxNT5U90LIKbOn+peADF1/lT3Aoip86e6F0BMnT/VvQBi6vyp7gUQU+eP6oLV1OfjARIeoJgHKOYBinmAYh6gmAco5gGG8/+AYh6gmAco5gGKeYBiHqCYB1j7AGZmZmZmZmZmFlP8AN3fTDc25TqSAAAAAElFTkSuQmCC"/>
+                                  </defs>
+                                </svg>                                                                    
+                                <p class="nunito ml-2">Empresa {x}</p>
+                              </div>
+                            </td>
+                            <td class="whitespace-nowrap px-3 py-4 text-sm nunito text-green-500 font-bold">
+                              Em atendimento
+                            </td>
+                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 nunito color-purple font-semibold">16 min</td>
+                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 nunito color-purple font-semibold">
+                              <p style="color: #398bf7" class="nunito font-bold">14:11</p>
+                            </td>
+                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 nunito color-purple font-semibold">
+                              <div class="flex items-center justify-end gap-x-2 sm:justify-start">
+                                <div class="flex-none rounded-full p-1 text-green-400 bg-green-opacity">
+                                  <div class="h-1.5 w-1.5 rounded-full bg-current"></div>
+                                </div>
+                                <div class="hidden text-green-400 sm:block">Executando</div>
+                              </div>
+                            </td>
+                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 nunito color-purple">
+                              <div class="flex items-center mr-6">
+                                <img class="h-8 rounded-full" src="<%= item.image_account %>">
+                                <p class="nunito ml-2"><%= item.name_account %></p>
+                              </div>
+                            </td>
+                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 nunito color-purple font-semibold">
+                              <div class="flex items-center">
+                                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" class="mr-2">
+                                  <path opacity="0.5" d="M2.73038 12.7463C2.0221 11.8262 1.66797 11.3661 1.66797 9.99992C1.66797 8.63375 2.0221 8.17369 2.73038 7.25353C4.1446 5.41622 6.51639 3.33325 10.0013 3.33325C13.4862 3.33325 15.858 5.41622 17.2722 7.25353C17.9805 8.17369 18.3346 8.63375 18.3346 9.99992C18.3346 11.3661 17.9805 11.8262 17.2722 12.7463C15.858 14.5836 13.4862 16.6666 10.0013 16.6666C6.51639 16.6666 4.1446 14.5836 2.73038 12.7463Z" stroke="#0E1726" stroke-width="1.25"/>
+                                  <path d="M12.5 10C12.5 11.3807 11.3807 12.5 10 12.5C8.61925 12.5 7.5 11.3807 7.5 10C7.5 8.61925 8.61925 7.5 10 7.5C11.3807 7.5 12.5 8.61925 12.5 10Z" stroke="#0E1726" stroke-width="1.25"/>
+                                </svg>
+                                Visualizar                                  
+                              </div>
+                            </td>
+                          </tr>
+                        <% }) %>
+                      </tbody>
+                    </table>
+                  </div>
+                <% } else { %>
+                  <div class="flex flex-col justify-center items-center px-4 sm:px-2 mt-2 col-span-3 mt-14">
+                    <svg width="245" height="239" viewBox="0 0 245 239" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <g clip-path="url(#clip0_232_2)">
+                      <path d="M155.439 53.7504H89.4637C87.9602 53.7522 86.5189 54.3503 85.4558 55.4134C84.3927 56.4765 83.7946 57.9179 83.7928 59.4213V206.052L83.0367 206.283L66.8519 211.239C66.0848 211.473 65.2563 211.393 64.5482 211.017C63.8402 210.64 63.3104 209.998 63.0751 209.232L14.9328 51.9773C14.6985 51.2102 14.7783 50.3816 15.1548 49.6734C15.5312 48.9651 16.1734 48.4354 16.9403 48.2005L41.881 40.5636L114.185 18.432L139.126 10.7951C139.505 10.6783 139.904 10.6375 140.299 10.675C140.695 10.7125 141.079 10.8276 141.43 11.0137C141.78 11.1998 142.091 11.4533 142.344 11.7596C142.597 12.0659 142.787 12.4191 142.903 12.7989L155.208 52.9943L155.439 53.7504Z" fill="#F2F2F2"/>
+                      <path d="M169.836 52.9965L155.005 4.55181C154.758 3.74463 154.355 2.99399 153.818 2.34277C153.281 1.69155 152.621 1.15252 151.876 0.756489C151.13 0.360454 150.314 0.11517 149.474 0.0346625C148.634 -0.045845 147.786 0.0400014 146.979 0.287288L111.914 11.0204L39.6136 33.1559L4.54843 43.8928C2.91949 44.393 1.55556 45.5191 0.756014 47.0239C-0.0435315 48.5286 -0.213366 50.2892 0.283796 51.919L50.9742 217.483C51.3781 218.799 52.193 219.95 53.2994 220.769C54.4057 221.587 55.7453 222.03 57.1216 222.031C57.7585 222.032 58.3919 221.936 59.0004 221.748L83.0375 214.391L83.7937 214.156V213.366L83.0375 213.597L58.7774 221.026C57.3396 221.464 55.7866 221.314 54.4591 220.609C53.1317 219.904 52.1381 218.701 51.6963 217.264L1.00983 51.696C0.790964 50.9841 0.714685 50.236 0.785354 49.4945C0.856023 48.7531 1.07225 48.0329 1.42166 47.3751C1.77107 46.7173 2.2468 46.135 2.82161 45.6613C3.39641 45.1877 4.05899 44.8321 4.77142 44.6149L39.8365 33.878L112.137 11.7463L147.202 1.00939C147.742 0.84448 148.304 0.760396 148.869 0.759869C150.082 0.762592 151.261 1.15349 152.236 1.87531C153.21 2.59713 153.927 3.61194 154.283 4.77109L169.046 52.9965L169.281 53.7526H170.067L169.836 52.9965Z" fill="#3F3D56"/>
+                      <path d="M46.3798 48.324C45.6511 48.3235 44.9418 48.0895 44.3559 47.6563C43.7699 47.2231 43.3383 46.6135 43.1242 45.917L38.2546 30.0113C38.1238 29.5841 38.0784 29.1352 38.121 28.6904C38.1636 28.2456 38.2935 27.8136 38.5031 27.4189C38.7127 27.0243 38.9981 26.6749 39.3428 26.3905C39.6875 26.1062 40.0848 25.8926 40.5121 25.7618L107.028 5.39805C107.891 5.13474 108.823 5.22455 109.619 5.64775C110.416 6.07095 111.012 6.79297 111.277 7.65534L116.147 23.5612C116.41 24.4241 116.32 25.3561 115.897 26.1528C115.474 26.9495 114.752 27.5458 113.89 27.8109L47.3738 48.1747C47.0517 48.2735 46.7167 48.3238 46.3798 48.324Z" fill="#239CFF"/>
+                      <path d="M71.8893 16.9956C76.0653 16.9956 79.4505 13.6103 79.4505 9.43438C79.4505 5.25844 76.0653 1.87317 71.8893 1.87317C67.7134 1.87317 64.3281 5.25844 64.3281 9.43438C64.3281 13.6103 67.7134 16.9956 71.8893 16.9956Z" fill="#239CFF"/>
+                      <path d="M71.8896 14.2223C74.5339 14.2223 76.6775 12.0787 76.6775 9.43436C76.6775 6.79002 74.5339 4.64636 71.8896 4.64636C69.2452 4.64636 67.1016 6.79002 67.1016 9.43436C67.1016 12.0787 69.2452 14.2223 71.8896 14.2223Z" fill="white"/>
+                      <path d="M227.834 220.097H100.049C99.1975 220.096 98.3807 219.757 97.7782 219.155C97.1758 218.552 96.8369 217.735 96.8359 216.883V63.7689C96.8369 62.9169 97.1758 62.1001 97.7782 61.4977C98.3806 60.8952 99.1975 60.5564 100.049 60.5554H227.834C228.686 60.5564 229.503 60.8953 230.105 61.4977C230.708 62.1002 231.046 62.917 231.047 63.7689V216.883C231.046 217.735 230.708 218.552 230.105 219.155C229.503 219.757 228.686 220.096 227.834 220.097Z" fill="#E6E6E6"/>
+                      <path d="M169.044 52.9943H89.4622C87.7584 52.9967 86.125 53.6746 84.9203 54.8794C83.7155 56.0841 83.0376 57.7175 83.0352 59.4213V213.594L83.7913 213.364V59.4213C83.7931 57.9178 84.3912 56.4765 85.4543 55.4134C86.5174 54.3503 87.9587 53.7522 89.4622 53.7504H169.278L169.044 52.9943ZM238.418 52.9943H89.4622C87.7584 52.9967 86.125 53.6746 84.9203 54.8794C83.7155 56.0841 83.0376 57.7175 83.0352 59.4213V232.573C83.0376 234.277 83.7155 235.91 84.9203 237.115C86.125 238.32 87.7584 238.998 89.4622 239H238.418C240.122 238.998 241.755 238.32 242.96 237.115C244.165 235.91 244.843 234.277 244.845 232.573V59.4213C244.843 57.7175 244.165 56.0841 242.96 54.8794C241.755 53.6746 240.122 52.9967 238.418 52.9943ZM244.089 232.573C244.087 234.076 243.489 235.518 242.426 236.581C241.363 237.644 239.922 238.242 238.418 238.244H89.4622C87.9587 238.242 86.5174 237.644 85.4543 236.581C84.3912 235.518 83.7931 234.076 83.7913 232.573V59.4213C83.7931 57.9178 84.3912 56.4765 85.4543 55.4134C86.5174 54.3503 87.9587 53.7522 89.4622 53.7504H238.418C239.922 53.7522 241.363 54.3503 242.426 55.4134C243.489 56.4765 244.087 57.9178 244.089 59.4213V232.573Z" fill="#3F3D56"/>
+                      <path d="M198.724 69.6288H129.16C128.258 69.6278 127.393 69.269 126.756 68.6311C126.118 67.9932 125.759 67.1284 125.758 66.2263V49.5916C125.759 48.6895 126.118 47.8247 126.756 47.1868C127.393 46.5489 128.258 46.1901 129.16 46.1891H198.724C199.626 46.1901 200.49 46.5489 201.128 47.1868C201.766 47.8247 202.125 48.6895 202.126 49.5916V66.2263C202.125 67.1284 201.766 67.9932 201.128 68.6311C200.49 69.269 199.626 69.6278 198.724 69.6288Z" fill="#239CFF"/>
+                      <path d="M163.94 47.3232C168.116 47.3232 171.501 43.938 171.501 39.762C171.501 35.5861 168.116 32.2008 163.94 32.2008C159.764 32.2008 156.379 35.5861 156.379 39.762C156.379 43.938 159.764 47.3232 163.94 47.3232Z" fill="#239CFF"/>
+                      <path d="M163.941 44.3676C166.485 44.3676 168.547 42.3056 168.547 39.7621C168.547 37.2186 166.485 35.1566 163.941 35.1566C161.398 35.1566 159.336 37.2186 159.336 39.7621C159.336 42.3056 161.398 44.3676 163.941 44.3676Z" fill="white"/>
+                      </g>
+                      <defs>
+                      <clipPath id="clip0_232_2">
+                      <rect width="244.846" height="239" fill="white"/>
+                      </clipPath>
+                      </defs>
+                    </svg>                                                              
+                    <h2 class="nunito text-xl font-semibold mt-10">Nenhum chamado disponível</h2>
+                    <p class="nunito">Essa empresa não realizou nenhum chamado.</p>           
+                  </div>
+                <% } %>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+</body>
+
+<script>
+  function openDelete() {
+    const delete_popup = document.querySelector("#popup_delete")
+
+    delete_popup.classList.remove("hidden")
+  }
+
+  function closeDelete() {
+    const delete_popup = document.querySelector("#popup_delete")
+
+    delete_popup.classList.add("hidden")
+  }
+
+  function deleteCompany() {
+    fetch('/admin/delete-company/<%= company._id %>', {
+      method: 'DELETE',
+    })
+    .then(response => {
+      location.reload()
+    })
+    .catch(err => {
+      alert_message("error", "Tente mais tarde")
+    })
+  }
+</script>
+</html>

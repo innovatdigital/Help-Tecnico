@@ -13,24 +13,25 @@ const {
 
 const {
   dashboard,
-  users,
   allCalls,
   allCompanies,
+  allSuppliers,
   newTechnician,
   newCompany,
   newAdmin,
   newTest,
   newSupplier,
   saveSupplier,
-  infoUser,
   saveTechnician,
+  updateSupplier,
+  deleteSupplier,
+  updateCompany,
   saveAdmin,
   saveCompany,
-  updateUser,
-  blockUser,
-  unlockUser,
-  deleteUser
-} = require('../controllers/adminCtrl')
+  deleteCompany,
+  viewCompany,
+  viewSupplier
+} = require('../controllers/companyCtrl')
 
 const { 
   account,
@@ -47,6 +48,7 @@ router.get("/", authMiddleware, dashboard)
 // Infos
 router.get("/all-calls", authMiddleware, allCalls)
 router.get("/all-companies", authMiddleware, allCompanies)
+router.get("/all-suppliers", authMiddleware, allSuppliers)
 
 // router.delete("/all-posts/delete-post/:id", authMiddleware)
 // router.put("/all-posts/edit-post-schedule-link/:id", authMiddleware, editPostScheduleLink)
@@ -110,6 +112,10 @@ router.post("/new-technician/save", authMiddleware, isAdmin, saveTechnician)
 
 router.get("/new-company", authMiddleware, isAdmin, newCompany)
 router.post("/new-company/save", authMiddleware, isAdmin, saveCompany)
+router.get("/view-company/:id", authMiddleware, isAdmin, viewCompany)
+router.get("/update-company/:id", authMiddleware, isAdmin, updateCompany)
+router.put("/save-company/:id", authMiddleware, isAdmin, saveCompany)
+router.delete("/delete-company/:id", authMiddleware, isAdmin, deleteCompany)
 
 router.get("/new-admin", authMiddleware, isAdmin, newAdmin)
 router.post("/new-admin/save", authMiddleware, isAdmin, saveAdmin)
@@ -118,12 +124,9 @@ router.get("/new_test", authMiddleware, isAdmin, newTest)
 
 router.get("/new-supplier", authMiddleware, isAdmin, newSupplier)
 router.post("/new-supplier/save", authMiddleware, isAdmin, saveSupplier)
-
-router.get("/users", authMiddleware, isAdmin, users)
-router.get("/users/:id", authMiddleware, isAdmin, infoUser)
-router.put("/users/update/:id", authMiddleware, isAdmin, updateUser)
-router.post("/users/block/:id", authMiddleware, isAdmin, blockUser)
-router.post("/users/unlock/:id", authMiddleware, isAdmin, unlockUser)
-router.delete("/users/delete/:id", authMiddleware, isAdmin, deleteUser)
+router.get("/view-supplier/:id", authMiddleware, isAdmin, viewSupplier)
+router.get("/update-supplier/:id", authMiddleware, isAdmin, updateSupplier)
+router.put("/save-supplier/:id", authMiddleware, isAdmin, saveSupplier)
+router.delete("/delete-supplier/:id", authMiddleware, isAdmin, deleteSupplier)
 
 module.exports = router

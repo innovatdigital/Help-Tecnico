@@ -15,10 +15,10 @@
 </head>
 
 <body class="bg-gray-100">
-  <%- include('../partials/sidebar-platform', {isAdmin: isAdmin}) %>
+  <%- include('../partials/company/sidebar-company', {isAdmin: isAdmin}) %>
 
   <div class="lg:pl-70">
-    <%- include('../partials/nav-platform', {isAdmin: isAdmin, title: "Dashboard da sua conta", notifications: notifications, photo: photo, name_user: name_user}) %>
+    <%- include('../partials/company/nav-company', {isAdmin: isAdmin, title: "Visão geral da empresa", notifications: notifications, photo: photo, name_user: name_user}) %>
 
     <main class="py-4 fade-in">
       <div class="px-4 sm:px-6 lg:px-12">

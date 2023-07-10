@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Help Técnico | Dashboard</title>
+  <link rel="shortcut icon" href="/img/login/icon.png" type="image/x-icon">
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="/img/site/plubee-icon.png" type="image/x-icon">
+  <!-- Custom styles -->
+  <link rel="stylesheet" href="/css/platform/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/1.8.12/tailwind-experimental.min.css">
+</head>
+
+<body class="bg-gray-100">
+  <%- include('../partials/company/sidebar-company', {isAdmin: isAdmin}) %>
+
+  <div class="lg:pl-70">
+    <%- include('../partials/company/nav-company', {isAdmin: isAdmin, title: "Visão geral da empresa", notifications: notifications, photo: photo, name_user: name_user}) %>
+
+    <main class="py-4 fade-in">
+      <div class="grid grid-cols-1 sm:grid-cols-1 lg:grid-cols-1 lg:pr-12">
+        <div class="px-4 sm:px-6 lg:pl-12 mt-4 col-span-3">
+          <div class="sm:flex sm:items-center">
+            <div class="sm:flex-auto">
+              <h1 class="text-xl font-semibold leading-6 text-gray-900 nunito">Bem vindo (a) novamente <span class="font-bold" style="color: #179d5f;">Unimed Canoas</span></h1>
+            </div>
+          </div>
+
+          <dl class="mt-5 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
+            <div class="relative overflow-hidden rounded-lg bg-white px-4 pt-5 shadow sm:px-6 sm:pt-6">
+              <dt>
+                <div class=" absolute rounded-lg bg-purple p-3">
+                  <svg width="35" height="35" viewBox="0 0 35 35" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M19.4603 13.8954C19.927 12.4021 19.9795 10.8854 19.6178 9.34544C19.2562 7.80544 18.5153 6.46377 17.3953 5.32044C16.532 4.43377 15.517 3.7746 14.3503 3.34294C13.1837 2.91127 11.982 2.7421 10.7453 2.83544C10.372 2.85877 10.0745 2.99877 9.85283 3.25544C9.63116 3.5121 9.5145 3.8096 9.50283 4.14794C9.49116 4.48627 9.61366 4.79544 9.87033 5.07544C10.2903 5.4721 11.0253 6.0846 12.0753 6.91294C13.1253 7.74127 13.8487 8.35377 14.2453 8.75044C14.642 9.14711 14.8345 9.60794 14.8228 10.1329C14.8112 10.6579 14.6187 11.1071 14.2453 11.4804L11.4803 14.2454C11.107 14.6188 10.652 14.8113 10.1153 14.8229C9.57866 14.8346 9.13533 14.6538 8.78533 14.2804L5.07533 9.90544C4.79533 9.64877 4.48616 9.52044 4.14783 9.52044C3.80949 9.52044 3.51199 9.63127 3.25533 9.85294C2.99866 10.0746 2.85866 10.3721 2.83533 10.7454C2.71866 12.1454 2.94616 13.4929 3.51783 14.7879C4.08949 16.0829 4.92949 17.1679 6.03783 18.0429C7.14616 18.9179 8.40033 19.4838 9.80033 19.7404C11.2003 19.9971 12.5653 19.9154 13.8953 19.4954C14.1053 19.4254 14.3095 19.4196 14.5078 19.4779C14.7062 19.5363 14.8637 19.6471 14.9803 19.8104L23.4503 30.6955C24.1037 31.3955 24.8795 31.8738 25.7778 32.1305C26.6762 32.3871 27.5803 32.3988 28.4904 32.1655C29.4004 31.9321 30.182 31.483 30.8354 30.818C31.4887 30.153 31.932 29.3713 32.1654 28.4729C32.3987 27.5746 32.387 26.6704 32.1304 25.7604C31.8737 24.8504 31.3954 24.0804 30.6954 23.4504L19.8103 14.9804C19.647 14.8638 19.5362 14.7063 19.4778 14.5079C19.4195 14.3096 19.4137 14.1054 19.4603 13.8954ZM28.2804 28.2804C28.047 28.5371 27.7612 28.6946 27.4228 28.753C27.0845 28.8113 26.752 28.7763 26.4253 28.6479C26.0987 28.5196 25.842 28.3154 25.6553 28.0354C25.4687 27.7554 25.3753 27.4404 25.3753 27.0904C25.3753 26.7404 25.4687 26.4196 25.6553 26.1279C25.842 25.8363 26.0987 25.6263 26.4253 25.4979C26.752 25.3696 27.0845 25.3404 27.4228 25.4104C27.7612 25.4804 28.047 25.6321 28.2804 25.8654C28.607 26.1921 28.7704 26.5946 28.7704 27.0729C28.7704 27.5513 28.607 27.9538 28.2804 28.2804Z" fill="#208FEB"/>
+                  </svg>                                                                            
+                </div>
+                <p class="ml-16 truncate text-sm inter font-medium text-gray-500">Chamados hoje</p>
+              </dt>
+              <dd class="ml-16 flex items-center pb-6 sm:pb-7">
+                <p class="text-xl font-semibold">1 chamados</p>
+              </dd>
+            </div>
+  
+            <div class="relative overflow-hidden rounded-lg bg-white px-4 pt-5 shadow sm:px-6 sm:pt-6">
+              <dt>
+                <div class="absolute rounded-lg bg-purple p-3 pb-3.5">
+                  <svg width="35" height="29" viewBox="0 0 35 29" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd" clip-rule="evenodd" d="M17.1852 16.1111C17.7784 16.1111 18.2593 16.592 18.2593 17.1852V27.9259C18.2593 28.5192 17.7784 29 17.1852 29C16.592 29 16.1111 28.5192 16.1111 27.9259V17.1852C16.1111 16.592 16.592 16.1111 17.1852 16.1111ZM23.6296 16.1111C24.2229 16.1111 24.7037 16.592 24.7037 17.1852C24.7037 21.0476 26.5692 24.5954 29.6524 26.8012C30.1348 27.1464 30.2461 27.8173 29.9009 28.2998C29.5558 28.7822 28.885 28.8935 28.4025 28.5484C24.7614 25.9434 22.5556 21.7483 22.5556 17.1852C22.5556 16.592 23.0364 16.1111 23.6296 16.1111ZM10.7407 16.1111C11.334 16.1111 11.8148 16.592 11.8148 17.1852C11.8148 21.743 9.61417 25.9339 5.98002 28.5397C5.49789 28.8854 4.82689 28.7748 4.48121 28.2927C4.13553 27.8106 4.24612 27.1396 4.72825 26.7939C7.8056 24.5874 9.66667 21.0432 9.66667 17.1852C9.66667 16.592 10.1475 16.1111 10.7407 16.1111ZM30.0741 0C32.4468 0 34.3704 1.92354 34.3704 4.2963V10.7407C34.3704 13.1135 32.4468 15.037 30.0741 15.037H4.2963C1.92354 15.037 0 13.1135 0 10.7407V4.2963C0 1.92354 1.92354 0 4.2963 0H30.0741ZM29 8.59259H5.37037C4.77714 8.59259 4.2963 9.07343 4.2963 9.66667C4.2963 10.2599 4.77714 10.7407 5.37037 10.7407H29C29.5932 10.7407 30.0741 10.2599 30.0741 9.66667C30.0741 9.07343 29.5932 8.59259 29 8.59259Z" fill="#208FEB"/>
+                  </svg>                                                            
+                </div>
+                <p class="ml-16 truncate text-sm inter font-medium text-gray-500">Seus equipamentos</p>
+              </dt>
+              <dd class="ml-16 flex items-baseline pb-6 sm:pb-7">
+                <p class="text-xl font-semibold">4 equipamentos</p>
+              </dd>
+            </div>
+  
+            <div class="relative overflow-hidden rounded-lg bg-white px-4 pt-5 shadow sm:px-6 sm:pt-6">
+              <dt>
+                <div class="absolute rounded-lg bg-purple p-2.5">
+                  <svg width="35" height="35" viewBox="0 0 35 35" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M20.9138 3.41462C20.9138 1.52872 19.3851 0 17.4992 0C15.6133 0 14.0845 1.52872 14.0845 3.41462H10.6699V6.82924H24.3285V3.41462H20.9138Z" fill="#208FEB"/>
+                    <path d="M20.0618 23.4756H18.7812V26.0365H20.0618C20.7679 26.0365 21.3423 25.4621 21.3423 24.756C21.3423 24.05 20.768 23.4756 20.0618 23.4756Z" fill="#208FEB"/>
+                    <path d="M14.9387 18.3538C14.2326 18.3538 13.6582 18.9282 13.6582 19.6343C13.6582 20.3404 14.2326 20.9148 14.9387 20.9148H16.2191V18.3538H14.9387V18.3538Z" fill="#208FEB"/>
+                    <path d="M26.8904 6.82935V9.39029H8.10993V6.82935H4.69531V35.0001H30.3051V6.82935H26.8904ZM20.0613 28.5976H18.7807V30.7317H16.2197V28.5976H14.9394C13.9149 28.5976 12.9096 28.4258 11.9515 28.0871L12.8051 25.6727C13.4883 25.9143 14.2064 26.0367 14.9394 26.0367H16.2197V23.4757H14.9394C12.8212 23.4757 11.0979 21.7525 11.0979 19.6343C11.0979 17.5161 12.8212 15.7928 14.9394 15.7928H16.2197V13.6587H18.7807V15.7928H20.0613C21.0858 15.7928 22.0909 15.9646 23.0492 16.3033L22.1955 18.7179C21.5123 18.4763 20.7942 18.3538 20.0613 18.3538H18.7807V20.9148H20.0613C22.1795 20.9148 23.9027 22.6381 23.9027 24.7562C23.9027 26.8744 22.1795 28.5976 20.0613 28.5976Z" fill="#208FEB"/>
+                  </svg>                                        
+                </div>
+                <p class="ml-16 truncate text-sm inter font-medium text-gray-500">Orçamentos pendentes</p>
+              </dt>
+              <dd class="ml-16 flex items-baseline pb-6 sm:pb-7">
+                <p class="text-xl font-semibold">2 orçamentos</p>
+              </dd>
+            </div>
+  
+            <div class="relative overflow-hidden rounded-lg bg-white px-4 pt-5 shadow sm:px-6 sm:pt-6">
+              <dt>
+                <div class="absolute rounded-lg bg-purple p-2.5">
+                  <svg width="33" height="33" viewBox="0 0 33 33" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M16.5009 0.944336C13.4243 0.944336 10.4168 1.85665 7.85867 3.56592C5.30057 5.27519 3.30678 7.70463 2.12942 10.547C0.952052 13.3894 0.644 16.5172 1.24422 19.5346C1.84443 22.5521 3.32595 25.3239 5.50144 27.4993C7.67692 29.6748 10.4487 31.1563 13.4661 31.7566C16.4836 32.3568 19.6113 32.0487 22.4537 30.8714C25.2961 29.694 27.7256 27.7002 29.4349 25.1421C31.1441 22.584 32.0564 19.5765 32.0564 16.4999C32.0564 12.3743 30.4176 8.41769 27.5003 5.50045C24.5831 2.58322 20.6265 0.944336 16.5009 0.944336ZM16.287 26.0763C15.9697 26.0763 15.6596 25.9822 15.3958 25.8059C15.132 25.6297 14.9263 25.3791 14.8049 25.086C14.6835 24.7929 14.6518 24.4703 14.7136 24.1592C14.7755 23.848 14.9283 23.5622 15.1527 23.3378C15.377 23.1135 15.6629 22.9607 15.974 22.8988C16.2852 22.8369 16.6078 22.8686 16.9009 22.9901C17.194 23.1115 17.4445 23.3171 17.6208 23.5809C17.7971 23.8447 17.8912 24.1548 17.8912 24.4721C17.8912 24.8976 17.7221 25.3056 17.4213 25.6064C17.1205 25.9073 16.7124 26.0763 16.287 26.0763ZM17.6189 18.2402V19.9124C17.6169 20.2525 17.4848 20.5789 17.2498 20.8248C17.0148 21.0706 16.6947 21.2173 16.355 21.2346H16.2481C16.0762 21.2411 15.9047 21.2135 15.7435 21.1534C15.5824 21.0932 15.4347 21.0018 15.3091 20.8843C15.1834 20.7668 15.0823 20.6255 15.0115 20.4687C14.9407 20.3119 14.9017 20.1427 14.8967 19.9707C14.8967 19.543 14.8967 17.2874 14.8967 17.2874C14.8807 17.1315 14.8965 16.974 14.9432 16.8245C14.9898 16.6749 15.0664 16.5363 15.1682 16.4172C15.27 16.2982 15.395 16.201 15.5355 16.1316C15.676 16.0623 15.8291 16.0222 15.9856 16.0138C17.512 15.8971 20.0495 15.3332 20.0495 12.8541C20.0495 11.0749 18.6787 9.86934 16.7148 9.86934C15.9703 9.88163 15.2373 10.0548 14.566 10.377C13.8948 10.6992 13.3011 11.1628 12.8259 11.736C12.6461 11.927 12.4137 12.0602 12.158 12.1187C11.9023 12.1772 11.635 12.1584 11.3901 12.0646C11.1452 11.9708 10.9337 11.8063 10.7825 11.592C10.6314 11.3776 10.5473 11.1232 10.5412 10.861C10.5469 10.4945 10.6971 10.1451 10.9592 9.88878C11.6812 9.05291 12.5777 8.38553 13.5856 7.93367C14.5935 7.48181 15.6882 7.25646 16.7925 7.27351C20.3898 7.27351 22.8981 9.50962 22.8981 12.718C22.8981 15.6832 20.9828 17.6666 17.6189 18.2402Z" fill="#208FEB"/>
+                  </svg>                                        
+                </div>
+                <p class="ml-16 truncate text-sm inter font-medium text-gray-500">Precisa de ajuda?</p>
+              </dt>
+              <dd class="ml-16 flex items-baseline pb-6 sm:pb-7">
+                <p class="text-xl font-semibold color-blue">Entrar em contato</p>
+              </dd>
+            </div>
+          </dl>
+
+          <div class="mt-6 flow-root">
+            <div class="-mx-4 -my-2">
+              <div class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-5">
+                <div class="overflow-hidden shadow ring-1 ring-black ring-opacity-5 sm:rounded-lg">
+                  <table class="min-w-full divide-y divide-gray-300">
+                    <thead class="bg-gray-50">
+                      <tr>
+                        <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 nunito">ID</th>
+                        <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 nunito">Empresa</th>
+                        <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 nunito">Mensagem</th>
+                        <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 nunito">SLA</th>
+                        <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 nunito">Início em</th>
+                        <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 nunito">Término em</th>
+                        <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 nunito">Status</th>
+                        <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 nunito">Técnico</th>
+                        <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 nunito">Ações</th>
+                      </tr>
+                    </thead>
+
+                    <tbody class="divide-y divide-gray-200 bg-white">
+                      <tr>
+                        <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium sm:pl-6 text-indigo-600">
+                          #284525
+                        </td>
+                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 nunito">
+                          <div class="flex items-center mr-6">
+                            <img class="h-8 w-8 rounded-full bg-gray-50" src="/img/photos/<%= photo %>" alt="">                                                                    
+                            <p class="nunito ml-2">Unimed POA (Você)</p>
+                          </div>
+                        </td>
+                        <td class="whitespace-nowrap px-3 py-4 text-sm nunito text-gray-800 font-bold">
+                          Estamos com problema em nossos ar-condicionado...
+                        </td>
+                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 nunito color-purple font-semibold">16 min</td>
+                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 nunito color-purple font-semibold">
+                          <p style="color: #398bf7" class="nunito font-bold">14:11</p>
+                        </td>
+                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 nunito color-purple font-semibold">
+                          <p class="nunito font-bold">Não</p>
+                        </td>
+                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 nunito color-purple font-semibold">
+                          <div class="flex items-center justify-end gap-x-2 sm:justify-start">
+                            <div class="flex-none rounded-full p-1 text-green-400 bg-green-opacity">
+                              <div class="h-1.5 w-1.5 rounded-full bg-current"></div>
+                            </div>
+                            <div class="hidden text-green-400 sm:block">Em atendimento</div>
+                          </div>
+                        </td>
+                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 nunito color-purple">
+                          <div class="flex items-center mr-6">
+                            <img class="h-8 rounded-full" src="https://pps.whatsapp.net/v/t61.24694-24/309612029_1303621463511201_2184499647973530355_n.jpg?ccb=11-4&oh=01_AdTLj4igz1k4OkKVwtf5wwXyceqwcgJlQGxo3JG6sDOlTQ&oe=64B44F62">
+                            <p class="inter ml-2">Anderson Moreira</p>
+                          </div>
+                        </td>
+                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 nunito color-purple font-semibold">
+                          <div class="flex items-center">
+                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" class="mr-2">
+                              <path opacity="0.5" d="M2.73038 12.7463C2.0221 11.8262 1.66797 11.3661 1.66797 9.99992C1.66797 8.63375 2.0221 8.17369 2.73038 7.25353C4.1446 5.41622 6.51639 3.33325 10.0013 3.33325C13.4862 3.33325 15.858 5.41622 17.2722 7.25353C17.9805 8.17369 18.3346 8.63375 18.3346 9.99992C18.3346 11.3661 17.9805 11.8262 17.2722 12.7463C15.858 14.5836 13.4862 16.6666 10.0013 16.6666C6.51639 16.6666 4.1446 14.5836 2.73038 12.7463Z" stroke="#0E1726" stroke-width="1.25"/>
+                              <path d="M12.5 10C12.5 11.3807 11.3807 12.5 10 12.5C8.61925 12.5 7.5 11.3807 7.5 10C7.5 8.61925 8.61925 7.5 10 7.5C11.3807 7.5 12.5 8.61925 12.5 10Z" stroke="#0E1726" stroke-width="1.25"/>
+                            </svg>
+                            Visualizar                                  
+                          </div>
+                        </td>
+                      </tr>
+
+                      <tr>
+                        <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium sm:pl-6 text-indigo-600">
+                          #284414
+                        </td>
+                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 nunito">
+                          <div class="flex items-center mr-6">
+                            <img class="h-8 w-8 rounded-full bg-gray-50" src="/img/photos/<%= photo %>" alt="">                                                                    
+                            <p class="nunito ml-2">Unimed POA (Você)</p>
+                          </div>
+                        </td>
+                        <td class="whitespace-nowrap px-3 py-4 text-sm nunito text-gray-800 font-bold">
+                          Nossos aparelhos não estão ligando quando...
+                        </td>
+                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 nunito color-purple font-semibold">Não iniciado</td>
+                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 nunito color-purple font-semibold">
+                          <p style="color: #398bf7" class="nunito font-bold">Pendente</p>
+                        </td>
+                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 nunito color-purple font-semibold">
+                          <p class="nunito font-bold">Não</p>
+                        </td>
+                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 nunito color-purple font-semibold">
+                          <div class="flex items-center justify-end gap-x-2 sm:justify-start">
+                            <div class="flex-none rounded-full p-1 text-yellow-400 bg-yellow-opacity">
+                              <div class="h-1.5 w-1.5 rounded-full bg-current"></div>
+                            </div>
+                            <div class="hidden text-yellow-400 sm:block">Pendente</div>
+                          </div>
+                        </td>
+                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 nunito color-purple">
+                          <div class="flex items-center mr-6">
+                            <img class="h-8 rounded-full" src="https://pps.whatsapp.net/v/t61.24694-24/309612029_1303621463511201_2184499647973530355_n.jpg?ccb=11-4&oh=01_AdTLj4igz1k4OkKVwtf5wwXyceqwcgJlQGxo3JG6sDOlTQ&oe=64B44F62">
+                            <p class="inter ml-2">Anderson Moreira</p>
+                          </div>
+                        </td>
+                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 nunito color-purple font-semibold">
+                          <div class="flex items-center">
+                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" class="mr-2">
+                              <path opacity="0.5" d="M2.73038 12.7463C2.0221 11.8262 1.66797 11.3661 1.66797 9.99992C1.66797 8.63375 2.0221 8.17369 2.73038 7.25353C4.1446 5.41622 6.51639 3.33325 10.0013 3.33325C13.4862 3.33325 15.858 5.41622 17.2722 7.25353C17.9805 8.17369 18.3346 8.63375 18.3346 9.99992C18.3346 11.3661 17.9805 11.8262 17.2722 12.7463C15.858 14.5836 13.4862 16.6666 10.0013 16.6666C6.51639 16.6666 4.1446 14.5836 2.73038 12.7463Z" stroke="#0E1726" stroke-width="1.25"/>
+                              <path d="M12.5 10C12.5 11.3807 11.3807 12.5 10 12.5C8.61925 12.5 7.5 11.3807 7.5 10C7.5 8.61925 8.61925 7.5 10 7.5C11.3807 7.5 12.5 8.61925 12.5 10Z" stroke="#0E1726" stroke-width="1.25"/>
+                            </svg>
+                            Visualizar                                  
+                          </div>
+                        </td>
+                      </tr>
+
+                      <tr>
+                        <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium sm:pl-6 text-indigo-600">
+                          #284324
+                        </td>
+                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 nunito">
+                          <div class="flex items-center mr-6">
+                            <img class="h-8 w-8 rounded-full bg-gray-50" src="/img/photos/<%= photo %>" alt="">                                                                    
+                            <p class="nunito ml-2">Unimed POA (Você)</p>
+                          </div>
+                        </td>
+                        <td class="whitespace-nowrap px-3 py-4 text-sm nunito text-gray-800 font-bold">
+                          Os aparelhos não conseguem climatizar bem...
+                        </td>
+                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 nunito color-purple font-semibold">55 min</td>
+                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 nunito color-purple font-semibold">
+                          <p class="nunito font-bold">14:11</p>
+                        </td>
+                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 nunito color-purple font-semibold">
+                          <p class="nunito font-bold">15:06</p>
+                        </td>
+                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 nunito color-purple font-semibold">
+                          <div class="flex items-center justify-end gap-x-2 sm:justify-start">
+                            <div class="flex-none rounded-full p-1 text-gray-500 bg-gray-opacity">
+                              <div class="h-1.5 w-1.5 rounded-full bg-current"></div>
+                            </div>
+                            <div class="hidden text-gray-500 sm:block">Concluído</div>
+                          </div>
+                        </td>
+                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 nunito color-purple">
+                          <div class="flex items-center mr-6">
+                            <img class="h-8 rounded-full" src="https://pps.whatsapp.net/v/t61.24694-24/309612029_1303621463511201_2184499647973530355_n.jpg?ccb=11-4&oh=01_AdTLj4igz1k4OkKVwtf5wwXyceqwcgJlQGxo3JG6sDOlTQ&oe=64B44F62">
+                            <p class="inter ml-2">Anderson Moreira</p>
+                          </div>
+                        </td>
+                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 nunito color-purple font-semibold">
+                          <div class="flex items-center">
+                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" class="mr-2">
+                              <path opacity="0.5" d="M2.73038 12.7463C2.0221 11.8262 1.66797 11.3661 1.66797 9.99992C1.66797 8.63375 2.0221 8.17369 2.73038 7.25353C4.1446 5.41622 6.51639 3.33325 10.0013 3.33325C13.4862 3.33325 15.858 5.41622 17.2722 7.25353C17.9805 8.17369 18.3346 8.63375 18.3346 9.99992C18.3346 11.3661 17.9805 11.8262 17.2722 12.7463C15.858 14.5836 13.4862 16.6666 10.0013 16.6666C6.51639 16.6666 4.1446 14.5836 2.73038 12.7463Z" stroke="#0E1726" stroke-width="1.25"/>
+                              <path d="M12.5 10C12.5 11.3807 11.3807 12.5 10 12.5C8.61925 12.5 7.5 11.3807 7.5 10C7.5 8.61925 8.61925 7.5 10 7.5C11.3807 7.5 12.5 8.61925 12.5 10Z" stroke="#0E1726" stroke-width="1.25"/>
+                            </svg>
+                            Visualizar                                  
+                          </div>
+                        </td>
+                      </tr>
+
+                      <tr>
+                        <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium sm:pl-6 text-indigo-600">
+                          #284324
+                        </td>
+                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 nunito">
+                          <div class="flex items-center mr-6">
+                            <img class="h-8 w-8 rounded-full bg-gray-50" src="/img/photos/<%= photo %>" alt="">                                                                    
+                            <p class="nunito ml-2">Unimed POA (Você)</p>
+                          </div>
+                        </td>
+                        <td class="whitespace-nowrap px-3 py-4 text-sm nunito text-gray-800 font-bold">
+                          Os aparelhos não conseguem climatizar bem...
+                        </td>
+                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 nunito color-purple font-semibold">55 min</td>
+                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 nunito color-purple font-semibold">
+                          <p class="nunito font-bold">14:11</p>
+                        </td>
+                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 nunito color-purple font-semibold">
+                          <p class="nunito font-bold">15:06</p>
+                        </td>
+                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 nunito color-purple font-semibold">
+                          <div class="flex items-center justify-end gap-x-2 sm:justify-start">
+                            <div class="flex-none rounded-full p-1 text-gray-500 bg-gray-opacity">
+                              <div class="h-1.5 w-1.5 rounded-full bg-current"></div>
+                            </div>
+                            <div class="hidden text-gray-500 sm:block">Concluído</div>
+                          </div>
+                        </td>
+                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 nunito color-purple">
+                          <div class="flex items-center mr-6">
+                            <img class="h-8 rounded-full" src="https://pps.whatsapp.net/v/t61.24694-24/309612029_1303621463511201_2184499647973530355_n.jpg?ccb=11-4&oh=01_AdTLj4igz1k4OkKVwtf5wwXyceqwcgJlQGxo3JG6sDOlTQ&oe=64B44F62">
+                            <p class="inter ml-2">Anderson Moreira</p>
+                          </div>
+                        </td>
+                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 nunito color-purple font-semibold">
+                          <div class="flex items-center">
+                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" class="mr-2">
+                              <path opacity="0.5" d="M2.73038 12.7463C2.0221 11.8262 1.66797 11.3661 1.66797 9.99992C1.66797 8.63375 2.0221 8.17369 2.73038 7.25353C4.1446 5.41622 6.51639 3.33325 10.0013 3.33325C13.4862 3.33325 15.858 5.41622 17.2722 7.25353C17.9805 8.17369 18.3346 8.63375 18.3346 9.99992C18.3346 11.3661 17.9805 11.8262 17.2722 12.7463C15.858 14.5836 13.4862 16.6666 10.0013 16.6666C6.51639 16.6666 4.1446 14.5836 2.73038 12.7463Z" stroke="#0E1726" stroke-width="1.25"/>
+                              <path d="M12.5 10C12.5 11.3807 11.3807 12.5 10 12.5C8.61925 12.5 7.5 11.3807 7.5 10C7.5 8.61925 8.61925 7.5 10 7.5C11.3807 7.5 12.5 8.61925 12.5 10Z" stroke="#0E1726" stroke-width="1.25"/>
+                            </svg>
+                            Visualizar                                  
+                          </div>
+                        </td>
+                      </tr>
+
+                      <tr>
+                        <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium sm:pl-6 text-indigo-600">
+                          #284324
+                        </td>
+                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 nunito">
+                          <div class="flex items-center mr-6">
+                            <img class="h-8 w-8 rounded-full bg-gray-50" src="/img/photos/<%= photo %>" alt="">                                                                    
+                            <p class="nunito ml-2">Unimed POA (Você)</p>
+                          </div>
+                        </td>
+                        <td class="whitespace-nowrap px-3 py-4 text-sm nunito text-gray-800 font-bold">
+                          Os aparelhos não conseguem climatizar bem...
+                        </td>
+                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 nunito color-purple font-semibold">55 min</td>
+                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 nunito color-purple font-semibold">
+                          <p class="nunito font-bold">14:11</p>
+                        </td>
+                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 nunito color-purple font-semibold">
+                          <p class="nunito font-bold">15:06</p>
+                        </td>
+                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 nunito color-purple font-semibold">
+                          <div class="flex items-center justify-end gap-x-2 sm:justify-start">
+                            <div class="flex-none rounded-full p-1 text-gray-500 bg-gray-opacity">
+                              <div class="h-1.5 w-1.5 rounded-full bg-current"></div>
+                            </div>
+                            <div class="hidden text-gray-500 sm:block">Concluído</div>
+                          </div>
+                        </td>
+                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 nunito color-purple">
+                          <div class="flex items-center mr-6">
+                            <img class="h-8 rounded-full" src="https://pps.whatsapp.net/v/t61.24694-24/309612029_1303621463511201_2184499647973530355_n.jpg?ccb=11-4&oh=01_AdTLj4igz1k4OkKVwtf5wwXyceqwcgJlQGxo3JG6sDOlTQ&oe=64B44F62">
+                            <p class="inter ml-2">Anderson Moreira</p>
+                          </div>
+                        </td>
+                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 nunito color-purple font-semibold">
+                          <div class="flex items-center">
+                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" class="mr-2">
+                              <path opacity="0.5" d="M2.73038 12.7463C2.0221 11.8262 1.66797 11.3661 1.66797 9.99992C1.66797 8.63375 2.0221 8.17369 2.73038 7.25353C4.1446 5.41622 6.51639 3.33325 10.0013 3.33325C13.4862 3.33325 15.858 5.41622 17.2722 7.25353C17.9805 8.17369 18.3346 8.63375 18.3346 9.99992C18.3346 11.3661 17.9805 11.8262 17.2722 12.7463C15.858 14.5836 13.4862 16.6666 10.0013 16.6666C6.51639 16.6666 4.1446 14.5836 2.73038 12.7463Z" stroke="#0E1726" stroke-width="1.25"/>
+                              <path d="M12.5 10C12.5 11.3807 11.3807 12.5 10 12.5C8.61925 12.5 7.5 11.3807 7.5 10C7.5 8.61925 8.61925 7.5 10 7.5C11.3807 7.5 12.5 8.61925 12.5 10Z" stroke="#0E1726" stroke-width="1.25"/>
+                            </svg>
+                            Visualizar                                  
+                          </div>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div> 
+      </div>
+    </main>
+  </div>
+</body>
+
+</html>
