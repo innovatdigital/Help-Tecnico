@@ -29,6 +29,14 @@ const viewEquipment = asyncHandler(async(req, res) => {
     res.render('layouts/company/view-equipment', {notifications: req.user.notifications.reverse().slice(0, 5), photo: req.user.photo, name_user: req.user.name})
 })
 
+const viewReport = asyncHandler(async(req, res) => {
+    res.render('layouts/company/view-report', {notifications: req.user.notifications.reverse().slice(0, 5), photo: req.user.photo, name_user: req.user.name})
+})
+
+const viewBudget = asyncHandler(async(req, res) => {
+    res.render('layouts/company/view-budget', {notifications: req.user.notifications.reverse().slice(0, 5), photo: req.user.photo, name_user: req.user.name})
+})
+
 const notifications = asyncHandler(async(req, res) => {
     res.render('layouts/company/notifications', {notifications: req.user.notifications.reverse().slice(0, 5), photo: req.user.photo, name_user: req.user.name})
 })
@@ -39,6 +47,10 @@ const myEquipments = asyncHandler(async(req, res) => {
 
 const reports = asyncHandler(async(req, res) => {
     res.render('layouts/company/reports', {notifications: req.user.notifications.reverse().slice(0, 5), photo: req.user.photo, name_user: req.user.name})
+})
+
+const budgets = asyncHandler(async(req, res) => {
+    res.render('layouts/company/budgets', {notifications: req.user.notifications.reverse().slice(0, 5), photo: req.user.photo, name_user: req.user.name})
 })
 
 const allCompanies = asyncHandler(async(req, res) => {
@@ -301,9 +313,12 @@ module.exports = {
     saveCompany,
     deleteCompany,
     viewCompany,
+    viewReport,
     saveAdmin,
     updateCompany,
     newTest,
+    viewBudget,
+    budgets,
     account,
     updateAccount,
     newPassword,

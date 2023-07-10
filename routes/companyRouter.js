@@ -32,7 +32,10 @@ const {
   viewCompany,
   viewSupplier,
   viewEquipment,
+  viewReport,
+  viewBudget,
   myEquipments,
+  budgets,
   reports,
   account,
   updateAccount,
@@ -51,9 +54,12 @@ router.get("/all-calls", authMiddleware, allCalls)
 router.get("/new-call", authMiddleware, newCall)
 router.get("/view-call", authMiddleware, viewCall)
 router.get("/view-equipment", authMiddleware, viewEquipment)
+router.get("/view-report", authMiddleware, viewReport)
+router.get("/view-budget", authMiddleware, viewBudget)
 router.get("/notifications", authMiddleware, notifications)
 router.get("/my-equipments", authMiddleware, myEquipments)
 router.get("/reports", authMiddleware, reports)
+router.get("/budgets", authMiddleware, budgets)
 
 
 router.get("/account", authMiddleware, account)

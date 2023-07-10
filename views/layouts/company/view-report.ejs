@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Help Técnico | Todos os chamados</title>
+  <link rel="shortcut icon" href="/img/login/icon.png" type="image/x-icon">
+  <!-- Custom styles -->
+  <link rel="stylesheet" href="/css/platform/style.css">
+  <link rel="stylesheet" href="/css/platform/notify.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/1.8.12/tailwind-experimental.min.css">
+</head>
+
+<body>
+  <%- include('../partials/company/sidebar-company') %>
+
+  <div class="lg:pl-70">
+    <%- include('../partials/company/nav-company', {title: "Todos os chamados", notifications: notifications, photo: photo, name_user: name_user}) %>
+
+    <main class="py-5 fade-in">
+      <div class="alert mt-14" style="display: none;"><div style="display: flex;" class="alert-text"></div></div>
+      <div class="error mt-14" style="display: none;"><div style="display: flex;" class="error-text"></div></div>
+
+      <div class="px-4 sm:px-6 lg:pl-12 mt-2 col-span-3">
+        <div class="min-h-full">
+          <main>
+            <div class="mx-auto mt-8 sm:px-6">
+              <div class="space-y-6">
+                <!-- Description list-->
+                <section aria-labelledby="applicant-information-title">
+                  <div class="bg-white shadow-lg border sm:rounded-lg">
+                    <div class="mx-auto px-4 pt-6 sm:px-6 md:flex md:items-center md:justify-between md:space-x-5 lg:pr-8 pb-6">
+                      <div class="flex items-center space-x-5">
+                        <div class="flex-shrink-0">
+                          <div class="relative">
+                            <svg width="52" height="52" viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg">
+                              <path opacity="0.5" d="M6.5 21.6663C6.5 13.4953 6.5 9.40982 9.03841 6.87139C11.5768 4.33301 15.6623 4.33301 23.8333 4.33301H28.1666C36.3376 4.33301 40.4232 4.33301 42.9616 6.87139C45.5 9.40982 45.5 13.4953 45.5 21.6663V30.3329C45.5 38.5039 45.5 42.5896 42.9616 45.128C40.4232 47.6663 36.3376 47.6663 28.1666 47.6663H23.8333C15.6623 47.6663 11.5768 47.6663 9.03841 45.128C6.5 42.5896 6.5 38.5039 6.5 30.3329V21.6663Z" fill="#0E1726" fill-opacity="0.5"/>
+                              <path fill-rule="evenodd" clip-rule="evenodd" d="M15.7117 26C15.7117 25.1026 16.4392 24.375 17.3367 24.375H34.6699C35.5674 24.375 36.2949 25.1026 36.2949 26C36.2949 26.8975 35.5674 27.625 34.6699 27.625H17.3367C16.4392 27.625 15.7117 26.8975 15.7117 26Z" fill="#0E1726" fill-opacity="0.5"/>
+                              <path fill-rule="evenodd" clip-rule="evenodd" d="M15.7117 17.333C15.7117 16.4355 16.4392 15.708 17.3367 15.708H34.6699C35.5674 15.708 36.2949 16.4355 36.2949 17.333C36.2949 18.2304 35.5674 18.958 34.6699 18.958H17.3367C16.4392 18.958 15.7117 18.2304 15.7117 17.333Z" fill="#0E1726" fill-opacity="0.5"/>
+                              <path fill-rule="evenodd" clip-rule="evenodd" d="M15.7117 34.667C15.7117 33.7695 16.4392 33.042 17.3367 33.042H28.1699C29.0674 33.042 29.7949 33.7695 29.7949 34.667C29.7949 35.5643 29.0674 36.292 28.1699 36.292H17.3367C16.4392 36.292 15.7117 35.5643 15.7117 34.667Z" fill="#0E1726" fill-opacity="0.5"/>
+                            </svg>                              
+                            <span class="absolute inset-0 rounded-full shadow-inner" aria-hidden="true"></span>
+                          </div>
+                        </div>
+                        <div>
+                          <h1 class="text-2xl font-bold text-gray-900 nunito">Relatório #23452</h1>
+                          <p class="text-sm font-semibold text-gray-500 nunito">ID do chamado: <span class="text-indigo-600 underline">#42423</span></p>
+                        </div>
+                      </div>
+                      <div class="mt-6 flex flex-col-reverse justify-stretch space-y-4 space-y-reverse sm:flex-row-reverse sm:justify-end sm:space-x-3 sm:space-y-0 sm:space-x-reverse md:mt-0 md:flex-row md:space-x-3">
+                        <button type="button" class="inline-flex items-center border justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50">Preciso de ajuda</button>
+                      </div>
+                    </div>
+
+                    <div class="border-t border-gray-200 px-4 py-5 sm:px-6">
+                      <dl class="grid grid-cols-1 gap-x-4 gap-y-8 sm:grid-cols-2">
+                        <div class="sm:col-span-1">
+                          <dt class="text-sm font-semibold text-gray-500 nunito">Pertencente:</dt>
+                          <dd class="mt-1 text-sm text-gray-900 nunito">Unimed POA (Você)</dd>
+                        </div>
+
+                        <div class="sm:col-span-1">
+                          <dt class="text-sm font-semibold text-gray-500 nunito">Tipo de relatório:</dt>
+                          <span class="inline-flex items-center nunito gap-x-1.5 border rounded-full px-2 py-1 text-xs font-semibold text-gray-900 ring-1 ring-inset ring-gray-200">
+                            <svg width="6" height="6" viewBox="0 0 6 6" fill="none" xmlns="http://www.w3.org/2000/svg">
+                              <g clip-path="url(#clip0_285_50)">
+                              <path d="M3 6C4.65685 6 6 4.65685 6 3C6 1.34315 4.65685 0 3 0C1.34315 0 0 1.34315 0 3C0 4.65685 1.34315 6 3 6Z" fill="#11AA17"/>
+                              </g>
+                              <defs>
+                              <clipPath id="clip0_285_50">
+                              <rect width="6" height="6" fill="white"/>
+                              </clipPath>
+                              </defs>
+                            </svg>                              
+                            Conclusão de serviço
+                          </span>
+                        </div>
+
+                        <div class="sm:col-span-1">
+                          <dt class="text-sm font-semibold text-gray-500 nunito">Data de início do serviço:</dt>
+                          <dd class="mt-1 text-sm text-gray-900 nunito">14:40</dd>
+                        </div>
+
+                        <div class="sm:col-span-1">
+                          <dt class="text-sm font-semibold text-gray-500 nunito">Data de conclusão do serviço:</dt>
+                          <dd class="mt-1 text-sm text-gray-900 nunito">15:24</dd>
+                        </div>
+
+                        <div class="sm:col-span-1">
+                          <dt class="text-sm font-semibold text-gray-500 nunito">Manutenções em equipamentos</dt>
+                          <dd class="mt-1 text-sm text-gray-900 nunito">2 Manutenções</dd>
+                        </div>
+
+                        <div class="sm:col-span-1">
+                          <dt class="text-sm font-semibold text-gray-500 nunito">Instalação de equipamentos</dt>
+                          <dd class="mt-1 text-sm text-gray-900 font-bold nunito">Não</dd>
+                        </div>
+
+                        <div class="sm:col-span-1">
+                          <dt class="text-sm font-semibold text-gray-500 nunito">Gerado em:</dt>
+                          <dd class="mt-1 text-sm text-gray-900 nunito">10/07/2023</dd>
+                        </div>
+
+                        <div class="sm:col-span-1">
+                          <dt class="text-sm font-semibold text-gray-500 nunito">Técnico responsável</dt>
+                          <dd class="flex items-center mt-1">
+                            <img class="h-8 rounded-full" src="https://pps.whatsapp.net/v/t61.24694-24/309612029_1303621463511201_2184499647973530355_n.jpg?ccb=11-4&oh=01_AdTLj4igz1k4OkKVwtf5wwXyceqwcgJlQGxo3JG6sDOlTQ&oe=64B44F62">
+                            <p class="nunito text-sm ml-2">Anderson Moreira</p>
+                          </dd>
+                        </div>
+
+                        <div class="sm:col-span-2">
+                          <dt class="text-md font-medium text-gray-500">Descrição do relatório:</dt>
+                          <dd class="mt-1 text-sm text-gray-900 nunito nunito font-medium">Nossa equipe técnica realizou um serviço completo de manutenção preventiva no sistema de ar condicionado do cliente. O serviço incluiu a inspeção e limpeza minuciosa de todos os componentes do sistema, verificação de vazamentos, teste de funcionamento e substituição de peças desgastadas, conforme necessário. Além disso, realizamos a limpeza dos filtros e a calibração dos controles para garantir um desempenho ideal do sistema de ar condicionado.</dd>
+                        </div>
+
+                        <div class="sm:col-span-2">
+                          <dt class="text-md font-medium text-gray-500">Equipamentos envolvidos:</dt>
+                          <div class="flex items-center space-x-5 mt-4">
+                            <div class="flex-shrink-0">
+                              <div class="relative">
+                                <img class="h-12 rounded-md" src="https://s.zst.com.br/cms-assets/2021/10/cuidados-com-o-ar-condicionado.jpg" alt="">
+                                <span class="absolute inset-0 rounded-full shadow-inner" aria-hidden="true"></span>
+                              </div>
+                            </div>
+                            <div>
+                              <h1 class="text-md font-bold text-gray-900 nunito">Ar Condicionado Split</h1>
+                              <p class="text-sm font-semibold text-gray-500 nunito">ID do equipamento: <span class="text-indigo-600">#42423</span></p>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div class="sm:col-span-2">
+                          <dt class="text-md font-medium text-gray-500">Anexos do técnico:</dt>
+                          <ul role="list" class="divide-y divide-gray-200 rounded-md border border-gray-200 mt-2">
+                            <li class="flex items-center justify-between py-4 pl-3 pr-4 text-sm">
+                              <div class="flex w-0 flex-1 items-center">
+                                <svg class="h-5 w-5 flex-shrink-0 text-gray-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                                  <path fill-rule="evenodd" d="M15.621 4.379a3 3 0 00-4.242 0l-7 7a3 3 0 004.241 4.243h.001l.497-.5a.75.75 0 011.064 1.057l-.498.501-.002.002a4.5 4.5 0 01-6.364-6.364l7-7a4.5 4.5 0 016.368 6.36l-3.455 3.553A2.625 2.625 0 119.52 9.52l3.45-3.451a.75.75 0 111.061 1.06l-3.45 3.451a1.125 1.125 0 001.587 1.595l3.454-3.553a3 3 0 000-4.242z" clip-rule="evenodd" />
+                                </svg>
+                                <span class="ml-2 w-0 flex-1 truncate">imagem_do_técnico-1.jpeg</span>
+                              </div>
+                              <div class="ml-4 flex-shrink-0">
+                                <a href="#" class="font-medium color-blue">Download</a>
+                              </div>
+                            </li>
+                          </ul>
+                        </div>
+                      </dl>
+                    </div>
+                  </div>
+                </section>
+              </div>
+            </div>
+          </main>
+        </div>
+      </div>
+    </main>
+  </div>
+</body>
+</html>
