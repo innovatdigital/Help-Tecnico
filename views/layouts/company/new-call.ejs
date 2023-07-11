@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Help Técnico | Todos os chamados</title>
+  <title>Help Técnico | Novo chamado</title>
   <link rel="shortcut icon" href="/img/login/icon.png" type="image/x-icon">
   <!-- Custom styles -->
   <link rel="stylesheet" href="/css/platform/style.css">
@@ -17,7 +17,7 @@
   <%- include('../partials/company/sidebar-company') %>
 
   <div class="lg:pl-70">
-    <%- include('../partials/company/nav-company', {title: "Todos os chamados", notifications: notifications, photo: photo, name_user: name_user}) %>
+    <%- include('../partials/company/nav-company', {title: "Abrir chamado", notifications: notifications, photo: photo, name_user: name_user}) %>
 
     <main class="py-5 fade-in">
       <div class="alert mt-14" style="display: none;"><div style="display: flex;" class="alert-text"></div></div>
@@ -49,11 +49,11 @@
   
           <div class="mt-8 div-image">
             <label for="files" class="block text-md font-medium leading-6 text-gray-900 nunito font-semibold color-blue">Imagens do chamado:</label>
-            <label for="files" style="border: 2px dashed #3C3C3C; cursor: pointer;" class="relative block mt-2 w-full rounded-lg p-4 text-center hover:border-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
+            <label for="files" style="border: 2px dashed #239CFF; cursor: pointer;" class="relative block mt-2 w-full rounded-lg p-4 text-center hover:border-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
               <div class="flex justify-center">
                 <svg width="45" height="45" viewBox="0 0 45 45" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M5.625 2.25C4.72989 2.25 3.87145 2.60558 3.23851 3.23851C2.60558 3.87145 2.25 4.72989 2.25 5.625V39.375C2.25 40.2701 2.60558 41.1285 3.23851 41.7615C3.87145 42.3944 4.72989 42.75 5.625 42.75H39.375C40.2701 42.75 41.1285 42.3944 41.7615 41.7615C42.3944 41.1285 42.75 40.2701 42.75 39.375V5.625C42.75 4.72989 42.3944 3.87145 41.7615 3.23851C41.1285 2.60558 40.2701 2.25 39.375 2.25H5.625ZM16.875 10.125C19.35 10.125 21.375 12.15 21.375 14.625C21.375 17.1 19.35 19.125 16.875 19.125C14.4 19.125 12.375 17.1 12.375 14.625C12.375 12.15 14.4 10.125 16.875 10.125ZM37.1227 38.25H7.86825C6.94575 38.25 6.42825 37.215 6.96825 36.4725L14.9625 27.3577C15.39 26.8852 16.1325 26.8852 16.5825 27.3352L20.25 31.5L27.135 20.7427C27.2407 20.5872 27.3837 20.4607 27.5509 20.3746C27.7181 20.2886 27.9043 20.2459 28.0923 20.2504C28.2803 20.2549 28.4641 20.3064 28.6271 20.4003C28.79 20.4941 28.9268 20.6274 29.025 20.7877L38.1127 36.5625C38.5177 37.3275 37.9777 38.25 37.1227 38.25Z" fill="#3C3C3C"/>
-                </svg>
+                  <path d="M5.625 2.25C4.72989 2.25 3.87145 2.60558 3.23851 3.23851C2.60558 3.87145 2.25 4.72989 2.25 5.625V39.375C2.25 40.2701 2.60558 41.1285 3.23851 41.7615C3.87145 42.3944 4.72989 42.75 5.625 42.75H39.375C40.2701 42.75 41.1285 42.3944 41.7615 41.7615C42.3944 41.1285 42.75 40.2701 42.75 39.375V5.625C42.75 4.72989 42.3944 3.87145 41.7615 3.23851C41.1285 2.60558 40.2701 2.25 39.375 2.25H5.625ZM16.875 10.125C19.35 10.125 21.375 12.15 21.375 14.625C21.375 17.1 19.35 19.125 16.875 19.125C14.4 19.125 12.375 17.1 12.375 14.625C12.375 12.15 14.4 10.125 16.875 10.125ZM37.1227 38.25H7.86825C6.94575 38.25 6.42825 37.215 6.96825 36.4725L14.9625 27.3577C15.39 26.8852 16.1325 26.8852 16.5825 27.3352L20.25 31.5L27.135 20.7427C27.2407 20.5872 27.3837 20.4607 27.5509 20.3746C27.7181 20.2886 27.9043 20.2459 28.0923 20.2504C28.2803 20.2549 28.4641 20.3064 28.6271 20.4003C28.79 20.4941 28.9268 20.6274 29.025 20.7877L38.1127 36.5625C38.5177 37.3275 37.9777 38.25 37.1227 38.25Z" fill="#239CFF"/>
+                </svg>                  
               </div>
               <span class="mt-2 files block text-sm font-semibold text-gray-900 inter">Selecione uma imagem</span>
               <input type="file" name="files" id="files" class="hidden">
