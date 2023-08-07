@@ -26,7 +26,7 @@
       <div class="px-4 sm:px-6 lg:pl-12 mt-2 col-span-3">
         <div class="sm:flex sm:items-center">
           <div class="w-full flex justify-between items-center">
-            <h1 class="text-lg font-semibold leading-6 text-gray-900 inter color-purple">Total de equipamentos: 5 unidades</h1>
+            <h1 class="text-lg font-semibold leading-6 text-gray-900 inter color-purple">Total de equipamentos: <%= equipments.length %> unidades</h1>
             <div class="relative mt-2 rounded-md shadow-sm">
               <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
                 <svg width="17" height="17" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -39,90 +39,23 @@
         </div>
 
         <ul role="list" class="grid grid-cols-2 gap-x-4 gap-y-8 md:grid-cols-3 md:grid-cols-4 sm:gap-x-6 lg:grid-cols-5 xl:gap-x-8 mt-8">
-          <li class="relative rounded-lg shadow-lg">
-            <div class="border-b">
-              <img class="h-44 rounded-t-lg" src="https://s.zst.com.br/cms-assets/2021/10/cuidados-com-o-ar-condicionado.jpg" alt="">
-            </div>
-
-            <div class="p-4">
-              <h2 class="text-lg font-bold color-blue nunito">Ar condicionado Split </h2>
-              <h2 class="text-sm font-bold color-blue nunito">QR Code: <span class="color-blue">#6334124</span></h2>
-              <h2 class="text-sm font-semibold mt-2 text-gray-800 nunito">ID na base: #2245212</h2>
-              <h2 class="text-sm font-semibold mt-1 text-gray-800 nunito">Manutenções: 4 man.</h2>
-              <h2 class="text-sm font-semibold mt-1 text-gray-800 nunito">Data de cadastro: 24/05/2023</h2>
-              <div>
-                <a href="/company/view-equipment" class="flex justify-center items-center bg-blue text-white mt-4 text-sm font-semibold rounded-lg nunito py-2" href="">Ver equipamento</a>
+          <% equipments.forEach(item => { %>
+            <li class="relative rounded-lg shadow-lg">
+              <div class="border-b">
+                <img class="h-44 rounded-t-lg" src="https://s.zst.com.br/cms-assets/2021/10/cuidados-com-o-ar-condicionado.jpg" alt="">
               </div>
-            </div>
-          </li>
 
-          <li class="relative rounded-lg shadow-lg">
-            <div class="border-b">
-              <img class="w-80 h-44 rounded-t-lg" src="https://blogdofrio.com.br/wp-content/uploads/2023/01/ar-condicionado-split-23-graus-celsius.jpg" alt="">
-            </div>
-
-            <div class="p-4">
-              <h2 class="text-lg font-bold color-blue nunito">Ar condicionado Split </h2>
-              <h2 class="text-sm font-bold color-blue nunito">QR Code: <span class="color-blue">#6334253</span></h2>
-              <h2 class="text-sm font-semibold mt-2 text-gray-800 nunito">ID na base: #2245212</h2>
-              <h2 class="text-sm font-semibold mt-1 text-gray-800 nunito">Manutenções: 2 man.</h2>
-              <h2 class="text-sm font-semibold mt-1 text-gray-800 nunito">Data de cadastro: 24/05/2023</h2>
-              <div>
-                <a href="/company/view-equipment" class="flex justify-center items-center bg-blue text-white mt-4 text-sm font-semibold rounded-lg nunito py-2" href="">Ver equipamento</a>
+              <div class="p-4">
+                <h2 class="text-lg font-bold color-blue nunito"><%= item.model %> </h2>
+                <h2 class="text-sm font-semibold mt-2 text-gray-800 nunito">ID na base: <span class="text-blue">#<%= item.id %></span></h2>
+                <h2 class="text-sm font-semibold mt-1 text-gray-800 nunito">Manutenções: <%= item.maintenance %> man.</h2>
+                <h2 class="text-sm font-semibold mt-1 text-gray-800 nunito">Data de cadastro: <%= item.date %></h2>
+                <div>
+                  <a href="/company/view-equipment/<%= item.id %>" class="flex justify-center items-center bg-blue text-white mt-4 text-sm font-semibold rounded-lg nunito py-2" href="">Ver equipamento</a>
+                </div>
               </div>
-            </div>
-          </li>
-
-          <li class="relative rounded-lg shadow-lg">
-            <div class="border-b">
-              <img class="h-44 rounded-t-lg" src="https://www.confiavel.digital/wp-content/uploads/2022/05/melhores-ar-condicionados-para-comprar.jpg" alt="">
-            </div>
-
-            <div class="p-4">
-              <h2 class="text-lg font-bold color-blue nunito">Ar condicionado Split </h2>
-              <h2 class="text-sm font-bold color-blue nunito">QR Code: <span class="color-blue">#6334233</span></h2>
-              <h2 class="text-sm font-semibold mt-2 text-gray-800 nunito">ID na base: #2245212</h2>
-              <h2 class="text-sm font-semibold mt-1 text-gray-800 nunito">Manutenções: 3 man.</h2>
-              <h2 class="text-sm font-semibold mt-1 text-gray-800 nunito">Data de cadastro: 24/05/2023</h2>
-              <div>
-                <a href="/company/view-equipment" class="flex justify-center items-center bg-blue text-white mt-4 text-sm font-semibold rounded-lg nunito py-2" href="">Ver equipamento</a>
-              </div>
-            </div>
-          </li>
-
-          <li class="relative rounded-lg shadow-lg">
-            <div class="border-b">
-              <img class="w-80 h-44 rounded-t-lg" src="https://cdnm.westwing.com.br/glossary/uploads/br/2015/05/28181716/ar-condicionado-em-uma-parede-branca-_c-a1191.jpg" alt="">
-            </div>
-
-            <div class="p-4">
-              <h2 class="text-lg font-bold color-blue nunito">Ar condicionado Split </h2>
-              <h2 class="text-sm font-bold color-blue nunito">QR Code: <span class="color-blue">#6334222</span></h2>
-              <h2 class="text-sm font-semibold mt-2 text-gray-800 nunito">ID na base: #2245212</h2>
-              <h2 class="text-sm font-semibold mt-1 text-gray-800 nunito">Manutenções: 1 man.</h2>
-              <h2 class="text-sm font-semibold mt-1 text-gray-800 nunito">Data de cadastro: 24/05/2023</h2>
-              <div>
-                <a href="/company/view-equipment" class="flex justify-center items-center bg-blue text-white mt-4 text-sm font-semibold rounded-lg nunito py-2" href="">Ver equipamento</a>
-              </div>
-            </div>
-          </li>
-
-          <li class="relative rounded-lg shadow-lg">
-            <div class="border-b">
-              <img class="w-80 h-44 rounded-t-lg" src="https://static.webarcondicionado.com.br/blog/uploads/2021/01/melhor-modelo-de-ar-condicionado-split.jpg" alt="">
-            </div>
-
-            <div class="p-4">
-              <h2 class="text-lg font-bold color-blue nunito">Ar condicionado Split </h2>
-              <h2 class="text-sm font-bold color-blue nunito">QR Code: <span class="color-blue">#6336889</span></h2>
-              <h2 class="text-sm font-semibold mt-2 text-gray-800 nunito">ID na base: #2245212</h2>
-              <h2 class="text-sm font-semibold mt-1 text-gray-800 nunito">Manutenções: 0 man.</h2>
-              <h2 class="text-sm font-semibold mt-1 text-gray-800 nunito">Data de cadastro: 24/05/2023</h2>
-              <div>
-                <a href="/company/view-equipment" class="flex justify-center items-center bg-blue text-white mt-4 text-sm font-semibold rounded-lg nunito py-2" href="">Ver equipamento</a>
-              </div>
-            </div>
-          </li>
+            </li>
+          <% }) %>
         </ul>
       </div>
     </main>

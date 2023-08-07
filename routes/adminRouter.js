@@ -14,6 +14,9 @@ const {
 const {
   dashboard,
   allCalls,
+  allReports,
+  administrators,
+  viewCall,
   allCompanies,
   allSuppliers,
   newTechnician,
@@ -30,8 +33,10 @@ const {
   saveCompany,
   deleteCompany,
   viewCompany,
-  viewSupplier
-} = require('../controllers/companyCtrl')
+  viewSupplier,
+  invoices,
+  technicians
+} = require('../controllers/adminCtrl')
 
 const { 
   account,
@@ -47,14 +52,13 @@ router.get("/", authMiddleware, dashboard)
 
 // Infos
 router.get("/all-calls", authMiddleware, allCalls)
+router.get("/all-reports", authMiddleware, allReports)
+router.get("/administrators", authMiddleware, administrators)
+router.get("/technicians", authMiddleware, technicians)
+router.get("/view-call/:id", authMiddleware, viewCall)
 router.get("/all-companies", authMiddleware, allCompanies)
 router.get("/all-suppliers", authMiddleware, allSuppliers)
-
-// router.delete("/all-posts/delete-post/:id", authMiddleware)
-// router.put("/all-posts/edit-post-schedule-link/:id", authMiddleware, editPostScheduleLink)
-// router.put("/all-posts/edit-post-schedule-image/:id", authMiddleware, editPostScheduleImage)
-// router.put("/all-posts/edit-post-published/:id", authMiddleware, editPostPublished)
-// router.get("/view/:id", authMiddleware, viewPost)
+router.get("/invoices", authMiddleware, invoices)
 
 
 // Account

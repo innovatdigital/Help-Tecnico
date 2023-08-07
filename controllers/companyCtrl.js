@@ -5,14 +5,19 @@ const Company = require('../models/Company')
 const Suppliers = require('../models/Suppliers')
 const Calls = require('../models/Calls')
 
+// Dashboard
+
 const dashboard = asyncHandler(async(req, res) => {
-    const calls = await Calls.find({})
+    const calls = await Calls.find({id_company: req.user._id})
 
     res.render('layouts/company/dashboard', {isAdmin: true, notifications: req.user.notifications.reverse().slice(0, 5), photo: req.user.photo, name_user: req.user.name, calls: calls.reverse()})
 })
 
+
+// Calls
+
 const allCalls = asyncHandler(async(req, res) => {
-    const calls = await Calls.find({})
+    const calls = await Calls.find({id_company: req.user._id})
 
     res.render('layouts/company/all-calls', {notifications: req.user.notifications.reverse().slice(0, 5), photo: req.user.photo, name_user: req.user.name, calls: calls.reverse()})
 })
@@ -22,11 +27,57 @@ const newCall = asyncHandler(async(req, res) => {
 })
 
 const viewCall = asyncHandler(async(req, res) => {
-    res.render('layouts/company/view-call', {notifications: req.user.notifications.reverse().slice(0, 5), photo: req.user.photo, name_user: req.user.name})
+    const call = await Calls.findById(req.params.id)
+    call.emailCompany = req.user.email
+    call.phoneCompany = req.user.phoneCompany
+
+    res.render('layouts/company/view-call', {notifications: req.user.notifications.reverse().slice(0, 5), photo: req.user.photo, name_user: req.user.name, call: call})
 })
 
+const saveCall = asyncHandler(async(req, res) => {
+    try {
+        const { description, photos } = req.body
+
+        const date = Date.now();
+        const options = { day: '2-digit', month: '2-digit', year: 'numeric' };
+        const formater = new Intl.DateTimeFormat('pt-BR', options);
+        const dataFormat = formater.format(date);
+
+        const dateHour = new Date();
+
+        const hour = dateHour.getHours();
+        const minutes = dateHour.getMinutes();
+
+        const saveCallInDb = await Calls.create({description: description, id_company: req.user._id, id_technician: '', photos: photos, date: dataFormat, status: "pending", sla: "0", timeline: [{text: `Chamado aberto por ${req.user.name}`, hour: `${hour}:${minutes}`, type: "company"}]})
+        
+        const saveCallInCompany = await Company.findByIdAndUpdate(
+            { _id: req.user._id },
+            {
+                $push: {
+                    calls: {
+                        id: saveCallInDb._id
+                    }
+                }
+            }
+        );
+
+        if (saveCallInCompany) {
+            res.sendStatus(200)
+        } else {
+            res.sendStatus(500)
+        }
+    } catch (err) {
+        res.sendStatus(500)
+        console.log(err)
+    }
+})
+
+
+
 const viewEquipment = asyncHandler(async(req, res) => {
-    res.render('layouts/company/view-equipment', {notifications: req.user.notifications.reverse().slice(0, 5), photo: req.user.photo, name_user: req.user.name})
+    const equipment = req.user.equipments.find(item => item.id == req.params.id)
+
+    res.render('layouts/company/view-equipment', {notifications: req.user.notifications.reverse().slice(0, 5), photo: req.user.photo, name_user: req.user.name, equipment: equipment})
 })
 
 const viewReport = asyncHandler(async(req, res) => {
@@ -42,7 +93,7 @@ const notifications = asyncHandler(async(req, res) => {
 })
 
 const myEquipments = asyncHandler(async(req, res) => {
-    res.render('layouts/company/my-equipments', {notifications: req.user.notifications.reverse().slice(0, 5), photo: req.user.photo, name_user: req.user.name})
+    res.render('layouts/company/my-equipments', {notifications: req.user.notifications.reverse().slice(0, 5), photo: req.user.photo, name_user: req.user.name, equipments: req.user.equipments})
 })
 
 const reports = asyncHandler(async(req, res) => {
@@ -323,6 +374,7 @@ module.exports = {
     updateAccount,
     newPassword,
     viewCall,
+    saveCall,
     viewEquipment,
     notifications,
     notificationsEmail

@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Help Técnico | Relatórios</title>
+  <link rel="shortcut icon" href="/img/login/icon.png" type="image/x-icon">
+  <!-- Custom styles -->
+  <link rel="stylesheet" href="/css/platform/style.css">
+  <link rel="stylesheet" href="/css/platform/notify.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/1.8.12/tailwind-experimental.min.css">
+</head>
+
+<body>
+  <%- include('../partials/admin/sidebar-admin', {isAdmin: isAdmin}) %>
+
+  <div class="lg:pl-70">
+    <%- include('../partials/admin/nav-admin', {isAdmin: isAdmin, title: "Todos os relatórios", notifications: notifications, photo: photo, name_user: name_user}) %>
+
+    <main class="py-5 fade-in">
+      <div class="alert mt-14" style="display: none;"><div style="display: flex;" class="alert-text"></div></div>
+      <div class="error mt-14" style="display: none;"><div style="display: flex;" class="error-text"></div></div>
+
+      <div class="px-4 sm:px-6 lg:pl-12 mt-4 col-span-3">
+        <div class="sm:flex sm:items-center">
+          <div class="w-full flex justify-between items-center">
+            <h1 class="text-lg font-semibold leading-6 text-gray-900 inter color-purple">Total de relatórios: 4 relatórios</h1>
+          </div>
+        </div>
+
+        <ul role="list" class="grid grid-cols-1 gap-x-6 gap-y-8 lg:grid-cols-4 xl:gap-x-8 mt-8">
+          <li class="overflow-hidden rounded-lg border border-gray-200">
+            <div class="flex items-center gap-x-4 border-b border-gray-900/5 bg-gray-50 p-6">
+              <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path opacity="0.5" d="M4 13.3332C4 8.30484 4 5.7907 5.5621 4.22858C7.12419 2.6665 9.63835 2.6665 14.6667 2.6665H17.3333C22.3616 2.6665 24.8758 2.6665 26.4379 4.22858C28 5.7907 28 8.30484 28 13.3332V18.6665C28 23.6948 28 26.209 26.4379 27.7711C24.8758 29.3332 22.3616 29.3332 17.3333 29.3332H14.6667C9.63835 29.3332 7.12419 29.3332 5.5621 27.7711C4 26.209 4 23.6948 4 18.6665V13.3332Z" fill="#0E1726" fill-opacity="0.5"/>
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M9.6687 16C9.6687 15.4477 10.1164 15 10.6687 15H21.3353C21.8876 15 22.3353 15.4477 22.3353 16C22.3353 16.5523 21.8876 17 21.3353 17H10.6687C10.1164 17 9.6687 16.5523 9.6687 16Z" fill="#0E1726" fill-opacity="0.5"/>
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M9.6687 10.6665C9.6687 10.1142 10.1164 9.6665 10.6687 9.6665H21.3353C21.8876 9.6665 22.3353 10.1142 22.3353 10.6665C22.3353 11.2188 21.8876 11.6665 21.3353 11.6665H10.6687C10.1164 11.6665 9.6687 11.2188 9.6687 10.6665Z" fill="#0E1726" fill-opacity="0.5"/>
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M9.6687 21.3335C9.6687 20.7812 10.1164 20.3335 10.6687 20.3335H17.3353C17.8876 20.3335 18.3353 20.7812 18.3353 21.3335C18.3353 21.8857 17.8876 22.3335 17.3353 22.3335H10.6687C10.1164 22.3335 9.6687 21.8857 9.6687 21.3335Z" fill="#0E1726" fill-opacity="0.5"/>
+              </svg>                                                
+              <div>
+                <h2 class="text-md font-semibold leading-6 text-gray-900 nunito">Relatório de chamado</h2>
+                <p class="text-sm font-medium leading-6 text-gray-900 nunito">ID do relatório: <span class="text-indigo-600">#52923</span></p>
+              </div>
+              <div class="relative ml-auto">
+                <button type="button" class="-m-2.5 block p-2.5 text-gray-400 hover:text-gray-500" id="options-menu-0-button" aria-expanded="false" aria-haspopup="true">
+                  <span class="sr-only">Open options</span>
+                  <svg class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                    <path d="M3 10a1.5 1.5 0 113 0 1.5 1.5 0 01-3 0zM8.5 10a1.5 1.5 0 113 0 1.5 1.5 0 01-3 0zM15.5 8.5a1.5 1.5 0 100 3 1.5 1.5 0 000-3z" />
+                  </svg>
+                </button>
+        
+                <!--
+                  Dropdown menu, show/hide based on menu state.
+        
+                  Entering: "transition ease-out duration-100"
+                    From: "transform opacity-0 scale-95"
+                    To: "transform opacity-100 scale-100"
+                  Leaving: "transition ease-in duration-75"
+                    From: "transform opacity-100 scale-100"
+                    To: "transform opacity-0 scale-95"
+                -->
+              </div>
+            </div>
+            <dl class="-my-3 divide-y divide-gray-100 px-6 py-4 text-sm leading-6">
+              <div class="flex justify-between gap-x-4 py-3">
+                <dt class="text-gray-500 font-bold nunito">Data do relatório</dt>
+                <dd class="text-gray-700"><time datetime="2022-12-13">14/05/2023</time></dd>
+              </div>
+              <div class="flex justify-between gap-x-4 py-3">
+                <dt class="text-gray-500 font-bold nunito">Chamado</dt>
+                <dd class="text-gray-700"><time datetime="2022-12-13">#23935</time></dd>
+              </div>
+              <div class="flex justify-between gap-x-4 py-3">
+                <dt class="text-gray-500 font-bold nunito">Tipo de relatório</dt>
+                <dd class="text-gray-700 font-semibold nunito">Conclusão de serviço</dd>
+              </div>
+              <div>
+                <a class="flex justify-center items-center bg-blue text-white mt-4 rounded-lg nunito font-bold py-1.5 mb-2" href="/company/view-report">Ver relatório</a>
+              </div>
+            </dl>
+          </li>
+
+          <li class="overflow-hidden rounded-lg border border-gray-200">
+            <div class="flex items-center gap-x-4 border-b border-gray-900/5 bg-gray-50 p-6">
+              <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path opacity="0.5" d="M4 13.3332C4 8.30484 4 5.7907 5.5621 4.22858C7.12419 2.6665 9.63835 2.6665 14.6667 2.6665H17.3333C22.3616 2.6665 24.8758 2.6665 26.4379 4.22858C28 5.7907 28 8.30484 28 13.3332V18.6665C28 23.6948 28 26.209 26.4379 27.7711C24.8758 29.3332 22.3616 29.3332 17.3333 29.3332H14.6667C9.63835 29.3332 7.12419 29.3332 5.5621 27.7711C4 26.209 4 23.6948 4 18.6665V13.3332Z" fill="#0E1726" fill-opacity="0.5"/>
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M9.6687 16C9.6687 15.4477 10.1164 15 10.6687 15H21.3353C21.8876 15 22.3353 15.4477 22.3353 16C22.3353 16.5523 21.8876 17 21.3353 17H10.6687C10.1164 17 9.6687 16.5523 9.6687 16Z" fill="#0E1726" fill-opacity="0.5"/>
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M9.6687 10.6665C9.6687 10.1142 10.1164 9.6665 10.6687 9.6665H21.3353C21.8876 9.6665 22.3353 10.1142 22.3353 10.6665C22.3353 11.2188 21.8876 11.6665 21.3353 11.6665H10.6687C10.1164 11.6665 9.6687 11.2188 9.6687 10.6665Z" fill="#0E1726" fill-opacity="0.5"/>
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M9.6687 21.3335C9.6687 20.7812 10.1164 20.3335 10.6687 20.3335H17.3353C17.8876 20.3335 18.3353 20.7812 18.3353 21.3335C18.3353 21.8857 17.8876 22.3335 17.3353 22.3335H10.6687C10.1164 22.3335 9.6687 21.8857 9.6687 21.3335Z" fill="#0E1726" fill-opacity="0.5"/>
+              </svg>                                                
+              <div>
+                <h2 class="text-md font-semibold leading-6 text-gray-900 nunito">Relatório de chamado</h2>
+                <p class="text-sm font-medium leading-6 text-gray-900 nunito">ID do relatório: <span class="text-indigo-600">#24535</span></p>
+              </div>
+              <div class="relative ml-auto">
+                <button type="button" class="-m-2.5 block p-2.5 text-gray-400 hover:text-gray-500" id="options-menu-0-button" aria-expanded="false" aria-haspopup="true">
+                  <span class="sr-only">Open options</span>
+                  <svg class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                    <path d="M3 10a1.5 1.5 0 113 0 1.5 1.5 0 01-3 0zM8.5 10a1.5 1.5 0 113 0 1.5 1.5 0 01-3 0zM15.5 8.5a1.5 1.5 0 100 3 1.5 1.5 0 000-3z" />
+                  </svg>
+                </button>
+        
+                <!--
+                  Dropdown menu, show/hide based on menu state.
+        
+                  Entering: "transition ease-out duration-100"
+                    From: "transform opacity-0 scale-95"
+                    To: "transform opacity-100 scale-100"
+                  Leaving: "transition ease-in duration-75"
+                    From: "transform opacity-100 scale-100"
+                    To: "transform opacity-0 scale-95"
+                -->
+              </div>
+            </div>
+            <dl class="-my-3 divide-y divide-gray-100 px-6 py-4 text-sm leading-6">
+              <div class="flex justify-between gap-x-4 py-3">
+                <dt class="text-gray-500 font-bold nunito">Data do relatório</dt>
+                <dd class="text-gray-700"><time datetime="2022-12-13">14/05/2023</time></dd>
+              </div>
+              <div class="flex justify-between gap-x-4 py-3">
+                <dt class="text-gray-500 font-bold nunito">Chamado</dt>
+                <dd class="text-gray-700"><time datetime="2022-12-13">#24592</time></dd>
+              </div>
+              <div class="flex justify-between gap-x-4 py-3">
+                <dt class="text-gray-500 font-bold nunito">Tipo de relatório</dt>
+                <dd class="text-gray-700 font-semibold nunito">Conclusão de serviço</dd>
+              </div>
+              <div>
+                <a class="flex justify-center items-center bg-blue text-white mt-4 rounded-lg nunito font-bold py-1.5 mb-2" href="/company/view-report">Ver relatório</a>
+              </div>
+            </dl>
+          </li>
+
+          <li class="overflow-hidden rounded-lg border border-gray-200">
+            <div class="flex items-center gap-x-4 border-b border-gray-900/5 bg-gray-50 p-6">
+              <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path opacity="0.5" d="M4 13.3332C4 8.30484 4 5.7907 5.5621 4.22858C7.12419 2.6665 9.63835 2.6665 14.6667 2.6665H17.3333C22.3616 2.6665 24.8758 2.6665 26.4379 4.22858C28 5.7907 28 8.30484 28 13.3332V18.6665C28 23.6948 28 26.209 26.4379 27.7711C24.8758 29.3332 22.3616 29.3332 17.3333 29.3332H14.6667C9.63835 29.3332 7.12419 29.3332 5.5621 27.7711C4 26.209 4 23.6948 4 18.6665V13.3332Z" fill="#0E1726" fill-opacity="0.5"/>
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M9.6687 16C9.6687 15.4477 10.1164 15 10.6687 15H21.3353C21.8876 15 22.3353 15.4477 22.3353 16C22.3353 16.5523 21.8876 17 21.3353 17H10.6687C10.1164 17 9.6687 16.5523 9.6687 16Z" fill="#0E1726" fill-opacity="0.5"/>
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M9.6687 10.6665C9.6687 10.1142 10.1164 9.6665 10.6687 9.6665H21.3353C21.8876 9.6665 22.3353 10.1142 22.3353 10.6665C22.3353 11.2188 21.8876 11.6665 21.3353 11.6665H10.6687C10.1164 11.6665 9.6687 11.2188 9.6687 10.6665Z" fill="#0E1726" fill-opacity="0.5"/>
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M9.6687 21.3335C9.6687 20.7812 10.1164 20.3335 10.6687 20.3335H17.3353C17.8876 20.3335 18.3353 20.7812 18.3353 21.3335C18.3353 21.8857 17.8876 22.3335 17.3353 22.3335H10.6687C10.1164 22.3335 9.6687 21.8857 9.6687 21.3335Z" fill="#0E1726" fill-opacity="0.5"/>
+              </svg>                                                
+              <div>
+                <h2 class="text-md font-semibold leading-6 text-gray-900 nunito">Relatório de chamado</h2>
+                <p class="text-sm font-medium leading-6 text-gray-900 nunito">ID do relatório: <span class="text-indigo-600">#75848</span></p>
+              </div>
+              <div class="relative ml-auto">
+                <button type="button" class="-m-2.5 block p-2.5 text-gray-400 hover:text-gray-500" id="options-menu-0-button" aria-expanded="false" aria-haspopup="true">
+                  <span class="sr-only">Open options</span>
+                  <svg class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                    <path d="M3 10a1.5 1.5 0 113 0 1.5 1.5 0 01-3 0zM8.5 10a1.5 1.5 0 113 0 1.5 1.5 0 01-3 0zM15.5 8.5a1.5 1.5 0 100 3 1.5 1.5 0 000-3z" />
+                  </svg>
+                </button>
+        
+                <!--
+                  Dropdown menu, show/hide based on menu state.
+        
+                  Entering: "transition ease-out duration-100"
+                    From: "transform opacity-0 scale-95"
+                    To: "transform opacity-100 scale-100"
+                  Leaving: "transition ease-in duration-75"
+                    From: "transform opacity-100 scale-100"
+                    To: "transform opacity-0 scale-95"
+                -->
+              </div>
+            </div>
+            <dl class="-my-3 divide-y divide-gray-100 px-6 py-4 text-sm leading-6">
+              <div class="flex justify-between gap-x-4 py-3">
+                <dt class="text-gray-500 font-bold nunito">Data do relatório</dt>
+                <dd class="text-gray-700"><time datetime="2022-12-13">14/05/2023</time></dd>
+              </div>
+              <div class="flex justify-between gap-x-4 py-3">
+                <dt class="text-gray-500 font-bold nunito">Chamado</dt>
+                <dd class="text-gray-700"><time datetime="2022-12-13">#64543</time></dd>
+              </div>
+              <div class="flex justify-between gap-x-4 py-3">
+                <dt class="text-gray-500 font-bold nunito">Tipo de relatório</dt>
+                <dd class="text-gray-700 font-semibold nunito">Conclusão de serviço</dd>
+              </div>
+              <div>
+                <a class="flex justify-center items-center bg-blue text-white mt-4 rounded-lg nunito font-bold py-1.5 mb-2" href="/company/view-report">Ver relatório</a>
+              </div>
+            </dl>
+          </li>
+
+          <li class="overflow-hidden rounded-lg border border-gray-200">
+            <div class="flex items-center gap-x-4 border-b border-gray-900/5 bg-gray-50 p-6">
+              <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path opacity="0.5" d="M4 13.3332C4 8.30484 4 5.7907 5.5621 4.22858C7.12419 2.6665 9.63835 2.6665 14.6667 2.6665H17.3333C22.3616 2.6665 24.8758 2.6665 26.4379 4.22858C28 5.7907 28 8.30484 28 13.3332V18.6665C28 23.6948 28 26.209 26.4379 27.7711C24.8758 29.3332 22.3616 29.3332 17.3333 29.3332H14.6667C9.63835 29.3332 7.12419 29.3332 5.5621 27.7711C4 26.209 4 23.6948 4 18.6665V13.3332Z" fill="#0E1726" fill-opacity="0.5"/>
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M9.6687 16C9.6687 15.4477 10.1164 15 10.6687 15H21.3353C21.8876 15 22.3353 15.4477 22.3353 16C22.3353 16.5523 21.8876 17 21.3353 17H10.6687C10.1164 17 9.6687 16.5523 9.6687 16Z" fill="#0E1726" fill-opacity="0.5"/>
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M9.6687 10.6665C9.6687 10.1142 10.1164 9.6665 10.6687 9.6665H21.3353C21.8876 9.6665 22.3353 10.1142 22.3353 10.6665C22.3353 11.2188 21.8876 11.6665 21.3353 11.6665H10.6687C10.1164 11.6665 9.6687 11.2188 9.6687 10.6665Z" fill="#0E1726" fill-opacity="0.5"/>
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M9.6687 21.3335C9.6687 20.7812 10.1164 20.3335 10.6687 20.3335H17.3353C17.8876 20.3335 18.3353 20.7812 18.3353 21.3335C18.3353 21.8857 17.8876 22.3335 17.3353 22.3335H10.6687C10.1164 22.3335 9.6687 21.8857 9.6687 21.3335Z" fill="#0E1726" fill-opacity="0.5"/>
+              </svg>                                                
+              <div>
+                <h2 class="text-md font-semibold leading-6 text-gray-900 nunito">Relatório de chamado</h2>
+                <p class="text-sm font-medium leading-6 text-gray-900 nunito">ID do relatório: <span class="text-indigo-600">#49674</span></p>
+              </div>
+              <div class="relative ml-auto">
+                <button type="button" class="-m-2.5 block p-2.5 text-gray-400 hover:text-gray-500" id="options-menu-0-button" aria-expanded="false" aria-haspopup="true">
+                  <span class="sr-only">Open options</span>
+                  <svg class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                    <path d="M3 10a1.5 1.5 0 113 0 1.5 1.5 0 01-3 0zM8.5 10a1.5 1.5 0 113 0 1.5 1.5 0 01-3 0zM15.5 8.5a1.5 1.5 0 100 3 1.5 1.5 0 000-3z" />
+                  </svg>
+                </button>
+        
+                <!--
+                  Dropdown menu, show/hide based on menu state.
+        
+                  Entering: "transition ease-out duration-100"
+                    From: "transform opacity-0 scale-95"
+                    To: "transform opacity-100 scale-100"
+                  Leaving: "transition ease-in duration-75"
+                    From: "transform opacity-100 scale-100"
+                    To: "transform opacity-0 scale-95"
+                -->
+              </div>
+            </div>
+            <dl class="-my-3 divide-y divide-gray-100 px-6 py-4 text-sm leading-6">
+              <div class="flex justify-between gap-x-4 py-3">
+                <dt class="text-gray-500 font-bold nunito">Data do relatório</dt>
+                <dd class="text-gray-700"><time datetime="2022-12-13">14/05/2023</time></dd>
+              </div>
+              <div class="flex justify-between gap-x-4 py-3">
+                <dt class="text-gray-500 font-bold nunito">Chamado</dt>
+                <dd class="text-gray-700"><time datetime="2022-12-13">#94848</time></dd>
+              </div>
+              <div class="flex justify-between gap-x-4 py-3">
+                <dt class="text-gray-500 font-bold nunito">Tipo de relatório</dt>
+                <dd class="text-gray-700 font-semibold nunito">Conclusão de serviço</dd>
+              </div>
+              <div>
+                <a class="flex justify-center items-center bg-blue text-white mt-4 rounded-lg nunito font-bold py-1.5 mb-2" href="/company/view-report">Ver relatório</a>
+              </div>
+            </dl>
+          </li>
+        </ul>
+      </div>
+    </main>
+  </div>
+</body>
+</html>

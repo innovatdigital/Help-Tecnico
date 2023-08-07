@@ -4,7 +4,7 @@ const User = require('../models/Admin')
 const account = asyncHandler(async(req, res) => {
     const find = await User.findById(req.user._id)
 
-    res.render('layouts/configurations', {isAdmin: find.isAdmin, user: find, notifications: find.notifications.reverse().slice(0, 5), photo: find.photo, name_user: find.name})
+    res.render('layouts/admin/configurations', {isAdmin: find.isAdmin, user: find, notifications: find.notifications.reverse().slice(0, 5), photo: find.photo, name_user: find.name})
 })
 
 const updateAccount = asyncHandler(async(req, res) => {

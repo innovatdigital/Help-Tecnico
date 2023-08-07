@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Help Técnico | Visualizar orçamento</title>
+  <link rel="shortcut icon" href="/img/login/icon.png" type="image/x-icon">
+  <!-- Custom styles -->
+  <link rel="stylesheet" href="/css/platform/style.css">
+  <link rel="stylesheet" href="/css/platform/notify.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/1.8.12/tailwind-experimental.min.css">
+</head>
+
+<body>
+  <%- include('../partials/company/sidebar-company') %>
+
+  <div class="lg:pl-70">
+    <%- include('../partials/company/nav-company', {title: "Visualizar orçamento", notifications: notifications, photo: photo, name_user: name_user}) %>
+
+    <main class="py-5 fade-in">
+      <div class="alert mt-14" style="display: none;"><div style="display: flex;" class="alert-text"></div></div>
+      <div class="error mt-14" style="display: none;"><div style="display: flex;" class="error-text"></div></div>
+
+      <div class="px-4 sm:px-6 lg:pl-12 mt-2 col-span-3">
+        <div class="min-h-full">
+          <main>
+            <div class="mx-auto mt-8 sm:px-6">
+              <div class="space-y-6">
+                <!-- Description list-->
+                <section aria-labelledby="applicant-information-title">
+                  <div class="bg-white shadow-lg border sm:rounded-lg">
+                    <div class="mx-auto px-4 pt-6 sm:px-6 md:flex md:items-center md:justify-between md:space-x-5 lg:pr-8 pb-6">
+                      <div class="flex items-center space-x-5">
+                        <div class="flex-shrink-0">
+                          <div class="relative">
+                            <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                              <g clip-path="url(#clip0_289_61)">
+                              <path d="M20 0C16.0444 0 12.1776 1.17298 8.88861 3.37061C5.59962 5.56824 3.03617 8.69181 1.52242 12.3463C0.00866564 16.0009 -0.387401 20.0222 0.384303 23.9018C1.15601 27.7814 3.06082 31.3451 5.85787 34.1422C8.65493 36.9392 12.2186 38.844 16.0982 39.6157C19.9778 40.3874 23.9992 39.9914 27.6537 38.4776C31.3082 36.9639 34.4318 34.4004 36.6294 31.1114C38.827 27.8224 40 23.9556 40 20C40 14.6957 37.8929 9.6086 34.1422 5.85787C30.3914 2.10714 25.3043 0 20 0ZM25.1921 25.1579C24.9357 25.7426 24.556 26.2651 24.079 26.6895C23.5683 27.1345 22.9806 27.4823 22.3448 27.7158C21.6224 27.9838 20.8658 28.1485 20.0974 28.2053L19.8342 30.9553C19.8282 31.0184 19.8085 31.0795 19.7763 31.1342C19.7365 31.194 19.6783 31.2393 19.6105 31.2632C19.5025 31.3031 19.3904 31.3314 19.2763 31.3474C19.1018 31.3702 18.926 31.3808 18.75 31.379C18.5292 31.3824 18.3084 31.3692 18.0895 31.3395C17.9543 31.3223 17.8223 31.286 17.6974 31.2316C17.6135 31.1954 17.5467 31.1286 17.5105 31.0448C17.4779 30.9609 17.4715 30.8692 17.4921 30.7816L17.7553 28.1737C17.4011 28.1257 17.0497 28.0589 16.7026 27.9737C16.4026 27.9017 16.1066 27.8138 15.8158 27.7105C15.5799 27.624 15.3497 27.5229 15.1263 27.4079C14.9679 27.3282 14.8217 27.2263 14.6921 27.1053C14.582 26.9825 14.509 26.831 14.4816 26.6684C14.4309 26.3863 14.4089 26.0997 14.4158 25.8132C14.4158 25.5237 14.4158 25.2869 14.4421 25.0947C14.4515 24.9457 14.4817 24.7987 14.5316 24.6579C14.5573 24.5771 14.6094 24.5072 14.6796 24.4595C14.7497 24.4118 14.8338 24.389 14.9184 24.3947C15.0941 24.4192 15.2612 24.486 15.4053 24.5895C15.6728 24.74 15.9477 24.877 16.229 25C16.6214 25.1734 17.0271 25.3151 17.4421 25.4237C17.9909 25.5609 18.5554 25.6255 19.1211 25.6158C20.1211 25.6158 20.8684 25.429 21.3553 25.0579C21.5887 24.8886 21.7773 24.665 21.9048 24.4063C22.0322 24.1477 22.0947 23.8619 22.0869 23.5737C22.103 23.2091 21.9923 22.8501 21.7737 22.5579C21.5396 22.2736 21.2539 22.0361 20.9316 21.8579C20.5501 21.6424 20.1503 21.461 19.7369 21.3158C19.2974 21.1579 18.8447 20.9869 18.3816 20.8079C17.9169 20.6274 17.4642 20.4173 17.0263 20.179C16.5894 19.9418 16.1888 19.6431 15.8369 19.2921C15.4781 18.9267 15.1939 18.495 15 18.0211C14.7753 17.4418 14.6679 16.8237 14.6842 16.2026C14.6751 15.6035 14.7823 15.0083 15 14.45C15.2084 13.9295 15.524 13.4588 15.9263 13.0684C16.3571 12.6543 16.8637 12.3273 17.4184 12.1053C18.0579 11.8482 18.7302 11.6817 19.4158 11.6105L19.679 9.02895C19.6866 8.9678 19.7063 8.90876 19.7369 8.85527C19.78 8.79753 19.8383 8.75289 19.9053 8.72632C20.0091 8.68166 20.1191 8.65325 20.2316 8.64211C20.4117 8.6233 20.5926 8.61451 20.7737 8.61579C20.9945 8.61309 21.2153 8.62628 21.4342 8.65527C21.5737 8.67197 21.7102 8.7083 21.8395 8.76316C21.8803 8.78072 21.9172 8.80631 21.9479 8.83841C21.9787 8.87051 22.0027 8.90846 22.0184 8.95C22.0461 9.03492 22.0595 9.12386 22.0579 9.21316L21.7948 11.6421C22.0342 11.6763 22.2869 11.7237 22.5526 11.7816C22.8049 11.8379 23.0535 11.9091 23.2974 11.9947C23.5127 12.0705 23.7236 12.1583 23.929 12.2579C24.0708 12.319 24.2029 12.4006 24.3211 12.5C24.3856 12.5653 24.4414 12.6387 24.4869 12.7184C24.5292 12.8014 24.5594 12.89 24.5763 12.9816C24.6 13.1085 24.615 13.2369 24.6211 13.3658V13.8921C24.6211 14.1553 24.6211 14.3763 24.6026 14.5474C24.5968 14.6807 24.5729 14.8126 24.5316 14.9395C24.51 15.0093 24.47 15.072 24.4158 15.1211C24.3708 15.1514 24.3174 15.167 24.2632 15.1658C24.0936 15.1449 23.9304 15.0884 23.7842 15C23.5711 14.8895 23.3079 14.7684 22.9948 14.6395C22.6424 14.4993 22.2821 14.3798 21.9158 14.2816C21.4772 14.1649 21.0249 14.1082 20.5711 14.1132C20.1864 14.1069 19.8025 14.1502 19.429 14.2421C19.1504 14.3095 18.8882 14.4321 18.6579 14.6026C18.467 14.746 18.3165 14.9364 18.2211 15.1553C18.1246 15.3777 18.0762 15.6181 18.079 15.8605C18.0672 16.2258 18.1805 16.5841 18.4 16.8763C18.6345 17.1675 18.9254 17.4083 19.2553 17.5842C19.6439 17.7901 20.0477 17.9661 20.4632 18.1105C20.9123 18.2737 21.3702 18.4491 21.8369 18.6369C22.3077 18.8171 22.7673 19.0254 23.2132 19.2605C23.6551 19.4893 24.0597 19.7839 24.4132 20.1342C24.7739 20.4936 25.0624 20.9189 25.2632 21.3869C25.4891 21.9494 25.5983 22.5519 25.5842 23.1579C25.596 23.8448 25.4624 24.5263 25.1921 25.1579Z" fill="#0E1726" fill-opacity="0.5"/>
+                              </g>
+                              <defs>
+                              <clipPath id="clip0_289_61">
+                              <rect width="40" height="40" fill="white"/>
+                              </clipPath>
+                              </defs>
+                            </svg>                                                            
+                            <span class="absolute inset-0 rounded-full shadow-inner" aria-hidden="true"></span>
+                          </div>
+                        </div>
+                        <div>
+                          <h1 class="text-2xl font-bold text-gray-900 nunito">Orçamento #23452</h1>
+                          <p class="text-sm font-semibold text-gray-500 nunito">Referente ao relatório: <span class="text-indigo-600 underline">#42423</span></p>
+                        </div>
+                      </div>
+                      <div class="mt-6 flex flex-col-reverse justify-stretch space-y-4 space-y-reverse sm:flex-row-reverse sm:justify-end sm:space-x-3 sm:space-y-0 sm:space-x-reverse md:mt-0 md:flex-row md:space-x-3">
+                        <button type="button" class="inline-flex items-center border justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50">Preciso de ajuda</button>
+                      </div>
+                    </div>
+
+                    <div>
+                      <div class="mx-auto grid max-w-2xl grid-cols-1 grid-rows-1 items-start gap-x-8 gap-y-8 lg:mx-0 lg:max-w-none lg:grid-cols-3">
+                        <!-- Invoice summary -->
+                        <div class="lg:col-start-3 lg:row-end-1 pr-8">
+                          <h2 class="sr-only">Summary</h2>
+                          <div class="rounded-lg bg-gray-50 shadow-sm ring-1 ring-gray-900/5">
+                            <dl class="flex flex-wrap">
+                              <div class="flex-auto pl-6 pt-6">
+                                <dt class="text-sm font-semibold leading-6 text-gray-900 nunito">Valor total</dt>
+                                <dd class="mt-1 text-base font-semibold leading-6 text-gray-900">R$440,00</dd>
+                              </div>
+                              <div class="flex-none self-end px-6 pt-4">
+                                <dt class="sr-only">Status</dt>
+                                <span class="inline-flex items-center rounded-md bg-yellow-100 px-2 py-1 text-xs font-medium text-yellow-800 nunito">Pendente</span>
+                              </div>
+                              <div class="mt-6 flex w-full flex-none gap-x-4 border-t border-gray-900/5 px-6 pt-6">
+                                <dt class="flex-none">
+                                  <span class="sr-only">Client</span>
+                                  <img class="h-6 w-6 rounded-full bg-gray-50" src="/img/photos/<%= photo %>" alt="">
+                                </dt>
+                                <dd class="text-sm font-medium leading-6 text-gray-900 nunito">Unimed POA (Você)</dd>
+                              </div>
+                              <div class="mt-4 flex w-full flex-none gap-x-4 px-6">
+                                <dt class="flex-none">
+                                  <span class="sr-only">Due date</span>
+                                  <svg class="h-6 w-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                                    <path d="M5.25 12a.75.75 0 01.75-.75h.01a.75.75 0 01.75.75v.01a.75.75 0 01-.75.75H6a.75.75 0 01-.75-.75V12zM6 13.25a.75.75 0 00-.75.75v.01c0 .414.336.75.75.75h.01a.75.75 0 00.75-.75V14a.75.75 0 00-.75-.75H6zM7.25 12a.75.75 0 01.75-.75h.01a.75.75 0 01.75.75v.01a.75.75 0 01-.75.75H8a.75.75 0 01-.75-.75V12zM8 13.25a.75.75 0 00-.75.75v.01c0 .414.336.75.75.75h.01a.75.75 0 00.75-.75V14a.75.75 0 00-.75-.75H8zM9.25 10a.75.75 0 01.75-.75h.01a.75.75 0 01.75.75v.01a.75.75 0 01-.75.75H10a.75.75 0 01-.75-.75V10zM10 11.25a.75.75 0 00-.75.75v.01c0 .414.336.75.75.75h.01a.75.75 0 00.75-.75V12a.75.75 0 00-.75-.75H10zM9.25 14a.75.75 0 01.75-.75h.01a.75.75 0 01.75.75v.01a.75.75 0 01-.75.75H10a.75.75 0 01-.75-.75V14zM12 9.25a.75.75 0 00-.75.75v.01c0 .414.336.75.75.75h.01a.75.75 0 00.75-.75V10a.75.75 0 00-.75-.75H12zM11.25 12a.75.75 0 01.75-.75h.01a.75.75 0 01.75.75v.01a.75.75 0 01-.75.75H12a.75.75 0 01-.75-.75V12zM12 13.25a.75.75 0 00-.75.75v.01c0 .414.336.75.75.75h.01a.75.75 0 00.75-.75V14a.75.75 0 00-.75-.75H12zM13.25 10a.75.75 0 01.75-.75h.01a.75.75 0 01.75.75v.01a.75.75 0 01-.75.75H14a.75.75 0 01-.75-.75V10zM14 11.25a.75.75 0 00-.75.75v.01c0 .414.336.75.75.75h.01a.75.75 0 00.75-.75V12a.75.75 0 00-.75-.75H14z" />
+                                    <path fill-rule="evenodd" d="M5.75 2a.75.75 0 01.75.75V4h7V2.75a.75.75 0 011.5 0V4h.25A2.75 2.75 0 0118 6.75v8.5A2.75 2.75 0 0115.25 18H4.75A2.75 2.75 0 012 15.25v-8.5A2.75 2.75 0 014.75 4H5V2.75A.75.75 0 015.75 2zm-1 5.5c-.69 0-1.25.56-1.25 1.25v6.5c0 .69.56 1.25 1.25 1.25h10.5c.69 0 1.25-.56 1.25-1.25v-6.5c0-.69-.56-1.25-1.25-1.25H4.75z" clip-rule="evenodd" />
+                                  </svg>
+                                </dt>
+                                <dd class="text-sm leading-6 text-gray-500">
+                                  <time datetime="2023-01-31 nunito">Julho 06, 2023</time>
+                                </dd>
+                              </div>
+                              <div class="mt-4 flex w-full flex-none gap-x-4 px-6">
+                                <dt class="flex-none">
+                                  <span class="sr-only">Status</span>
+                                  <svg class="h-6 w-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                                    <path fill-rule="evenodd" d="M2.5 4A1.5 1.5 0 001 5.5V6h18v-.5A1.5 1.5 0 0017.5 4h-15zM19 8.5H1v6A1.5 1.5 0 002.5 16h15a1.5 1.5 0 001.5-1.5v-6zM3 13.25a.75.75 0 01.75-.75h1.5a.75.75 0 010 1.5h-1.5a.75.75 0 01-.75-.75zm4.75-.75a.75.75 0 000 1.5h3.5a.75.75 0 000-1.5h-3.5z" clip-rule="evenodd" />
+                                  </svg>
+                                </dt>
+                                <dd class="text-sm leading-6 text-gray-500 nunito">Pagamento via Boleto</dd>
+                              </div>
+                            </dl>
+                            <div class="mt-6 border-t border-gray-900/5 px-6 py-6">
+                              <a href="#" class="text-sm font-semibold leading-6 text-gray-900">Download em PDF <span aria-hidden="true">&rarr;</span></a>
+                            </div>
+                          </div>
+                        </div>
+                  
+                        <!-- Invoice -->
+                        <div class="px-6 py-8 shadow-sm ring-1 ring-gray-900/5 sm:mx-0 sm:rounded-lg lg:col-span-2 lg:row-span-2 lg:row-end-2">
+                          <h2 class="text-base font-semibold leading-6 text-gray-900 nunito">Informações do orçamento</h2>
+                          <dl class="mt-6 grid grid-cols-1 text-sm leading-6 sm:grid-cols-2">
+                            <div class="sm:pr-4">
+                              <dt class="inline text-gray-500 font-semibold nunito">Emitido em</dt>
+                              <dd class="inline text-gray-700 font-bold nunito"><time datetime="2023-23-01">Julho 06, 2023</time></dd>
+                            </div>
+                            <div class="mt-2 sm:mt-0 sm:pl-4">
+                              <dt class="inline text-gray-500">Expira em</dt>
+                              <dd class="inline text-gray-700 font-bold nunito"><time datetime="2023-23-01">Julho 26, 2023</time></dd>
+                            </div>
+                            <div class="mt-6 border-t border-gray-900/5 pt-6 sm:pr-4">
+                              <dt class="font-semibold text-gray-900 nunito">De:</dt>
+                              <dd class="mt-2 text-gray-500 nunito"><span class="font-bold text-gray-900">Moreira Refrigeração</span><br>Rua Itália, N° 1003<br>CNPJ: 38.581.151.0001/53</dd>
+                            </div>
+                            <div class="mt-8 sm:mt-6 sm:border-t sm:border-gray-900/5 sm:pl-4 sm:pt-6">
+                              <dt class="font-semibold text-gray-900 nunito">Para:</dt>
+                              <dd class="mt-2 text-gray-500 nunito"><span class="font-bold text-gray-900">Unimed POA</span><br>Av. Getúlio Vargas - Centro, 5600<br>CNPJ: 87.096.616/0001-96</dd>
+                            </div>
+                          </dl>
+                          <table class="mt-16 w-full whitespace-nowrap text-left text-sm leading-6">
+                            <thead class="border-b border-gray-200 text-gray-900">
+                              <tr>
+                                <th scope="col" class="px-0 py-3 font-semibold">Serviço</th>
+                                <th scope="col" class="py-3 pr-0 font-semibold">Descrição</th>
+                                <th scope="col" class="py-3 pl-8 pr-0 font-semibold">Valor</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr class="border-b border-gray-100">
+                                <td class="px-0 py-5 align-top">
+                                  <div class="font-bold text-gray-900 nunito">Concerto do compressor de ar condicionado.</div>
+                                </td>
+                                <td class="py-5 pr-0 align-top text-gray-700">
+                                  <div class="text-gray-500">A peça estava quebrada e não poderia ser restaurada. Necessitando uma nova para a substituição.</div>
+                                </td>
+                                <td class="py-5 pl-8 pr-0 text-right align-top text-gray-700">R$120,00</td>
+                              </tr>
+                              <tr class="border-b border-gray-100">
+                                <td class="px-0 py-5 align-top">
+                                  <div class="font-bold text-gray-900 nunito">Reparo da carcaça do aparelho.</div>
+                                </td>
+                                <td class="py-5 pr-0 align-top text-gray-700">
+                                  <div class="text-gray-500">O equipamento precisava de um reparo na parte externa da carcaça.</div>
+                                </td>
+                                <td class="py-5 pl-8 pr-0 text-right align-top text-gray-700">R$320,00</td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </section>
+              </div>
+            </div>
+          </main>
+        </div>
+      </div>
+    </main>
+  </div>
+</body>
+</html>

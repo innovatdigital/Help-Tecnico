@@ -41,19 +41,52 @@ const {
   updateAccount,
   newCall,
   viewCall,
+  saveCall,
   newPassword,
   notificationsEmail,
   notifications
 } = require('../controllers/companyCtrl')
 
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    const destinationPath = path.resolve(__dirname, '../public/img/uploads');
+    cb(null, path.resolve(__dirname, destinationPath))
+  },
+  filename: function (req, file, cb) {
+    const extension = path.extname(file.originalname);
+    const randomNumber = Math.floor(Math.random() * 1000000000);
+    const filename = randomNumber.toString() + extension;
+    cb(null, filename);
+  }
+});
+
+const upload = multer({ storage: storage });
+
 
 // Dashboard
 router.get("/", authMiddleware, dashboard)
 
+// Chamados
 router.get("/all-calls", authMiddleware, allCalls)
 router.get("/new-call", authMiddleware, newCall)
-router.get("/view-call", authMiddleware, viewCall)
-router.get("/view-equipment", authMiddleware, viewEquipment)
+router.get("/view-call/:id", authMiddleware, viewCall)
+router.post("/save-call", authMiddleware, saveCall)
+router.post('/save-image-call', authMiddleware, upload.single('image'), function (req, res, next) {
+  const destinationPath = path.resolve(__dirname, '../public/img/uploads');
+  const filePath = path.join(destinationPath, req.file.filename);
+  const extension = path.extname(req.file.originalname);
+  const newRandomNumber = Math.floor(Math.random() * 1000000000);
+  const newFilename = uuidv4() + '-' + Date.now() + '-' + newRandomNumber.toString() + extension
+  fs.rename(filePath, path.join(destinationPath, newFilename), function (err) {
+    if (err) {
+      return next(err);
+    }
+    res.send(newFilename);
+  });
+})
+
+
+router.get("/view-equipment/:id", authMiddleware, viewEquipment)
 router.get("/view-report", authMiddleware, viewReport)
 router.get("/view-budget", authMiddleware, viewBudget)
 router.get("/notifications", authMiddleware, notifications)

@@ -41,7 +41,7 @@
                         </div>
                         <div>
                           <h1 class="text-2xl font-bold text-gray-900 nunito">Ar Condicionado Split</h1>
-                          <p class="text-sm font-semibold text-gray-500 nunito">ID do equipamento: <span class="text-indigo-600">#42423</span></p>
+                          <p class="text-sm font-semibold text-gray-500 nunito">ID do equipamento: <span class="text-indigo-600">#<%= equipment.id %></span></p>
                         </div>
                       </div>
                       <div class="mt-6 flex flex-col-reverse justify-stretch space-y-4 space-y-reverse sm:flex-row-reverse sm:justify-end sm:space-x-3 sm:space-y-0 sm:space-x-reverse md:mt-0 md:flex-row md:space-x-3">
@@ -53,7 +53,7 @@
                       <dl class="grid grid-cols-1 gap-x-4 gap-y-8 sm:grid-cols-2">
                         <div class="sm:col-span-1">
                           <dt class="text-sm font-semibold text-gray-500 nunito">Pertencente:</dt>
-                          <dd class="mt-1 text-sm text-gray-900 nunito">Unimed POA (Você)</dd>
+                          <dd class="mt-1 text-sm text-gray-900 nunito"><%= name_user %> (Você)</dd>
                         </div>
                         <div class="sm:col-span-1">
                           <dt class="text-sm font-semibold text-gray-500 nunito">Último status do equipamento:</dt>
@@ -73,74 +73,15 @@
                         </div>
                         <div class="sm:col-span-1">
                           <dt class="text-sm font-semibold text-gray-500 nunito">Data de cadastro:</dt>
-                          <dd class="mt-1 text-sm text-gray-900 nunito">10/07/2023</dd>
+                          <dd class="mt-1 text-sm text-gray-900 nunito"><%= equipment.date %></dd>
                         </div>
                         <div class="sm:col-span-1">
                           <dt class="text-sm font-semibold text-gray-500 nunito">Manutenções</dt>
-                          <dd class="mt-1 text-sm text-gray-900 nunito">4 Manutenções</dd>
+                          <dd class="mt-1 text-sm text-gray-900 nunito"><%= equipment.maintenance %> manutenções</dd>
                         </div>
                         <div class="sm:col-span-2">
                           <dt class="text-sm font-semibold text-gray-800 nunito">Relatórios anexados ao equipamento:</dt>
-                          <dd class="mt-1 text-sm text-gray-900 nunito">
-                            <ul role="list" class="divide-y divide-gray-200 rounded-md border border-gray-200 mt-2">
-                              <li class="flex items-center justify-between py-4 pl-3 pr-4 text-sm">
-                                <div class="flex w-0 flex-1 items-center">
-                                  <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path opacity="0.5" d="M2.5 8.33316C2.5 5.19046 2.5 3.61912 3.47631 2.6428C4.45262 1.6665 6.02397 1.6665 9.16667 1.6665H10.8333C13.976 1.6665 15.5474 1.6665 16.5237 2.6428C17.5 3.61912 17.5 5.19046 17.5 8.33316V11.6665C17.5 14.8092 17.5 16.3806 16.5237 17.3569C15.5474 18.3332 13.976 18.3332 10.8333 18.3332H9.16667C6.02397 18.3332 4.45262 18.3332 3.47631 17.3569C2.5 16.3806 2.5 14.8092 2.5 11.6665V8.33316Z" fill="#0E1726" fill-opacity="0.5"/>
-                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M6.04297 10C6.04297 9.65483 6.32279 9.375 6.66797 9.375H13.3346C13.6798 9.375 13.9596 9.65483 13.9596 10C13.9596 10.3452 13.6798 10.625 13.3346 10.625H6.66797C6.32279 10.625 6.04297 10.3452 6.04297 10Z" fill="#0E1726" fill-opacity="0.5"/>
-                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M6.04297 6.6665C6.04297 6.32132 6.32279 6.0415 6.66797 6.0415H13.3346C13.6798 6.0415 13.9596 6.32132 13.9596 6.6665C13.9596 7.01167 13.6798 7.2915 13.3346 7.2915H6.66797C6.32279 7.2915 6.04297 7.01167 6.04297 6.6665Z" fill="#0E1726" fill-opacity="0.5"/>
-                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M6.04297 13.3335C6.04297 12.9883 6.32279 12.7085 6.66797 12.7085H10.8346C11.1798 12.7085 11.4596 12.9883 11.4596 13.3335C11.4596 13.6786 11.1798 13.9585 10.8346 13.9585H6.66797C6.32279 13.9585 6.04297 13.6786 6.04297 13.3335Z" fill="#0E1726" fill-opacity="0.5"/>
-                                  </svg>                                                                        
-                                  <span class="ml-2 w-0 flex-1 truncate">Relatório dia 22/07/2023</span>
-                                </div>
-                                <div class="ml-4 flex-shrink-0">
-                                  <a href="#" class="font-semibold color-blue">Verificar</a>
-                                </div>
-                              </li>
-                              <li class="flex items-center justify-between py-4 pl-3 pr-4 text-sm">
-                                <div class="flex w-0 flex-1 items-center">
-                                  <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path opacity="0.5" d="M2.5 8.33316C2.5 5.19046 2.5 3.61912 3.47631 2.6428C4.45262 1.6665 6.02397 1.6665 9.16667 1.6665H10.8333C13.976 1.6665 15.5474 1.6665 16.5237 2.6428C17.5 3.61912 17.5 5.19046 17.5 8.33316V11.6665C17.5 14.8092 17.5 16.3806 16.5237 17.3569C15.5474 18.3332 13.976 18.3332 10.8333 18.3332H9.16667C6.02397 18.3332 4.45262 18.3332 3.47631 17.3569C2.5 16.3806 2.5 14.8092 2.5 11.6665V8.33316Z" fill="#0E1726" fill-opacity="0.5"/>
-                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M6.04297 10C6.04297 9.65483 6.32279 9.375 6.66797 9.375H13.3346C13.6798 9.375 13.9596 9.65483 13.9596 10C13.9596 10.3452 13.6798 10.625 13.3346 10.625H6.66797C6.32279 10.625 6.04297 10.3452 6.04297 10Z" fill="#0E1726" fill-opacity="0.5"/>
-                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M6.04297 6.6665C6.04297 6.32132 6.32279 6.0415 6.66797 6.0415H13.3346C13.6798 6.0415 13.9596 6.32132 13.9596 6.6665C13.9596 7.01167 13.6798 7.2915 13.3346 7.2915H6.66797C6.32279 7.2915 6.04297 7.01167 6.04297 6.6665Z" fill="#0E1726" fill-opacity="0.5"/>
-                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M6.04297 13.3335C6.04297 12.9883 6.32279 12.7085 6.66797 12.7085H10.8346C11.1798 12.7085 11.4596 12.9883 11.4596 13.3335C11.4596 13.6786 11.1798 13.9585 10.8346 13.9585H6.66797C6.32279 13.9585 6.04297 13.6786 6.04297 13.3335Z" fill="#0E1726" fill-opacity="0.5"/>
-                                  </svg>                                                                        
-                                  <span class="ml-2 w-0 flex-1 truncate">Relatório dia 18/06/2023</span>
-                                </div>
-                                <div class="ml-4 flex-shrink-0">
-                                  <a href="#" class="font-semibold color-blue">Verificar</a>
-                                </div>
-                              </li>
-                              <li class="flex items-center justify-between py-4 pl-3 pr-4 text-sm">
-                                <div class="flex w-0 flex-1 items-center">
-                                  <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path opacity="0.5" d="M2.5 8.33316C2.5 5.19046 2.5 3.61912 3.47631 2.6428C4.45262 1.6665 6.02397 1.6665 9.16667 1.6665H10.8333C13.976 1.6665 15.5474 1.6665 16.5237 2.6428C17.5 3.61912 17.5 5.19046 17.5 8.33316V11.6665C17.5 14.8092 17.5 16.3806 16.5237 17.3569C15.5474 18.3332 13.976 18.3332 10.8333 18.3332H9.16667C6.02397 18.3332 4.45262 18.3332 3.47631 17.3569C2.5 16.3806 2.5 14.8092 2.5 11.6665V8.33316Z" fill="#0E1726" fill-opacity="0.5"/>
-                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M6.04297 10C6.04297 9.65483 6.32279 9.375 6.66797 9.375H13.3346C13.6798 9.375 13.9596 9.65483 13.9596 10C13.9596 10.3452 13.6798 10.625 13.3346 10.625H6.66797C6.32279 10.625 6.04297 10.3452 6.04297 10Z" fill="#0E1726" fill-opacity="0.5"/>
-                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M6.04297 6.6665C6.04297 6.32132 6.32279 6.0415 6.66797 6.0415H13.3346C13.6798 6.0415 13.9596 6.32132 13.9596 6.6665C13.9596 7.01167 13.6798 7.2915 13.3346 7.2915H6.66797C6.32279 7.2915 6.04297 7.01167 6.04297 6.6665Z" fill="#0E1726" fill-opacity="0.5"/>
-                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M6.04297 13.3335C6.04297 12.9883 6.32279 12.7085 6.66797 12.7085H10.8346C11.1798 12.7085 11.4596 12.9883 11.4596 13.3335C11.4596 13.6786 11.1798 13.9585 10.8346 13.9585H6.66797C6.32279 13.9585 6.04297 13.6786 6.04297 13.3335Z" fill="#0E1726" fill-opacity="0.5"/>
-                                  </svg>                                                                        
-                                  <span class="ml-2 w-0 flex-1 truncate">Relatório dia 10/05/2023</span>
-                                </div>
-                                <div class="ml-4 flex-shrink-0">
-                                  <a href="#" class="font-semibold color-blue">Verificar</a>
-                                </div>
-                              </li>
-                              <li class="flex items-center justify-between py-4 pl-3 pr-4 text-sm">
-                                <div class="flex w-0 flex-1 items-center">
-                                  <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path opacity="0.5" d="M2.5 8.33316C2.5 5.19046 2.5 3.61912 3.47631 2.6428C4.45262 1.6665 6.02397 1.6665 9.16667 1.6665H10.8333C13.976 1.6665 15.5474 1.6665 16.5237 2.6428C17.5 3.61912 17.5 5.19046 17.5 8.33316V11.6665C17.5 14.8092 17.5 16.3806 16.5237 17.3569C15.5474 18.3332 13.976 18.3332 10.8333 18.3332H9.16667C6.02397 18.3332 4.45262 18.3332 3.47631 17.3569C2.5 16.3806 2.5 14.8092 2.5 11.6665V8.33316Z" fill="#0E1726" fill-opacity="0.5"/>
-                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M6.04297 10C6.04297 9.65483 6.32279 9.375 6.66797 9.375H13.3346C13.6798 9.375 13.9596 9.65483 13.9596 10C13.9596 10.3452 13.6798 10.625 13.3346 10.625H6.66797C6.32279 10.625 6.04297 10.3452 6.04297 10Z" fill="#0E1726" fill-opacity="0.5"/>
-                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M6.04297 6.6665C6.04297 6.32132 6.32279 6.0415 6.66797 6.0415H13.3346C13.6798 6.0415 13.9596 6.32132 13.9596 6.6665C13.9596 7.01167 13.6798 7.2915 13.3346 7.2915H6.66797C6.32279 7.2915 6.04297 7.01167 6.04297 6.6665Z" fill="#0E1726" fill-opacity="0.5"/>
-                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M6.04297 13.3335C6.04297 12.9883 6.32279 12.7085 6.66797 12.7085H10.8346C11.1798 12.7085 11.4596 12.9883 11.4596 13.3335C11.4596 13.6786 11.1798 13.9585 10.8346 13.9585H6.66797C6.32279 13.9585 6.04297 13.6786 6.04297 13.3335Z" fill="#0E1726" fill-opacity="0.5"/>
-                                  </svg>                                                                        
-                                  <span class="ml-2 w-0 flex-1 truncate">Relatório dia 13/04/2023</span>
-                                </div>
-                                <div class="ml-4 flex-shrink-0">
-                                  <a href="#" class="font-semibold color-blue">Verificar</a>
-                                </div>
-                              </li>
-                            </ul>
-                          </dd>
+                          <h2 class="nunito font-semibold">Nenhum relatório anexado ao equipamento.</h2>
                         </div>
                       </dl>
                     </div>
@@ -155,50 +96,6 @@
                   <!-- Activity Feed -->
                   <div class="mt-6 flow-root">
                     <ul role="list" class="-mb-8">
-                      <li>
-                        <div class="relative pb-8">
-                          <span class="absolute left-4 top-4 -ml-px h-full w-0.5 bg-gray-200" aria-hidden="true"></span>
-                          <div class="relative flex space-x-3">
-                            <div>
-                              <span class="h-8 w-8 rounded-full bg-blue-500 flex items-center justify-center ring-8 ring-white">
-                                <svg class="h-5 w-5 text-white" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                                  <path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z" clip-rule="evenodd" />
-                                </svg>
-                              </span>
-                            </div>
-                            <div class="flex min-w-0 flex-1 justify-between space-x-4 pt-1.5">
-                              <div>
-                                <p class="text-sm nunito font-semibold text-gray-500">Equipamento precisou de reparos internos.</p>
-                              </div>
-                              <div class="whitespace-nowrap text-right text-sm text-gray-500">
-                                <time datetime="2020-09-30">26/06/2023</time>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </li>
-                      <li>
-                        <div class="relative pb-8">
-                          <span class="absolute left-4 top-4 -ml-px h-full w-0.5 bg-gray-200" aria-hidden="true"></span>
-                          <div class="relative flex space-x-3">
-                            <div>
-                              <span class="h-8 w-8 rounded-full bg-blue-500 flex items-center justify-center ring-8 ring-white">
-                                <svg class="h-5 w-5 text-white" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                                  <path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z" clip-rule="evenodd" />
-                                </svg>
-                              </span>
-                            </div>
-                            <div class="flex min-w-0 flex-1 justify-between space-x-4 pt-1.5">
-                              <div>
-                                <p class="text-sm nunito font-semibold text-gray-500">Equipamento precisou de reparos externos.</p>
-                              </div>
-                              <div class="whitespace-nowrap text-right text-sm text-gray-500">
-                                <time datetime="2020-09-30">14/06/2023</time>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </li>
                       <li>
                         <div class="relative pb-8">
                           <span class="absolute left-4 top-4 -ml-px h-full w-0.5 bg-gray-200" aria-hidden="true"></span>

@@ -16,10 +16,10 @@
 </head>
 
 <body>
-  <%- include('../partials/sidebar-platform', {isAdmin: isAdmin}) %>
+  <%- include('../partials/admin/sidebar-platform', {isAdmin: isAdmin}) %>
 
   <div class="lg:pl-70">
-    <%- include('../partials/nav-platform', {isAdmin: isAdmin, title: "Editar usuário", notifications: notifications, photo: photo, name_user: name_user}) %>
+    <%- include('../partials/admin/nav-platform', {isAdmin: isAdmin, title: "Editar usuário", notifications: notifications, photo: photo, name_user: name_user}) %>
 
     <main class="py-8 px-12 fade-in">
       <div class="alert mt-10" style="display: none;"><div style="display: flex;" class="alert-text"></div></div>

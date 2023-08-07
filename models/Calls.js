@@ -17,9 +17,25 @@ const Call = new mongoose.Schema({
         type: Array,
         default: []
     },
+    timeline: {
+        type: Array,
+        default: []
+    },
+    reports: {
+        type: Array,
+        default: []
+    },
     date: {
-        type: Date,
-        default: Date.now()
+        type: String,
+        require: true
+    },
+    start_time: {
+        type: String,
+        require: true
+    },
+    end_time: {
+        type: String,
+        require: true
     },
     status: {
         type: String,

@@ -33,404 +33,179 @@
         <div class="mt-6 flow-root">
           <div class="-mx-4 -my-2">
             <div class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-5">
-              <div class="overflow-hidden shadow ring-1 ring-black ring-opacity-5 sm:rounded-lg">
-                <table class="min-w-full divide-y divide-gray-300">
-                  <thead class="bg-gray-50">
-                    <tr>
-                      <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 nunito">ID</th>
-                      <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 nunito">Empresa</th>
-                      <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 nunito">Mensagem</th>
-                      <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 nunito">Data</th>
-                      <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 nunito">SLA</th>
-                      <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 nunito">Início em</th>
-                      <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 nunito">Término em</th>
-                      <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 nunito">Status</th>
-                      <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 nunito">Técnico</th>
-                      <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 nunito">Ações</th>
-                    </tr>
-                  </thead>
+              <% if (calls.length > 0) { %>
+                <div class="overflow-hidden shadow ring-1 ring-black ring-opacity-5 sm:rounded-lg">
+                  <table class="min-w-full divide-y divide-gray-300">
+                    <thead class="bg-gray-50">
+                      <tr>
+                        <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 nunito">ID</th>
+                        <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 nunito">Mensagem</th>
+                        <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 nunito">SLA</th>
+                        <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 nunito">Início em</th>
+                        <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 nunito">Término em</th>
+                        <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 nunito">Status</th>
+                        <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 nunito">Técnico</th>
+                        <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 nunito">Ações</th>
+                      </tr>
+                    </thead>
 
-                  <tbody class="divide-y divide-gray-200 bg-white">
-                    <tr>
-                      <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium sm:pl-6 text-indigo-600">
-                        #284525
-                      </td>
-                      <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 nunito">
-                        <div class="flex items-center mr-6">
-                          <img class="h-8 w-8 rounded-full bg-gray-50" src="/img/photos/<%= photo %>" alt="">                                                                    
-                          <p class="nunito ml-2">Unimed POA (Você)</p>
-                        </div>
-                      </td>
-                      <td class="whitespace-nowrap px-3 py-4 text-sm nunito text-gray-800 font-bold">
-                        Falha na inicialização...
-                      </td>
-                      <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 nunito color-purple font-semibold">10/04/2023</td>
-                      <td class="whitespace-nowrap px-3 py-4 text-sm nunito color-blue font-semibold">16 min (contando)</td>
-                      <td class="whitespace-nowrap px-3 py-4 text-sm nunito color-blue font-semibold">
-                        14:11
-                      </td>
-                      <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 nunito color-purple font-semibold">
-                        Não
-                      </td>
-                      <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 nunito color-purple font-semibold">
-                        <div class="flex items-center justify-end gap-x-2 sm:justify-start">
-                          <div class="flex-none rounded-full p-1 text-green-400 bg-green-opacity">
-                            <div class="h-1.5 w-1.5 rounded-full bg-current"></div>
-                          </div>
-                          <div class="hidden text-green-400 sm:block font-bold">Em atendimento</div>
-                        </div>
-                      </td>
-                      <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 nunito color-purple">
-                        <div class="flex items-center mr-6">
-                          <img class="h-8 rounded-full" src="https://pps.whatsapp.net/v/t61.24694-24/309612029_1303621463511201_2184499647973530355_n.jpg?ccb=11-4&oh=01_AdTLj4igz1k4OkKVwtf5wwXyceqwcgJlQGxo3JG6sDOlTQ&oe=64B44F62">
-                          <p class="inter ml-2">Anderson Moreira</p>
-                        </div>
-                      </td>
-                      <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 nunito color-purple font-semibold">
-                        <a href="/company/view-call" class="flex items-center">
-                          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" class="mr-2">
-                            <path opacity="0.5" d="M2.73038 12.7463C2.0221 11.8262 1.66797 11.3661 1.66797 9.99992C1.66797 8.63375 2.0221 8.17369 2.73038 7.25353C4.1446 5.41622 6.51639 3.33325 10.0013 3.33325C13.4862 3.33325 15.858 5.41622 17.2722 7.25353C17.9805 8.17369 18.3346 8.63375 18.3346 9.99992C18.3346 11.3661 17.9805 11.8262 17.2722 12.7463C15.858 14.5836 13.4862 16.6666 10.0013 16.6666C6.51639 16.6666 4.1446 14.5836 2.73038 12.7463Z" stroke="#0E1726" stroke-width="1.25"/>
-                            <path d="M12.5 10C12.5 11.3807 11.3807 12.5 10 12.5C8.61925 12.5 7.5 11.3807 7.5 10C7.5 8.61925 8.61925 7.5 10 7.5C11.3807 7.5 12.5 8.61925 12.5 10Z" stroke="#0E1726" stroke-width="1.25"/>
-                          </svg>
-                          Visualizar                                  
-                        </a>
-                      </td>
-                    </tr>
-
-                    <tr>
-                      <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium sm:pl-6 text-indigo-600">
-                        #284414
-                      </td>
-                      <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 nunito">
-                        <div class="flex items-center mr-6">
-                          <img class="h-8 w-8 rounded-full bg-gray-50" src="/img/photos/<%= photo %>" alt="">                                                                    
-                          <p class="nunito ml-2">Unimed POA (Você)</p>
-                        </div>
-                      </td>
-                      <td class="whitespace-nowrap px-3 py-4 text-sm nunito text-gray-800 font-bold">
-                        Inconsistências na climatização...
-                      </td>
-                      <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 nunito color-purple font-semibold">16/04/2023</td>
-                      <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 nunito color-purple font-semibold">Não iniciado</td>
-                      <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 nunito color-blue font-semibold">
-                        Pendente
-                      </td>
-                      <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 nunito color-purple font-semibold">
-                        <p class="nunito font-bold">Não</p>
-                      </td>
-                      <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 nunito color-purple font-semibold">
-                        <div class="flex items-center justify-end gap-x-2 sm:justify-start">
-                          <div class="flex-none rounded-full p-1 text-yellow-400 bg-yellow-opacity">
-                            <div class="h-1.5 w-1.5 rounded-full bg-current"></div>
-                          </div>
-                          <div class="hidden text-yellow-400 sm:block">Pendente</div>
-                        </div>
-                      </td>
-                      <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 nunito color-purple">
-                        <div class="flex items-center mr-6">
-                          <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <g clip-path="url(#clip0_281_44)">
-                            <path d="M15 30C23.2843 30 30 23.2843 30 15C30 6.71573 23.2843 0 15 0C6.71573 0 0 6.71573 0 15C0 23.2843 6.71573 30 15 30Z" fill="#0EA5E9"/>
-                            <path d="M21.8077 10.9377C21.8448 11.0114 21.867 11.0919 21.8731 11.1745C21.8791 11.2571 21.8689 11.3401 21.843 11.4186C21.8171 11.4971 21.776 11.5696 21.7221 11.6318C21.6682 11.6941 21.6027 11.7448 21.5292 11.781C21.4558 11.8173 21.376 11.8383 21.2944 11.843C21.2129 11.8476 21.1312 11.8357 21.0542 11.808C20.9773 11.7802 20.9065 11.7372 20.8462 11.6814C20.7858 11.6257 20.737 11.5583 20.7026 11.4832C20.3341 10.7167 19.8149 10.0346 19.177 9.47888C18.974 9.36419 18.7451 9.30521 18.5127 9.30793C18.2804 9.3106 18.0528 9.37479 17.8525 9.49417C17.6523 9.61351 17.4863 9.7839 17.371 9.98839C17.2557 10.1928 17.1951 10.4243 17.1953 10.6599V11.346C17.195 11.4876 17.1394 11.6233 17.0407 11.7234C16.9419 11.8235 16.808 11.8799 16.6683 11.8802H13.9167C13.777 11.8799 13.6431 11.8235 13.5443 11.7234C13.4456 11.6233 13.39 11.4876 13.3897 11.346V11.4247C13.39 11.1621 13.3144 10.9052 13.1722 10.6857C13.1398 10.6444 13.1087 10.602 13.079 10.5586C12.9438 10.3952 12.7724 10.2664 12.5788 10.1829C12.3852 10.0994 12.1748 10.0636 11.9649 10.0782C11.755 10.0929 11.5514 10.1578 11.371 10.2675C11.1905 10.3772 11.0382 10.5286 10.9265 10.7093C10.869 10.8401 10.7688 10.9468 10.6428 11.0116C10.5168 11.0762 10.3727 11.095 10.2347 11.0646C10.0967 11.0343 9.9732 10.9567 9.88498 10.8448C9.7968 10.733 9.74925 10.5938 9.75039 10.4507V7.88629C9.7503 7.74102 9.80029 7.60027 9.89171 7.48841C9.98313 7.37654 10.1102 7.30056 10.2511 7.2736C10.3919 7.24664 10.5376 7.27043 10.6629 7.34083C10.7883 7.41119 10.8854 7.52379 10.9376 7.65908C11.0489 7.83336 11.1983 7.9793 11.3742 8.08553C11.5502 8.19176 11.7479 8.25538 11.9521 8.27149C12.1563 8.2876 12.3614 8.25575 12.5515 8.1784C12.7415 8.10106 12.9114 7.98028 13.0479 7.82556C13.0949 7.75314 13.1457 7.68332 13.1999 7.61634L13.2077 7.60397H13.211C13.4369 7.32875 13.7199 7.10736 14.0397 6.95556C14.3596 6.80371 14.7085 6.72521 15.0617 6.72554H15.095C15.1164 6.7232 15.1379 6.72209 15.1593 6.72217C16.5462 6.72176 17.9052 7.11682 19.0811 7.86225C20.2569 8.60769 21.2022 9.67343 21.8088 10.9377H21.8077ZM16.6628 13.3165C16.6625 13.1749 16.6068 13.0391 16.5081 12.939C16.4093 12.8389 16.2754 12.7825 16.1358 12.7822H14.2329C14.0933 12.7828 13.9596 12.8393 13.8609 12.9394C13.7622 13.0394 13.7065 13.175 13.7059 13.3165V23.9395C13.7062 24.0812 13.7618 24.2169 13.8605 24.317C13.9593 24.4171 14.0932 24.4735 14.2329 24.4738H16.1358C16.2754 24.4735 16.4093 24.4171 16.5081 24.317C16.6068 24.2169 16.6625 24.0812 16.6628 23.9395V13.3165Z" fill="white"/>
-                            </g>
-                            <defs>
-                            <clipPath id="clip0_281_44">
-                            <rect width="30" height="30" fill="white"/>
-                            </clipPath>
-                            </defs>
-                          </svg>                                                                                          
-                          <p class="inter ml-2">Aguardando Técnico</p>
-                        </div>
-                      </td>
-                      <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 nunito color-purple font-semibold">
-                        <a href="/company/view-call" class="flex items-center">
-                          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" class="mr-2">
-                            <path opacity="0.5" d="M2.73038 12.7463C2.0221 11.8262 1.66797 11.3661 1.66797 9.99992C1.66797 8.63375 2.0221 8.17369 2.73038 7.25353C4.1446 5.41622 6.51639 3.33325 10.0013 3.33325C13.4862 3.33325 15.858 5.41622 17.2722 7.25353C17.9805 8.17369 18.3346 8.63375 18.3346 9.99992C18.3346 11.3661 17.9805 11.8262 17.2722 12.7463C15.858 14.5836 13.4862 16.6666 10.0013 16.6666C6.51639 16.6666 4.1446 14.5836 2.73038 12.7463Z" stroke="#0E1726" stroke-width="1.25"/>
-                            <path d="M12.5 10C12.5 11.3807 11.3807 12.5 10 12.5C8.61925 12.5 7.5 11.3807 7.5 10C7.5 8.61925 8.61925 7.5 10 7.5C11.3807 7.5 12.5 8.61925 12.5 10Z" stroke="#0E1726" stroke-width="1.25"/>
-                          </svg>
-                          Visualizar                                  
-                        </a>
-                      </td>
-                    </tr>
-
-                    <tr>
-                      <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium sm:pl-6 text-indigo-600">
-                        #284324
-                      </td>
-                      <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 nunito">
-                        <div class="flex items-center mr-6">
-                          <img class="h-8 w-8 rounded-full bg-gray-50" src="/img/photos/<%= photo %>" alt="">                                                                    
-                          <p class="nunito ml-2">Unimed POA (Você)</p>
-                        </div>
-                      </td>
-                      <td class="whitespace-nowrap px-3 py-4 text-sm nunito text-gray-800 font-bold">
-                        Dificuldade dos aparelhos...
-                      </td>
-                      <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 nunito color-purple font-semibold">25/05/2023</td>
-                      <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 nunito color-purple font-semibold">55 min</td>
-                      <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 nunito color-purple font-semibold">
-                        <p class="nunito font-bold">14:11</p>
-                      </td>
-                      <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 nunito color-purple font-semibold">
-                        <p class="nunito font-bold">15:06</p>
-                      </td>
-                      <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 nunito color-purple font-semibold">
-                        <div class="flex items-center justify-end gap-x-2 sm:justify-start">
-                          <div class="flex-none rounded-full p-1 text-blue-600 bg-blue-opacity">
-                            <div class="h-1.5 w-1.5 rounded-full bg-current"></div>
-                          </div>
-                          <div class="hidden text-blue-600 sm:block">Concluído</div>
-                        </div>
-                      </td>
-                      <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 nunito color-purple">
-                        <div class="flex items-center mr-6">
-                          <img class="h-8 rounded-full" src="https://pps.whatsapp.net/v/t61.24694-24/309612029_1303621463511201_2184499647973530355_n.jpg?ccb=11-4&oh=01_AdTLj4igz1k4OkKVwtf5wwXyceqwcgJlQGxo3JG6sDOlTQ&oe=64B44F62">
-                          <p class="inter ml-2">Anderson Moreira</p>
-                        </div>
-                      </td>
-                      <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 nunito color-purple font-semibold">
-                        <a href="/company/view-call" class="flex items-center">
-                          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" class="mr-2">
-                            <path opacity="0.5" d="M2.73038 12.7463C2.0221 11.8262 1.66797 11.3661 1.66797 9.99992C1.66797 8.63375 2.0221 8.17369 2.73038 7.25353C4.1446 5.41622 6.51639 3.33325 10.0013 3.33325C13.4862 3.33325 15.858 5.41622 17.2722 7.25353C17.9805 8.17369 18.3346 8.63375 18.3346 9.99992C18.3346 11.3661 17.9805 11.8262 17.2722 12.7463C15.858 14.5836 13.4862 16.6666 10.0013 16.6666C6.51639 16.6666 4.1446 14.5836 2.73038 12.7463Z" stroke="#0E1726" stroke-width="1.25"/>
-                            <path d="M12.5 10C12.5 11.3807 11.3807 12.5 10 12.5C8.61925 12.5 7.5 11.3807 7.5 10C7.5 8.61925 8.61925 7.5 10 7.5C11.3807 7.5 12.5 8.61925 12.5 10Z" stroke="#0E1726" stroke-width="1.25"/>
-                          </svg>
-                          Visualizar                                  
-                        </a>
-                      </td>
-                    </tr>
-
-                    <tr>
-                      <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium sm:pl-6 text-indigo-600">
-                        #284324
-                      </td>
-                      <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 nunito">
-                        <div class="flex items-center mr-6">
-                          <img class="h-8 w-8 rounded-full bg-gray-50" src="/img/photos/<%= photo %>" alt="">                                                                    
-                          <p class="nunito ml-2">Unimed POA (Você)</p>
-                        </div>
-                      </td>
-                      <td class="whitespace-nowrap px-3 py-4 text-sm nunito text-gray-800 font-bold">
-                        Defeito em aparelhos de climatização...
-                      </td>
-                      <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 nunito color-purple font-semibold">28/06/2023</td>
-                      <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 nunito color-purple font-semibold">1:19 horas</td>
-                      <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 nunito color-purple font-semibold">
-                        <p class="nunito font-bold">13:43</p>
-                      </td>
-                      <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 nunito color-purple font-semibold">
-                        <p class="nunito font-bold">15:24</p>
-                      </td>
-                      <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 nunito color-purple font-semibold">
-                        <div class="flex items-center justify-end gap-x-2 sm:justify-start">
-                          <div class="flex-none rounded-full p-1 text-blue-600 bg-blue-opacity">
-                            <div class="h-1.5 w-1.5 rounded-full bg-current"></div>
-                          </div>
-                          <div class="hidden text-blue-600 sm:block">Concluído</div>
-                        </div>
-                      </td>
-                      <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 nunito color-purple">
-                        <div class="flex items-center mr-6">
-                          <img class="h-8 rounded-full" src="https://pps.whatsapp.net/v/t61.24694-24/309612029_1303621463511201_2184499647973530355_n.jpg?ccb=11-4&oh=01_AdTLj4igz1k4OkKVwtf5wwXyceqwcgJlQGxo3JG6sDOlTQ&oe=64B44F62">
-                          <p class="inter ml-2">Anderson Moreira</p>
-                        </div>
-                      </td>
-                      <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 nunito color-purple font-semibold">
-                        <a href="/company/view-call" class="flex items-center">
-                          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" class="mr-2">
-                            <path opacity="0.5" d="M2.73038 12.7463C2.0221 11.8262 1.66797 11.3661 1.66797 9.99992C1.66797 8.63375 2.0221 8.17369 2.73038 7.25353C4.1446 5.41622 6.51639 3.33325 10.0013 3.33325C13.4862 3.33325 15.858 5.41622 17.2722 7.25353C17.9805 8.17369 18.3346 8.63375 18.3346 9.99992C18.3346 11.3661 17.9805 11.8262 17.2722 12.7463C15.858 14.5836 13.4862 16.6666 10.0013 16.6666C6.51639 16.6666 4.1446 14.5836 2.73038 12.7463Z" stroke="#0E1726" stroke-width="1.25"/>
-                            <path d="M12.5 10C12.5 11.3807 11.3807 12.5 10 12.5C8.61925 12.5 7.5 11.3807 7.5 10C7.5 8.61925 8.61925 7.5 10 7.5C11.3807 7.5 12.5 8.61925 12.5 10Z" stroke="#0E1726" stroke-width="1.25"/>
-                          </svg>
-                          Visualizar                                  
-                        </a>
-                      </td>
-                    </tr>
-
-                    <tr>
-                      <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium sm:pl-6 text-indigo-600">
-                        #284324
-                      </td>
-                      <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 nunito">
-                        <div class="flex items-center mr-6">
-                          <img class="h-8 w-8 rounded-full bg-gray-50" src="/img/photos/<%= photo %>" alt="">                                                                    
-                          <p class="nunito ml-2">Unimed POA (Você)</p>
-                        </div>
-                      </td>
-                      <td class="whitespace-nowrap px-3 py-4 text-sm nunito text-gray-800 font-bold">
-                        Ineficiência dos aparelhos...
-                      </td>
-                      <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 nunito color-purple font-semibold">14/05/2023</td>
-                      <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 nunito color-purple font-semibold">23 min</td>
-                      <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 nunito color-purple font-semibold">
-                        <p class="nunito font-bold">11:11</p>
-                      </td>
-                      <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 nunito color-purple font-semibold">
-                        <p class="nunito font-bold">11:34</p>
-                      </td>
-                      <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 nunito color-purple font-semibold">
-                        <div class="flex items-center justify-end gap-x-2 sm:justify-start">
-                          <div class="flex-none rounded-full p-1 text-blue-600 bg-blue-opacity">
-                            <div class="h-1.5 w-1.5 rounded-full bg-current"></div>
-                          </div>
-                          <div class="hidden text-blue-500 sm:block">Concluído</div>
-                        </div>
-                      </td>
-                      <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 nunito color-purple">
-                        <div class="flex items-center mr-6">
-                          <img class="h-8 rounded-full" src="https://pps.whatsapp.net/v/t61.24694-24/309612029_1303621463511201_2184499647973530355_n.jpg?ccb=11-4&oh=01_AdTLj4igz1k4OkKVwtf5wwXyceqwcgJlQGxo3JG6sDOlTQ&oe=64B44F62">
-                          <p class="inter ml-2">Anderson Moreira</p>
-                        </div>
-                      </td>
-                      <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 nunito color-purple font-semibold">
-                        <a href="/company/view-call" class="flex items-center">
-                          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" class="mr-2">
-                            <path opacity="0.5" d="M2.73038 12.7463C2.0221 11.8262 1.66797 11.3661 1.66797 9.99992C1.66797 8.63375 2.0221 8.17369 2.73038 7.25353C4.1446 5.41622 6.51639 3.33325 10.0013 3.33325C13.4862 3.33325 15.858 5.41622 17.2722 7.25353C17.9805 8.17369 18.3346 8.63375 18.3346 9.99992C18.3346 11.3661 17.9805 11.8262 17.2722 12.7463C15.858 14.5836 13.4862 16.6666 10.0013 16.6666C6.51639 16.6666 4.1446 14.5836 2.73038 12.7463Z" stroke="#0E1726" stroke-width="1.25"/>
-                            <path d="M12.5 10C12.5 11.3807 11.3807 12.5 10 12.5C8.61925 12.5 7.5 11.3807 7.5 10C7.5 8.61925 8.61925 7.5 10 7.5C11.3807 7.5 12.5 8.61925 12.5 10Z" stroke="#0E1726" stroke-width="1.25"/>
-                          </svg>
-                          Visualizar                                  
-                        </a>
-                      </td>
-                    </tr>
-
-                    <tr>
-                      <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium sm:pl-6 text-indigo-600">
-                        #284324
-                      </td>
-                      <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 nunito">
-                        <div class="flex items-center mr-6">
-                          <img class="h-8 w-8 rounded-full bg-gray-50" src="/img/photos/<%= photo %>" alt="">                                                                    
-                          <p class="nunito ml-2">Unimed POA (Você)</p>
-                        </div>
-                      </td>
-                      <td class="whitespace-nowrap px-3 py-4 text-sm nunito text-gray-800 font-bold">
-                        Problemas nos sensores...
-                      </td>
-                      <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 nunito color-purple font-semibold">06/03/2023</td>
-                      <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 nunito color-purple font-semibold">36 min</td>
-                      <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 nunito color-purple font-semibold">
-                        <p class="nunito font-bold">16:10</p>
-                      </td>
-                      <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 nunito color-purple font-semibold">
-                        <p class="nunito font-bold">16:46</p>
-                      </td>
-                      <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 nunito color-purple font-semibold">
-                        <div class="flex items-center justify-end gap-x-2 sm:justify-start">
-                          <div class="flex-none rounded-full p-1 text-blue-600 bg-blue-opacity">
-                            <div class="h-1.5 w-1.5 rounded-full bg-current"></div>
-                          </div>
-                          <div class="hidden text-blue-500 sm:block">Concluído</div>
-                        </div>
-                      </td>
-                      <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 nunito color-purple">
-                        <div class="flex items-center mr-6">
-                          <img class="h-8 rounded-full" src="https://pps.whatsapp.net/v/t61.24694-24/309612029_1303621463511201_2184499647973530355_n.jpg?ccb=11-4&oh=01_AdTLj4igz1k4OkKVwtf5wwXyceqwcgJlQGxo3JG6sDOlTQ&oe=64B44F62">
-                          <p class="inter ml-2">Anderson Moreira</p>
-                        </div>
-                      </td>
-                      <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 nunito color-purple font-semibold">
-                        <a href="/company/view-call" class="flex items-center">
-                          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" class="mr-2">
-                            <path opacity="0.5" d="M2.73038 12.7463C2.0221 11.8262 1.66797 11.3661 1.66797 9.99992C1.66797 8.63375 2.0221 8.17369 2.73038 7.25353C4.1446 5.41622 6.51639 3.33325 10.0013 3.33325C13.4862 3.33325 15.858 5.41622 17.2722 7.25353C17.9805 8.17369 18.3346 8.63375 18.3346 9.99992C18.3346 11.3661 17.9805 11.8262 17.2722 12.7463C15.858 14.5836 13.4862 16.6666 10.0013 16.6666C6.51639 16.6666 4.1446 14.5836 2.73038 12.7463Z" stroke="#0E1726" stroke-width="1.25"/>
-                            <path d="M12.5 10C12.5 11.3807 11.3807 12.5 10 12.5C8.61925 12.5 7.5 11.3807 7.5 10C7.5 8.61925 8.61925 7.5 10 7.5C11.3807 7.5 12.5 8.61925 12.5 10Z" stroke="#0E1726" stroke-width="1.25"/>
-                          </svg>
-                          Visualizar                                  
-                        </a>
-                      </td>
-                    </tr>
-
-                    <tr>
-                      <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium sm:pl-6 text-indigo-600">
-                        #284324
-                      </td>
-                      <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 nunito">
-                        <div class="flex items-center mr-6">
-                          <img class="h-8 w-8 rounded-full bg-gray-50" src="/img/photos/<%= photo %>" alt="">                                                                    
-                          <p class="nunito ml-2">Unimed POA (Você)</p>
-                        </div>
-                      </td>
-                      <td class="whitespace-nowrap px-3 py-4 text-sm nunito text-gray-800 font-bold">
-                        Desequilíbrio na distribuição...
-                      </td>
-                      <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 nunito color-purple font-semibold">23/01/2023</td>
-                      <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 nunito color-purple font-semibold">2:12 horas</td>
-                      <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 nunito color-purple font-semibold">
-                        <p class="nunito font-bold">14:00</p>
-                      </td>
-                      <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 nunito color-purple font-semibold">
-                        <p class="nunito font-bold">16:12</p>
-                      </td>
-                      <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 nunito color-purple font-semibold">
-                        <div class="flex items-center justify-end gap-x-2 sm:justify-start">
-                          <div class="flex-none rounded-full p-1 text-blue-600 bg-blue-opacity">
-                            <div class="h-1.5 w-1.5 rounded-full bg-current"></div>
-                          </div>
-                          <div class="hidden text-blue-500 sm:block">Concluído</div>
-                        </div>
-                      </td>
-                      <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 nunito color-purple">
-                        <div class="flex items-center mr-6">
-                          <img class="h-8 rounded-full" src="https://pps.whatsapp.net/v/t61.24694-24/309612029_1303621463511201_2184499647973530355_n.jpg?ccb=11-4&oh=01_AdTLj4igz1k4OkKVwtf5wwXyceqwcgJlQGxo3JG6sDOlTQ&oe=64B44F62">
-                          <p class="inter ml-2">Anderson Moreira</p>
-                        </div>
-                      </td>
-                      <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 nunito color-purple font-semibold">
-                        <a href="/company/view-call" class="flex items-center">
-                          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" class="mr-2">
-                            <path opacity="0.5" d="M2.73038 12.7463C2.0221 11.8262 1.66797 11.3661 1.66797 9.99992C1.66797 8.63375 2.0221 8.17369 2.73038 7.25353C4.1446 5.41622 6.51639 3.33325 10.0013 3.33325C13.4862 3.33325 15.858 5.41622 17.2722 7.25353C17.9805 8.17369 18.3346 8.63375 18.3346 9.99992C18.3346 11.3661 17.9805 11.8262 17.2722 12.7463C15.858 14.5836 13.4862 16.6666 10.0013 16.6666C6.51639 16.6666 4.1446 14.5836 2.73038 12.7463Z" stroke="#0E1726" stroke-width="1.25"/>
-                            <path d="M12.5 10C12.5 11.3807 11.3807 12.5 10 12.5C8.61925 12.5 7.5 11.3807 7.5 10C7.5 8.61925 8.61925 7.5 10 7.5C11.3807 7.5 12.5 8.61925 12.5 10Z" stroke="#0E1726" stroke-width="1.25"/>
-                          </svg>
-                          Visualizar                                  
-                        </a>
-                      </td>
-                    </tr>
-
-                    <tr>
-                      <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium sm:pl-6 text-indigo-600">
-                        #284324
-                      </td>
-                      <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 nunito">
-                        <div class="flex items-center mr-6">
-                          <img class="h-8 w-8 rounded-full bg-gray-50" src="/img/photos/<%= photo %>" alt="">                                                                    
-                          <p class="nunito ml-2">Unimed POA (Você)</p>
-                        </div>
-                      </td>
-                      <td class="whitespace-nowrap px-3 py-4 text-sm nunito text-gray-800 font-bold">
-                        Necessidade de otimização...
-                      </td>
-                      <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 nunito color-purple font-semibold">12/01/2023</td>
-                      <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 nunito color-purple font-semibold">1:35 horas</td>
-                      <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 nunito color-purple font-semibold">
-                        <p class="nunito font-bold">14:00</p>
-                      </td>
-                      <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 nunito color-purple font-semibold">
-                        <p class="nunito font-bold">15:35</p>
-                      </td>
-                      <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 nunito color-purple font-semibold">
-                        <div class="flex items-center justify-end gap-x-2 sm:justify-start">
-                          <div class="flex-none rounded-full p-1 text-blue-600 bg-blue-opacity">
-                            <div class="h-1.5 w-1.5 rounded-full bg-current"></div>
-                          </div>
-                          <div class="hidden text-blue-500 sm:block">Concluído</div>
-                        </div>
-                      </td>
-                      <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 nunito color-purple">
-                        <div class="flex items-center mr-6">
-                          <img class="h-8 rounded-full" src="https://pps.whatsapp.net/v/t61.24694-24/309612029_1303621463511201_2184499647973530355_n.jpg?ccb=11-4&oh=01_AdTLj4igz1k4OkKVwtf5wwXyceqwcgJlQGxo3JG6sDOlTQ&oe=64B44F62">
-                          <p class="inter ml-2">Anderson Moreira</p>
-                        </div>
-                      </td>
-                      <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 nunito color-purple font-semibold">
-                        <a href="/company/view-call" class="flex items-center">
-                          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" class="mr-2">
-                            <path opacity="0.5" d="M2.73038 12.7463C2.0221 11.8262 1.66797 11.3661 1.66797 9.99992C1.66797 8.63375 2.0221 8.17369 2.73038 7.25353C4.1446 5.41622 6.51639 3.33325 10.0013 3.33325C13.4862 3.33325 15.858 5.41622 17.2722 7.25353C17.9805 8.17369 18.3346 8.63375 18.3346 9.99992C18.3346 11.3661 17.9805 11.8262 17.2722 12.7463C15.858 14.5836 13.4862 16.6666 10.0013 16.6666C6.51639 16.6666 4.1446 14.5836 2.73038 12.7463Z" stroke="#0E1726" stroke-width="1.25"/>
-                            <path d="M12.5 10C12.5 11.3807 11.3807 12.5 10 12.5C8.61925 12.5 7.5 11.3807 7.5 10C7.5 8.61925 8.61925 7.5 10 7.5C11.3807 7.5 12.5 8.61925 12.5 10Z" stroke="#0E1726" stroke-width="1.25"/>
-                          </svg>
-                          Visualizar                                  
-                        </a>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
+                    <tbody class="divide-y divide-gray-200 bg-white">
+                      <% calls.forEach(function(item) { %>
+                        <tr>
+                          <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium sm:pl-6 text-indigo-600">
+                            <%= item._id %>
+                          </td>
+  
+                          <td class="whitespace-nowrap px-3 py-4 text-sm nunito text-gray-800 font-bold">
+                            <%= item.description %>
+                          </td>
+  
+                          <% if (item.status == "pending") { %>
+                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 nunito color-purple font-semibold">Não iniciado</td>
+                          <% } else if (item.status == "in-attendance") { %>
+                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 nunito color-purple font-semibold"><%= item.sla %> (contando)</td>
+                          <% } else if (item.status == "concluded") { %>
+                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 nunito color-purple font-semibold"><%= item.sla %></td>
+                          <% } %>
+  
+                          <% if (item.status == "pending") { %>
+                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 nunito color-purple font-semibold">
+                              <p class="nunito font-bold">Aguardando</p>
+                            </td>
+                          <% } else { %>
+                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 nunito color-purple font-semibold">
+                              <p class="nunito font-bold"><%= item.start_time %></p>
+                            </td>
+                          <% } %>
+  
+                          <% if (item.status == "pending") { %>
+                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 nunito color-purple font-semibold">
+                              <p class="nunito font-bold">Aguardando</p>
+                            </td>
+                          <% } else { %>
+                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 nunito color-purple font-semibold">
+                              <p class="nunito font-bold"><%= item.end_time %></p>
+                            </td>
+                          <% } %>
+  
+                          <% if (item.status == "pending") { %>
+                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 nunito color-purple font-semibold">
+                              <div class="flex items-center justify-end gap-x-2 sm:justify-start">
+                                <div class="flex-none rounded-full p-1 text-yellow-400 bg-yellow-opacity">
+                                  <div class="h-1.5 w-1.5 rounded-full bg-current"></div>
+                                </div>
+                                <div class="hidden text-yellow-400 sm:block">Pendente</div>
+                              </div>
+                            </td>
+  
+                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 nunito color-purple">
+                              <div class="flex items-center mr-6">
+                                <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                  <g clip-path="url(#clip0_281_44)">
+                                  <path d="M15 30C23.2843 30 30 23.2843 30 15C30 6.71573 23.2843 0 15 0C6.71573 0 0 6.71573 0 15C0 23.2843 6.71573 30 15 30Z" fill="#0EA5E9"/>
+                                  <path d="M21.8077 10.9377C21.8448 11.0114 21.867 11.0919 21.8731 11.1745C21.8791 11.2571 21.8689 11.3401 21.843 11.4186C21.8171 11.4971 21.776 11.5696 21.7221 11.6318C21.6682 11.6941 21.6027 11.7448 21.5292 11.781C21.4558 11.8173 21.376 11.8383 21.2944 11.843C21.2129 11.8476 21.1312 11.8357 21.0542 11.808C20.9773 11.7802 20.9065 11.7372 20.8462 11.6814C20.7858 11.6257 20.737 11.5583 20.7026 11.4832C20.3341 10.7167 19.8149 10.0346 19.177 9.47888C18.974 9.36419 18.7451 9.30521 18.5127 9.30793C18.2804 9.3106 18.0528 9.37479 17.8525 9.49417C17.6523 9.61351 17.4863 9.7839 17.371 9.98839C17.2557 10.1928 17.1951 10.4243 17.1953 10.6599V11.346C17.195 11.4876 17.1394 11.6233 17.0407 11.7234C16.9419 11.8235 16.808 11.8799 16.6683 11.8802H13.9167C13.777 11.8799 13.6431 11.8235 13.5443 11.7234C13.4456 11.6233 13.39 11.4876 13.3897 11.346V11.4247C13.39 11.1621 13.3144 10.9052 13.1722 10.6857C13.1398 10.6444 13.1087 10.602 13.079 10.5586C12.9438 10.3952 12.7724 10.2664 12.5788 10.1829C12.3852 10.0994 12.1748 10.0636 11.9649 10.0782C11.755 10.0929 11.5514 10.1578 11.371 10.2675C11.1905 10.3772 11.0382 10.5286 10.9265 10.7093C10.869 10.8401 10.7688 10.9468 10.6428 11.0116C10.5168 11.0762 10.3727 11.095 10.2347 11.0646C10.0967 11.0343 9.9732 10.9567 9.88498 10.8448C9.7968 10.733 9.74925 10.5938 9.75039 10.4507V7.88629C9.7503 7.74102 9.80029 7.60027 9.89171 7.48841C9.98313 7.37654 10.1102 7.30056 10.2511 7.2736C10.3919 7.24664 10.5376 7.27043 10.6629 7.34083C10.7883 7.41119 10.8854 7.52379 10.9376 7.65908C11.0489 7.83336 11.1983 7.9793 11.3742 8.08553C11.5502 8.19176 11.7479 8.25538 11.9521 8.27149C12.1563 8.2876 12.3614 8.25575 12.5515 8.1784C12.7415 8.10106 12.9114 7.98028 13.0479 7.82556C13.0949 7.75314 13.1457 7.68332 13.1999 7.61634L13.2077 7.60397H13.211C13.4369 7.32875 13.7199 7.10736 14.0397 6.95556C14.3596 6.80371 14.7085 6.72521 15.0617 6.72554H15.095C15.1164 6.7232 15.1379 6.72209 15.1593 6.72217C16.5462 6.72176 17.9052 7.11682 19.0811 7.86225C20.2569 8.60769 21.2022 9.67343 21.8088 10.9377H21.8077ZM16.6628 13.3165C16.6625 13.1749 16.6068 13.0391 16.5081 12.939C16.4093 12.8389 16.2754 12.7825 16.1358 12.7822H14.2329C14.0933 12.7828 13.9596 12.8393 13.8609 12.9394C13.7622 13.0394 13.7065 13.175 13.7059 13.3165V23.9395C13.7062 24.0812 13.7618 24.2169 13.8605 24.317C13.9593 24.4171 14.0932 24.4735 14.2329 24.4738H16.1358C16.2754 24.4735 16.4093 24.4171 16.5081 24.317C16.6068 24.2169 16.6625 24.0812 16.6628 23.9395V13.3165Z" fill="white"/>
+                                  </g>
+                                  <defs>
+                                  <clipPath id="clip0_281_44">
+                                  <rect width="30" height="30" fill="white"/>
+                                  </clipPath>
+                                  </defs>
+                                </svg>                                                                                          
+                                <p class="inter ml-2">Aguardando Técnico</p>
+                              </div>
+                            </td>
+                          <% } else if (item.status == "in-attendance") { %>
+                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 nunito color-purple font-semibold">
+                              <div class="flex items-center justify-end gap-x-2 sm:justify-start">
+                                <div class="flex-none rounded-full p-1 text-green-400 bg-green-opacity">
+                                  <div class="h-1.5 w-1.5 rounded-full bg-current"></div>
+                                </div>
+                                <div class="hidden text-green-400 sm:block font-bold">Em atendimento</div>
+                              </div>
+                            </td>
+                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 nunito color-purple">
+                              <div class="flex items-center mr-6">
+                                <img class="h-8 rounded-full" src="https://pps.whatsapp.net/v/t61.24694-24/309612029_1303621463511201_2184499647973530355_n.jpg?ccb=11-4&oh=01_AdTLj4igz1k4OkKVwtf5wwXyceqwcgJlQGxo3JG6sDOlTQ&oe=64B44F62">
+                                <p class="inter ml-2">Anderson Moreira</p>
+                              </div>
+                            </td>
+                          <% } else if (item.status == "concluded") { %>
+                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 nunito color-purple font-semibold">
+                              <div class="flex items-center justify-end gap-x-2 sm:justify-start">
+                                <div class="flex-none rounded-full p-1 text-blue-600 bg-blue-opacity">
+                                  <div class="h-1.5 w-1.5 rounded-full bg-current"></div>
+                                </div>
+                                <div class="hidden text-blue-600 sm:block">Concluído</div>
+                              </div>
+                            </td>
+                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 nunito color-purple">
+                              <div class="flex items-center mr-6">
+                                <img class="h-8 rounded-full" src="https://pps.whatsapp.net/v/t61.24694-24/309612029_1303621463511201_2184499647973530355_n.jpg?ccb=11-4&oh=01_AdTLj4igz1k4OkKVwtf5wwXyceqwcgJlQGxo3JG6sDOlTQ&oe=64B44F62">
+                                <p class="inter ml-2">Anderson Moreira</p>
+                              </div>
+                            </td>
+                          <% } %>
+  
+                          <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 nunito color-purple font-semibold">
+                            <a href="/admin/view-call/<%= item._id %>" class="flex items-center">
+                              <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" class="mr-2">
+                                <path opacity="0.5" d="M2.73038 12.7463C2.0221 11.8262 1.66797 11.3661 1.66797 9.99992C1.66797 8.63375 2.0221 8.17369 2.73038 7.25353C4.1446 5.41622 6.51639 3.33325 10.0013 3.33325C13.4862 3.33325 15.858 5.41622 17.2722 7.25353C17.9805 8.17369 18.3346 8.63375 18.3346 9.99992C18.3346 11.3661 17.9805 11.8262 17.2722 12.7463C15.858 14.5836 13.4862 16.6666 10.0013 16.6666C6.51639 16.6666 4.1446 14.5836 2.73038 12.7463Z" stroke="#0E1726" stroke-width="1.25"/>
+                                <path d="M12.5 10C12.5 11.3807 11.3807 12.5 10 12.5C8.61925 12.5 7.5 11.3807 7.5 10C7.5 8.61925 8.61925 7.5 10 7.5C11.3807 7.5 12.5 8.61925 12.5 10Z" stroke="#0E1726" stroke-width="1.25"/>
+                              </svg>
+                              Visualizar                                  
+                            </a>
+                          </td>
+                        </tr>
+                      <% }) %>
+                    </tbody>
+                  </table>
+                </div>
+              <% } else { %>
+                <div class="flex flex-col justify-center items-center px-4 sm:px-2 mt-2 col-span-3 mt-40">
+                  <svg width="483" height="242" viewBox="0 0 483 242" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <g clip-path="url(#clip0_314_264)">
+                    <path d="M158.977 242C144.41 242 129.865 241.739 115.342 241.218C94.5906 240.472 73.1323 239.702 53.1876 228.64C39.2354 220.902 26.8786 208.488 17.4534 192.739C11.1538 182.064 6.53457 170.483 3.75811 158.402C-1.42106 136.409 -1.24465 113.493 4.2725 91.5817C6.20592 84.0692 8.87128 76.7643 12.2303 69.772C26.7752 39.6525 53.3039 19.4342 85.0145 14.3015C85.2764 14.2675 85.5412 14.2618 85.8043 14.2846C85.9469 14.2923 86.0891 14.3004 86.234 14.2944L86.4206 14.2351C86.8988 14.0688 87.3901 13.9428 87.8893 13.8581C136.795 6.57743 188.496 21.3088 237.399 56.4587C275.21 83.6401 325.321 98.2769 390.595 101.205L391.522 101.254C409.692 102.298 427.269 109.789 442.353 122.919C457.241 135.878 468.42 153.169 474.68 172.921C475.45 175.329 476.156 177.836 476.777 180.371C477.356 182.728 477.315 185.193 476.659 187.529C476.002 189.865 474.752 191.991 473.03 193.7V193.705L472.868 193.872C472.477 194.261 472.065 194.634 471.644 194.982L471.149 195.39C466.977 198.826 463.683 201.54 459.74 203.649C457.11 205.045 454.313 206.101 451.416 206.791C435.51 210.669 419.356 214.265 403.405 217.478C372.426 223.724 340.632 228.877 308.904 232.793C259.164 238.926 209.094 242.001 158.977 242ZM85.4334 15.3514C85.336 15.3505 85.2387 15.3571 85.1422 15.3712C53.7281 20.4559 27.4505 40.4757 13.0499 70.2971C9.72399 77.22 7.08501 84.4525 5.17081 91.8906C-0.296072 113.608 -0.470286 136.32 4.66282 158.118C7.4121 170.083 11.9865 181.553 18.2254 192.126C27.5583 207.721 39.7887 220.011 53.5946 227.667C73.3603 238.63 94.7174 239.397 115.372 240.138C179.97 242.446 244.65 239.631 308.804 231.719C340.511 227.806 372.285 222.657 403.243 216.415C419.184 213.203 435.326 209.611 451.222 205.735C454.049 205.062 456.778 204.032 459.345 202.669C463.208 200.604 466.472 197.915 470.603 194.512L471.098 194.104C471.46 193.805 471.815 193.486 472.155 193.154L472.253 193.051C475.648 189.629 476.968 185.114 475.875 180.665V180.664C475.26 178.156 474.562 175.676 473.8 173.293C461.011 132.942 427.928 104.426 391.477 102.333L390.555 102.284C360.739 100.946 334.647 97.2399 310.793 90.9527C282.317 83.4477 257.456 72.1501 236.902 57.3744C188.186 22.3593 136.701 7.68267 88.0088 14.9288C87.554 15.0073 87.1064 15.1233 86.6707 15.2757L86.3344 15.3698C86.1434 15.3784 85.952 15.3761 85.7612 15.363C85.6488 15.3572 85.5399 15.3514 85.4334 15.3514Z" fill="#F0F0F0"/>
+                    <path d="M150.79 78.8465C149.442 77.5527 148.063 70.3378 146.341 69.6053C147.628 72.4495 146.694 73.2025 146.687 76.324C146.703 78.0964 146.496 79.8638 146.071 81.5846H116.906V58.824C116.906 56.7789 117.309 54.7538 118.092 52.8644C118.874 50.975 120.021 49.2582 121.467 47.8121C122.913 46.366 124.63 45.2189 126.52 44.4363C128.409 43.6537 130.434 43.2509 132.479 43.251C133.26 43.2662 134.035 43.3797 134.788 43.5889C137.294 44.2657 139.579 45.5898 141.413 47.4283C143.246 49.2669 144.564 51.5552 145.234 54.0638C147.457 62.1904 150.993 75.7175 150.79 78.8465Z" fill="#2F2E41"/>
+                    <path d="M118.621 106.846L118.635 89.1057L108.207 90.0376L111.887 101.227L110.165 129.35C109.329 129.538 108.566 129.964 107.969 130.578C107.372 131.191 106.966 131.965 106.801 132.805C106.636 133.645 106.72 134.515 107.041 135.309C107.362 136.103 107.907 136.786 108.609 137.275C109.312 137.765 110.141 138.039 110.997 138.065C111.853 138.091 112.698 137.867 113.429 137.421C114.16 136.976 114.745 136.327 115.113 135.554C115.482 134.781 115.617 133.918 115.504 133.069L118.621 106.846Z" fill="#FFB6B6"/>
+                    <path d="M139.142 233.621L143.355 233.62L145.359 217.37H139.141L139.142 233.621Z" fill="#FFB6B6"/>
+                    <path d="M137.715 231.542L144.375 231.144V233.998L150.707 238.371C151.019 238.587 151.255 238.897 151.379 239.256C151.503 239.616 151.509 240.005 151.396 240.368C151.282 240.731 151.056 241.048 150.75 241.273C150.444 241.498 150.074 241.62 149.694 241.62H141.765L140.398 238.797L139.865 241.62H136.875L137.715 231.542Z" fill="#2F2E41"/>
+                    <path d="M114.782 233.621L118.995 233.62L120.999 217.37H114.781L114.782 233.621Z" fill="#FFB6B6"/>
+                    <path d="M113.355 231.542L120.015 231.144V233.998L126.347 238.371C126.66 238.587 126.896 238.897 127.02 239.256C127.143 239.616 127.149 240.005 127.036 240.368C126.923 240.731 126.697 241.048 126.391 241.273C126.085 241.498 125.715 241.62 125.334 241.62H117.405L116.039 238.797L115.505 241.62H112.516L113.355 231.542Z" fill="#2F2E41"/>
+                    <path d="M135.393 69.9476L126.665 70.1188L120.505 76.6218L115.565 77.3462C113.331 77.6739 111.277 78.7585 109.746 80.4188C108.216 82.0791 107.302 84.2145 107.156 86.4679L108.012 91.168H113.146L116.116 108.606C114.961 111.549 114.883 113.872 117.253 114.784L124.612 128.646L146.346 118.891C147.448 116.997 147.801 115.093 146.674 113.242L148.228 86.5474H153.452C153.452 81.5546 151.763 77.3455 146.802 76.7899C144.831 76.5767 142.851 76.4635 140.869 76.4507L135.393 69.9476Z" fill="#E6E6E6"/>
+                    <path d="M146.339 118.891C146.339 118.891 125.118 122.656 117.246 114.784C117.246 114.784 116.447 116.141 115.243 118.391C114.896 119.038 114.227 119.477 113.823 120.26C113.456 120.973 112.512 121.849 112.112 122.657C111.79 123.307 112.307 124.156 111.972 124.858C107.94 133.314 103.23 145.242 104.24 153.118C104.891 158.197 106.236 170.016 107.653 182.71C107.763 183.702 106.867 184.976 106.978 185.975C107.083 186.918 108.196 187.586 108.3 188.531C108.37 189.158 107.593 189.798 107.663 190.425C107.739 191.112 108.661 191.786 108.737 192.471C110.678 209.998 112.454 226.362 112.454 226.362H122.38L124.253 188.989L122.722 175.365L126.316 147.813L131.279 173.996L131.917 188.732L137.162 227.047H146.339V189.956L147.023 188.029L146.339 185.558L147.023 182.895L146.339 179.995V118.891Z" fill="#2F2E41"/>
+                    <path d="M138.07 64.8864C136.718 66.6823 134.795 67.9642 132.617 68.5211C130.439 69.0779 128.137 68.8765 126.089 67.9499C124.041 67.0233 122.369 65.4268 121.35 63.4234C120.33 61.42 120.023 59.1291 120.479 56.928C120.936 54.7268 122.128 52.7468 123.86 51.3138C125.592 49.8809 127.761 49.0805 130.008 49.0445C132.256 49.0086 134.449 49.7391 136.226 51.1159C138.003 52.4927 139.258 54.4336 139.784 56.619C139.813 56.7376 139.837 56.8555 139.86 56.9779C140.138 58.3477 140.123 59.7609 139.814 61.1242C139.505 62.4875 138.911 63.7698 138.07 64.8864Z" fill="#FFB6B6"/>
+                    <path d="M136.002 59.2416C135.792 58.1883 135.262 57.2258 134.483 56.4864C134.56 57.4957 134.419 58.5099 134.072 59.4607C131.47 59.6911 128.856 59.1733 126.539 57.9684C124.793 56.7842 122.572 56.8868 119.984 57.9684C119.984 56.7098 120.232 55.4636 120.714 54.3008C121.195 53.138 121.901 52.0815 122.791 51.1916C123.681 50.3016 124.737 49.5957 125.9 49.1142C127.063 48.6326 128.309 48.3848 129.568 48.385H131.279C133.821 48.3854 136.258 49.3953 138.055 51.1924C139.852 52.9895 140.862 55.4269 140.863 57.9684C139.283 58.5349 137.657 58.9609 136.002 59.2416Z" fill="#2F2E41"/>
+                    <path d="M61.1333 181.386C76.3387 181.386 88.6651 169.059 88.6651 153.854C88.6651 138.649 76.3387 126.322 61.1333 126.322C45.928 126.322 33.6016 138.649 33.6016 153.854C33.6016 169.059 45.928 181.386 61.1333 181.386Z" fill="#F0F0F0"/>
+                    <path d="M236.586 55.0635C251.792 55.0635 264.118 42.7371 264.118 27.5318C264.118 12.3264 251.792 0 236.586 0C221.381 0 209.055 12.3264 209.055 27.5318C209.055 42.7371 221.381 55.0635 236.586 55.0635Z" fill="#F0F0F0"/>
+                    <path d="M455.219 185.704C470.425 185.704 482.751 173.378 482.751 158.173C482.751 142.967 470.425 130.641 455.219 130.641C440.014 130.641 427.688 142.967 427.688 158.173C427.688 173.378 440.014 185.704 455.219 185.704Z" fill="#F0F0F0"/>
+                    <path d="M286.253 30.5342V92.9644C286.253 94.2612 285.742 95.5056 284.829 96.4274C283.917 97.3492 282.678 97.8738 281.382 97.8874C281.364 97.8892 281.346 97.89 281.328 97.8896H274.062C268.248 97.8896 262.672 95.5801 258.561 91.4691C254.45 87.3581 252.141 81.7824 252.141 75.9686V30.5342C252.141 29.228 252.66 27.9752 253.583 27.0516C254.507 26.1279 255.76 25.609 257.066 25.609H260.01C258.646 29.588 277.158 31.2632 278.175 25.609H281.328C282.634 25.609 283.887 26.128 284.81 27.0516C285.734 27.9752 286.253 29.228 286.253 30.5342Z" fill="#239CFF"/>
+                    <path d="M264.688 20.9407C264.688 20.7696 264.756 20.6056 264.877 20.4846C264.998 20.3636 265.162 20.2955 265.333 20.2953H269.722C269.893 20.2958 270.057 20.364 270.177 20.485C270.298 20.606 270.366 20.7699 270.366 20.9407C270.366 21.1116 270.298 21.2755 270.177 21.3965C270.057 21.5175 269.893 21.5857 269.722 21.5862H265.333C265.162 21.586 264.998 21.5179 264.877 21.3969C264.756 21.2759 264.688 21.1119 264.688 20.9407Z" fill="#3F3D56"/>
+                    <path d="M282.828 105.808H255.072C252.918 105.806 250.854 104.949 249.331 103.427C247.808 101.904 246.952 99.8395 246.949 97.686V54.0447C246.797 53.9353 246.673 53.7911 246.587 53.6241C246.502 53.4571 246.457 53.2721 246.457 53.0845V48.6954C246.457 48.5078 246.502 48.3228 246.587 48.1559C246.673 47.9889 246.797 47.8448 246.949 47.7354V46.5574C246.797 46.448 246.673 46.3038 246.587 46.1369C246.502 45.9699 246.457 45.785 246.457 45.5974V41.208C246.457 41.0204 246.502 40.8355 246.587 40.6685C246.673 40.5016 246.797 40.3574 246.949 40.248V38.119C246.761 38.0179 246.604 37.8676 246.494 37.6841C246.385 37.5006 246.328 37.2909 246.328 37.0772V32.6882C246.328 32.4745 246.385 32.2647 246.494 32.0812C246.604 31.8977 246.761 31.7473 246.949 31.6462V25.8123C246.952 23.6589 247.808 21.5943 249.331 20.0716C250.854 18.5489 252.918 17.6924 255.072 17.69H282.828C284.982 17.6924 287.046 18.549 288.569 20.0717C290.092 21.5944 290.948 23.6589 290.95 25.8124V38.5289C291.097 38.6204 291.217 38.7475 291.301 38.8985C291.385 39.0494 291.429 39.2191 291.429 39.3916V47.7607C291.429 47.9333 291.385 48.103 291.301 48.2539C291.217 48.4049 291.097 48.5321 290.95 48.6237V97.686C290.948 99.8394 290.092 101.904 288.569 103.427C287.046 104.949 284.982 105.806 282.828 105.808ZM255.072 18.7697C253.205 18.7718 251.414 19.5144 250.094 20.8347C248.774 22.155 248.031 23.9451 248.029 25.8124V32.5646L247.51 32.5846C247.483 32.5856 247.457 32.5968 247.438 32.6161C247.419 32.6354 247.408 32.6612 247.408 32.6882V37.0772C247.408 37.1042 247.419 37.13 247.438 37.1492C247.457 37.1685 247.483 37.1798 247.51 37.1808L248.029 37.2006V41.0061L247.618 41.1073C247.595 41.1128 247.575 41.1256 247.56 41.1439C247.546 41.1621 247.537 41.1846 247.537 41.208V45.5974C247.537 45.6207 247.546 45.6433 247.56 45.6615C247.575 45.6797 247.595 45.6926 247.618 45.6981L248.029 45.7993V48.4934L247.618 48.5947C247.595 48.6001 247.575 48.613 247.56 48.6312C247.546 48.6494 247.537 48.672 247.537 48.6954V53.0845C247.537 53.1079 247.546 53.1305 247.56 53.1487C247.575 53.167 247.595 53.1799 247.618 53.1854L248.029 53.2866V97.686C248.031 99.5532 248.774 101.343 250.094 102.664C251.414 103.984 253.205 104.727 255.072 104.729H282.828C284.695 104.727 286.485 103.984 287.806 102.664C289.126 101.343 289.869 99.5532 289.871 97.686V47.6993H290.349V39.4533H289.871V25.8123C289.869 23.9452 289.126 22.1551 287.806 20.8348C286.485 19.5145 284.695 18.7718 282.828 18.7697L255.072 18.7697Z" fill="#3F3D56"/>
+                    <path d="M272.177 21.5862C272.533 21.5862 272.822 21.2972 272.822 20.9407C272.822 20.5843 272.533 20.2953 272.177 20.2953C271.82 20.2953 271.531 20.5843 271.531 20.9407C271.531 21.2972 271.82 21.5862 272.177 21.5862Z" fill="#3F3D56"/>
+                    <path d="M131.766 145.974H59.5425C58.5168 145.971 57.5339 145.563 56.8086 144.837C56.0833 144.112 55.6746 143.129 55.6719 142.104V106.912C55.6745 105.887 56.0831 104.904 56.8083 104.178C57.5335 103.453 58.5163 103.044 59.5419 103.042H131.765C132.791 103.044 133.774 103.453 134.499 104.178C135.225 104.903 135.633 105.886 135.636 106.912V142.103C135.633 143.129 135.225 144.112 134.5 144.837C133.774 145.562 132.792 145.971 131.766 145.974Z" fill="white"/>
+                    <path d="M131.766 145.974H59.5425C58.5168 145.971 57.5339 145.563 56.8086 144.837C56.0833 144.112 55.6746 143.129 55.6719 142.104V106.912C55.6745 105.887 56.0831 104.904 56.8083 104.178C57.5335 103.453 58.5163 103.044 59.5419 103.042H131.765C132.791 103.044 133.774 103.453 134.499 104.178C135.225 104.903 135.633 105.886 135.636 106.912V142.103C135.633 143.129 135.225 144.112 134.5 144.837C133.774 145.562 132.792 145.971 131.766 145.974ZM59.5425 104.121C58.8029 104.124 58.0942 104.418 57.5712 104.941C57.0483 105.464 56.7536 106.173 56.7516 106.913V142.103C56.7537 142.843 57.0485 143.552 57.5715 144.075C58.0946 144.597 58.8034 144.892 59.543 144.894H131.765C132.505 144.892 133.213 144.597 133.736 144.074C134.26 143.551 134.554 142.842 134.556 142.103V106.912C134.554 106.173 134.259 105.464 133.736 104.941C133.213 104.418 132.505 104.123 131.765 104.121L59.5425 104.121Z" fill="#3F3D56"/>
+                    <path d="M99.5235 140.773C85.2795 140.773 70.4269 140.637 64.8852 140.549C64.1561 140.534 63.4617 140.234 62.9504 139.714C62.4391 139.194 62.1512 138.495 62.1484 137.766V108.635C62.1487 108.374 62.2524 108.124 62.4368 107.939C62.6213 107.754 62.8714 107.65 63.1326 107.649H128.17C128.431 107.649 128.681 107.753 128.866 107.937C129.051 108.121 129.156 108.371 129.156 108.633V128.397C129.144 131.623 127.868 134.716 125.602 137.013C123.335 139.309 120.259 140.625 117.033 140.68C111.869 140.747 105.753 140.773 99.5235 140.773Z" fill="#239CFF"/>
+                    <path d="M124.312 126.581H65.5457C65.0536 126.58 64.5739 126.427 64.1717 126.144C63.7695 125.86 63.4644 125.46 63.2977 124.997L56.6462 106.336C56.518 105.976 56.4781 105.591 56.5297 105.212C56.5814 104.834 56.7231 104.473 56.943 104.161C57.1629 103.849 57.4546 103.593 57.7935 103.417C58.1324 103.241 58.5087 103.148 58.8907 103.148L132.348 103.045C132.697 103.045 133.042 103.121 133.359 103.269C133.675 103.416 133.955 103.631 134.18 103.899C134.404 104.166 134.567 104.48 134.657 104.817C134.747 105.154 134.762 105.507 134.701 105.851L134.758 105.875L134.547 106.367L134.545 106.372L126.504 125.135C126.321 125.564 126.015 125.93 125.626 126.188C125.236 126.445 124.779 126.582 124.312 126.581ZM132.351 104.125L58.8928 104.227C58.6835 104.228 58.4774 104.278 58.2917 104.375C58.106 104.471 57.9463 104.611 57.8258 104.782C57.7053 104.953 57.6277 105.151 57.5994 105.358C57.5711 105.566 57.5929 105.777 57.6631 105.974L64.3144 124.633C64.4058 124.887 64.5731 125.106 64.7935 125.262C65.0139 125.417 65.2768 125.501 65.5464 125.502H124.312C124.568 125.502 124.818 125.427 125.031 125.286C125.244 125.145 125.411 124.945 125.512 124.71L133.553 105.947C133.638 105.748 133.672 105.531 133.653 105.316C133.634 105.1 133.562 104.893 133.443 104.713C133.323 104.532 133.161 104.384 132.971 104.281C132.78 104.179 132.568 104.125 132.351 104.125Z" fill="#3F3D56"/>
+                    <path d="M95.5391 130.643C98.0805 130.643 100.141 128.583 100.141 126.042C100.141 123.5 98.0805 121.44 95.5391 121.44C92.9977 121.44 90.9375 123.5 90.9375 126.042C90.9375 128.583 92.9977 130.643 95.5391 130.643Z" fill="white"/>
+                    <path d="M269.367 90.6952C271.909 90.6952 273.969 88.635 273.969 86.0936C273.969 83.5522 271.909 81.492 269.367 81.492C266.826 81.492 264.766 83.5522 264.766 86.0936C264.766 88.635 266.826 90.6952 269.367 90.6952Z" fill="white"/>
+                    <path d="M443.409 152.839L431.117 140.703C430.519 140.108 429.809 139.637 429.028 139.316C428.247 138.996 427.41 138.832 426.566 138.836H426.523C425.673 138.838 424.831 139.009 424.047 139.339C423.263 139.669 422.552 140.151 421.956 140.757C419.207 143.539 417.644 147.278 417.595 151.188C417.546 155.098 419.014 158.875 421.691 161.725C421.821 161.865 421.956 162 422.091 162.135C422.839 162.878 423.664 163.539 424.553 164.105C426.983 165.676 429.816 166.506 432.71 166.497H432.801C434.787 166.49 436.752 166.09 438.582 165.319C440.412 164.548 442.071 163.422 443.463 162.006C444.669 160.782 445.341 159.129 445.331 157.411C445.321 155.693 444.63 154.049 443.409 152.839ZM442.697 161.244C440.414 163.543 437.409 164.986 434.188 165.328C430.967 165.67 427.726 164.891 425.011 163.123C424.235 162.609 423.51 162.022 422.847 161.368C420.198 158.753 418.697 155.192 418.674 151.469C418.65 147.747 420.107 144.167 422.723 141.519C423.22 141.012 423.813 140.609 424.467 140.334C425.121 140.059 425.824 139.916 426.534 139.915H426.566C427.269 139.913 427.965 140.049 428.616 140.316C429.266 140.582 429.857 140.975 430.356 141.47L442.648 153.611C443.666 154.617 444.242 155.986 444.251 157.418C444.26 158.849 443.701 160.225 442.697 161.244Z" fill="#3F3D56"/>
+                    <path d="M403.083 113.01L390.791 100.869C389.581 99.6684 387.945 98.9967 386.24 99.001H386.203C385.351 99.0044 384.508 99.1765 383.724 99.5073C382.939 99.838 382.227 100.321 381.63 100.928C379.358 103.236 377.885 106.211 377.426 109.416C376.968 112.622 377.548 115.891 379.082 118.743L379.088 118.748C379.72 119.915 380.507 120.991 381.425 121.949C381.528 122.068 381.646 122.187 381.765 122.306C384.588 125.108 388.406 126.676 392.384 126.668H392.481C394.467 126.659 396.432 126.258 398.262 125.486C400.092 124.714 401.751 123.587 403.143 122.171C403.74 121.565 404.213 120.848 404.534 120.06C404.854 119.272 405.016 118.429 405.011 117.578C405.005 116.727 404.832 115.886 404.501 115.102C404.171 114.318 403.689 113.607 403.083 113.01ZM402.371 121.415C401.079 122.73 399.539 123.775 397.841 124.491C396.142 125.208 394.319 125.58 392.476 125.588H392.384C389.616 125.587 386.91 124.767 384.606 123.232C382.302 121.698 380.504 119.516 379.437 116.961C378.371 114.407 378.083 111.594 378.61 108.877C379.138 106.16 380.457 103.659 382.402 101.689C383.409 100.672 384.778 100.095 386.209 100.086C387.64 100.077 389.016 100.636 390.035 101.641L402.328 113.776C403.345 114.785 403.92 116.155 403.928 117.587C403.936 119.019 403.376 120.395 402.371 121.415Z" fill="#3F3D56"/>
+                    <path d="M444.197 156.655L430.645 143.27C429.757 142.394 428.557 141.907 427.309 141.915C426.062 141.922 424.868 142.425 423.991 143.311C422.893 144.421 422.024 145.735 421.434 147.18C420.845 148.626 420.546 150.173 420.555 151.733C420.564 153.294 420.88 154.838 421.486 156.276C422.092 157.715 422.975 159.019 424.086 160.116C425.196 161.213 426.512 162.08 427.957 162.668C429.403 163.256 430.951 163.553 432.511 163.543C434.072 163.532 435.616 163.214 437.053 162.606C438.491 161.999 439.795 161.114 440.89 160.003L444.197 156.655Z" fill="#239CFF"/>
+                    <path d="M403.869 116.823L390.317 103.438C389.429 102.563 388.229 102.075 386.981 102.083C385.734 102.091 384.54 102.593 383.662 103.48C382.564 104.589 381.696 105.904 381.106 107.349C380.517 108.794 380.218 110.341 380.227 111.902C380.236 113.463 380.552 115.006 381.158 116.445C381.764 117.883 382.647 119.188 383.757 120.285C384.868 121.381 386.184 122.248 387.629 122.836C389.075 123.424 390.623 123.721 392.183 123.711C393.744 123.7 395.287 123.382 396.725 122.775C398.163 122.167 399.467 121.283 400.562 120.171L403.869 116.823Z" fill="#239CFF"/>
+                    <path d="M429.305 164.991L428.981 165.844C427.459 165.266 425.983 164.687 424.554 164.105C399.247 153.778 387.165 141.691 379.084 118.748L379.078 118.743C378.695 117.663 378.323 116.558 377.961 115.428L378.814 115.153C379.099 116.24 379.516 117.288 380.056 118.273C380.498 119.531 380.953 120.756 381.421 121.949C389.017 141.313 400.218 152.38 421.693 161.725C422.773 162.194 423.88 162.661 425.013 163.123C426.33 163.981 427.78 164.612 429.305 164.991Z" fill="#3F3D56"/>
+                    <path d="M390.564 125.685L389.805 126.453L417.843 154.146L418.602 153.378L390.564 125.685Z" fill="#3F3D56"/>
+                    <path d="M153.187 102.739L153.202 84.9986L142.773 85.9305L146.454 97.1194L133.094 117.371C132.259 117.558 131.496 117.985 130.899 118.598C130.302 119.212 129.896 119.986 129.731 120.826C129.566 121.666 129.649 122.536 129.97 123.33C130.291 124.124 130.836 124.807 131.539 125.296C132.241 125.786 133.071 126.06 133.927 126.086C134.783 126.112 135.627 125.888 136.358 125.442C137.089 124.996 137.675 124.347 138.043 123.575C138.411 122.802 138.547 121.938 138.433 121.09L153.187 102.739Z" fill="#FFB6B6"/>
+                    </g>
+                    <defs>
+                    <clipPath id="clip0_314_264">
+                    <rect width="482.75" height="242" fill="white"/>
+                    </clipPath>
+                    </defs>
+                  </svg>                    
+                  <h2 class="nunito text-xl font-semibold mt-10">Nenhum chamado disponível</h2>
+                  <p class="inter">Você não realizou um chamado.</p>           
+                </div>
+              <% } %>
             </div>
           </div>
         </div>
@@ -439,7 +214,3 @@
   </div>
 </body>
 </html>
-
-<script>
-  function _0x2c92(){const _0x15a07c=['classList','jjHTm','782946qrwcte','omsdj','\x20tarde.','target','innerHTML','animation:','UVcWZ','gxlyA','error','ublished','bIlJu','CWvSY','apPwN','DELETE','display','4948UrBQnO','Insira\x20um\x20','hiVqP','gfxkd','post/updat','/Bulk/erro','#day','style','1021614liunFn','uHaOu','PkEXb','ouaFb','hIFPw','hZdlI','change','PUT','pQmaR','ortada\x20com','display:\x20n','flex','published/','iGCHm','ZoxaQ','FzmpW','ROKQY','Evwii','UBMAX','mente\x20mais','#div-date','\x20slideoff\x20','IeUte','dCiua','/Bulk/chec','2px\x20solid\x20','vjRfY','LROXs','tzoWW','/img/admin','remove','\x20sucesso.','cess','then','tvNbB','MWeip','img','.alert','/platform/','haWzk','zFdnZ','rHqOg','ifOuK','2s;','Tente\x20mais','blicação.','aqQwu','LGxsp','lgGag','yxPzZ','all-posts/','schedule-i','stringify','append','KeFiP','8RqLOJM','link\x20válid','width','ppyus','vbCqg','qHdqe','OWosA','puCmp','#div-image','490SnzhJT','UJuXy','slice','khfiB','.image-suc','innerText','DqCbU','iTemK','435573gyzqOk','ZrqSF','#div-link','2MmOBVB','kExqa','Imagem\x20imp','QlRod','DCxgO','gNHZF','#link-sche','add','qHvOZ','kgoMY','EjcMb','kuIEQ','#image','#popup_del','#content-s','#content-p','zjXUY','#popup_edi','PTaZN','applicatio','irIvr','addEventLi','valueAsDat','OisbH','mage/','Itihe','hbTBx','ualizar\x20pu','KaUiM','files','njuSp','#e00d0d','btcSX','ent','ogiTT','image','BFAer','PFGjH','e-image/','.error','Tente\x20nova','rGDXP','QBKjq','IyfsY','ZvzKw','schedule-l','reload','rSTcu','edit-post-','delete-pos','link','appendChil','Klwcg','hZfTj','sAkYA','stener','ete','ZKmzh','tor','STYWh','querySelec','#hour','\x20tarde','qRHMM','r.png','t_publishe','hidden','success','ink/','JIneM','createElem','chedule','value','LjblS','border','dqHhk','test','224280TpNyFY','push','tify','KuhOu','Erro\x20ao\x20at','buRmp','dule','n/json','XIVjE','24952EhRugb','urWZW','ked.png','AdkQU','NUBor','fhnLN','NPqoy','#files','phcDA','Dqfft','length','src','MMtoP','rXNpV','BZHvJ','catch','message-no','rywIL','height','OklCf','1881971XOUNGm','one'];_0x2c92=function(){return _0x15a07c;};return _0x2c92();}const _0x1ff5b8=_0x209f;(function(_0x1af4e0,_0x2dae37){const _0x401af4=_0x209f,_0x220999=_0x1af4e0();while(!![]){try{const _0x2d1710=-parseInt(_0x401af4(0x1d6))/(0x8e*-0x1+0x24ca+-0x173*0x19)*(parseInt(_0x401af4(0x180))/(0x1fb7+0x20d2+-0x1*0x4087))+-parseInt(_0x401af4(0x17d))/(0x1e09+0x4*0x45b+-0x2f72)+-parseInt(_0x401af4(0x12d))/(-0x125b+-0x2b6*-0x2+0xcf3)*(-parseInt(_0x401af4(0x175))/(0x312+0x2bd*0xc+0x13d*-0x1d))+-parseInt(_0x401af4(0x135))/(-0xc76+0x923+0x359)+-parseInt(_0x401af4(0x11a))/(0x1c92+-0x1*0x17e4+0x3*-0x18d)*(-parseInt(_0x401af4(0x16c))/(0x16*0x106+0x9bc*0x2+-0x29f4))+parseInt(_0x401af4(0x11e))/(0x6*-0x625+0x12dc+0x120b)+parseInt(_0x401af4(0x1cd))/(0x5*-0x3ea+0xa22+-0x2*-0x4bd);if(_0x2d1710===_0x2dae37)break;else _0x220999['push'](_0x220999['shift']());}catch(_0x679604){_0x220999['push'](_0x220999['shift']());}}}(_0x2c92,-0x3e421+0x1a462+0x4ad30));let file_input=document[_0x1ff5b8(0x1bc)+_0x1ff5b8(0x1ba)](_0x1ff5b8(0x10d));const image_success=document[_0x1ff5b8(0x1bc)+_0x1ff5b8(0x1ba)](_0x1ff5b8(0x179)+_0x1ff5b8(0x155));let id,type;function alert_message(_0x3e9735,_0x1323e0){const _0x58227d=_0x1ff5b8,_0x1ea659={'jjHTm':_0x58227d(0x13f)+_0x58227d(0x11b),'tvNbB':_0x58227d(0x123)+_0x58227d(0x14a)+_0x58227d(0x160),'DCxgO':function(_0x34f8c8,_0x5d9789,_0xc6fa7b){return _0x34f8c8(_0x5d9789,_0xc6fa7b);},'pQmaR':function(_0x720786,_0x512bca,_0x4bb43c){return _0x720786(_0x512bca,_0x4bb43c);},'rywIL':function(_0x45d3de,_0x1e0a6d){return _0x45d3de==_0x1e0a6d;},'UJuXy':_0x58227d(0x126),'OklCf':_0x58227d(0x1a7),'uHaOu':_0x58227d(0x140),'kgoMY':_0x58227d(0x159),'LROXs':_0x58227d(0x152)+_0x58227d(0x132)+_0x58227d(0x1c0),'UBMAX':_0x58227d(0x116)+_0x58227d(0x1cf),'tzoWW':function(_0x5f32ac,_0x16d795){return _0x5f32ac==_0x16d795;},'lgGag':_0x58227d(0x1c3),'rXNpV':_0x58227d(0x15a),'sAkYA':_0x58227d(0x152)+_0x58227d(0x14d)+_0x58227d(0x1d8)};if(_0x1ea659[_0x58227d(0x117)](_0x3e9735,_0x1ea659[_0x58227d(0x176)])){const _0x17988b=document[_0x58227d(0x1bc)+_0x58227d(0x1ba)](_0x1ea659[_0x58227d(0x119)]);_0x17988b[_0x58227d(0x134)][_0x58227d(0x12c)]=_0x1ea659[_0x58227d(0x136)],_0x17988b[_0x58227d(0x122)]='';const _0x3e6d03=document[_0x58227d(0x1c6)+_0x58227d(0x1a1)]('p'),_0x4909f1=document[_0x58227d(0x1c6)+_0x58227d(0x1a1)](_0x1ea659[_0x58227d(0x189)]);_0x4909f1[_0x58227d(0x16e)]='28',_0x4909f1[_0x58227d(0x118)]='28',_0x4909f1[_0x58227d(0x111)]=_0x1ea659[_0x58227d(0x150)],_0x3e6d03[_0x58227d(0x11c)][_0x58227d(0x187)](_0x1ea659[_0x58227d(0x147)]),_0x3e6d03[_0x58227d(0x17a)]=_0x1323e0,_0x17988b[_0x58227d(0x1b3)+'d'](_0x4909f1),_0x17988b[_0x58227d(0x1b3)+'d'](_0x3e6d03),_0x1ea659[_0x58227d(0x184)](setTimeout,()=>{const _0x1f1eb0=_0x58227d,_0x5d2c90={'rSTcu':_0x1ea659[_0x1f1eb0(0x11d)]};_0x17988b[_0x1f1eb0(0x134)]=_0x1ea659[_0x1f1eb0(0x157)],_0x1ea659[_0x1f1eb0(0x184)](setTimeout,()=>{const _0x482b06=_0x1f1eb0;_0x17988b[_0x482b06(0x134)]=_0x5d2c90[_0x482b06(0x1af)];},0x14*-0x15d+0x2b5*-0x6+0x2ea2);},0x21e*0x7+0xe3f*-0x1+0x73d);}else{if(_0x1ea659[_0x58227d(0x151)](_0x3e9735,_0x1ea659[_0x58227d(0x165)])){const _0x92ceb0=document[_0x58227d(0x1bc)+_0x58227d(0x1ba)](_0x1ea659[_0x58227d(0x113)]);_0x92ceb0[_0x58227d(0x134)][_0x58227d(0x12c)]=_0x1ea659[_0x58227d(0x136)],_0x92ceb0[_0x58227d(0x122)]='';const _0x4616f8=document[_0x58227d(0x1c6)+_0x58227d(0x1a1)]('p'),_0xcb1b8e=document[_0x58227d(0x1c6)+_0x58227d(0x1a1)](_0x1ea659[_0x58227d(0x189)]);_0xcb1b8e[_0x58227d(0x16e)]='28',_0xcb1b8e[_0x58227d(0x118)]='28',_0xcb1b8e[_0x58227d(0x111)]=_0x1ea659[_0x58227d(0x1b6)],_0x4616f8[_0x58227d(0x11c)][_0x58227d(0x187)](_0x1ea659[_0x58227d(0x147)]),_0x4616f8[_0x58227d(0x17a)]=_0x1323e0,_0x92ceb0[_0x58227d(0x1b3)+'d'](_0xcb1b8e),_0x92ceb0[_0x58227d(0x1b3)+'d'](_0x4616f8),_0x1ea659[_0x58227d(0x13d)](setTimeout,()=>{const _0x27c063=_0x58227d,_0x2ff85b={'dCiua':_0x1ea659[_0x27c063(0x11d)]};_0x92ceb0[_0x27c063(0x134)]=_0x1ea659[_0x27c063(0x157)],_0x1ea659[_0x27c063(0x13d)](setTimeout,()=>{const _0xf7c6e0=_0x27c063;_0x92ceb0[_0xf7c6e0(0x134)]=_0x2ff85b[_0xf7c6e0(0x14c)];},0xd18+0x655+-0x104d);},0x2031+0x16d6*-0x1+-0x18b);}}}function _0x209f(_0x808275,_0x49edb7){const _0x4dc905=_0x2c92();return _0x209f=function(_0x493ad6,_0x5ad8e4){_0x493ad6=_0x493ad6-(0x20cb+-0x1fa4+-0x1d*0x1);let _0x18d4e4=_0x4dc905[_0x493ad6];return _0x18d4e4;},_0x209f(_0x808275,_0x49edb7);}const handle_file_preview=_0x2aed6a=>{const _0x52e415=_0x1ff5b8,_0x251188={'KaUiM':function(_0x5a8c12,_0x4d6f11,_0x38c469){return _0x5a8c12(_0x4d6f11,_0x38c469);},'apPwN':_0x52e415(0x1c3),'haWzk':_0x52e415(0x182)+_0x52e415(0x13e)+_0x52e415(0x154),'dqHhk':_0x52e415(0x126),'gNHZF':_0x52e415(0x1a8)+_0x52e415(0x148)+_0x52e415(0x120),'LGxsp':_0x52e415(0x1a3),'hiVqP':function(_0x479b1a,_0x5825bf,_0x4c107c){return _0x479b1a(_0x5825bf,_0x4c107c);},'KeFiP':function(_0x2afa84,_0x36959e){return _0x2afa84+_0x36959e;},'buRmp':_0x52e415(0x15b)+_0x52e415(0x131)+_0x52e415(0x1a6),'CWvSY':_0x52e415(0x13c)};let _0x3146ca=_0x2aed6a[_0x52e415(0x121)][_0x52e415(0x19d)],_0x76fa8e=_0x3146ca[_0x52e415(0x110)];const _0x351b27=new FormData();return _0x351b27[_0x52e415(0x16a)](_0x251188[_0x52e415(0x164)],_0x3146ca[-0xd3b+0xedd+-0x1a2]),_0x251188[_0x52e415(0x12f)](fetch,_0x251188[_0x52e415(0x16b)](_0x251188[_0x52e415(0x1d2)],id),{'method':_0x251188[_0x52e415(0x129)],'body':_0x351b27})[_0x52e415(0x156)](_0x1fc5fc=>{const _0x4908b6=_0x52e415;_0x1fc5fc['ok']&&_0x251188[_0x4908b6(0x19c)](alert_message,_0x251188[_0x4908b6(0x12a)],_0x251188[_0x4908b6(0x15c)]);})[_0x52e415(0x115)](_0xa0de64=>{const _0x2d8d0f=_0x52e415;_0x251188[_0x2d8d0f(0x19c)](alert_message,_0x251188[_0x2d8d0f(0x1cb)],_0x251188[_0x2d8d0f(0x185)]);});};file_input[_0x1ff5b8(0x195)+_0x1ff5b8(0x1b7)](_0x1ff5b8(0x13b),handle_file_preview);function openEditSchedule(_0x543b64,_0x2a6977,_0x356eb9,_0x32c6b6,_0x5526b9,_0xf554a4){const _0x45b86a=_0x1ff5b8,_0xce6ad6={'DqCbU':_0x45b86a(0x191)+'t','ZKmzh':_0x45b86a(0x18e)+_0x45b86a(0x1c7),'qHdqe':_0x45b86a(0x17f),'ouaFb':_0x45b86a(0x174),'yxPzZ':_0x45b86a(0x149),'urWZW':_0x45b86a(0x186)+_0x45b86a(0x1d3),'vbCqg':_0x45b86a(0x18c),'hZfTj':_0x45b86a(0x133),'hIFPw':_0x45b86a(0x1bd),'Klwcg':function(_0x1ea9a0,_0x184236){return _0x1ea9a0>_0x184236;},'phcDA':_0x45b86a(0x1c2),'omsdj':_0x45b86a(0x1b2),'kuIEQ':_0x45b86a(0x1a3)},_0x4cebd0=document[_0x45b86a(0x1bc)+_0x45b86a(0x1ba)](_0xce6ad6[_0x45b86a(0x17b)]),_0xe2d258=document[_0x45b86a(0x1bc)+_0x45b86a(0x1ba)](_0xce6ad6[_0x45b86a(0x1b9)]),_0x31072c=document[_0x45b86a(0x1bc)+_0x45b86a(0x1ba)](_0xce6ad6[_0x45b86a(0x171)]),_0x2ee509=document[_0x45b86a(0x1bc)+_0x45b86a(0x1ba)](_0xce6ad6[_0x45b86a(0x138)]),_0xea3f9e=document[_0x45b86a(0x1bc)+_0x45b86a(0x1ba)](_0xce6ad6[_0x45b86a(0x166)]),_0x30c972=document[_0x45b86a(0x1bc)+_0x45b86a(0x1ba)](_0xce6ad6[_0x45b86a(0x1d7)]),_0x16e2e4=document[_0x45b86a(0x1bc)+_0x45b86a(0x1ba)](_0xce6ad6[_0x45b86a(0x170)]),_0x1b1003=document[_0x45b86a(0x1bc)+_0x45b86a(0x1ba)](_0xce6ad6[_0x45b86a(0x1b5)]),_0x5a01cf=document[_0x45b86a(0x1bc)+_0x45b86a(0x1ba)](_0xce6ad6[_0x45b86a(0x139)]);_0xe2d258[_0x45b86a(0x1c8)]=_0x2a6977,id=_0x543b64;_0xce6ad6[_0x45b86a(0x1b4)](_0x356eb9[_0x45b86a(0x110)],-0x969+0x1049+-0x6df)?(_0x30c972[_0x45b86a(0x1c8)]=_0x356eb9,_0x2ee509[_0x45b86a(0x11c)][_0x45b86a(0x187)](_0xce6ad6[_0x45b86a(0x10e)]),type=_0xce6ad6[_0x45b86a(0x11f)]):(_0x31072c[_0x45b86a(0x11c)][_0x45b86a(0x187)](_0xce6ad6[_0x45b86a(0x10e)]),type=_0xce6ad6[_0x45b86a(0x18b)]);if(_0x32c6b6){_0xea3f9e[_0x45b86a(0x11c)][_0x45b86a(0x153)](_0xce6ad6[_0x45b86a(0x10e)]);const _0x2b8d5a=new Date(_0x5526b9[_0x45b86a(0x177)](-0x12*0xa9+-0x1d*-0x139+-0x178d,0x143*-0x19+-0x113f+0x19*0x1f4)+'-'+_0x5526b9[_0x45b86a(0x177)](0x227*0xd+-0x244d*0x1+0x1b*0x4f,-0x1c31+0x73+0x1bc3)+'-'+_0x5526b9[_0x45b86a(0x177)](0x3*-0x41d+0x61f*0x4+-0xc25,0x59*-0x11+0x8cb*-0x1+-0x75b*-0x2));_0x1b1003[_0x45b86a(0x196)+'e']=_0x2b8d5a,_0x5a01cf[_0x45b86a(0x1c8)]=_0xf554a4;}else _0xea3f9e[_0x45b86a(0x11c)][_0x45b86a(0x187)](_0xce6ad6[_0x45b86a(0x10e)]);_0x4cebd0[_0x45b86a(0x11c)][_0x45b86a(0x153)](_0xce6ad6[_0x45b86a(0x10e)]);}function openEditPublished(_0x102bed,_0x1fcd59){const _0x5de236=_0x1ff5b8,_0x473d00={'kExqa':_0x5de236(0x191)+_0x5de236(0x1c1)+'d','rHqOg':_0x5de236(0x18f)+_0x5de236(0x127),'MWeip':_0x5de236(0x1c2)},_0x2ba353=document[_0x5de236(0x1bc)+_0x5de236(0x1ba)](_0x473d00[_0x5de236(0x181)]),_0x57bb2f=document[_0x5de236(0x1bc)+_0x5de236(0x1ba)](_0x473d00[_0x5de236(0x15e)]);_0x57bb2f[_0x5de236(0x1c8)]=_0x1fcd59,id=_0x102bed,_0x2ba353[_0x5de236(0x11c)][_0x5de236(0x153)](_0x473d00[_0x5de236(0x158)]);}function closeEditPublished(){const _0x2adb40=_0x1ff5b8,_0x36e0b0={'BFAer':_0x2adb40(0x191)+_0x2adb40(0x1c1)+'d','UVcWZ':_0x2adb40(0x1c2)},_0x4bfeda=document[_0x2adb40(0x1bc)+_0x2adb40(0x1ba)](_0x36e0b0[_0x2adb40(0x1a4)]);_0x4bfeda[_0x2adb40(0x11c)][_0x2adb40(0x187)](_0x36e0b0[_0x2adb40(0x124)]);}function openDelete(_0x104b39){const _0x2ce144=_0x1ff5b8,_0x31e9d1={'zFdnZ':_0x2ce144(0x18d)+_0x2ce144(0x1b8),'hZdlI':_0x2ce144(0x1c2)},_0x44f08e=document[_0x2ce144(0x1bc)+_0x2ce144(0x1ba)](_0x31e9d1[_0x2ce144(0x15d)]);id=_0x104b39,_0x44f08e[_0x2ce144(0x11c)][_0x2ce144(0x153)](_0x31e9d1[_0x2ce144(0x13a)]);}function closeEditSchedule(){const _0x284a5a=_0x1ff5b8,_0x3cd553={'OisbH':_0x284a5a(0x191)+'t','MMtoP':_0x284a5a(0x17f),'njuSp':_0x284a5a(0x174),'ZoxaQ':_0x284a5a(0x149),'Dqfft':_0x284a5a(0x1c2)},_0x1b6ab8=document[_0x284a5a(0x1bc)+_0x284a5a(0x1ba)](_0x3cd553[_0x284a5a(0x197)]),_0x2d2e9d=document[_0x284a5a(0x1bc)+_0x284a5a(0x1ba)](_0x3cd553[_0x284a5a(0x112)]),_0x16a43c=document[_0x284a5a(0x1bc)+_0x284a5a(0x1ba)](_0x3cd553[_0x284a5a(0x19e)]),_0x31fbd9=document[_0x284a5a(0x1bc)+_0x284a5a(0x1ba)](_0x3cd553[_0x284a5a(0x143)]);_0x2d2e9d[_0x284a5a(0x11c)][_0x284a5a(0x153)](_0x3cd553[_0x284a5a(0x10f)]),_0x16a43c[_0x284a5a(0x11c)][_0x284a5a(0x153)](_0x3cd553[_0x284a5a(0x10f)]),_0x16a43c[_0x284a5a(0x11c)][_0x284a5a(0x153)](_0x3cd553[_0x284a5a(0x10f)]),_0x1b6ab8[_0x284a5a(0x11c)][_0x284a5a(0x187)](_0x3cd553[_0x284a5a(0x10f)]);}function closeDel(){const _0x8bc739=_0x1ff5b8,_0x18b371={'IyfsY':_0x8bc739(0x18d)+_0x8bc739(0x1b8),'PkEXb':_0x8bc739(0x1c2)},_0x1800f8=document[_0x8bc739(0x1bc)+_0x8bc739(0x1ba)](_0x18b371[_0x8bc739(0x1ab)]);_0x1800f8[_0x8bc739(0x11c)][_0x8bc739(0x187)](_0x18b371[_0x8bc739(0x137)]);}function deletePost(){const _0x29b647=_0x1ff5b8,_0x1e477d={'KuhOu':function(_0x386a8f,_0x5d9629,_0x1085cc){return _0x386a8f(_0x5d9629,_0x1085cc);},'XIVjE':_0x29b647(0x126),'AdkQU':_0x29b647(0x161)+_0x29b647(0x1be),'khfiB':function(_0x184e53,_0x5df5c2,_0x4fb62e){return _0x184e53(_0x5df5c2,_0x4fb62e);},'ogiTT':function(_0x45845a,_0x45e480){return _0x45845a+_0x45e480;},'aqQwu':_0x29b647(0x15b)+_0x29b647(0x167)+_0x29b647(0x1b1)+'t/','EjcMb':_0x29b647(0x12b)};_0x1e477d[_0x29b647(0x178)](fetch,_0x1e477d[_0x29b647(0x1a2)](_0x1e477d[_0x29b647(0x163)],id),{'method':_0x1e477d[_0x29b647(0x18a)]})[_0x29b647(0x156)](_0x4bfbe8=>{const _0x262d95=_0x29b647;location[_0x262d95(0x1ae)]();})[_0x29b647(0x115)](_0x347d7c=>{const _0x41b20c=_0x29b647;_0x1e477d[_0x41b20c(0x1d0)](alert_message,_0x1e477d[_0x41b20c(0x1d5)],_0x1e477d[_0x41b20c(0x1d9)]);});}function editPostSchedule(){const _0x422698=_0x1ff5b8,_0x11b68c={'zjXUY':function(_0x421f2c,_0x1f55e4,_0x330c63){return _0x421f2c(_0x1f55e4,_0x330c63);},'ZrqSF':_0x422698(0x126),'irIvr':_0x422698(0x1d1)+_0x422698(0x19b)+_0x422698(0x162),'gxlyA':_0x422698(0x1a8)+_0x422698(0x148)+_0x422698(0x120),'qHvOZ':_0x422698(0x18e)+_0x422698(0x1c7),'NPqoy':_0x422698(0x186)+_0x422698(0x1d3),'ROKQY':_0x422698(0x133),'ifOuK':_0x422698(0x1bd),'btcSX':function(_0x5ddd07,_0x2fb039){return _0x5ddd07==_0x2fb039;},'FzmpW':_0x422698(0x14e)+_0x422698(0x19f),'qRHMM':_0x422698(0x1b2),'PTaZN':function(_0x4150b5,_0x83cdb0){return _0x4150b5(_0x83cdb0);},'JIneM':_0x422698(0x12e)+_0x422698(0x16d)+'o','rGDXP':function(_0x5ea05d,_0x1d4874,_0x396d93){return _0x5ea05d(_0x1d4874,_0x396d93);},'Evwii':function(_0x5c45cd,_0x40e80e){return _0x5c45cd+_0x40e80e;},'NUBor':_0x422698(0x15b)+_0x422698(0x167)+_0x422698(0x1b0)+_0x422698(0x1ad)+_0x422698(0x1c4),'PFGjH':_0x422698(0x13c),'puCmp':_0x422698(0x193)+_0x422698(0x1d4),'IeUte':_0x422698(0x1a3),'iTemK':function(_0x5d3eac,_0x35b7d0,_0x584781){return _0x5d3eac(_0x35b7d0,_0x584781);},'fhnLN':function(_0x139f55,_0x4607f4){return _0x139f55+_0x4607f4;},'bIlJu':_0x422698(0x15b)+_0x422698(0x167)+_0x422698(0x1b0)+_0x422698(0x168)+_0x422698(0x198)},_0x207e08=document[_0x422698(0x1bc)+_0x422698(0x1ba)](_0x11b68c[_0x422698(0x188)]),_0x408683=document[_0x422698(0x1bc)+_0x422698(0x1ba)](_0x11b68c[_0x422698(0x10c)]),_0x484376=document[_0x422698(0x1bc)+_0x422698(0x1ba)](_0x11b68c[_0x422698(0x145)]),_0x4b1540=document[_0x422698(0x1bc)+_0x422698(0x1ba)](_0x11b68c[_0x422698(0x15f)]),_0x585fb3=[],_0x3236d0=/^(http|https):\/\/[a-zA-Z0-9\-\.]+\.[a-zA-Z]{2,}(\/\S*)?$/;if(_0x11b68c[_0x422698(0x1a0)](_0x207e08[_0x422698(0x1c8)][_0x422698(0x110)],-0x1705+0x1*-0x4bf+-0xde2*-0x2)){_0x207e08[_0x422698(0x134)][_0x422698(0x1ca)]=_0x11b68c[_0x422698(0x144)];return;}if(_0x11b68c[_0x422698(0x1a0)](_0x484376[_0x422698(0x1c8)],'')){_0x484376[_0x422698(0x134)][_0x422698(0x1ca)]=_0x11b68c[_0x422698(0x144)];return;}if(_0x11b68c[_0x422698(0x1a0)](_0x4b1540[_0x422698(0x1c8)],'')){_0x4b1540[_0x422698(0x134)][_0x422698(0x1ca)]=_0x11b68c[_0x422698(0x144)];return;}if(_0x11b68c[_0x422698(0x1a0)](type,_0x11b68c[_0x422698(0x1bf)])){if(_0x11b68c[_0x422698(0x1a0)](_0x3236d0[_0x422698(0x1cc)](_0x408683[_0x422698(0x1c8)]),![])){_0x11b68c[_0x422698(0x192)](alert_message,_0x11b68c[_0x422698(0x1c5)]);return;}_0x11b68c[_0x422698(0x1a9)](fetch,_0x11b68c[_0x422698(0x146)](_0x11b68c[_0x422698(0x10a)],id),{'method':_0x11b68c[_0x422698(0x1a5)],'headers':{'Content-Type':_0x11b68c[_0x422698(0x173)]},'body':JSON[_0x422698(0x169)]({'content':_0x207e08[_0x422698(0x1c8)],'day':_0x484376[_0x422698(0x1c8)],'hour':_0x4b1540[_0x422698(0x1c8)],'link':_0x408683[_0x422698(0x1c8)]})})[_0x422698(0x156)](_0x10491b=>{const _0x27ba6c=_0x422698;_0x10491b['ok']?location[_0x27ba6c(0x1ae)]():_0x11b68c[_0x27ba6c(0x190)](alert_message,_0x11b68c[_0x27ba6c(0x17e)],_0x11b68c[_0x27ba6c(0x194)]);})[_0x422698(0x115)](_0x4b1632=>{const _0x285366=_0x422698;_0x11b68c[_0x285366(0x190)](alert_message,_0x11b68c[_0x285366(0x17e)],_0x11b68c[_0x285366(0x125)]);});}else _0x11b68c[_0x422698(0x1a0)](type,_0x11b68c[_0x422698(0x14b)])&&_0x11b68c[_0x422698(0x17c)](fetch,_0x11b68c[_0x422698(0x10b)](_0x11b68c[_0x422698(0x128)],id),{'method':_0x11b68c[_0x422698(0x1a5)],'headers':{'Content-Type':_0x11b68c[_0x422698(0x173)]},'body':JSON[_0x422698(0x169)]({'content':_0x207e08[_0x422698(0x1c8)],'day':_0x484376[_0x422698(0x1c8)],'hour':_0x4b1540[_0x422698(0x1c8)]})})[_0x422698(0x156)](_0x907824=>{const _0x2119ec=_0x422698;_0x907824['ok']?location[_0x2119ec(0x1ae)]():_0x11b68c[_0x2119ec(0x190)](alert_message,_0x11b68c[_0x2119ec(0x17e)],_0x11b68c[_0x2119ec(0x194)]);})[_0x422698(0x115)](_0x2f4131=>{const _0x58aaf9=_0x422698;_0x11b68c[_0x58aaf9(0x190)](alert_message,_0x11b68c[_0x58aaf9(0x17e)],_0x11b68c[_0x58aaf9(0x125)]);});}function editPostPublished(){const _0x32b229=_0x1ff5b8,_0xf401a7={'hbTBx':function(_0x432f6e,_0x18fadd,_0x5577dd){return _0x432f6e(_0x18fadd,_0x5577dd);},'BZHvJ':_0x32b229(0x126),'Itihe':_0x32b229(0x1d1)+_0x32b229(0x19b)+_0x32b229(0x162),'QlRod':function(_0x3c0294,_0x2d7c70,_0x21d791){return _0x3c0294(_0x2d7c70,_0x21d791);},'ZvzKw':_0x32b229(0x1a8)+_0x32b229(0x148)+_0x32b229(0x120),'ppyus':_0x32b229(0x18f)+_0x32b229(0x127),'OWosA':function(_0x1e22ea,_0x13fa01){return _0x1e22ea==_0x13fa01;},'LjblS':_0x32b229(0x14e)+_0x32b229(0x19f),'iGCHm':function(_0x5ab41d,_0x403c03,_0x2b8f96){return _0x5ab41d(_0x403c03,_0x2b8f96);},'QBKjq':function(_0x3c5de1,_0x120b8d){return _0x3c5de1+_0x120b8d;},'STYWh':_0x32b229(0x15b)+_0x32b229(0x167)+_0x32b229(0x1b0)+_0x32b229(0x141),'gfxkd':_0x32b229(0x13c),'vjRfY':_0x32b229(0x193)+_0x32b229(0x1d4)},_0x69eb8a=document[_0x32b229(0x1bc)+_0x32b229(0x1ba)](_0xf401a7[_0x32b229(0x16f)]),_0x331882=[];_0xf401a7[_0x32b229(0x172)](_0x69eb8a[_0x32b229(0x1c8)][_0x32b229(0x110)],-0x101*-0x25+-0x1b2f+0x19*-0x66)&&(_0x69eb8a[_0x32b229(0x134)][_0x32b229(0x1ca)]=_0xf401a7[_0x32b229(0x1c9)],_0x331882[_0x32b229(0x1ce)](_0xf401a7[_0x32b229(0x114)])),_0xf401a7[_0x32b229(0x172)](_0x331882[_0x32b229(0x110)],-0xbe1*0x3+-0xaed+-0x4*-0xba4)&&_0xf401a7[_0x32b229(0x142)](fetch,_0xf401a7[_0x32b229(0x1aa)](_0xf401a7[_0x32b229(0x1bb)],id),{'method':_0xf401a7[_0x32b229(0x130)],'headers':{'Content-Type':_0xf401a7[_0x32b229(0x14f)]},'body':JSON[_0x32b229(0x169)]({'content':_0x69eb8a[_0x32b229(0x1c8)]})})[_0x32b229(0x156)](_0x1db6d9=>{const _0x160a9a=_0x32b229;_0x1db6d9['ok']?location[_0x160a9a(0x1ae)]():_0xf401a7[_0x160a9a(0x19a)](alert_message,_0xf401a7[_0x160a9a(0x114)],_0xf401a7[_0x160a9a(0x199)]);})[_0x32b229(0x115)](_0x476a08=>{const _0x565e5c=_0x32b229;_0xf401a7[_0x565e5c(0x183)](alert_message,_0xf401a7[_0x565e5c(0x114)],_0xf401a7[_0x565e5c(0x1ac)]);});}
-</script>
