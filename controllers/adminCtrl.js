@@ -38,6 +38,10 @@ const administrators = asyncHandler(async(req, res) => {
     res.render('layouts/admin/administrators', {isAdmin: true, notifications: req.user.notifications.reverse().slice(0, 5), photo: req.user.photo, name_user: req.user.name, administrators: findAdmins})
 })
 
+const testUsers = asyncHandler(async(req, res) => {
+    res.render('layouts/admin/test-users', {isAdmin: true, notifications: req.user.notifications.reverse().slice(0, 5), photo: req.user.photo, name_user: req.user.name})
+})
+
 const technicians = asyncHandler(async(req, res) => {
     const findTechnicians = await Technician.find({})
 
@@ -260,5 +264,6 @@ module.exports = {
     saveAdmin,
     updateCompany,
     newTest,
-    invoices
+    invoices,
+    testUsers
 }

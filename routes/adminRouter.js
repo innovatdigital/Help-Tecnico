@@ -16,6 +16,7 @@ const {
   allCalls,
   allReports,
   administrators,
+  testUsers,
   viewCall,
   allCompanies,
   allSuppliers,
@@ -54,6 +55,7 @@ router.get("/", authMiddleware, dashboard)
 router.get("/all-calls", authMiddleware, allCalls)
 router.get("/all-reports", authMiddleware, allReports)
 router.get("/administrators", authMiddleware, administrators)
+router.get("/test-users", authMiddleware, testUsers)
 router.get("/technicians", authMiddleware, technicians)
 router.get("/view-call/:id", authMiddleware, viewCall)
 router.get("/all-companies", authMiddleware, allCompanies)

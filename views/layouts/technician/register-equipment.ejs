@@ -1,17 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Help Técnico | Novo chamado</title>
-  <link rel="shortcut icon" href="/img/login/icon.png" type="image/x-icon">
-  <!-- Custom styles -->
-  <link rel="stylesheet" href="/css/platform/style.css">
-  <link rel="stylesheet" href="/css/platform/notify.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/1.8.12/tailwind-experimental.min.css">
-</head>
+<%- include('../partials/head', {title: "title"}) %>
 
 <body>
   <%- include('../partials/technician/sidebar-technician') %>
@@ -79,7 +69,7 @@
                           </div>
 
                           <div class="flex items-center">
-                            <button onclick="openFunction('<%= item._id %>')" class="rounded-full bg-blue-100 px-2 py-1 border-blue nunito font-semibold">Selecionar</button>
+                            <button onclick="openFunction('<%= item._id %>')" class="rounded-full bg-blue-100 px-2 py-1 border-blue inter font-semibold">Selecionar</button>
                           </div>
                         </div>
                       </li>
@@ -175,7 +165,7 @@
                 </div>
 
                 <div class="mt-8">
-                  <button onclick="saveEquipment()" class="w-full p-2 bg-blue nunito text-white font-semibold rounded-lg">Cadastrar equipamento</button>
+                  <button onclick="saveEquipment()" class="w-full p-2 bg-blue inter text-white font-semibold rounded-lg">Cadastrar equipamento</button>
                 </div>
               </div>
             </div>

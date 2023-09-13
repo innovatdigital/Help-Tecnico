@@ -27,7 +27,8 @@ const Report = new mongoose.Schema({
     },
     },
     {
-        versionKey: false,
+        timestamps: true,
+        versionKey: false
     }
 )
 

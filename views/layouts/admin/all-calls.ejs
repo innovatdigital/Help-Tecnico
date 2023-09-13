@@ -1,17 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Help Técnico | Todos os chamados</title>
-  <link rel="shortcut icon" href="/img/login/icon.png" type="image/x-icon">
-  <!-- Custom styles -->
-  <link rel="stylesheet" href="/css/platform/style.css">
-  <link rel="stylesheet" href="/css/platform/notify.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/1.8.12/tailwind-experimental.min.css">
-</head>
+<%- include('../partials/head', {title: "title"}) %>
 
 <body>
   <%- include('../partials/admin/sidebar-admin', {isAdmin: isAdmin}) %>
@@ -38,16 +28,16 @@
                   <table class="min-w-full divide-y divide-gray-300">
                     <thead class="bg-gray-50">
                       <tr>
-                        <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 nunito">ID</th>
-                        <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 nunito">Empresa</th>
-                        <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 nunito">Mensagem</th>
-                        <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 nunito">Data</th>
-                        <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 nunito">SLA</th>
-                        <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 nunito">Início em</th>
-                        <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 nunito">Término em</th>
-                        <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 nunito">Status</th>
-                        <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 nunito">Técnico</th>
-                        <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 nunito">Ações</th>
+                        <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 inter">ID</th>
+                        <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 inter">Empresa</th>
+                        <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 inter">Mensagem</th>
+                        <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 inter">Data</th>
+                        <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 inter">SLA</th>
+                        <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 inter">Início em</th>
+                        <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 inter">Término em</th>
+                        <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 inter">Status</th>
+                        <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 inter">Técnico</th>
+                        <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 inter">Ações</th>
                       </tr>
                     </thead>
   
@@ -58,49 +48,49 @@
                             <%= item._id %>
                           </td>
 
-                          <td class="whitespace-nowrap px-3 py-4 text-sm nunito text-gray-800 font-bold">
+                          <td class="whitespace-nowrap px-3 py-4 text-sm inter text-gray-800 font-bold">
                             <div class="flex items-center mr-6">
                               <img class="h-9 w-9 rounded-full" src="/img/photos/<%= item.imageCompany %>" alt="">                                                                    
-                              <p class="nunito ml-2"><%= item.nameCompany %></p>
+                              <p class="inter ml-2"><%= item.nameCompany %></p>
                             </div>
                           </td>
   
-                          <td class="whitespace-nowrap px-3 py-4 text-sm nunito text-gray-800 font-bold">
+                          <td class="whitespace-nowrap px-3 py-4 text-sm inter text-gray-800 font-bold">
                             <%= item.description %>
                           </td>
   
-                          <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 nunito color-purple font-semibold"><%= item.date %></td>
+                          <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 inter color-purple font-semibold"><%= item.date %></td>
   
                           <% if (item.status == "pending") { %>
-                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 nunito color-purple font-semibold">Não iniciado</td>
+                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 inter color-purple font-semibold">Não iniciado</td>
                           <% } else if (item.status == "in-attendance") { %>
-                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 nunito color-purple font-semibold"><%= item.sla %> (contando)</td>
+                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 inter color-purple font-semibold"><%= item.sla %> (contando)</td>
                           <% } else if (item.status == "concluded") { %>
-                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 nunito color-purple font-semibold"><%= item.sla %></td>
+                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 inter color-purple font-semibold"><%= item.sla %></td>
                           <% } %>
   
                           <% if (item.status == "pending") { %>
-                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 nunito color-purple font-semibold">
-                              <p class="nunito font-bold">Aguardando</p>
+                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 inter color-purple font-semibold">
+                              <p class="inter font-bold">Aguardando</p>
                             </td>
                           <% } else { %>
-                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 nunito color-purple font-semibold">
-                              <p class="nunito font-bold"><%= item.start_time %></p>
+                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 inter color-purple font-semibold">
+                              <p class="inter font-bold"><%= item.start_time %></p>
                             </td>
                           <% } %>
   
                           <% if (item.status == "pending") { %>
-                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 nunito color-purple font-semibold">
-                              <p class="nunito font-bold">Aguardando</p>
+                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 inter color-purple font-semibold">
+                              <p class="inter font-bold">Aguardando</p>
                             </td>
                           <% } else { %>
-                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 nunito color-purple font-semibold">
-                              <p class="nunito font-bold"><%= item.end_time %></p>
+                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 inter color-purple font-semibold">
+                              <p class="inter font-bold"><%= item.end_time %></p>
                             </td>
                           <% } %>
   
                           <% if (item.status == "pending") { %>
-                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 nunito color-purple font-semibold">
+                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 inter color-purple font-semibold">
                               <div class="flex items-center justify-end gap-x-2 sm:justify-start">
                                 <div class="flex-none rounded-full p-1 text-yellow-400 bg-yellow-opacity">
                                   <div class="h-1.5 w-1.5 rounded-full bg-current"></div>
@@ -109,7 +99,7 @@
                               </div>
                             </td>
   
-                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 nunito color-purple">
+                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 inter color-purple">
                               <div class="flex items-center mr-6">
                                 <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
                                   <g clip-path="url(#clip0_281_44)">
@@ -126,7 +116,7 @@
                               </div>
                             </td>
                           <% } else if (item.status == "in-attendance") { %>
-                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 nunito color-purple font-semibold">
+                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 inter color-purple font-semibold">
                               <div class="flex items-center justify-end gap-x-2 sm:justify-start">
                                 <div class="flex-none rounded-full p-1 text-green-400 bg-green-opacity">
                                   <div class="h-1.5 w-1.5 rounded-full bg-current"></div>
@@ -134,14 +124,14 @@
                                 <div class="hidden text-green-400 sm:block font-bold">Em atendimento</div>
                               </div>
                             </td>
-                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 nunito color-purple">
+                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 inter color-purple">
                               <div class="flex items-center mr-6">
                                 <img class="h-8 rounded-full" src="https://pps.whatsapp.net/v/t61.24694-24/309612029_1303621463511201_2184499647973530355_n.jpg?ccb=11-4&oh=01_AdTLj4igz1k4OkKVwtf5wwXyceqwcgJlQGxo3JG6sDOlTQ&oe=64B44F62">
                                 <p class="inter ml-2">Anderson Moreira</p>
                               </div>
                             </td>
                           <% } else if (item.status == "concluded") { %>
-                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 nunito color-purple font-semibold">
+                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 inter color-purple font-semibold">
                               <div class="flex items-center justify-end gap-x-2 sm:justify-start">
                                 <div class="flex-none rounded-full p-1 text-blue-600 bg-blue-opacity">
                                   <div class="h-1.5 w-1.5 rounded-full bg-current"></div>
@@ -149,7 +139,7 @@
                                 <div class="hidden text-blue-600 sm:block">Concluído</div>
                               </div>
                             </td>
-                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 nunito color-purple">
+                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 inter color-purple">
                               <div class="flex items-center mr-6">
                                 <img class="h-8 rounded-full" src="https://pps.whatsapp.net/v/t61.24694-24/309612029_1303621463511201_2184499647973530355_n.jpg?ccb=11-4&oh=01_AdTLj4igz1k4OkKVwtf5wwXyceqwcgJlQGxo3JG6sDOlTQ&oe=64B44F62">
                                 <p class="inter ml-2">Anderson Moreira</p>
@@ -157,7 +147,7 @@
                             </td>
                           <% } %>
   
-                          <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 nunito color-purple font-semibold">
+                          <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 inter color-purple font-semibold">
                             <a href="/admin/view-call/<%= item._id %>" class="flex items-center">
                               <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" class="mr-2">
                                 <path opacity="0.5" d="M2.73038 12.7463C2.0221 11.8262 1.66797 11.3661 1.66797 9.99992C1.66797 8.63375 2.0221 8.17369 2.73038 7.25353C4.1446 5.41622 6.51639 3.33325 10.0013 3.33325C13.4862 3.33325 15.858 5.41622 17.2722 7.25353C17.9805 8.17369 18.3346 8.63375 18.3346 9.99992C18.3346 11.3661 17.9805 11.8262 17.2722 12.7463C15.858 14.5836 13.4862 16.6666 10.0013 16.6666C6.51639 16.6666 4.1446 14.5836 2.73038 12.7463Z" stroke="#0E1726" stroke-width="1.25"/>
@@ -213,7 +203,7 @@
                     </clipPath>
                     </defs>
                   </svg>                    
-                  <h2 class="nunito text-xl font-semibold mt-10">Nenhum chamado disponível</h2>
+                  <h2 class="inter text-xl font-semibold mt-10">Nenhum chamado disponível</h2>
                   <p class="inter">Nenhuma empresa realizou um chamado.</p>           
                 </div>
               <% } %>

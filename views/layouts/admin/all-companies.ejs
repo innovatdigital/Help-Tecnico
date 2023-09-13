@@ -1,17 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Help Técnico | Todas as empresas</title>
-  <link rel="shortcut icon" href="/img/login/icon.png" type="image/x-icon">
-  <!-- Custom styles -->
-  <link rel="stylesheet" href="/css/platform/style.css">
-  <link rel="stylesheet" href="/css/platform/notify.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/1.8.12/tailwind-experimental.min.css">
-</head>
+<%- include('../partials/head', {title: "title"}) %>
 
 <body>
   <%- include('../partials/admin/sidebar-admin', {isAdmin: isAdmin}) %>
@@ -38,13 +28,13 @@
                   <table class="min-w-full divide-y divide-gray-300">
                     <thead class="bg-gray-50">
                       <tr>
-                        <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 nunito">Empresa</th>
-                        <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 nunito">CNPJ</th>
-                        <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 nunito">Telefone (Empresa)</th>
-                        <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 nunito">Email</th>
-                        <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 nunito">Data de cadastro</th>
-                        <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 nunito">Cidade</th>
-                        <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 nunito">Ações</th>
+                        <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 inter">Empresa</th>
+                        <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 inter">CNPJ</th>
+                        <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 inter">Telefone (Empresa)</th>
+                        <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 inter">Email</th>
+                        <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 inter">Data de cadastro</th>
+                        <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 inter">Cidade</th>
+                        <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 inter">Ações</th>
                       </tr>
                     </thead>
 
@@ -63,23 +53,23 @@
                                 <image id="image0_155_54" width="96" height="96" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAAACXBIWXMAAAsTAAALEwEAmpwYAAABvElEQVR4nO3ZPU7DYBCE4S0QVwEJjkoQP+IqVHAK4CJAR9CLIqWgQVvEw6438/SJZr6xHUWOMDMzMzMzMzMz+wNwCdwAr8An/X3us+4yX652WOAUeAC+Wa8tcL/rEis8/GfmeFrVCPsrf5q7WNEzf3frTrMFLqI74Ja5rqM74I25XqI74IO53qM7hovuGC66Y7jojuGiO4aL7hguumO46I7hojt1QcSf/6f3DS/ABjhf7OCXKnjo94c438K+9kOceIBaj4uNcGiSI7sDftt4gPrH0ZnvgFpXHmDt7xsOTXDEvwHLvG9guBCfjwdIeIBiHqCYByjmAYp5gGIeoNj4AdQFEFPnT3UvgJg6f6p7AcTU+VPdCyCmzp/qXgAxdf5U9wKIqfOnuhdATJ0/1b0AYur8UV2wmvp8PEDCAxTzAMU8QDEPUMwDFPMAxcYPoC6AmDp/qnsBxNT5U90LIKbOn+peADF1/lT3Aoip86e6F0BMnT/VvQBi6vyp7gUQU+eP6oLV1OfjARIeoJgHKOYBinmAYh6gmAco5gGG8/+AYh6gmAco5gGKeYBiHqCYB1j7AGZmZmZmZmZmFlP8AN3fTDc25TqSAAAAAElFTkSuQmCC"/>
                                 </defs>
                               </svg>
-                              <p class="nunito ml-2"><%= item.name %></p>
+                              <p class="inter ml-2"><%= item.name %></p>
                             </div>                                                                 
                           </td>
-                          <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 nunito">
+                          <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 inter">
                             <%= item.cnpj %>
                           </td>
-                          <td class="whitespace-nowrap px-3 py-4 text-sm nunito text-green-500 font-bold">
+                          <td class="whitespace-nowrap px-3 py-4 text-sm inter text-green-500 font-bold">
                             <%= item.phoneCompany %>
                           </td>
-                          <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 nunito color-purple font-semibold"><%= item.email %></td>
-                          <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 nunito color-purple font-semibold">
+                          <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 inter color-purple font-semibold"><%= item.email %></td>
+                          <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 inter color-purple font-semibold">
                             <%= item.date %>
                           </td>
-                          <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 nunito color-purple font-semibold">
+                          <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 inter color-purple font-semibold">
                             <%= item.city %>
                           </td>
-                          <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 nunito color-purple font-semibold">
+                          <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 inter color-purple font-semibold">
                             <a href="/admin/view-company/<%= item._id %>" class="flex items-center pointer">
                               <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" class="mr-2">
                                 <path opacity="0.5" d="M2.73038 12.7463C2.0221 11.8262 1.66797 11.3661 1.66797 9.99992C1.66797 8.63375 2.0221 8.17369 2.73038 7.25353C4.1446 5.41622 6.51639 3.33325 10.0013 3.33325C13.4862 3.33325 15.858 5.41622 17.2722 7.25353C17.9805 8.17369 18.3346 8.63375 18.3346 9.99992C18.3346 11.3661 17.9805 11.8262 17.2722 12.7463C15.858 14.5836 13.4862 16.6666 10.0013 16.6666C6.51639 16.6666 4.1446 14.5836 2.73038 12.7463Z" stroke="#0E1726" stroke-width="1.25"/>
@@ -143,7 +133,7 @@
                     </clipPath>
                     </defs>
                   </svg>                                                                                                      
-                  <h2 class="nunito text-xl font-semibold mt-10">Nenhuma empresa disponível</h2>
+                  <h2 class="inter text-xl font-semibold mt-10">Nenhuma empresa disponível</h2>
                   <p class="inter">Você precisa cadastrar uma empresa primeiro</p>           
                 </div>
               <% } %>

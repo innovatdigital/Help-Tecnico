@@ -86,7 +86,7 @@ router.post('/save-image-call', authMiddleware, upload.single('image'), function
 })
 
 
-router.get("/view-equipment/:id", authMiddleware, viewEquipment)
+router.get("/view-equipment", authMiddleware, viewEquipment)
 router.get("/view-report", authMiddleware, viewReport)
 router.get("/view-budget", authMiddleware, viewBudget)
 router.get("/notifications", authMiddleware, notifications)

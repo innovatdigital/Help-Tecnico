@@ -1,18 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Help Técnico | Novo técnico</title>
-  <link rel="shortcut icon" href="/img/login/icon.png" type="image/x-icon">
-  <!-- Custom styles -->
-  <link rel="stylesheet" href="/css/platform/style.css">
-  <link rel="stylesheet" href="/css/platform/notify.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/1.8.12/tailwind-experimental.min.css">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
-</head>
+<%- include('../partials/head', {title: "title"}) %>
 
 <body>
   <%- include('../partials/admin/sidebar-admin', {isAdmin: isAdmin}) %>
@@ -128,7 +117,7 @@
 
         <div class="bg-white rounded-xl shadow-lg border p-4 px-5 col-span-1">
           <div class="space-y-4">
-            <button type="button" onclick="saveCompany()" style="background-color: #00AB55;" class="w-full inline-flex justify-center items-center gap-x-1.5 rounded-md px-3 py-3 text-sm font-semibold text-white nunito shadow-sm">
+            <button type="button" onclick="saveCompany()" style="background-color: #00AB55;" class="w-full inline-flex justify-center items-center gap-x-1.5 rounded-md px-3 py-3 text-sm font-semibold text-white inter shadow-sm">
               <svg width="21" height="20" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <g clip-path="url(#clip0_156_9768)">
                 <path d="M3.46649 17.1132C4.68687 18.3337 6.65105 18.3337 10.5794 18.3337C14.5078 18.3337 16.472 18.3337 17.6923 17.1132C18.9128 15.8929 18.9128 13.9287 18.9128 10.0003C18.9128 9.71574 18.9128 9.57349 18.9001 9.42883C18.8413 8.75441 18.5678 8.09413 18.1325 7.57561C18.0391 7.46438 17.9361 7.3613 17.7299 7.15514L13.4246 2.84986C13.2184 2.64371 13.1153 2.54062 13.0042 2.44725C12.4856 2.01199 11.8253 1.7385 11.1509 1.67962C11.0063 1.66699 10.864 1.66699 10.5794 1.66699C6.65105 1.66699 4.68687 1.66699 3.46649 2.88738C2.24609 4.10777 2.24609 6.07195 2.24609 10.0003C2.24609 13.9287 2.24609 15.8929 3.46649 17.1132Z" stroke="white" stroke-width="1.25"/>
@@ -144,7 +133,7 @@
               Salvar
             </button>
 
-            <button type="button" style="background-color: #2196F3;" class="w-full inline-flex justify-center items-center gap-x-1.5 rounded-md px-3 py-3 text-sm font-semibold text-white nunito shadow-sm">
+            <button type="button" style="background-color: #2196F3;" class="w-full inline-flex justify-center items-center gap-x-1.5 rounded-md px-3 py-3 text-sm font-semibold text-white inter shadow-sm">
               <svg width="21" height="20" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <g clip-path="url(#clip0_156_9775)">
                 <path d="M15.3833 15.4046L17.9922 7.57843C19.0324 4.45761 19.5526 2.89719 18.7289 2.07351C17.9052 1.24982 16.3447 1.76996 13.2237 2.81023L5.44772 5.40214C3.71287 5.98041 2.84544 6.26953 2.58215 6.90563C2.52026 7.05513 2.48285 7.21363 2.47134 7.37502C2.42236 8.0617 3.0689 8.70824 4.36198 10.0012L4.59751 10.2367C4.80976 10.449 4.91587 10.5552 4.9961 10.6732C5.15432 10.9062 5.24413 11.1789 5.25536 11.4602C5.26105 11.603 5.23877 11.7514 5.19422 12.0482C5.03115 13.1347 4.94961 13.6779 5.04566 14.0959C5.23712 14.9292 5.88207 15.5832 6.71256 15.7864C7.12921 15.8883 7.67355 15.8145 8.76225 15.6667L8.82177 15.6587C9.12867 15.617 9.28216 15.5962 9.4295 15.6051C9.69691 15.6212 9.95525 15.7083 10.1779 15.8574C10.3005 15.9396 10.41 16.0491 10.629 16.2681L10.8384 16.4774C12.097 17.736 12.7262 18.3652 13.3938 18.3324C13.5778 18.3234 13.7587 18.2807 13.9273 18.2065C14.5391 17.9373 14.8205 17.0931 15.3833 15.4046Z" stroke="white" stroke-width="1.25"/>
@@ -161,8 +150,8 @@
           </div>
 
           <div class="mt-8">
-            <h2 class="text-sm nunito font-semibold">Observações internas</h2>
-            <textarea class="w-full rounded-lg border-blue text-sm mt-2 nunito p-2" name="comments" id="comments" cols="4" rows="6"><%= company.comments %></textarea>
+            <h2 class="text-sm inter font-semibold">Observações internas</h2>
+            <textarea class="w-full rounded-lg border-blue text-sm mt-2 inter p-2" name="comments" id="comments" cols="4" rows="6"><%= company.comments %></textarea>
           </div>
         </div>
       </div>

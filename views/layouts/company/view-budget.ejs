@@ -1,17 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Help Técnico | Visualizar orçamento</title>
-  <link rel="shortcut icon" href="/img/login/icon.png" type="image/x-icon">
-  <!-- Custom styles -->
-  <link rel="stylesheet" href="/css/platform/style.css">
-  <link rel="stylesheet" href="/css/platform/notify.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/1.8.12/tailwind-experimental.min.css">
-</head>
+<%- include('../partials/head', {title: "title"}) %>
 
 <body>
   <%- include('../partials/company/sidebar-company') %>
@@ -49,8 +39,8 @@
                           </div>
                         </div>
                         <div>
-                          <h1 class="text-2xl font-bold text-gray-900 nunito">Orçamento #23452</h1>
-                          <p class="text-sm font-semibold text-gray-500 nunito">Referente ao relatório: <span class="text-indigo-600 underline">#42423</span></p>
+                          <h1 class="text-2xl font-bold text-gray-900 inter">Orçamento #23452</h1>
+                          <p class="text-sm font-semibold text-gray-500 inter">Referente ao relatório: <span class="text-indigo-600 underline">#42423</span></p>
                         </div>
                       </div>
                       <div class="mt-6 flex flex-col-reverse justify-stretch space-y-4 space-y-reverse sm:flex-row-reverse sm:justify-end sm:space-x-3 sm:space-y-0 sm:space-x-reverse md:mt-0 md:flex-row md:space-x-3">
@@ -66,19 +56,19 @@
                           <div class="rounded-lg bg-gray-50 shadow-sm ring-1 ring-gray-900/5">
                             <dl class="flex flex-wrap">
                               <div class="flex-auto pl-6 pt-6">
-                                <dt class="text-sm font-semibold leading-6 text-gray-900 nunito">Valor total</dt>
+                                <dt class="text-sm font-semibold leading-6 text-gray-900 inter">Valor total</dt>
                                 <dd class="mt-1 text-base font-semibold leading-6 text-gray-900">R$440,00</dd>
                               </div>
                               <div class="flex-none self-end px-6 pt-4">
                                 <dt class="sr-only">Status</dt>
-                                <span class="inline-flex items-center rounded-md bg-yellow-100 px-2 py-1 text-xs font-medium text-yellow-800 nunito">Pendente</span>
+                                <span class="inline-flex items-center rounded-md bg-yellow-100 px-2 py-1 text-xs font-medium text-yellow-800 inter">Pendente</span>
                               </div>
                               <div class="mt-6 flex w-full flex-none gap-x-4 border-t border-gray-900/5 px-6 pt-6">
                                 <dt class="flex-none">
                                   <span class="sr-only">Client</span>
                                   <img class="h-6 w-6 rounded-full bg-gray-50" src="/img/photos/<%= photo %>" alt="">
                                 </dt>
-                                <dd class="text-sm font-medium leading-6 text-gray-900 nunito">Unimed POA (Você)</dd>
+                                <dd class="text-sm font-medium leading-6 text-gray-900 inter">Unimed POA (Você)</dd>
                               </div>
                               <div class="mt-4 flex w-full flex-none gap-x-4 px-6">
                                 <dt class="flex-none">
@@ -89,7 +79,7 @@
                                   </svg>
                                 </dt>
                                 <dd class="text-sm leading-6 text-gray-500">
-                                  <time datetime="2023-01-31 nunito">Julho 06, 2023</time>
+                                  <time datetime="2023-01-31 inter">Julho 06, 2023</time>
                                 </dd>
                               </div>
                               <div class="mt-4 flex w-full flex-none gap-x-4 px-6">
@@ -99,7 +89,7 @@
                                     <path fill-rule="evenodd" d="M2.5 4A1.5 1.5 0 001 5.5V6h18v-.5A1.5 1.5 0 0017.5 4h-15zM19 8.5H1v6A1.5 1.5 0 002.5 16h15a1.5 1.5 0 001.5-1.5v-6zM3 13.25a.75.75 0 01.75-.75h1.5a.75.75 0 010 1.5h-1.5a.75.75 0 01-.75-.75zm4.75-.75a.75.75 0 000 1.5h3.5a.75.75 0 000-1.5h-3.5z" clip-rule="evenodd" />
                                   </svg>
                                 </dt>
-                                <dd class="text-sm leading-6 text-gray-500 nunito">Pagamento via Boleto</dd>
+                                <dd class="text-sm leading-6 text-gray-500 inter">Pagamento via Boleto</dd>
                               </div>
                             </dl>
                             <div class="mt-6 border-t border-gray-900/5 px-6 py-6">
@@ -110,23 +100,23 @@
                   
                         <!-- Invoice -->
                         <div class="px-6 py-8 shadow-sm ring-1 ring-gray-900/5 sm:mx-0 sm:rounded-lg lg:col-span-2 lg:row-span-2 lg:row-end-2">
-                          <h2 class="text-base font-semibold leading-6 text-gray-900 nunito">Informações do orçamento</h2>
+                          <h2 class="text-base font-semibold leading-6 text-gray-900 inter">Informações do orçamento</h2>
                           <dl class="mt-6 grid grid-cols-1 text-sm leading-6 sm:grid-cols-2">
                             <div class="sm:pr-4">
-                              <dt class="inline text-gray-500 font-semibold nunito">Emitido em</dt>
-                              <dd class="inline text-gray-700 font-bold nunito"><time datetime="2023-23-01">Julho 06, 2023</time></dd>
+                              <dt class="inline text-gray-500 font-semibold inter">Emitido em</dt>
+                              <dd class="inline text-gray-700 font-bold inter"><time datetime="2023-23-01">Julho 06, 2023</time></dd>
                             </div>
                             <div class="mt-2 sm:mt-0 sm:pl-4">
                               <dt class="inline text-gray-500">Expira em</dt>
-                              <dd class="inline text-gray-700 font-bold nunito"><time datetime="2023-23-01">Julho 26, 2023</time></dd>
+                              <dd class="inline text-gray-700 font-bold inter"><time datetime="2023-23-01">Julho 26, 2023</time></dd>
                             </div>
                             <div class="mt-6 border-t border-gray-900/5 pt-6 sm:pr-4">
-                              <dt class="font-semibold text-gray-900 nunito">De:</dt>
-                              <dd class="mt-2 text-gray-500 nunito"><span class="font-bold text-gray-900">Moreira Refrigeração</span><br>Rua Itália, N° 1003<br>CNPJ: 38.581.151.0001/53</dd>
+                              <dt class="font-semibold text-gray-900 inter">De:</dt>
+                              <dd class="mt-2 text-gray-500 inter"><span class="font-bold text-gray-900">Moreira Refrigeração</span><br>Rua Itália, N° 1003<br>CNPJ: 38.581.151.0001/53</dd>
                             </div>
                             <div class="mt-8 sm:mt-6 sm:border-t sm:border-gray-900/5 sm:pl-4 sm:pt-6">
-                              <dt class="font-semibold text-gray-900 nunito">Para:</dt>
-                              <dd class="mt-2 text-gray-500 nunito"><span class="font-bold text-gray-900">Unimed POA</span><br>Av. Getúlio Vargas - Centro, 5600<br>CNPJ: 87.096.616/0001-96</dd>
+                              <dt class="font-semibold text-gray-900 inter">Para:</dt>
+                              <dd class="mt-2 text-gray-500 inter"><span class="font-bold text-gray-900">Unimed POA</span><br>Av. Getúlio Vargas - Centro, 5600<br>CNPJ: 87.096.616/0001-96</dd>
                             </div>
                           </dl>
                           <table class="mt-16 w-full whitespace-nowrap text-left text-sm leading-6">
@@ -140,7 +130,7 @@
                             <tbody>
                               <tr class="border-b border-gray-100">
                                 <td class="px-0 py-5 align-top">
-                                  <div class="font-bold text-gray-900 nunito">Concerto do compressor de ar condicionado.</div>
+                                  <div class="font-bold text-gray-900 inter">Concerto do compressor de ar condicionado.</div>
                                 </td>
                                 <td class="py-5 pr-0 align-top text-gray-700">
                                   <div class="text-gray-500">A peça estava quebrada e não poderia ser restaurada. Necessitando uma nova para a substituição.</div>
@@ -149,7 +139,7 @@
                               </tr>
                               <tr class="border-b border-gray-100">
                                 <td class="px-0 py-5 align-top">
-                                  <div class="font-bold text-gray-900 nunito">Reparo da carcaça do aparelho.</div>
+                                  <div class="font-bold text-gray-900 inter">Reparo da carcaça do aparelho.</div>
                                 </td>
                                 <td class="py-5 pr-0 align-top text-gray-700">
                                   <div class="text-gray-500">O equipamento precisava de um reparo na parte externa da carcaça.</div>

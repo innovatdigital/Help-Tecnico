@@ -15,8 +15,6 @@ const https = require('https')
 const app = express();
 const helmet = require('helmet');
 
-process.env["NODE_TLS_REJECT_UNAUTHORIZED"] = 0;
-
 app.use(bodyParser.urlencoded({extended: false}))
 app.use(bodyParser.json())
 app.use(cookieParser());
@@ -57,18 +55,17 @@ const dbConnect = () => {
 
 dbConnect()
 
-// Dev server
-// const options = {
-//   key: fs.readFileSync("./keys/localhost-key.pem"),
-//   cert: fs.readFileSync("./keys/localhost.pem"),
-// };
-
-// https.createServer(options, app).listen(5500, () => {
-//   console.log('Server listening on port ' + 5500);
-// });
-
-// Production server
-
-app.listen(process.env.PORT || 3000, () => {
-  console.log('Server listening on port 3000')
-})
+if (process.env.MODE == "DEV") {
+  const options = {
+    key: fs.readFileSync("./keys/localhost-key.pem"),
+    cert: fs.readFileSync("./keys/localhost.pem"),
+  };
+  
+  https.createServer(options, app).listen(5500, () => {
+    console.log('Server listening on port ' + 5500);
+  });
+} else if (process.env.MODE == "PROD") {
+  app.listen(3000, () => {
+    console.log('Server listening on port 3000')
+  })
+}

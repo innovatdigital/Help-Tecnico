@@ -1,17 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Help Técnico | Relatórios</title>
-  <link rel="shortcut icon" href="/img/login/icon.png" type="image/x-icon">
-  <!-- Custom styles -->
-  <link rel="stylesheet" href="/css/platform/style.css">
-  <link rel="stylesheet" href="/css/platform/notify.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/1.8.12/tailwind-experimental.min.css">
-</head>
+<%- include('../partials/head', {title: "title"}) %>
 
 <body>
   <%- include('../partials/admin/sidebar-admin', {isAdmin: isAdmin}) %>
@@ -40,8 +30,8 @@
                 <path fill-rule="evenodd" clip-rule="evenodd" d="M9.6687 21.3335C9.6687 20.7812 10.1164 20.3335 10.6687 20.3335H17.3353C17.8876 20.3335 18.3353 20.7812 18.3353 21.3335C18.3353 21.8857 17.8876 22.3335 17.3353 22.3335H10.6687C10.1164 22.3335 9.6687 21.8857 9.6687 21.3335Z" fill="#0E1726" fill-opacity="0.5"/>
               </svg>                                                
               <div>
-                <h2 class="text-md font-semibold leading-6 text-gray-900 nunito">Relatório de chamado</h2>
-                <p class="text-sm font-medium leading-6 text-gray-900 nunito">ID do relatório: <span class="text-indigo-600">#52923</span></p>
+                <h2 class="text-md font-semibold leading-6 text-gray-900 inter">Relatório de chamado</h2>
+                <p class="text-sm font-medium leading-6 text-gray-900 inter">ID do relatório: <span class="text-indigo-600">#52923</span></p>
               </div>
               <div class="relative ml-auto">
                 <button type="button" class="-m-2.5 block p-2.5 text-gray-400 hover:text-gray-500" id="options-menu-0-button" aria-expanded="false" aria-haspopup="true">
@@ -65,19 +55,19 @@
             </div>
             <dl class="-my-3 divide-y divide-gray-100 px-6 py-4 text-sm leading-6">
               <div class="flex justify-between gap-x-4 py-3">
-                <dt class="text-gray-500 font-bold nunito">Data do relatório</dt>
+                <dt class="text-gray-500 font-bold inter">Data do relatório</dt>
                 <dd class="text-gray-700"><time datetime="2022-12-13">14/05/2023</time></dd>
               </div>
               <div class="flex justify-between gap-x-4 py-3">
-                <dt class="text-gray-500 font-bold nunito">Chamado</dt>
+                <dt class="text-gray-500 font-bold inter">Chamado</dt>
                 <dd class="text-gray-700"><time datetime="2022-12-13">#23935</time></dd>
               </div>
               <div class="flex justify-between gap-x-4 py-3">
-                <dt class="text-gray-500 font-bold nunito">Tipo de relatório</dt>
-                <dd class="text-gray-700 font-semibold nunito">Conclusão de serviço</dd>
+                <dt class="text-gray-500 font-bold inter">Tipo de relatório</dt>
+                <dd class="text-gray-700 font-semibold inter">Conclusão de serviço</dd>
               </div>
               <div>
-                <a class="flex justify-center items-center bg-blue text-white mt-4 rounded-lg nunito font-bold py-1.5 mb-2" href="/company/view-report">Ver relatório</a>
+                <a class="flex justify-center items-center bg-blue text-white mt-4 rounded-lg inter font-bold py-1.5 mb-2" href="/company/view-report">Ver relatório</a>
               </div>
             </dl>
           </li>
@@ -91,8 +81,8 @@
                 <path fill-rule="evenodd" clip-rule="evenodd" d="M9.6687 21.3335C9.6687 20.7812 10.1164 20.3335 10.6687 20.3335H17.3353C17.8876 20.3335 18.3353 20.7812 18.3353 21.3335C18.3353 21.8857 17.8876 22.3335 17.3353 22.3335H10.6687C10.1164 22.3335 9.6687 21.8857 9.6687 21.3335Z" fill="#0E1726" fill-opacity="0.5"/>
               </svg>                                                
               <div>
-                <h2 class="text-md font-semibold leading-6 text-gray-900 nunito">Relatório de chamado</h2>
-                <p class="text-sm font-medium leading-6 text-gray-900 nunito">ID do relatório: <span class="text-indigo-600">#24535</span></p>
+                <h2 class="text-md font-semibold leading-6 text-gray-900 inter">Relatório de chamado</h2>
+                <p class="text-sm font-medium leading-6 text-gray-900 inter">ID do relatório: <span class="text-indigo-600">#24535</span></p>
               </div>
               <div class="relative ml-auto">
                 <button type="button" class="-m-2.5 block p-2.5 text-gray-400 hover:text-gray-500" id="options-menu-0-button" aria-expanded="false" aria-haspopup="true">
@@ -116,19 +106,19 @@
             </div>
             <dl class="-my-3 divide-y divide-gray-100 px-6 py-4 text-sm leading-6">
               <div class="flex justify-between gap-x-4 py-3">
-                <dt class="text-gray-500 font-bold nunito">Data do relatório</dt>
+                <dt class="text-gray-500 font-bold inter">Data do relatório</dt>
                 <dd class="text-gray-700"><time datetime="2022-12-13">14/05/2023</time></dd>
               </div>
               <div class="flex justify-between gap-x-4 py-3">
-                <dt class="text-gray-500 font-bold nunito">Chamado</dt>
+                <dt class="text-gray-500 font-bold inter">Chamado</dt>
                 <dd class="text-gray-700"><time datetime="2022-12-13">#24592</time></dd>
               </div>
               <div class="flex justify-between gap-x-4 py-3">
-                <dt class="text-gray-500 font-bold nunito">Tipo de relatório</dt>
-                <dd class="text-gray-700 font-semibold nunito">Conclusão de serviço</dd>
+                <dt class="text-gray-500 font-bold inter">Tipo de relatório</dt>
+                <dd class="text-gray-700 font-semibold inter">Conclusão de serviço</dd>
               </div>
               <div>
-                <a class="flex justify-center items-center bg-blue text-white mt-4 rounded-lg nunito font-bold py-1.5 mb-2" href="/company/view-report">Ver relatório</a>
+                <a class="flex justify-center items-center bg-blue text-white mt-4 rounded-lg inter font-bold py-1.5 mb-2" href="/company/view-report">Ver relatório</a>
               </div>
             </dl>
           </li>
@@ -142,8 +132,8 @@
                 <path fill-rule="evenodd" clip-rule="evenodd" d="M9.6687 21.3335C9.6687 20.7812 10.1164 20.3335 10.6687 20.3335H17.3353C17.8876 20.3335 18.3353 20.7812 18.3353 21.3335C18.3353 21.8857 17.8876 22.3335 17.3353 22.3335H10.6687C10.1164 22.3335 9.6687 21.8857 9.6687 21.3335Z" fill="#0E1726" fill-opacity="0.5"/>
               </svg>                                                
               <div>
-                <h2 class="text-md font-semibold leading-6 text-gray-900 nunito">Relatório de chamado</h2>
-                <p class="text-sm font-medium leading-6 text-gray-900 nunito">ID do relatório: <span class="text-indigo-600">#75848</span></p>
+                <h2 class="text-md font-semibold leading-6 text-gray-900 inter">Relatório de chamado</h2>
+                <p class="text-sm font-medium leading-6 text-gray-900 inter">ID do relatório: <span class="text-indigo-600">#75848</span></p>
               </div>
               <div class="relative ml-auto">
                 <button type="button" class="-m-2.5 block p-2.5 text-gray-400 hover:text-gray-500" id="options-menu-0-button" aria-expanded="false" aria-haspopup="true">
@@ -167,19 +157,19 @@
             </div>
             <dl class="-my-3 divide-y divide-gray-100 px-6 py-4 text-sm leading-6">
               <div class="flex justify-between gap-x-4 py-3">
-                <dt class="text-gray-500 font-bold nunito">Data do relatório</dt>
+                <dt class="text-gray-500 font-bold inter">Data do relatório</dt>
                 <dd class="text-gray-700"><time datetime="2022-12-13">14/05/2023</time></dd>
               </div>
               <div class="flex justify-between gap-x-4 py-3">
-                <dt class="text-gray-500 font-bold nunito">Chamado</dt>
+                <dt class="text-gray-500 font-bold inter">Chamado</dt>
                 <dd class="text-gray-700"><time datetime="2022-12-13">#64543</time></dd>
               </div>
               <div class="flex justify-between gap-x-4 py-3">
-                <dt class="text-gray-500 font-bold nunito">Tipo de relatório</dt>
-                <dd class="text-gray-700 font-semibold nunito">Conclusão de serviço</dd>
+                <dt class="text-gray-500 font-bold inter">Tipo de relatório</dt>
+                <dd class="text-gray-700 font-semibold inter">Conclusão de serviço</dd>
               </div>
               <div>
-                <a class="flex justify-center items-center bg-blue text-white mt-4 rounded-lg nunito font-bold py-1.5 mb-2" href="/company/view-report">Ver relatório</a>
+                <a class="flex justify-center items-center bg-blue text-white mt-4 rounded-lg inter font-bold py-1.5 mb-2" href="/company/view-report">Ver relatório</a>
               </div>
             </dl>
           </li>
@@ -193,8 +183,8 @@
                 <path fill-rule="evenodd" clip-rule="evenodd" d="M9.6687 21.3335C9.6687 20.7812 10.1164 20.3335 10.6687 20.3335H17.3353C17.8876 20.3335 18.3353 20.7812 18.3353 21.3335C18.3353 21.8857 17.8876 22.3335 17.3353 22.3335H10.6687C10.1164 22.3335 9.6687 21.8857 9.6687 21.3335Z" fill="#0E1726" fill-opacity="0.5"/>
               </svg>                                                
               <div>
-                <h2 class="text-md font-semibold leading-6 text-gray-900 nunito">Relatório de chamado</h2>
-                <p class="text-sm font-medium leading-6 text-gray-900 nunito">ID do relatório: <span class="text-indigo-600">#49674</span></p>
+                <h2 class="text-md font-semibold leading-6 text-gray-900 inter">Relatório de chamado</h2>
+                <p class="text-sm font-medium leading-6 text-gray-900 inter">ID do relatório: <span class="text-indigo-600">#49674</span></p>
               </div>
               <div class="relative ml-auto">
                 <button type="button" class="-m-2.5 block p-2.5 text-gray-400 hover:text-gray-500" id="options-menu-0-button" aria-expanded="false" aria-haspopup="true">
@@ -218,19 +208,19 @@
             </div>
             <dl class="-my-3 divide-y divide-gray-100 px-6 py-4 text-sm leading-6">
               <div class="flex justify-between gap-x-4 py-3">
-                <dt class="text-gray-500 font-bold nunito">Data do relatório</dt>
+                <dt class="text-gray-500 font-bold inter">Data do relatório</dt>
                 <dd class="text-gray-700"><time datetime="2022-12-13">14/05/2023</time></dd>
               </div>
               <div class="flex justify-between gap-x-4 py-3">
-                <dt class="text-gray-500 font-bold nunito">Chamado</dt>
+                <dt class="text-gray-500 font-bold inter">Chamado</dt>
                 <dd class="text-gray-700"><time datetime="2022-12-13">#94848</time></dd>
               </div>
               <div class="flex justify-between gap-x-4 py-3">
-                <dt class="text-gray-500 font-bold nunito">Tipo de relatório</dt>
-                <dd class="text-gray-700 font-semibold nunito">Conclusão de serviço</dd>
+                <dt class="text-gray-500 font-bold inter">Tipo de relatório</dt>
+                <dd class="text-gray-700 font-semibold inter">Conclusão de serviço</dd>
               </div>
               <div>
-                <a class="flex justify-center items-center bg-blue text-white mt-4 rounded-lg nunito font-bold py-1.5 mb-2" href="/company/view-report">Ver relatório</a>
+                <a class="flex justify-center items-center bg-blue text-white mt-4 rounded-lg inter font-bold py-1.5 mb-2" href="/company/view-report">Ver relatório</a>
               </div>
             </dl>
           </li>

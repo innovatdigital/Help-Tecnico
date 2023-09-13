@@ -1,17 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Help Técnico | Novo chamado</title>
-  <link rel="shortcut icon" href="/img/login/icon.png" type="image/x-icon">
-  <!-- Custom styles -->
-  <link rel="stylesheet" href="/css/platform/style.css">
-  <link rel="stylesheet" href="/css/platform/notify.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/1.8.12/tailwind-experimental.min.css">
-</head>
+<%- include('../partials/head', {title: "title"}) %>
 
 <body>
   <%- include('../partials/company/sidebar-company') %>
@@ -49,7 +39,7 @@
         <div class="bg-white rounded-xl shadow p-4 px-5">
           <div class="flex justify-between items-center border-b pb-3">
             <div>
-              <h2 class="text-xl color-blue nunito font-bold">Solicitar novo chamado</h2>
+              <h2 class="text-xl color-blue inter font-bold">Solicitar novo chamado</h2>
             </div>
   
             <div class="flex items-center">
@@ -58,19 +48,19 @@
               <!-- <div class="mr-2">
                 <p class="text-sm inter">0 contas</p>
               </div> -->
-              <button type="button" onclick="openAccounts()" class="rounded-full px-2.5 py-1 nunito text-sm font-semibold shadow-sm border-blue color-blue">Selecionar equipamentos</button>
+              <button type="button" onclick="openAccounts()" class="rounded-full px-2.5 py-1 inter text-sm font-semibold shadow-sm border-blue color-blue">Selecionar equipamentos</button>
             </div>
           </div>
   
           <div class="mt-4">
-            <label for="comment" class="block text-md font-medium leading-6 text-gray-900 nunito font-semibold">Conteúdo do chamado:</label>
+            <label for="comment" class="block text-md font-medium leading-6 text-gray-900 inter font-semibold">Conteúdo do chamado:</label>
             <div class="mt-2">
-              <textarea rows="3" id="description" class="block w-full border-blue rounded-lg p-1.5 text-gray-900 shadow-sm ring-1 nunito ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" placeholder="O ar condicionado não recebe comandos do controle."></textarea>
+              <textarea rows="3" id="description" class="block w-full border-blue rounded-lg p-1.5 text-gray-900 shadow-sm ring-1 inter ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" placeholder="O ar condicionado não recebe comandos do controle."></textarea>
             </div>
           </div>
   
           <div class="mt-8 div-image">
-            <label for="images" class="block text-md font-medium leading-6 text-gray-900 nunito font-semibold color-blue">Imagens do chamado:</label>
+            <label for="images" class="block text-md font-medium leading-6 text-gray-900 inter font-semibold color-blue">Imagens do chamado:</label>
             <label for="images" style="border: 2px dashed #239CFF; cursor: pointer;" class="relative block mt-2 w-full rounded-lg p-4 text-center hover:border-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
               <div class="flex justify-center">
                 <svg width="45" height="45" viewBox="0 0 45 45" fill="none" xmlns="http://www.w3.org/2000/svg">

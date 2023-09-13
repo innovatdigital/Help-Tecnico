@@ -1,18 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Help Técnico | Visualizar fornecedor</title>
-  <link rel="shortcut icon" href="/img/login/icon.png" type="image/x-icon">
-  <!-- Custom styles -->
-  <link rel="stylesheet" href="/css/platform/style.css">
-  <link rel="stylesheet" href="/css/platform/notify.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/1.8.12/tailwind-experimental.min.css">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
-</head>
+<%- include('../partials/head', {title: "title"}) %>
 
 <body>
   <%- include('../partials/admin/sidebar-admin', {isAdmin: isAdmin}) %>
@@ -31,7 +20,7 @@
         <div class="fixed inset-0 z-10 overflow-y-auto p-4 mt-40 ml-40 sm:p-6 md:p-20">
           <div class="mx-auto accounts transform divide-y divide-gray-100 overflow-hidden rounded-xl bg-white shadow-2xl ring-1 ring-black ring-opacity-5 transition-all">
             <div class="flex justify-between py-3 px-6">
-              <h2 class="color-red nunito font-bold text-lg">Excluir fornecedor:</h2>
+              <h2 class="color-red inter font-bold text-lg">Excluir fornecedor:</h2>
               <button onclick="closeDelete()">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path d="M14.3075 11.7231L20.3075 5.67693C20.5844 5.4 20.5844 4.98462 20.3075 4.7077L19.3844 3.73847C19.1075 3.46154 18.6921 3.46154 18.4151 3.73847L12.369 9.78462C12.1844 9.96923 11.9075 9.96923 11.7228 9.78462L5.67668 3.69231C5.39976 3.41539 4.98438 3.41539 4.70745 3.69231L3.73822 4.66154C3.4613 4.93847 3.4613 5.35385 3.73822 5.63077L9.78438 11.6769C9.96899 11.8615 9.96899 12.1385 9.78438 12.3231L3.69207 18.4154C3.41514 18.6923 3.41514 19.1077 3.69207 19.3846L4.6613 20.3538C4.93822 20.6308 5.35361 20.6308 5.63053 20.3538L11.6767 14.3077C11.8613 14.1231 12.1382 14.1231 12.3228 14.3077L18.369 20.3538C18.6459 20.6308 19.0613 20.6308 19.3382 20.3538L20.3075 19.3846C20.5844 19.1077 20.5844 18.6923 20.3075 18.4154L14.3075 12.3692C14.1228 12.1846 14.1228 11.9077 14.3075 11.7231Z" fill="#A31313"/>
@@ -48,12 +37,12 @@
                     <path d="M20.1263 35.4583V18.2083C20.1263 17.7 19.9244 17.2125 19.5649 16.853C19.2055 16.4936 18.718 16.2916 18.2096 16.2916C17.7013 16.2916 17.2138 16.4936 16.8543 16.853C16.4949 17.2125 16.293 17.7 16.293 18.2083V35.4583C16.293 35.9666 16.4949 36.4541 16.8543 36.8136C17.2138 37.173 17.7013 37.375 18.2096 37.375C18.718 37.375 19.2055 37.173 19.5649 36.8136C19.9244 36.4541 20.1263 35.9666 20.1263 35.4583Z" fill="#AA2222"/>
                     <path d="M29.7083 35.4583V18.2083C29.7083 17.7 29.5064 17.2125 29.147 16.853C28.7875 16.4936 28.3 16.2916 27.7917 16.2916C27.2833 16.2916 26.7958 16.4936 26.4364 16.853C26.0769 17.2125 25.875 17.7 25.875 18.2083V35.4583C25.875 35.9666 26.0769 36.4541 26.4364 36.8136C26.7958 37.173 27.2833 37.375 27.7917 37.375C28.3 37.375 28.7875 37.173 29.147 36.8136C29.5064 36.4541 29.7083 35.9666 29.7083 35.4583Z" fill="#AA2222"/>
                   </svg>                                        
-                  <h2 for="content" class="block text-md font-bold leading-6 text-gray-900 nunito mt-4">Tem certeza que deseja excluir o fornecedor?</h2>
-                  <p class="nunito text-center text-sm font-semibold">Essa ação é irreversível, e todos os dados associados a ele serão apagados.</p>
+                  <h2 for="content" class="block text-md font-bold leading-6 text-gray-900 inter mt-4">Tem certeza que deseja excluir o fornecedor?</h2>
+                  <p class="inter text-center text-sm font-semibold">Essa ação é irreversível, e todos os dados associados a ele serão apagados.</p>
                 </div>
 
                 <div class="pb-4">
-                  <button class="w-full py-2.5 nunito bg-red text-white text-sm rounded-lg mt-4 font-bold" onclick="deleteSupplier()">Confirmar minha escolha</button>
+                  <button class="w-full py-2.5 inter bg-red text-white text-sm rounded-lg mt-4 font-bold" onclick="deleteSupplier()">Confirmar minha escolha</button>
                 </div>
               </div>
             </div>
@@ -64,7 +53,7 @@
       <div class="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-x-6">
         <div class="bg-white rounded-xl shadow-lg border p-4 px-5 col-span-1">
           <div class="flex items-center justify-between">
-            <h2 class="nunito font-bold text-gray-700 text-lg">Perfil do fornecedor</h2>
+            <h2 class="inter font-bold text-gray-700 text-lg">Perfil do fornecedor</h2>
 
             <button class="rounded-full bg-indigo-600 p-2">
               <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -94,7 +83,7 @@
               </defs>
             </svg>
             
-            <h1 class="nunito text-xl text-blue font-semibold mt-4"><%= supplier.name %></h1>
+            <h1 class="inter text-xl text-blue font-semibold mt-4"><%= supplier.name %></h1>
             
             <div class="flex items-center space-x-2 mt-4">
               <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -103,7 +92,7 @@
                 <path opacity="0.5" d="M14.166 3.33337V2.08337" stroke="#888EA8" stroke-width="1.25" stroke-linecap="round"/>
                 <path opacity="0.5" d="M1.66602 7.5H18.3327" stroke="#888EA8" stroke-width="1.25" stroke-linecap="round"/>
               </svg>                
-              <p class="nunito text-sm font-semibold text-gray-600">Cadastrada em <%= supplier.date %></p>
+              <p class="inter text-sm font-semibold text-gray-600">Cadastrada em <%= supplier.date %></p>
             </div>
 
             <div class="flex items-center space-x-2 mt-4">
@@ -111,7 +100,7 @@
                 <path opacity="0.5" d="M3.33398 8.45271C3.33398 4.70486 6.31875 1.66663 10.0007 1.66663C13.6826 1.66663 16.6673 4.70486 16.6673 8.45271C16.6673 12.1712 14.5396 16.5103 11.2197 18.062C10.4459 18.4237 9.5554 18.4237 8.78157 18.062C5.46175 16.5103 3.33398 12.1712 3.33398 8.45271Z" stroke="#3C487B" stroke-width="1.25"/>
                 <path d="M10 10.8334C11.3807 10.8334 12.5 9.71409 12.5 8.33337C12.5 6.95266 11.3807 5.83337 10 5.83337C8.61929 5.83337 7.5 6.95266 7.5 8.33337C7.5 9.71409 8.61929 10.8334 10 10.8334Z" stroke="#888EA8" stroke-width="1.25"/>
               </svg>                                                
-              <p class="nunito text-sm font-semibold text-gray-600"><%= supplier.city %></p>
+              <p class="inter text-sm font-semibold text-gray-600"><%= supplier.city %></p>
             </div>
 
             <div class="flex items-center space-x-2 mt-4">
@@ -119,7 +108,7 @@
                 <path opacity="0.5" d="M1.66602 10C1.66602 6.85734 1.66602 5.286 2.64232 4.30968C3.61864 3.33337 5.18998 3.33337 8.33268 3.33337H11.666C14.8087 3.33337 16.3801 3.33337 17.3563 4.30968C18.3327 5.286 18.3327 6.85734 18.3327 10C18.3327 13.1427 18.3327 14.7141 17.3563 15.6904C16.3801 16.6667 14.8087 16.6667 11.666 16.6667H8.33268C5.18998 16.6667 3.61864 16.6667 2.64232 15.6904C1.66602 14.7141 1.66602 13.1427 1.66602 10Z" stroke="#3C487B" stroke-width="1.25"/>
                 <path d="M5 6.66663L6.79908 8.16586C8.32961 9.44129 9.09492 10.079 10 10.079C10.9051 10.079 11.6704 9.44129 13.2009 8.16586L15 6.66663" stroke="#888EA8" stroke-width="1.25" stroke-linecap="round"/>
               </svg>                                
-              <p class="nunito text-sm font-semibold text-gray-600"><%= supplier.email %></p>
+              <p class="inter text-sm font-semibold text-gray-600"><%= supplier.email %></p>
             </div>
 
             <div class="flex items-center space-x-2 mt-4">
@@ -128,7 +117,7 @@
                 <path opacity="0.5" d="M15.5476 15.7998C14.1911 15.9262 10.8739 15.7865 7.33841 12.2704C4.00455 8.95477 3.40708 6.11292 3.33203 4.79211" stroke="#3C487B" stroke-width="1.24902"/>
                 <path opacity="0.5" d="M13.4035 11.1315C13.4035 11.1315 12.5023 12.0278 10.0422 9.58124C7.58215 7.13461 8.48344 6.23828 8.48344 6.23828" stroke="#3C487B" stroke-width="1.24902" stroke-linecap="round"/>
               </svg>                                
-              <p class="nunito text-sm font-semibold text-gray-600"><%= supplier.landline %></p>
+              <p class="inter text-sm font-semibold text-gray-600"><%= supplier.landline %></p>
             </div>
 
             <div class="flex items-center space-x-2 mt-4">
@@ -137,7 +126,7 @@
                 <path opacity="0.5" d="M15.5476 15.7998C14.1911 15.9262 10.8739 15.7865 7.33841 12.2704C4.00455 8.95477 3.40708 6.11292 3.33203 4.79211" stroke="#3C487B" stroke-width="1.24902"/>
                 <path opacity="0.5" d="M13.4035 11.1315C13.4035 11.1315 12.5023 12.0278 10.0422 9.58124C7.58215 7.13461 8.48344 6.23828 8.48344 6.23828" stroke="#3C487B" stroke-width="1.24902" stroke-linecap="round"/>
               </svg>                                
-              <p class="nunito text-sm font-semibold text-gray-600"><%= supplier.phone %></p>
+              <p class="inter text-sm font-semibold text-gray-600"><%= supplier.phone %></p>
             </div>
 
             <div class="flex items-center mt-8">
@@ -153,7 +142,7 @@
                   <rect x="10.5" y="0.5" width="39" height="39" rx="19.5" stroke="#2196F3"/>
                   </g>
                   <defs>
-                  <filter id="filter0_d_152_3086" x="0" y="0" width="60" height="60" filterUnits="userSpaceOnUse" color-nunitopolation-filters="sRGB">
+                  <filter id="filter0_d_152_3086" x="0" y="0" width="60" height="60" filterUnits="userSpaceOnUse">
                   <feFlood flood-opacity="0" result="BackgroundImageFix"/>
                   <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
                   <feMorphology radius="10" operator="erode" in="SourceAlpha" result="effect1_dropShadow_152_3086"/>
@@ -183,7 +172,7 @@
                   <rect x="10.5" y="0.5" width="39" height="39" rx="19.5" stroke="#3B3F5C"/>
                   </g>
                   <defs>
-                  <filter id="filter0_d_152_3096" x="0" y="0" width="60" height="60" filterUnits="userSpaceOnUse" color-nunitopolation-filters="sRGB">
+                  <filter id="filter0_d_152_3096" x="0" y="0" width="60" height="60" filterUnits="userSpaceOnUse">
                   <feFlood flood-opacity="0" result="BackgroundImageFix"/>
                   <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
                   <feMorphology radius="10" operator="erode" in="SourceAlpha" result="effect1_dropShadow_152_3096"/>
@@ -213,7 +202,7 @@
                   <rect x="10.5" y="0.5" width="39" height="39" rx="19.5" stroke="#D90C18"/>
                   </g>
                   <defs>
-                  <filter id="filter0_d_152_3092" x="0" y="0" width="60" height="60" filterUnits="userSpaceOnUse" color-nunitopolation-filters="sRGB">
+                  <filter id="filter0_d_152_3092" x="0" y="0" width="60" height="60" filterUnits="userSpaceOnUse">
                   <feFlood flood-opacity="0" result="BackgroundImageFix"/>
                   <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
                   <feMorphology radius="10" operator="erode" in="SourceAlpha" result="effect1_dropShadow_152_3092"/>

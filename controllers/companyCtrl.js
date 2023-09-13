@@ -75,9 +75,7 @@ const saveCall = asyncHandler(async(req, res) => {
 
 
 const viewEquipment = asyncHandler(async(req, res) => {
-    const equipment = req.user.equipments.find(item => item.id == req.params.id)
-
-    res.render('layouts/company/view-equipment', {notifications: req.user.notifications.reverse().slice(0, 5), photo: req.user.photo, name_user: req.user.name, equipment: equipment})
+    res.render('layouts/company/view-equipment', {notifications: req.user.notifications.reverse().slice(0, 5), photo: req.user.photo, name_user: req.user.name})
 })
 
 const viewReport = asyncHandler(async(req, res) => {

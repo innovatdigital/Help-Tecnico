@@ -1,17 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Help Técnico | Visualizar relatório</title>
-  <link rel="shortcut icon" href="/img/login/icon.png" type="image/x-icon">
-  <!-- Custom styles -->
-  <link rel="stylesheet" href="/css/platform/style.css">
-  <link rel="stylesheet" href="/css/platform/notify.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/1.8.12/tailwind-experimental.min.css">
-</head>
+<%- include('../partials/head', {title: "title"}) %>
 
 <body>
   <%- include('../partials/company/sidebar-company') %>
@@ -45,8 +35,8 @@
                           </div>
                         </div>
                         <div>
-                          <h1 class="text-2xl font-bold text-gray-900 nunito">Relatório #23452</h1>
-                          <p class="text-sm font-semibold text-gray-500 nunito">ID do chamado: <span class="text-indigo-600 underline">#42423</span></p>
+                          <h1 class="text-2xl font-bold text-gray-900 inter">Relatório #23452</h1>
+                          <p class="text-sm font-semibold text-gray-500 inter">ID do chamado: <span class="text-indigo-600 underline">#42423</span></p>
                         </div>
                       </div>
                       <div class="mt-6 flex flex-col-reverse justify-stretch space-y-4 space-y-reverse sm:flex-row-reverse sm:justify-end sm:space-x-3 sm:space-y-0 sm:space-x-reverse md:mt-0 md:flex-row md:space-x-3">
@@ -57,13 +47,13 @@
                     <div class="border-t border-gray-200 px-4 py-5 sm:px-6">
                       <dl class="grid grid-cols-1 gap-x-4 gap-y-8 sm:grid-cols-2">
                         <div class="sm:col-span-1">
-                          <dt class="text-sm font-semibold text-gray-500 nunito">Pertencente:</dt>
-                          <dd class="mt-1 text-sm text-gray-900 nunito">Unimed POA (Você)</dd>
+                          <dt class="text-sm font-semibold text-gray-500 inter">Pertencente:</dt>
+                          <dd class="mt-1 text-sm text-gray-900 inter">Unimed POA (Você)</dd>
                         </div>
 
                         <div class="sm:col-span-1">
-                          <dt class="text-sm font-semibold text-gray-500 nunito">Tipo de relatório:</dt>
-                          <span class="inline-flex items-center nunito gap-x-1.5 border rounded-full px-2 py-1 text-xs font-semibold text-gray-900 ring-1 ring-inset ring-gray-200">
+                          <dt class="text-sm font-semibold text-gray-500 inter">Tipo de relatório:</dt>
+                          <span class="inline-flex items-center inter gap-x-1.5 border rounded-full px-2 py-1 text-xs font-semibold text-gray-900 ring-1 ring-inset ring-gray-200">
                             <svg width="6" height="6" viewBox="0 0 6 6" fill="none" xmlns="http://www.w3.org/2000/svg">
                               <g clip-path="url(#clip0_285_50)">
                               <path d="M3 6C4.65685 6 6 4.65685 6 3C6 1.34315 4.65685 0 3 0C1.34315 0 0 1.34315 0 3C0 4.65685 1.34315 6 3 6Z" fill="#11AA17"/>
@@ -79,41 +69,41 @@
                         </div>
 
                         <div class="sm:col-span-1">
-                          <dt class="text-sm font-semibold text-gray-500 nunito">Data de início do serviço:</dt>
-                          <dd class="mt-1 text-sm text-gray-900 nunito">14:40</dd>
+                          <dt class="text-sm font-semibold text-gray-500 inter">Data de início do serviço:</dt>
+                          <dd class="mt-1 text-sm text-gray-900 inter">14:40</dd>
                         </div>
 
                         <div class="sm:col-span-1">
-                          <dt class="text-sm font-semibold text-gray-500 nunito">Data de conclusão do serviço:</dt>
-                          <dd class="mt-1 text-sm text-gray-900 nunito">15:24</dd>
+                          <dt class="text-sm font-semibold text-gray-500 inter">Data de conclusão do serviço:</dt>
+                          <dd class="mt-1 text-sm text-gray-900 inter">15:24</dd>
                         </div>
 
                         <div class="sm:col-span-1">
-                          <dt class="text-sm font-semibold text-gray-500 nunito">Manutenções em equipamentos</dt>
-                          <dd class="mt-1 text-sm text-gray-900 nunito">2 Manutenções</dd>
+                          <dt class="text-sm font-semibold text-gray-500 inter">Manutenções em equipamentos</dt>
+                          <dd class="mt-1 text-sm text-gray-900 inter">2 Manutenções</dd>
                         </div>
 
                         <div class="sm:col-span-1">
-                          <dt class="text-sm font-semibold text-gray-500 nunito">Instalação de equipamentos</dt>
-                          <dd class="mt-1 text-sm text-gray-900 font-bold nunito">Não</dd>
+                          <dt class="text-sm font-semibold text-gray-500 inter">Instalação de equipamentos</dt>
+                          <dd class="mt-1 text-sm text-gray-900 font-bold inter">Não</dd>
                         </div>
 
                         <div class="sm:col-span-1">
-                          <dt class="text-sm font-semibold text-gray-500 nunito">Gerado em:</dt>
-                          <dd class="mt-1 text-sm text-gray-900 nunito">10/07/2023</dd>
+                          <dt class="text-sm font-semibold text-gray-500 inter">Gerado em:</dt>
+                          <dd class="mt-1 text-sm text-gray-900 inter">10/07/2023</dd>
                         </div>
 
                         <div class="sm:col-span-1">
-                          <dt class="text-sm font-semibold text-gray-500 nunito">Técnico responsável</dt>
+                          <dt class="text-sm font-semibold text-gray-500 inter">Técnico responsável</dt>
                           <dd class="flex items-center mt-1">
                             <img class="h-8 rounded-full" src="https://pps.whatsapp.net/v/t61.24694-24/309612029_1303621463511201_2184499647973530355_n.jpg?ccb=11-4&oh=01_AdTLj4igz1k4OkKVwtf5wwXyceqwcgJlQGxo3JG6sDOlTQ&oe=64B44F62">
-                            <p class="nunito text-sm ml-2">Anderson Moreira</p>
+                            <p class="inter text-sm ml-2">Anderson Moreira</p>
                           </dd>
                         </div>
 
                         <div class="sm:col-span-2">
                           <dt class="text-md font-medium text-gray-500">Descrição do relatório:</dt>
-                          <dd class="mt-1 text-sm text-gray-900 nunito nunito font-medium">Nossa equipe técnica realizou um serviço completo de manutenção preventiva no sistema de ar condicionado do cliente. O serviço incluiu a inspeção e limpeza minuciosa de todos os componentes do sistema, verificação de vazamentos, teste de funcionamento e substituição de peças desgastadas, conforme necessário. Além disso, realizamos a limpeza dos filtros e a calibração dos controles para garantir um desempenho ideal do sistema de ar condicionado.</dd>
+                          <dd class="mt-1 text-sm text-gray-900 inter inter font-medium">Nossa equipe técnica realizou um serviço completo de manutenção preventiva no sistema de ar condicionado do cliente. O serviço incluiu a inspeção e limpeza minuciosa de todos os componentes do sistema, verificação de vazamentos, teste de funcionamento e substituição de peças desgastadas, conforme necessário. Além disso, realizamos a limpeza dos filtros e a calibração dos controles para garantir um desempenho ideal do sistema de ar condicionado.</dd>
                         </div>
 
                         <div class="sm:col-span-2">
@@ -126,8 +116,8 @@
                               </div>
                             </div>
                             <div>
-                              <h1 class="text-md font-bold text-gray-900 nunito">Ar Condicionado Split</h1>
-                              <p class="text-sm font-semibold text-gray-500 nunito">ID do equipamento: <span class="text-indigo-600">#42423</span></p>
+                              <h1 class="text-md font-bold text-gray-900 inter">Ar Condicionado Split</h1>
+                              <p class="text-sm font-semibold text-gray-500 inter">ID do equipamento: <span class="text-indigo-600">#42423</span></p>
                             </div>
                           </div>
                         </div>

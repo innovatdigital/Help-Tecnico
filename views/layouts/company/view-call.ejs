@@ -1,17 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Help Técnico | Visualizar chamado</title>
-  <link rel="shortcut icon" href="/img/login/icon.png" type="image/x-icon">
-  <!-- Custom styles -->
-  <link rel="stylesheet" href="/css/platform/style.css">
-  <link rel="stylesheet" href="/css/platform/notify.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/1.8.12/tailwind-experimental.min.css">
-</head>
+<%- include('../partials/head', {title: "title"}) %>
 
 <body>
   <%- include('../partials/company/sidebar-company') %>
@@ -31,17 +21,18 @@
               <div class="flex items-center space-x-5">
                 <div class="flex-shrink-0">
                   <div class="relative">
-                    <img class="h-16 w-16 rounded-full" src="/img/photos/<%= photo %>" alt="">
+                    <img class="h-16 w-16 rounded-full" src="/img/photos/<%= call.photoCompany %>" alt="">
                     <span class="absolute inset-0 rounded-full shadow-inner" aria-hidden="true"></span>
                   </div>
                 </div>
                 <div>
-                  <h1 class="text-2xl font-bold text-gray-900 nunito">Chamado <span class="text-indigo-600"><% call._id %></span></h1>
-                  <p class="text-sm font-semibold text-gray-500 nunito">Aberto por você em: <time datetime="<%= call.date %>"><%= call.date %></time></p>
+                  <h1 class="text-2xl font-bold text-gray-900 inter">Chamado <span class="text-indigo-600"><% call._id %></span></h1>
+                  <p class="text-sm font-semibold text-gray-500 inter">Aberto por você em: <time datetime="<%= call.date %>"><%= call.date %></time></p>
                 </div>
               </div>
               <div class="mt-6 flex flex-col-reverse justify-stretch space-y-4 space-y-reverse sm:flex-row-reverse sm:justify-end sm:space-x-3 sm:space-y-0 sm:space-x-reverse md:mt-0 md:flex-row md:space-x-3">
-                <button type="button" class="inline-flex items-center justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 border shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50">Preciso de ajuda</button>
+                <button type="button" class="inline-flex items-center justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 border shadow-sm ring-1 ring-inset ring-gray-300">Ver empresa</button>
+                <button type="button" class="inline-flex items-center justify-center rounded-md bg-blue px-3 py-2 text-sm font-semibold text-white border shadow-sm ring-1 ring-inset ring-gray-300">Editar chamado</button>
                 <button type="button" class="inline-flex items-center justify-center rounded-md px-3 py-2 text-sm font-semibold text-white shadow-sm bg-red-600">Cancelar chamado</button>
               </div>
             </div>
@@ -52,34 +43,34 @@
                 <section aria-labelledby="applicant-information-title">
                   <div class="bg-white shadow border sm:rounded-lg">
                     <div class="px-4 py-5 sm:px-6">
-                      <h2 id="applicant-information-title" class="text-lg font-semibold leading-6 text-gray-900 nunito">Informações do chamado:</h2>
-                      <p class="mt-1 max-w-2xl text-sm text-gray-500 nunito">Confira todos os detalhes do seu chamado.</p>
+                      <h2 id="applicant-information-title" class="text-lg font-semibold leading-6 text-gray-900 inter">Informações do chamado:</h2>
+                      <p class="mt-1 max-w-2xl text-sm text-gray-500 inter">Confira todos os detalhes do seu chamado.</p>
                     </div>
                     <div class="border-t border-gray-200 px-4 py-5 sm:px-6">
                       <dl class="grid grid-cols-1 gap-x-4 gap-y-8 sm:grid-cols-2">
                         <div class="sm:col-span-1">
-                          <dt class="text-sm font-semibold text-gray-500 nunito">Chamado aberto por:</dt>
-                          <dd class="mt-1 text-sm text-gray-900 nunito"><%= name_user %> (Você)</dd>
+                          <dt class="text-sm font-semibold text-gray-500 inter">Chamado aberto por:</dt>
+                          <dd class="mt-1 text-sm text-gray-900 inter"><%= name_user %> (Você)</dd>
                         </div>
                         <div class="sm:col-span-1">
-                          <dt class="text-sm font-semibold text-gray-500 nunito">Endereço de email:</dt>
-                          <dd class="mt-1 text-sm text-gray-900 nunito"><%= call.emailCompany %></dd>
+                          <dt class="text-sm font-semibold text-gray-500 inter">Endereço de email:</dt>
+                          <dd class="mt-1 text-sm text-gray-900 inter"><%= call.emailCompany %></dd>
                         </div>
                         <div class="sm:col-span-1">
-                          <dt class="text-sm font-semibold text-gray-500 nunito">Data</dt>
-                          <dd class="mt-1 text-sm text-gray-900 nunito"><%= call.date %></dd>
+                          <dt class="text-sm font-semibold text-gray-500 inter">Data</dt>
+                          <dd class="mt-1 text-sm text-gray-900 inter"><%= call.date %></dd>
                         </div>
                         <div class="sm:col-span-1">
-                          <dt class="text-sm font-semibold text-gray-500 nunito">Telefone</dt>
-                          <dd class="mt-1 text-sm text-gray-900 nunito"><%= call.phoneCompany %></dd>
+                          <dt class="text-sm font-semibold text-gray-500 inter">Telefone</dt>
+                          <dd class="mt-1 text-sm text-gray-900 inter"><%= call.phoneCompany %></dd>
                         </div>
                         <div class="sm:col-span-2">
                           <dt class="text-md font-medium text-gray-500">Descrição do chamado:</dt>
-                          <dd class="mt-1 text-sm text-gray-900 nunito nunito font-medium"><%= call.description %></dd>
+                          <dd class="mt-1 text-sm text-gray-900 inter inter font-medium"><%= call.description %></dd>
                         </div>
                         <div class="sm:col-span-2">
-                          <dt class="text-sm font-semibold text-gray-500 nunito">Anexos do chamado:</dt>
-                          <dd class="mt-1 text-sm text-gray-900 nunito">
+                          <dt class="text-sm font-semibold text-gray-500 inter">Anexos do chamado:</dt>
+                          <dd class="mt-1 text-sm text-gray-900 inter">
                             <ul role="list" class="divide-y divide-gray-200 rounded-md border border-gray-200">
                               <% call.photos.forEach(item => { %>
                                 <li class="flex items-center justify-between py-3 pl-3 pr-4 text-sm">
@@ -119,10 +110,10 @@
                                 </div>
                                 <div>
                                   <div class="text-sm">
-                                    <a href="#" class="font-bold text-md nunito text-gray-900">Anderson Moreira</a>
+                                    <a href="#" class="font-bold text-md inter text-gray-900">Anderson Moreira</a>
                                   </div>
                                   <div class="mt-1 text-sm text-gray-700">
-                                    <p class="font-semibold nunito">O chamado a seguir foi atendido com excelência. Deixo aqui o relatório caso a empresa queira conferir.</p>
+                                    <p class="font-semibold inter">O chamado a seguir foi atendido com excelência. Deixo aqui o relatório caso a empresa queira conferir.</p>
                                   </div>
                                   <div class="mt-2 space-x-2 text-sm">
                                     <span class="font-medium text-gray-500">15:44</span>
@@ -133,7 +124,7 @@
                                         <svg class="h-5 w-5 flex-shrink-0 text-gray-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                                           <path fill-rule="evenodd" d="M15.621 4.379a3 3 0 00-4.242 0l-7 7a3 3 0 004.241 4.243h.001l.497-.5a.75.75 0 011.064 1.057l-.498.501-.002.002a4.5 4.5 0 01-6.364-6.364l7-7a4.5 4.5 0 016.368 6.36l-3.455 3.553A2.625 2.625 0 119.52 9.52l3.45-3.451a.75.75 0 111.061 1.06l-3.45 3.451a1.125 1.125 0 001.587 1.595l3.454-3.553a3 3 0 000-4.242z" clip-rule="evenodd" />
                                         </svg>
-                                        <span class="ml-2 w-0 flex-1 nunito text-md font-bold truncate">Relatório do chamado #32455</span>
+                                        <span class="ml-2 w-0 flex-1 inter text-md font-bold truncate">Relatório do chamado #32455</span>
                                       </div>
                                       <div class="ml-4 flex-shrink-0">
                                         <a href="#" class="font-medium color-blue">Verificar</a>
@@ -181,10 +172,9 @@
                                   </span>
                                 <% } %>
                               </div>
-
                               <div class="flex min-w-0 flex-1 justify-between space-x-4 pt-1.5">
                                 <div>
-                                  <p class="text-sm nunito font-semibold text-gray-500"><%= item.text %></p>
+                                  <p class="text-sm inter font-semibold text-gray-500"><%= item.text %></p>
                                 </div>
                                 <div class="whitespace-nowrap text-right text-sm text-gray-500">
                                   <time datetime="<%= item.hour %>"><%= item.hour %></time>
@@ -206,7 +196,7 @@
                             </div>
                             <div class="flex min-w-0 flex-1 justify-between space-x-4 pt-1.5">
                               <div>
-                                <p class="text-sm nunito font-semibold text-gray-500">Chamado aceito por <span class="font-bold">Anderson Moreira</span></p>
+                                <p class="text-sm inter font-semibold text-gray-500">Chamado aceito por <span class="font-bold">Anderson Moreira</span></p>
                               </div>
                               <div class="whitespace-nowrap text-right text-sm text-gray-500">
                                 <time datetime="2020-09-22">14:24</time>
@@ -228,7 +218,7 @@
                             </div>
                             <div class="flex min-w-0 flex-1 justify-between space-x-4 pt-1.5">
                               <div>
-                                <p class="text-sm nunito font-semibold text-gray-500">Técnico <span class="font-bold">Anderson Moreira</span> a caminho do local.</p>
+                                <p class="text-sm inter font-semibold text-gray-500">Técnico <span class="font-bold">Anderson Moreira</span> a caminho do local.</p>
                               </div>
                               <div class="whitespace-nowrap text-right text-sm text-gray-500">
                                 <time datetime="2020-09-28">14:26</time>
@@ -250,7 +240,7 @@
                             </div>
                             <div class="flex min-w-0 flex-1 justify-between space-x-4 pt-1.5">
                               <div>
-                                <p class="text-sm nunito font-semibold text-gray-500">Iniciado o atendimento pelo Técnico. (SLA em andamento)</p>
+                                <p class="text-sm inter font-semibold text-gray-500">Iniciado o atendimento pelo Técnico. (SLA em andamento)</p>
                               </div>
                               <div class="whitespace-nowrap text-right text-sm text-gray-500">
                                 <time datetime="2020-09-30">14:40</time>
@@ -272,7 +262,7 @@
                             </div>
                             <div class="flex min-w-0 flex-1 justify-between space-x-4 pt-1.5">
                               <div>
-                                <p class="text-sm nunito font-semibold text-gray-500">Terminado o atendimento pelo Técnico. (SLA concluído) <span class="color-blue">1 hora</span></p>
+                                <p class="text-sm inter font-semibold text-gray-500">Terminado o atendimento pelo Técnico. (SLA concluído) <span class="color-blue">1 hora</span></p>
                               </div>
                               <div class="whitespace-nowrap text-right text-sm text-gray-500">
                                 <time datetime="2020-09-30">15:40</time>
@@ -293,7 +283,7 @@
                             </div>
                             <div class="flex min-w-0 flex-1 justify-between space-x-4 pt-1.5">
                               <div>
-                                <p class="text-sm nunito font-semibold text-gray-500">Chamado concluído com sucesso.<span class="font-bold color-blue">1 relatório</span> gerado.</p>
+                                <p class="text-sm inter font-semibold text-gray-500">Chamado concluído com sucesso.<span class="font-bold color-blue">1 relatório</span> gerado.</p>
                               </div>
                               <div class="whitespace-nowrap text-right text-sm text-gray-500">
                                 <time datetime="2020-10-04">15:44</time>

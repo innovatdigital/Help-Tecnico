@@ -1,17 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Help Técnico | Meus equipamentos</title>
-  <link rel="shortcut icon" href="/img/login/icon.png" type="image/x-icon">
-  <!-- Custom styles -->
-  <link rel="stylesheet" href="/css/platform/style.css">
-  <link rel="stylesheet" href="/css/platform/notify.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/1.8.12/tailwind-experimental.min.css">
-</head>
+<%- include('../partials/head', {title: "title"}) %>
 
 <body>
   <%- include('../partials/company/sidebar-company') %>
@@ -46,12 +36,12 @@
               </div>
 
               <div class="p-4">
-                <h2 class="text-lg font-bold color-blue nunito"><%= item.model %> </h2>
-                <h2 class="text-sm font-semibold mt-2 text-gray-800 nunito">ID na base: <span class="text-blue">#<%= item.id %></span></h2>
-                <h2 class="text-sm font-semibold mt-1 text-gray-800 nunito">Manutenções: <%= item.maintenance %> man.</h2>
-                <h2 class="text-sm font-semibold mt-1 text-gray-800 nunito">Data de cadastro: <%= item.date %></h2>
+                <h2 class="text-lg font-bold color-blue inter"><%= item.model %> </h2>
+                <h2 class="text-sm font-semibold mt-2 text-gray-800 inter">ID na base: <span class="text-blue">#<%= item.id %></span></h2>
+                <h2 class="text-sm font-semibold mt-1 text-gray-800 inter">Manutenções: <%= item.maintenance %> man.</h2>
+                <h2 class="text-sm font-semibold mt-1 text-gray-800 inter">Data de cadastro: <%= item.date %></h2>
                 <div>
-                  <a href="/company/view-equipment/<%= item.id %>" class="flex justify-center items-center bg-blue text-white mt-4 text-sm font-semibold rounded-lg nunito py-2" href="">Ver equipamento</a>
+                  <a href="/company/view-equipment/<%= item.id %>" class="flex justify-center items-center bg-blue text-white mt-4 text-sm font-semibold rounded-lg inter py-2" href="">Ver equipamento</a>
                 </div>
               </div>
             </li>
