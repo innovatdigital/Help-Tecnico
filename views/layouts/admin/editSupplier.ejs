@@ -30,7 +30,7 @@
 
           <div class="grid grid-cols-2 mt-12 gap-x-4">
             <div>
-              <label for="name" class="block text-md font-medium leading-6 text-gray-900 inter font-semibold">Nome da empresa/fornecedor</label>
+              <label for="name" class="block text-md font-medium leading-6 text-gray-900 inter font-semibold">Nome</label>
               <div class="relative mt-2 rounded-md shadow-sm">
                 <input type="text" name="name" id="name" value="<%= supplier.name %>" class="block w-full rounded-lg inter py-1.5 mt-2 pl-2 text-gray-900 ring-1 ring-inset ring-gray-300 sm:text-sm sm:leading-6 border-blue-1" placeholder="Insira o nome">
               </div>
@@ -62,7 +62,77 @@
             <div>
               <label for="city" class="block text-md font-medium leading-6 text-gray-900 inter font-semibold">Cidade</label>
               <div class="relative mt-2 rounded-md shadow-sm">
-                <input type="text" name="city" id="city" value="<%= supplier.city %>" class="block w-full rounded-lg inter py-1.5 mt-2 pl-2 text-gray-900 ring-1 ring-inset ring-gray-300 sm:text-sm sm:leading-6 border-blue-1" placeholder="Insira a cidade">
+                <select name="city" id="city" class="block w-full rounded-lg inter py-2 mt-2 pl-2 text-gray-900 ring-1 ring-inset ring-gray-300 sm:text-sm sm:leading-6 border-blue-1">
+                  <option value="<%= supplier.city %>"><%= supplier.city %> (selecionado)</option>
+                  <option value="Porto Alegre / RS">Porto Alegre / RS</option>
+                  <option value="Canoas / RS">Canoas / RS</option>
+                  <option value="Gramado / RS">Gramado / RS</option>
+                  <option value="Novo Hamburgo / RS">Novo Hamburgo / RS</option>
+                  <option value="Caxias do Sul / RS">Caxias do Sul / RS</option>
+                  <option value="Pelotas / RS">Pelotas / RS</option>
+                  <option value="Santa Maria / RS">Santa Maria / RS</option>
+                  <option value="Passo Fundo / RS">Passo Fundo / RS</option>
+                  <option value="Santa Cruz do Sul / RS">Santa Cruz do Sul / RS</option>
+                  <option value="São Leopoldo / RS">São Leopoldo / RS</option>
+                  <option value="Rio Grande / RS">Rio Grande / RS</option>
+                  <option value="Bento Gonçalves / RS">Bento Gonçalves / RS</option>
+                  <option value="Uruguaiana / RS">Uruguaiana / RS</option>
+                  <option value="Santana do Livramento / RS">Santana do Livramento / RS</option>
+                  <option value="Erechim / RS">Erechim / RS</option>
+                  <option value="Ijuí / RS">Ijuí / RS</option>
+                  <option value="Bagé / RS">Bagé / RS</option>
+                  <option value="Vacaria / RS">Vacaria / RS</option>
+                  <option value="Lajeado / RS">Lajeado / RS</option>
+                  <option value="Sapucaia do Sul / RS">Sapucaia do Sul / RS</option>
+                  <option value="Gravataí / RS">Gravataí / RS</option>
+                  <option value="Cachoeirinha / RS">Cachoeirinha / RS</option>
+                  <option value="Esteio / RS">Esteio / RS</option>
+                  <option value="São Borja / RS">São Borja / RS</option>
+                  <option value="Cruz Alta / RS">Cruz Alta / RS</option>
+                  <option value="Santo Ângelo / RS">Santo Ângelo / RS</option>
+                  <option value="Taquara / RS">Taquara / RS</option>
+                  <option value="São Gabriel / RS">São Gabriel / RS</option>
+                  <option value="Montenegro / RS">Montenegro / RS</option>
+                  <option value="Capão da Canoa / RS">Capão da Canoa / RS</option>
+                  <option value="Osório / RS">Osório / RS</option>
+                  <option value="Venâncio Aires / RS">Venâncio Aires / RS</option>
+                  <option value="Santa Rosa / RS">Santa Rosa / RS</option>
+                  <option value="Alegrete / RS">Alegrete / RS</option>
+                  <option value="São Sebastião do Caí / RS">São Sebastião do Caí / RS</option>
+                  <option value="São Lourenço do Sul / RS">São Lourenço do Sul / RS</option>
+                  <option value="Bage / RS">Bage / RS</option>
+                  <option value="São Jerônimo / RS">São Jerônimo / RS</option>
+                  <option value="São José do Norte / RS">São José do Norte / RS</option>
+                  <option value="São José do Sul / RS">São José do Sul / RS</option>
+                  <option value="São Leopoldo / RS">São Leopoldo / RS</option>
+                  <option value="São Luiz Gonzaga / RS">São Luiz Gonzaga / RS</option>
+                  <option value="São Marcos / RS">São Marcos / RS</option>
+                  <option value="São Pedro do Sul / RS">São Pedro do Sul / RS</option>
+                  <option value="São Sebastião do Caí / RS">São Sebastião do Caí / RS</option>
+                  <option value="São Sepé / RS">São Sepé / RS</option>
+                  <option value="São Vicente do Sul / RS">São Vicente do Sul / RS</option>
+                  <option value="Sapiranga / RS">Sapiranga / RS</option>
+                  <option value="Sapucaia do Sul / RS">Sapucaia do Sul / RS</option>
+                  <option value="Sarandi / RS">Sarandi / RS</option>
+                  <option value="Serafina Corrêa / RS">Serafina Corrêa / RS</option>
+                  <option value="Soledade / RS">Soledade / RS</option>
+                  <option value="Tapejara / RS">Tapejara / RS</option>
+                  <option value="Tapes / RS">Tapes / RS</option>
+                  <option value="Taquari / RS">Taquari / RS</option>
+                  <option value="Teutônia / RS">Teutônia / RS</option>
+                  <option value="Torres / RS">Torres / RS</option>
+                  <option value="Tramandaí / RS">Tramandaí / RS</option>
+                  <option value="Três Coroas / RS">Três Coroas / RS</option>
+                  <option value="Três de Maio / RS">Três de Maio / RS</option>
+                  <option value="Três Passos / RS">Três Passos / RS</option>
+                  <option value="Triunfo / RS">Triunfo / RS</option>
+                  <option value="Tupanciretã / RS">Tupanciretã / RS</option>
+                  <option value="Uruguaiana / RS">Uruguaiana / RS</option>
+                  <option value="Vacaria / RS">Vacaria / RS</option>
+                  <option value="Venâncio Aires / RS">Venâncio Aires / RS</option>
+                  <option value="Viamão / RS">Viamão / RS</option>
+                  <option value="Xangri-lá / RS">Xangri-lá / RS</option>
+                </select>
               </div>
             </div>
           </div>
@@ -71,52 +141,43 @@
             <div>
               <label for="landline" class="block text-md font-medium leading-6 text-gray-900 inter font-semibold">Telefone (Fixo)</label>
               <div class="relative mt-2 rounded-md shadow-sm">
-                <input type="number" name="landline" id="landline" value="<%= supplier.landline %>" class="block w-full rounded-lg inter py-1.5 mt-2 pl-2 text-gray-900 ring-1 ring-inset ring-gray-300 sm:text-sm sm:leading-6 border-blue-1" placeholder="Insira o telefone fixo">
+                <input type="text" name="landline" id="landline" value="<%= supplier.landline %>"  class="block w-full rounded-lg inter py-1.5 mt-2 pl-2 text-gray-900 ring-1 ring-inset ring-gray-300 sm:text-sm sm:leading-6 border-blue-1" placeholder="Insira o telefone fixo">
               </div>
             </div>
 
             <div>
               <label for="phone" class="block text-md font-medium leading-6 text-gray-900 inter font-semibold">Telefone (Celular)</label>
               <div class="relative mt-2 rounded-md shadow-sm">
-                <input type="number" name="phone" id="phone" value="<%= supplier.phone %>" class="block w-full rounded-lg inter py-1.5 mt-2 pl-2 text-gray-900 ring-1 ring-inset ring-gray-300 sm:text-sm sm:leading-6 border-blue-1" placeholder="Insira o celular">
+                <input type="text" name="phone" id="phone" value="<%= supplier.phone %>"  class="block w-full rounded-lg inter py-1.5 mt-2 pl-2 text-gray-900 ring-1 ring-inset ring-gray-300 sm:text-sm sm:leading-6 border-blue-1" placeholder="Insira o celular">
               </div>
             </div>
 
             <div>
               <label for="contactName" class="block text-md font-medium leading-6 text-gray-900 inter font-semibold">Nome do contato</label>
               <div class="relative mt-2 rounded-md shadow-sm">
-                <input type="text" name="contactName" id="contactName" value="<%= supplier.contactName %>" class="block w-full rounded-lg inter py-1.5 mt-2 pl-2 text-gray-900 ring-1 ring-inset ring-gray-300 sm:text-sm sm:leading-6 border-blue-1" placeholder="Insira o nome do contato">
+                <input type="text" name="contactName" id="contactName" value="<%= supplier.contactName %>"  class="block w-full rounded-lg inter py-1.5 mt-2 pl-2 text-gray-900 ring-1 ring-inset ring-gray-300 sm:text-sm sm:leading-6 border-blue-1" placeholder="Insira o nome do contato">
               </div>
             </div>
           </div>
 
-          <div class="grid grid-cols-1 mt-12 gap-x-4">
-            <div>
-              <label class="block text-md font-medium leading-6 text-gray-900 inter font-semibold">O que ele fornece?</label>
-              <div id="items">
-                <div class="relative mt-2 rounded-md shadow-sm item-div">
-                  <input type="text" id="item-content" class="block w-full rounded-lg inter py-1.5 mt-2 pl-2 text-gray-900 ring-1 ring-inset ring-gray-300 sm:text-sm sm:leading-6 border-blue-1" placeholder="Exemplo: Peça X para ar-condicionado split">
-                </div>
-              </div>
-            </div>
+          <div id="materials" class="grid grid-cols-1 mt-12 gap-x-4"></div>
 
-            <div style="cursor: pointer;" class="flex mt-6" id="newItem">          
-              <div class="relative flex items-center">
-                <div class="flex h-6 items-center">
-                  <svg width="15" height="16" viewBox="0 0 15 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <g clip-path="url(#clip0_236_21)">
-                    <path fill-rule="evenodd" clip-rule="evenodd" d="M7.5 15.5C11.6421 15.5 15 12.1421 15 8C15 3.85786 11.6421 0.5 7.5 0.5C3.35786 0.5 0 3.85786 0 8C0 12.1421 3.35786 15.5 7.5 15.5ZM6.80429 7.48215V5.05966H8.67095V7.48215H11.0888V9.34881H8.67095V11.7667H6.80429V9.34881H4.38179V7.48215H6.80429Z" fill="#239CFF"/>
-                    </g>
-                    <defs>
-                    <clipPath id="clip0_236_21">
-                    <rect width="15" height="16" fill="white"/>
-                    </clipPath>
-                    </defs>
-                  </svg>                                                   
-                </div>
-                <div class="ml-3 leading-6">
-                  <p class="block text-sm font-semibold leading-6 text-gray-900 inter">Adicionar campo</p>
-                </div>
+          <div style="cursor: pointer;" class="flex mt-6" id="newMaterial">          
+            <div class="relative flex items-center">
+              <div class="flex h-6 items-center">
+                <svg width="15" height="16" viewBox="0 0 15 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <g clip-path="url(#clip0_236_21)">
+                  <path fill-rule="evenodd" clip-rule="evenodd" d="M7.5 15.5C11.6421 15.5 15 12.1421 15 8C15 3.85786 11.6421 0.5 7.5 0.5C3.35786 0.5 0 3.85786 0 8C0 12.1421 3.35786 15.5 7.5 15.5ZM6.80429 7.48215V5.05966H8.67095V7.48215H11.0888V9.34881H8.67095V11.7667H6.80429V9.34881H4.38179V7.48215H6.80429Z" fill="#239CFF"/>
+                  </g>
+                  <defs>
+                  <clipPath id="clip0_236_21">
+                  <rect width="15" height="16" fill="white"/>
+                  </clipPath>
+                  </defs>
+                </svg>                                                   
+              </div>
+              <div class="ml-3 leading-6">
+                <p class="block text-sm font-semibold leading-6 text-gray-900 inter">Adicionar nova opção</p>
               </div>
             </div>
           </div>
@@ -124,7 +185,7 @@
 
         <div class="bg-white rounded-xl shadow-lg border p-4 px-5 col-span-1">
           <div class="space-y-4">
-            <button type="button" onclick="newSupplier()" style="background-color: #00AB55;" class="w-full inline-flex justify-center items-center gap-x-1.5 rounded-md px-3 py-3 text-sm font-semibold text-white inter shadow-sm">
+            <button type="button" onclick="updateSupplier()" style="background-color: #00AB55;" class="w-full inline-flex justify-center items-center gap-x-1.5 rounded-md px-3 py-3 text-sm font-semibold text-white inter shadow-sm">
               <svg width="21" height="20" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <g clip-path="url(#clip0_156_9768)">
                 <path d="M3.46649 17.1132C4.68687 18.3337 6.65105 18.3337 10.5794 18.3337C14.5078 18.3337 16.472 18.3337 17.6923 17.1132C18.9128 15.8929 18.9128 13.9287 18.9128 10.0003C18.9128 9.71574 18.9128 9.57349 18.9001 9.42883C18.8413 8.75441 18.5678 8.09413 18.1325 7.57561C18.0391 7.46438 17.9361 7.3613 17.7299 7.15514L13.4246 2.84986C13.2184 2.64371 13.1153 2.54062 13.0042 2.44725C12.4856 2.01199 11.8253 1.7385 11.1509 1.67962C11.0063 1.66699 10.864 1.66699 10.5794 1.66699C6.65105 1.66699 4.68687 1.66699 3.46649 2.88738C2.24609 4.10777 2.24609 6.07195 2.24609 10.0003C2.24609 13.9287 2.24609 15.8929 3.46649 17.1132Z" stroke="white" stroke-width="1.25"/>
@@ -139,26 +200,11 @@
               </svg>                
               Salvar
             </button>
-
-            <button type="button" style="background-color: #2196F3;" class="w-full inline-flex justify-center items-center gap-x-1.5 rounded-md px-3 py-3 text-sm font-semibold text-white inter shadow-sm">
-              <svg width="21" height="20" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <g clip-path="url(#clip0_156_9775)">
-                <path d="M15.3833 15.4046L17.9922 7.57843C19.0324 4.45761 19.5526 2.89719 18.7289 2.07351C17.9052 1.24982 16.3447 1.76996 13.2237 2.81023L5.44772 5.40214C3.71287 5.98041 2.84544 6.26953 2.58215 6.90563C2.52026 7.05513 2.48285 7.21363 2.47134 7.37502C2.42236 8.0617 3.0689 8.70824 4.36198 10.0012L4.59751 10.2367C4.80976 10.449 4.91587 10.5552 4.9961 10.6732C5.15432 10.9062 5.24413 11.1789 5.25536 11.4602C5.26105 11.603 5.23877 11.7514 5.19422 12.0482C5.03115 13.1347 4.94961 13.6779 5.04566 14.0959C5.23712 14.9292 5.88207 15.5832 6.71256 15.7864C7.12921 15.8883 7.67355 15.8145 8.76225 15.6667L8.82177 15.6587C9.12867 15.617 9.28216 15.5962 9.4295 15.6051C9.69691 15.6212 9.95525 15.7083 10.1779 15.8574C10.3005 15.9396 10.41 16.0491 10.629 16.2681L10.8384 16.4774C12.097 17.736 12.7262 18.3652 13.3938 18.3324C13.5778 18.3234 13.7587 18.2807 13.9273 18.2065C14.5391 17.9373 14.8205 17.0931 15.3833 15.4046Z" stroke="white" stroke-width="1.25"/>
-                <path opacity="0.5" d="M5.80078 15L18.3008 2.5" stroke="white" stroke-width="1.25" stroke-linecap="round"/>
-                </g>
-                <defs>
-                <clipPath id="clip0_156_9775">
-                <rect width="20" height="20" fill="white" transform="translate(0.800781)"/>
-                </clipPath>
-                </defs>
-              </svg>                                                
-              Enviar por email
-            </button>
           </div>
 
           <div class="mt-8">
             <h2 class="text-sm inter font-semibold">Observações internas</h2>
-            <textarea class="w-full rounded-lg border-blue text-sm mt-2 inter p-2" name="comments" id="comments" cols="4" rows="6"><%= supplier.comments %></textarea>
+            <textarea class="w-full rounded-lg border-blue text-sm mt-2 inter p-2" name="comments" id="comments" cols="4" rows="6"></textarea>
           </div>
         </div>
       </div>
@@ -166,11 +212,12 @@
   </div>
 </body>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-masker/1.1.0/vanilla-masker.min.js"></script>
 <script>
-  const divItems = document.querySelector("#items")
-  const newItemButton = document.querySelector("#newItem")
+  const divMaterials = document.querySelector("#materials")
+  const newMaterialButton = document.querySelector("#newMaterial")
 
-  function newItem() {
+  function newMaterial() {
     var chars = 'abcdefghijklmnopqrstuvwxyz';
     var id = '';
 
@@ -180,40 +227,98 @@
     }
 
     const html = `
-      <div class="w-full flex items-center mt-2" id="${id}">
-        <div class="relative mt-2 rounded-md shadow-sm item-div">
-          <input type="text" id="item-content" class="block w-full rounded-lg inter py-1.5 mt-2 pl-2 text-gray-900 ring-1 ring-inset ring-gray-300 sm:text-sm sm:leading-6 border-blue-1" placeholder="Exemplo: Peça X para ar-condicionado split">
+      <div id='${id}' class="material grid grid-cols-4 gap-x-3 mt-2">
+        <div class="col-span-3">
+          <div class="relative mt-2 rounded-lg shadow-sm item-div">
+            <input type="text" id="item" class="block w-full rounded-lg inter py-1.5 mt-2 pl-2 text-gray-900 ring-1 ring-inset ring-gray-300 sm:text-sm sm:leading-6 border-blue-1" placeholder="Nome da peça/material">
+          </div>
         </div>
 
-        <button onclick="deleteItem(${id})" class="ml-2 mr-1">
-          <svg width="16" height="18" viewBox="0 0 16 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <g clip-path="url(#clip0_236_23)">
-            <mask id="mask0_236_23" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="0" y="0" width="16" height="18">
-            <path d="M16 0H0V18H16V0Z" fill="white"/>
-            </mask>
-            <g mask="url(#mask0_236_23)">
-            <path d="M14.125 4.625L13.3661 15.2497C13.3007 16.1655 12.5387 16.875 11.6205 16.875H4.37946C3.46134 16.875 2.69932 16.1655 2.63391 15.2497L1.875 4.625M6.25 8.125V13.375M9.75 8.125V13.375M10.625 4.625V2C10.625 1.51675 10.2332 1.125 9.75 1.125H6.25C5.76675 1.125 5.375 1.51675 5.375 2V4.625M1 4.625H15" stroke="#239CFF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-            </g>
-            </g>
-            <defs>
-            <clipPath id="clip0_236_23">
-            <rect width="16" height="18" fill="white"/>
-            </clipPath>
-            </defs>
-          </svg>
-        </button>
+        <div class="flex items-center col-span-1">
+          <div class="flex flex-col">
+            <div class="relative rounded-lg shadow-sm item-div">
+              <input type="text" id="manufacturer" class="block w-full rounded-lg inter py-1.5 mt-2 pl-2 text-gray-900 ring-1 ring-inset ring-gray-300 sm:text-sm sm:leading-6 border-blue-1" placeholder="Nome do fabricante">
+            </div>
+          </div>
+
+          <button onclick="deleteElement(${id})" class="ml-2 mr-1">
+            <svg width="16" height="18" viewBox="0 0 16 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <g clip-path="url(#clip0_236_23)">
+              <mask id="mask0_236_23" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="0" y="0" width="16" height="18">
+              <path d="M16 0H0V18H16V0Z" fill="white"/>
+              </mask>
+              <g mask="url(#mask0_236_23)">
+              <path d="M14.125 4.625L13.3661 15.2497C13.3007 16.1655 12.5387 16.875 11.6205 16.875H4.37946C3.46134 16.875 2.69932 16.1655 2.63391 15.2497L1.875 4.625M6.25 8.125V13.375M9.75 8.125V13.375M10.625 4.625V2C10.625 1.51675 10.2332 1.125 9.75 1.125H6.25C5.76675 1.125 5.375 1.51675 5.375 2V4.625M1 4.625H15" stroke="#239CFF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </g>
+              </g>
+              <defs>
+              <clipPath id="clip0_236_23">
+              <rect width="16" height="18" fill="white"/>
+              </clipPath>
+              </defs>
+            </svg>
+          </button>
+        </div>
       </div>
     `;
 
-    divItems.insertAdjacentHTML("beforeend", html);
+    divMaterials.insertAdjacentHTML("beforeend", html);
   }
 
-  function deleteItem(id) {
-    id.remove()
+  function loadMaterials(data) {
+    var chars = 'abcdefghijklmnopqrstuvwxyz';
+    var id = '';
+
+    for (var i = 0; i < chars.length; i++) {
+      var random = Math.floor(Math.random() * chars.length);
+      id += chars.charAt(random);
+    }
+
+    const html = `
+      <div id='${id}' class="material grid grid-cols-4 gap-x-3 mt-2">
+        <div class="col-span-3">
+          <div class="relative mt-2 rounded-lg shadow-sm item-div">
+            <input type="text" id="item" value='${item}' class="block w-full rounded-lg inter py-1.5 mt-2 pl-2 text-gray-900 ring-1 ring-inset ring-gray-300 sm:text-sm sm:leading-6 border-blue-1" placeholder="Nome da peça/material">
+          </div>
+        </div>
+
+        <div class="flex items-center col-span-1">
+          <div class="flex flex-col">
+            <div class="relative rounded-lg shadow-sm item-div">
+              <input type="text" id="manufacturer" value='${manufacturer}' class="block w-full rounded-lg inter py-1.5 mt-2 pl-2 text-gray-900 ring-1 ring-inset ring-gray-300 sm:text-sm sm:leading-6 border-blue-1" placeholder="Nome do fabricante">
+            </div>
+          </div>
+
+          <button onclick="deleteElement(${id})" class="ml-2 mr-1">
+            <svg width="16" height="18" viewBox="0 0 16 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <g clip-path="url(#clip0_236_23)">
+              <mask id="mask0_236_23" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="0" y="0" width="16" height="18">
+              <path d="M16 0H0V18H16V0Z" fill="white"/>
+              </mask>
+              <g mask="url(#mask0_236_23)">
+              <path d="M14.125 4.625L13.3661 15.2497C13.3007 16.1655 12.5387 16.875 11.6205 16.875H4.37946C3.46134 16.875 2.69932 16.1655 2.63391 15.2497L1.875 4.625M6.25 8.125V13.375M9.75 8.125V13.375M10.625 4.625V2C10.625 1.51675 10.2332 1.125 9.75 1.125H6.25C5.76675 1.125 5.375 1.51675 5.375 2V4.625M1 4.625H15" stroke="#239CFF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </g>
+              </g>
+              <defs>
+              <clipPath id="clip0_236_23">
+              <rect width="16" height="18" fill="white"/>
+              </clipPath>
+              </defs>
+            </svg>
+          </button>
+        </div>
+      </div>
+    `;
+
+    divMaterials.insertAdjacentHTML("beforeend", html);
   }
 
-  newItemButton.addEventListener("click", function() {
-    newItem()
+  function deleteElement(element) {
+    element.remove()
+  }
+
+  newMaterialButton.addEventListener("click", function() {
+    newMaterial()
   })
 
   function alertMessage(type, content) {
@@ -260,7 +365,17 @@
     }
   }
 
-  function newSupplier() {
+  function formatCEP(input) {
+    const value = input.value.replace(/\D/g, '').substring(0, 8);
+
+    if (value.length > 5) {
+      input.value = value.substring(0, 5) + '-' + value.substring(5);
+    } else {
+      input.value = value;
+    }
+  }
+
+  function updateSupplier() {
     const name = document.querySelector("#name")
     const email = document.querySelector("#email")
     const address = document.querySelector("#address")
@@ -270,23 +385,14 @@
     const phone = document.querySelector("#phone")
     const contactName = document.querySelector("#contactName")
     const comments = document.querySelector("#comments")
-    const items = document.getElementsByClassName('item-div')
-    const contents = []
+    const materials = document.getElementsByClassName('material')
+    const materialsArray = []
 
-    for (var i = 0; i < items.length; i++) {
-      const item = items[i].querySelector("#item-content");
-
-      if (item.value.length < 1) {
-        alertMessage("error", "Nenhum item adicionado")
-        return
-      }
+    for (var i = 0; i < materials.length; i++) {
+      const item = materials[i].querySelector("#item");
+      const manufacturer = materials[i].querySelector("#manufacturer");
       
-      contents.push(item.value)
-    }
-
-    if (contents.length < 1) {
-      alertMessage("error", "Adicione pelo menos um item")
-      return
+      materialsArray.push({item: item.value, manufacturer: manufacturer.value})
     }
 
     if (name.value.length == 0) {
@@ -319,23 +425,36 @@
       return
     }
 
-    fetch('/admin/new-supplier/save', {
+    fetch('/admin/save-supplier/<%= supplier._id %>', {
       method: 'POST',
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({name: name.value, email: email.value, address: address.value, cep: cep.value, city: city.value, landline: landline.value, phone: phone.value, contactName: contactName.value, type: contents, comments: comments.value})
+      body: JSON.stringify({name: name.value, email: email.value, address: address.value, cep: cep.value, city: city.value, landline: landline.value, phone: phone.value, contactName: contactName.value, materials: materialsArray, comments: comments.value})
     })
     .then((response) => {
       if (response.ok) {
-        alertMessage("success", "Fornecedor adicionado com sucesso.")
+        alertMessage("success", "Fornecedor atualizado com sucesso.")
       } else {
-        alertMessage("error", "Erro ao adicionar fornecedor")
+        alertMessage("error", "Erro ao atualizar fornecedor")
       }
     })
     .catch((error) => {
       alertMessage("error", "Tente novamente mais tarde")
     })
   }
+
+  cep.addEventListener("input", function() {
+    formatCEP(cep)
+  })
+
+  window.addEventListener('DOMContentLoaded', function () {
+    VMasker(document.getElementById('landline')).maskPattern('(99) 9999-9999');
+    VMasker(document.getElementById('phone')).maskPattern('(99) 99999-9999');
+  });
+
+  document.addEventListener("DOMContentLoaded", function() {
+    loadMaterials('<%= JSON.stringify(supplier.materials) %>')
+  })
 </script>
 </html>

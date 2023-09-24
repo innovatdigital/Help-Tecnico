@@ -41,6 +41,14 @@ const Call = new mongoose.Schema({
         type: String,
         require: true
     },
+    name_company: {
+        type: String,
+        require: true
+    },
+    logo_company: {
+        type: String,
+        require: true
+    },
     sla: {
         type: String,
         require: true

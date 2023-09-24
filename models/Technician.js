@@ -10,7 +10,7 @@ const Technician = new mongoose.Schema({
         require: true
     },
     phone: {
-        type: Number,
+        type: String,
         require: true
     },
     email: {
@@ -62,6 +62,10 @@ const Technician = new mongoose.Schema({
         require: true
     },
     calls: {
+        type: Array,
+        default: []
+    },
+    responsibleCompanies: {
         type: Array,
         default: []
     },

@@ -17,7 +17,7 @@
         <div class="fixed inset-0 bg-gray-500 bg-opacity-25 transition-opacity"></div>
       
         <div class="fixed inset-0 z-10 overflow-y-auto p-4 sm:p-6 md:p-20 mt-40">
-          <div class="mx-auto accounts transform divide-y divide-gray-100 overflow-hidden rounded-xl bg-white shadow-2xl ring-1 ring-black ring-opacity-5 transition-all">      
+          <div class="mx-auto max-w-xl transform divide-y divide-gray-100 overflow-hidden rounded-xl bg-white shadow-2xl ring-1 ring-black ring-opacity-5 transition-all">      
             <div class="flex flex-col divide-y divide-gray-100">
               <div class="min-w-0 flex-auto scroll-py-4 overflow-y-auto px-6 py-4">
                 <div class="flex flex-col divide-y divide-gray-100 px-6">
@@ -35,27 +35,68 @@
         </div>
       </div>
 
+      <div class="hidden relative z-10 fade-in" id="popup_equipments" role="dialog" aria-modal="true">
+        <div class="fixed inset-0 bg-gray-500 bg-opacity-25 transition-opacity"></div>
+
+        <div class="fixed inset-0 z-10 overflow-y-auto p-4 sm:p-6 md:p-20 mt-20">
+          <div
+            class="mx-auto max-w-xl transform divide-y divide-gray-100 overflow-hidden rounded-xl bg-white shadow-2xl ring-1 ring-black ring-opacity-5 transition-all">
+            <div class="flex justify-between py-3 px-6">
+              <h2 class="color-purple inter font-semibold text-lg">Selecionar equipamentos:</h2>
+              <button onclick="closeEquipments()">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path
+                    d="M14.3075 11.7231L20.3075 5.67693C20.5844 5.4 20.5844 4.98462 20.3075 4.7077L19.3844 3.73847C19.1075 3.46154 18.6921 3.46154 18.4151 3.73847L12.369 9.78462C12.1844 9.96923 11.9075 9.96923 11.7228 9.78462L5.67668 3.69231C5.39976 3.41539 4.98438 3.41539 4.70745 3.69231L3.73822 4.66154C3.4613 4.93847 3.4613 5.35385 3.73822 5.63077L9.78438 11.6769C9.96899 11.8615 9.96899 12.1385 9.78438 12.3231L3.69207 18.4154C3.41514 18.6923 3.41514 19.1077 3.69207 19.3846L4.6613 20.3538C4.93822 20.6308 5.35361 20.6308 5.63053 20.3538L11.6767 14.3077C11.8613 14.1231 12.1382 14.1231 12.3228 14.3077L18.369 20.3538C18.6459 20.6308 19.0613 20.6308 19.3382 20.3538L20.3075 19.3846C20.5844 19.1077 20.5844 18.6923 20.3075 18.4154L14.3075 12.3692C14.1228 12.1846 14.1228 11.9077 14.3075 11.7231Z"
+                    fill="#239CFF" />
+                </svg>
+              </button>
+            </div>
+
+            <% if (equipments.length == 0) { %>
+              <div class="flex flex-col divide-y divide-gray-100">
+                <div class="min-w-0 flex-auto scroll-py-4 overflow-y-auto px-6 py-4">
+                  <ul class="-mx-2 text-sm text-gray-700 overflow-y-auto h-48" id="options" role="listbox">
+                    <% equipments.forEach(function(item) { %>
+                      <li class="group flex flex-col cursor-default select-none rounded-md p-2 mb-4" id="option-1" role="option" tabindex="-1">
+                        <div>
+                          <div class="flex items-center">
+                            <img src="<%= item.photo %>" alt="" class="h-9 flex-none rounded-full border-purple">
+                            <span style="font-size: 15px;"
+                              class="ml-3 flex-auto truncate inter font-semibold color-purple">
+                              <%= item.name %>
+                            </span>
+                          </div>
+                        </div>
+                      </li>
+                      <% }) %>
+                  </ul>
+                </div>
+              </div>
+            <% } else { %>
+              <div class="px-6 py-14 text-center text-sm sm:px-14">
+                <p class="mt-4 font-semibold inter color-blue">Nenhum equipamento encontrado</p>
+            <% } %>
+          </div>
+        </div>
+      </div>
+
       <div class="px-4 sm:px-6 lg:pl-12 mt-2 col-span-3">
-        <div class="bg-white rounded-xl shadow p-4 px-5">
+        <div class="bg-white rounded-xl border-2 p-4 px-5">
           <div class="flex justify-between items-center border-b pb-3">
             <div>
-              <h2 class="text-xl color-blue inter font-bold">Solicitar novo chamado</h2>
+              <h2 class="text-xl color-blue inter font-semibold">Solicitar novo chamado</h2>
             </div>
   
             <div class="flex items-center">
-              <div class="min-img flex gap-x-2 mr-2">
-              </div>
-              <!-- <div class="mr-2">
-                <p class="text-sm inter">0 contas</p>
-              </div> -->
-              <button type="button" onclick="openAccounts()" class="rounded-full px-2.5 py-1 inter text-sm font-semibold shadow-sm border-blue color-blue">Selecionar equipamentos</button>
+              <div class="min-img flex gap-x-2 mr-2"></div>
+              <button type="button" onclick="openEquipments()" class="rounded-full px-2.5 py-1 inter text-sm font-semibold shadow-sm border-blue color-blue">Selecionar equipamentos</button>
             </div>
           </div>
   
           <div class="mt-4">
             <label for="comment" class="block text-md font-medium leading-6 text-gray-900 inter font-semibold">Conteúdo do chamado:</label>
             <div class="mt-2">
-              <textarea rows="3" id="description" class="block w-full border-blue rounded-lg p-1.5 text-gray-900 shadow-sm ring-1 inter ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" placeholder="O ar condicionado não recebe comandos do controle."></textarea>
+              <textarea rows="3" id="description" class="block w-full border-blue-1 rounded-lg p-1.5 text-gray-900 shadow-sm ring-1 inter sm:text-sm sm:leading-6" placeholder="O ar condicionado não recebe comandos do controle."></textarea>
             </div>
           </div>
   
@@ -68,14 +109,15 @@
                 </svg>                  
               </div>
               <span class="mt-2 files block text-sm font-semibold text-gray-900 inter">Selecione uma ou várias imagens</span>
-              <input type="file" name="images" id="images" class="hidden" multiple>
+              <span class="mt-1 block text-xs font-medium text-gray-900 inter">JPEG, PNG OU JPG</span>
+              <input type="file" name="images" id="images" class="hidden" multiple accept="image/*,video/*">
             </label>
           </div>
   
           <div id="images-selected" class="flex space-x-4 flex-wrap mt-8"></div>
           
           <div class="mt-2">
-            <button onclick="saveCall()" class="w-full rounded-lg bg-blue inter text-white py-2.5">Criar novo chamado</button>
+            <button onclick="saveCall()" class="w-full rounded-lg bg-blue inter text-white py-2.5">Abrir chamado</button>
           </div>
         </div>
       </div>
@@ -89,6 +131,18 @@
   const uploadImagesInput = document.querySelector("#images")
   const selectedImages = document.querySelector("#images-selected")
   uploadImagesInput.addEventListener('change', uploadImages);
+
+  function openEquipments() {
+    const popup = document.querySelector("#popup_equipments")
+
+    popup.classList.remove("hidden")
+  }
+
+  function closeEquipments() {
+    const popup = document.querySelector("#popup_equipments")
+
+    popup.classList.add("hidden")
+  }
 
   function alert_message(type, content) {
     if (type == 'error') {
@@ -186,7 +240,7 @@
         openLoading(false)
         const data = await response.json();
 
-        location.href = "/company/view-call";
+        location.href = `/company/view-call/${data.call}`;
       } else {
         alert_message("error", "Não foi possível abrir o chamado.");
         openLoading(false)

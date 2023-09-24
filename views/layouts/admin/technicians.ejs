@@ -14,13 +14,19 @@
       <div class="error mt-14" style="display: none;"><div style="display: flex;" class="error-text"></div></div>
 
       <div class="px-4 sm:px-6 lg:pl-12 mt-2 col-span-3">
-        <div class="sm:flex sm:items-center">
-          <div class="sm:flex-auto">
-            <h1 class="text-lg font-semibold leading-6 text-gray-900 inter color-purple"><%= technicians.length %> técnico(s) cadastrado(s)</h1>
+        <div class="sm:flex sm:justify-between sm:items-center">
+          <h1 class="text-lg font-semibold leading-6 text-gray-900 inter color-purple"><span class="text-blue"><%= technicians.length %> técnico(s)</span> cadastrado(s)</h1>
+
+          <div class="relative flex">
+            <label for="search-field" class="sr-only">Search</label>
+            <svg class="pointer-events-none absolute inset-y-0 left-0 h-full ml-2 w-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+              <path fill-rule="evenodd" d="M9 3.5a5.5 5.5 0 100 11 5.5 5.5 0 000-11zM2 9a7 7 0 1112.452 4.391l3.328 3.329a.75.75 0 11-1.06 1.06l-3.329-3.328A7 7 0 012 9z" clip-rule="evenodd" />
+            </svg>
+            <input id="search-field" class="block h-full w-full border-blue-1 rounded-lg py-2 pl-8 pr-0 inter text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm" placeholder="Pesquisar por nome" type="search" name="search">
           </div>
         </div>
         
-        <div class="mt-4 flow-root">
+        <div class="mt-8 flow-root">
           <div class="-mx-4 -my-2">
             <div class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-5">
               <% if (technicians.length > 0) { %>
@@ -29,7 +35,6 @@
                     <thead class="bg-gray-50">
                       <tr>
                         <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 inter">Técnico</th>
-                        <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 inter">CPF</th>
                         <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 inter">Telefone</th>
                         <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 inter">Email</th>
                         <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 inter">Cidade</th>
@@ -42,109 +47,49 @@
                     <tbody class="divide-y divide-gray-200 bg-white">
                       <% technicians.forEach(function(item) { %>
                         <tr>
-                          <td class="whitespace-nowrap px-3 py-4 text-sm inter text-gray-800 font-bold">
-                            <div class="flex items-center mr-6">
+                          <td class="whitespace-nowrap px-3 py-4 text-sm inter text-gray-800 font-semibold">
+                            <div class="flex items-center ml-4">
                               <% if (item.photo.length > 0) { %>
                                 <img class="h-9 w-9 rounded-full" src="/img/photos/<%= item.imageCompany %>">
                               <% } else { %>
-                                <p class="inter ml-2"><%= item.name %></p>
-                            </div>
-                          </td>
-  
-                          <td class="whitespace-nowrap px-3 py-4 text-sm inter text-gray-800 font-bold">
-                            <%= item.description %>
-                          </td>
-  
-                          <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 inter color-purple font-semibold"><%= item.date %></td>
-  
-                          <% if (item.status == "pending") { %>
-                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 inter color-purple font-semibold">Não iniciado</td>
-                          <% } else if (item.status == "in-attendance") { %>
-                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 inter color-purple font-semibold"><%= item.sla %> (contando)</td>
-                          <% } else if (item.status == "concluded") { %>
-                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 inter color-purple font-semibold"><%= item.sla %></td>
-                          <% } %>
-  
-                          <% if (item.status == "pending") { %>
-                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 inter color-purple font-semibold">
-                              <p class="inter font-bold">Aguardando</p>
-                            </td>
-                          <% } else { %>
-                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 inter color-purple font-semibold">
-                              <p class="inter font-bold"><%= item.start_time %></p>
-                            </td>
-                          <% } %>
-  
-                          <% if (item.status == "pending") { %>
-                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 inter color-purple font-semibold">
-                              <p class="inter font-bold">Aguardando</p>
-                            </td>
-                          <% } else { %>
-                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 inter color-purple font-semibold">
-                              <p class="inter font-bold"><%= item.end_time %></p>
-                            </td>
-                          <% } %>
-  
-                          <% if (item.status == "pending") { %>
-                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 inter color-purple font-semibold">
-                              <div class="flex items-center justify-end gap-x-2 sm:justify-start">
-                                <div class="flex-none rounded-full p-1 text-yellow-400 bg-yellow-opacity">
-                                  <div class="h-1.5 w-1.5 rounded-full bg-current"></div>
-                                </div>
-                                <div class="hidden text-yellow-400 sm:block">Pendente</div>
-                              </div>
-                            </td>
-  
-                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 inter color-purple">
-                              <div class="flex items-center mr-6">
-                                <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                  <g clip-path="url(#clip0_281_44)">
-                                  <path d="M15 30C23.2843 30 30 23.2843 30 15C30 6.71573 23.2843 0 15 0C6.71573 0 0 6.71573 0 15C0 23.2843 6.71573 30 15 30Z" fill="#0EA5E9"/>
-                                  <path d="M21.8077 10.9377C21.8448 11.0114 21.867 11.0919 21.8731 11.1745C21.8791 11.2571 21.8689 11.3401 21.843 11.4186C21.8171 11.4971 21.776 11.5696 21.7221 11.6318C21.6682 11.6941 21.6027 11.7448 21.5292 11.781C21.4558 11.8173 21.376 11.8383 21.2944 11.843C21.2129 11.8476 21.1312 11.8357 21.0542 11.808C20.9773 11.7802 20.9065 11.7372 20.8462 11.6814C20.7858 11.6257 20.737 11.5583 20.7026 11.4832C20.3341 10.7167 19.8149 10.0346 19.177 9.47888C18.974 9.36419 18.7451 9.30521 18.5127 9.30793C18.2804 9.3106 18.0528 9.37479 17.8525 9.49417C17.6523 9.61351 17.4863 9.7839 17.371 9.98839C17.2557 10.1928 17.1951 10.4243 17.1953 10.6599V11.346C17.195 11.4876 17.1394 11.6233 17.0407 11.7234C16.9419 11.8235 16.808 11.8799 16.6683 11.8802H13.9167C13.777 11.8799 13.6431 11.8235 13.5443 11.7234C13.4456 11.6233 13.39 11.4876 13.3897 11.346V11.4247C13.39 11.1621 13.3144 10.9052 13.1722 10.6857C13.1398 10.6444 13.1087 10.602 13.079 10.5586C12.9438 10.3952 12.7724 10.2664 12.5788 10.1829C12.3852 10.0994 12.1748 10.0636 11.9649 10.0782C11.755 10.0929 11.5514 10.1578 11.371 10.2675C11.1905 10.3772 11.0382 10.5286 10.9265 10.7093C10.869 10.8401 10.7688 10.9468 10.6428 11.0116C10.5168 11.0762 10.3727 11.095 10.2347 11.0646C10.0967 11.0343 9.9732 10.9567 9.88498 10.8448C9.7968 10.733 9.74925 10.5938 9.75039 10.4507V7.88629C9.7503 7.74102 9.80029 7.60027 9.89171 7.48841C9.98313 7.37654 10.1102 7.30056 10.2511 7.2736C10.3919 7.24664 10.5376 7.27043 10.6629 7.34083C10.7883 7.41119 10.8854 7.52379 10.9376 7.65908C11.0489 7.83336 11.1983 7.9793 11.3742 8.08553C11.5502 8.19176 11.7479 8.25538 11.9521 8.27149C12.1563 8.2876 12.3614 8.25575 12.5515 8.1784C12.7415 8.10106 12.9114 7.98028 13.0479 7.82556C13.0949 7.75314 13.1457 7.68332 13.1999 7.61634L13.2077 7.60397H13.211C13.4369 7.32875 13.7199 7.10736 14.0397 6.95556C14.3596 6.80371 14.7085 6.72521 15.0617 6.72554H15.095C15.1164 6.7232 15.1379 6.72209 15.1593 6.72217C16.5462 6.72176 17.9052 7.11682 19.0811 7.86225C20.2569 8.60769 21.2022 9.67343 21.8088 10.9377H21.8077ZM16.6628 13.3165C16.6625 13.1749 16.6068 13.0391 16.5081 12.939C16.4093 12.8389 16.2754 12.7825 16.1358 12.7822H14.2329C14.0933 12.7828 13.9596 12.8393 13.8609 12.9394C13.7622 13.0394 13.7065 13.175 13.7059 13.3165V23.9395C13.7062 24.0812 13.7618 24.2169 13.8605 24.317C13.9593 24.4171 14.0932 24.4735 14.2329 24.4738H16.1358C16.2754 24.4735 16.4093 24.4171 16.5081 24.317C16.6068 24.2169 16.6625 24.0812 16.6628 23.9395V13.3165Z" fill="white"/>
+                                <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                  <g clip-path="url(#clip0_1_8)">
+                                  <path d="M16 32C24.8366 32 32 24.8366 32 16C32 7.16344 24.8366 0 16 0C7.16344 0 0 7.16344 0 16C0 24.8366 7.16344 32 16 32Z" fill="#0EA5E9"/>
+                                  <path d="M23.2614 11.6669C23.301 11.7456 23.3247 11.8314 23.3312 11.9195C23.3376 12.0076 23.3267 12.0961 23.2991 12.1798C23.2714 12.2636 23.2276 12.3409 23.1701 12.4073C23.1126 12.4737 23.0427 12.5278 22.9644 12.5665C22.886 12.6051 22.8009 12.6276 22.7139 12.6325C22.6269 12.6374 22.5398 12.6247 22.4577 12.5952C22.3756 12.5656 22.3002 12.5197 22.2358 12.4602C22.1714 12.4008 22.1193 12.3288 22.0826 12.2488C21.6895 11.4312 21.1358 10.7036 20.4553 10.1108C20.2389 9.9885 19.9946 9.9256 19.7468 9.92849C19.499 9.93134 19.2562 9.99981 19.0426 10.1272C18.829 10.2545 18.6519 10.4362 18.5289 10.6543C18.4059 10.8724 18.3413 11.1193 18.3416 11.3706V12.1024C18.3413 12.2534 18.2819 12.3982 18.1766 12.505C18.0712 12.6118 17.9284 12.6719 17.7794 12.6722H14.8444C14.6953 12.6719 14.5525 12.6118 14.4472 12.505C14.3418 12.3982 14.2825 12.2534 14.2822 12.1024V12.1864C14.2825 11.9063 14.2019 11.6322 14.0502 11.3982C14.0156 11.3541 13.9825 11.3089 13.9508 11.2626C13.8066 11.0882 13.6238 10.9509 13.4173 10.8618C13.2107 10.7727 12.9863 10.7345 12.7624 10.7501C12.5385 10.7658 12.3214 10.835 12.1289 10.952C11.9364 11.069 11.774 11.2305 11.6548 11.4233C11.5935 11.5628 11.4866 11.6767 11.3522 11.7457C11.2178 11.8147 11.0641 11.8347 10.9169 11.8023C10.7697 11.7699 10.638 11.6871 10.5439 11.5679C10.4498 11.4486 10.3991 11.3001 10.4003 11.1474V8.41208C10.4002 8.25713 10.4535 8.10699 10.551 7.98767C10.6485 7.86835 10.7841 7.7873 10.9343 7.75854C11.0845 7.72978 11.2399 7.75516 11.3737 7.83025C11.5074 7.9053 11.611 8.02541 11.6667 8.16972C11.7853 8.35562 11.9447 8.51128 12.1324 8.6246C12.3201 8.73791 12.531 8.80577 12.7488 8.82296C12.9666 8.84014 13.1854 8.80617 13.3881 8.72367C13.5908 8.64117 13.7721 8.51234 13.9177 8.3473C13.9678 8.27006 14.0219 8.19558 14.0798 8.12413L14.0881 8.11093H14.0916C14.3326 7.81737 14.6344 7.58122 14.9756 7.4193C15.3168 7.25732 15.689 7.1736 16.0657 7.17395H16.1012C16.124 7.17145 16.1469 7.17027 16.1698 7.17035C17.6492 7.16992 19.0988 7.59131 20.353 8.38644C21.6073 9.18157 22.6155 10.3184 23.2626 11.6669H23.2614ZM17.7735 14.2043C17.7732 14.0532 17.7138 13.9085 17.6085 13.8017C17.5031 13.6949 17.3603 13.6347 17.2114 13.6344H15.1817C15.0327 13.6351 14.8901 13.6953 14.7848 13.802C14.6795 13.9088 14.6201 14.0533 14.6195 14.2043V25.5355C14.6198 25.6866 14.6791 25.8314 14.7845 25.9382C14.8898 26.045 15.0326 26.1051 15.1817 26.1054H17.2114C17.3603 26.1051 17.5031 26.045 17.6085 25.9382C17.7138 25.8314 17.7732 25.6866 17.7735 25.5355V14.2043Z" fill="white"/>
                                   </g>
                                   <defs>
-                                  <clipPath id="clip0_281_44">
-                                  <rect width="30" height="30" fill="white"/>
+                                  <clipPath id="clip0_1_8">
+                                  <rect width="32" height="32" fill="white"/>
                                   </clipPath>
                                   </defs>
-                                </svg>                                                                                          
-                                <p class="inter ml-2">Aguardando Técnico</p>
-                              </div>
-                            </td>
-                          <% } else if (item.status == "in-attendance") { %>
-                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 inter color-purple font-semibold">
-                              <div class="flex items-center justify-end gap-x-2 sm:justify-start">
-                                <div class="flex-none rounded-full p-1 text-green-400 bg-green-opacity">
-                                  <div class="h-1.5 w-1.5 rounded-full bg-current"></div>
-                                </div>
-                                <div class="hidden text-green-400 sm:block font-bold">Em atendimento</div>
-                              </div>
-                            </td>
-                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 inter color-purple">
-                              <div class="flex items-center mr-6">
-                                <img class="h-8 rounded-full" src="https://pps.whatsapp.net/v/t61.24694-24/309612029_1303621463511201_2184499647973530355_n.jpg?ccb=11-4&oh=01_AdTLj4igz1k4OkKVwtf5wwXyceqwcgJlQGxo3JG6sDOlTQ&oe=64B44F62">
-                                <p class="inter ml-2">Anderson Moreira</p>
-                              </div>
-                            </td>
-                          <% } else if (item.status == "concluded") { %>
-                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 inter color-purple font-semibold">
-                              <div class="flex items-center justify-end gap-x-2 sm:justify-start">
-                                <div class="flex-none rounded-full p-1 text-blue-600 bg-blue-opacity">
-                                  <div class="h-1.5 w-1.5 rounded-full bg-current"></div>
-                                </div>
-                                <div class="hidden text-blue-600 sm:block">Concluído</div>
-                              </div>
-                            </td>
-                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 inter color-purple">
-                              <div class="flex items-center mr-6">
-                                <img class="h-8 rounded-full" src="https://pps.whatsapp.net/v/t61.24694-24/309612029_1303621463511201_2184499647973530355_n.jpg?ccb=11-4&oh=01_AdTLj4igz1k4OkKVwtf5wwXyceqwcgJlQGxo3JG6sDOlTQ&oe=64B44F62">
-                                <p class="inter ml-2">Anderson Moreira</p>
-                              </div>
-                            </td>
-                          <% } %>
+                                </svg>                                  
+                              <% } %>                                  
+                              <p class="inter ml-2"><%= item.name %></p>
+                            </div>
+                          </td>
+
+                          <td class="whitespace-nowrap px-3 py-4 text-sm inter text-gray-800 font-semibold">
+                            <%= item.phone %>
+                          </td>
+
+                          <td class="whitespace-nowrap px-3 py-4 text-sm inter text-gray-800 font-semibold">
+                            <%= item.email %>
+                          </td>
+
+                          <td class="whitespace-nowrap px-3 py-4 text-sm inter text-gray-800 font-semibold">
+                            <%= item.city %>
+                          </td>
+
+                          <td class="whitespace-nowrap px-3 py-4 text-sm inter text-blue font-semibold">
+                            <%= item.calls.length %> chamados
+                          </td>
+
+                          <td class="whitespace-nowrap px-3 py-4 text-sm inter text-gray-800 font-semibold">
+                            <%= item.date %>
+                          </td>
   
                           <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 inter color-purple font-semibold">
-                            <a href="/admin/view-call/<%= item._id %>" class="flex items-center">
+                            <a href="/admin/view-technician/<%= item._id %>" class="flex items-center pointer">
                               <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" class="mr-2">
                                 <path opacity="0.5" d="M2.73038 12.7463C2.0221 11.8262 1.66797 11.3661 1.66797 9.99992C1.66797 8.63375 2.0221 8.17369 2.73038 7.25353C4.1446 5.41622 6.51639 3.33325 10.0013 3.33325C13.4862 3.33325 15.858 5.41622 17.2722 7.25353C17.9805 8.17369 18.3346 8.63375 18.3346 9.99992C18.3346 11.3661 17.9805 11.8262 17.2722 12.7463C15.858 14.5836 13.4862 16.6666 10.0013 16.6666C6.51639 16.6666 4.1446 14.5836 2.73038 12.7463Z" stroke="#0E1726" stroke-width="1.25"/>
                                 <path d="M12.5 10C12.5 11.3807 11.3807 12.5 10 12.5C8.61925 12.5 7.5 11.3807 7.5 10C7.5 8.61925 8.61925 7.5 10 7.5C11.3807 7.5 12.5 8.61925 12.5 10Z" stroke="#0E1726" stroke-width="1.25"/>
@@ -209,7 +154,7 @@
                     <rect width="321.696" height="296" fill="white"/>
                     </clipPath>
                     </defs>
-                  </svg>                                                                                                  
+                  </svg>  
                   <h2 class="inter text-xl font-semibold mt-10">Nenhum técnico cadastrado</h2>
                   <p class="inter">Você não cadastrou nenhum técnico ainda</p>           
                 </div>

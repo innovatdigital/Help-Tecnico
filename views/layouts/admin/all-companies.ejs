@@ -14,9 +14,15 @@
       <div class="error mt-14" style="display: none;"><div style="display: flex;" class="error-text"></div></div>
 
       <div class="px-4 sm:px-6 lg:pl-12 mt-2 col-span-3">
-        <div class="sm:flex sm:items-center">
-          <div class="sm:flex-auto">
-            <h1 class="text-lg font-semibold leading-6 text-gray-900 inter color-purple">Todas as empresas:</h1>
+        <div class="sm:flex sm:justify-between sm:items-center">
+          <h1 class="text-lg font-semibold leading-6 text-gray-900 inter color-purple"><span class="text-blue"><%= companies.length %> empresa(s)</span> cadastrada(s)</h1>
+
+          <div class="relative flex">
+            <label for="search-field" class="sr-only">Search</label>
+            <svg class="pointer-events-none absolute inset-y-0 left-0 h-full ml-2 w-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+              <path fill-rule="evenodd" d="M9 3.5a5.5 5.5 0 100 11 5.5 5.5 0 000-11zM2 9a7 7 0 1112.452 4.391l3.328 3.329a.75.75 0 11-1.06 1.06l-3.329-3.328A7 7 0 012 9z" clip-rule="evenodd" />
+            </svg>
+            <input id="search-field" class="block h-full w-full border-blue-1 rounded-lg py-2 pl-8 pr-0 inter text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm" placeholder="Pesquisar por nome" type="search" name="search">
           </div>
         </div>
         
@@ -41,35 +47,44 @@
                     <tbody class="divide-y divide-gray-200 bg-white">
                       <% companies.forEach(function(item) { %>
                         <tr>
-                          <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium sm:pl-6 text-blue">
+                          <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium sm:pl-6 text-gray-500">
                             <div class="flex items-center space-x-2">
-                              <svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-                                <rect width="36" height="36" rx="18" fill="#888EA8" fill-opacity="0.4"/>
-                                <rect x="7" y="8" width="22.8571" height="20" fill="url(#pattern0)"/>
-                                <defs>
-                                <pattern id="pattern0" patternContentUnits="objectBoundingBox" width="1" height="1">
-                                <use xlink:href="#image0_155_54" transform="matrix(0.00911458 0 0 0.0104167 0.0625001 0)"/>
-                                </pattern>
-                                <image id="image0_155_54" width="96" height="96" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAAACXBIWXMAAAsTAAALEwEAmpwYAAABvElEQVR4nO3ZPU7DYBCE4S0QVwEJjkoQP+IqVHAK4CJAR9CLIqWgQVvEw6438/SJZr6xHUWOMDMzMzMzMzMz+wNwCdwAr8An/X3us+4yX652WOAUeAC+Wa8tcL/rEis8/GfmeFrVCPsrf5q7WNEzf3frTrMFLqI74Ja5rqM74I25XqI74IO53qM7hovuGC66Y7jojuGiO4aL7hguumO46I7hojt1QcSf/6f3DS/ABjhf7OCXKnjo94c438K+9kOceIBaj4uNcGiSI7sDftt4gPrH0ZnvgFpXHmDt7xsOTXDEvwHLvG9guBCfjwdIeIBiHqCYByjmAYp5gGIeoNj4AdQFEFPnT3UvgJg6f6p7AcTU+VPdCyCmzp/qXgAxdf5U9wKIqfOnuhdATJ0/1b0AYur8UV2wmvp8PEDCAxTzAMU8QDEPUMwDFPMAxcYPoC6AmDp/qnsBxNT5U90LIKbOn+peADF1/lT3Aoip86e6F0BMnT/VvQBi6vyp7gUQU+eP6oLV1OfjARIeoJgHKOYBinmAYh6gmAco5gGG8/+AYh6gmAco5gGKeYBiHqCYB1j7AGZmZmZmZmZmFlP8AN3fTDc25TqSAAAAAElFTkSuQmCC"/>
-                                </defs>
-                              </svg>
+                              <% if (item.photo.length > 0) { %>
+                                <img class="h-8 rounded-full" src="/img/photos/<%= item.photo %>">
+                              <% } else { %>
+                                <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                                  <g clip-path="url(#clip0_3_2)">
+                                  <path d="M32 16C32 7.16344 24.8366 0 16 0C7.16344 0 0 7.16344 0 16C0 24.8366 7.16344 32 16 32C24.8366 32 32 24.8366 32 16Z" fill="#239CFF"/>
+                                  <path d="M26.5396 7.11111H6.22217V24.8889H26.5396V7.11111Z" fill="url(#pattern0)"/>
+                                  </g>
+                                  <defs>
+                                  <pattern id="pattern0" patternContentUnits="objectBoundingBox" width="1" height="1">
+                                  <use xlink:href="#image0_3_2" transform="matrix(0.00911458 0 0 0.0104167 0.0625001 0)"/>
+                                  </pattern>
+                                  <clipPath id="clip0_3_2">
+                                  <rect width="32" height="32" fill="white"/>
+                                  </clipPath>
+                                  <image id="image0_3_2" width="96" height="96" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAAACXBIWXMAAAsTAAALEwEAmpwYAAABvElEQVR4nO3ZPU7DYBCE4S0QVwEJjkoQP+IqVHAK4CJAR9CLIqWgQVvEw6438/SJZr6xHUWOMDMzMzMzMzMz+wNwCdwAr8An/X3us+4yX652WOAUeAC+Wa8tcL/rEis8/GfmeFrVCPsrf5q7WNEzf3frTrMFLqI74Ja5rqM74I25XqI74IO53qM7hovuGC66Y7jojuGiO4aL7hguumO46I7hojt1QcSf/6f3DS/ABjhf7OCXKnjo94c438K+9kOceIBaj4uNcGiSI7sDftt4gPrH0ZnvgFpXHmDt7xsOTXDEvwHLvG9guBCfjwdIeIBiHqCYByjmAYp5gGIeoNj4AdQFEFPnT3UvgJg6f6p7AcTU+VPdCyCmzp/qXgAxdf5U9wKIqfOnuhdATJ0/1b0AYur8UV2wmvp8PEDCAxTzAMU8QDEPUMwDFPMAxcYPoC6AmDp/qnsBxNT5U90LIKbOn+peADF1/lT3Aoip86e6F0BMnT/VvQBi6vyp7gUQU+eP6oLV1OfjARIeoJgHKOYBinmAYh6gmAco5gGG8/+AYh6gmAco5gGKeYBiHqCYB1j7AGZmZmZmZmZmFlP8AN3fTDc25TqSAAAAAElFTkSuQmCC"/>
+                                  </defs>
+                                </svg>
+                              <% } %>
                               <p class="inter ml-2"><%= item.name %></p>
-                            </div>                                                                 
+                            </div>
                           </td>
                           <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 inter">
                             <%= item.cnpj %>
                           </td>
-                          <td class="whitespace-nowrap px-3 py-4 text-sm inter text-green-500 font-bold">
+                          <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 inter font-medium">
                             <%= item.phoneCompany %>
                           </td>
-                          <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 inter color-purple font-semibold"><%= item.email %></td>
-                          <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 inter color-purple font-semibold">
+                          <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 inter color-purple font-medium"><%= item.email %></td>
+                          <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 inter color-purple font-medium">
                             <%= item.date %>
                           </td>
-                          <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 inter color-purple font-semibold">
+                          <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 inter color-purple font-medium">
                             <%= item.city %>
                           </td>
-                          <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 inter color-purple font-semibold">
+                          <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 inter color-purple font-medium">
                             <a href="/admin/view-company/<%= item._id %>" class="flex items-center pointer">
                               <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" class="mr-2">
                                 <path opacity="0.5" d="M2.73038 12.7463C2.0221 11.8262 1.66797 11.3661 1.66797 9.99992C1.66797 8.63375 2.0221 8.17369 2.73038 7.25353C4.1446 5.41622 6.51639 3.33325 10.0013 3.33325C13.4862 3.33325 15.858 5.41622 17.2722 7.25353C17.9805 8.17369 18.3346 8.63375 18.3346 9.99992C18.3346 11.3661 17.9805 11.8262 17.2722 12.7463C15.858 14.5836 13.4862 16.6666 10.0013 16.6666C6.51639 16.6666 4.1446 14.5836 2.73038 12.7463Z" stroke="#0E1726" stroke-width="1.25"/>

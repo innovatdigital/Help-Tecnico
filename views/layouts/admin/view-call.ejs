@@ -10,13 +10,98 @@
     <%- include('../partials/admin/nav-admin', {title: "Visualizar chamado", notifications: notifications, photo: photo, name_user: name_user}) %>
 
     <main class="py-5 fade-in">
-      <div class="alert mt-14" style="display: none;"><div style="display: flex;" class="alert-text"></div></div>
-      <div class="error mt-14" style="display: none;"><div style="display: flex;" class="error-text"></div></div>
+      <div class="hidden fade-in relative z-10" id="popup_technician" role="dialog" aria-modal="true">
+        <div class="fixed inset-0 bg-gray-500 bg-opacity-25 transition-opacity"></div>
+      
+        <div class="fixed inset-0 z-10 overflow-y-auto p-4 mt-40 ml-40 sm:p-6 md:p-20">
+          <div class="mx-auto max-w-xl transform divide-y divide-gray-100 overflow-hidden rounded-xl bg-white shadow-2xl ring-1 ring-black ring-opacity-5 transition-all">
+            <div class="flex justify-between py-3 px-6">
+              <h2 class="color-blue inter font-semibold text-lg">Designar chamado</h2>
+              <button onclick="closeSelectTechnician()">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M14.3075 11.7231L20.3075 5.67693C20.5844 5.4 20.5844 4.98462 20.3075 4.7077L19.3844 3.73847C19.1075 3.46154 18.6921 3.46154 18.4151 3.73847L12.369 9.78462C12.1844 9.96923 11.9075 9.96923 11.7228 9.78462L5.67668 3.69231C5.39976 3.41539 4.98438 3.41539 4.70745 3.69231L3.73822 4.66154C3.4613 4.93847 3.4613 5.35385 3.73822 5.63077L9.78438 11.6769C9.96899 11.8615 9.96899 12.1385 9.78438 12.3231L3.69207 18.4154C3.41514 18.6923 3.41514 19.1077 3.69207 19.3846L4.6613 20.3538C4.93822 20.6308 5.35361 20.6308 5.63053 20.3538L11.6767 14.3077C11.8613 14.1231 12.1382 14.1231 12.3228 14.3077L18.369 20.3538C18.6459 20.6308 19.0613 20.6308 19.3382 20.3538L20.3075 19.3846C20.5844 19.1077 20.5844 18.6923 20.3075 18.4154L14.3075 12.3692C14.1228 12.1846 14.1228 11.9077 14.3075 11.7231Z" fill="#000000"/>
+                </svg>                                    
+              </button>
+            </div>
+
+            <div class="flex flex-col px-6">
+              <div class="py-4">
+                <% technicians.forEach(function(item) { %>
+                  <div class="flex justify-between items-center py-2">
+                    <div class="flex items-center">
+                      <% if (item.photo.length > 0) { %>
+                        <img class="h-12 w-12 rounded-full" src="/img/photos/<%= item.photo %>">
+                      <% } else { %>
+                        <svg width="39" height="40" viewBox="0 0 39 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <g clip-path="url(#clip0_103_101)">
+                          <mask id="mask0_103_101" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="0" y="0" width="39" height="40">
+                          <path d="M38.7879 0H0V40H38.7879V0Z" fill="white"/>
+                          </mask>
+                          <g mask="url(#mask0_103_101)">
+                          <path d="M19.3939 40C30.105 40 38.7879 31.0458 38.7879 20C38.7879 8.9543 30.105 0 19.3939 0C8.68296 0 0 8.9543 0 20C0 31.0458 8.68296 40 19.3939 40Z" fill="#0EA5E9"/>
+                          <path d="M28.1956 14.5836C28.2436 14.682 28.2723 14.7892 28.2802 14.8994C28.288 15.0095 28.2748 15.1201 28.2413 15.2247C28.2077 15.3295 28.1547 15.4261 28.085 15.5091C28.0153 15.5921 27.9305 15.6597 27.8356 15.7081C27.7406 15.7564 27.6374 15.7845 27.532 15.7906C27.4265 15.7967 27.321 15.7809 27.2214 15.744C27.1219 15.707 27.0305 15.6496 26.9525 15.5752C26.8744 15.501 26.8113 15.411 26.7668 15.311C26.2903 14.289 25.6191 13.3795 24.7943 12.6385C24.532 12.4856 24.2359 12.407 23.9355 12.4106C23.6351 12.4142 23.3408 12.4998 23.0819 12.659C22.823 12.8181 22.6083 13.0452 22.4593 13.3179C22.3102 13.5905 22.2319 13.8991 22.2322 14.2132V15.128C22.2319 15.3167 22.1599 15.4977 22.0322 15.6312C21.9045 15.7647 21.7314 15.8399 21.5508 15.8402H17.9932C17.8125 15.8399 17.6394 15.7647 17.5117 15.6312C17.384 15.4977 17.3121 15.3167 17.3117 15.128V15.233C17.3121 14.8829 17.2144 14.5402 17.0305 14.2477C16.9886 14.1926 16.9485 14.1361 16.91 14.0782C16.7353 13.8602 16.5137 13.6886 16.2634 13.5772C16.013 13.4659 15.741 13.4181 15.4696 13.4376C15.1982 13.4572 14.935 13.5437 14.7017 13.69C14.4683 13.8362 14.2715 14.0381 14.127 14.2791C14.0527 14.4535 13.9231 14.5959 13.7602 14.6821C13.5973 14.7684 13.411 14.7934 13.2326 14.7529C13.0542 14.7124 12.8945 14.6089 12.7805 14.4599C12.6664 14.3107 12.605 14.1251 12.6064 13.9342V10.5151C12.6063 10.3214 12.6709 10.1337 12.7891 9.98458C12.9073 9.83543 13.0716 9.73411 13.2537 9.69816C13.4357 9.66221 13.6241 9.69394 13.7863 9.7878C13.9483 9.88161 14.0739 10.0318 14.1414 10.2121C14.2852 10.4445 14.4784 10.6391 14.7059 10.7807C14.9334 10.9224 15.1891 11.0072 15.4531 11.0287C15.7171 11.0502 15.9823 11.0077 16.228 10.9046C16.4737 10.8015 16.6934 10.6404 16.8699 10.4341C16.9307 10.3376 16.9962 10.2445 17.0664 10.1552L17.0765 10.1387H17.0807C17.3728 9.7717 17.7387 9.47651 18.1522 9.27411C18.5658 9.07164 19.017 8.96699 19.4736 8.96743H19.5166C19.5442 8.9643 19.572 8.96283 19.5997 8.96293C21.393 8.96239 23.15 9.48913 24.6703 10.483C26.1907 11.477 27.4127 12.898 28.1971 14.5836H28.1956ZM21.5436 17.7554C21.5433 17.5665 21.4713 17.3856 21.3436 17.2521C21.2159 17.1186 21.0428 17.0434 20.8623 17.043H18.402C18.2214 17.0439 18.0486 17.1191 17.921 17.2525C17.7933 17.386 17.7213 17.5666 17.7206 17.7554V31.9194C17.721 32.1082 17.7928 32.2892 17.9206 32.4227C18.0482 32.5562 18.2213 32.6314 18.402 32.6317H20.8623C21.0428 32.6314 21.2159 32.5562 21.3436 32.4227C21.4713 32.2892 21.5433 32.1082 21.5436 31.9194V17.7554Z" fill="white"/>
+                          </g>
+                          </g>
+                          <defs>
+                          <clipPath id="clip0_103_101">
+                          <rect width="38.7879" height="40" fill="white"/>
+                          </clipPath>
+                          </defs>
+                        </svg>                                                          
+                      <% } %>                                  
+                      <p class="inter font-semibold ml-2.5"><%= item.name %></p>
+                    </div>
+
+                    <div>
+                      <button onclick="designateCall('<%= item._id %>')" class="border-blue px-2 py-0.5 text-sm rounded-full color-blue font-semibold inter">Designar</button>
+                    </div>
+                  </div>
+                <% }) %>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="hidden fade-in relative z-10" id="popup_cancel" role="dialog" aria-modal="true">
+        <div class="fixed inset-0 bg-gray-500 bg-opacity-25 transition-opacity"></div>
+      
+        <div class="fixed inset-0 z-10 overflow-y-auto p-4 mt-40 ml-40 sm:p-6 md:p-20">
+          <div class="mx-auto max-w-xl transform divide-y divide-gray-100 overflow-hidden rounded-xl bg-white shadow-2xl ring-1 ring-black ring-opacity-5 transition-all">
+            <div class="flex justify-between py-3 px-6">
+              <h2 class="color-red inter font-bold text-lg">Cancelar chamado:</h2>
+              <button onclick="closeCancel()">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M14.3075 11.7231L20.3075 5.67693C20.5844 5.4 20.5844 4.98462 20.3075 4.7077L19.3844 3.73847C19.1075 3.46154 18.6921 3.46154 18.4151 3.73847L12.369 9.78462C12.1844 9.96923 11.9075 9.96923 11.7228 9.78462L5.67668 3.69231C5.39976 3.41539 4.98438 3.41539 4.70745 3.69231L3.73822 4.66154C3.4613 4.93847 3.4613 5.35385 3.73822 5.63077L9.78438 11.6769C9.96899 11.8615 9.96899 12.1385 9.78438 12.3231L3.69207 18.4154C3.41514 18.6923 3.41514 19.1077 3.69207 19.3846L4.6613 20.3538C4.93822 20.6308 5.35361 20.6308 5.63053 20.3538L11.6767 14.3077C11.8613 14.1231 12.1382 14.1231 12.3228 14.3077L18.369 20.3538C18.6459 20.6308 19.0613 20.6308 19.3382 20.3538L20.3075 19.3846C20.5844 19.1077 20.5844 18.6923 20.3075 18.4154L14.3075 12.3692C14.1228 12.1846 14.1228 11.9077 14.3075 11.7231Z" fill="#A31313"/>
+                </svg>                                    
+              </button>
+            </div>
+
+            <div class="flex flex-col divide-y divide-gray-100 px-6">
+              <div>
+                <div class="flex flex-col items-center justify-center mt-6 py-4">
+                  <svg width="46" height="46" viewBox="0 0 46 46" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M40.2487 2.87504H26.832C26.832 2.36671 26.6301 1.8792 26.2706 1.51975C25.9112 1.16031 25.4237 0.958374 24.9154 0.958374H21.082C20.5737 0.958374 20.0862 1.16031 19.7267 1.51975C19.3673 1.8792 19.1654 2.36671 19.1654 2.87504H5.7487C5.24037 2.87504 4.75285 3.07697 4.39341 3.43642C4.03397 3.79586 3.83203 4.28338 3.83203 4.79171C3.83203 5.30004 4.03397 5.78755 4.39341 6.147C4.75285 6.50644 5.24037 6.70837 5.7487 6.70837H40.2487C40.757 6.70837 41.2445 6.50644 41.604 6.147C41.9634 5.78755 42.1654 5.30004 42.1654 4.79171C42.1654 4.28338 41.9634 3.79586 41.604 3.43642C41.2445 3.07697 40.757 2.87504 40.2487 2.87504Z" fill="#AA2222"/>
+                    <path d="M37.3737 8.625C36.8654 8.625 36.3779 8.82693 36.0184 9.18638C35.659 9.54582 35.457 10.0333 35.457 10.5417V41.2083H10.5404V10.5417C10.5404 10.0333 10.3384 9.54582 9.97899 9.18638C9.61954 8.82693 9.13203 8.625 8.6237 8.625C8.11537 8.625 7.62785 8.82693 7.26841 9.18638C6.90897 9.54582 6.70703 10.0333 6.70703 10.5417V43.125C6.70703 43.6333 6.90897 44.1208 7.26841 44.4803C7.62785 44.8397 8.11537 45.0417 8.6237 45.0417H37.3737C37.882 45.0417 38.3695 44.8397 38.729 44.4803C39.0884 44.1208 39.2904 43.6333 39.2904 43.125V10.5417C39.2904 10.0333 39.0884 9.54582 38.729 9.18638C38.3695 8.82693 37.882 8.625 37.3737 8.625Z" fill="#AA2222"/>
+                    <path d="M20.1263 35.4583V18.2083C20.1263 17.7 19.9244 17.2125 19.5649 16.853C19.2055 16.4936 18.718 16.2916 18.2096 16.2916C17.7013 16.2916 17.2138 16.4936 16.8543 16.853C16.4949 17.2125 16.293 17.7 16.293 18.2083V35.4583C16.293 35.9666 16.4949 36.4541 16.8543 36.8136C17.2138 37.173 17.7013 37.375 18.2096 37.375C18.718 37.375 19.2055 37.173 19.5649 36.8136C19.9244 36.4541 20.1263 35.9666 20.1263 35.4583Z" fill="#AA2222"/>
+                    <path d="M29.7083 35.4583V18.2083C29.7083 17.7 29.5064 17.2125 29.147 16.853C28.7875 16.4936 28.3 16.2916 27.7917 16.2916C27.2833 16.2916 26.7958 16.4936 26.4364 16.853C26.0769 17.2125 25.875 17.7 25.875 18.2083V35.4583C25.875 35.9666 26.0769 36.4541 26.4364 36.8136C26.7958 37.173 27.2833 37.375 27.7917 37.375C28.3 37.375 28.7875 37.173 29.147 36.8136C29.5064 36.4541 29.7083 35.9666 29.7083 35.4583Z" fill="#AA2222"/>
+                  </svg>                                        
+                  <h2 for="content" class="block text-md font-bold leading-6 text-gray-900 inter mt-4">Tem certeza que deseja cancelar o chamado da empresa?</h2>
+                  <p class="inter text-center text-sm font-semibold">Essa ação é irreversível, e todos os dados associados a ele serão apagados.</p>
+                </div>
+
+                <div class="pb-4">
+                  <button class="w-full py-2.5 inter bg-red text-white text-sm rounded-lg mt-4 font-bold" onclick="cancelCall()">Confirmar minha escolha</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
 
       <div class="px-4 sm:px-6 lg:pl-12 mt-2 col-span-3">
         <div class="min-h-full">
           <main class="py-4">
-            <!-- Page header -->
             <div class="mx-auto px-4 sm:px-6 md:flex md:items-center md:justify-between md:space-x-5 lg:px-8">
               <div class="flex items-center space-x-5">
                 <div class="flex-shrink-0">
@@ -26,14 +111,15 @@
                   </div>
                 </div>
                 <div>
-                  <h1 class="text-2xl font-bold text-gray-900 inter">Chamado <span class="text-indigo-600"><% call._id %></span></h1>
+                  <h1 class="text-2xl font-bold text-gray-900 inter">Chamado <span class="text-blue text-base">#<%= call._id %></span></h1>
                   <p class="text-sm font-semibold text-gray-500 inter">Aberto por você em: <time datetime="<%= call.date %>"><%= call.date %></time></p>
                 </div>
               </div>
               <div class="mt-6 flex flex-col-reverse justify-stretch space-y-4 space-y-reverse sm:flex-row-reverse sm:justify-end sm:space-x-3 sm:space-y-0 sm:space-x-reverse md:mt-0 md:flex-row md:space-x-3">
-                <button type="button" class="inline-flex items-center justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 border shadow-sm ring-1 ring-inset ring-gray-300">Ver empresa</button>
-                <button type="button" class="inline-flex items-center justify-center rounded-md bg-blue px-3 py-2 text-sm font-semibold text-white border shadow-sm ring-1 ring-inset ring-gray-300">Editar chamado</button>
-                <button type="button" class="inline-flex items-center justify-center rounded-md px-3 py-2 text-sm font-semibold text-white shadow-sm bg-red-600">Cancelar chamado</button>
+                <a href="/admin/view-company/<%= call.id_company %>" class="inline-flex items-center justify-center rounded-lg bg-white px-3 py-2 text-sm font-semibold text-gray-900 border-2 shadow-sm inter">Ver empresa</a>
+                <button onclick="openSelectTechnician()" class="inline-flex items-center justify-center rounded-lg bg-blue px-3 py-2 text-sm font-semibold text-white shadow-sm inter">Designar técnico</button>
+                <button class="inline-flex items-center justify-center rounded-lg bg-green-500 px-3 py-2 text-sm font-semibold text-white shadow-sm inter">Gerar orçamento</button>
+                <button onclick="openCancel()" class="inline-flex items-center justify-center rounded-lg px-3 py-2 text-sm font-semibold text-white shadow-sm bg-red-600 inter">Cancelar chamado</button>
               </div>
             </div>
 
@@ -75,10 +161,10 @@
                               <% call.photos.forEach(item => { %>
                                 <li class="flex items-center justify-between py-3 pl-3 pr-4 text-sm">
                                   <div class="flex w-0 flex-1 items-center">
-                                    <svg class="h-5 w-5 flex-shrink-0 text-gray-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                                      <path fill-rule="evenodd" d="M15.621 4.379a3 3 0 00-4.242 0l-7 7a3 3 0 004.241 4.243h.001l.497-.5a.75.75 0 011.064 1.057l-.498.501-.002.002a4.5 4.5 0 01-6.364-6.364l7-7a4.5 4.5 0 016.368 6.36l-3.455 3.553A2.625 2.625 0 119.52 9.52l3.45-3.451a.75.75 0 111.061 1.06l-3.45 3.451a1.125 1.125 0 001.587 1.595l3.454-3.553a3 3 0 000-4.242z" clip-rule="evenodd" />
-                                    </svg>
-                                    <span class="ml-2 w-0 flex-1 truncate"><%= item %></span>
+                                    <div class="flex w-0 flex-1 items-center">
+                                      <img class="h-20 rounded-lg" src="/img/calls/<%= item %>">
+                                      <span class="ml-4 w-0 flex-1 truncate"><%= item %></span>
+                                    </div>
                                   </div>
                                   <div class="ml-4 flex-shrink-0">
                                     <button onclick="downloadFile('<%= item %>')" class="font-medium color-blue">Download</button>
@@ -98,7 +184,7 @@
                   <div class="bg-white shadow border sm:overflow-hidden sm:rounded-lg">
                     <div class="divide-y divide-gray-200">
                       <div class="px-4 py-5 sm:px-6">
-                        <h2 id="notes-title" class="text-lg font-medium text-gray-900">Relatórios do chamado:</h2>
+                        <h2 id="notes-title" class="text-lg font-medium text-gray-900 inter">Relatórios do chamado:</h2>
                       </div>
                       <div class="px-4 py-6 sm:px-6">
                         <ul role="list" class="space-y-8">
@@ -144,14 +230,13 @@
 
               <section aria-labelledby="timeline-title" class="lg:col-span-1 lg:col-start-3">
                 <div class="bg-white px-4 py-5 shadow border sm:rounded-lg sm:px-6">
-                  <h2 id="timeline-title" class="text-lg font-medium text-gray-900">Linha do tempo</h2>
+                  <h2 id="timeline-title" class="text-lg font-medium text-gray-900 inter">Linha do tempo</h2>
 
                   <div class="mt-6 flow-root">
                     <ul role="list" class="-mb-8">
                       <% call.timeline.forEach(item => { %>
                         <li>
                           <div class="relative pb-8">
-                            <span class="absolute left-4 top-4 -ml-px h-full w-0.5 bg-gray-200" aria-hidden="true"></span>
                             <div class="relative flex space-x-3">
                               <div>
                                 <% if (item.type == "company") { %>
@@ -161,8 +246,23 @@
                                     </svg>
                                   </span>
                                 <% } else if (item.type == "technician") { %>
-                                  <span class="h-8 w-8 rounded-full bg-blue-500 flex items-center justify-center ring-8 ring-white">
-                                    <img class="h-8 w-8 rounded-full" src="https://pps.whatsapp.net/v/t61.24694-24/309612029_1303621463511201_2184499647973530355_n.jpg?ccb=11-4&oh=01_AdTLj4igz1k4OkKVwtf5wwXyceqwcgJlQGxo3JG6sDOlTQ&oe=64B44F62" alt="">
+                                  <span class="h-8 w-8 rounded-full flex items-center justify-center">
+                                    <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                      <g clip-path="url(#clip0_103_101)">
+                                      <mask id="mask0_103_101" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="0" y="0" width="32" height="32">
+                                      <path d="M31.0303 0H0V32H31.0303V0Z" fill="white"/>
+                                      </mask>
+                                      <g mask="url(#mask0_103_101)">
+                                      <path d="M15.5152 32C24.084 32 31.0303 24.8366 31.0303 16C31.0303 7.16344 24.084 0 15.5152 0C6.94637 0 0 7.16344 0 16C0 24.8366 6.94637 32 15.5152 32Z" fill="#0EA5E9"/>
+                                      <path d="M22.5565 11.6669C22.5949 11.7456 22.6179 11.8314 22.6242 11.9195C22.6304 12.0076 22.6199 12.0961 22.5931 12.1798C22.5662 12.2636 22.5238 12.3409 22.468 12.4073C22.4122 12.4737 22.3445 12.5278 22.2685 12.5665C22.1925 12.6051 22.11 12.6276 22.0256 12.6325C21.9413 12.6374 21.8568 12.6247 21.7772 12.5952C21.6976 12.5656 21.6245 12.5197 21.562 12.4602C21.4996 12.4008 21.449 12.3288 21.4135 12.2488C21.0323 11.4312 20.4953 10.7036 19.8355 10.1108C19.6256 9.9885 19.3887 9.9256 19.1484 9.92849C18.9081 9.93134 18.6727 9.99981 18.4656 10.1272C18.2584 10.2545 18.0867 10.4362 17.9674 10.6543C17.8482 10.8724 17.7855 11.1193 17.7858 11.3706V12.1024C17.7855 12.2534 17.7279 12.3982 17.6258 12.505C17.5236 12.6118 17.3851 12.6719 17.2407 12.6722H14.3946C14.25 12.6719 14.1115 12.6118 14.0094 12.505C13.9072 12.3982 13.8497 12.2534 13.8494 12.1024V12.1864C13.8497 11.9063 13.7716 11.6322 13.6245 11.3982C13.5909 11.3541 13.5588 11.3089 13.5281 11.2626C13.3882 11.0882 13.211 10.9509 13.0107 10.8618C12.8104 10.7727 12.5928 10.7345 12.3757 10.7501C12.1586 10.7658 11.948 10.835 11.7614 10.952C11.5747 11.069 11.4172 11.2305 11.3016 11.4233C11.2422 11.5628 11.1385 11.6767 11.0082 11.7457C10.8779 11.8147 10.7288 11.8347 10.5861 11.8023C10.4434 11.7699 10.3157 11.6871 10.2244 11.5679C10.1332 11.4486 10.084 11.3001 10.0852 11.1474V8.41208C10.0851 8.25713 10.1368 8.10699 10.2313 7.98767C10.3258 7.86835 10.4573 7.7873 10.603 7.75854C10.7486 7.72978 10.8993 7.75516 11.0291 7.83025C11.1587 7.9053 11.2592 8.02541 11.3132 8.16972C11.4282 8.35562 11.5828 8.51128 11.7648 8.6246C11.9468 8.73791 12.1513 8.80577 12.3625 8.82296C12.5737 8.84014 12.7859 8.80617 12.9824 8.72367C13.179 8.64117 13.3548 8.51234 13.496 8.3473C13.5446 8.27006 13.597 8.19558 13.6532 8.12413L13.6612 8.11093H13.6646C13.8983 7.81737 14.191 7.58122 14.5218 7.4193C14.8527 7.25732 15.2136 7.1736 15.5789 7.17395H15.6133C15.6354 7.17145 15.6576 7.17027 15.6798 7.17035C17.1144 7.16992 18.5201 7.59131 19.7363 8.38644C20.9526 9.18157 21.9302 10.3184 22.5577 11.6669H22.5565ZM17.2349 14.2043C17.2346 14.0532 17.177 13.9085 17.0749 13.8017C16.9727 13.6949 16.8343 13.6347 16.6899 13.6344H14.7217C14.5772 13.6351 14.4389 13.6953 14.3368 13.802C14.2347 13.9088 14.1771 14.0533 14.1765 14.2043V25.5355C14.1768 25.6866 14.2343 25.8314 14.3365 25.9382C14.4386 26.045 14.5771 26.1051 14.7217 26.1054H16.6899C16.8343 26.1051 16.9727 26.045 17.0749 25.9382C17.177 25.8314 17.2346 25.6866 17.2349 25.5355V14.2043Z" fill="white"/>
+                                      </g>
+                                      </g>
+                                      <defs>
+                                      <clipPath id="clip0_103_101">
+                                      <rect width="31.0303" height="32" fill="white"/>
+                                      </clipPath>
+                                      </defs>
+                                    </svg>                                                                            
                                   </span>
                                 <% } else { %>
                                   <span class="h-8 w-8 rounded-full bg-blue-500 flex items-center justify-center ring-8 ring-white">
@@ -186,26 +286,6 @@
                         </li>
                       <% }) %>
 <!-- 
-                      <li>
-                        <div class="relative pb-8">
-                          <span class="absolute left-4 top-4 -ml-px h-full w-0.5 bg-gray-200" aria-hidden="true"></span>
-                          <div class="relative flex space-x-3">
-                            <div>
-                              <span class="h-8 w-8 rounded-full bg-blue-500 flex items-center justify-center ring-8 ring-white">
-                                <img class="h-8 w-8 rounded-full" src="https://pps.whatsapp.net/v/t61.24694-24/309612029_1303621463511201_2184499647973530355_n.jpg?ccb=11-4&oh=01_AdTLj4igz1k4OkKVwtf5wwXyceqwcgJlQGxo3JG6sDOlTQ&oe=64B44F62" alt="">
-                              </span>
-                            </div>
-                            <div class="flex min-w-0 flex-1 justify-between space-x-4 pt-1.5">
-                              <div>
-                                <p class="text-sm inter font-semibold text-gray-500">Chamado aceito por <span class="font-bold">Anderson Moreira</span></p>
-                              </div>
-                              <div class="whitespace-nowrap text-right text-sm text-gray-500">
-                                <time datetime="2020-09-22">14:24</time>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </li>
                       <li>
                         <div class="relative pb-8">
                           <span class="absolute left-4 top-4 -ml-px h-full w-0.5 bg-gray-200" aria-hidden="true"></span>
@@ -308,13 +388,63 @@
 <script>
   function downloadFile(path) {
     const link = document.createElement('a');
-    link.href = `/img/uploads/${path}`;
-    link.download = `/img/uploads/${path}`;
+    link.href = `/img/calls/${path}`;
+    link.download = `/img/calls/${path}`;
 
     document.body.appendChild(link);
     link.click();
 
     document.body.removeChild(link);
+  }
+
+  function openCancel() {
+    const popup_cancel = document.querySelector("#popup_cancel")
+
+    popup_cancel.classList.remove("hidden")
+  }
+
+  function closeCancel() {
+    const popup_cancel = document.querySelector("#popup_cancel")
+
+    popup_cancel.classList.add("hidden")
+  }
+
+  function openSelectTechnician() {
+    const popup_select = document.querySelector("#popup_technician")
+
+    popup_select.classList.remove("hidden")
+  }
+
+  function closeSelectTechnician() {
+    const popup_select = document.querySelector("#popup_technician")
+
+    popup_select.classList.add("hidden")
+  }
+
+  function cancelCall() {
+    fetch('/admin/cancel-call/<%= call._id %>', {
+      method: 'DELETE',
+    })
+    .then(response => {
+      location.href = "/admin/all-calls"
+    })
+    .catch(err => {
+      alert_message("error", "Tente mais tarde")
+    })
+  }
+
+  function designateCall(id_technician) {
+    fetch(`/admin/designate-call?id_technician=${id_technician}&id_call=<%= call._id %>`, {
+      method: 'PUT',
+    })
+    .then(response => {
+      if (response.ok) {
+        location.reload()
+      }
+    })
+    .catch(err => {
+      alert_message("error", "Tente mais tarde")
+    })
   }
 </script>
 

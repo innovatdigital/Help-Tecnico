@@ -14,17 +14,15 @@
       <div class="error mt-14" style="display: none;"><div style="display: flex;" class="error-text"></div></div>
 
       <div class="px-4 sm:px-6 lg:pl-12 mt-2 col-span-3">
-        <div class="sm:flex sm:items-center">
-          <div class="w-full flex justify-between items-center">
-            <h1 class="text-lg font-semibold leading-6 text-gray-900 inter color-purple">Todos os fornecedores:</h1>
-            <div class="relative mt-2 rounded-md shadow-sm">
-              <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
-                <svg width="17" height="17" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M6.1088 4.25001C6.1088 4.39091 6.05283 4.52603 5.9532 4.62566C5.85357 4.72529 5.71845 4.78126 5.57755 4.78126C5.22531 4.78126 4.8875 4.92119 4.63843 5.17026C4.38936 5.41933 4.24943 5.75715 4.24943 6.10939C4.24943 6.25028 4.19346 6.38541 4.09383 6.48504C3.9942 6.58467 3.85907 6.64064 3.71818 6.64064C3.57728 6.64064 3.44216 6.58467 3.34253 6.48504C3.2429 6.38541 3.18693 6.25028 3.18693 6.10939C3.18693 5.47535 3.4388 4.86729 3.88713 4.41896C4.33546 3.97063 4.94352 3.71876 5.57755 3.71876C5.71845 3.71876 5.85357 3.77473 5.9532 3.87436C6.05283 3.97399 6.1088 4.10912 6.1088 4.25001ZM15.1135 13.456C15.1135 13.5969 15.0575 13.732 14.9578 13.8316L13.8305 14.9584C13.7309 15.058 13.5958 15.114 13.4549 15.114C13.3141 15.114 13.179 15.058 13.0793 14.9584L8.94727 10.8264C8.84768 10.7267 8.79173 10.5916 8.79173 10.4508C8.79173 10.3099 8.84768 10.1748 8.94727 10.0752L9.13533 9.88711L8.27843 9.03126C7.53405 9.71913 6.5561 10.0984 5.54259 10.0924C4.52907 10.0864 3.55571 9.69544 2.81957 8.99876C2.08344 8.30207 1.63954 7.3517 1.57775 6.34004C1.51596 5.32839 1.84089 4.33106 2.48676 3.54996C3.13263 2.76886 4.05117 2.26237 5.05642 2.13303C6.06167 2.00368 7.07851 2.26116 7.90108 2.85331C8.72364 3.44547 9.29045 4.32807 9.48677 5.32241C9.68308 6.31676 9.49422 7.34855 8.95843 8.20889L9.88652 9.13751L10.0746 8.94998C10.1742 8.85039 10.3093 8.79444 10.4502 8.79444C10.591 8.79444 10.7261 8.85039 10.8258 8.94998L14.9578 13.082C15.0571 13.1813 15.113 13.3157 15.1135 13.456ZM8.49943 6.10939C8.49943 5.53149 8.32806 4.96658 8.007 4.48608C7.68594 4.00558 7.22961 3.63108 6.69571 3.40993C6.1618 3.18878 5.57431 3.13091 5.00752 3.24365C4.44074 3.3564 3.92011 3.63468 3.51148 4.04331C3.10284 4.45194 2.82456 4.97257 2.71182 5.53936C2.59908 6.10615 2.65694 6.69364 2.87809 7.22754C3.09924 7.76144 3.47375 8.21778 3.95425 8.53884C4.43475 8.8599 4.99966 9.03126 5.57755 9.03126C6.35218 9.03028 7.0948 8.72212 7.64254 8.17438C8.19029 7.62663 8.49844 6.88401 8.49943 6.10939ZM13.8311 13.456L10.4502 10.0752L10.0741 10.4508L13.4549 13.8316L13.8311 13.456Z" fill="black"/>
-                </svg>                  
-              </div>
-              <input type="text" name="find" id="find" class="block border-blue w-full rounded-lg py-1.5 pl-10 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 pr-10" placeholder="Pesquise por nomes de peças">
-            </div>
+        <div class="sm:flex sm:justify-between sm:items-center">
+          <h1 class="text-lg font-semibold leading-6 text-gray-900 inter color-purple"><span class="text-blue"><%= suppliers.length %> fornecedor</span> cadastrado(s)</h1>
+
+          <div class="relative flex">
+            <label for="search-field" class="sr-only">Search</label>
+            <svg class="pointer-events-none absolute inset-y-0 left-0 h-full ml-2 w-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+              <path fill-rule="evenodd" d="M9 3.5a5.5 5.5 0 100 11 5.5 5.5 0 000-11zM2 9a7 7 0 1112.452 4.391l3.328 3.329a.75.75 0 11-1.06 1.06l-3.329-3.328A7 7 0 012 9z" clip-rule="evenodd" />
+            </svg>
+            <input id="search-field" class="block h-full w-full border-blue-1 rounded-lg py-2 pl-8 pr-0 inter text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm" placeholder="Pesquisar por nome" type="search" name="search">
           </div>
         </div>
         
@@ -49,11 +47,11 @@
                     <tbody class="divide-y divide-gray-200 bg-white">
                       <% suppliers.forEach(function(item) { %>
                         <tr>
-                          <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium sm:pl-6 text-blue">
+                          <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium sm:pl-6 text-gray-500">
                             <div class="flex items-center space-x-2">
                               <svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <g clip-path="url(#clip0_269_10)">
-                                <path d="M36 18C36 8.05887 27.9411 0 18 0C8.05887 0 0 8.05887 0 18C0 27.9411 8.05887 36 18 36C27.9411 36 36 27.9411 36 18Z" fill="#888EA8" fill-opacity="0.4"/>
+                                <path d="M36 18C36 8.05887 27.9411 0 18 0C8.05887 0 0 8.05887 0 18C0 27.9411 8.05887 36 18 36C27.9411 36 36 27.9411 36 18Z" fill="#2196F3"/>
                                 <path fill-rule="evenodd" clip-rule="evenodd" d="M17.8889 18.3333C18.1957 18.3333 18.4444 18.582 18.4444 18.8889V24.4444C18.4444 24.7513 18.1957 25 17.8889 25C17.582 25 17.3333 24.7513 17.3333 24.4444V18.8889C17.3333 18.582 17.582 18.3333 17.8889 18.3333ZM21.2222 18.3333C21.5291 18.3333 21.7778 18.582 21.7778 18.8889C21.7778 20.8867 22.7427 22.7218 24.3374 23.8627C24.587 24.0412 24.6445 24.3883 24.466 24.6378C24.2875 24.8873 23.9405 24.9449 23.6909 24.7664C21.8076 23.419 20.6667 21.2491 20.6667 18.8889C20.6667 18.582 20.9154 18.3333 21.2222 18.3333ZM14.5556 18.3333C14.8624 18.3333 15.1111 18.582 15.1111 18.8889C15.1111 21.2464 13.9728 23.4141 12.0931 24.7619C11.8437 24.9407 11.4967 24.8835 11.3179 24.6342C11.1391 24.3848 11.1963 24.0377 11.4456 23.8589C13.0374 22.7176 14 20.8844 14 18.8889C14 18.582 14.2487 18.3333 14.5556 18.3333ZM24.5556 10C25.7829 10 26.7778 10.9949 26.7778 12.2222V15.5556C26.7778 16.7828 25.7829 17.7778 24.5556 17.7778H11.2222C9.99493 17.7778 9 16.7828 9 15.5556V12.2222C9 10.9949 9.99493 10 11.2222 10H24.5556ZM24 14.4444H11.7778C11.4709 14.4444 11.2222 14.6932 11.2222 15C11.2222 15.3068 11.4709 15.5556 11.7778 15.5556H24C24.3068 15.5556 24.5556 15.3068 24.5556 15C24.5556 14.6932 24.3068 14.4444 24 14.4444Z" fill="white"/>
                                 </g>
                                 <defs>
@@ -73,7 +71,7 @@
                           </td>
                           <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 inter color-purple font-semibold"><%= item.email %></td>
                           <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 inter color-purple font-semibold">
-                            <%= item.date %>
+                            <%= item.createdAt %>
                           </td>
                           <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 inter color-purple font-semibold">
                             <%= item.city %>

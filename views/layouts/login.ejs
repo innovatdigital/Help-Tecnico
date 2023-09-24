@@ -63,7 +63,7 @@
     </div>
     
     <div class="relative hidden w-0 flex-1 lg:block">
-      <img class="absolute inset-0 h-full w-full object-cover" src="/img/login/photo.webp" alt="">
+      <img class="absolute inset-0 h-full w-full object-cover" src="/img/login/photo.png" alt="">
     </div>
   </div>
 </div>
@@ -131,7 +131,7 @@ btn.addEventListener("click", function() {
     return;
   }
 
-  fetch("/login/auth", {
+  fetch("/auth", {
     method: "POST",
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ email: email, password: password })

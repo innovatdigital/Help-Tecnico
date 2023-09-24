@@ -16,16 +16,25 @@
       <div class="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-x-6">
         <div class="bg-white rounded-xl shadow-lg border p-4 px-5 col-span-3">
           <div class="col-span-full flex items-center gap-x-6 mt-4">
-            <svg width="74" height="73" viewBox="0 0 74 73" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-              <ellipse cx="37" cy="36.5" rx="37" ry="36.5" fill="#0EA5E9"/>
-              <rect x="17" y="17" width="40" height="40" fill="url(#pattern0)"/>
-              <defs>
-              <pattern id="pattern0" patternContentUnits="objectBoundingBox" width="1" height="1">
-              <use xlink:href="#image0_0_1" transform="scale(0.0104167)"/>
-              </pattern>
-              <image id="image0_0_1" width="96" height="96" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAAACXBIWXMAAAsTAAALEwEAmpwYAAABvElEQVR4nO3ZPU7DYBCE4S0QVwEJjkoQP+IqVHAK4CJAR9CLIqWgQVvEw6438/SJZr6xHUWOMDMzMzMzMzMz+wNwCdwAr8An/X3us+4yX652WOAUeAC+Wa8tcL/rEis8/GfmeFrVCPsrf5q7WNEzf3frTrMFLqI74Ja5rqM74I25XqI74IO53qM7hovuGC66Y7jojuGiO4aL7hguumO46I7hojt1QcSf/6f3DS/ABjhf7OCXKnjo94c438K+9kOceIBaj4uNcGiSI7sDftt4gPrH0ZnvgFpXHmDt7xsOTXDEvwHLvG9guBCfjwdIeIBiHqCYByjmAYp5gGIeoNj4AdQFEFPnT3UvgJg6f6p7AcTU+VPdCyCmzp/qXgAxdf5U9wKIqfOnuhdATJ0/1b0AYur8UV2wmvp8PEDCAxTzAMU8QDEPUMwDFPMAxcYPoC6AmDp/qnsBxNT5U90LIKbOn+peADF1/lT3Aoip86e6F0BMnT/VvQBi6vyp7gUQU+eP6oLV1OfjARIeoJgHKOYBinmAYh6gmAco5gGG8/+AYh6gmAco5gGKeYBiHqCYB1j7AGZmZmZmZmZmFlP8AN3fTDc25TqSAAAAAElFTkSuQmCC"/>
-              </defs>
-            </svg>                                                                        
+            <% if (company.photo.length > 0) { %>
+              <img class="h-20 rounded-full" src="/img/photos/<%= company.photo %>">
+            <% } else { %>
+              <svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                <g clip-path="url(#clip0_3_2)">
+                <path d="M64 32C64 14.3269 49.6731 0 32 0C14.3269 0 0 14.3269 0 32C0 49.6731 14.3269 64 32 64C49.6731 64 64 49.6731 64 32Z" fill="#239CFF"/>
+                <path d="M53.0793 14.2222H12.4445V49.7778H53.0793V14.2222Z" fill="url(#pattern0)"/>
+                </g>
+                <defs>
+                <pattern id="pattern0" patternContentUnits="objectBoundingBox" width="1" height="1">
+                <use xlink:href="#image0_3_2" transform="matrix(0.00911458 0 0 0.0104167 0.0625001 0)"/>
+                </pattern>
+                <clipPath id="clip0_3_2">
+                <rect width="64" height="64" fill="white"/>
+                </clipPath>
+                <image id="image0_3_2" width="96" height="96" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAAACXBIWXMAAAsTAAALEwEAmpwYAAABvElEQVR4nO3ZPU7DYBCE4S0QVwEJjkoQP+IqVHAK4CJAR9CLIqWgQVvEw6438/SJZr6xHUWOMDMzMzMzMzMz+wNwCdwAr8An/X3us+4yX652WOAUeAC+Wa8tcL/rEis8/GfmeFrVCPsrf5q7WNEzf3frTrMFLqI74Ja5rqM74I25XqI74IO53qM7hovuGC66Y7jojuGiO4aL7hguumO46I7hojt1QcSf/6f3DS/ABjhf7OCXKnjo94c438K+9kOceIBaj4uNcGiSI7sDftt4gPrH0ZnvgFpXHmDt7xsOTXDEvwHLvG9guBCfjwdIeIBiHqCYByjmAYp5gGIeoNj4AdQFEFPnT3UvgJg6f6p7AcTU+VPdCyCmzp/qXgAxdf5U9wKIqfOnuhdATJ0/1b0AYur8UV2wmvp8PEDCAxTzAMU8QDEPUMwDFPMAxcYPoC6AmDp/qnsBxNT5U90LIKbOn+peADF1/lT3Aoip86e6F0BMnT/VvQBi6vyp7gUQU+eP6oLV1OfjARIeoJgHKOYBinmAYh6gmAco5gGG8/+AYh6gmAco5gGKeYBiHqCYB1j7AGZmZmZmZmZmFlP8AN3fTDc25TqSAAAAAElFTkSuQmCC"/>
+                </defs>
+              </svg>                
+            <% } %>                                                                      
                                       
             <div class="items-center mt-2">
               <label style="cursor: pointer;" for="picture" class="rounded-md px-3 py-2 text-sm font-semibold border-blue color-blue shadow-sm inter">Inserir foto</label>
@@ -38,14 +47,14 @@
             <div>
               <label for="name" class="block text-md font-medium leading-6 text-gray-900 inter font-semibold">Nome da empresa</label>
               <div class="relative mt-2 rounded-md shadow-sm">
-                <input type="text" name="name" id="name" value="<%= company.name %>" class="block w-full rounded-lg inter py-1.5 mt-2 pl-2 text-gray-900 ring-1 ring-inset ring-gray-300 sm:text-sm sm:leading-6 border-blue-1" placeholder="Insira o nome">
+                <input type="text" value="<%= company.name %>" name="name" id="name" class="block w-full rounded-lg inter py-1.5 mt-2 pl-2 text-gray-900 ring-1 ring-inset ring-gray-300 sm:text-sm sm:leading-6 border-blue-1" placeholder="Insira o nome">
               </div>
             </div>
 
             <div>
               <label for="cnpj" class="block text-md font-medium leading-6 text-gray-900 inter font-semibold">CNPJ</label>
               <div class="relative mt-2 rounded-md shadow-sm">
-                <input type="text" name="cnpj" id="cnpj" value="<%= company.cnpj %>" class="block w-full rounded-lg inter py-1.5 mt-2 pl-2 text-gray-900 ring-1 ring-inset ring-gray-300 sm:text-sm sm:leading-6 border-blue-1" placeholder="Insira o CNPJ">
+                <input type="text" value="<%= company.cnpj %>" name="cnpj" id="cnpj" class="block w-full rounded-lg inter py-1.5 mt-2 pl-2 text-gray-900 ring-1 ring-inset ring-gray-300 sm:text-sm sm:leading-6 border-blue-1" placeholder="Insira o CNPJ">
               </div>
             </div>
           </div>
@@ -54,14 +63,14 @@
             <div>
               <label for="email" class="block text-md font-medium leading-6 text-gray-900 inter font-semibold">Email</label>
               <div class="relative mt-2 rounded-md shadow-sm">
-                <input type="text" name="email" id="email" value="<%= company.email %>" class="block w-full rounded-lg inter py-1.5 mt-2 pl-2 text-gray-900 ring-1 ring-inset ring-gray-300 sm:text-sm sm:leading-6 border-blue-1" placeholder="Insira o email">
+                <input type="text" value="<%= company.email %>" name="email" id="email" class="block w-full rounded-lg inter py-1.5 mt-2 pl-2 text-gray-900 ring-1 ring-inset ring-gray-300 sm:text-sm sm:leading-6 border-blue-1" placeholder="Insira o email">
               </div>
             </div>
 
             <div>
               <label for="password" class="block text-md font-medium leading-6 text-gray-900 inter font-semibold">Senha</label>
               <div class="relative mt-2 rounded-md shadow-sm">
-                <input type="text" name="password" id="password" value="<%= company.password %>" class="block w-full rounded-lg inter py-1.5 mt-2 pl-2 text-gray-900 ring-1 ring-inset ring-gray-300 sm:text-sm sm:leading-6 border-blue-1" placeholder="Insira a senha">
+                <input type="text" value="<%= company.password %>" name="password" id="password" class="block w-full rounded-lg inter py-1.5 mt-2 pl-2 text-gray-900 ring-1 ring-inset ring-gray-300 sm:text-sm sm:leading-6 border-blue-1" placeholder="Insira a senha">
               </div>
             </div>
           </div>
@@ -70,14 +79,14 @@
             <div>
               <label for="responsible-phone" class="block text-md font-medium leading-6 text-gray-900 inter font-semibold">Telefone (Responsável)</label>
               <div class="relative mt-2 rounded-md shadow-sm">
-                <input type="number" name="responsible-phone" id="responsible-phone" value="<%= company.phoneResponsible %>" class="block w-full rounded-lg inter py-1.5 mt-2 pl-2 text-gray-900 ring-1 ring-inset ring-gray-300 sm:text-sm sm:leading-6 border-blue-1" placeholder="Insira o número do responsável">
+                <input type="text" value="<%= company.phoneResponsible %>" name="responsible-phone" id="responsible-phone" class="block w-full rounded-lg inter py-1.5 mt-2 pl-2 text-gray-900 ring-1 ring-inset ring-gray-300 sm:text-sm sm:leading-6 border-blue-1" placeholder="Insira o número do responsável">
               </div>
             </div>
 
             <div>
               <label for="company-phone" class="block text-md font-medium leading-6 text-gray-900 inter font-semibold">Telefone (Empresa)</label>
               <div class="relative mt-2 rounded-md shadow-sm">
-                <input type="text" name="company-phone" id="company-phone" value="<%= company.phoneCompany %>" class="block w-full rounded-lg inter py-1.5 mt-2 pl-2 text-gray-900 ring-1 ring-inset ring-gray-300 sm:text-sm sm:leading-6 border-blue-1" placeholder="Insira o celular">
+                <input type="text" value="<%= company.phoneCompany %>" name="company-phone" id="company-phone" class="block w-full rounded-lg inter py-1.5 mt-2 pl-2 text-gray-900 ring-1 ring-inset ring-gray-300 sm:text-sm sm:leading-6 border-blue-1" placeholder="Insira o celular">
               </div>
             </div>
           </div>
@@ -86,14 +95,14 @@
             <div>
               <label for="address" class="block text-md font-medium leading-6 text-gray-900 inter font-semibold">Endereço</label>
               <div class="relative mt-2 rounded-md shadow-sm">
-                <input type="text" name="address" id="address" value="<%= company.address %>" class="block w-full rounded-lg inter py-1.5 mt-2 pl-2 text-gray-900 ring-1 ring-inset ring-gray-300 sm:text-sm sm:leading-6 border-blue-1" placeholder="Insira o endereço">
+                <input type="text" value="<%= company.address %>" name="address" id="address" class="block w-full rounded-lg inter py-1.5 mt-2 pl-2 text-gray-900 ring-1 ring-inset ring-gray-300 sm:text-sm sm:leading-6 border-blue-1" placeholder="Insira o endereço">
               </div>
             </div>
 
             <div>
               <label for="number" class="block text-md font-medium leading-6 text-gray-900 inter font-semibold">Número</label>
               <div class="relative mt-2 rounded-md shadow-sm">
-                <input type="number" name="number" id="number" value="<%= company.number %>" class="block w-full rounded-lg inter py-1.5 mt-2 pl-2 text-gray-900 ring-1 ring-inset ring-gray-300 sm:text-sm sm:leading-6 border-blue-1" placeholder="Insira o número">
+                <input type="number" value="<%= company.number %>" name="number" id="number" class="block w-full rounded-lg inter py-1.5 mt-2 pl-2 text-gray-900 ring-1 ring-inset ring-gray-300 sm:text-sm sm:leading-6 border-blue-1" placeholder="Insira o número">
               </div>
             </div>
           </div>
@@ -102,14 +111,126 @@
             <div>
               <label for="cep" class="block text-md font-medium leading-6 text-gray-900 inter font-semibold">CEP</label>
               <div class="relative mt-2 rounded-md shadow-sm">
-                <input type="number" name="cep" id="cep" value="<%= company.cep %>" class="block w-full rounded-lg inter py-1.5 mt-2 pl-2 text-gray-900 ring-1 ring-inset ring-gray-300 sm:text-sm sm:leading-6 border-blue-1" placeholder="Insira o CEP">
+                <input type="text" value="<%= company.cep %>" name="cep" id="cep" class="block w-full rounded-lg inter py-1.5 mt-2 pl-2 text-gray-900 ring-1 ring-inset ring-gray-300 sm:text-sm sm:leading-6 border-blue-1" placeholder="Insira o CEP">
               </div>
             </div>
 
             <div>
+              <label for="neighborhood" class="block text-md font-medium leading-6 text-gray-900 inter font-semibold">Bairro</label>
+              <div class="relative mt-2 rounded-md shadow-sm">
+                <input type="text" value="<%= company.neighborhood%>" name="neighborhood" id="neighborhood" class="block w-full rounded-lg inter py-1.5 mt-2 pl-2 text-gray-900 ring-1 ring-inset ring-gray-300 sm:text-sm sm:leading-6 border-blue-1" placeholder="Insira o CEP">
+              </div>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-2 mt-12 gap-x-4">
+            <div>
               <label for="city" class="block text-md font-medium leading-6 text-gray-900 inter font-semibold">Cidade</label>
               <div class="relative mt-2 rounded-md shadow-sm">
-                <input type="text" name="city" id="city" value="<%= company.city %>" class="block w-full rounded-lg inter py-1.5 mt-2 pl-2 text-gray-900 ring-1 ring-inset ring-gray-300 sm:text-sm sm:leading-6 border-blue-1" placeholder="Insira a cidade">
+                <select name="city" id="city" class="block w-full rounded-lg inter py-2 mt-2 pl-2 text-gray-900 ring-1 ring-inset ring-gray-300 sm:text-sm sm:leading-6 border-blue-1">
+                  <option value="<%= company.city %>"><%= company.city %> (selecionado)</option>
+                  <option value="Porto Alegre / RS">Porto Alegre / RS</option>
+                  <option value="Canoas / RS">Canoas / RS</option>
+                  <option value="Gramado / RS">Gramado / RS</option>
+                  <option value="Novo Hamburgo / RS">Novo Hamburgo / RS</option>
+                  <option value="Caxias do Sul / RS">Caxias do Sul / RS</option>
+                  <option value="Pelotas / RS">Pelotas / RS</option>
+                  <option value="Santa Maria / RS">Santa Maria / RS</option>
+                  <option value="Passo Fundo / RS">Passo Fundo / RS</option>
+                  <option value="Santa Cruz do Sul / RS">Santa Cruz do Sul / RS</option>
+                  <option value="São Leopoldo / RS">São Leopoldo / RS</option>
+                  <option value="Rio Grande / RS">Rio Grande / RS</option>
+                  <option value="Bento Gonçalves / RS">Bento Gonçalves / RS</option>
+                  <option value="Uruguaiana / RS">Uruguaiana / RS</option>
+                  <option value="Santana do Livramento / RS">Santana do Livramento / RS</option>
+                  <option value="Erechim / RS">Erechim / RS</option>
+                  <option value="Ijuí / RS">Ijuí / RS</option>
+                  <option value="Bagé / RS">Bagé / RS</option>
+                  <option value="Vacaria / RS">Vacaria / RS</option>
+                  <option value="Lajeado / RS">Lajeado / RS</option>
+                  <option value="Sapucaia do Sul / RS">Sapucaia do Sul / RS</option>
+                  <option value="Gravataí / RS">Gravataí / RS</option>
+                  <option value="Cachoeirinha / RS">Cachoeirinha / RS</option>
+                  <option value="Esteio / RS">Esteio / RS</option>
+                  <option value="São Borja / RS">São Borja / RS</option>
+                  <option value="Cruz Alta / RS">Cruz Alta / RS</option>
+                  <option value="Santo Ângelo / RS">Santo Ângelo / RS</option>
+                  <option value="Taquara / RS">Taquara / RS</option>
+                  <option value="São Gabriel / RS">São Gabriel / RS</option>
+                  <option value="Montenegro / RS">Montenegro / RS</option>
+                  <option value="Capão da Canoa / RS">Capão da Canoa / RS</option>
+                  <option value="Osório / RS">Osório / RS</option>
+                  <option value="Venâncio Aires / RS">Venâncio Aires / RS</option>
+                  <option value="Santa Rosa / RS">Santa Rosa / RS</option>
+                  <option value="Alegrete / RS">Alegrete / RS</option>
+                  <option value="São Sebastião do Caí / RS">São Sebastião do Caí / RS</option>
+                  <option value="São Lourenço do Sul / RS">São Lourenço do Sul / RS</option>
+                  <option value="Bage / RS">Bage / RS</option>
+                  <option value="São Jerônimo / RS">São Jerônimo / RS</option>
+                  <option value="São José do Norte / RS">São José do Norte / RS</option>
+                  <option value="São José do Sul / RS">São José do Sul / RS</option>
+                  <option value="São Leopoldo / RS">São Leopoldo / RS</option>
+                  <option value="São Luiz Gonzaga / RS">São Luiz Gonzaga / RS</option>
+                  <option value="São Marcos / RS">São Marcos / RS</option>
+                  <option value="São Pedro do Sul / RS">São Pedro do Sul / RS</option>
+                  <option value="São Sebastião do Caí / RS">São Sebastião do Caí / RS</option>
+                  <option value="São Sepé / RS">São Sepé / RS</option>
+                  <option value="São Vicente do Sul / RS">São Vicente do Sul / RS</option>
+                  <option value="Sapiranga / RS">Sapiranga / RS</option>
+                  <option value="Sapucaia do Sul / RS">Sapucaia do Sul / RS</option>
+                  <option value="Sarandi / RS">Sarandi / RS</option>
+                  <option value="Serafina Corrêa / RS">Serafina Corrêa / RS</option>
+                  <option value="Soledade / RS">Soledade / RS</option>
+                  <option value="Tapejara / RS">Tapejara / RS</option>
+                  <option value="Tapes / RS">Tapes / RS</option>
+                  <option value="Taquari / RS">Taquari / RS</option>
+                  <option value="Teutônia / RS">Teutônia / RS</option>
+                  <option value="Torres / RS">Torres / RS</option>
+                  <option value="Tramandaí / RS">Tramandaí / RS</option>
+                  <option value="Três Coroas / RS">Três Coroas / RS</option>
+                  <option value="Três de Maio / RS">Três de Maio / RS</option>
+                  <option value="Três Passos / RS">Três Passos / RS</option>
+                  <option value="Triunfo / RS">Triunfo / RS</option>
+                  <option value="Tupanciretã / RS">Tupanciretã / RS</option>
+                  <option value="Uruguaiana / RS">Uruguaiana / RS</option>
+                  <option value="Vacaria / RS">Vacaria / RS</option>
+                  <option value="Venâncio Aires / RS">Venâncio Aires / RS</option>
+                  <option value="Viamão / RS">Viamão / RS</option>
+                  <option value="Xangri-lá / RS">Xangri-lá / RS</option>
+                </select>
+              </div>
+            </div>
+
+            <div>
+              <label for="city" class="block text-md font-medium leading-6 text-gray-900 inter font-semibold">PMOC/LISTA DE EQUIPAMENTOS</label>
+              <div class="relative mt-2 rounded-md shadow-sm">
+                <select name="service" id="service" class="block w-full rounded-lg inter py-2 mt-2 pl-2 text-gray-900 ring-1 ring-inset ring-gray-300 sm:text-sm sm:leading-6 border-blue-1">
+                  <% if (company.service == "equipment-list") { %>
+                    <option value="equipment-list" selected>Lista de equipamentos</option>
+                    <option value="pmoc">PMOC</option>
+                  <% } else if (company.service == "pmoc") { %>
+                    <option value="pmoc" selected>PMOC</option>
+                    <option value="equipment-list">Lista de equipamentos</option>
+                  <% } %>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-2 mt-12 gap-x-4">
+            <div>
+              <label for="technician" class="block text-md font-medium leading-6 text-gray-900 inter font-semibold">Técnico responsável</label>
+              <div class="relative mt-2 rounded-md shadow-sm">
+                <select name="technician" id="technician" class="block w-full rounded-lg inter py-2 mt-2 pl-2 text-gray-900 ring-1 ring-inset ring-gray-300 sm:text-sm sm:leading-6 border-blue-1">
+                  <option value="select">Selecione o técnico</option>
+                  <% technicians.forEach(technician => { %>
+                    <% if (String(technician._id) == company.technician) { %>
+                      <option value="<%= technician._id %>" selected><%= technician.name %></option>
+                    <% } else { %>
+                      <option value="<%= technician._id %>"><%= technician.name %></option>
+                    <% } %>
+                  <% }) %>
+                </select>
               </div>
             </div>
           </div>
@@ -151,7 +272,7 @@
 
           <div class="mt-8">
             <h2 class="text-sm inter font-semibold">Observações internas</h2>
-            <textarea class="w-full rounded-lg border-blue text-sm mt-2 inter p-2" name="comments" id="comments" cols="4" rows="6"><%= company.comments %></textarea>
+            <textarea class="w-full rounded-lg border-blue text-sm mt-2 inter p-2" name="comments" id="comments" cols="4" rows="6"></textarea>
           </div>
         </div>
       </div>
@@ -159,6 +280,7 @@
   </div>
 </body>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-masker/1.1.0/vanilla-masker.min.js"></script>
 <script>
   function alertMessage(type, content) {
     if (type == 'error') {
@@ -204,6 +326,16 @@
     }
   }
 
+  function formatCEP(input) {
+    const value = input.value.replace(/\D/g, '').substring(0, 8);
+
+    if (value.length > 5) {
+      input.value = value.substring(0, 5) + '-' + value.substring(5);
+    } else {
+      input.value = value;
+    }
+  }
+
   function saveCompany() {
     const name = document.querySelector("#name")
     const cnpj = document.querySelector("#cnpj")
@@ -213,9 +345,12 @@
     const phoneCompany = document.querySelector("#company-phone")
     const address = document.querySelector("#address")
     const cep = document.querySelector("#cep")
+    const neighborhood = document.querySelector("#neighborhood")
     const city = document.querySelector("#city")
     const number = document.querySelector("#number")
     const comments = document.querySelector("#comments")
+    const service = document.querySelector("#service")
+    const technician = document.querySelector("#technician")
 
     if (name.value.length == 0) {
       name.style = "border: 1px solid #e00d0d !important"
@@ -252,13 +387,23 @@
       return
     }
 
+    if (neighborhood.value.length == 0) {
+      neighborhood.style.border = "1px solid #e00d0d";
+      return
+    }
+
     if (cep.value.length == 0) {
       cep.style.border = "1px solid #e00d0d";
       return
     }
 
-    if (city.value.length == 0) {
+    if (city.value == "select") {
       city.style.border = "1px solid #e00d0d";
+      return
+    }
+
+    if (service.value == "select") {
+      service.style.border = "1px solid #e00d0d";
       return
     }
 
@@ -272,18 +417,36 @@
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({name: name.value, cnpj: cnpj.value, email: email.value, password: password.value, phoneResponsible: phoneResponsible.value, phoneCompany: phoneCompany.value, city: city.value, address: address.value, cep: cep.value, number: number.value, comments: comments.value})
+      body: JSON.stringify({name: name.value, cnpj: cnpj.value, email: email.value, password: password.value, phoneResponsible: phoneResponsible.value, phoneCompany: phoneCompany.value, city: city.value, address: address.value, cep: cep.value, neighborhood: neighborhood.value, service: service.value, number: number.value, comments: comments.value, technician: technician.value})
     })
     .then((response) => {
       if (response.ok) {
-        location.reload()
+        alertMessage("success", "Empresa atualizada com sucesso.")
       } else {
-        alertMessage("error", "Erro ao adicionar empresa")
+        alertMessage("error", "Erro ao atualizar empresa")
       }
     })
     .catch((error) => {
       alertMessage("error", "Tente novamente mais tarde")
     })
   }
+
+  window.addEventListener('DOMContentLoaded', function () {
+    VMasker(document.getElementById('phone')).maskPattern('(99) 99999-9999');
+  });
+
+  cep.addEventListener("input", function() {
+    formatCEP(cep)
+  })
+
+  cnpj.addEventListener('input', function (e) {
+    var x = e.target.value.replace(/\D/g, '').match(/(\d{0,2})(\d{0,3})(\d{0,3})(\d{0,4})(\d{0,2})/);
+    e.target.value = !x[2] ? x[1] : x[1] + '.' + x[2] + '.' + x[3] + '/' + x[4] + (x[5] ? '-' + x[5] : '');
+  });
+
+  window.addEventListener('DOMContentLoaded', function () {
+    VMasker(document.getElementById('responsible-phone')).maskPattern('(99) 99999-9999');
+    VMasker(document.getElementById('company-phone')).maskPattern('(99) 99999-9999');
+  });
 </script>
 </html>

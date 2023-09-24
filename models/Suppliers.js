@@ -6,11 +6,11 @@ const Supplier = new mongoose.Schema({
         require: true
     },
     landline: {
-        type: Number,
+        type: String,
         require: true
     },
     phone: {
-        type: Number,
+        type: String,
         require: true
     },
     email: {
@@ -21,15 +21,11 @@ const Supplier = new mongoose.Schema({
         type: String,
         require: true
     },
-    date: {
-        type: String,
-        require: true
-    },
     photo: {
         type: String,
         default: "" 
     },
-    type: {
+    materials: {
         type: Array,
         default: [] 
     },

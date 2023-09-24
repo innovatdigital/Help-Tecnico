@@ -11,41 +11,91 @@
 
     <main class="py-5 fade-in">
       <div class="relative isolate overflow-hidden">
-        <!-- Secondary navigation -->
         <header class="pb-4 pt-2 sm:pb-6">
-          <div class="mx-auto flex flex-wrap items-center gap-6 px-4 sm:flex-nowrap sm:px-6 lg:px-8">
-            <h1 class="text-base font-semibold leading-7 text-gray-900">Faturamento</h1>
-            <div class="order-last flex w-full gap-x-8 text-sm font-semibold leading-6 sm:order-none sm:w-auto sm:border-l sm:border-gray-200 sm:pl-6 sm:leading-7">
-              <a href="#" class="text-blue inter font-semibold">Últimos 7 dias</a>
-              <a href="#" class="text-blue inter font-semibold">Últimos 30 dias</a>
-              <a href="#" class="text-blue inter font-semibold">Todo o período</a>
+          <div class="mx-auto flex justify-between flex-wrap items-center gap-6 px-4 sm:flex-nowrap sm:px-6 lg:px-8">
+            <h1 class="text-xl inter font-semibold leading-7 text-gray-900">Faturamento</h1>
+
+            <div class="order-last flex w-full gap-x-3 text-sm font-semibold leading-6 sm:order-none sm:w-auto sm:leading-7">
+              <select class="text-blue inter font-semibold px-4 py-1 border-blue-1 rounded-md">
+                <option value="select">Periodo</option>
+                <option value="month">Últimos 7 dias</option>
+                <option value="month">Últimos 30 dias</option>
+                <option value="month">Todo o periodo</option>
+              </select>
+              
+              <input type="date" class="text-blue inter font-semibold px-4 py-1 border-blue-1 rounded-md">
             </div>
           </div>
         </header>
     
         <div class="border-b border-b-gray-900/10 lg:border-t lg:border-t-gray-900/5">
-          <dl class="mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 lg:px-2 xl:px-0">
-            <div class="flex items-baseline flex-wrap justify-between gap-y-2 gap-x-4 border-t border-gray-900/5 px-4 py-10 sm:px-6 lg:border-t-0 xl:px-8">
-              <dt class="text-sm font-medium leading-6 text-gray-500">Total (Todos)</dt>
-              <dd class="text-xs font-medium text-blue inter font-semibold">0.00%</dd>
-              <dd class="w-full flex-none text-3xl font-semibold leading-10 tracking-tight text-green-600">R$0,00</dd>
+          <dl class="mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 lg:px-2 xl:px-0">
+            <div class="flex items-baseline flex-wrap justify-between gap-y-2 gap-x-4 border-t border-gray-900/5 px-4 py-6 sm:px-6 lg:border-t-0 xl:px-8">
+              <dt class="inter text-sm font-medium leading-6 text-gray-500">Total (Todos)</dt>
+              <dd class="inter w-full flex-none text-3xl font-semibold leading-10 tracking-tight text-green-600">R$0,00</dd>
             </div>
-            <div class="flex items-baseline flex-wrap justify-between gap-y-2 gap-x-4 border-t border-gray-900/5 px-4 py-10 sm:px-6 lg:border-t-0 xl:px-8 sm:border-l">
-              <dt class="text-sm font-medium leading-6 text-gray-500">Orçamentos corretivos</dt>
-              <dd class="text-xs font-medium text-rose-600">0.00%</dd>
-              <dd class="w-full flex-none text-3xl font-semibold leading-10 tracking-tight text-gray-900">R$0,00</dd>
+
+            <div class="flex items-baseline flex-wrap justify-between gap-y-2 gap-x-4 border-t border-gray-900/5 px-4 py-6 sm:px-6 lg:border-t-0 xl:px-8 sm:border-l">
+              <dt class="inter text-sm font-medium leading-6 text-gray-500">Orçamentos corretivos</dt>
+              <dd class="inter w-full flex-none text-3xl font-semibold leading-10 tracking-tight text-gray-900">R$0,00</dd>
             </div>
-            <div class="flex items-baseline flex-wrap justify-between gap-y-2 gap-x-4 border-t border-gray-900/5 px-4 py-10 sm:px-6 lg:border-t-0 xl:px-8 lg:border-l">
-              <dt class="text-sm font-medium leading-6 text-gray-500">Orçamentos em geral</dt>
-              <dd class="text-xs font-medium text-blue inter font-semibold">0.00%</dd>
-              <dd class="w-full flex-none text-3xl font-semibold leading-10 tracking-tight text-gray-900">R$0,00</dd>
+
+            <div class="flex items-baseline flex-wrap justify-between gap-y-2 gap-x-4 border-t border-gray-900/5 px-4 py-6 sm:px-6 lg:border-t-0 xl:px-8 lg:border-l">
+              <dt class="inter text-sm font-medium leading-6 text-gray-500">Instalações</dt>
+              <dd class="inter w-full flex-none text-3xl font-semibold leading-10 tracking-tight text-gray-900">R$0,00</dd>
             </div>
-            <div class="flex items-baseline flex-wrap justify-between gap-y-2 gap-x-4 border-t border-gray-900/5 px-4 py-10 sm:px-6 lg:border-t-0 xl:px-8 sm:border-l">
-              <dt class="text-sm font-medium leading-6 text-gray-500">Contratos</dt>
-              <dd class="text-xs font-medium text-rose-600">0.00%</dd>
-              <dd class="w-full flex-none text-3xl font-semibold leading-10 tracking-tight text-gray-900">R$0,00</dd>
+
+            <div class="flex items-baseline flex-wrap justify-between gap-y-2 gap-x-4 border-t border-gray-900/5 px-4 py-6 sm:px-6 lg:border-t-0 xl:px-8 sm:border-l">
+              <dt class="inter text-sm font-medium leading-6 text-gray-500">Contratos</dt>
+              <dd class="inter w-full flex-none text-3xl font-semibold leading-10 tracking-tight text-gray-900">R$0,00</dd>
+            </div>
+
+            <div class="flex items-baseline flex-wrap justify-between gap-y-2 gap-x-4 border-t border-gray-900/5 px-4 py-6 sm:px-6 lg:border-t-0 xl:px-8 sm:border-l">
+              <dt class="inter text-sm font-medium leading-6 text-gray-500">Gastos</dt>
+              <dd class="inter w-full flex-none text-3xl font-semibold leading-10 tracking-tight text-red-700">R$0,00</dd>
             </div>
           </dl>
+        </div>
+
+        <div class="grid grid-cols-4 px-5">
+          <div class="col-span-3">
+            <dl class="grid grid-cols-1 mt-2">
+              <div class="col-sm-6 text-center">
+                <div id="area-chart"></div>
+              </div>
+            </dl>
+          </div>
+  
+          <div class="flex flex-col items-center justify-center mt-6">
+            <div id="doughnutChart" class="chart-doughnut-invoice"></div>
+            <div class="flex items-center justify-center space-x-4 mt-6">
+              <div class="flex items-center space-x-2">
+                <span style="width: 22px; height: 14px; background-color: #eedc36;"></span>
+                <p class="inter text-xs font-semibold">Corretivos</p>
+              </div>
+  
+              <div class="flex items-center space-x-2">
+                <span style="width: 22px; height: 14px; background-color: #e98330;"></span>
+                <p class="inter text-xs font-semibold">Instalações</p>
+              </div>
+  
+              <div class="flex items-center space-x-2">
+                <span style="width: 22px; height: 14px; background-color: #239CFF;"></span>
+                <p class="inter text-xs font-semibold">Contratos</p>
+              </div>
+            </div>
+            <div class="flex items-center justify-center space-x-4 mt-6">
+              <div class="flex items-center space-x-2">
+                <span style="width: 22px; height: 14px; background-color: #FC4349;"></span>
+                <p class="inter text-xs font-semibold">Gastos</p>
+              </div>
+  
+              <div class="flex items-center space-x-2">
+                <span style="width: 22px; height: 14px; background-color: #41d361;"></span>
+                <p class="inter text-xs font-semibold">Ganhos</p>
+              </div>
+            </div>
+          </div>
         </div>
     
         <div class="absolute left-0 top-full -z-10 mt-96 origin-top-left translate-y-40 -rotate-90 transform-gpu opacity-20 blur-3xl sm:left-1/2 sm:-ml-96 sm:-mt-10 sm:translate-y-0 sm:rotate-0 sm:transform-gpu sm:opacity-50" aria-hidden="true">
@@ -53,12 +103,15 @@
         </div>
       </div>
     
-      <div class="space-y-16 py-12 xl:space-y-20">
+      <div class="space-y-8 py-12 xl:space-y-20 mt-10">
         <div>
-          <div class="mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 class="mx-auto max-w-2xl text-base font-semibold leading-6 text-gray-900 lg:mx-0 lg:max-w-none">Orçamentos corretivos:</h2>
+          <div class="flex items-center justify-between mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="mx-auto max-w-2xl text-md font-semibold leading-6 text-gray-900 lg:mx-0 lg:max-w-none inter">Orçamentos corretivos:</h2>
+            
+            <a class="mx-auto max-w-2xl text-sm font-medium leading-6 color-blue lg:mx-0 lg:max-w-none inter">Ver mais -></a>
           </div>
-          <div class="mt-6 overflow-hidden border-t border-gray-100">
+
+          <div class="mt-4 overflow-hidden border-t border-gray-100">
             <div class="mx-auto px-4 sm:px-6 lg:px-8">
               <div class="mx-auto max-w-2xl lg:mx-0 lg:max-w-none">
                 <table class="w-full text-left">
@@ -85,24 +138,23 @@
                           </svg>
                           <div class="flex-auto">
                             <div class="flex items-start gap-x-3">
-                              <div class="text-sm font-medium leading-6 text-gray-900">R$7,600.00 BRL</div>
-                              <div class="rounded-md py-1 px-2 text-xs font-medium ring-1 ring-inset text-green-700 bg-green-50 ring-green-600/20">Paid</div>
+                              <div class="text-sm font-semibold leading-6 text-green-600 inter">R$7,600.00 BRL</div>
                             </div>
-                            <div class="mt-1 text-xs leading-5 text-gray-500">$500.00 tax</div>
+                            <div class="mt-1 text-xs leading-5 text-gray-500 inter">Data</div>
                           </div>
                         </div>
                         <div class="absolute bottom-0 right-full h-px w-screen bg-gray-100"></div>
                         <div class="absolute bottom-0 left-0 h-px w-screen bg-gray-100"></div>
                       </td>
                       <td class="hidden py-5 pr-6 sm:table-cell">
-                        <div class="text-sm leading-6 text-gray-900">Nome da empresa</div>
-                        <div class="mt-1 text-xs leading-5 text-gray-500">Chamado: <span class="text-blue">Ver chamado</span></div>
+                        <div class="text-sm leading-6 text-gray-900 inter font-semibold">Nome da empresa</div>
+                        <div class="mt-1 text-xs leading-5 text-gray-500 inter underline">Conferir empresa</div>
                       </td>
                       <td class="py-5 text-right">
                         <div class="flex justify-end">
-                          <a href="#" class="text-sm font-medium leading-6 text-blue inter font-semibold hover:text-indigo-500">Ver<span class="hidden sm:inline"> orçamento</span><span class="sr-only">, invoice #00012, Reform</span></a>
+                          <a href="#" class="text-sm font-medium leading-6 text-blue inter font-semibold hover:text-indigo-500">Ver orçamento</a>
                         </div>
-                        <div class="mt-1 text-xs leading-5 text-gray-500">ID: <span class="text-gray-900">#00012</span></div>
+                        <div class="mt-1 text-xs leading-5 text-gray-500 inter">ID: <span class="text-gray-900">#00012</span></div>
                       </td>
                     </tr>
                   </tbody>
@@ -112,11 +164,14 @@
           </div>
         </div>
 
-        <div class="mt-8">
-          <div class="mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 class="mx-auto max-w-2xl text-base font-semibold leading-6 text-gray-900 lg:mx-0 lg:max-w-none">Orçamentos em geral:</h2>
+        <div class="mt-4">
+          <div class="flex items-center justify-between mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="mx-auto max-w-2xl text-md font-semibold leading-6 text-gray-900 lg:mx-0 lg:max-w-none inter">Instalações:</h2>
+            
+            <a class="mx-auto max-w-2xl text-sm font-medium leading-6 color-blue lg:mx-0 lg:max-w-none inter">Ver mais -></a>
           </div>
-          <div class="mt-6 overflow-hidden border-t border-gray-100">
+
+          <div class="mt-4 overflow-hidden border-t border-gray-100">
             <div class="mx-auto px-4 sm:px-6 lg:px-8">
               <div class="mx-auto max-w-2xl lg:mx-0 lg:max-w-none">
                 <table class="w-full text-left">
@@ -143,24 +198,23 @@
                           </svg>
                           <div class="flex-auto">
                             <div class="flex items-start gap-x-3">
-                              <div class="text-sm font-medium leading-6 text-gray-900">R$7,600.00 BRL</div>
-                              <div class="rounded-md py-1 px-2 text-xs font-medium ring-1 ring-inset text-green-700 bg-green-50 ring-green-600/20">Paid</div>
+                              <div class="text-sm font-semibold leading-6 text-green-600 inter">R$7,600.00 BRL</div>
                             </div>
-                            <div class="mt-1 text-xs leading-5 text-gray-500">$500.00 tax</div>
+                            <div class="mt-1 text-xs leading-5 text-gray-500 inter">Data</div>
                           </div>
                         </div>
                         <div class="absolute bottom-0 right-full h-px w-screen bg-gray-100"></div>
                         <div class="absolute bottom-0 left-0 h-px w-screen bg-gray-100"></div>
                       </td>
                       <td class="hidden py-5 pr-6 sm:table-cell">
-                        <div class="text-sm leading-6 text-gray-900">Nome da empresa</div>
-                        <div class="mt-1 text-xs leading-5 text-gray-500">Chamado: <span class="text-blue">Ver chamado</span></div>
+                        <div class="text-sm leading-6 text-gray-900 inter font-semibold">Nome da empresa</div>
+                        <div class="mt-1 text-xs leading-5 text-gray-500 inter underline">Conferir empresa</div>
                       </td>
                       <td class="py-5 text-right">
                         <div class="flex justify-end">
-                          <a href="#" class="text-sm font-medium leading-6 text-blue inter font-semibold hover:text-indigo-500">Ver<span class="hidden sm:inline"> orçamento</span><span class="sr-only">, invoice #00012, Reform</span></a>
+                          <a href="#" class="text-sm font-medium leading-6 text-blue inter font-semibold hover:text-indigo-500">Ver completo</a>
                         </div>
-                        <div class="mt-1 text-xs leading-5 text-gray-500">ID: <span class="text-gray-900">#00012</span></div>
+                        <div class="mt-1 text-xs leading-5 text-gray-500 inter">ID: <span class="text-gray-900">#00012</span></div>
                       </td>
                     </tr>
                   </tbody>
@@ -170,147 +224,75 @@
           </div>
         </div>
 
-        <div class="mx-auto px-4 sm:px-6 lg:px-8">
-          <div class="mx-auto max-w-2xl lg:mx-0 lg:max-w-none">
-            <div class="flex items-center justify-between">
-              <h2 class="text-base font-semibold leading-7 text-gray-900">Contratos</h2>
-              <a href="#" class="text-sm font-semibold leading-6 text-blue inter font-semibold hover:text-indigo-500">Ver todos</a>
+        <div class="mt-4">
+          <div class="flex items-center justify-between mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="mx-auto max-w-2xl text-md font-semibold leading-6 text-gray-900 lg:mx-0 lg:max-w-none inter">Contratos:</h2>
+            
+            <a class="mx-auto max-w-2xl text-sm font-medium leading-6 color-blue lg:mx-0 lg:max-w-none inter">Ver mais -></a>
+          </div>
+
+          <div class="mt-4 overflow-hidden border-t border-gray-100">
+            <div class="mx-auto px-4 sm:px-6 lg:px-8">
+              <div class="mx-auto max-w-2xl lg:mx-0 lg:max-w-none">
+                <table class="w-full text-left">
+                  <thead class="sr-only">
+                    <tr>
+                      <th>Amount</th>
+                      <th class="hidden sm:table-cell">Client</th>
+                      <th>More details</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr class="text-sm leading-6 text-gray-900">
+                      <th scope="colgroup" colspan="3" class="relative isolate py-2 font-semibold">
+                        <time datetime="2023-03-22">Today</time>
+                        <div class="absolute inset-y-0 right-full -z-10 w-screen border-b border-gray-200 bg-gray-50"></div>
+                        <div class="absolute inset-y-0 left-0 -z-10 w-screen border-b border-gray-200 bg-gray-50"></div>
+                      </th>
+                    </tr>
+                    <tr>
+                      <td class="relative py-5 pr-6">
+                        <div class="flex gap-x-6">
+                          <svg class="hidden h-6 w-5 flex-none text-gray-400 sm:block" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm-.75-4.75a.75.75 0 001.5 0V8.66l1.95 2.1a.75.75 0 101.1-1.02l-3.25-3.5a.75.75 0 00-1.1 0L6.2 9.74a.75.75 0 101.1 1.02l1.95-2.1v4.59z" clip-rule="evenodd" />
+                          </svg>
+                          <div class="flex-auto">
+                            <div class="flex items-start gap-x-3">
+                              <div class="text-sm font-semibold leading-6 text-green-600 inter">R$7,600.00 BRL</div>
+                            </div>
+                            <div class="mt-1 text-xs leading-5 text-gray-500 inter">Data</div>
+                          </div>
+                        </div>
+                        <div class="absolute bottom-0 right-full h-px w-screen bg-gray-100"></div>
+                        <div class="absolute bottom-0 left-0 h-px w-screen bg-gray-100"></div>
+                      </td>
+                      <td class="hidden py-5 pr-6 sm:table-cell">
+                        <div class="text-sm leading-6 text-gray-900 inter font-semibold">Nome da empresa</div>
+                        <div class="mt-1 text-xs leading-5 text-gray-500 inter underline">Conferir empresa</div>
+                      </td>
+                      <td class="py-5 text-right">
+                        <div class="flex justify-end">
+                          <a href="#" class="text-sm font-medium leading-6 text-blue inter font-semibold hover:text-indigo-500">Ver contrato</a>
+                        </div>
+                        <div class="mt-1 text-xs leading-5 text-gray-500 inter">ID: <span class="text-gray-900">#00012</span></div>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
             </div>
-            <ul role="list" class="mt-6 grid grid-cols-1 gap-x-6 gap-y-8 lg:grid-cols-3 xl:gap-x-8">
-              <li class="overflow-hidden rounded-xl border border-gray-200">
-                <div class="flex items-center gap-x-4 border-b border-gray-900/5 bg-gray-50 p-6">
-                  <img src="https://tailwindui.com/img/logos/48x48/tuple.svg" alt="Tuple" class="h-12 w-12 flex-none rounded-lg bg-white object-cover ring-1 ring-gray-900/10">
-                  <div class="text-sm font-medium leading-6 text-gray-900">Tuple</div>
-                  <div class="relative ml-auto">
-                    <button type="button" class="-m-2.5 block p-2.5 text-gray-400 hover:text-gray-500" id="options-menu-0-button" aria-expanded="false" aria-haspopup="true">
-                      <span class="sr-only">Open options</span>
-                      <svg class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                        <path d="M3 10a1.5 1.5 0 113 0 1.5 1.5 0 01-3 0zM8.5 10a1.5 1.5 0 113 0 1.5 1.5 0 01-3 0zM15.5 8.5a1.5 1.5 0 100 3 1.5 1.5 0 000-3z" />
-                      </svg>
-                    </button>
-    
-                    <!--
-                      Dropdown menu, show/hide based on menu state.
-    
-                      Entering: "transition ease-out duration-100"
-                        From: "transform opacity-0 scale-95"
-                        To: "transform opacity-100 scale-100"
-                      Leaving: "transition ease-in duration-75"
-                        From: "transform opacity-100 scale-100"
-                        To: "transform opacity-0 scale-95"
-                    -->
-                    <div class="absolute right-0 z-10 mt-0.5 w-32 origin-top-right rounded-md bg-white py-2 shadow-lg ring-1 ring-gray-900/5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="options-menu-0-button" tabindex="-1">
-                      <!-- Active: "bg-gray-50", Not Active: "" -->
-                      <a href="#" class="block px-3 py-1 text-sm leading-6 text-gray-900" role="menuitem" tabindex="-1" id="options-menu-0-item-0">View<span class="sr-only">, Tuple</span></a>
-                      <a href="#" class="block px-3 py-1 text-sm leading-6 text-gray-900" role="menuitem" tabindex="-1" id="options-menu-0-item-1">Edit<span class="sr-only">, Tuple</span></a>
-                    </div>
-                  </div>
-                </div>
-                <dl class="-my-3 divide-y divide-gray-100 px-6 py-4 text-sm leading-6">
-                  <div class="flex justify-between gap-x-4 py-3">
-                    <dt class="text-gray-500">Last invoice</dt>
-                    <dd class="text-blue inter font-semibold"><time datetime="2022-12-13">December 13, 2022</time></dd>
-                  </div>
-                  <div class="flex justify-between gap-x-4 py-3">
-                    <dt class="text-gray-500">Amount</dt>
-                    <dd class="flex items-start gap-x-2">
-                      <div class="font-medium text-gray-900">$2,000.00</div>
-                      <div class="rounded-md py-1 px-2 text-xs font-medium ring-1 ring-inset text-red-700 bg-red-50 ring-red-600/10">Overdue</div>
-                    </dd>
-                  </div>
-                </dl>
-              </li>
-              <li class="overflow-hidden rounded-xl border border-gray-200">
-                <div class="flex items-center gap-x-4 border-b border-gray-900/5 bg-gray-50 p-6">
-                  <img src="https://tailwindui.com/img/logos/48x48/savvycal.svg" alt="SavvyCal" class="h-12 w-12 flex-none rounded-lg bg-white object-cover ring-1 ring-gray-900/10">
-                  <div class="text-sm font-medium leading-6 text-gray-900">SavvyCal</div>
-                  <div class="relative ml-auto">
-                    <button type="button" class="-m-2.5 block p-2.5 text-gray-400 hover:text-gray-500" id="options-menu-1-button" aria-expanded="false" aria-haspopup="true">
-                      <span class="sr-only">Open options</span>
-                      <svg class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                        <path d="M3 10a1.5 1.5 0 113 0 1.5 1.5 0 01-3 0zM8.5 10a1.5 1.5 0 113 0 1.5 1.5 0 01-3 0zM15.5 8.5a1.5 1.5 0 100 3 1.5 1.5 0 000-3z" />
-                      </svg>
-                    </button>
-    
-                    <!--
-                      Dropdown menu, show/hide based on menu state.
-    
-                      Entering: "transition ease-out duration-100"
-                        From: "transform opacity-0 scale-95"
-                        To: "transform opacity-100 scale-100"
-                      Leaving: "transition ease-in duration-75"
-                        From: "transform opacity-100 scale-100"
-                        To: "transform opacity-0 scale-95"
-                    -->
-                    <div class="absolute right-0 z-10 mt-0.5 w-32 origin-top-right rounded-md bg-white py-2 shadow-lg ring-1 ring-gray-900/5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="options-menu-1-button" tabindex="-1">
-                      <!-- Active: "bg-gray-50", Not Active: "" -->
-                      <a href="#" class="block px-3 py-1 text-sm leading-6 text-gray-900" role="menuitem" tabindex="-1" id="options-menu-1-item-0">View<span class="sr-only">, SavvyCal</span></a>
-                      <a href="#" class="block px-3 py-1 text-sm leading-6 text-gray-900" role="menuitem" tabindex="-1" id="options-menu-1-item-1">Edit<span class="sr-only">, SavvyCal</span></a>
-                    </div>
-                  </div>
-                </div>
-                <dl class="-my-3 divide-y divide-gray-100 px-6 py-4 text-sm leading-6">
-                  <div class="flex justify-between gap-x-4 py-3">
-                    <dt class="text-gray-500">Last invoice</dt>
-                    <dd class="text-blue inter font-semibold"><time datetime="2023-01-22">January 22, 2023</time></dd>
-                  </div>
-                  <div class="flex justify-between gap-x-4 py-3">
-                    <dt class="text-gray-500">Amount</dt>
-                    <dd class="flex items-start gap-x-2">
-                      <div class="font-medium text-gray-900">$14,000.00</div>
-                      <div class="rounded-md py-1 px-2 text-xs font-medium ring-1 ring-inset text-green-700 bg-green-50 ring-green-600/20">Paid</div>
-                    </dd>
-                  </div>
-                </dl>
-              </li>
-              <li class="overflow-hidden rounded-xl border border-gray-200">
-                <div class="flex items-center gap-x-4 border-b border-gray-900/5 bg-gray-50 p-6">
-                  <img src="https://tailwindui.com/img/logos/48x48/reform.svg" alt="Reform" class="h-12 w-12 flex-none rounded-lg bg-white object-cover ring-1 ring-gray-900/10">
-                  <div class="text-sm font-medium leading-6 text-gray-900">Reform</div>
-                  <div class="relative ml-auto">
-                    <button type="button" class="-m-2.5 block p-2.5 text-gray-400 hover:text-gray-500" id="options-menu-2-button" aria-expanded="false" aria-haspopup="true">
-                      <span class="sr-only">Open options</span>
-                      <svg class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                        <path d="M3 10a1.5 1.5 0 113 0 1.5 1.5 0 01-3 0zM8.5 10a1.5 1.5 0 113 0 1.5 1.5 0 01-3 0zM15.5 8.5a1.5 1.5 0 100 3 1.5 1.5 0 000-3z" />
-                      </svg>
-                    </button>
-    
-                    <!--
-                      Dropdown menu, show/hide based on menu state.
-    
-                      Entering: "transition ease-out duration-100"
-                        From: "transform opacity-0 scale-95"
-                        To: "transform opacity-100 scale-100"
-                      Leaving: "transition ease-in duration-75"
-                        From: "transform opacity-100 scale-100"
-                        To: "transform opacity-0 scale-95"
-                    -->
-                    <div class="absolute right-0 z-10 mt-0.5 w-32 origin-top-right rounded-md bg-white py-2 shadow-lg ring-1 ring-gray-900/5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="options-menu-2-button" tabindex="-1">
-                      <!-- Active: "bg-gray-50", Not Active: "" -->
-                      <a href="#" class="block px-3 py-1 text-sm leading-6 text-gray-900" role="menuitem" tabindex="-1" id="options-menu-2-item-0">View<span class="sr-only">, Reform</span></a>
-                      <a href="#" class="block px-3 py-1 text-sm leading-6 text-gray-900" role="menuitem" tabindex="-1" id="options-menu-2-item-1">Edit<span class="sr-only">, Reform</span></a>
-                    </div>
-                  </div>
-                </div>
-                <dl class="-my-3 divide-y divide-gray-100 px-6 py-4 text-sm leading-6">
-                  <div class="flex justify-between gap-x-4 py-3">
-                    <dt class="text-gray-500">Last invoice</dt>
-                    <dd class="text-blue inter font-semibold"><time datetime="2023-01-23">January 23, 2023</time></dd>
-                  </div>
-                  <div class="flex justify-between gap-x-4 py-3">
-                    <dt class="text-gray-500">Amount</dt>
-                    <dd class="flex items-start gap-x-2">
-                      <div class="font-medium text-gray-900">$7,600.00</div>
-                      <div class="rounded-md py-1 px-2 text-xs font-medium ring-1 ring-inset text-green-700 bg-green-50 ring-green-600/20">Paid</div>
-                    </dd>
-                  </div>
-                </dl>
-              </li>
-            </ul>
           </div>
         </div>
       </div>
     </main>
   </div>
 </body>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+<script src="https://www.google.com/jsapi"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.2/raphael-min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.0/morris.min.js"></script>
+<script src="/js/admin/chart-invoice-line.js"></script>
+<script src="/js/admin/chart-invoice-doughnut.js"></script>
 </html>

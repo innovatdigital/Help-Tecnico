@@ -70,7 +70,7 @@
             <div>
               <label for="responsible-phone" class="block text-md font-medium leading-6 text-gray-900 inter font-semibold">Telefone (Responsável)</label>
               <div class="relative mt-2 rounded-md shadow-sm">
-                <input type="number" name="responsible-phone" id="responsible-phone" class="block w-full rounded-lg inter py-1.5 mt-2 pl-2 text-gray-900 ring-1 ring-inset ring-gray-300 sm:text-sm sm:leading-6 border-blue-1" placeholder="Insira o número do responsável">
+                <input type="text" name="responsible-phone" id="responsible-phone" class="block w-full rounded-lg inter py-1.5 mt-2 pl-2 text-gray-900 ring-1 ring-inset ring-gray-300 sm:text-sm sm:leading-6 border-blue-1" placeholder="Insira o número do responsável">
               </div>
             </div>
 
@@ -102,14 +102,118 @@
             <div>
               <label for="cep" class="block text-md font-medium leading-6 text-gray-900 inter font-semibold">CEP</label>
               <div class="relative mt-2 rounded-md shadow-sm">
-                <input type="number" name="cep" id="cep" class="block w-full rounded-lg inter py-1.5 mt-2 pl-2 text-gray-900 ring-1 ring-inset ring-gray-300 sm:text-sm sm:leading-6 border-blue-1" placeholder="Insira o CEP">
+                <input type="text" name="cep" id="cep" class="block w-full rounded-lg inter py-1.5 mt-2 pl-2 text-gray-900 ring-1 ring-inset ring-gray-300 sm:text-sm sm:leading-6 border-blue-1" placeholder="Insira o CEP">
               </div>
             </div>
 
             <div>
+              <label for="neighborhood" class="block text-md font-medium leading-6 text-gray-900 inter font-semibold">Bairro</label>
+              <div class="relative mt-2 rounded-md shadow-sm">
+                <input type="text" name="neighborhood" id="neighborhood" class="block w-full rounded-lg inter py-1.5 mt-2 pl-2 text-gray-900 ring-1 ring-inset ring-gray-300 sm:text-sm sm:leading-6 border-blue-1" placeholder="Insira o CEP">
+              </div>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-2 mt-12 gap-x-4">
+            <div>
               <label for="city" class="block text-md font-medium leading-6 text-gray-900 inter font-semibold">Cidade</label>
               <div class="relative mt-2 rounded-md shadow-sm">
-                <input type="text" name="city" id="city" class="block w-full rounded-lg inter py-1.5 mt-2 pl-2 text-gray-900 ring-1 ring-inset ring-gray-300 sm:text-sm sm:leading-6 border-blue-1" placeholder="Insira a cidade">
+                <select name="city" id="city" class="block w-full rounded-lg inter py-2 mt-2 pl-2 text-gray-900 ring-1 ring-inset ring-gray-300 sm:text-sm sm:leading-6 border-blue-1">
+                  <option value="select">Selecione a cidade</option>
+                  <option value="Porto Alegre / RS">Porto Alegre / RS</option>
+                  <option value="Canoas / RS">Canoas / RS</option>
+                  <option value="Gramado / RS">Gramado / RS</option>
+                  <option value="Novo Hamburgo / RS">Novo Hamburgo / RS</option>
+                  <option value="Caxias do Sul / RS">Caxias do Sul / RS</option>
+                  <option value="Pelotas / RS">Pelotas / RS</option>
+                  <option value="Santa Maria / RS">Santa Maria / RS</option>
+                  <option value="Passo Fundo / RS">Passo Fundo / RS</option>
+                  <option value="Santa Cruz do Sul / RS">Santa Cruz do Sul / RS</option>
+                  <option value="São Leopoldo / RS">São Leopoldo / RS</option>
+                  <option value="Rio Grande / RS">Rio Grande / RS</option>
+                  <option value="Bento Gonçalves / RS">Bento Gonçalves / RS</option>
+                  <option value="Uruguaiana / RS">Uruguaiana / RS</option>
+                  <option value="Santana do Livramento / RS">Santana do Livramento / RS</option>
+                  <option value="Erechim / RS">Erechim / RS</option>
+                  <option value="Ijuí / RS">Ijuí / RS</option>
+                  <option value="Bagé / RS">Bagé / RS</option>
+                  <option value="Vacaria / RS">Vacaria / RS</option>
+                  <option value="Lajeado / RS">Lajeado / RS</option>
+                  <option value="Sapucaia do Sul / RS">Sapucaia do Sul / RS</option>
+                  <option value="Gravataí / RS">Gravataí / RS</option>
+                  <option value="Cachoeirinha / RS">Cachoeirinha / RS</option>
+                  <option value="Esteio / RS">Esteio / RS</option>
+                  <option value="São Borja / RS">São Borja / RS</option>
+                  <option value="Cruz Alta / RS">Cruz Alta / RS</option>
+                  <option value="Santo Ângelo / RS">Santo Ângelo / RS</option>
+                  <option value="Taquara / RS">Taquara / RS</option>
+                  <option value="São Gabriel / RS">São Gabriel / RS</option>
+                  <option value="Montenegro / RS">Montenegro / RS</option>
+                  <option value="Capão da Canoa / RS">Capão da Canoa / RS</option>
+                  <option value="Osório / RS">Osório / RS</option>
+                  <option value="Venâncio Aires / RS">Venâncio Aires / RS</option>
+                  <option value="Santa Rosa / RS">Santa Rosa / RS</option>
+                  <option value="Alegrete / RS">Alegrete / RS</option>
+                  <option value="São Sebastião do Caí / RS">São Sebastião do Caí / RS</option>
+                  <option value="São Lourenço do Sul / RS">São Lourenço do Sul / RS</option>
+                  <option value="Bage / RS">Bage / RS</option>
+                  <option value="São Jerônimo / RS">São Jerônimo / RS</option>
+                  <option value="São José do Norte / RS">São José do Norte / RS</option>
+                  <option value="São José do Sul / RS">São José do Sul / RS</option>
+                  <option value="São Leopoldo / RS">São Leopoldo / RS</option>
+                  <option value="São Luiz Gonzaga / RS">São Luiz Gonzaga / RS</option>
+                  <option value="São Marcos / RS">São Marcos / RS</option>
+                  <option value="São Pedro do Sul / RS">São Pedro do Sul / RS</option>
+                  <option value="São Sebastião do Caí / RS">São Sebastião do Caí / RS</option>
+                  <option value="São Sepé / RS">São Sepé / RS</option>
+                  <option value="São Vicente do Sul / RS">São Vicente do Sul / RS</option>
+                  <option value="Sapiranga / RS">Sapiranga / RS</option>
+                  <option value="Sapucaia do Sul / RS">Sapucaia do Sul / RS</option>
+                  <option value="Sarandi / RS">Sarandi / RS</option>
+                  <option value="Serafina Corrêa / RS">Serafina Corrêa / RS</option>
+                  <option value="Soledade / RS">Soledade / RS</option>
+                  <option value="Tapejara / RS">Tapejara / RS</option>
+                  <option value="Tapes / RS">Tapes / RS</option>
+                  <option value="Taquari / RS">Taquari / RS</option>
+                  <option value="Teutônia / RS">Teutônia / RS</option>
+                  <option value="Torres / RS">Torres / RS</option>
+                  <option value="Tramandaí / RS">Tramandaí / RS</option>
+                  <option value="Três Coroas / RS">Três Coroas / RS</option>
+                  <option value="Três de Maio / RS">Três de Maio / RS</option>
+                  <option value="Três Passos / RS">Três Passos / RS</option>
+                  <option value="Triunfo / RS">Triunfo / RS</option>
+                  <option value="Tupanciretã / RS">Tupanciretã / RS</option>
+                  <option value="Uruguaiana / RS">Uruguaiana / RS</option>
+                  <option value="Vacaria / RS">Vacaria / RS</option>
+                  <option value="Venâncio Aires / RS">Venâncio Aires / RS</option>
+                  <option value="Viamão / RS">Viamão / RS</option>
+                  <option value="Xangri-lá / RS">Xangri-lá / RS</option>
+                </select>
+              </div>
+            </div>
+
+            <div>
+              <label for="service" class="block text-md font-medium leading-6 text-gray-900 inter font-semibold">PMOC/LISTA DE EQUIPAMENTOS</label>
+              <div class="relative mt-2 rounded-md shadow-sm">
+                <select name="service" id="service" class="block w-full rounded-lg inter py-2 mt-2 pl-2 text-gray-900 ring-1 ring-inset ring-gray-300 sm:text-sm sm:leading-6 border-blue-1">
+                  <option value="select">Selecione uma opção</option>
+                  <option value="equipment-list">Lista de equipamentos</option>
+                  <option value="pmoc">PMOC</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-2 mt-12 gap-x-4">
+            <div>
+              <label for="technician" class="block text-md font-medium leading-6 text-gray-900 inter font-semibold">Técnico responsável</label>
+              <div class="relative mt-2 rounded-md shadow-sm">
+                <select name="technician" id="technician" class="block w-full rounded-lg inter py-2 mt-2 pl-2 text-gray-900 ring-1 ring-inset ring-gray-300 sm:text-sm sm:leading-6 border-blue-1">
+                  <option value="select">Selecione o técnico</option>
+                  <% technicians.forEach(technician => { %>
+                    <option value="<%= technician._id %>"><%= technician.name %></option>
+                  <% }) %>
+                </select>
               </div>
             </div>
           </div>
@@ -159,6 +263,7 @@
   </div>
 </body>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-masker/1.1.0/vanilla-masker.min.js"></script>
 <script>
   function alertMessage(type, content) {
     if (type == 'error') {
@@ -204,6 +309,16 @@
     }
   }
 
+  function formatCEP(input) {
+    const value = input.value.replace(/\D/g, '').substring(0, 8);
+
+    if (value.length > 5) {
+      input.value = value.substring(0, 5) + '-' + value.substring(5);
+    } else {
+      input.value = value;
+    }
+  }
+
   function newCompany() {
     const name = document.querySelector("#name")
     const cnpj = document.querySelector("#cnpj")
@@ -213,9 +328,12 @@
     const phoneCompany = document.querySelector("#company-phone")
     const address = document.querySelector("#address")
     const cep = document.querySelector("#cep")
+    const neighborhood = document.querySelector("#neighborhood")
     const city = document.querySelector("#city")
     const number = document.querySelector("#number")
     const comments = document.querySelector("#comments")
+    const service = document.querySelector("#service")
+    const technician = document.querySelector("#technician")
 
     if (name.value.length == 0) {
       name.style = "border: 1px solid #e00d0d !important"
@@ -252,13 +370,23 @@
       return
     }
 
+    if (neighborhood.value.length == 0) {
+      neighborhood.style.border = "1px solid #e00d0d";
+      return
+    }
+
     if (cep.value.length == 0) {
       cep.style.border = "1px solid #e00d0d";
       return
     }
 
-    if (city.value.length == 0) {
+    if (city.value == "select") {
       city.style.border = "1px solid #e00d0d";
+      return
+    }
+
+    if (service.value == "select") {
+      service.style.border = "1px solid #e00d0d";
       return
     }
 
@@ -272,7 +400,7 @@
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({name: name.value, cnpj: cnpj.value, email: email.value, password: password.value, phoneResponsible: phoneResponsible.value, phoneCompany: phoneCompany.value, city: city.value, address: address.value, cep: cep.value, number: number.value, comments: comments.value})
+      body: JSON.stringify({name: name.value, cnpj: cnpj.value, email: email.value, password: password.value, phoneResponsible: phoneResponsible.value, phoneCompany: phoneCompany.value, city: city.value, address: address.value, cep: cep.value, neighborhood: neighborhood.value, service: service.value, number: number.value, comments: comments.value, technician: technician.value})
     })
     .then((response) => {
       if (response.ok) {
@@ -285,5 +413,23 @@
       alertMessage("error", "Tente novamente mais tarde")
     })
   }
+
+  window.addEventListener('DOMContentLoaded', function () {
+    VMasker(document.getElementById('phone')).maskPattern('(99) 99999-9999');
+  });
+
+  cep.addEventListener("input", function() {
+    formatCEP(cep)
+  })
+
+  cnpj.addEventListener('input', function (e) {
+    var x = e.target.value.replace(/\D/g, '').match(/(\d{0,2})(\d{0,3})(\d{0,3})(\d{0,4})(\d{0,2})/);
+    e.target.value = !x[2] ? x[1] : x[1] + '.' + x[2] + '.' + x[3] + '/' + x[4] + (x[5] ? '-' + x[5] : '');
+  });
+
+  window.addEventListener('DOMContentLoaded', function () {
+    VMasker(document.getElementById('responsible-phone')).maskPattern('(99) 99999-9999');
+    VMasker(document.getElementById('company-phone')).maskPattern('(99) 99999-9999');
+  });
 </script>
 </html>

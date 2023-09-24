@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<%- include('../partials/head', {title: "title"}) %>
+
+<body>
+  <%- include('../partials/technician/sidebar-technician') %>
+
+  <div class="lg:pl-70">
+    <%- include('../partials/technician/nav-technician', {title: "Meus orçamentos", notifications: notifications, photo: photo, name_user: name_user}) %>
+
+    <main id="main" class="py-5 fade-in"></main>
+  </div>
+</body>
+
+<script>
+  document.addEventListener("DOMContentLoaded", async function() {
+    if ('mediaDevices' in navigator && 'getUserMedia' in navigator.mediaDevices) {
+      const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+
+      const videoElement = document.createElement('video');
+      videoElement.srcObject = stream;
+      document.querySelector("#main").appendChild(videoElement);
+
+      videoElement.play();
+    } else {
+      console.error('A API de câmera não é suportada neste navegador.');
+    }
+  })
+</script>
+
+</html>

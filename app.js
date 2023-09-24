@@ -8,6 +8,7 @@ const admin = require('./routes/adminRouter')
 const company = require('./routes/companyRouter')
 const technician = require('./routes/technicianRouter')
 const cookieParser = require('cookie-parser');
+const morgan = require('morgan')
 const dotenv = require('dotenv').config()
 const ejs = require('ejs');
 const fs = require('fs')
@@ -23,8 +24,10 @@ app.engine('ejs', ejs.renderFile);
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 
+app.use(morgan('dev'))
+
 app.use(express.static(path.join(__dirname, 'public')))
-app.use(express.static(path.join(__dirname, "js")));
+app.use(express.static(path.join(__dirname, 'js')));
 
 app.use(session({
   secret: process.env.SECRET,
@@ -32,7 +35,7 @@ app.use(session({
   saveUninitialized: true
 }));
  
-app.use("/login", auth)
+app.use("/", auth)
 app.use("/company", company)
 app.use("/technician", technician)
 app.use("/admin", admin)

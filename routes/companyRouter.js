@@ -1,6 +1,6 @@
 const express = require('express')
 const router = express.Router()
-const multer  = require('multer');
+const multer = require('multer');
 const path = require('path')
 const fs = require('fs')
 const Company = require('../models/Company')
@@ -8,48 +8,54 @@ const { v4: uuidv4 } = require('uuid');
 
 const {
   authMiddleware,
-  isAdmin
+  isCompany
 } = require('../middlewares/authMiddleware')
 
 const {
   dashboard,
+
   allCalls,
-  allCompanies,
-  allSuppliers,
-  newTechnician,
-  newCompany,
-  newAdmin,
-  newTest,
-  newSupplier,
-  saveSupplier,
-  saveTechnician,
-  updateSupplier,
-  deleteSupplier,
-  updateCompany,
-  saveAdmin,
-  saveCompany,
-  deleteCompany,
-  viewCompany,
-  viewSupplier,
-  viewEquipment,
-  viewReport,
-  viewBudget,
-  myEquipments,
-  budgets,
-  reports,
-  account,
-  updateAccount,
   newCall,
   viewCall,
   saveCall,
+  cancelCall,
+
+  equipments,
+  viewEquipment,
+  
+  viewPmoc,
+
+  viewEquipmentList,
+
+  reports,
+  viewReport,
+
+  budgets,
+  viewBudget,
+
+  account,
+  updateAccount,
   newPassword,
-  notificationsEmail,
-  notifications
 } = require('../controllers/companyCtrl')
+
+
+// ########################### //
+// ##       DASHBOARD       ## //
+// ########################### //
+
+router.get("/", authMiddleware, dashboard)
+
+
+
+
+
+// ########################## //
+// ##       CHAMADOS       ## //
+// ########################## //
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    const destinationPath = path.resolve(__dirname, '../public/img/uploads');
+    const destinationPath = path.resolve(__dirname, '../public/img/calls');
     cb(null, path.resolve(__dirname, destinationPath))
   },
   filename: function (req, file, cb) {
@@ -62,17 +68,12 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage: storage });
 
-
-// Dashboard
-router.get("/", authMiddleware, dashboard)
-
-// Chamados
 router.get("/all-calls", authMiddleware, allCalls)
 router.get("/new-call", authMiddleware, newCall)
 router.get("/view-call/:id", authMiddleware, viewCall)
 router.post("/save-call", authMiddleware, saveCall)
 router.post('/save-image-call', authMiddleware, upload.single('image'), function (req, res, next) {
-  const destinationPath = path.resolve(__dirname, '../public/img/uploads');
+  const destinationPath = path.resolve(__dirname, '../public/img/calls');
   const filePath = path.join(destinationPath, req.file.filename);
   const extension = path.extname(req.file.originalname);
   const newRandomNumber = Math.floor(Math.random() * 1000000000);
@@ -84,21 +85,72 @@ router.post('/save-image-call', authMiddleware, upload.single('image'), function
     res.send(newFilename);
   });
 })
+router.delete("/cancel-call/:id", authMiddleware, cancelCall)
 
 
+
+
+
+// ########################## //
+// ##     EQUIPAMENTOS     ## //
+// ########################## //
+
+router.get("/equipments", authMiddleware, equipments)
 router.get("/view-equipment", authMiddleware, viewEquipment)
-router.get("/view-report", authMiddleware, viewReport)
-router.get("/view-budget", authMiddleware, viewBudget)
-router.get("/notifications", authMiddleware, notifications)
-router.get("/my-equipments", authMiddleware, myEquipments)
-router.get("/reports", authMiddleware, reports)
-router.get("/budgets", authMiddleware, budgets)
 
+
+
+
+
+// ########################## //
+// ##         PMOC         ## //
+// ########################## //
+
+router.get("/view-pmoc", authMiddleware, viewPmoc)
+
+
+
+
+
+// ################################# //
+// ##    LISTA DE EQUIPAMENTOS    ## //
+// ################################# //
+
+router.get("/view-equipment-list", authMiddleware, viewEquipmentList)
+
+
+
+
+
+// ########################## //
+// ##      RELATÓRIOS      ## //
+// ########################## //
+
+router.get("/reports", authMiddleware, reports)
+router.get("/view-report", authMiddleware, viewReport)
+
+
+
+
+
+// ########################## //
+// ##      ORÇAMENTOS      ## //
+// ########################## //
+
+router.get("/budgets", authMiddleware, budgets)
+router.get("/view-budget", authMiddleware, viewBudget)
+
+
+
+
+
+// ######################### //
+// ##        CONTA        ## //
+// ######################### //
 
 router.get("/account", authMiddleware, account)
 router.post("/account/update", authMiddleware, updateAccount)
 router.post("/account/password", authMiddleware, newPassword)
-router.post("/account/notifications", authMiddleware, notificationsEmail)
 
 const storagePhoto = multer.diskStorage({
   destination: function (req, file, cb) {
@@ -133,7 +185,7 @@ router.post('/account/upload', authMiddleware, uploadPhoto.single('image'), func
         }
       });
     }
-    
+
     const update = await Company.findByIdAndUpdate(req.user._id, {
       photo: newFilename
     })

@@ -13,61 +13,207 @@ const {
 
 const {
   dashboard,
+    
   allCalls,
-  allReports,
-  administrators,
-  testUsers,
   viewCall,
-  allCompanies,
-  allSuppliers,
-  newTechnician,
-  newCompany,
+  designateCall,
+  cancelCall,
+  
+  fileManager,
+  createFolder,
+
+  allReports,
+  viewReport,
+
+  budgets,
+  viewBudget,
+
+  allEquipments,
+
+  administrators,
   newAdmin,
-  newTest,
+  saveAdmin,
+
+  testUsers,
+  newTester,
+
+  technicians,
+  newTechnician,
+  viewTechnician,
+  saveTechnician,
+  updateTechnician,
+  deleteTechnician,
+
+  allCompanies,
+  newCompany,
+  saveCompany,
+  viewCompany,
+  updateCompany,
+  deleteCompany,
+
+  allSuppliers,
   newSupplier,
   saveSupplier,
-  saveTechnician,
+  viewSupplier,
   updateSupplier,
   deleteSupplier,
-  updateCompany,
-  saveAdmin,
-  saveCompany,
-  deleteCompany,
-  viewCompany,
-  viewSupplier,
-  invoices,
-  technicians
-} = require('../controllers/adminCtrl')
 
-const { 
+  invoices,
+
   account,
   updateAccount,
-  newPassword,
-  notificationsEmail
-} = require('../controllers/accountCtrl')
+  newPassword
+} = require('../controllers/adminCtrl')
 
 
-// Dashboard
+// ########################### //
+// ##       DASHBOARD       ## //
+// ########################### //
+
 router.get("/", authMiddleware, dashboard)
 
 
-// Infos
+
+
+
+// ########################## //
+// ##       CHAMADOS       ## //
+// ########################## //
+
 router.get("/all-calls", authMiddleware, allCalls)
-router.get("/all-reports", authMiddleware, allReports)
-router.get("/administrators", authMiddleware, administrators)
-router.get("/test-users", authMiddleware, testUsers)
-router.get("/technicians", authMiddleware, technicians)
 router.get("/view-call/:id", authMiddleware, viewCall)
+router.put("/designate-call", authMiddleware, designateCall)
+router.delete("/cancel-call/:id", authMiddleware, cancelCall)
+
+
+
+
+
+// ########################## //
+// ##       ARQUIVOS       ## //
+// ########################## //
+
+router.get("/file-manager", authMiddleware, fileManager)
+router.post("/file-manager/create-folder", authMiddleware, createFolder)
+
+
+
+
+
+// ########################## //
+// ##      RELATÓRIOS      ## //
+// ########################## //
+
+router.get("/all-reports", authMiddleware, allReports)
+router.get("/view-report/:id", authMiddleware, viewReport)
+
+
+
+
+// ########################## //
+// ##      ORÇAMENTOS      ## //
+// ########################## //
+
+router.get("/budgets", authMiddleware, budgets)
+router.get("/view-budget", authMiddleware, viewBudget)
+
+
+
+
+
+// ########################## //
+// ##     EQUIPAMENTOS     ## //
+// ########################## //
+
+router.get("/all-equipments", authMiddleware, allEquipments)
+
+
+
+
+
+// ########################## //
+// ##    ADMINISTRADORES   ## //
+// ########################## //
+
+router.get("/administrators", authMiddleware, administrators)
+router.get("/new-admin", authMiddleware, isAdmin, newAdmin)
+router.post("/new-admin/save", authMiddleware, isAdmin, saveAdmin)
+
+
+
+
+
+// ########################### //
+// ##   USUÁRIOS DE TESTE   ## //
+// ########################### //
+
+router.get("/test-users", authMiddleware, testUsers)
+router.get("/new-tester", authMiddleware, isAdmin, newTester)
+
+
+
+
+
+// ########################## //
+// ##       TÉCNICOS       ## //
+// ########################## //
+
+router.get("/technicians", authMiddleware, technicians)
+router.get("/new-technician", authMiddleware, isAdmin, newTechnician)
+router.post("/new-technician/save", authMiddleware, isAdmin, saveTechnician)
+router.get("/view-technician/:id", authMiddleware, isAdmin, viewTechnician)
+router.get("/update-technician/:id", authMiddleware, isAdmin, updateTechnician)
+router.put("/save-technician/:id", authMiddleware, isAdmin, saveTechnician)
+router.delete("/delete-technician/:id", authMiddleware, isAdmin, deleteTechnician)
+
+
+
+
+
+// ########################## //
+// ##       EMPRESAS       ## //
+// ########################## //
+
 router.get("/all-companies", authMiddleware, allCompanies)
+router.get("/new-company", authMiddleware, isAdmin, newCompany)
+router.post("/new-company/save", authMiddleware, isAdmin, saveCompany)
+router.get("/view-company/:id", authMiddleware, isAdmin, viewCompany)
+router.get("/update-company/:id", authMiddleware, isAdmin, updateCompany)
+router.put("/save-company/:id", authMiddleware, isAdmin, saveCompany)
+router.delete("/delete-company/:id", authMiddleware, isAdmin, deleteCompany)
+
+
+
+
+
+// ########################## //
+// ##     FORNECEDORES     ## //
+// ########################## //
+
 router.get("/all-suppliers", authMiddleware, allSuppliers)
+router.get("/new-supplier", authMiddleware, isAdmin, newSupplier)
+router.post("/new-supplier/save", authMiddleware, isAdmin, saveSupplier)
+router.get("/view-supplier/:id", authMiddleware, isAdmin, viewSupplier)
+router.get("/update-supplier/:id", authMiddleware, isAdmin, updateSupplier)
+router.put("/save-supplier/:id", authMiddleware, isAdmin, saveSupplier)
+router.delete("/delete-supplier/:id", authMiddleware, isAdmin, deleteSupplier)
+
+
+
+
+// ######################### //
+// ##     FATURAMENTO     ## //
+// ######################### //
+
 router.get("/invoices", authMiddleware, invoices)
 
 
-// Account
-router.get("/account", authMiddleware, account)
-router.post("/account/update", authMiddleware, updateAccount)
-router.post("/account/password", authMiddleware, newPassword)
-router.post("/account/notifications", authMiddleware, notificationsEmail)
+
+
+
+// ######################### //
+// ##        CONTA        ## //
+// ######################### //
 
 const storagePhoto = multer.diskStorage({
   destination: function (req, file, cb) {
@@ -83,7 +229,10 @@ const storagePhoto = multer.diskStorage({
 
 const uploadPhoto = multer({ storage: storagePhoto });
 
-router.post('/config/upload', authMiddleware, uploadPhoto.single('image'), function (req, res, next) {
+router.get("/account", authMiddleware, account)
+router.post("/account/update", authMiddleware, updateAccount)
+router.post("/account/password", authMiddleware, newPassword)
+router.post('/account/upload', authMiddleware, uploadPhoto.single('image'), function (req, res, next) {
   const filePath = path.join('./public/img/photos', req.file.filename);
   const extension = path.extname(req.file.originalname);
   const newRandomNumber = Math.floor(Math.random() * 1000000000);
@@ -110,29 +259,5 @@ router.post('/config/upload', authMiddleware, uploadPhoto.single('image'), funct
     res.send(newFilename);
   });
 });
-
-
-// Functions
-router.get("/new-technician", authMiddleware, isAdmin, newTechnician)
-router.post("/new-technician/save", authMiddleware, isAdmin, saveTechnician)
-
-router.get("/new-company", authMiddleware, isAdmin, newCompany)
-router.post("/new-company/save", authMiddleware, isAdmin, saveCompany)
-router.get("/view-company/:id", authMiddleware, isAdmin, viewCompany)
-router.get("/update-company/:id", authMiddleware, isAdmin, updateCompany)
-router.put("/save-company/:id", authMiddleware, isAdmin, saveCompany)
-router.delete("/delete-company/:id", authMiddleware, isAdmin, deleteCompany)
-
-router.get("/new-admin", authMiddleware, isAdmin, newAdmin)
-router.post("/new-admin/save", authMiddleware, isAdmin, saveAdmin)
-
-router.get("/new_test", authMiddleware, isAdmin, newTest)
-
-router.get("/new-supplier", authMiddleware, isAdmin, newSupplier)
-router.post("/new-supplier/save", authMiddleware, isAdmin, saveSupplier)
-router.get("/view-supplier/:id", authMiddleware, isAdmin, viewSupplier)
-router.get("/update-supplier/:id", authMiddleware, isAdmin, updateSupplier)
-router.put("/save-supplier/:id", authMiddleware, isAdmin, saveSupplier)
-router.delete("/delete-supplier/:id", authMiddleware, isAdmin, deleteSupplier)
 
 module.exports = router

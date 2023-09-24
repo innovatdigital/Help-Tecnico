@@ -37,16 +37,16 @@
 
           <div class="grid grid-cols-2 mt-12 gap-x-4">
             <div>
-              <label for="name" class="block text-md font-medium leading-6 text-gray-900 inter font-semibold">Nome do técnico</label>
+              <label for="name" class="block text-md font-medium leading-6 text-gray-900 inter font-semibold">Nome</label>
               <div class="relative mt-2 rounded-md shadow-sm">
                 <input type="text" name="name" id="name" class="block w-full rounded-lg inter py-1.5 mt-2 pl-2 text-gray-900 ring-1 ring-inset ring-gray-300 sm:text-sm sm:leading-6 border-blue-1" placeholder="Insira o nome">
               </div>
             </div>
 
             <div>
-              <label for="cpf" class="block text-md font-medium leading-6 text-gray-900 inter font-semibold">CPF</label>
+              <label for="phone" class="block text-md font-medium leading-6 text-gray-900 inter font-semibold">Telefone</label>
               <div class="relative mt-2 rounded-md shadow-sm">
-                <input type="text" name="cpf" id="cpf" class="block w-full rounded-lg inter py-1.5 mt-2 pl-2 text-gray-900 ring-1 ring-inset ring-gray-300 sm:text-sm sm:leading-6 border-blue-1" placeholder="Insira o CPF">
+                <input type="text" name="phone" id="phone" class="block w-full rounded-lg inter py-1.5 mt-2 pl-2 text-gray-900 ring-1 ring-inset ring-gray-300 sm:text-sm sm:leading-6 border-blue-1" placeholder="Insira o número de celular">
               </div>
             </div>
           </div>
@@ -63,15 +63,6 @@
               <label for="password" class="block text-md font-medium leading-6 text-gray-900 inter font-semibold">Senha</label>
               <div class="relative mt-2 rounded-md shadow-sm">
                 <input type="text" name="password" id="password" class="block w-full rounded-lg inter py-1.5 mt-2 pl-2 text-gray-900 ring-1 ring-inset ring-gray-300 sm:text-sm sm:leading-6 border-blue-1" placeholder="Insira a senha">
-              </div>
-            </div>
-          </div>
-
-          <div class="grid grid-cols-2 mt-12 gap-x-4">
-            <div>
-              <label for="phone" class="block text-md font-medium leading-6 text-gray-900 inter font-semibold">Telefone</label>
-              <div class="relative mt-2 rounded-md shadow-sm">
-                <input type="number" name="phone" id="phone" class="block w-full rounded-lg inter py-1.5 mt-2 pl-2 text-gray-900 ring-1 ring-inset ring-gray-300 sm:text-sm sm:leading-6 border-blue-1" placeholder="Insira o número de celular">
               </div>
             </div>
           </div>
@@ -121,6 +112,7 @@
   </div>
 </body>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-masker/1.1.0/vanilla-masker.min.js"></script>
 <script>
   function alertMessage(type, content) {
     if (type == 'error') {
@@ -168,7 +160,6 @@
 
   function newAdmin() {
     const name = document.querySelector("#name")
-    const cpf = document.querySelector("#cpf")
     const email = document.querySelector("#email")
     const password = document.querySelector("#password")
     const phone = document.querySelector("#phone")
@@ -176,11 +167,6 @@
 
     if (name.value.length == 0) {
       name.style = "border: 1px solid #e00d0d !important"
-      return
-    }
-
-    if (cpf.value.length == 0) {
-      cpf.style.border = "1px solid #e00d0d";
       return
     }
 
@@ -204,7 +190,7 @@
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({name: name.value, cpf: cpf.value, email: email.value, password: password.value, phone: phone.value, comments: comments.value})
+      body: JSON.stringify({name: name.value, email: email.value, password: password.value, phone: phone.value, comments: comments.value})
     })
     .then((response) => {
       if (response.ok) {
@@ -217,5 +203,9 @@
       alertMessage("error", "Tente novamente mais tarde")
     })
   }
+
+  window.addEventListener('DOMContentLoaded', function () {
+    VMasker(document.getElementById('phone')).maskPattern('(99) 99999-9999');
+  });
 </script>
 </html>

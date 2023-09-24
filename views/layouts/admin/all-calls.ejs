@@ -31,7 +31,6 @@
                         <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 inter">ID</th>
                         <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 inter">Empresa</th>
                         <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 inter">Mensagem</th>
-                        <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 inter">Data</th>
                         <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 inter">SLA</th>
                         <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 inter">Início em</th>
                         <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 inter">Término em</th>
@@ -40,26 +39,42 @@
                         <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 inter">Ações</th>
                       </tr>
                     </thead>
-  
+
                     <tbody class="divide-y divide-gray-200 bg-white">
                       <% calls.forEach(function(item) { %>
                         <tr>
-                          <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium sm:pl-6 text-indigo-600">
+                          <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium sm:pl-6 color-blue">
                             <%= item._id %>
                           </td>
 
-                          <td class="whitespace-nowrap px-3 py-4 text-sm inter text-gray-800 font-bold">
-                            <div class="flex items-center mr-6">
-                              <img class="h-9 w-9 rounded-full" src="/img/photos/<%= item.imageCompany %>" alt="">                                                                    
-                              <p class="inter ml-2"><%= item.nameCompany %></p>
-                            </div>
+                          <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium sm:pl-6 text-gray-500">
+                            <div class="flex items-center space-x-2">
+                              <% if (item.logo_company.length > 0) { %>
+                                <img class="h-8 rounded-full" src="/img/photos/<%= item.logo_company %>">
+                              <% } else { %>
+                                <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                                  <g clip-path="url(#clip0_3_2)">
+                                  <path d="M32 16C32 7.16344 24.8366 0 16 0C7.16344 0 0 7.16344 0 16C0 24.8366 7.16344 32 16 32C24.8366 32 32 24.8366 32 16Z" fill="#239CFF"/>
+                                  <path d="M26.5396 7.11111H6.22217V24.8889H26.5396V7.11111Z" fill="url(#pattern0)"/>
+                                  </g>
+                                  <defs>
+                                  <pattern id="pattern0" patternContentUnits="objectBoundingBox" width="1" height="1">
+                                  <use xlink:href="#image0_3_2" transform="matrix(0.00911458 0 0 0.0104167 0.0625001 0)"/>
+                                  </pattern>
+                                  <clipPath id="clip0_3_2">
+                                  <rect width="32" height="32" fill="white"/>
+                                  </clipPath>
+                                  <image id="image0_3_2" width="96" height="96" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAAACXBIWXMAAAsTAAALEwEAmpwYAAABvElEQVR4nO3ZPU7DYBCE4S0QVwEJjkoQP+IqVHAK4CJAR9CLIqWgQVvEw6438/SJZr6xHUWOMDMzMzMzMzMz+wNwCdwAr8An/X3us+4yX652WOAUeAC+Wa8tcL/rEis8/GfmeFrVCPsrf5q7WNEzf3frTrMFLqI74Ja5rqM74I25XqI74IO53qM7hovuGC66Y7jojuGiO4aL7hguumO46I7hojt1QcSf/6f3DS/ABjhf7OCXKnjo94c438K+9kOceIBaj4uNcGiSI7sDftt4gPrH0ZnvgFpXHmDt7xsOTXDEvwHLvG9guBCfjwdIeIBiHqCYByjmAYp5gGIeoNj4AdQFEFPnT3UvgJg6f6p7AcTU+VPdCyCmzp/qXgAxdf5U9wKIqfOnuhdATJ0/1b0AYur8UV2wmvp8PEDCAxTzAMU8QDEPUMwDFPMAxcYPoC6AmDp/qnsBxNT5U90LIKbOn+peADF1/lT3Aoip86e6F0BMnT/VvQBi6vyp7gUQU+eP6oLV1OfjARIeoJgHKOYBinmAYh6gmAco5gGG8/+AYh6gmAco5gGKeYBiHqCYB1j7AGZmZmZmZmZmFlP8AN3fTDc25TqSAAAAAElFTkSuQmCC"/>
+                                  </defs>
+                                </svg>                                  
+                              <% } %>
+                              <p class="inter ml-2"><%= item.name_company %></p>
+                            </div>                                                                 
                           </td>
   
                           <td class="whitespace-nowrap px-3 py-4 text-sm inter text-gray-800 font-bold">
                             <%= item.description %>
                           </td>
-  
-                          <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 inter color-purple font-semibold"><%= item.date %></td>
   
                           <% if (item.status == "pending") { %>
                             <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 inter color-purple font-semibold">Não iniciado</td>
@@ -204,7 +219,7 @@
                     </defs>
                   </svg>                    
                   <h2 class="inter text-xl font-semibold mt-10">Nenhum chamado disponível</h2>
-                  <p class="inter">Nenhuma empresa realizou um chamado.</p>           
+                  <p class="inter">Você não realizou um chamado.</p>           
                 </div>
               <% } %>
             </div>

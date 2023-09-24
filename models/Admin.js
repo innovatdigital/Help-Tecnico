@@ -5,12 +5,8 @@ const Admin = new mongoose.Schema({
         type: String,
         require: true
     },
-    cpf: {
-        type: String,
-        require: true
-    },
     phone: {
-        type: Number,
+        type: String,
         require: true
     },
     email: {

@@ -10,11 +10,11 @@ const Company = new mongoose.Schema({
         require: true
     },
     phoneResponsible: {
-        type: Number,
+        type: String,
         require: true
     },
     phoneCompany: {
-        type: Number,
+        type: String,
         require: true
     },
     email: {
@@ -22,10 +22,6 @@ const Company = new mongoose.Schema({
         require: true
     },
     password: {
-        type: String,
-        require: true
-    },
-    date: {
         type: String,
         require: true
     },
@@ -46,6 +42,18 @@ const Company = new mongoose.Schema({
         require: true
     },
     number: {
+        type: String,
+        require: true
+    },
+    neighborhood: {
+        type: String,
+        require: true
+    },
+    service: {
+        type: String,
+        require: true
+    },
+    technician: {
         type: String,
         require: true
     },

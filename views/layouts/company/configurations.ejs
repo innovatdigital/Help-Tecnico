@@ -17,7 +17,7 @@
         <div class="fixed inset-0 bg-gray-500 bg-opacity-25 transition-opacity"></div>
       
         <div class="fixed inset-0 z-10 overflow-y-auto p-4 mt-14 sm:p-6 md:p-20">
-          <div class="mx-auto accounts transform divide-y divide-gray-100 overflow-hidden rounded-xl bg-white shadow-2xl ring-1 ring-black ring-opacity-5 transition-all">
+          <div class="mx-auto max-w-xl transform divide-y divide-gray-100 overflow-hidden rounded-xl bg-white shadow-2xl ring-1 ring-black ring-opacity-5 transition-all">
             <div class="flex justify-between py-3 px-6">
               <h2 class="color-black inter font-semibold text-lg">Editar perfil:</h2>
               <button onclick="closeEditProfile()">
@@ -31,13 +31,13 @@
               <div>
                 <div class="mt-6">
                   <label for="email" class="block text-md font-medium leading-6 text-gray-900 inter">Email:</label>
-                  <div class="relative mt-2 rounded-md shadow-sm">
+                  <div class="relative mt-2 rounded-lg shadow-sm">
                     <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
                       <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path fill-rule="evenodd" clip-rule="evenodd" d="M17.4154 3.66675C18.9341 3.66675 20.1654 4.89796 20.1654 6.41675V15.5834C20.1654 17.1022 18.9341 18.3334 17.4154 18.3334H4.58203C3.06325 18.3334 1.83203 17.1022 1.83203 15.5834V6.41675C1.83203 4.89796 3.06325 3.66675 4.58203 3.66675H17.4154ZM18.332 6.71741L11.6023 12.6066C11.2855 12.8838 10.8255 12.9069 10.4848 12.6759L10.3951 12.6066L3.66536 6.71833V15.5834C3.66536 16.0897 4.07577 16.5001 4.58203 16.5001H17.4154C17.9216 16.5001 18.332 16.0897 18.332 15.5834V6.71741ZM16.9387 5.50008H5.05686L10.9987 10.6987L16.9387 5.50008Z" fill="#239CFF"/>
                       </svg>                                                                                                                                
                     </div>
-                    <input type="text" value="<%= user.email %>" name="email" id="email" class="block w-full rounded-lg inter py-1.5 mt-2 pl-10 text-gray-900 ring-1 ring-inset ring-gray-300 sm:text-sm sm:leading-6 border-blue">
+                    <input type="text" value="<%= user.email %>" name="email" id="email" class="block w-full rounded-lg inter py-1.5 mt-2 pl-10 text-gray-900 ring-1 ring-inset ring-gray-300 sm:text-sm sm:leading-6 border-blue-1">
                   </div>
                 </div>
 
@@ -55,7 +55,7 @@
           <nav class="flex-none px-4 sm:px-6 lg:px-2">
             <ul role="list" class="flex gap-x-3 gap-y-1 whitespace-nowrap lg:flex-col">
               <li>
-                <button onclick="openProfile()" class="text-gray-700 hover-blue group flex gap-x-3 rounded-md py-2 pl-2 pr-3 text-sm leading-6 inter font-semibold">
+                <button onclick="openProfile()" class="text-gray-700 hover-blue group flex gap-x-3 rounded-lg py-2 pl-2 pr-3 text-sm leading-6 inter font-semibold">
                   <svg class="h-6 w-6 shrink-0 text-gray-400" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M17.982 18.725A7.488 7.488 0 0012 15.75a7.488 7.488 0 00-5.982 2.975m11.963 0a9 9 0 10-11.963 0m11.963 0A8.966 8.966 0 0112 21a8.966 8.966 0 01-5.982-2.275M15 9.75a3 3 0 11-6 0 3 3 0 016 0z" />
                   </svg>
@@ -63,19 +63,11 @@
                 </button>
               </li>
               <li>
-                <button onclick="openSecurity()" class="text-gray-700 hover-blue group flex gap-x-3 rounded-md py-2 pl-2 pr-3 text-sm leading-6 inter font-semibold">
+                <button onclick="openSecurity()" class="text-gray-700 hover-blue group flex gap-x-3 rounded-lg py-2 pl-2 pr-3 text-sm leading-6 inter font-semibold">
                   <svg class="h-6 w-6 shrink-0 text-gray-400" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M7.864 4.243A7.5 7.5 0 0119.5 10.5c0 2.92-.556 5.709-1.568 8.268M5.742 6.364A7.465 7.465 0 004.5 10.5a7.464 7.464 0 01-1.15 3.993m1.989 3.559A11.209 11.209 0 008.25 10.5a3.75 3.75 0 117.5 0c0 .527-.021 1.049-.064 1.565M12 10.5a14.94 14.94 0 01-3.6 9.75m6.633-4.596a18.666 18.666 0 01-2.485 5.33" />
                   </svg>
                   Segurança
-                </button>
-              </li>
-              <li>
-                <button onclick="openNotifications()" class="text-gray-700 hover-blue group flex gap-x-3 rounded-md py-2 pl-2 pr-3 text-sm leading-6 inter font-semibold">
-                  <svg class="h-6 w-6 shrink-0 text-gray-400" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M14.857 17.082a23.848 23.848 0 005.454-1.31A8.967 8.967 0 0118 9.75v-.7V9A6 6 0 006 9v.75a8.967 8.967 0 01-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 01-5.714 0m5.714 0a3 3 0 11-5.714 0" />
-                  </svg>
-                  Notificações
                 </button>
               </li>
             </ul>
@@ -91,19 +83,14 @@
               <div class="col-span-full flex items-center gap-x-8 mt-6">
                 <% if (user.photo) { %>
                   <img src="/img/photos/<%= user.photo %>" alt="" class="h-24 w-24 flex-none rounded-lg object-cover preview">
-                  <div>
-                    <label style="cursor: pointer;" for="picture" class="rounded-md px-3 py-2 text-sm font-semibold border-blue color-blue shadow-sm inter">Atualizar foto</label>
-                    <p class="mt-4 text-xs leading-5 text-gray-600 inter">JPG, GIF or PNG. 1MB max.</p>
-                    <input type="file" id="picture" class="hidden" name="picture">
-                  </div>
                 <% } else { %>
                   <img src="/img/platform/profile.png" alt="" class="h-24 w-24 flex-none rounded-lg object-cover preview">
-                  <div>
-                    <label style="cursor: pointer;" for="picture" class="rounded-md px-3 py-2 text-sm font-semibold border-blue color-blue shadow-sm inter">Atualizar foto</label>
-                    <p class="mt-4 text-xs leading-5 text-gray-600 inter">JPG, GIF or PNG. 1MB max.</p>
-                    <input type="file" id="picture" class="hidden" name="picture">
-                  </div>
                 <% } %>
+                <div>
+                  <label style="cursor: pointer;" for="picture" class="rounded-md px-3 py-2 text-sm font-semibold border-blue color-blue shadow-sm inter">Atualizar foto</label>
+                  <p class="mt-4 text-xs leading-5 text-gray-600 inter">JPG, GIF or PNG. 1MB max.</p>
+                  <input type="file" id="picture" class="hidden" name="picture">
+                </div>
               </div>
             </div>
 
@@ -160,129 +147,27 @@
             <div class="col-span-full">
               <label for="current-password" class="block text-sm font-medium leading-6 color-blue inter">Senha atual:</label>
               <div class="mt-2">
-                <input id="current-password" name="current_password" type="password" class="block w-full rounded-md border-blue px-2 inter bg-gray-50 py-1.5 color-blue shadow-sm ring-1 ring-inset ring-white/10 focus:ring-2 focus:ring-inset focus:ring-indigo-500 sm:text-sm sm:leading-6">
+                <input id="current-password" name="current_password" type="password" class="block w-full rounded-lg border-blue-1 px-2 inter bg-gray-50 py-1.5 color-blue shadow-sm ring-1 ring-inset ring-white/10 focus:ring-2 focus:ring-inset focus:ring-indigo-500 sm:text-sm sm:leading-6">
               </div>
             </div>
 
             <div class="col-span-full">
               <label for="new-password" class="block text-sm font-medium leading-6 color-blue inter">Nova senha:</label>
               <div class="mt-2">
-                <input id="new-password" name="new_password" type="password" class="block w-full rounded-md border-blue px-2 inter bg-gray-50 py-1.5 color-blue shadow-sm ring-1 ring-inset ring-white/10 focus:ring-2 focus:ring-inset focus:ring-indigo-500 sm:text-sm sm:leading-6">
+                <input id="new-password" name="new_password" type="password" class="block w-full rounded-lg border-blue-1 px-2 inter bg-gray-50 py-1.5 color-blue shadow-sm ring-1 ring-inset ring-white/10 focus:ring-2 focus:ring-inset focus:ring-indigo-500 sm:text-sm sm:leading-6">
               </div>
             </div>
 
             <div class="col-span-full">
               <label for="confirm-password" class="block text-sm font-medium leading-6 color-blue inter">Confirme a senha:</label>
               <div class="mt-2">
-                <input id="confirm-password" name="confirm_password" type="password" class="block w-full rounded-md border-blue px-2 inter bg-gray-50 py-1.5 color-blue shadow-sm ring-1 ring-inset ring-white/10 focus:ring-2 focus:ring-inset focus:ring-indigo-500 sm:text-sm sm:leading-6">
+                <input id="confirm-password" name="confirm_password" type="password" class="block w-full rounded-lg border-blue-1 px-2 inter bg-gray-50 py-1.5 color-blue shadow-sm ring-1 ring-inset ring-white/10 focus:ring-2 focus:ring-inset focus:ring-indigo-500 sm:text-sm sm:leading-6">
               </div>
             </div>
           </div>
 
           <div class="mt-4 flex">
-            <button onclick="changePassword()" type="submit" class="rounded-md bg-blue px-3 py-2 text-sm font-semibold text-white shadow-sm inter">Alterar</button>
-          </div>
-        </div>
-
-        <div class="hidden px-4 py-16 sm:px-6 lg:flex-auto lg:px-6 lg:py-4 fade-in" id="notifications">
-          <div class="mx-auto max-w-2xl space-y-16 sm:space-y-2 lg:mx-0 lg:max-w-none">
-            <div>
-              <h2 class="text-lg font-semibold leading-7 text-gray-900 inter">Notificações</h2>
-              <p class="mt-1 text-sm leading-6 text-gray-500 inter">Defina se você deseja ser notificado por email.</p>
-            </div>
-
-            <div>
-              <dl class="space-y-2 divide-y divide-gray-100 text-sm leading-6">
-                <div class="pt-6 sm:flex">
-                  <dt class="font-medium text-gray-900 sm:w-64 sm:flex-none sm:pr-6 inter">Notificação por email:</dt>
-                  <dd class="mt-1 flex justify-between gap-x-6 sm:mt-0 sm:flex-auto">
-                    <% if (user.notificationEmail) { %>
-                      <button onclick="notificationEmail(false)" type="button" class="font-semibold color-blue inter">Desativar</button>
-                    <% } else { %>
-                      <button onclick="notificationEmail(true)" type="button" class="font-semibold color-blue inter">Ativar</button>
-                    <% } %>
-                  </dd>
-                </div>
-              </dl>
-            </div>
-          </div>
-        </div>
-
-        <div class="hidden px-4 py-16 sm:px-6 lg:flex-auto lg:px-6 lg:py-4 fade-in" id="payments">
-          <div class="mx-auto max-w-2xl sm:space-y-4 lg:mx-0 lg:max-w-none">
-            <div>
-              <h2 class="text-lg font-semibold leading-7 text-gray-900 inter">Pagamentos</h2>
-              <p class="mt-1 text-sm leading-6 text-gray-500 inter">Gerencie todos os seus pagamentos.</p>
-            </div>
-
-            <div class="sm:flex">
-              <div class="flex-shrink-0 sm:mb-0 sm:mr-4">
-                <svg width="60" height="60" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <g clip-path="url(#clip0_116_250)">
-                  <path d="M60 14.4457C60 11.7718 57.8478 9.61963 55.1739 9.61963H4.82609C2.15217 9.61963 0 11.7718 0 14.4457V43.9892C0 46.5979 2.15217 48.7501 4.82609 48.7501H55.2391C57.913 48.7501 60.0652 46.5979 60.0652 43.924V14.4457H60ZM54.7826 14.837V21.6849H29.375H5.21739V14.837H54.7826ZM5.21739 43.5327V27.2283H54.7826V43.5327H5.21739ZM49.8913 35.0544C49.8913 36.4892 48.7174 37.6631 47.2826 37.6631H34.8913C33.4565 37.6631 32.2826 36.4892 32.2826 35.0544C32.2826 33.6196 33.4565 32.4457 34.8913 32.4457H47.2826C48.7174 32.4457 49.8913 33.6196 49.8913 35.0544Z" fill="#A7A7A7"/>
-                  </g>
-                  <defs>
-                  <clipPath id="clip0_116_250">
-                  <rect width="60" height="60" fill="white"/>
-                  </clipPath>
-                  </defs>
-                </svg>                                    
-              </div>
-              <div class="mt-1">
-                <h4 class="text-md font-bold color-blue inter">Cartão com final 4044</h4>
-                <p class="mt-1 inter">Seu cartão cadastrado.</p>
-              </div>
-              
-              <button type="button" class="font-semibold color-blue inter ml-12">Modificar</button>
-            </div>
-
-            <div>
-              <dl class="mt-6 space-y-2 border-t border-gray-200 text-sm leading-6">
-                <div class="pt-6 sm:flex">
-                  <dt class="font-medium text-gray-900 sm:w-64 sm:flex-none sm:pr-6 inter">Ultimo pagamento:</dt>
-                  <dd class="mt-1 flex justify-between gap-x-6 sm:mt-0 sm:flex-auto">
-                    <div class="text-gray-900 inter">20/12/2022</div>
-                    <div class="text-gray-900 inter">R$297,00</div>
-                  </dd>
-                </div>
-                <div class="pt-6 sm:flex">
-                  <dt class="font-medium text-gray-900 sm:w-64 sm:flex-none sm:pr-6 color-blue inter">Próximo pagamento:</dt>
-                  <dd class="mt-1 flex justify-between gap-x-6 sm:mt-0 sm:flex-auto">
-                    <div class="text-gray-900 inter">20/04/2023</div>
-                    <div class="text-gray-900 inter">R$297,00</div>
-                  </dd>
-                </div>
-              </dl>
-            </div>
-
-            <div class="mt-8 flow-root">
-              <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
-                <div class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
-                  <div class="overflow-hidden shadow ring-1 ring-black ring-opacity-5 sm:rounded-lg">
-                    <table class="min-w-full divide-y divide-gray-300">
-                      <thead class="bg-gray-50">
-                        <tr>
-                          <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">Data</th>
-                          <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Status</th>
-                          <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Valor</th>
-                          <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Cartão</th>
-                          <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Ações</th>
-                        </tr>
-                      </thead>
-                      <tbody class="divide-y divide-gray-200 bg-white">
-                        <tr>
-                          <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6">Lindsay Walton</td>
-                          <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">Front-end Developer</td>
-                          <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">lindsay.walton@example.com</td>
-                          <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">Member</td>
-                          <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">Member</td>
-                        </tr>
-                      </tbody>
-                    </table>
-                  </div>
-                </div>
-              </div>
-            </div>
+            <button onclick="changePassword()" type="submit" class="rounded-lg bg-blue px-3 py-2 text-sm font-semibold text-white shadow-sm inter">Alterar</button>
           </div>
         </div>
       </div>
@@ -338,36 +223,16 @@
   function openProfile() {
     const profile = document.querySelector("#profile")
     const security = document.querySelector("#security")
-    const notifications = document.querySelector("#notifications")
-    const payments = document.querySelector("#payments")
 
     security.classList.add("hidden")
-    notifications.classList.add("hidden")
-    payments.classList.add("hidden")
     profile.classList.remove("hidden")
   }
 
   function openSecurity() {
     const profile = document.querySelector("#profile")
     const security = document.querySelector("#security")
-    const notifications = document.querySelector("#notifications")
-    const payments = document.querySelector("#payments")
 
     security.classList.remove("hidden")
-    notifications.classList.add("hidden")
-    payments.classList.add("hidden")
-    profile.classList.add("hidden")
-  }
-
-  function openNotifications() {
-    const profile = document.querySelector("#profile")
-    const security = document.querySelector("#security")
-    const notifications = document.querySelector("#notifications")
-    const payments = document.querySelector("#payments")
-
-    security.classList.add("hidden")
-    notifications.classList.remove("hidden")
-    payments.classList.add("hidden")
     profile.classList.add("hidden")
   }
 
@@ -394,7 +259,6 @@
 
   const profile = document.querySelector("#profile")
   const login = document.querySelector("#login")
-  const payments = document.querySelector("#payments")
 
   const upload = (e) => {
     const formData = new FormData();
@@ -478,26 +342,6 @@
         alert_message("error", "Ocorreu um erro")
       })
     }
-  }
-
-  async function notificationEmail(status) {
-    fetch('/admin/config/notifications', {
-      method: 'POST',
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({status: status})
-    })
-    .then((response) => {
-      if (response.ok) {
-        location.reload()
-      } else {
-        alert_message("error", "Ocorreu um erro")
-      }
-    })
-    .catch((error) => {
-      alert_message("error", "Ocorreu um erro")
-    })
   }
 </script>
 
