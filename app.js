@@ -47,11 +47,11 @@ app.use((req, res, next) => {
 app.use(helmet());
 
 const dbConnect = () => {
-  try{
+  try {
     mongoose.set("strictQuery", false);
     const conn = mongoose.connect(process.env.MONGODB_URL)
     console.log('Database connected successful!')
-  }catch(error){
+  } catch(error) {
     console.log('Database connected error.')
   }
 }

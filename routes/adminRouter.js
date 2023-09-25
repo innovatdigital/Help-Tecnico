@@ -94,7 +94,7 @@ router.delete("/cancel-call/:id", authMiddleware, cancelCall)
 // ##       ARQUIVOS       ## //
 // ########################## //
 
-const upload = multer({ dest: "../public/file-manager" });
+// const upload = multer({ dest: "../public/file-manager" });
 
 router.get("/file-manager", authMiddleware, fileManager)
 router.post("/file-manager/create-folder", authMiddleware, createFolder)
