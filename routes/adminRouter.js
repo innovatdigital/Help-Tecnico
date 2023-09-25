@@ -98,7 +98,7 @@ router.delete("/cancel-call/:id", authMiddleware, cancelCall)
 
 router.get("/file-manager", authMiddleware, fileManager)
 router.post("/file-manager/create-folder", authMiddleware, createFolder)
-router.post("/file-manager/upload-archive", authMiddleware, upload.single('arquivo'), uploadArchive)
+// router.post("/file-manager/upload-archive", authMiddleware, upload.single('arquivo'), uploadArchive)
 
 
 
