@@ -83,7 +83,7 @@ const saveCall = asyncHandler(async(req, res) => {
 })
 
 const cancelCall = asyncHandler(async(req, res) => {
-    const cancelCall = await Calls.findByIdAndDelete(req.params.id)
+    const cancelCall = await Calls.findByIdAndUpdate(req.params.id, {cancellation_message: req.body.cancellation_message, status: "canceled"})
 
     if (cancelCall) {
         res.sendStatus(200)

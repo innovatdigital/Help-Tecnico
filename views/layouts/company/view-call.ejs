@@ -26,15 +26,16 @@
 
             <div class="flex flex-col divide-y divide-gray-100 px-6">
               <div>
-                <div class="flex flex-col items-center justify-center mt-6 py-4">
-                  <svg width="46" height="46" viewBox="0 0 46 46" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M40.2487 2.87504H26.832C26.832 2.36671 26.6301 1.8792 26.2706 1.51975C25.9112 1.16031 25.4237 0.958374 24.9154 0.958374H21.082C20.5737 0.958374 20.0862 1.16031 19.7267 1.51975C19.3673 1.8792 19.1654 2.36671 19.1654 2.87504H5.7487C5.24037 2.87504 4.75285 3.07697 4.39341 3.43642C4.03397 3.79586 3.83203 4.28338 3.83203 4.79171C3.83203 5.30004 4.03397 5.78755 4.39341 6.147C4.75285 6.50644 5.24037 6.70837 5.7487 6.70837H40.2487C40.757 6.70837 41.2445 6.50644 41.604 6.147C41.9634 5.78755 42.1654 5.30004 42.1654 4.79171C42.1654 4.28338 41.9634 3.79586 41.604 3.43642C41.2445 3.07697 40.757 2.87504 40.2487 2.87504Z" fill="#AA2222"/>
-                    <path d="M37.3737 8.625C36.8654 8.625 36.3779 8.82693 36.0184 9.18638C35.659 9.54582 35.457 10.0333 35.457 10.5417V41.2083H10.5404V10.5417C10.5404 10.0333 10.3384 9.54582 9.97899 9.18638C9.61954 8.82693 9.13203 8.625 8.6237 8.625C8.11537 8.625 7.62785 8.82693 7.26841 9.18638C6.90897 9.54582 6.70703 10.0333 6.70703 10.5417V43.125C6.70703 43.6333 6.90897 44.1208 7.26841 44.4803C7.62785 44.8397 8.11537 45.0417 8.6237 45.0417H37.3737C37.882 45.0417 38.3695 44.8397 38.729 44.4803C39.0884 44.1208 39.2904 43.6333 39.2904 43.125V10.5417C39.2904 10.0333 39.0884 9.54582 38.729 9.18638C38.3695 8.82693 37.882 8.625 37.3737 8.625Z" fill="#AA2222"/>
-                    <path d="M20.1263 35.4583V18.2083C20.1263 17.7 19.9244 17.2125 19.5649 16.853C19.2055 16.4936 18.718 16.2916 18.2096 16.2916C17.7013 16.2916 17.2138 16.4936 16.8543 16.853C16.4949 17.2125 16.293 17.7 16.293 18.2083V35.4583C16.293 35.9666 16.4949 36.4541 16.8543 36.8136C17.2138 37.173 17.7013 37.375 18.2096 37.375C18.718 37.375 19.2055 37.173 19.5649 36.8136C19.9244 36.4541 20.1263 35.9666 20.1263 35.4583Z" fill="#AA2222"/>
-                    <path d="M29.7083 35.4583V18.2083C29.7083 17.7 29.5064 17.2125 29.147 16.853C28.7875 16.4936 28.3 16.2916 27.7917 16.2916C27.2833 16.2916 26.7958 16.4936 26.4364 16.853C26.0769 17.2125 25.875 17.7 25.875 18.2083V35.4583C25.875 35.9666 26.0769 36.4541 26.4364 36.8136C26.7958 37.173 27.2833 37.375 27.7917 37.375C28.3 37.375 28.7875 37.173 29.147 36.8136C29.5064 36.4541 29.7083 35.9666 29.7083 35.4583Z" fill="#AA2222"/>
-                  </svg>                                        
+                <div class="flex flex-col items-center justify-center mt-2">                                        
                   <h2 for="content" class="block text-md font-bold leading-6 text-gray-900 inter mt-4">Tem certeza que deseja cancelar o chamado</h2>
                   <p class="inter text-center text-sm font-semibold">Essa ação é irreversível, e todos os dados associados a ele serão apagados.</p>
+                </div>
+
+                <div class="mt-6">
+                  <label for="cancellation_message" class="block text-md font-medium leading-6 text-gray-900 inter mt-2">Insira o motivo do cancelamento:</label>
+                  <div class="flex items-center option mt-2">
+                    <textarea name="cancellation_message" id="cancellation_message" class="block w-full rounded-lg p-2 text-sm text-gray-900 border-2 shadow-sm inter" aria-placeholder="Motivo do cancelamento:"></textarea>
+                  </div>
                 </div>
 
                 <div class="pb-4">
@@ -103,6 +104,13 @@
                           <dt class="text-md font-medium text-gray-500">Descrição do chamado:</dt>
                           <dd class="mt-1 text-sm text-gray-900 inter inter font-medium"><%= call.description %></dd>
                         </div>
+
+                        <% if (call.status == "canceled") { %>
+                          <div class="sm:col-span-2">
+                            <dt class="text-md font-medium text-red-500">Motivo do cancelamento:</dt>
+                            <dd class="mt-1 text-sm text-gray-900 inter inter font-medium"><%= call.cancellation_message %></dd>
+                          </div>
+                        <% } %>
                         
                         <div class="sm:col-span-2">
                           <dt class="text-sm font-semibold text-gray-500 inter">Anexos do chamado:</dt>
@@ -377,8 +385,19 @@
   }
 
   function cancelCall() {
+    const cancellation_message = document.querySelector("#cancellation_message")
+
+    if (cancellation_message.value.length == 0) {
+      cancellation_message.style.border = "1px solid #e00d0d;"
+      return
+    }
+
     fetch('/company/cancel-call/<%= call._id %>', {
       method: 'DELETE',
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({cancellation_message: cancellation_message.value})
     })
     .then(response => {
       if (response.ok) {

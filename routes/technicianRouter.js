@@ -12,6 +12,12 @@ const {
 } = require('../middlewares/authMiddleware')
 
 const {
+  calls,
+  viewCall,
+
+  reports,
+  viewReport,
+
   scanQrCode,
   account,
   updateAccount,
@@ -20,20 +26,24 @@ const {
   newPassword,
 } = require('../controllers/technicianCtrl')
 
-const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    const destinationPath = path.resolve(__dirname, '../public/img/uploads');
-    cb(null, path.resolve(__dirname, destinationPath))
-  },
-  filename: function (req, file, cb) {
-    const extension = path.extname(file.originalname);
-    const randomNumber = Math.floor(Math.random() * 1000000000);
-    const filename = randomNumber.toString() + extension;
-    cb(null, filename);
-  }
-});
 
-const upload = multer({ storage: storage });
+// ########################## //
+// ##       CHAMADOS       ## //
+// ########################## //
+
+router.get("/calls", authMiddleware, calls)
+router.get("/view-call/:id", authMiddleware, viewCall)
+
+
+
+
+
+// ########################## //
+// ##      RELATÓRIOS      ## //
+// ########################## //
+
+router.get("/reports", authMiddleware, reports)
+router.get("/view-report/:id", authMiddleware, viewReport)
 
 
 router.get("/register-equipment", authMiddleware, newEquipment)

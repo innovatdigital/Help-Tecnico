@@ -82,11 +82,17 @@
                             <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 inter color-purple font-semibold"><%= item.sla %> (contando)</td>
                           <% } else if (item.status == "concluded") { %>
                             <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 inter color-purple font-semibold"><%= item.sla %></td>
+                          <% } else if (item.status == "canceled") { %>
+                            <td class="whitespace-nowrap px-3 py-4 text-sm text-red-500 inter color-purple font-semibold">Cancelado</td>
                           <% } %>
   
                           <% if (item.status == "pending") { %>
                             <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 inter color-purple font-semibold">
                               <p class="inter font-bold">Aguardando</p>
+                            </td>
+                          <% } else if (item.status == "canceled") { %>
+                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 inter color-purple font-semibold">
+                              <p class="inter font-bold">Não iniciado</p>
                             </td>
                           <% } else { %>
                             <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 inter color-purple font-semibold">
@@ -97,6 +103,10 @@
                           <% if (item.status == "pending") { %>
                             <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 inter color-purple font-semibold">
                               <p class="inter font-bold">Aguardando</p>
+                            </td>
+                          <% } else if (item.status == "canceled") { %>
+                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 inter color-purple font-semibold">
+                              <p class="inter font-bold">Não iniciado</p>
                             </td>
                           <% } else { %>
                             <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 inter color-purple font-semibold">
@@ -158,6 +168,32 @@
                               <div class="flex items-center mr-6">
                                 <img class="h-8 rounded-full" src="https://pps.whatsapp.net/v/t61.24694-24/309612029_1303621463511201_2184499647973530355_n.jpg?ccb=11-4&oh=01_AdTLj4igz1k4OkKVwtf5wwXyceqwcgJlQGxo3JG6sDOlTQ&oe=64B44F62">
                                 <p class="inter ml-2">Anderson Moreira</p>
+                              </div>
+                            </td>
+                          <% } else if (item.status == "canceled") { %>
+                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 inter color-purple font-semibold">
+                              <div class="flex items-center justify-end gap-x-2 sm:justify-start">
+                                <div class="flex-none rounded-full p-1 text-red-600 bg-red-opacity">
+                                  <div class="h-1.5 w-1.5 rounded-full bg-current"></div>
+                                </div>
+                                <div class="hidden text-red-600 sm:block">Cancelado</div>
+                              </div>
+                            </td>
+  
+                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 inter color-purple">
+                              <div class="flex items-center mr-6">
+                                <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                  <g clip-path="url(#clip0_281_44)">
+                                  <path d="M15 30C23.2843 30 30 23.2843 30 15C30 6.71573 23.2843 0 15 0C6.71573 0 0 6.71573 0 15C0 23.2843 6.71573 30 15 30Z" fill="#0EA5E9"/>
+                                  <path d="M21.8077 10.9377C21.8448 11.0114 21.867 11.0919 21.8731 11.1745C21.8791 11.2571 21.8689 11.3401 21.843 11.4186C21.8171 11.4971 21.776 11.5696 21.7221 11.6318C21.6682 11.6941 21.6027 11.7448 21.5292 11.781C21.4558 11.8173 21.376 11.8383 21.2944 11.843C21.2129 11.8476 21.1312 11.8357 21.0542 11.808C20.9773 11.7802 20.9065 11.7372 20.8462 11.6814C20.7858 11.6257 20.737 11.5583 20.7026 11.4832C20.3341 10.7167 19.8149 10.0346 19.177 9.47888C18.974 9.36419 18.7451 9.30521 18.5127 9.30793C18.2804 9.3106 18.0528 9.37479 17.8525 9.49417C17.6523 9.61351 17.4863 9.7839 17.371 9.98839C17.2557 10.1928 17.1951 10.4243 17.1953 10.6599V11.346C17.195 11.4876 17.1394 11.6233 17.0407 11.7234C16.9419 11.8235 16.808 11.8799 16.6683 11.8802H13.9167C13.777 11.8799 13.6431 11.8235 13.5443 11.7234C13.4456 11.6233 13.39 11.4876 13.3897 11.346V11.4247C13.39 11.1621 13.3144 10.9052 13.1722 10.6857C13.1398 10.6444 13.1087 10.602 13.079 10.5586C12.9438 10.3952 12.7724 10.2664 12.5788 10.1829C12.3852 10.0994 12.1748 10.0636 11.9649 10.0782C11.755 10.0929 11.5514 10.1578 11.371 10.2675C11.1905 10.3772 11.0382 10.5286 10.9265 10.7093C10.869 10.8401 10.7688 10.9468 10.6428 11.0116C10.5168 11.0762 10.3727 11.095 10.2347 11.0646C10.0967 11.0343 9.9732 10.9567 9.88498 10.8448C9.7968 10.733 9.74925 10.5938 9.75039 10.4507V7.88629C9.7503 7.74102 9.80029 7.60027 9.89171 7.48841C9.98313 7.37654 10.1102 7.30056 10.2511 7.2736C10.3919 7.24664 10.5376 7.27043 10.6629 7.34083C10.7883 7.41119 10.8854 7.52379 10.9376 7.65908C11.0489 7.83336 11.1983 7.9793 11.3742 8.08553C11.5502 8.19176 11.7479 8.25538 11.9521 8.27149C12.1563 8.2876 12.3614 8.25575 12.5515 8.1784C12.7415 8.10106 12.9114 7.98028 13.0479 7.82556C13.0949 7.75314 13.1457 7.68332 13.1999 7.61634L13.2077 7.60397H13.211C13.4369 7.32875 13.7199 7.10736 14.0397 6.95556C14.3596 6.80371 14.7085 6.72521 15.0617 6.72554H15.095C15.1164 6.7232 15.1379 6.72209 15.1593 6.72217C16.5462 6.72176 17.9052 7.11682 19.0811 7.86225C20.2569 8.60769 21.2022 9.67343 21.8088 10.9377H21.8077ZM16.6628 13.3165C16.6625 13.1749 16.6068 13.0391 16.5081 12.939C16.4093 12.8389 16.2754 12.7825 16.1358 12.7822H14.2329C14.0933 12.7828 13.9596 12.8393 13.8609 12.9394C13.7622 13.0394 13.7065 13.175 13.7059 13.3165V23.9395C13.7062 24.0812 13.7618 24.2169 13.8605 24.317C13.9593 24.4171 14.0932 24.4735 14.2329 24.4738H16.1358C16.2754 24.4735 16.4093 24.4171 16.5081 24.317C16.6068 24.2169 16.6625 24.0812 16.6628 23.9395V13.3165Z" fill="white"/>
+                                  </g>
+                                  <defs>
+                                  <clipPath id="clip0_281_44">
+                                  <rect width="30" height="30" fill="white"/>
+                                  </clipPath>
+                                  </defs>
+                                </svg>                                                                                          
+                                <p class="inter ml-2">Nenhum</p>
                               </div>
                             </td>
                           <% } %>

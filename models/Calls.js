@@ -52,6 +52,10 @@ const Call = new mongoose.Schema({
     sla: {
         type: String,
         require: true
+    },
+    cancellation_message: {
+        type: String,
+        require: true
     }
     },
     {

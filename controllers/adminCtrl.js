@@ -5,6 +5,7 @@ const Technician = require('../models/Technician')
 const Company = require('../models/Company')
 const Suppliers = require('../models/Suppliers')
 const Calls = require('../models/Calls')
+const path = require('path');
 const fs = require('fs')
 const { welcomeCompany } = require('../controllers/emailCtrl')
 
@@ -133,17 +134,44 @@ const cancelCall = asyncHandler(async(req, res) => {
 // ########################## //
 
 const fileManager = asyncHandler(async(req, res) => {
-    res.render('layouts/admin/file-manager', {isAdmin: true, notifications: req.user.notifications.reverse(), photo: req.user.photo, name_user: req.user.name, archives: []})
+    fs.readdir(path.resolve(__dirname, "../public/file-manager/"), (err, files) => {
+        if (err) {
+          console.error('Erro ao ler diretório:', err);
+          return;
+        }
+    
+        const folders = files.filter(file => {
+          const filePath = path.join(path.resolve(__dirname, "../public/file-manager/"), file);
+          return fs.statSync(filePath).isDirectory();
+        });
+
+        res.render('layouts/admin/file-manager', {isAdmin: true, notifications: req.user.notifications.reverse(), photo: req.user.photo, name_user: req.user.name, archives: [], folders: folders})
+    });
 })
 
 const createFolder = asyncHandler(async(req, res) => {
-    fs.mkdir(`../public/file-manager/${req.body.name_folder}`, (err) => {
+    fs.mkdir(path.resolve(__dirname, `../public/file-manager/${req.body.name_folder}`), (err) => {
         if (err) {
-          res.sendStatus(500)
+            res.sendStatus(500)
         } else {
-          res.sendStatus(200)
+            res.sendStatus(200)
         }
     });
+})
+
+const uploadArchive = asyncHandler(async(req, res) => {
+    const nomePasta = req.body.name_path;
+    const arquivoEnviado = req.file;
+
+    const pastaPath = path.join(__dirname, `../public/file-manager/${nomePasta}`);
+    if (!fs.existsSync(pastaPath)) {
+        fs.mkdirSync(pastaPath);
+    }
+
+    const destino = path.join(pastaPath, arquivoEnviado.originalname);
+    fs.renameSync(arquivoEnviado.path, destino);
+
+    res.sendStatus(200)
 })
 
 
@@ -374,6 +402,12 @@ const saveCompany = asyncHandler(async(req, res) => {
     try {
         if (req.params.id === undefined) {
             const createCompany = await Company.create(req.body)
+            
+            const updateTechnician = await Technician.findByIdAndUpdate(req.body.technician, {
+                $push: {
+                    responsibleCompanies: createCompany._id
+                }
+            })
 
             if (createCompany) {
                 await welcomeCompany({name: req.body.name, email: req.body.email, password: req.body.password})
@@ -581,6 +615,7 @@ module.exports = {
     
     fileManager,
     createFolder,
+    uploadArchive,
 
     allReports,
     viewReport,

@@ -154,6 +154,14 @@
                           <dt class="text-md font-medium text-gray-500">Descrição do chamado:</dt>
                           <dd class="mt-1 text-sm text-gray-900 inter inter font-medium"><%= call.description %></dd>
                         </div>
+
+                        <% if (call.status == "canceled") { %>
+                          <div class="sm:col-span-2">
+                            <dt class="text-md font-medium text-red-500">Motivo do cancelamento:</dt>
+                            <dd class="mt-1 text-sm text-gray-900 inter inter font-medium"><%= call.cancellation_message %></dd>
+                          </div>
+                        <% } %>
+
                         <div class="sm:col-span-2">
                           <dt class="text-sm font-semibold text-gray-500 inter">Anexos do chamado:</dt>
                           <dd class="mt-1 text-sm text-gray-900 inter">

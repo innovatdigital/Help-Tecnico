@@ -4,10 +4,10 @@
 <%- include('../partials/head', {title: "title"}) %>
 
 <body>
-  <%- include('../partials/technician/sidebar-technician') %>
+  <%- include('../partials/admin/sidebar-admin') %>
 
   <div class="lg:pl-70">
-    <%- include('../partials/technician/nav-technician', {title: "Visualizar orçamento", notifications: notifications, photo: photo, name_user: name_user}) %>
+    <%- include('../partials/admin/nav-admin', {title: "Visualizar orçamento", notifications: notifications, photo: photo, name_user: name_user}) %>
 
     <main class="py-5 fade-in">
       <div class="alert mt-14" style="display: none;"><div style="display: flex;" class="alert-text"></div></div>
@@ -53,7 +53,7 @@
                         <!-- Invoice summary -->
                         <div class="lg:col-start-3 lg:row-end-1 pr-8">
                           <h2 class="sr-only">Summary</h2>
-                          <div class="rounded-lg bg-gray-50 shadow-sm ring-1 ring-gray-900/5">
+                          <div class="rounded-lg bg-gray-50 shadow-sm">
                             <dl class="flex flex-wrap">
                               <div class="flex-auto pl-6 pt-6">
                                 <dt class="text-sm font-semibold leading-6 text-gray-900 inter">Valor total</dt>
@@ -99,7 +99,7 @@
                         </div>
                   
                         <!-- Invoice -->
-                        <div class="px-6 py-8 shadow-sm ring-1 ring-gray-900/5 sm:mx-0 sm:rounded-lg lg:col-span-2 lg:row-span-2 lg:row-end-2">
+                        <div class="px-6 py-8 shadow-sm sm:mx-0 sm:rounded-lg lg:col-span-2 lg:row-span-2 lg:row-end-2">
                           <h2 class="text-base font-semibold leading-6 text-gray-900 inter">Informações do orçamento</h2>
                           <dl class="mt-6 grid grid-cols-1 text-sm leading-6 sm:grid-cols-2">
                             <div class="sm:pr-4">

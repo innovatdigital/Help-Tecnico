@@ -161,6 +161,48 @@
               </div>
             </div>
           </div>
+
+          <div class="grid grid-cols-2 mt-12 gap-x-4">
+            <div>
+              <label for="cnh" class="block text-md font-medium leading-6 text-gray-900 inter font-semibold">CNH do Técnico</label>
+              <div class="relative mt-2 rounded-md shadow-sm">
+                <input type="number" name="cnh" id="cnh" class="block w-full rounded-lg inter py-1.5 mt-2 pl-2 text-gray-900 ring-1 ring-inset ring-gray-300 sm:text-sm sm:leading-6 border-blue-1" placeholder="Insira o número da CNH">
+              </div>
+            </div>
+
+            <div>
+              <label for="car_model" class="block text-md font-medium leading-6 text-gray-900 inter font-semibold">Modelo do carro</label>
+              <div class="relative mt-2 rounded-md shadow-sm">
+                <input type="text" name="car-model" id="car-model" class="block w-full rounded-lg inter py-1.5 mt-2 pl-2 text-gray-900 ring-1 ring-inset ring-gray-300 sm:text-sm sm:leading-6 border-blue-1" placeholder="Insira o modelo do carro">
+              </div>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-2 mt-12 gap-x-4">
+            <div>
+              <label for="car_plate" class="block text-md font-medium leading-6 text-gray-900 inter font-semibold">Placa do carro</label>
+              <div class="relative mt-2 rounded-md shadow-sm">
+                <input type="text" name="car-plate" id="car-plate" class="block w-full rounded-lg inter py-1.5 mt-2 pl-2 text-gray-900 ring-1 ring-inset ring-gray-300 sm:text-sm sm:leading-6 border-blue-1" placeholder="Insira a placa do carro">
+              </div>
+            </div>
+
+            <div>
+              <label for="cep" class="block text-md font-medium leading-6 text-gray-900 inter font-semibold">Cor do carro</label>
+              <div class="relative mt-2 rounded-md shadow-sm">
+                <select name="car-color" id="car-color" class="block w-full rounded-lg inter py-2 mt-2 pl-2 text-gray-900 ring-1 ring-inset ring-gray-300 sm:text-sm sm:leading-6 border-blue-1">
+                  <option value="branco">Branco</option>
+                  <option value="vermelho">Vermelho</option>
+                  <option value="azul">Azul</option>
+                  <option value="verde">Verde</option>
+                  <option value="amarelo">Amarelo</option>
+                  <option value="roxo">Roxo</option>
+                  <option value="laranja">Laranja</option>
+                  <option value="rosa">Rosa</option>
+                  <option value="preto">Preto</option>
+                </select>
+              </div>
+            </div>
+          </div>
         </div>
 
         <div class="bg-white rounded-xl shadow-lg border p-4 px-5 col-span-1">
@@ -272,6 +314,10 @@
     const city = document.querySelector("#city")
     const address = document.querySelector("#address")
     const cep = document.querySelector("#cep")
+    const cnh = document.querySelector("#cnh")
+    const car_model = document.querySelector("#car-model")
+    const car_plate = document.querySelector("#car-plate")
+    const car_color = document.querySelector("#car-color")
     const comments = document.querySelector("#comments")
 
     if (name.value.length == 0) {
@@ -319,7 +365,7 @@
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({name: name.value, cpf: cpf.value, email: email.value, password: password.value, phone: phone.value, city: city.value, address: address.value, cep: cep.value, comments: comments.value})
+      body: JSON.stringify({name: name.value, cpf: cpf.value, email: email.value, password: password.value, phone: phone.value, city: city.value, address: address.value, cep: cep.value, cnh: cnh.value, car_model: car_model.value, car_plate: car_plate.value, car_color: car_color.value, comments: comments.value})
     })
     .then((response) => {
       if (response.ok) {

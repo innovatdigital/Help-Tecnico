@@ -41,6 +41,22 @@ const Technician = new mongoose.Schema({
         type: String,
         require: true
     },
+    cnh: {
+        type: String,
+        require: true
+    },
+    car_model: {
+        type: String,
+        require: true
+    },
+    car_plate: {
+        type: String,
+        require: true
+    },
+    car_color: {
+        type: String,
+        require: true
+    },
     isBlocked: {
         type: Boolean,
         default: false
