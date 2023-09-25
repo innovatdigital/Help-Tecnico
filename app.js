@@ -68,7 +68,7 @@ if (process.env.MODE == "DEV") {
     console.log('Server listening on port ' + 5500);
   });
 } else if (process.env.MODE == "PROD") {
-  app.listen(3000, () => {
+  app.listen(process.env.PORT || 3000, () => {
     console.log('Server listening on port 3000')
   })
 }
