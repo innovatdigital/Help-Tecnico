@@ -4,51 +4,14 @@
 <%- include('../partials/head', {title: "title"}) %>
 
 <body>
-  <%- include('../partials/admin/sidebar-admin', {isAdmin: isAdmin}) %>
+  <%- include('../partials/technician/sidebar-technician', {isAdmin: isAdmin}) %>
 
   <div class="lg:pl-70">
-    <%- include('../partials/admin/nav-admin', {isAdmin: isAdmin, title: "Visualizar empresa", notifications: notifications, photo: photo, name_user: name_user}) %>
+    <%- include('../partials/technician/nav-technician', {isAdmin: isAdmin, title: "Visualizar empresa", notifications: notifications, photo: photo, name_user: name_user}) %>
 
     <main class="py-8 px-12 fade-in">
       <div class="alert mt-10" style="display: none;"><div style="display: flex;" class="alert-text"></div></div>
       <div class="error" style="display: none;"><div style="display: flex;" class="error-text"></div></div>
-
-      <!-- Excluir -->
-      <div class="hidden fade-in relative z-10" id="popup_delete" role="dialog" aria-modal="true">
-        <div class="fixed inset-0 bg-gray-500 bg-opacity-25 transition-opacity"></div>
-      
-        <div class="fixed inset-0 z-10 overflow-y-auto p-4 mt-40 ml-40 sm:p-6 md:p-20">
-          <div class="mx-auto max-w-xl transform divide-y divide-gray-100 overflow-hidden rounded-xl bg-white shadow-2xl ring-1 ring-black ring-opacity-5 transition-all">
-            <div class="flex justify-between py-3 px-6">
-              <h2 class="color-red inter font-bold text-lg">Excluir empresa:</h2>
-              <button onclick="closeDelete()">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M14.3075 11.7231L20.3075 5.67693C20.5844 5.4 20.5844 4.98462 20.3075 4.7077L19.3844 3.73847C19.1075 3.46154 18.6921 3.46154 18.4151 3.73847L12.369 9.78462C12.1844 9.96923 11.9075 9.96923 11.7228 9.78462L5.67668 3.69231C5.39976 3.41539 4.98438 3.41539 4.70745 3.69231L3.73822 4.66154C3.4613 4.93847 3.4613 5.35385 3.73822 5.63077L9.78438 11.6769C9.96899 11.8615 9.96899 12.1385 9.78438 12.3231L3.69207 18.4154C3.41514 18.6923 3.41514 19.1077 3.69207 19.3846L4.6613 20.3538C4.93822 20.6308 5.35361 20.6308 5.63053 20.3538L11.6767 14.3077C11.8613 14.1231 12.1382 14.1231 12.3228 14.3077L18.369 20.3538C18.6459 20.6308 19.0613 20.6308 19.3382 20.3538L20.3075 19.3846C20.5844 19.1077 20.5844 18.6923 20.3075 18.4154L14.3075 12.3692C14.1228 12.1846 14.1228 11.9077 14.3075 11.7231Z" fill="#A31313"/>
-                </svg>                                    
-              </button>
-            </div>
-
-            <div class="flex flex-col divide-y divide-gray-100 px-6">
-              <div>
-                <div class="flex flex-col items-center justify-center mt-6 py-4">
-                  <svg width="46" height="46" viewBox="0 0 46 46" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M40.2487 2.87504H26.832C26.832 2.36671 26.6301 1.8792 26.2706 1.51975C25.9112 1.16031 25.4237 0.958374 24.9154 0.958374H21.082C20.5737 0.958374 20.0862 1.16031 19.7267 1.51975C19.3673 1.8792 19.1654 2.36671 19.1654 2.87504H5.7487C5.24037 2.87504 4.75285 3.07697 4.39341 3.43642C4.03397 3.79586 3.83203 4.28338 3.83203 4.79171C3.83203 5.30004 4.03397 5.78755 4.39341 6.147C4.75285 6.50644 5.24037 6.70837 5.7487 6.70837H40.2487C40.757 6.70837 41.2445 6.50644 41.604 6.147C41.9634 5.78755 42.1654 5.30004 42.1654 4.79171C42.1654 4.28338 41.9634 3.79586 41.604 3.43642C41.2445 3.07697 40.757 2.87504 40.2487 2.87504Z" fill="#AA2222"/>
-                    <path d="M37.3737 8.625C36.8654 8.625 36.3779 8.82693 36.0184 9.18638C35.659 9.54582 35.457 10.0333 35.457 10.5417V41.2083H10.5404V10.5417C10.5404 10.0333 10.3384 9.54582 9.97899 9.18638C9.61954 8.82693 9.13203 8.625 8.6237 8.625C8.11537 8.625 7.62785 8.82693 7.26841 9.18638C6.90897 9.54582 6.70703 10.0333 6.70703 10.5417V43.125C6.70703 43.6333 6.90897 44.1208 7.26841 44.4803C7.62785 44.8397 8.11537 45.0417 8.6237 45.0417H37.3737C37.882 45.0417 38.3695 44.8397 38.729 44.4803C39.0884 44.1208 39.2904 43.6333 39.2904 43.125V10.5417C39.2904 10.0333 39.0884 9.54582 38.729 9.18638C38.3695 8.82693 37.882 8.625 37.3737 8.625Z" fill="#AA2222"/>
-                    <path d="M20.1263 35.4583V18.2083C20.1263 17.7 19.9244 17.2125 19.5649 16.853C19.2055 16.4936 18.718 16.2916 18.2096 16.2916C17.7013 16.2916 17.2138 16.4936 16.8543 16.853C16.4949 17.2125 16.293 17.7 16.293 18.2083V35.4583C16.293 35.9666 16.4949 36.4541 16.8543 36.8136C17.2138 37.173 17.7013 37.375 18.2096 37.375C18.718 37.375 19.2055 37.173 19.5649 36.8136C19.9244 36.4541 20.1263 35.9666 20.1263 35.4583Z" fill="#AA2222"/>
-                    <path d="M29.7083 35.4583V18.2083C29.7083 17.7 29.5064 17.2125 29.147 16.853C28.7875 16.4936 28.3 16.2916 27.7917 16.2916C27.2833 16.2916 26.7958 16.4936 26.4364 16.853C26.0769 17.2125 25.875 17.7 25.875 18.2083V35.4583C25.875 35.9666 26.0769 36.4541 26.4364 36.8136C26.7958 37.173 27.2833 37.375 27.7917 37.375C28.3 37.375 28.7875 37.173 29.147 36.8136C29.5064 36.4541 29.7083 35.9666 29.7083 35.4583Z" fill="#AA2222"/>
-                  </svg>                                        
-                  <h2 for="content" class="block text-md font-bold leading-6 text-gray-900 inter mt-4">Tem certeza que deseja excluir a empresa?</h2>
-                  <p class="inter text-center text-sm font-semibold">Essa ação é irreversível, e todos os dados associados a ela serão apagados.</p>
-                </div>
-
-                <div class="pb-4">
-                  <button class="w-full py-2.5 inter bg-red text-white text-sm rounded-lg mt-4 font-bold" onclick="deleteCompany()">Confirmar minha escolha</button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
 
       <div class="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-x-6">
         <div class="bg-white rounded-xl shadow-lg border p-4 px-5 col-span-1">
@@ -150,63 +113,6 @@
                   </defs>
                 </svg>
               </a>
-              
-              <a href="/admin/update-company/<%= company._id %>">
-                <svg width="60" height="60" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <g filter="url(#filter0_d_152_3096)">
-                  <rect x="10" width="40" height="40" rx="20" fill="#3B3F5C"/>
-                  <g clip-path="url(#clip0_152_3096)">
-                  <path opacity="0.5" d="M23.334 28.3334H36.6673" stroke="white" stroke-width="1.25" stroke-linecap="round"/>
-                  <path d="M32.192 12.4345L31.5741 13.0524L25.8932 18.7332C25.5084 19.118 25.316 19.3104 25.1506 19.5225C24.9554 19.7727 24.7881 20.0435 24.6515 20.33C24.5358 20.5728 24.4498 20.831 24.2777 21.3472L23.5485 23.5347L23.3703 24.0694C23.2856 24.3235 23.3517 24.6035 23.5411 24.7929C23.7304 24.9822 24.0105 25.0484 24.2645 24.9636L24.7993 24.7855L26.9868 24.0562C27.503 23.8842 27.7611 23.7981 28.004 23.6824C28.2904 23.5459 28.5612 23.3785 28.8114 23.1834C29.0236 23.0179 29.2159 22.8255 29.6007 22.4408L35.2816 16.7599L35.8995 16.142C36.9232 15.1182 36.9232 13.4583 35.8995 12.4345C34.8757 11.4107 33.2157 11.4107 32.192 12.4345Z" stroke="white" stroke-width="1.25"/>
-                  <path opacity="0.5" d="M31.5724 13.0533C31.5724 13.0533 31.6496 14.3664 32.8082 15.525C33.9669 16.6836 35.2799 16.7609 35.2799 16.7609M24.7976 24.7864L23.5469 23.5356" stroke="white" stroke-width="1.25"/>
-                  </g>
-                  <rect x="10.5" y="0.5" width="39" height="39" rx="19.5" stroke="#3B3F5C"/>
-                  </g>
-                  <defs>
-                  <filter id="filter0_d_152_3096" x="0" y="0" width="60" height="60" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-                  <feFlood flood-opacity="0" result="BackgroundImageFix"/>
-                  <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
-                  <feMorphology radius="10" operator="erode" in="SourceAlpha" result="effect1_dropShadow_152_3096"/>
-                  <feOffset dy="10"/>
-                  <feGaussianBlur stdDeviation="10"/>
-                  <feComposite in2="hardAlpha" operator="out"/>
-                  <feColorMatrix type="matrix" values="0 0 0 0 0.231373 0 0 0 0 0.247059 0 0 0 0 0.360784 0 0 0 0.6 0"/>
-                  <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_152_3096"/>
-                  <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_152_3096" result="shape"/>
-                  </filter>
-                  <clipPath id="clip0_152_3096">
-                  <rect width="20" height="20" fill="white" transform="translate(20 10)"/>
-                  </clipPath>
-                  </defs>
-                </svg>                  
-              </a>
-
-              <button onclick="openDelete()">
-                <svg width="60" height="60" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <g filter="url(#filter0_d_152_3092)">
-                  <rect x="10" width="40" height="40" rx="20" fill="#D90C18"/>
-                  <path d="M38.5001 14H21.5" stroke="white" stroke-width="1.25" stroke-linecap="round"/>
-                  <path d="M36.8327 16.5L36.3728 23.3991C36.1958 26.054 36.1073 27.3815 35.2423 28.1907C34.3773 29 33.0469 29 30.3861 29H29.6127C26.9519 29 25.6215 29 24.7565 28.1907C23.8914 27.3815 23.8029 26.054 23.626 23.3991L23.166 16.5" stroke="white" stroke-width="1.25" stroke-linecap="round"/>
-                  <path opacity="0.5" d="M27.5 19L28 24" stroke="white" stroke-width="1.25" stroke-linecap="round"/>
-                  <path opacity="0.5" d="M32.5 19L32 24" stroke="white" stroke-width="1.25" stroke-linecap="round"/>
-                  <path opacity="0.5" d="M24.5 14C24.5559 14 24.5838 14 24.6091 13.9994C25.4326 13.9785 26.159 13.4549 26.4392 12.6803C26.4478 12.6565 26.4567 12.63 26.4743 12.577L26.5714 12.2857C26.6543 12.0371 26.6957 11.9128 26.7507 11.8072C26.97 11.3861 27.3757 11.0936 27.8446 11.0188C27.9621 11 28.0932 11 28.3553 11H31.6447C31.9068 11 32.0379 11 32.1554 11.0188C32.6243 11.0936 33.03 11.3861 33.2493 11.8072C33.3043 11.9128 33.3457 12.0371 33.4286 12.2857L33.5257 12.577C33.5433 12.6299 33.5522 12.6565 33.5608 12.6803C33.841 13.4549 34.5674 13.9785 35.3909 13.9994C35.4162 14 35.4441 14 35.5 14" stroke="white" stroke-width="1.25"/>
-                  <rect x="10.5" y="0.5" width="39" height="39" rx="19.5" stroke="#D90C18"/>
-                  </g>
-                  <defs>
-                  <filter id="filter0_d_152_3092" x="0" y="0" width="60" height="60" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-                  <feFlood flood-opacity="0" result="BackgroundImageFix"/>
-                  <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
-                  <feMorphology radius="10" operator="erode" in="SourceAlpha" result="effect1_dropShadow_152_3092"/>
-                  <feOffset dy="10"/>
-                  <feGaussianBlur stdDeviation="10"/>
-                  <feComposite in2="hardAlpha" operator="out"/>
-                  <feColorMatrix type="matrix" values="0 0 0 0 0.905882 0 0 0 0 0.317647 0 0 0 0 0.352941 0 0 0 0.6 0"/>
-                  <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_152_3092"/>
-                  <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_152_3092" result="shape"/>
-                  </filter>
-                  </defs>
-                </svg>                  
-              </button>
             </div>
           </div>
         </div>
@@ -320,7 +226,7 @@
                           <% } %>
   
                           <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 inter color-purple font-semibold">
-                            <a href="/admin/view-call/<%= item._id %>" class="flex items-center">
+                            <a href="/technician/view-call/<%= item._id %>" class="flex items-center">
                               <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" class="mr-2">
                                 <path opacity="0.5" d="M2.73038 12.7463C2.0221 11.8262 1.66797 11.3661 1.66797 9.99992C1.66797 8.63375 2.0221 8.17369 2.73038 7.25353C4.1446 5.41622 6.51639 3.33325 10.0013 3.33325C13.4862 3.33325 15.858 5.41622 17.2722 7.25353C17.9805 8.17369 18.3346 8.63375 18.3346 9.99992C18.3346 11.3661 17.9805 11.8262 17.2722 12.7463C15.858 14.5836 13.4862 16.6666 10.0013 16.6666C6.51639 16.6666 4.1446 14.5836 2.73038 12.7463Z" stroke="#0E1726" stroke-width="1.25"/>
                                 <path d="M12.5 10C12.5 11.3807 11.3807 12.5 10 12.5C8.61925 12.5 7.5 11.3807 7.5 10C7.5 8.61925 8.61925 7.5 10 7.5C11.3807 7.5 12.5 8.61925 12.5 10Z" stroke="#0E1726" stroke-width="1.25"/>
@@ -418,82 +324,25 @@
           <h1 class="inter font-semibold text-blue">Nenhum equipamento disponivel</h1>
 
           <ul role="list" class="mt-4 space-y-2">
-            <li class="flex items-center space-x-4 rounded-lg border">
-              <div>
-                <img class="w-32 h-20 rounded-l-lg" src="https://s.zst.com.br/cms-assets/2021/10/cuidados-com-o-ar-condicionado.jpg" alt="">
-              </div>
-
-              <div>
-                <h2 class="text-sm font-bold text-gray-800 inter">Ar condicionado</h2>
-                <h2 class="text-xs mt-0.5 font-semibold text-gray-800 inter">ID na base: <span class="text-blue">#224242</span></h2>
+            <% equipments.forEach(item => { %>
+              <li class="flex items-center space-x-4 rounded-lg border">
                 <div>
-                  <a href="/company/view-equipment" class="text-blue mt-2 text-sm font-semibold inter underline">Ver equipamento</a>
+                  <img class="w-32 h-20 rounded-l-lg" src="/img/equipments/<%= item.imageFile %>" alt="">
                 </div>
-              </div>
-            </li>
-          </ul>
-        </div>
 
-        <div class="bg-white rounded-xl shadow-lg border p-4 px-5 col-span-1">
-          <div class="flex">
-            <h2 class="inter font-bold text-gray-700 text-lg">Orçamentos da empresa:</h2>
-          </div>
-
-          <h1 class="inter font-semibold text-blue">Nenhum orçamento disponível</h1>
-
-          <ul role="list" class="mt-4 space-y-2">
-            <li class="flex items-center space-x-4 rounded-lg border p-2">
-              <div>
-                <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <g clip-path="url(#clip0_289_61)">
-                  <path d="M20 0C16.0444 0 12.1776 1.17298 8.88861 3.37061C5.59962 5.56824 3.03617 8.69181 1.52242 12.3463C0.00866564 16.0009 -0.387401 20.0222 0.384303 23.9018C1.15601 27.7814 3.06082 31.3451 5.85787 34.1422C8.65493 36.9392 12.2186 38.844 16.0982 39.6157C19.9778 40.3874 23.9992 39.9914 27.6537 38.4776C31.3082 36.9639 34.4318 34.4004 36.6294 31.1114C38.827 27.8224 40 23.9556 40 20C40 14.6957 37.8929 9.6086 34.1422 5.85787C30.3914 2.10714 25.3043 0 20 0ZM25.1921 25.1579C24.9357 25.7426 24.556 26.2651 24.079 26.6895C23.5683 27.1345 22.9806 27.4823 22.3448 27.7158C21.6224 27.9838 20.8658 28.1485 20.0974 28.2053L19.8342 30.9553C19.8282 31.0184 19.8085 31.0795 19.7763 31.1342C19.7365 31.194 19.6783 31.2393 19.6105 31.2632C19.5025 31.3031 19.3904 31.3314 19.2763 31.3474C19.1018 31.3702 18.926 31.3808 18.75 31.379C18.5292 31.3824 18.3084 31.3692 18.0895 31.3395C17.9543 31.3223 17.8223 31.286 17.6974 31.2316C17.6135 31.1954 17.5467 31.1286 17.5105 31.0448C17.4779 30.9609 17.4715 30.8692 17.4921 30.7816L17.7553 28.1737C17.4011 28.1257 17.0497 28.0589 16.7026 27.9737C16.4026 27.9017 16.1066 27.8138 15.8158 27.7105C15.5799 27.624 15.3497 27.5229 15.1263 27.4079C14.9679 27.3282 14.8217 27.2263 14.6921 27.1053C14.582 26.9825 14.509 26.831 14.4816 26.6684C14.4309 26.3863 14.4089 26.0997 14.4158 25.8132C14.4158 25.5237 14.4158 25.2869 14.4421 25.0947C14.4515 24.9457 14.4817 24.7987 14.5316 24.6579C14.5573 24.5771 14.6094 24.5072 14.6796 24.4595C14.7497 24.4118 14.8338 24.389 14.9184 24.3947C15.0941 24.4192 15.2612 24.486 15.4053 24.5895C15.6728 24.74 15.9477 24.877 16.229 25C16.6214 25.1734 17.0271 25.3151 17.4421 25.4237C17.9909 25.5609 18.5554 25.6255 19.1211 25.6158C20.1211 25.6158 20.8684 25.429 21.3553 25.0579C21.5887 24.8886 21.7773 24.665 21.9048 24.4063C22.0322 24.1477 22.0947 23.8619 22.0869 23.5737C22.103 23.2091 21.9923 22.8501 21.7737 22.5579C21.5396 22.2736 21.2539 22.0361 20.9316 21.8579C20.5501 21.6424 20.1503 21.461 19.7369 21.3158C19.2974 21.1579 18.8447 20.9869 18.3816 20.8079C17.9169 20.6274 17.4642 20.4173 17.0263 20.179C16.5894 19.9418 16.1888 19.6431 15.8369 19.2921C15.4781 18.9267 15.1939 18.495 15 18.0211C14.7753 17.4418 14.6679 16.8237 14.6842 16.2026C14.6751 15.6035 14.7823 15.0083 15 14.45C15.2084 13.9295 15.524 13.4588 15.9263 13.0684C16.3571 12.6543 16.8637 12.3273 17.4184 12.1053C18.0579 11.8482 18.7302 11.6817 19.4158 11.6105L19.679 9.02895C19.6866 8.9678 19.7063 8.90876 19.7369 8.85527C19.78 8.79753 19.8383 8.75289 19.9053 8.72632C20.0091 8.68166 20.1191 8.65325 20.2316 8.64211C20.4117 8.6233 20.5926 8.61451 20.7737 8.61579C20.9945 8.61309 21.2153 8.62628 21.4342 8.65527C21.5737 8.67197 21.7102 8.7083 21.8395 8.76316C21.8803 8.78072 21.9172 8.80631 21.9479 8.83841C21.9787 8.87051 22.0027 8.90846 22.0184 8.95C22.0461 9.03492 22.0595 9.12386 22.0579 9.21316L21.7948 11.6421C22.0342 11.6763 22.2869 11.7237 22.5526 11.7816C22.8049 11.8379 23.0535 11.9091 23.2974 11.9947C23.5127 12.0705 23.7236 12.1583 23.929 12.2579C24.0708 12.319 24.2029 12.4006 24.3211 12.5C24.3856 12.5653 24.4414 12.6387 24.4869 12.7184C24.5292 12.8014 24.5594 12.89 24.5763 12.9816C24.6 13.1085 24.615 13.2369 24.6211 13.3658V13.8921C24.6211 14.1553 24.6211 14.3763 24.6026 14.5474C24.5968 14.6807 24.5729 14.8126 24.5316 14.9395C24.51 15.0093 24.47 15.072 24.4158 15.1211C24.3708 15.1514 24.3174 15.167 24.2632 15.1658C24.0936 15.1449 23.9304 15.0884 23.7842 15C23.5711 14.8895 23.3079 14.7684 22.9948 14.6395C22.6424 14.4993 22.2821 14.3798 21.9158 14.2816C21.4772 14.1649 21.0249 14.1082 20.5711 14.1132C20.1864 14.1069 19.8025 14.1502 19.429 14.2421C19.1504 14.3095 18.8882 14.4321 18.6579 14.6026C18.467 14.746 18.3165 14.9364 18.2211 15.1553C18.1246 15.3777 18.0762 15.6181 18.079 15.8605C18.0672 16.2258 18.1805 16.5841 18.4 16.8763C18.6345 17.1675 18.9254 17.4083 19.2553 17.5842C19.6439 17.7901 20.0477 17.9661 20.4632 18.1105C20.9123 18.2737 21.3702 18.4491 21.8369 18.6369C22.3077 18.8171 22.7673 19.0254 23.2132 19.2605C23.6551 19.4893 24.0597 19.7839 24.4132 20.1342C24.7739 20.4936 25.0624 20.9189 25.2632 21.3869C25.4891 21.9494 25.5983 22.5519 25.5842 23.1579C25.596 23.8448 25.4624 24.5263 25.1921 25.1579Z" fill="#21B50E" fill-opacity="0.8"/>
-                  </g>
-                  <defs>
-                  <clipPath id="clip0_289_61">
-                  <rect width="40" height="40" fill="white"/>
-                  </clipPath>
-                  </defs>
-                </svg>
-              </div>
-
-              <div>
-                <h2 class="text-sm font-bold text-gray-800 inter">Orçamento tipo</h2>
-                <h2 class="text-xs mt-0.5 font-semibold text-gray-800 inter">Referente ao chamado: <span class="text-blue">#242422</span></h2>
                 <div>
-                  <a href="/company/view-equipment" class="text-blue mt-2 text-sm font-semibold inter underline">Ver orçamento</a>
+                    <h2 class="text-sm font-bold text-gray-800 inter"><%= item.model %></h2>
+                    <h2 class="text-xs mt-0.5 font-semibold text-gray-800 inter">Marca: <span class="text-blue"><%= item.brand %></span></h2>
+                    <div>
+                      <a href="/technician/view-equipment/<%= item._id %>" class="text-blue mt-2 text-sm font-semibold inter underline">Ver equipamento</a>
+                    </div>
                 </div>
-              </div>
-            </li>
+              </li>
+            <% }) %>
           </ul>
         </div>
       </div>
     </main>
   </div>
 </body>
-
-<script>
-  function openDelete() {
-    const delete_popup = document.querySelector("#popup_delete")
-
-    delete_popup.classList.remove("hidden")
-  }
-
-  function closeDelete() {
-    const delete_popup = document.querySelector("#popup_delete")
-
-    delete_popup.classList.add("hidden")
-  }
-
-  function deleteCompany() {
-    fetch('/admin/delete-company/<%= company._id %>', {
-      method: 'DELETE',
-    })
-    .then(response => {
-      location.href = "/admin/all-companies"
-    })
-    .catch(err => {
-      alert_message("error", "Tente mais tarde")
-    })
-  }
-</script>
 </html>

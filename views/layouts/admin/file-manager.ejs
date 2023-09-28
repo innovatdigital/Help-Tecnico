@@ -116,7 +116,7 @@
               <% if (folders.length > 0) { %>
                 <div class="grid grid-cols-5 gap-x-4">
                   <% folders.forEach(folder => { %>
-                    <div class="flex flex-col justify-center items-center p-4 border-blue-1 rounded-lg">
+                    <a class="flex flex-col justify-center items-center px-4 py-12 border-blue-1 rounded-lg">
                       <svg width="65" height="65" viewBox="0 0 65 65" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <g clip-path="url(#clip0_260_16)">
                         <path d="M64.485 25.1063C64.1344 24.473 63.6202 23.9455 62.9961 23.5787C62.3721 23.2118 61.661 23.0192 60.9371 23.0209H22.4409C21.143 23.0212 19.8802 23.4423 18.8421 24.2212C17.8039 25.0001 17.0463 26.0947 16.683 27.3407L9.06311 53.4625C8.66202 54.8376 7.8258 56.0455 6.67993 56.905C5.53407 57.7644 4.14037 58.2291 2.70801 58.2292H51.1167C52.5493 58.2292 53.9432 57.7646 55.0893 56.9051C56.2354 56.0457 57.0718 54.8377 57.4732 53.4625L64.7884 28.3834C64.9583 27.8445 65.0191 27.2771 64.9673 26.7144C64.9154 26.1518 64.7506 25.6051 64.485 25.1063Z" fill="#239CFF"/>
@@ -129,8 +129,8 @@
                         </defs>
                       </svg>
 
-                      <h2 class="inter text-sm font-semibold"><%= folder %></h2>
-                    </div>
+                      <h2 class="inter text-md font-semibold"><%= folder %></h2>
+                    </a>
                   <% }) %>
                 </div>
               <% } else { %>

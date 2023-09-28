@@ -1,222 +1,354 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<%- include('../partials/head', {title: "title"}) %>
+<%- include('../partials/head', {title: "title" }) %>
 
-<body>
-  <%- include('../partials/technician/sidebar-technician') %>
+  <body>
+    <%- include('../partials/technician/sidebar-technician') %>
 
-  <div class="lg:pl-70">
-    <%- include('../partials/technician/nav-technician', {title: "Cadastrar novo equipamento", notifications: notifications, photo: photo, name_user: name_user}) %>
+      <div class="lg:pl-70">
+        <%- include('../partials/technician/nav-technician', {title: "Cadastrar novo equipamento" , notifications:
+          notifications, photo: photo, name_user: name_user}) %>
 
-    <main class="py-5 fade-in">
-      <div class="alert mt-14" style="display: none;"><div style="display: flex;" class="alert-text"></div></div>
-      <div class="error mt-14" style="display: none;"><div style="display: flex;" class="error-text"></div></div>
+          <main class="py-5 fade-in">
+            <div class="hidden relative z-20 fade-in" id="loading" role="dialog" aria-modal="true">
+              <div class="fixed inset-0 bg-white bg-opacity-25 transition-opacity"></div>
+          
+              <div class="flex justify-center items-center fixed inset-0 z-20 overflow-y-auto">
+                <div class="mx-auto max-w-xl transform divide-y divide-gray-200 transition-all">
+                  <div class="c-loader"></div>
+                </div>
+              </div>
+            </div>
 
-      <div style="z-index: 1;" class="hidden relative z-10 fade-in" id="popup_await" role="dialog" aria-modal="true">
-        <div class="fixed inset-0 bg-gray-500 bg-opacity-25 transition-opacity"></div>
-      
-        <div class="fixed inset-0 z-10 overflow-y-auto p-4 sm:p-6 md:p-20 mt-40">
-          <div class="mx-auto accounts transform divide-y divide-gray-100 overflow-hidden rounded-xl bg-white shadow-2xl ring-1 ring-black ring-opacity-5 transition-all">      
-            <div class="flex flex-col divide-y divide-gray-100">
-              <div class="min-w-0 flex-auto scroll-py-4 overflow-y-auto px-6 py-4">
-                <div class="flex flex-col divide-y divide-gray-100 px-6">
-                  <div>
-                    <div class="flex flex-col items-center justify-center mt-6 py-4">
-                      <div class="c-loader"></div>                                        
-                      <h2 for="content" class="block text-lg font-semibold leading-6 text-gray-900 inter mt-6">Criando chamado</h2>
-                      <p class="inter text-center text-md font-medium">Por favor, não feche a janela ou troque de página.</p>
+            <div class="alert mt-14" style="display: none;">
+              <div style="display: flex;" class="alert-text"></div>
+            </div>
+            <div class="error mt-14" style="display: none;">
+              <div style="display: flex;" class="error-text"></div>
+            </div>
+
+            <div class="relative z-10 fade-in" id="popup_companies" role="dialog" aria-modal="true">
+              <div class="fixed inset-0 bg-gray-500 bg-opacity-25 transition-opacity"></div>
+
+              <div class="fixed inset-0 z-10 overflow-y-auto p-4 sm:p-6 md:p-20 mt-40">
+                <div
+                  class="mx-auto max-w-xl transform divide-y divide-gray-100 overflow-hidden rounded-xl bg-white shadow-2xl ring-1 ring-black ring-opacity-5 transition-all">
+                  <div class="flex justify-between py-3 px-6">
+                    <h2 class="color-purple inter font-semibold text-lg">Selecionar empresa:</h2>
+                    <button>
+                      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                          d="M14.3075 11.7231L20.3075 5.67693C20.5844 5.4 20.5844 4.98462 20.3075 4.7077L19.3844 3.73847C19.1075 3.46154 18.6921 3.46154 18.4151 3.73847L12.369 9.78462C12.1844 9.96923 11.9075 9.96923 11.7228 9.78462L5.67668 3.69231C5.39976 3.41539 4.98438 3.41539 4.70745 3.69231L3.73822 4.66154C3.4613 4.93847 3.4613 5.35385 3.73822 5.63077L9.78438 11.6769C9.96899 11.8615 9.96899 12.1385 9.78438 12.3231L3.69207 18.4154C3.41514 18.6923 3.41514 19.1077 3.69207 19.3846L4.6613 20.3538C4.93822 20.6308 5.35361 20.6308 5.63053 20.3538L11.6767 14.3077C11.8613 14.1231 12.1382 14.1231 12.3228 14.3077L18.369 20.3538C18.6459 20.6308 19.0613 20.6308 19.3382 20.3538L20.3075 19.3846C20.5844 19.1077 20.5844 18.6923 20.3075 18.4154L14.3075 12.3692C14.1228 12.1846 14.1228 11.9077 14.3075 11.7231Z"
+                          fill="#239CFF" />
+                      </svg>
+                    </button>
+                  </div>
+
+                  <% if (companies.length> 0) { %>
+                    <div class="flex flex-col divide-y divide-gray-100">
+                      <div class="min-w-0 flex-auto scroll-py-4 overflow-y-auto px-6 py-4">
+                        <div class="relative">
+                          <svg class="pointer-events-none absolute left-2 top-2.5 h-5 w-5 text-gray-400"
+                            viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                            <path fill-rule="evenodd"
+                              d="M9 3.5a5.5 5.5 0 100 11 5.5 5.5 0 000-11zM2 9a7 7 0 1112.452 4.391l3.328 3.329a.75.75 0 11-1.06 1.06l-3.329-3.328A7 7 0 012 9z"
+                              clip-rule="evenodd" />
+                          </svg>
+                          <input type="text"
+                            class="h-10 w-full border-blue-1 rounded-full bg-transparent pl-8 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm inter"
+                            placeholder="Digite o nome da empresa" role="combobox" aria-expanded="false"
+                            aria-controls="options">
+                        </div>
+
+                        <ul class="text-sm text-gray-700 overflow-y-auto h-48 mt-4" id="options" role="listbox">
+                          <% companies.forEach(function(item) { %>
+                            <li class="group flex flex-col cursor-default select-none rounded-md p-2 mb-4" id="option-1"
+                              role="option" tabindex="-1">
+                              <div class="flex justify-between items-center">
+                                <div class="flex items-center">
+                                  <img src="/img/photos/<%= item.photo %>" alt=""
+                                    class="h-9 flex-none rounded-full border-purple">
+                                  <span style="font-size: 15px;"
+                                    class="ml-3 flex-auto truncate inter font-semibold color-purple">
+                                    <%= item.name %>
+                                  </span>
+                                </div>
+
+                                <div class="flex items-center">
+                                  <button onclick="openRegister('<%= item._id %>')"
+                                    class="text-xs rounded-full bg-blue-100 px-2 py-1 border-blue-1 text-gray-600 inter font-semibold">Selecionar</button>
+                                </div>
+                              </div>
+                            </li>
+                            <% }) %>
+                        </ul>
+                      </div>
+                    </div>
+                    <% } else { %>
+                      <div class="px-6 py-14 text-center text-sm sm:px-14">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <g clip-path="url(#clip0_315_2)">
+                            <path
+                              d="M22.971 23.25H20.5283C20.4545 23.25 20.3837 23.2207 20.3315 23.1685C20.2793 23.1163 20.25 23.0455 20.25 22.9717V11.5552C20.25 11.3857 20.3865 11.2492 20.556 11.2492H22.4963C22.9125 11.2492 23.25 11.5867 23.25 12.003V22.9703C23.2501 23.0069 23.243 23.0432 23.229 23.0771C23.215 23.111 23.1944 23.1418 23.1685 23.1678C23.1426 23.1937 23.1118 23.2142 23.0779 23.2282C23.044 23.2422 23.0077 23.2501 22.971 23.25ZM3.471 23.25H1.02825C0.954454 23.25 0.88368 23.2207 0.831498 23.1685C0.779316 23.1163 0.75 23.0455 0.75 22.9717V12.0037C0.75 11.5875 1.0875 11.25 1.50375 11.25H3.444C3.61275 11.25 3.75 11.3865 3.75 11.556V22.971C3.7501 23.0076 3.74297 23.0439 3.72904 23.0777C3.7151 23.1116 3.69462 23.1423 3.66877 23.1682C3.64292 23.1942 3.61221 23.2147 3.57841 23.2287C3.5446 23.2428 3.50835 23.25 3.47175 23.25H3.471ZM17.745 2.25H16.8375C16.7363 2.2507 16.6369 2.22295 16.5507 2.16991C16.4645 2.11686 16.395 2.04067 16.35 1.95L16.0425 1.3425C15.855 0.9825 15.4875 0.75 15.075 0.75H8.91C8.5125 0.75 8.145 0.975 7.965 1.335L7.65 1.95C7.60502 2.04067 7.53547 2.11686 7.44927 2.16991C7.36307 2.22295 7.26371 2.2507 7.1625 2.25H6.255C5.7 2.25 5.25 2.7 5.25 3.255V22.9725C5.25 23.1225 5.3775 23.25 5.5275 23.25H9.4725C9.6225 23.25 9.75 23.1225 9.75 22.9725V20.3775C9.75 19.1775 10.635 18.09 11.835 18.0075C12.525 17.955 13.1475 18.2175 13.59 18.66C13.995 19.065 14.25 19.6275 14.25 20.25V22.9725C14.25 23.1225 14.3775 23.25 14.5275 23.25H18.4725C18.6225 23.25 18.75 23.1225 18.75 22.9725V3.255C18.75 2.7 18.3 2.25 17.745 2.25ZM10.5 15.405C10.5 15.6 10.35 15.75 10.155 15.75H8.595C8.4 15.75 8.25 15.6 8.25 15.405V13.845C8.25 13.65 8.4 13.5 8.595 13.5H10.155C10.35 13.5 10.5 13.65 10.5 13.845V15.405ZM10.5 10.905C10.5 11.1 10.35 11.25 10.155 11.25H8.595C8.4 11.25 8.25 11.1 8.25 10.905V9.345C8.25 9.15 8.4 9 8.595 9H10.155C10.35 9 10.5 9.15 10.5 9.345V10.905ZM10.5 6.405C10.5 6.6 10.35 6.75 10.155 6.75H8.595C8.4 6.75 8.25 6.6 8.25 6.405V4.845C8.25 4.65 8.4 4.5 8.595 4.5H10.155C10.35 4.5 10.5 4.65 10.5 4.845V6.405ZM15.75 15.405C15.75 15.6 15.6 15.75 15.405 15.75H13.845C13.65 15.75 13.5 15.6 13.5 15.405V13.845C13.5 13.65 13.65 13.5 13.845 13.5H15.405C15.6 13.5 15.75 13.65 15.75 13.845V15.405ZM15.75 10.905C15.75 11.1 15.6 11.25 15.405 11.25H13.845C13.65 11.25 13.5 11.1 13.5 10.905V9.345C13.5 9.15 13.65 9 13.845 9H15.405C15.6 9 15.75 9.15 15.75 9.345V10.905ZM15.75 6.405C15.75 6.6 15.6 6.75 15.405 6.75H13.845C13.65 6.75 13.5 6.6 13.5 6.405V4.845C13.5 4.65 13.65 4.5 13.845 4.5H15.405C15.6 4.5 15.75 4.65 15.75 4.845V6.405Z"
+                              fill="#0E1726" fill-opacity="0.5" />
+                          </g>
+                          <defs>
+                            <clipPath id="clip0_315_2">
+                              <rect width="24" height="24" fill="white" />
+                            </clipPath>
+                          </defs>
+                        </svg>
+                        <p class="mt-4 font-semibold inter color-purple">Nenhuma empresa encontrada</p>
+                      </div>
+                      <% } %>
+                </div>
+              </div>
+            </div>
+
+            <div class="hidden relative z-10 fade-in" id="popup_register" role="dialog" aria-modal="true">
+              <div class="fixed inset-0 bg-gray-500 bg-opacity-25 transition-opacity"></div>
+
+              <div class="fixed inset-0 z-10 overflow-y-auto p-4 sm:p-6 md:p-20 mt-20">
+                <div
+                  class="mx-auto companies transform divide-y divide-gray-100 overflow-hidden rounded-xl bg-white shadow-2xl ring-1 ring-black ring-opacity-5 transition-all">
+                  <div class="flex justify-between py-3 px-6">
+                    <h2 class="color-purple inter font-semibold text-lg">Cadastrar equipamento</h2>
+                    <button>
+                      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                          d="M14.3075 11.7231L20.3075 5.67693C20.5844 5.4 20.5844 4.98462 20.3075 4.7077L19.3844 3.73847C19.1075 3.46154 18.6921 3.46154 18.4151 3.73847L12.369 9.78462C12.1844 9.96923 11.9075 9.96923 11.7228 9.78462L5.67668 3.69231C5.39976 3.41539 4.98438 3.41539 4.70745 3.69231L3.73822 4.66154C3.4613 4.93847 3.4613 5.35385 3.73822 5.63077L9.78438 11.6769C9.96899 11.8615 9.96899 12.1385 9.78438 12.3231L3.69207 18.4154C3.41514 18.6923 3.41514 19.1077 3.69207 19.3846L4.6613 20.3538C4.93822 20.6308 5.35361 20.6308 5.63053 20.3538L11.6767 14.3077C11.8613 14.1231 12.1382 14.1231 12.3228 14.3077L18.369 20.3538C18.6459 20.6308 19.0613 20.6308 19.3382 20.3538L20.3075 19.3846C20.5844 19.1077 20.5844 18.6923 20.3075 18.4154L14.3075 12.3692C14.1228 12.1846 14.1228 11.9077 14.3075 11.7231Z"
+                          fill="#239CFF" />
+                      </svg>
+                    </button>
+                  </div>
+
+                  <div class="flex flex-col divide-y divide-gray-100">
+                    <div class="min-w-0 flex-auto scroll-py-4 overflow-y-auto px-6 py-4">
+                      <h2 class="inter font-semibold text-gray-800 text-md">Modelo:</h2>
+                      <div class="relative mt-2">
+                        <svg class="pointer-events-none absolute left-4 top-2.5 h-5 w-5 text-gray-400" width="20"
+                          height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <g clip-path="url(#clip0_315_8)">
+                            <path d="M15.7698 8.55774H4.23137L3.53906 11.6347H16.4621L15.7698 8.55774Z" fill="#0E1726"
+                              fill-opacity="0.5" />
+                            <path
+                              d="M18.2692 2.59619H1.73078C0.776406 2.59619 0 3.3726 0 4.32693V9.90385C0 10.8582 0.776406 11.6346 1.73078 11.6346H2.35578L3.20641 7.85416C3.23516 7.72635 3.30655 7.61212 3.40885 7.53028C3.51114 7.44844 3.63825 7.40385 3.76926 7.40385H16.2308C16.3618 7.40385 16.4889 7.44844 16.5912 7.53028C16.6935 7.61212 16.7649 7.72635 16.7936 7.85416L17.6443 11.6346H18.2693C19.2236 11.6346 20 10.8582 20 9.90385V4.32693C20 3.3726 19.2236 2.59619 18.2692 2.59619ZM13.0769 6.63463H12.3077C11.9891 6.63463 11.7308 6.37631 11.7308 6.05771C11.7308 5.73912 11.9891 5.4808 12.3077 5.4808H13.0769C13.3955 5.4808 13.6538 5.73912 13.6538 6.05771C13.6538 6.37631 13.3955 6.63463 13.0769 6.63463ZM15.7692 6.63463H15C14.6814 6.63463 14.4231 6.37631 14.4231 6.05771C14.4231 5.73912 14.6814 5.4808 15 5.4808H15.7692C16.0879 5.4808 16.3461 5.73912 16.3461 6.05771C16.3461 6.37631 16.0879 6.63463 15.7692 6.63463ZM10.3846 14.2627C10.3846 14.1021 10.4146 14.0521 10.4947 13.9186C10.604 13.7364 10.7692 13.4611 10.7692 12.9808C10.7692 12.6622 10.5109 12.4039 10.1923 12.4039C9.87371 12.4039 9.61539 12.6622 9.61539 12.9808C9.61539 13.1415 9.58543 13.1914 9.50531 13.3249C9.39598 13.5071 9.23078 13.7824 9.23078 14.2627C9.23078 14.743 9.39598 15.0184 9.50527 15.2006C9.58539 15.3342 9.61539 15.3841 9.61539 15.5448C9.61539 15.7055 9.58543 15.7556 9.50527 15.889C9.39598 16.0713 9.23078 16.3466 9.23078 16.8269C9.23078 17.1456 9.4891 17.4038 9.8077 17.4038C10.1263 17.4038 10.3846 17.1455 10.3846 16.8269C10.3846 16.6662 10.4146 16.6162 10.4947 16.4827C10.604 16.3005 10.7692 16.0252 10.7692 15.5448C10.7692 15.0645 10.604 14.7892 10.4947 14.6069C10.4146 14.4734 10.3846 14.4235 10.3846 14.2627ZM7.3077 14.2627C7.3077 14.1021 7.33766 14.0521 7.41777 13.9186C7.52711 13.7364 7.6923 13.4611 7.6923 12.9808C7.6923 12.6622 7.43398 12.4039 7.11539 12.4039C6.7968 12.4039 6.53848 12.6622 6.53848 12.9808C6.53848 13.1415 6.50852 13.1914 6.4284 13.3249C6.31906 13.5071 6.15387 13.7824 6.15387 14.2627C6.15387 14.743 6.31906 15.0184 6.42836 15.2006C6.50848 15.3342 6.53848 15.3841 6.53848 15.5448C6.53848 15.7055 6.50852 15.7556 6.42836 15.889C6.31906 16.0713 6.15387 16.3466 6.15387 16.8269C6.15387 17.1456 6.41219 17.4038 6.73078 17.4038C7.04937 17.4038 7.3077 17.1455 7.3077 16.8269C7.3077 16.6662 7.33766 16.6162 7.41781 16.4827C7.52711 16.3005 7.6923 16.0252 7.6923 15.5448C7.6923 15.0645 7.52711 14.7892 7.41781 14.6069C7.3377 14.4734 7.3077 14.4235 7.3077 14.2627ZM13.4615 14.2627C13.4615 14.1021 13.4915 14.0521 13.5716 13.9186C13.6809 13.7364 13.8461 13.4611 13.8461 12.9808C13.8461 12.6622 13.5878 12.4039 13.2692 12.4039C12.9506 12.4039 12.6923 12.6622 12.6923 12.9808C12.6923 13.1415 12.6623 13.1914 12.5822 13.3249C12.4729 13.5071 12.3077 13.7824 12.3077 14.2627C12.3077 14.743 12.4729 15.0184 12.5822 15.2006C12.6623 15.3342 12.6923 15.3841 12.6923 15.5448C12.6923 15.7055 12.6623 15.7556 12.5822 15.889C12.4729 16.0713 12.3077 16.3466 12.3077 16.8269C12.3077 17.1456 12.566 17.4038 12.8846 17.4038C13.2032 17.4038 13.4615 17.1455 13.4615 16.8269C13.4615 16.6662 13.4915 16.6162 13.5716 16.4827C13.6809 16.3005 13.8461 16.0252 13.8461 15.5448C13.8461 15.0645 13.6809 14.7892 13.5716 14.6069C13.4915 14.4734 13.4615 14.4235 13.4615 14.2627Z"
+                              fill="#0E1726" fill-opacity="0.5" />
+                          </g>
+                          <defs>
+                            <clipPath id="clip0_315_8">
+                              <rect width="20" height="20" fill="white" />
+                            </clipPath>
+                          </defs>
+                        </svg>
+
+                        <select id="model"
+                          class="h-10 w-full border rounded-lg bg-transparent pl-11 pr-4 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm inter">
+                          <option value="Split">Split</option>
+                          <option value="Split Cassete">Split Cassete</option>
+                          <option value="Split Duto">Split Duto</option>
+                          <option value="Ar Condicionado Janela">Ar Condicionado Janela</option>
+                          <option value="Ar Condicionado Portátil">Ar Condicionado Portátil</option>
+                          <option value="Ar Condicionado Central">Ar Condicionado Central</option>
+                          <option value="Ar Condicionado Inverter">Ar Condicionado Inverter</option>
+                          <option value="Ar Condicionado VRF">Ar Condicionado VRF</option>
+                        </select>
+                      </div>
+
+                      <h2 class="inter font-semibold text-gray-800 text-md mt-6">Marca:</h2>
+                      <select id="brand"
+                        class="h-10 w-full border rounded-lg bg-transparent pl-2 pr-4 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm inter mt-2">
+                        <option value="LG">LG</option>
+                        <option value="Samsung">Samsung</option>
+                        <option value="Daikin">Daikin</option>
+                        <option value="Carrier">Carrier</option>
+                        <option value="Fujitsu">Fujitsu</option>
+                        <option value="Mitsubishi Electric">Mitsubishi Electric</option>
+                        <option value="Panasonic">Panasonic</option>
+                        <option value="Trane">Trane</option>
+                        <option value="Hitachi">Hitachi</option>
+                      </select>
+
+                      <h2 class="inter font-semibold text-gray-800 text-md mt-6">Setor:</h2>
+                      <input id="sector" type="text"
+                        class="w-full border rounded-lg bg-transparent pl-2 py-2 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm inter mt-2"
+                        placeholder="Insira o setor do equipamento">
+
+                      <h2 class="inter font-semibold text-gray-800 text-md mt-6">Local:</h2>
+                      <input id="local" type="text"
+                        class="w-full border rounded-lg bg-transparent pl-2 py-2 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm inter mt-2"
+                        placeholder="Insira o local do equipamento">
+
+                      <h2 class="inter font-semibold text-gray-800 text-md mt-6">BTUs:</h2>
+                      <input id="btus" type="text" oninput="formatBtus(this)"
+                        class="w-full border rounded-lg bg-transparent pl-2 py-2 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm inter mt-2"
+                        placeholder="Insira o local do equipamento">
+
+                      <h2 class="inter font-semibold text-gray-800 text-md mt-6">Tipo:</h2>
+                      <select id="type"
+                        class="h-10 w-full border rounded-lg bg-transparent pl-2 pr-4 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm inter mt-2">
+                        <option value="Hi-Wall">Hi-Wall</option>
+                        <option value="Hi-Wall">Piso Teto</option>
+                        <option value="Hi-Wall">Cassete</option>
+                        <option value="Duto">Duto</option>
+                        <option value="Janela">Janela</option>
+                        <option value="Portátil">Portátil</option>
+                        <option value="Central">Central</option>
+                        <option value="Inverter">Inverter</option>
+                        <option value="VRF">VRF</option>
+                      </select>
+
+                      <h2 class="inter font-semibold text-gray-800 text-md mt-6">Atividade:</h2>
+                      <select id="activity"
+                        class="h-10 w-full border rounded-lg bg-transparent pl-2 pr-4 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm inter mt-2">
+                        <option value="Moderada">Moderada</option>
+                      </select>
+
+                      <h2 class="inter font-semibold text-gray-800 text-md mt-6">Foto do equipamento::</h2>
+                      <div class="mt-2 div-image">
+                        <label for="image" style="border: 1px dashed #239CFF; cursor: pointer;"
+                          class="relative block w-full rounded-lg p-4 text-center hover:border-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
+                          <div class="flex justify-center">
+                            <svg width="30" height="30" viewBox="0 0 30 30" fill="none"
+                              xmlns="http://www.w3.org/2000/svg">
+                              <path
+                                d="M3.75 1.5C3.15326 1.5 2.58097 1.73705 2.15901 2.15901C1.73705 2.58097 1.5 3.15326 1.5 3.75V26.25C1.5 26.8467 1.73705 27.419 2.15901 27.841C2.58097 28.2629 3.15326 28.5 3.75 28.5H26.25C26.8467 28.5 27.419 28.2629 27.841 27.841C28.2629 27.419 28.5 26.8467 28.5 26.25V3.75C28.5 3.15326 28.2629 2.58097 27.841 2.15901C27.419 1.73705 26.8467 1.5 26.25 1.5H3.75ZM11.25 6.75C12.9 6.75 14.25 8.1 14.25 9.75C14.25 11.4 12.9 12.75 11.25 12.75C9.6 12.75 8.25 11.4 8.25 9.75C8.25 8.1 9.6 6.75 11.25 6.75ZM24.7485 25.5H5.2455C4.6305 25.5 4.2855 24.81 4.6455 24.315L9.975 18.2385C10.26 17.9235 10.755 17.9235 11.055 18.2235L13.5 21L18.09 13.8285C18.1605 13.7248 18.2558 13.6405 18.3673 13.5831C18.4787 13.5257 18.6029 13.4973 18.7282 13.5003C18.8535 13.5033 18.9761 13.5376 19.0847 13.6002C19.1933 13.6627 19.2845 13.7516 19.35 13.8585L25.4085 24.375C25.6785 24.885 25.3185 25.5 24.7485 25.5Z"
+                                fill="#239CFF" />
+                            </svg>
+                          </div>
+                          <span class="mt-2 files block text-sm font-semibold text-gray-900 inter">Selecione uma
+                            imagem</span>
+                          <span class="mt-1 block text-xs font-medium text-gray-900 inter">JPEG, PNG OU JPG</span>
+                          <input type="file" name="image" id="image" class="hidden" multiple accept="image/*">
+                        </label>
+                      </div>
+
+                      <div id="image-selected" class="flex space-x-4 flex-wrap mt-2"></div>
+
+                      <div class="mt-4">
+                        <button onclick="saveEquipment()"
+                          class="w-full py-2.5 bg-blue inter text-white text-sm font-semibold rounded-lg">Cadastrar
+                          equipamento</button>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
-        </div>
+          </main>
       </div>
+  </body>
 
-      <div class="relative z-10 fade-in" id="popup_companies" role="dialog" aria-modal="true">
-        <div class="fixed inset-0 bg-gray-500 bg-opacity-25 transition-opacity"></div>
-      
-        <div class="fixed inset-0 z-10 overflow-y-auto p-4 sm:p-6 md:p-20 mt-20">
-          <div class="mx-auto companies transform divide-y divide-gray-100 overflow-hidden rounded-xl bg-white shadow-2xl ring-1 ring-black ring-opacity-5 transition-all">
-            <div class="flex justify-between py-3 px-6">
-              <h2 class="color-purple inter font-semibold text-lg">Selecionar empresa:</h2>
-              <button>
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M14.3075 11.7231L20.3075 5.67693C20.5844 5.4 20.5844 4.98462 20.3075 4.7077L19.3844 3.73847C19.1075 3.46154 18.6921 3.46154 18.4151 3.73847L12.369 9.78462C12.1844 9.96923 11.9075 9.96923 11.7228 9.78462L5.67668 3.69231C5.39976 3.41539 4.98438 3.41539 4.70745 3.69231L3.73822 4.66154C3.4613 4.93847 3.4613 5.35385 3.73822 5.63077L9.78438 11.6769C9.96899 11.8615 9.96899 12.1385 9.78438 12.3231L3.69207 18.4154C3.41514 18.6923 3.41514 19.1077 3.69207 19.3846L4.6613 20.3538C4.93822 20.6308 5.35361 20.6308 5.63053 20.3538L11.6767 14.3077C11.8613 14.1231 12.1382 14.1231 12.3228 14.3077L18.369 20.3538C18.6459 20.6308 19.0613 20.6308 19.3382 20.3538L20.3075 19.3846C20.5844 19.1077 20.5844 18.6923 20.3075 18.4154L14.3075 12.3692C14.1228 12.1846 14.1228 11.9077 14.3075 11.7231Z" fill="#239CFF"/>
-                </svg>                                    
-              </button>
-            </div>
-      
-            <% if (companies.length > 0) { %>
-              <div class="flex flex-col divide-y divide-gray-100">
-                <div class="min-w-0 flex-auto scroll-py-4 overflow-y-auto px-6 py-4">
-                  <div class="relative">
-                    <svg class="pointer-events-none absolute left-4 top-2.5 h-5 w-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                      <path fill-rule="evenodd" d="M9 3.5a5.5 5.5 0 100 11 5.5 5.5 0 000-11zM2 9a7 7 0 1112.452 4.391l3.328 3.329a.75.75 0 11-1.06 1.06l-3.329-3.328A7 7 0 012 9z" clip-rule="evenodd" />
-                    </svg>
-                    <input type="text" class="h-10 w-full border rounded-lg bg-transparent pl-11 pr-4 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm" placeholder="Digite o nome da empresa" role="combobox" aria-expanded="false" aria-controls="options">
-                  </div>
+  <script>
+    const uploadImageInput = document.querySelector("#image");
+    const selectedImage = document.querySelector("#image-selected");
+    let images = [];
+    let idCompany;
 
-                  <ul class="text-sm text-gray-700 overflow-y-auto h-48 mt-6" id="options" role="listbox">
-                    <% companies.forEach(function(item) { %>
-                      <li class="group flex flex-col cursor-default select-none rounded-md p-2 mb-4" id="option-1" role="option" tabindex="-1">
-                        <div class="flex justify-between items-center">
-                          <div class="flex items-center">
-                            <img src="/img/photos/<%= item.photo %>" alt="" class="h-9 flex-none rounded-full border-purple">
-                            <span style="font-size: 15px;" class="ml-3 flex-auto truncate inter font-semibold color-purple"><%= item.name %></span>
-                          </div>
-
-                          <div class="flex items-center">
-                            <button onclick="openFunction('<%= item._id %>')" class="rounded-full bg-blue-100 px-2 py-1 border-blue inter font-semibold">Selecionar</button>
-                          </div>
-                        </div>
-                      </li>
-                    <% }) %>
-                  </ul>
-                </div>
-              </div>
-            <% } else { %>
-              <div class="px-6 py-14 text-center text-sm sm:px-14">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <g clip-path="url(#clip0_315_2)">
-                  <path d="M22.971 23.25H20.5283C20.4545 23.25 20.3837 23.2207 20.3315 23.1685C20.2793 23.1163 20.25 23.0455 20.25 22.9717V11.5552C20.25 11.3857 20.3865 11.2492 20.556 11.2492H22.4963C22.9125 11.2492 23.25 11.5867 23.25 12.003V22.9703C23.2501 23.0069 23.243 23.0432 23.229 23.0771C23.215 23.111 23.1944 23.1418 23.1685 23.1678C23.1426 23.1937 23.1118 23.2142 23.0779 23.2282C23.044 23.2422 23.0077 23.2501 22.971 23.25ZM3.471 23.25H1.02825C0.954454 23.25 0.88368 23.2207 0.831498 23.1685C0.779316 23.1163 0.75 23.0455 0.75 22.9717V12.0037C0.75 11.5875 1.0875 11.25 1.50375 11.25H3.444C3.61275 11.25 3.75 11.3865 3.75 11.556V22.971C3.7501 23.0076 3.74297 23.0439 3.72904 23.0777C3.7151 23.1116 3.69462 23.1423 3.66877 23.1682C3.64292 23.1942 3.61221 23.2147 3.57841 23.2287C3.5446 23.2428 3.50835 23.25 3.47175 23.25H3.471ZM17.745 2.25H16.8375C16.7363 2.2507 16.6369 2.22295 16.5507 2.16991C16.4645 2.11686 16.395 2.04067 16.35 1.95L16.0425 1.3425C15.855 0.9825 15.4875 0.75 15.075 0.75H8.91C8.5125 0.75 8.145 0.975 7.965 1.335L7.65 1.95C7.60502 2.04067 7.53547 2.11686 7.44927 2.16991C7.36307 2.22295 7.26371 2.2507 7.1625 2.25H6.255C5.7 2.25 5.25 2.7 5.25 3.255V22.9725C5.25 23.1225 5.3775 23.25 5.5275 23.25H9.4725C9.6225 23.25 9.75 23.1225 9.75 22.9725V20.3775C9.75 19.1775 10.635 18.09 11.835 18.0075C12.525 17.955 13.1475 18.2175 13.59 18.66C13.995 19.065 14.25 19.6275 14.25 20.25V22.9725C14.25 23.1225 14.3775 23.25 14.5275 23.25H18.4725C18.6225 23.25 18.75 23.1225 18.75 22.9725V3.255C18.75 2.7 18.3 2.25 17.745 2.25ZM10.5 15.405C10.5 15.6 10.35 15.75 10.155 15.75H8.595C8.4 15.75 8.25 15.6 8.25 15.405V13.845C8.25 13.65 8.4 13.5 8.595 13.5H10.155C10.35 13.5 10.5 13.65 10.5 13.845V15.405ZM10.5 10.905C10.5 11.1 10.35 11.25 10.155 11.25H8.595C8.4 11.25 8.25 11.1 8.25 10.905V9.345C8.25 9.15 8.4 9 8.595 9H10.155C10.35 9 10.5 9.15 10.5 9.345V10.905ZM10.5 6.405C10.5 6.6 10.35 6.75 10.155 6.75H8.595C8.4 6.75 8.25 6.6 8.25 6.405V4.845C8.25 4.65 8.4 4.5 8.595 4.5H10.155C10.35 4.5 10.5 4.65 10.5 4.845V6.405ZM15.75 15.405C15.75 15.6 15.6 15.75 15.405 15.75H13.845C13.65 15.75 13.5 15.6 13.5 15.405V13.845C13.5 13.65 13.65 13.5 13.845 13.5H15.405C15.6 13.5 15.75 13.65 15.75 13.845V15.405ZM15.75 10.905C15.75 11.1 15.6 11.25 15.405 11.25H13.845C13.65 11.25 13.5 11.1 13.5 10.905V9.345C13.5 9.15 13.65 9 13.845 9H15.405C15.6 9 15.75 9.15 15.75 9.345V10.905ZM15.75 6.405C15.75 6.6 15.6 6.75 15.405 6.75H13.845C13.65 6.75 13.5 6.6 13.5 6.405V4.845C13.5 4.65 13.65 4.5 13.845 4.5H15.405C15.6 4.5 15.75 4.65 15.75 4.845V6.405Z" fill="#0E1726" fill-opacity="0.5"/>
-                  </g>
-                  <defs>
-                  <clipPath id="clip0_315_2">
-                  <rect width="24" height="24" fill="white"/>
-                  </clipPath>
-                  </defs>
-                </svg>                  
-                <p class="mt-4 font-semibold inter color-purple">Nenhuma empresa encontrada</p>
-              </div>
-            <% } %>
-          </div>
-        </div>
-      </div>
-
-      <div class="hidden relative z-10 fade-in" id="popup_register" role="dialog" aria-modal="true">
-        <div class="fixed inset-0 bg-gray-500 bg-opacity-25 transition-opacity"></div>
-      
-        <div class="fixed inset-0 z-10 overflow-y-auto p-4 sm:p-6 md:p-20 mt-20">
-          <div class="mx-auto companies transform divide-y divide-gray-100 overflow-hidden rounded-xl bg-white shadow-2xl ring-1 ring-black ring-opacity-5 transition-all">
-            <div class="flex justify-between py-3 px-6">
-              <h2 class="color-purple inter font-semibold text-lg">Cadastrar equipamento</h2>
-              <button>
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M14.3075 11.7231L20.3075 5.67693C20.5844 5.4 20.5844 4.98462 20.3075 4.7077L19.3844 3.73847C19.1075 3.46154 18.6921 3.46154 18.4151 3.73847L12.369 9.78462C12.1844 9.96923 11.9075 9.96923 11.7228 9.78462L5.67668 3.69231C5.39976 3.41539 4.98438 3.41539 4.70745 3.69231L3.73822 4.66154C3.4613 4.93847 3.4613 5.35385 3.73822 5.63077L9.78438 11.6769C9.96899 11.8615 9.96899 12.1385 9.78438 12.3231L3.69207 18.4154C3.41514 18.6923 3.41514 19.1077 3.69207 19.3846L4.6613 20.3538C4.93822 20.6308 5.35361 20.6308 5.63053 20.3538L11.6767 14.3077C11.8613 14.1231 12.1382 14.1231 12.3228 14.3077L18.369 20.3538C18.6459 20.6308 19.0613 20.6308 19.3382 20.3538L20.3075 19.3846C20.5844 19.1077 20.5844 18.6923 20.3075 18.4154L14.3075 12.3692C14.1228 12.1846 14.1228 11.9077 14.3075 11.7231Z" fill="#239CFF"/>
-                </svg>                                    
-              </button>
-            </div>
-      
-            <div class="flex flex-col divide-y divide-gray-100">
-              <div class="min-w-0 flex-auto scroll-py-4 overflow-y-auto px-6 py-4">
-                <div class="relative">
-                  <svg class="pointer-events-none absolute left-4 top-2.5 h-5 w-5 text-gray-400" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <g clip-path="url(#clip0_315_8)">
-                    <path d="M15.7698 8.55774H4.23137L3.53906 11.6347H16.4621L15.7698 8.55774Z" fill="#0E1726" fill-opacity="0.5"/>
-                    <path d="M18.2692 2.59619H1.73078C0.776406 2.59619 0 3.3726 0 4.32693V9.90385C0 10.8582 0.776406 11.6346 1.73078 11.6346H2.35578L3.20641 7.85416C3.23516 7.72635 3.30655 7.61212 3.40885 7.53028C3.51114 7.44844 3.63825 7.40385 3.76926 7.40385H16.2308C16.3618 7.40385 16.4889 7.44844 16.5912 7.53028C16.6935 7.61212 16.7649 7.72635 16.7936 7.85416L17.6443 11.6346H18.2693C19.2236 11.6346 20 10.8582 20 9.90385V4.32693C20 3.3726 19.2236 2.59619 18.2692 2.59619ZM13.0769 6.63463H12.3077C11.9891 6.63463 11.7308 6.37631 11.7308 6.05771C11.7308 5.73912 11.9891 5.4808 12.3077 5.4808H13.0769C13.3955 5.4808 13.6538 5.73912 13.6538 6.05771C13.6538 6.37631 13.3955 6.63463 13.0769 6.63463ZM15.7692 6.63463H15C14.6814 6.63463 14.4231 6.37631 14.4231 6.05771C14.4231 5.73912 14.6814 5.4808 15 5.4808H15.7692C16.0879 5.4808 16.3461 5.73912 16.3461 6.05771C16.3461 6.37631 16.0879 6.63463 15.7692 6.63463ZM10.3846 14.2627C10.3846 14.1021 10.4146 14.0521 10.4947 13.9186C10.604 13.7364 10.7692 13.4611 10.7692 12.9808C10.7692 12.6622 10.5109 12.4039 10.1923 12.4039C9.87371 12.4039 9.61539 12.6622 9.61539 12.9808C9.61539 13.1415 9.58543 13.1914 9.50531 13.3249C9.39598 13.5071 9.23078 13.7824 9.23078 14.2627C9.23078 14.743 9.39598 15.0184 9.50527 15.2006C9.58539 15.3342 9.61539 15.3841 9.61539 15.5448C9.61539 15.7055 9.58543 15.7556 9.50527 15.889C9.39598 16.0713 9.23078 16.3466 9.23078 16.8269C9.23078 17.1456 9.4891 17.4038 9.8077 17.4038C10.1263 17.4038 10.3846 17.1455 10.3846 16.8269C10.3846 16.6662 10.4146 16.6162 10.4947 16.4827C10.604 16.3005 10.7692 16.0252 10.7692 15.5448C10.7692 15.0645 10.604 14.7892 10.4947 14.6069C10.4146 14.4734 10.3846 14.4235 10.3846 14.2627ZM7.3077 14.2627C7.3077 14.1021 7.33766 14.0521 7.41777 13.9186C7.52711 13.7364 7.6923 13.4611 7.6923 12.9808C7.6923 12.6622 7.43398 12.4039 7.11539 12.4039C6.7968 12.4039 6.53848 12.6622 6.53848 12.9808C6.53848 13.1415 6.50852 13.1914 6.4284 13.3249C6.31906 13.5071 6.15387 13.7824 6.15387 14.2627C6.15387 14.743 6.31906 15.0184 6.42836 15.2006C6.50848 15.3342 6.53848 15.3841 6.53848 15.5448C6.53848 15.7055 6.50852 15.7556 6.42836 15.889C6.31906 16.0713 6.15387 16.3466 6.15387 16.8269C6.15387 17.1456 6.41219 17.4038 6.73078 17.4038C7.04937 17.4038 7.3077 17.1455 7.3077 16.8269C7.3077 16.6662 7.33766 16.6162 7.41781 16.4827C7.52711 16.3005 7.6923 16.0252 7.6923 15.5448C7.6923 15.0645 7.52711 14.7892 7.41781 14.6069C7.3377 14.4734 7.3077 14.4235 7.3077 14.2627ZM13.4615 14.2627C13.4615 14.1021 13.4915 14.0521 13.5716 13.9186C13.6809 13.7364 13.8461 13.4611 13.8461 12.9808C13.8461 12.6622 13.5878 12.4039 13.2692 12.4039C12.9506 12.4039 12.6923 12.6622 12.6923 12.9808C12.6923 13.1415 12.6623 13.1914 12.5822 13.3249C12.4729 13.5071 12.3077 13.7824 12.3077 14.2627C12.3077 14.743 12.4729 15.0184 12.5822 15.2006C12.6623 15.3342 12.6923 15.3841 12.6923 15.5448C12.6923 15.7055 12.6623 15.7556 12.5822 15.889C12.4729 16.0713 12.3077 16.3466 12.3077 16.8269C12.3077 17.1456 12.566 17.4038 12.8846 17.4038C13.2032 17.4038 13.4615 17.1455 13.4615 16.8269C13.4615 16.6662 13.4915 16.6162 13.5716 16.4827C13.6809 16.3005 13.8461 16.0252 13.8461 15.5448C13.8461 15.0645 13.6809 14.7892 13.5716 14.6069C13.4915 14.4734 13.4615 14.4235 13.4615 14.2627Z" fill="#0E1726" fill-opacity="0.5"/>
-                    </g>
-                    <defs>
-                    <clipPath id="clip0_315_8">
-                    <rect width="20" height="20" fill="white"/>
-                    </clipPath>
-                    </defs>
-                  </svg>
-                    
-                  <select id="model" class="h-10 w-full border rounded-lg bg-transparent pl-11 pr-4 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm">
-                    <option value="split-hi-wall">Split Hi-Wall</option>
-                    <option value="split-piso-teto">Split Piso Teto</option>
-                    <option value="split-cassete">Split Cassete</option>
-                    <option value="split-duro">Split Duto</option>
-                    <option value="janela">Ar Condicionado Janela</option>
-                    <option value="portatil">Ar Condicionado Portátil</option>
-                    <option value="central">Ar Condicionado Central</option>
-                    <option value="inverter">Ar Condicionado Inverter</option>
-                    <option value="vrf">Ar Condicionado VRF</option>
-                  </select>
-                </div>
-
-                <div class="relative mt-6">
-                  <svg class="pointer-events-none absolute left-4 top-2.5 h-5 w-5 text-gray-400" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <g clip-path="url(#clip0_315_8)">
-                    <path d="M15.7698 8.55774H4.23137L3.53906 11.6347H16.4621L15.7698 8.55774Z" fill="#0E1726" fill-opacity="0.5"/>
-                    <path d="M18.2692 2.59619H1.73078C0.776406 2.59619 0 3.3726 0 4.32693V9.90385C0 10.8582 0.776406 11.6346 1.73078 11.6346H2.35578L3.20641 7.85416C3.23516 7.72635 3.30655 7.61212 3.40885 7.53028C3.51114 7.44844 3.63825 7.40385 3.76926 7.40385H16.2308C16.3618 7.40385 16.4889 7.44844 16.5912 7.53028C16.6935 7.61212 16.7649 7.72635 16.7936 7.85416L17.6443 11.6346H18.2693C19.2236 11.6346 20 10.8582 20 9.90385V4.32693C20 3.3726 19.2236 2.59619 18.2692 2.59619ZM13.0769 6.63463H12.3077C11.9891 6.63463 11.7308 6.37631 11.7308 6.05771C11.7308 5.73912 11.9891 5.4808 12.3077 5.4808H13.0769C13.3955 5.4808 13.6538 5.73912 13.6538 6.05771C13.6538 6.37631 13.3955 6.63463 13.0769 6.63463ZM15.7692 6.63463H15C14.6814 6.63463 14.4231 6.37631 14.4231 6.05771C14.4231 5.73912 14.6814 5.4808 15 5.4808H15.7692C16.0879 5.4808 16.3461 5.73912 16.3461 6.05771C16.3461 6.37631 16.0879 6.63463 15.7692 6.63463ZM10.3846 14.2627C10.3846 14.1021 10.4146 14.0521 10.4947 13.9186C10.604 13.7364 10.7692 13.4611 10.7692 12.9808C10.7692 12.6622 10.5109 12.4039 10.1923 12.4039C9.87371 12.4039 9.61539 12.6622 9.61539 12.9808C9.61539 13.1415 9.58543 13.1914 9.50531 13.3249C9.39598 13.5071 9.23078 13.7824 9.23078 14.2627C9.23078 14.743 9.39598 15.0184 9.50527 15.2006C9.58539 15.3342 9.61539 15.3841 9.61539 15.5448C9.61539 15.7055 9.58543 15.7556 9.50527 15.889C9.39598 16.0713 9.23078 16.3466 9.23078 16.8269C9.23078 17.1456 9.4891 17.4038 9.8077 17.4038C10.1263 17.4038 10.3846 17.1455 10.3846 16.8269C10.3846 16.6662 10.4146 16.6162 10.4947 16.4827C10.604 16.3005 10.7692 16.0252 10.7692 15.5448C10.7692 15.0645 10.604 14.7892 10.4947 14.6069C10.4146 14.4734 10.3846 14.4235 10.3846 14.2627ZM7.3077 14.2627C7.3077 14.1021 7.33766 14.0521 7.41777 13.9186C7.52711 13.7364 7.6923 13.4611 7.6923 12.9808C7.6923 12.6622 7.43398 12.4039 7.11539 12.4039C6.7968 12.4039 6.53848 12.6622 6.53848 12.9808C6.53848 13.1415 6.50852 13.1914 6.4284 13.3249C6.31906 13.5071 6.15387 13.7824 6.15387 14.2627C6.15387 14.743 6.31906 15.0184 6.42836 15.2006C6.50848 15.3342 6.53848 15.3841 6.53848 15.5448C6.53848 15.7055 6.50852 15.7556 6.42836 15.889C6.31906 16.0713 6.15387 16.3466 6.15387 16.8269C6.15387 17.1456 6.41219 17.4038 6.73078 17.4038C7.04937 17.4038 7.3077 17.1455 7.3077 16.8269C7.3077 16.6662 7.33766 16.6162 7.41781 16.4827C7.52711 16.3005 7.6923 16.0252 7.6923 15.5448C7.6923 15.0645 7.52711 14.7892 7.41781 14.6069C7.3377 14.4734 7.3077 14.4235 7.3077 14.2627ZM13.4615 14.2627C13.4615 14.1021 13.4915 14.0521 13.5716 13.9186C13.6809 13.7364 13.8461 13.4611 13.8461 12.9808C13.8461 12.6622 13.5878 12.4039 13.2692 12.4039C12.9506 12.4039 12.6923 12.6622 12.6923 12.9808C12.6923 13.1415 12.6623 13.1914 12.5822 13.3249C12.4729 13.5071 12.3077 13.7824 12.3077 14.2627C12.3077 14.743 12.4729 15.0184 12.5822 15.2006C12.6623 15.3342 12.6923 15.3841 12.6923 15.5448C12.6923 15.7055 12.6623 15.7556 12.5822 15.889C12.4729 16.0713 12.3077 16.3466 12.3077 16.8269C12.3077 17.1456 12.566 17.4038 12.8846 17.4038C13.2032 17.4038 13.4615 17.1455 13.4615 16.8269C13.4615 16.6662 13.4915 16.6162 13.5716 16.4827C13.6809 16.3005 13.8461 16.0252 13.8461 15.5448C13.8461 15.0645 13.6809 14.7892 13.5716 14.6069C13.4915 14.4734 13.4615 14.4235 13.4615 14.2627Z" fill="#0E1726" fill-opacity="0.5"/>
-                    </g>
-                    <defs>
-                    <clipPath id="clip0_315_8">
-                    <rect width="20" height="20" fill="white"/>
-                    </clipPath>
-                    </defs>
-                  </svg>
-                    
-                  <select id="brand" class="h-10 w-full border rounded-lg bg-transparent pl-11 pr-4 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm">
-                    <option value="lg">LG</option>
-                    <option value="samsung">Samsung</option>
-                    <option value="daikin">Daikin</option>
-                    <option value="carrier">Carrier</option>
-                    <option value="fujitsu">Fujitsu</option>
-                    <option value="mitsubishi">Mitsubishi Electric</option>
-                    <option value="panasonic">Panasonic</option>
-                    <option value="trane">Trane</option>
-                    <option value="hitachi">Hitachi</option>
-                  </select>
-                </div>
-
-                <div class="mt-8">
-                  <button onclick="saveEquipment()" class="w-full p-2 bg-blue inter text-white font-semibold rounded-lg">Cadastrar equipamento</button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </main>
-  </div>
-</body>
-
-<script>
-  let idCompany;
-
-  function openFunction(id) {
-    idCompany = id
-
-    const companies = document.querySelector("#popup_companies")
-    const register = document.querySelector("#popup_register")
-
-    companies.classList.add("hidden")
-    register.classList.remove("hidden")
-  }
-
-  async function saveEquipment() {
-    const model = document.querySelector("#model")
-    const brand = document.querySelector("#brand")
-
-    const response = await fetch(`/technician/save-equipment/${idCompany}`, {
-      method: "PUT",
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ model: model.value, brand: brand.value })
-    });
-
-    if (response.ok) {
-      const data = await response.json();
-
-      location.href = `/technician/view-equipment?idCompany=${idCompany}&idEquipment=${data.id}`;
-    } else {
-      alert_message("error", "Não foi possível cadastrar o equipamento.");
+    function formatBtus(input) {
+      var v = input.value.replace(/\D/g,'');
+      v = (v/100).toFixed(2) + '';
+      v = v.replace(".", ",");
+      v = v.replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.');
+      input.value = v;
     }
-  }
 
-  function openLoading(boolean) {
-    const popup_await = document.querySelector("#popup_await")
+    function openRegister(id) {
+      idCompany = id;
 
-    if (boolean) {
-      popup_await.classList.remove("hidden")
-    } else {
-      popup_await.classList.add("hidden")
+      const companies = document.querySelector("#popup_companies");
+      const register = document.querySelector("#popup_register");
+
+      companies.classList.add("hidden");
+      register.classList.remove("hidden");
     }
-  }
-</script>
+
+    async function saveEquipment() {
+      const model = document.querySelector("#model");
+      const brand = document.querySelector("#brand");
+      const sector = document.querySelector("#sector");
+      const local = document.querySelector("#local");
+      const btus = document.querySelector("#btus");
+      const type = document.querySelector("#type");
+      const activity = document.querySelector("#activity");
+      let imageFile;
+
+      openLoading(true)
+
+      const formData = new FormData();
+      formData.append('image', images[0]);
+
+      try {
+        const response = await fetch('/technician/save-image-equipment', {
+          method: 'POST',
+          body: formData
+        });
+
+        imageFile = await response.text();
+      } catch (err) {
+        console.error(err);
+      }
+
+      try {
+        const response = await fetch(`/technician/save-equipment`, {
+          method: "PUT",
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ model: model.value, brand: brand.value, sector: sector.value, local: local.value, btus: btus.value, type: type.value, activity: activity.value, imageFile: imageFile, idCompany: idCompany })
+        });
+
+        if (response.ok) {
+          const data = await response.json();
+
+          location.href = `/technician/view-equipment/${data.id}`;
+        } else {
+          openLoading(false)
+          alert_message("error", "Não foi possível cadastrar o equipamento.");
+        }
+      } catch (error) {
+        openLoading(false)
+        alert_message("error", "Não foi possível cadastrar o equipamento.");
+      }
+    }
+
+    function openLoading(boolean) {
+      const loading = document.querySelector("#loading");
+
+      if (boolean) {
+        loading.classList.remove("hidden");
+      } else {
+        loading.classList.add("hidden");
+      }
+    }
+
+    function updateSelectedImages() {
+      images.forEach(function (file, index) {
+        const img = document.createElement('img');
+        img.classList.add("h-20", "rounded-lg", "border-blue");
+        img.src = URL.createObjectURL(file);
+
+        const deleteButton = document.createElement('button');
+        deleteButton.textContent = 'Excluir';
+        deleteButton.setAttribute('data-index', index);
+
+        deleteButton.addEventListener('click', function () {
+          const indexToDelete = parseInt(this.getAttribute('data-index'));
+          images.splice(indexToDelete, 1);
+          updateSelectedImages();
+        });
+
+        selectedImage.appendChild(img);
+        selectedImage.appendChild(deleteButton);
+      });
+    }
+
+    function uploadImage(e) {
+      const files = e.target.files;
+      images.push(files[0]);
+      updateSelectedImages();
+    }
+
+    uploadImageInput.addEventListener('change', uploadImage);
+  </script>
 
 </html>

@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<%- include('../partials/head', {title: "title"}) %>
+<%- include('../partials/head', {title: "Ver equipamento"}) %>
 
 <body>
-  <%- include('../partials/company/sidebar-company') %>
+  <%- include('../partials/company/sidebar-company', {service: service}) %>
 
   <div class="lg:pl-70">
-    <%- include('../partials/company/nav-company', {title: "Visualizar equipamento", notifications: notifications, photo: photo, name_user: name_user}) %>
+    <%- include('../partials/company/nav-company', {title: "Ver equipamento", photo: photo, name_user: name_user}) %>
 
     <main class="py-5 fade-in">
       <div class="alert mt-14" style="display: none;"><div style="display: flex;" class="alert-text"></div></div>
@@ -16,145 +16,113 @@
       <div class="px-4 sm:px-6 lg:pl-12 mt-2 col-span-3">
         <div class="min-h-full">
           <main>
-            <div class="mx-auto mt-8 grid grid-cols-1 gap-6 sm:px-6 lg:grid-flow-col-dense lg:grid-cols-3">
+            <div class="mx-auto mt-8 grid grid-cols-1 gap-6 sm:px-6">
               <div class="space-y-6 lg:col-span-2 lg:col-start-1">
                 <!-- Description list-->
                 <section aria-labelledby="applicant-information-title">
                   <div class="bg-white shadow-lg border sm:rounded-lg">
-                    <div class="mx-auto max-w-3xl px-4 pt-6 sm:px-6 md:flex md:items-center md:justify-between md:space-x-5 lg:max-w-7xl lg:pr-8 pb-6">
+                    <div
+                      class="flex items-center justify-between px-6 py-6">
                       <div class="flex items-center space-x-5">
                         <div class="flex-shrink-0">
                           <div class="relative">
-                            <img class="h-20 rounded-lg" src="https://s.zst.com.br/cms-assets/2021/10/cuidados-com-o-ar-condicionado.jpg" alt="">
+                            <img class="h-20 rounded-lg" src="/img/equipments/<%= equipment.imageFile %>" alt="">
                             <span class="absolute inset-0 rounded-full shadow-inner" aria-hidden="true"></span>
                           </div>
                         </div>
                         <div>
-                          <h1 class="text-2xl font-bold text-gray-900 inter">Ar Condicionado Split</h1>
-                          <p class="text-sm font-semibold text-gray-500 inter">ID do equipamento: <span class="text-indigo-600">#25425</span></p>
+                          <h1 class="text-2xl font-bold text-gray-900 inter">
+                            <%= equipment.model %>
+                          </h1>
+                          <p class="text-sm font-semibold text-gray-500 inter">ID do equipamento: <span
+                              class="text-blue">#<%= equipment._id %></span></p>
                         </div>
                       </div>
-                      <div class="mt-6 flex flex-col-reverse justify-stretch space-y-4 space-y-reverse sm:flex-row-reverse sm:justify-end sm:space-x-3 sm:space-y-0 sm:space-x-reverse md:mt-0 md:flex-row md:space-x-3">
-                        <button type="button" class="inline-flex items-center border justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50">Preciso de ajuda</button>
+
+                      <div
+                        class="mt-6 flex flex-col-reverse justify-stretch space-y-4 space-y-reverse sm:flex-row-reverse sm:justify-end sm:space-x-3 sm:space-y-0 sm:space-x-reverse md:mt-0 md:flex-row md:space-x-3">
+                        <button type="button"
+                          class="inline-flex items-center border justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 inter">Preciso
+                          de ajuda</button>
                       </div>
                     </div>
 
                     <div class="border-t border-gray-200 px-4 py-5 sm:px-6">
                       <dl class="grid grid-cols-1 gap-x-4 gap-y-8 sm:grid-cols-2">
                         <div class="sm:col-span-1">
-                          <dt class="text-sm font-semibold text-gray-500 inter">Pertencente:</dt>
-                          <dd class="mt-1 text-sm text-gray-900 inter"><%= name_user %> (Você)</dd>
-                        </div>
-                        <div class="sm:col-span-1">
                           <dt class="text-sm font-semibold text-gray-500 inter">Último status do equipamento:</dt>
-                          <span class="inline-flex items-center inter gap-x-1.5 border rounded-full px-2 py-1 text-xs font-semibold text-gray-900 ring-1 ring-inset ring-gray-200">
-                            <svg width="6" height="6" viewBox="0 0 6 6" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <span
+                            class="inline-flex items-center inter gap-x-1.5 border rounded-full px-2 py-1 text-xs font-semibold text-gray-900 ring-1 ring-inset ring-gray-200">
+                            <svg width="6" height="6" viewBox="0 0 6 6" fill="none"
+                              xmlns="http://www.w3.org/2000/svg">
                               <g clip-path="url(#clip0_285_50)">
-                              <path d="M3 6C4.65685 6 6 4.65685 6 3C6 1.34315 4.65685 0 3 0C1.34315 0 0 1.34315 0 3C0 4.65685 1.34315 6 3 6Z" fill="#11AA17"/>
+                                <path
+                                  d="M3 6C4.65685 6 6 4.65685 6 3C6 1.34315 4.65685 0 3 0C1.34315 0 0 1.34315 0 3C0 4.65685 1.34315 6 3 6Z"
+                                  fill="#11AA17" />
                               </g>
                               <defs>
-                              <clipPath id="clip0_285_50">
-                              <rect width="6" height="6" fill="white"/>
-                              </clipPath>
+                                <clipPath id="clip0_285_50">
+                                  <rect width="6" height="6" fill="white" />
+                                </clipPath>
                               </defs>
-                            </svg>                              
+                            </svg>
                             Funcionando corretamente
                           </span>
                         </div>
+
                         <div class="sm:col-span-1">
                           <dt class="text-sm font-semibold text-gray-500 inter">Data de cadastro:</dt>
-                          <dd class="mt-1 text-sm text-gray-900 inter">14/02/2023</dd>
+                          <dd class="mt-1 text-sm text-gray-900 inter">
+                            <%= equipment.createdAt %>
+                          </dd>
                         </div>
+
                         <div class="sm:col-span-1">
-                          <dt class="text-sm font-semibold text-gray-500 inter">Manutenções</dt>
-                          <dd class="mt-1 text-sm text-gray-900 inter">2 manutenções</dd>
+                          <dt class="text-sm font-semibold text-gray-500 inter">Relatórios:</dt>
+                          <dd class="mt-1 text-sm text-gray-900 inter">
+                            <%= equipment.reports %> relatórios
+                          </dd>
                         </div>
-                        <div class="sm:col-span-2">
-                          <dt class="text-sm font-semibold text-gray-800 inter">Relatórios anexados ao equipamento:</dt>
-                          <h2 class="inter font-semibold">Nenhum relatório anexado ao equipamento.</h2>
+
+                        <div class="sm:col-span-1">
+                          <dt class="text-sm font-semibold text-gray-500 inter">Setor:</dt>
+                          <dd class="mt-1 text-sm text-gray-900 inter">
+                            <%= equipment.sector %>
+                          </dd>
+                        </div>
+
+                        <div class="sm:col-span-1">
+                          <dt class="text-sm font-semibold text-gray-500 inter">Local:</dt>
+                          <dd class="mt-1 text-sm text-gray-900 inter">
+                            <%= equipment.local %>
+                          </dd>
+                        </div>
+
+                        <div class="sm:col-span-1">
+                          <dt class="text-sm font-semibold text-gray-500 inter">Atividade:</dt>
+                          <dd class="mt-1 text-sm text-gray-900 inter">
+                            <%= equipment.activity %>
+                          </dd>
+                        </div>
+
+                        <div class="sm:col-span-1">
+                          <dt class="text-sm font-semibold text-gray-500 inter">Marca do equipamento:</dt>
+                          <dd class="mt-1 text-sm text-gray-900 inter">
+                            <%= equipment.brand %>
+                          </dd>
+                        </div>
+
+                        <div class="sm:col-span-1">
+                          <dt class="text-sm font-semibold text-gray-500 inter">BTUs</dt>
+                          <dd class="mt-1 text-sm text-gray-900 inter">
+                            <%= equipment.btus %> BTUs
+                          </dd>
                         </div>
                       </dl>
                     </div>
                   </div>
                 </section>
               </div>
-
-              <section aria-labelledby="timeline-title" class="lg:col-span-1 lg:col-start-3 shadow-lg border rounded-lg">
-                <div class="bg-white px-4 py-5 shadow sm:rounded-lg sm:px-6">
-                  <h2 id="timeline-title" class="text-lg font-medium text-gray-900">Linha do tempo</h2>
-
-                  <!-- Activity Feed -->
-                  <div class="mt-6 flow-root">
-                    <ul role="list" class="-mb-8">
-                      <li>
-                        <div class="relative pb-8">
-                          <span class="absolute left-4 top-4 -ml-px h-full w-0.5 bg-gray-200" aria-hidden="true"></span>
-                          <div class="relative flex space-x-3">
-                            <div>
-                              <span class="h-8 w-8 rounded-full bg-blue-500 flex items-center justify-center ring-8 ring-white">
-                                <svg class="h-5 w-5 text-white" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                                  <path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z" clip-rule="evenodd" />
-                                </svg>
-                              </span>
-                            </div>
-                            <div class="flex min-w-0 flex-1 justify-between space-x-4 pt-1.5">
-                              <div>
-                                <p class="text-sm inter font-semibold text-gray-500">QR Code do equipamento atualizado</p>
-                              </div>
-                              <div class="whitespace-nowrap text-right text-sm text-gray-500">
-                                <time datetime="2020-09-30">10/06/2023</time>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </li>
-                      <li>
-                        <div class="relative pb-8">
-                          <span class="absolute left-4 top-4 -ml-px h-full w-0.5 bg-gray-200" aria-hidden="true"></span>
-                          <div class="relative flex space-x-3">
-                            <div>
-                              <span class="h-8 w-8 rounded-full bg-blue-500 flex items-center justify-center ring-8 ring-white">
-                                <svg class="h-5 w-5 text-white" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                                  <path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z" clip-rule="evenodd" />
-                                </svg>
-                              </span>
-                            </div>
-                            <div class="flex min-w-0 flex-1 justify-between space-x-4 pt-1.5">
-                              <div>
-                                <p class="text-sm inter font-semibold text-gray-500">Dados do equipamento atualizado.</p>
-                              </div>
-                              <div class="whitespace-nowrap text-right text-sm text-gray-500">
-                                <time datetime="2020-09-30">11/06/2023</time>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </li>
-                      <li>
-                        <div class="relative pb-8">
-                          <div class="relative flex space-x-3">
-                            <div>
-                              <span class="h-8 w-8 rounded-full bg-green-500 flex items-center justify-center ring-8 ring-white">
-                                <svg class="h-5 w-5 text-white" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                                  <path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z" clip-rule="evenodd" />
-                                </svg>
-                              </span>
-                            </div>
-                            <div class="flex min-w-0 flex-1 justify-between space-x-4 pt-1.5">
-                              <div>
-                                <p class="text-sm inter font-semibold text-gray-500">Equipamento instalado e funcionando corretamente.</p>
-                              </div>
-                              <div class="whitespace-nowrap text-right text-sm text-gray-500">
-                                <time datetime="2020-10-04">10/03/2023</time>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-              </section>
             </div>
           </main>
         </div>

@@ -3,9 +3,11 @@ const Admin = require('../models/Admin')
 const Report = require('../models/Report')
 const Technician = require('../models/Technician')
 const Company = require('../models/Company')
+const Equipments = require('../models/Equipments')
 const Suppliers = require('../models/Suppliers')
 const Calls = require('../models/Calls')
 const path = require('path');
+const moment = require('moment')
 const fs = require('fs')
 const { welcomeCompany } = require('../controllers/emailCtrl')
 
@@ -26,6 +28,17 @@ const dashboard = asyncHandler(async(req, res) => {
         } else {
             call.name_company = "Empresa excluida"
             call.logo_company = ""
+        }
+
+        if (call.status != "pending" && call.id_technician.length > 0) {
+            const findTechnician = await Technician.findById(call.id_technician)
+
+            if (findTechnician) {
+                call.name_technician = findTechnician.name
+                call.photo_technician = findTechnician.photo
+            }
+        } else {
+            call.photo_technician = ''
         }
     }
 
@@ -53,6 +66,17 @@ const allCalls = asyncHandler(async(req, res) => {
             call.name_company = "Empresa excluida"
             call.logo_company = ""
         }
+
+        if (call.status != "pending" && call.id_technician.length > 0) {
+            const findTechnician = await Technician.findById(call.id_technician)
+
+            if (findTechnician) {
+                call.name_technician = findTechnician.name
+                call.photo_technician = findTechnician.photo
+            }
+        } else {
+            call.photo_technician = ''
+        }
     }
 
     res.render('layouts/admin/all-calls', {isAdmin: true, notifications: req.user.notifications.reverse(), photo: req.user.photo, name_user: req.user.name, calls: calls.reverse()})
@@ -62,13 +86,20 @@ const viewCall = asyncHandler(async(req, res) => {
     const findCall = await Calls.findById(req.params.id)
     const findCompany = await Company.findById(findCall.id_company)
     const technicians = await Technician.find({})
+    const equipments = []
+
+    for (const equipment of findCall.equipments) {
+        const findEquipment = await Equipments.findById(equipment)
+
+        equipments.push(findEquipment)
+    }
 
     if (findCompany && findCall) {
         findCall.emailCompany = req.user.email
         findCall.phoneCompany = req.user.phoneCompany
         findCall.photoCompany = findCompany.photo
         
-        res.render('layouts/admin/view-call', {isAdmin: true, notifications: req.user.notifications.reverse(), photo: req.user.photo, name_user: req.user.name, call: findCall, technicians: technicians})
+        res.render('layouts/admin/view-call', {isAdmin: true, notifications: req.user.notifications.reverse(), photo: req.user.photo, name_user: req.user.name, call: findCall, technicians: technicians, equipments: equipments})
     } else {
         res.render('layouts/notFound')
     }
@@ -246,6 +277,17 @@ const allEquipments = asyncHandler(async(req, res) => {
     }]
 
     res.render('layouts/admin/all-equipments', {isAdmin: true, notifications: req.user.notifications.reverse(), photo: req.user.photo, name_user: req.user.name, equipments: equipments})
+})
+
+const viewEquipment = asyncHandler(async (req, res) => {
+    const equipment = await Equipments.findById(req.params.id)
+    const company = await Company.findById(equipment.idCompany).select("name photo")
+
+    if (equipment && company) {
+        res.render('layouts/admin/view-equipment', { notifications: req.user.notifications.reverse().slice(0, 5), photo: req.user.photo, name_user: req.user.name, equipment: equipment, company: company })
+    } else {
+        res.render('layouts/notFound')
+    }
 })
 
 
@@ -624,6 +666,7 @@ module.exports = {
     viewBudget,
 
     allEquipments,
+    viewEquipment,
 
     administrators,
     newAdmin,

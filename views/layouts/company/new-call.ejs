@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<%- include('../partials/head', {title: "title"}) %>
+<%- include('../partials/head', {title: "Abrir novo chamado"}) %>
 
 <body>
-  <%- include('../partials/company/sidebar-company') %>
+  <%- include('../partials/company/sidebar-company', {service: service}) %>
 
   <div class="lg:pl-70">
-    <%- include('../partials/company/nav-company', {title: "Abrir chamado", notifications: notifications, photo: photo, name_user: name_user}) %>
+    <%- include('../partials/company/nav-company', {title: "Abrir novo chamado", photo: photo, name_user: name_user}) %>
 
     <main class="py-5 fade-in">
       <div class="alert mt-14" style="display: none;"><div style="display: flex;" class="alert-text"></div></div>
@@ -52,23 +52,33 @@
               </button>
             </div>
 
-            <% if (equipments.length == 0) { %>
+            <% if (equipments.length > 0) { %>
               <div class="flex flex-col divide-y divide-gray-100">
                 <div class="min-w-0 flex-auto scroll-py-4 overflow-y-auto px-6 py-4">
-                  <ul class="-mx-2 text-sm text-gray-700 overflow-y-auto h-48" id="options" role="listbox">
+                  <ul class="-mx-2 text-sm text-gray-700 overflow-y-auto h-80" id="options" role="listbox">
                     <% equipments.forEach(function(item) { %>
-                      <li class="group flex flex-col cursor-default select-none rounded-md p-2 mb-4" id="option-1" role="option" tabindex="-1">
-                        <div>
-                          <div class="flex items-center">
-                            <img src="<%= item.photo %>" alt="" class="h-9 flex-none rounded-full border-purple">
-                            <span style="font-size: 15px;"
-                              class="ml-3 flex-auto truncate inter font-semibold color-purple">
-                              <%= item.name %>
-                            </span>
+                      <li class="group flex flex-col cursor-default select-none rounded-md p-2 mb-4 divide-gray-300" id="option-1" role="option" tabindex="-1">
+                        <div class="flex items-center justify-between">
+                          <div class="flex items-center space-x-4">
+                            <div>
+                              <img src="/img/equipments/<%= item.imageFile %>" alt="" class="h-20 flex-none rounded-lg border-purple">
+                            </div>
+                            
+                            <div class="flex flex-col">
+                              <h2 class="inter text-lg font-bold text-blue"><%= item.model %></h2>
+                              <p class="inter text-sm font-semibold">Marca: <%= item.brand %></p>
+                              <p class="inter text-sm font-semibold">Setor: <%= item.sector %></p>
+                              <p class="inter text-sm font-semibold">Local: <%= item.local %></p>
+                            </div>
+                          </div>
+
+                          <div>
+                            <button onclick="selectEquipment('<%= item._id %>')" id="equipment-select-<%= item._id %>" class="text-xs rounded-full bg-blue-100 px-2 py-1 border-blue-1 text-gray-600 inter font-semibold">Selecionar</button>
+                            <button onclick="deselectEquipment('<%= item._id %>')" id="equipment-deselect-<%= item._id %>" class="text-xs rounded-full bg-red-100 px-2 py-1 border-red-1 text-gray-600 inter font-semibold hidden">Deselecionar</button>
                           </div>
                         </div>
                       </li>
-                      <% }) %>
+                    <% }) %>
                   </ul>
                 </div>
               </div>
@@ -127,10 +137,36 @@
 
 <script>
   let images = [];
+  let equipments = [];
   const description = document.querySelector("#description")
   const uploadImagesInput = document.querySelector("#images")
   const selectedImages = document.querySelector("#images-selected")
   uploadImagesInput.addEventListener('change', uploadImages);
+
+  function selectEquipment(id) {
+    if (!equipments.includes(id)) {
+      const selectBtn = document.getElementById(`equipment-select-${id}`).classList.add("hidden")
+      const deselectBtn = document.getElementById(`equipment-deselect-${id}`).classList.remove("hidden")
+
+      equipments.push(id)
+      console.log(equipments)
+    }
+  }
+
+  function deselectEquipment(id) {
+    if (equipments.includes(id)) {
+      const selectBtn = document.getElementById(`equipment-select-${id}`).classList.remove("hidden")
+      const deselectBtn = document.getElementById(`equipment-deselect-${id}`).classList.add("hidden")
+
+      const indexToRemove = equipments.findIndex(item => item == id);
+
+      if (indexToRemove !== -1) {
+        equipments.splice(indexToRemove, 1);
+      }
+
+      console.log(equipments)
+    }
+  }
 
   function openEquipments() {
     const popup = document.querySelector("#popup_equipments")
@@ -233,7 +269,7 @@
       const response = await fetch("/company/save-call", {
         method: "POST",
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ description: description.value, photos: saveImages })
+        body: JSON.stringify({ description: description.value, photos: saveImages, equipments: equipments })
       });
 
       if (response.ok) {

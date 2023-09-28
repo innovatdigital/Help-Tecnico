@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<%- include('../partials/head', {title: "title"}) %>
+<%- include('../partials/head', {title: "Equipamentos"}) %>
 
 <body>
-  <%- include('../partials/company/sidebar-company') %>
+  <%- include('../partials/company/sidebar-company', {service: service}) %>
 
   <div class="lg:pl-70">
-    <%- include('../partials/company/nav-company', {title: "Meus equipamentos", notifications: notifications, photo: photo, name_user: name_user}) %>
+    <%- include('../partials/company/nav-company', {title: "Equipamentos", photo: photo, name_user: name_user}) %>
 
     <main class="py-5 fade-in">
       <div class="alert mt-14" style="display: none;"><div style="display: flex;" class="alert-text"></div></div>
@@ -32,13 +32,15 @@
           <% equipments.forEach(item => { %>
             <li class="relative rounded-lg shadow-lg">
               <div class="border-b">
-                <img class="h-44 rounded-t-lg" src="https://s.zst.com.br/cms-assets/2021/10/cuidados-com-o-ar-condicionado.jpg" alt="">
+                <% if (item.imageFile.length > 0) { %>
+                  <img class="h-44 rounded-t-lg" src="/img/equipments/<%= item.imageFile %>" alt="">
+                <% } %>
               </div>
 
               <div class="p-4">
                 <h2 class="text-lg font-semibold color-blue inter"><%= item.model %> </h2>
-                <h2 class="text-sm font-medium mt-1 text-gray-800 inter">Data de cadastro: <%= item.date %></h2>
-                <h2 class="text-sm font-medium mt-1 text-gray-800 inter">Manutenções: <%= item.maintenance %> man.</h2>
+                <h2 class="text-sm font-medium mt-1 text-gray-800 inter">Data de cadastro: <%= item.createdAtFormatted %></h2>
+                <h2 class="text-sm font-medium mt-1 text-gray-800 inter">Relatórios: <%= item.reports %> relatórios</h2>
                 <h2 class="text-sm font-medium mt-1 text-gray-800 inter">Último status: <span class="font-semibold text-green-600">Funcionando</span></h2>
                 <div>
                   <a href="/company/view-equipment/<%= item.id %>" class="flex justify-center items-center bg-blue text-white mt-4 text-sm font-medium rounded-lg inter py-2" href="">Ver equipamento</a>

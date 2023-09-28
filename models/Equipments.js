@@ -1,29 +1,41 @@
 const mongoose = require('mongoose')
 
 const Equipment = new mongoose.Schema({
-    name: {
-        type: String,
-        require: true
+    model: {
+        type: String
     },
-    description: {
-        type: String,
-        require: true
+    brand: {
+        type: String
     },
-    id_admin: {
-        type: String,
-        require: true
+    sector: {
+        type: String
     },
-    photos: {
-        type: Array,
-        default: []
+    local: {
+        type: String
     },
-    date: {
-        type: Date,
-        default: Date.now()
+    type: {
+        type: String
     },
-    amount: {
-        type: Number,
-        default: []
+    activity: {
+        type: String
+    },
+    btus: {
+        type: String
+    },
+    imageFile: {
+        type: String
+    },
+    idCompany: {
+        type: String
+    },
+    nameCompany: {
+        type: String
+    },
+    photoCompany: {
+        type: String
+    },
+    createdAtFormatted: {
+        type: String
     },
     },
     {

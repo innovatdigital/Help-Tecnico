@@ -149,7 +149,7 @@
 
 @keyframes is-rotating {
     to {
-      transform: rotate(1turn);
+        transform: rotate(1turn);
     }
 }
 
@@ -169,13 +169,22 @@
     border: 1px solid #239CFF;
 }
 
+.border-red-1 {
+    border: 1px solid #a5020a;
+}
+
 .border-l-yellow {
     border-left: 4px solid #facc15 !important;
 }
 
 @keyframes fade-in {
-    0% { opacity: 0; }
-    100% { opacity: 1; }
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
 }
 
 .fade-in {
@@ -214,9 +223,24 @@ button:focus {
     background-color: rgba(42, 87, 182, 0.2)
 }
 
-@media (min-width: 1024px){
+.c-loader {
+    animation: is-rotating 1s infinite;
+    border: 6px solid #e5e5e5;
+    border-radius: 50%;
+    border-top-color: #239CFF;
+    height: 50px;
+    width: 50px;
+}
+
+@keyframes is-rotating {
+    to {
+        transform: rotate(1turn);
+    }
+}
+
+@media (min-width: 1024px) {
     .lg\:w-70 {
-      width: 16rem;
+        width: 16rem;
     }
 
     .lg\:pl-70 {

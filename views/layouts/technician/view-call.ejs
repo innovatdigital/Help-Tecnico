@@ -10,16 +10,16 @@
     <%- include('../partials/technician/nav-technician', {title: "Visualizar chamado", notifications: notifications, photo: photo, name_user: name_user}) %>
 
     <main class="py-5 fade-in">
-      <div class="hidden fade-in relative z-10" id="popup_cancel" role="dialog" aria-modal="true">
+      <div class="fade-in relative z-10 hidden" id="popup_code" role="dialog" aria-modal="true">
         <div class="fixed inset-0 bg-gray-500 bg-opacity-25 transition-opacity"></div>
       
         <div class="fixed inset-0 z-10 overflow-y-auto p-4 mt-40 ml-40 sm:p-6 md:p-20">
           <div class="mx-auto max-w-xl transform divide-y divide-gray-100 overflow-hidden rounded-xl bg-white shadow-2xl ring-1 ring-black ring-opacity-5 transition-all">
             <div class="flex justify-between py-3 px-6">
-              <h2 class="color-red inter font-bold text-lg">Cancelar chamado:</h2>
-              <button onclick="closeCancel()">
+              <h2 class="color-blue inter font-semibold text-lg">Inserir código</h2>
+              <button onclick="closeinsertCode()">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M14.3075 11.7231L20.3075 5.67693C20.5844 5.4 20.5844 4.98462 20.3075 4.7077L19.3844 3.73847C19.1075 3.46154 18.6921 3.46154 18.4151 3.73847L12.369 9.78462C12.1844 9.96923 11.9075 9.96923 11.7228 9.78462L5.67668 3.69231C5.39976 3.41539 4.98438 3.41539 4.70745 3.69231L3.73822 4.66154C3.4613 4.93847 3.4613 5.35385 3.73822 5.63077L9.78438 11.6769C9.96899 11.8615 9.96899 12.1385 9.78438 12.3231L3.69207 18.4154C3.41514 18.6923 3.41514 19.1077 3.69207 19.3846L4.6613 20.3538C4.93822 20.6308 5.35361 20.6308 5.63053 20.3538L11.6767 14.3077C11.8613 14.1231 12.1382 14.1231 12.3228 14.3077L18.369 20.3538C18.6459 20.6308 19.0613 20.6308 19.3382 20.3538L20.3075 19.3846C20.5844 19.1077 20.5844 18.6923 20.3075 18.4154L14.3075 12.3692C14.1228 12.1846 14.1228 11.9077 14.3075 11.7231Z" fill="#A31313"/>
+                  <path d="M14.3075 11.7231L20.3075 5.67693C20.5844 5.4 20.5844 4.98462 20.3075 4.7077L19.3844 3.73847C19.1075 3.46154 18.6921 3.46154 18.4151 3.73847L12.369 9.78462C12.1844 9.96923 11.9075 9.96923 11.7228 9.78462L5.67668 3.69231C5.39976 3.41539 4.98438 3.41539 4.70745 3.69231L3.73822 4.66154C3.4613 4.93847 3.4613 5.35385 3.73822 5.63077L9.78438 11.6769C9.96899 11.8615 9.96899 12.1385 9.78438 12.3231L3.69207 18.4154C3.41514 18.6923 3.41514 19.1077 3.69207 19.3846L4.6613 20.3538C4.93822 20.6308 5.35361 20.6308 5.63053 20.3538L11.6767 14.3077C11.8613 14.1231 12.1382 14.1231 12.3228 14.3077L18.369 20.3538C18.6459 20.6308 19.0613 20.6308 19.3382 20.3538L20.3075 19.3846C20.5844 19.1077 20.5844 18.6923 20.3075 18.4154L14.3075 12.3692C14.1228 12.1846 14.1228 11.9077 14.3075 11.7231Z" fill="#000000"/>
                 </svg>                                    
               </button>
             </div>
@@ -27,19 +27,18 @@
             <div class="flex flex-col divide-y divide-gray-100 px-6">
               <div>
                 <div class="flex flex-col items-center justify-center mt-2">                                        
-                  <h2 for="content" class="block text-md font-bold leading-6 text-gray-900 inter mt-4">Tem certeza que deseja cancelar o chamado</h2>
-                  <p class="inter text-center text-sm font-semibold">Essa ação é irreversível, e todos os dados associados a ele serão apagados.</p>
+                  <h2 for="content" class="block text-lg font-bold leading-6 text-gray-900 inter mt-4">Insira o código para iniciar o SLA do chamado:</h2>
                 </div>
 
                 <div class="mt-6">
-                  <label for="cancellation_message" class="block text-md font-medium leading-6 text-gray-900 inter mt-2">Insira o motivo do cancelamento:</label>
+                  <label for="code" class="block text-md text-center font-medium leading-6 text-gray-900 inter mt-2">Código de 6 digitos:</label>
                   <div class="flex items-center option mt-2">
-                    <textarea name="cancellation_message" id="cancellation_message" class="block w-full rounded-lg p-2 text-sm text-gray-900 border-2 shadow-sm inter" aria-placeholder="Motivo do cancelamento:"></textarea>
+                    <input type="number" name="code" id="code" class="w-full inter font-semibold px-2 py-2 text-center border-2 rounded-lg" maxlength="6" placeholder="000000">
                   </div>
                 </div>
 
                 <div class="pb-4">
-                  <button class="w-full py-2.5 inter bg-red text-white text-sm rounded-lg mt-4 font-bold" onclick="cancelCall()">Confirmar minha escolha</button>
+                  <button class="w-full py-2.5 inter bg-blue text-white text-sm rounded-lg mt-4 font-semibold" onclick="insertCode()">Inserir código e iniciar SLA</button>
                 </div>
               </div>
             </div>
@@ -61,12 +60,38 @@
                 </div>
                 <div>
                   <h1 class="text-2xl font-bold text-gray-900 inter">Chamado <span class="text-blue text-base">#<%= call._id %></span></h1>
-                  <p class="text-sm font-semibold text-gray-500 inter">Aberto por você em: <time datetime="<%= call.date %>"><%= call.date %></time></p>
+                  <p class="text-sm font-semibold text-gray-500 inter">Aberto em: <time datetime="<%= call.date %>"><%= call.date %></time></p>
                 </div>
               </div>
-              <div class="mt-6 flex flex-col-reverse justify-stretch space-y-4 space-y-reverse sm:flex-row-reverse sm:justify-end sm:space-x-3 sm:space-y-0 sm:space-x-reverse md:mt-0 md:flex-row md:space-x-3">
-                <a href="/technician/view-company/<%= call.id_company %>" class="inline-flex items-center justify-center rounded-lg border-2 bg-white px-3 py-2 text-sm font-semibold text-gray-800 shadow-sm inter">Ver empresa</a>
-                <button onclick="openSelectTechnician()" class="inline-flex items-center justify-center rounded-lg bg-blue px-3 py-2 text-sm font-semibold text-white shadow-sm inter">Gerar relatório</button>
+
+              <div class="flex items-center">
+                <% if (call.status == "concluded") { %>
+                  <div class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 inter color-purple font-semibold mr-4">
+                    <div class="flex items-center justify-end gap-x-2 sm:justify-start">
+                      <div class="flex-none rounded-full p-1 text-blue-500 bg-blue-opacity">
+                        <div class="h-1.5 w-1.5 rounded-full bg-current"></div>
+                      </div>
+                      <div class="hidden text-blue-500 sm:block font-semibold inter">Concluído</div>
+                    </div>
+                  </div>
+                <% } %>
+
+                <div class="mt-6 flex flex-col-reverse justify-stretch space-y-4 space-y-reverse sm:flex-row-reverse sm:justify-end sm:space-x-3 sm:space-y-0 sm:space-x-reverse md:mt-0 md:flex-row md:space-x-3">
+                  <% if (call.status == "in-attendance" && call.confirmed_code) { %>
+                    <button onclick="completeCall()" class="inline-flex items-center justify-center rounded-lg bg-blue px-3 py-2 text-sm font-semibold text-white shadow-sm inter">Concluir e gerar relatório</button>
+                  <% } %>
+
+                  <% if (call.status == "in-attendance" && !call.confirmed_code) { %>
+                    <button onclick="openInsertCode()" class="inline-flex items-center justify-center rounded-lg bg-yellow-500 px-3 py-2 text-sm font-semibold text-white shadow-sm inter">Inserir código</button>
+                    <button onclick="openInit()" class="inline-flex items-center justify-center rounded-lg bg-red-500 px-3 py-2 text-sm font-semibold text-white shadow-sm inter">Não consigo atender</button>
+                  <% } %>
+
+                  <% if (call.status == "pending") { %>
+                    <button onclick="initiateCall()" class="inline-flex items-center justify-center rounded-lg bg-green-500 px-3 py-2 text-sm font-semibold text-white shadow-sm inter">Iniciar chamado</button>
+                  <% } %>
+                  
+                  <a href="/technician/view-company/<%= call.id_company %>" class="inline-flex items-center justify-center rounded-lg border-2 bg-white px-3 py-2 text-sm font-semibold text-gray-800 shadow-sm inter">Ver empresa</a>
+                </div>
               </div>
             </div>
 
@@ -112,6 +137,34 @@
                             <dd class="mt-1 text-sm text-gray-900 inter inter font-medium"><%= call.cancellation_message %></dd>
                           </div>
                         <% } %>
+
+                        <div class="sm:col-span-2">
+                          <dt class="text-sm font-semibold text-gray-500 inter">Equipamentos do chamado:</dt>
+
+                          <dd class="mt-2 text-sm text-gray-900 inter">
+                            <ul role="list" class="divide-y divide-gray-200 rounded-md">
+                              <% equipments.forEach(item => { %>
+                                <li class="flex items-center justify-between space-x-4 py-3 pl-3 pr-4 rounded-lg border">
+                                  <div class="flex items-center space-x-4">
+                                    <div>
+                                      <img class="w-32 h-20 rounded-lg" src="/img/equipments/<%= item.imageFile %>" alt="">
+                                    </div>
+                    
+                                    <div>
+                                      <h2 class="text-sm font-bold text-gray-800 inter text-lg"><%= item.model %></h2>
+                                      <p class="text-sm mt-0.5 font-semibold text-gray-800 inter">Marca: <%= item.brand %></p>
+                                      <p class="text-sm mt-0.5 font-semibold text-gray-800 inter">Setor: <%= item.sector %></p>
+                                    </div>
+                                  </div>
+
+                                  <div>
+                                    <a href="/company/view-equipment/<%= item._id %>" class="inter font-semibold color-blue">Ver equipamento</a>
+                                  </div>
+                                </li>
+                              <% }) %>
+                            </ul>
+                          </dd>
+                        </div>
                         
                         <div class="sm:col-span-2">
                           <dt class="text-sm font-semibold text-gray-500 inter">Anexos do chamado:</dt>
@@ -195,10 +248,9 @@
                       <% call.timeline.forEach(item => { %>
                         <li>
                           <div class="relative pb-8">
-                            <!-- <span class="absolute left-4 top-4 -ml-px h-full w-0.5 bg-gray-200" aria-hidden="true"></span> -->
-                            <div class="relative flex space-x-3">
+                            <div class="relative flex items-center space-x-3">
                               <div>
-                                <% if (item.type == "technician") { %>
+                                <% if (item.type == "company") { %>
                                   <span class="h-8 w-8 rounded-full bg-gray-400 flex items-center justify-center ring-8 ring-white">
                                     <svg class="h-5 w-5 text-white" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                                       <path d="M10 8a3 3 0 100-6 3 3 0 000 6zM3.465 14.493a1.23 1.23 0 00.41 1.412A9.957 9.957 0 0010 18c2.31 0 4.438-.784 6.131-2.1.43-.333.604-.903.408-1.41a7.002 7.002 0 00-13.074.003z" />
@@ -221,18 +273,29 @@
                                     </clipPath>
                                     </defs>
                                   </svg>
-                                <% } else { %>
+                                <% } else if (item.type == "valid-code") { %>
                                   <span class="h-8 w-8 rounded-full bg-blue-500 flex items-center justify-center ring-8 ring-white">
                                     <svg class="h-5 w-5 text-white" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                                       <path d="M1 8.25a1.25 1.25 0 112.5 0v7.5a1.25 1.25 0 11-2.5 0v-7.5zM11 3V1.7c0-.268.14-.526.395-.607A2 2 0 0114 3c0 .995-.182 1.948-.514 2.826-.204.54.166 1.174.744 1.174h2.52c1.243 0 2.261 1.01 2.146 2.247a23.864 23.864 0 01-1.341 5.974C17.153 16.323 16.072 17 14.9 17h-3.192a3 3 0 01-1.341-.317l-2.734-1.366A3 3 0 006.292 15H5V8h.963c.685 0 1.258-.483 1.612-1.068a4.011 4.011 0 012.166-1.73c.432-.143.853-.386 1.011-.814.16-.432.248-.9.248-1.388z" />
                                     </svg>
                                   </span>
+                                <% } else if (item.type == "sla-started") { %>
+                                  <svg width="26" height="30" viewBox="0 0 26 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M22.6664 8.84706L24.3373 7.1869C24.4372 7.08704 24.5164 6.96848 24.5704 6.838C24.6245 6.70752 24.6523 6.56767 24.6523 6.42644C24.6523 6.28521 24.6245 6.14536 24.5704 6.01488C24.5164 5.8844 24.4372 5.76584 24.3373 5.66598C24.2374 5.56611 24.1189 5.48689 23.9884 5.43285C23.8579 5.3788 23.7181 5.35098 23.5769 5.35098C23.4356 5.35098 23.2958 5.3788 23.1653 5.43285C23.0348 5.48689 22.9163 5.56611 22.8164 5.66598L21.1562 7.33685C19.1234 5.60572 16.5983 4.5567 13.9372 4.33785V2.14215H16.0793C16.3634 2.14215 16.6358 2.0293 16.8367 1.82844C17.0376 1.62757 17.1504 1.35514 17.1504 1.07107C17.1504 0.787007 17.0376 0.514575 16.8367 0.31371C16.6358 0.112845 16.3634 0 16.0793 0H9.6529C9.36883 0 9.0964 0.112845 8.89554 0.31371C8.69467 0.514575 8.58183 0.787007 8.58183 1.07107C8.58183 1.35514 8.69467 1.62757 8.89554 1.82844C9.0964 2.0293 9.36883 2.14215 9.6529 2.14215H11.795V4.33785C8.92261 4.57507 6.21326 5.77088 4.10222 7.73319C1.99117 9.6955 0.600957 12.3104 0.154884 15.1579C-0.291188 18.0054 0.232772 20.9202 1.6426 23.4341C3.05243 25.9479 5.2663 27.915 7.92859 29.0193C10.5909 30.1235 13.5471 30.3009 16.3223 29.5229C19.0975 28.7449 21.5307 27.0567 23.231 24.7294C24.9313 22.4021 25.8001 19.5709 25.6977 16.6905C25.5953 13.8101 24.5277 11.0477 22.6664 8.84706ZM12.8661 27.8479C10.7477 27.8479 8.67693 27.2197 6.91556 26.0428C5.15419 24.8659 3.78136 23.1931 2.97069 21.236C2.16002 19.2789 1.94792 17.1253 2.36119 15.0476C2.77447 12.9699 3.79457 11.0615 5.29249 9.56354C6.79041 8.06562 8.69888 7.04552 10.7766 6.63224C12.8542 6.21897 15.0078 6.43108 16.9649 7.24175C18.9221 8.05241 20.5949 9.42524 21.7718 11.1866C22.9487 12.948 23.5769 15.0188 23.5769 17.1372C23.5769 18.5437 23.2998 19.9365 22.7615 21.236C22.2233 22.5355 21.4343 23.7162 20.4398 24.7108C19.4452 25.7054 18.2644 26.4943 16.9649 27.0326C15.6655 27.5709 14.2727 27.8479 12.8661 27.8479Z" fill="#E7AF00"/>
+                                    <path d="M12.866 8.5686C11.1712 8.5686 9.5146 9.07114 8.1055 10.0127C6.6964 10.9542 5.59815 12.2924 4.94961 13.8581C4.30108 15.4238 4.13139 17.1467 4.46201 18.8088C4.79263 20.471 5.60871 21.9978 6.80705 23.1961C8.00539 24.3944 9.53216 25.2105 11.1943 25.5411C12.8564 25.8718 14.5793 25.7021 16.145 25.0535C17.7107 24.405 19.0489 23.3067 19.9905 21.8976C20.932 20.4885 21.4345 18.8319 21.4345 17.1372C21.4345 14.8647 20.5318 12.6852 18.9249 11.0783C17.3179 9.47136 15.1385 8.5686 12.866 8.5686ZM16.8396 21.1109C16.7401 21.2113 16.6216 21.2909 16.4911 21.3453C16.3606 21.3997 16.2206 21.4277 16.0792 21.4277C15.9378 21.4277 15.7978 21.3997 15.6673 21.3453C15.5367 21.2909 15.4183 21.2113 15.3187 21.1109L12.1055 17.8976C12.0062 17.7976 11.9277 17.6789 11.8744 17.5484C11.8211 17.4179 11.7941 17.2781 11.7949 17.1372V11.7818C11.7949 11.4978 11.9077 11.2253 12.1086 11.0245C12.3095 10.8236 12.5819 10.7107 12.866 10.7107C13.15 10.7107 13.4225 10.8236 13.6233 11.0245C13.8242 11.2253 13.937 11.4978 13.937 11.7818V16.698L16.8396 19.5899C16.94 19.6895 17.0197 19.808 17.0741 19.9385C17.1285 20.069 17.1565 20.209 17.1565 20.3504C17.1565 20.4918 17.1285 20.6318 17.0741 20.7623C17.0197 20.8928 16.94 21.0113 16.8396 21.1109Z" fill="#E7AF00"/>
+                                  </svg>                                                                                                                                                                                                                                                                                                 
+                                <% } else if (item.type == "sla-finished") { %>
+                                  <svg width="29" height="29" viewBox="0 0 29 29" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M14.5 0C6.49745 0 0 6.49745 0 14.5C0 22.5026 6.49745 29 14.5 29C22.5026 29 29 22.5026 29 14.5C29 6.49745 22.5026 0 14.5 0ZM12.325 16.7997L19.9999 9.12485C20.2733 8.86072 20.6396 8.71457 21.0198 8.71787C21.4 8.72118 21.7636 8.87367 22.0325 9.14251C22.3013 9.41136 22.4538 9.77503 22.4571 10.1552C22.4604 10.5354 22.3143 10.9017 22.0502 11.1752L13.3502 19.8752C13.2156 20.0099 13.0558 20.1168 12.8799 20.1898C12.704 20.2627 12.5154 20.3003 12.325 20.3003C12.1346 20.3003 11.946 20.2627 11.7701 20.1898C11.5942 20.1168 11.4344 20.0099 11.2999 19.8752L6.94985 15.5252C6.68572 15.2517 6.53957 14.8854 6.54287 14.5052C6.54618 14.125 6.69867 13.7614 6.96751 13.4925C7.23636 13.2237 7.60003 13.0712 7.98022 13.0679C8.3604 13.0646 8.72668 13.2107 9.00015 13.4749L12.325 16.7997Z" fill="#01B506"/>
+                                  </svg>
                                 <% } %>
                               </div>
-                              <div class="flex min-w-0 flex-1 justify-between space-x-4 pt-1.5">
+                              
+                              <div class="flex min-w-0 flex-1 justify-between space-x-4">
                                 <div>
                                   <p class="text-sm inter font-semibold text-gray-500"><%= item.text %></p>
                                 </div>
+
                                 <div class="whitespace-nowrap text-right text-sm text-gray-500">
                                   <time datetime="<%= item.hour %>"><%= item.hour %></time>
                                 </div>
@@ -241,114 +304,6 @@
                           </div>
                         </li>
                       <% }) %>
-<!-- 
-                      <li>
-                        <div class="relative pb-8">
-                          <span class="absolute left-4 top-4 -ml-px h-full w-0.5 bg-gray-200" aria-hidden="true"></span>
-                          <div class="relative flex space-x-3">
-                            <div>
-                              <span class="h-8 w-8 rounded-full bg-blue-500 flex items-center justify-center ring-8 ring-white">
-                                <img class="h-8 w-8 rounded-full" src="https://pps.whatsapp.net/v/t61.24694-24/309612029_1303621463511201_2184499647973530355_n.jpg?ccb=11-4&oh=01_AdTLj4igz1k4OkKVwtf5wwXyceqwcgJlQGxo3JG6sDOlTQ&oe=64B44F62" alt="">
-                              </span>
-                            </div>
-                            <div class="flex min-w-0 flex-1 justify-between space-x-4 pt-1.5">
-                              <div>
-                                <p class="text-sm inter font-semibold text-gray-500">Chamado aceito por <span class="font-bold">Anderson Moreira</span></p>
-                              </div>
-                              <div class="whitespace-nowrap text-right text-sm text-gray-500">
-                                <time datetime="2020-09-22">14:24</time>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </li>
-                      <li>
-                        <div class="relative pb-8">
-                          <span class="absolute left-4 top-4 -ml-px h-full w-0.5 bg-gray-200" aria-hidden="true"></span>
-                          <div class="relative flex space-x-3">
-                            <div>
-                              <span class="h-8 w-8 rounded-full bg-green-500 flex items-center justify-center ring-8 ring-white">
-                                <svg class="h-5 w-5 text-white" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                                  <path d="M1 8.25a1.25 1.25 0 112.5 0v7.5a1.25 1.25 0 11-2.5 0v-7.5zM11 3V1.7c0-.268.14-.526.395-.607A2 2 0 0114 3c0 .995-.182 1.948-.514 2.826-.204.54.166 1.174.744 1.174h2.52c1.243 0 2.261 1.01 2.146 2.247a23.864 23.864 0 01-1.341 5.974C17.153 16.323 16.072 17 14.9 17h-3.192a3 3 0 01-1.341-.317l-2.734-1.366A3 3 0 006.292 15H5V8h.963c.685 0 1.258-.483 1.612-1.068a4.011 4.011 0 012.166-1.73c.432-.143.853-.386 1.011-.814.16-.432.248-.9.248-1.388z" />
-                                </svg>
-                              </span>
-                            </div>
-                            <div class="flex min-w-0 flex-1 justify-between space-x-4 pt-1.5">
-                              <div>
-                                <p class="text-sm inter font-semibold text-gray-500">Técnico <span class="font-bold">Anderson Moreira</span> a caminho do local.</p>
-                              </div>
-                              <div class="whitespace-nowrap text-right text-sm text-gray-500">
-                                <time datetime="2020-09-28">14:26</time>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </li>
-                      <li>
-                        <div class="relative pb-8">
-                          <span class="absolute left-4 top-4 -ml-px h-full w-0.5 bg-gray-200" aria-hidden="true"></span>
-                          <div class="relative flex space-x-3">
-                            <div>
-                              <span class="h-8 w-8 rounded-full bg-blue-500 flex items-center justify-center ring-8 ring-white">
-                                <svg class="h-5 w-5 text-white" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                                  <path d="M1 8.25a1.25 1.25 0 112.5 0v7.5a1.25 1.25 0 11-2.5 0v-7.5zM11 3V1.7c0-.268.14-.526.395-.607A2 2 0 0114 3c0 .995-.182 1.948-.514 2.826-.204.54.166 1.174.744 1.174h2.52c1.243 0 2.261 1.01 2.146 2.247a23.864 23.864 0 01-1.341 5.974C17.153 16.323 16.072 17 14.9 17h-3.192a3 3 0 01-1.341-.317l-2.734-1.366A3 3 0 006.292 15H5V8h.963c.685 0 1.258-.483 1.612-1.068a4.011 4.011 0 012.166-1.73c.432-.143.853-.386 1.011-.814.16-.432.248-.9.248-1.388z" />
-                                </svg>
-                              </span>
-                            </div>
-                            <div class="flex min-w-0 flex-1 justify-between space-x-4 pt-1.5">
-                              <div>
-                                <p class="text-sm inter font-semibold text-gray-500">Iniciado o atendimento pelo Técnico. (SLA em andamento)</p>
-                              </div>
-                              <div class="whitespace-nowrap text-right text-sm text-gray-500">
-                                <time datetime="2020-09-30">14:40</time>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </li>
-                      <li>
-                        <div class="relative pb-8">
-                          <span class="absolute left-4 top-4 -ml-px h-full w-0.5 bg-gray-200" aria-hidden="true"></span>
-                          <div class="relative flex space-x-3">
-                            <div>
-                              <span class="h-8 w-8 rounded-full bg-blue-500 flex items-center justify-center ring-8 ring-white">
-                                <svg class="h-5 w-5 text-white" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                                  <path d="M1 8.25a1.25 1.25 0 112.5 0v7.5a1.25 1.25 0 11-2.5 0v-7.5zM11 3V1.7c0-.268.14-.526.395-.607A2 2 0 0114 3c0 .995-.182 1.948-.514 2.826-.204.54.166 1.174.744 1.174h2.52c1.243 0 2.261 1.01 2.146 2.247a23.864 23.864 0 01-1.341 5.974C17.153 16.323 16.072 17 14.9 17h-3.192a3 3 0 01-1.341-.317l-2.734-1.366A3 3 0 006.292 15H5V8h.963c.685 0 1.258-.483 1.612-1.068a4.011 4.011 0 012.166-1.73c.432-.143.853-.386 1.011-.814.16-.432.248-.9.248-1.388z" />
-                                </svg>
-                              </span>
-                            </div>
-                            <div class="flex min-w-0 flex-1 justify-between space-x-4 pt-1.5">
-                              <div>
-                                <p class="text-sm inter font-semibold text-gray-500">Terminado o atendimento pelo Técnico. (SLA concluído) <span class="color-blue">1 hora</span></p>
-                              </div>
-                              <div class="whitespace-nowrap text-right text-sm text-gray-500">
-                                <time datetime="2020-09-30">15:40</time>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </li>
-                      <li>
-                        <div class="relative pb-8">
-                          <div class="relative flex space-x-3">
-                            <div>
-                              <span class="h-8 w-8 rounded-full bg-green-500 flex items-center justify-center ring-8 ring-white">
-                                <svg class="h-5 w-5 text-white" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                                  <path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z" clip-rule="evenodd" />
-                                </svg>
-                              </span>
-                            </div>
-                            <div class="flex min-w-0 flex-1 justify-between space-x-4 pt-1.5">
-                              <div>
-                                <p class="text-sm inter font-semibold text-gray-500">Chamado concluído com sucesso.<span class="font-bold color-blue">1 relatório</span> gerado.</p>
-                              </div>
-                              <div class="whitespace-nowrap text-right text-sm text-gray-500">
-                                <time datetime="2020-10-04">15:44</time>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </li> -->
                     </ul>
                   </div>
                 </div>
@@ -383,6 +338,66 @@
     const popup_cancel = document.querySelector("#popup_cancel")
 
     popup_cancel.classList.add("hidden")
+  }
+
+  function openInsertCode() {
+    const popup_code = document.querySelector("#popup_code")
+
+    popup_code.classList.remove("hidden")
+  }
+
+  function closeInsertCode() {
+    const popup_code = document.querySelector("#popup_code")
+
+    popup_code.classList.add("hidden")
+  }
+
+  function initiateCall() {
+    fetch('/technician/initiate-call/<%= call._id %>', {
+      method: 'PUT',
+    })
+    .then(response => {
+      if (response.ok) {
+        location.reload()
+      }
+    })
+    .catch(err => {
+      alert_message("error", "Tente mais tarde")
+    })
+  }
+
+  function insertCode() {
+    const code = document.querySelector("#code")
+
+    fetch('/technician/insert-code/<%= call._id %>', {
+      method: 'PUT',
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({code: code.value})
+    })
+    .then(response => {
+      if (response.ok) {
+        location.reload()
+      }
+    })
+    .catch(err => {
+      alert_message("error", "Tente mais tarde")
+    })
+  }
+
+  function completeCall() {
+    fetch('/technician/complete-call/<%= call._id %>', {
+      method: 'PUT'
+    })
+    .then(response => {
+      if (response.ok) {
+        location.href = "/technician/new-report/:id"
+      }
+    })
+    .catch(err => {
+      alert_message("error", "Tente mais tarde")
+    })
   }
 
   function cancelCall() {

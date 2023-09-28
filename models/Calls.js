@@ -3,17 +3,18 @@ const mongoose = require('mongoose')
 const Call = new mongoose.Schema({
     description: {
         type: String,
-        require: true
     },
     id_company: {
         type: String,
-        require: true
     },
     id_technician: {
         type: String,
-        require: true
     },
     photos: {
+        type: Array,
+        default: []
+    },
+    equipments: {
         type: Array,
         default: []
     },
@@ -27,35 +28,40 @@ const Call = new mongoose.Schema({
     },
     date: {
         type: String,
-        require: true
     },
     start_time: {
         type: String,
-        require: true
     },
     end_time: {
         type: String,
-        require: true
     },
     status: {
         type: String,
-        require: true
+    },
+    code: {
+        type: Number,
+    },
+    confirmed_code: {
+        type: Boolean,
+        default: false
     },
     name_company: {
         type: String,
-        require: true
     },
     logo_company: {
         type: String,
-        require: true
+    },
+    name_technician: {
+        type: String,
+    },
+    photo_technician: {
+        type: String,
     },
     sla: {
         type: String,
-        require: true
     },
     cancellation_message: {
         type: String,
-        require: true
     }
     },
     {

@@ -30,6 +30,7 @@ const {
   viewBudget,
 
   allEquipments,
+  viewEquipment,
 
   administrators,
   newAdmin,
@@ -94,7 +95,7 @@ router.delete("/cancel-call/:id", authMiddleware, cancelCall)
 // ##       ARQUIVOS       ## //
 // ########################## //
 
-// const upload = multer({ dest: "../public/file-manager" });
+// const upload = multer({ dest: path.resolve(__dirname, "../public/file-manager/") });
 
 router.get("/file-manager", authMiddleware, fileManager)
 router.post("/file-manager/create-folder", authMiddleware, createFolder)
@@ -130,6 +131,7 @@ router.get("/view-budget", authMiddleware, viewBudget)
 // ########################## //
 
 router.get("/all-equipments", authMiddleware, allEquipments)
+router.get("/view-equipment/:id", authMiddleware, viewEquipment)
 
 
 

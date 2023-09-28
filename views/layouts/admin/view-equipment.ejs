@@ -4,10 +4,10 @@
 <%- include('../partials/head', {title: "title" }) %>
 
   <body>
-    <%- include('../partials/technician/sidebar-technician') %>
+    <%- include('../partials/admin/sidebar-admin') %>
 
       <div class="lg:pl-70">
-        <%- include('../partials/technician/nav-technician', {title: "Visualizar equipamento" , notifications: notifications,
+        <%- include('../partials/admin/nav-admin', {title: "Visualizar equipamento" , notifications: notifications,
           photo: photo, name_user: name_user}) %>
 
           <main class="py-5 fade-in">
@@ -23,7 +23,6 @@
                 <main>
                   <div class="mx-auto mt-8 grid grid-cols-1">
                     <div class="space-y-6 lg:col-span-2 lg:col-start-1">
-                      <!-- Description list-->
                       <section aria-labelledby="applicant-information-title">
                         <div class="bg-white shadow-lg border sm:rounded-lg">
                           <div

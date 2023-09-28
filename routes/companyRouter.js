@@ -14,7 +14,7 @@ const {
 const {
   dashboard,
 
-  allCalls,
+  calls,
   newCall,
   viewCall,
   saveCall,
@@ -68,7 +68,7 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage: storage });
 
-router.get("/all-calls", authMiddleware, allCalls)
+router.get("/all-calls", authMiddleware, calls)
 router.get("/new-call", authMiddleware, newCall)
 router.get("/view-call/:id", authMiddleware, viewCall)
 router.post("/save-call", authMiddleware, saveCall)
@@ -96,7 +96,7 @@ router.delete("/cancel-call/:id", authMiddleware, cancelCall)
 // ########################## //
 
 router.get("/equipments", authMiddleware, equipments)
-router.get("/view-equipment", authMiddleware, viewEquipment)
+router.get("/view-equipment/:id", authMiddleware, viewEquipment)
 
 
 

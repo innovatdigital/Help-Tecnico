@@ -4,6 +4,8 @@ const Technician = require('../models/Technician')
 const Company = require('../models/Company')
 const Suppliers = require('../models/Suppliers')
 const Calls = require('../models/Calls')
+const Equipments = require('../models/Equipments')
+const moment = require('moment')
 
 
 // ########################### //
@@ -13,7 +15,20 @@ const Calls = require('../models/Calls')
 const dashboard = asyncHandler(async(req, res) => {
     const calls = await Calls.find({id_company: req.user._id})
 
-    res.render('layouts/company/dashboard', {isAdmin: true, notifications: req.user.notifications.reverse().slice(0, 5), photo: req.user.photo, name_user: req.user.name, calls: calls.reverse()})
+    for (const call of calls) {
+        if (call.status != "pending" && call.id_technician.length > 0) {
+            const findTechnician = await Technician.findById(call.id_technician)
+
+            if (findTechnician) {
+                call.name_technician = findTechnician.name
+                call.photo_technician = findTechnician.photo
+            }
+        } else {
+            call.photo_technician = ''
+        }
+    }
+
+    res.render('layouts/company/dashboard', {photo: req.user.photo, name_user: req.user.name, service: req.user.service, calls: calls.reverse()})
 })
 
 
@@ -24,29 +39,58 @@ const dashboard = asyncHandler(async(req, res) => {
 // ##       CHAMADOS       ## //
 // ########################## //
 
-const allCalls = asyncHandler(async(req, res) => {
+const calls = asyncHandler(async(req, res) => {
     const calls = await Calls.find({id_company: req.user._id})
 
-    res.render('layouts/company/all-calls', {notifications: req.user.notifications.reverse().slice(0, 5), photo: req.user.photo, name_user: req.user.name, calls: calls.reverse()})
+    for (const call of calls) {
+        if (call.status != "pending" && call.id_technician.length > 0) {
+            const findTechnician = await Technician.findById(call.id_technician)
+
+            if (findTechnician) {
+                call.name_technician = findTechnician.name
+                call.photo_technician = findTechnician.photo
+            }
+        } else {
+            call.photo_technician = ''
+        }
+    }
+
+    res.render('layouts/company/calls', {photo: req.user.photo, name_user: req.user.name, service: req.user.service, calls: calls.reverse()})
 })
 
 const newCall = asyncHandler(async(req, res) => {
-    res.render('layouts/company/new-call', {notifications: req.user.notifications.reverse().slice(0, 5), photo: req.user.photo, name_user: req.user.name, equipments: []})
+    const equipments = await Equipments.find({idCompany: req.user._id})
+    
+    for (const equipment of equipments) {
+        const dateCreatedAt = moment.utc(equipment.createdAt);
+        const createdAtFormatted = dateCreatedAt.format("DD/MM/YYYY");
+    
+        equipment.createdAtFormatted = createdAtFormatted
+    }
+
+    res.render('layouts/company/new-call', {photo: req.user.photo, name_user: req.user.name, service: req.user.service, equipments: equipments})
 })
 
 const viewCall = asyncHandler(async(req, res) => {
     const call = await Calls.findById(req.params.id)
+    const equipments = []
+    
+    for (const equipment of call.equipments) {
+        const findEquipment = await Equipments.findById(equipment)
+
+        equipments.push(findEquipment)
+    }
 
     call.emailCompany = req.user.email
     call.phoneCompany = req.user.phoneCompany
     call.photoCompany = req.user.photo
 
-    res.render('layouts/company/view-call', {isAdmin: true, notifications: req.user.notifications.reverse(), photo: req.user.photo, name_user: req.user.name, call: call})
+    res.render('layouts/company/view-call', {isAdmin: true, notifications: req.user.notifications.reverse(), photo: req.user.photo, name_user: req.user.name, service: req.user.service, call: call, equipments: equipments})
 })
 
 const saveCall = asyncHandler(async(req, res) => {
     try {
-        const { description, photos } = req.body
+        const { description, photos, equipments } = req.body
 
         const date = Date.now();
         const options = { day: '2-digit', month: '2-digit', year: 'numeric' };
@@ -58,7 +102,9 @@ const saveCall = asyncHandler(async(req, res) => {
         const hour = dateHour.getHours();
         const minutes = dateHour.getMinutes();
 
-        const saveCallInDb = await Calls.create({description: description, id_company: req.user._id, id_technician: '', photos: photos, date: dataFormat, status: "pending", sla: "0", timeline: [{text: `Chamado aberto por ${req.user.name}`, hour: `${hour}:${minutes}`, type: "company"}]})
+        const code = Math.floor(Math.random() * (999999 - 100000 + 1) + 100000);
+
+        const saveCallInDb = await Calls.create({description: description, id_company: req.user._id, id_technician: '', photos: photos, equipments: equipments, code: code, date: dataFormat, status: "pending", sla: "0", timeline: [{text: `Chamado aberto por ${req.user.name}`, hour: `${hour}:${minutes}`, type: "company"}]})
         
         const saveCallInCompany = await Company.findByIdAndUpdate(
             { _id: req.user._id },
@@ -101,7 +147,7 @@ const cancelCall = asyncHandler(async(req, res) => {
 // ########################## //
 
 const viewPmoc = asyncHandler(async(req, res) => {
-    res.render('layouts/company/view-pmoc', {notifications: req.user.notifications.reverse().slice(0, 5), photo: req.user.photo, name_user: req.user.name})
+    res.render('layouts/company/view-pmoc', {photo: req.user.photo, name_user: req.user.name, service: req.user.service})
 })
 
 
@@ -113,7 +159,7 @@ const viewPmoc = asyncHandler(async(req, res) => {
 // ################################# //
 
 const viewEquipmentList = asyncHandler(async(req, res) => {
-    res.render('layouts/company/view-equipment-list', {notifications: req.user.notifications.reverse().slice(0, 5), photo: req.user.photo, name_user: req.user.name})
+    res.render('layouts/company/view-equipment-list', {photo: req.user.photo, name_user: req.user.name, service: req.user.service})
 })
 
 
@@ -125,22 +171,22 @@ const viewEquipmentList = asyncHandler(async(req, res) => {
 // ########################## //
 
 const equipments = asyncHandler(async(req, res) => {
-    const equipments = [{
-        _id: "6501f97cd7c07a0535820364",
-        image: "https://s.zst.com.br/cms-assets/2021/10/cuidados-com-o-ar-condicionado.jpg",
-        model: "Ar condicionado Split",
-        imageCompany: "28730ff9-70c4-4270-898f-903dda65c5be-1694625282204-934505504.png",
-        nameCompany: "Innovat Digital",
-        status: "Funcionando corretamente",
-        maintances: 2,
-        createdAt: "16/02/2023"
-    }]
+    const equipments = await Equipments.find({idCompany: req.user._id})
+    
+    for (const equipment of equipments) {
+        const dateCreatedAt = moment.utc(equipment.createdAt);
+        const createdAtFormatted = dateCreatedAt.format("DD/MM/YYYY");
+    
+        equipment.createdAtFormatted = createdAtFormatted
+    }
 
-    res.render('layouts/company/equipments', {notifications: req.user.notifications.reverse().slice(0, 5), photo: req.user.photo, name_user: req.user.name, equipments: equipments})
+    res.render('layouts/company/equipments', {photo: req.user.photo, name_user: req.user.name, service: req.user.service, equipments: equipments})
 })
 
 const viewEquipment = asyncHandler(async(req, res) => {
-    res.render('layouts/company/view-equipment', {notifications: req.user.notifications.reverse().slice(0, 5), photo: req.user.photo, name_user: req.user.name})
+    const equipment = await Equipments.findById(req.params.id)
+
+    res.render('layouts/company/view-equipment', {photo: req.user.photo, name_user: req.user.name, service: req.user.service, equipment: equipment})
 })
 
 
@@ -152,11 +198,11 @@ const viewEquipment = asyncHandler(async(req, res) => {
 // ########################## //
 
 const reports = asyncHandler(async(req, res) => {
-    res.render('layouts/company/reports', {notifications: req.user.notifications.reverse().slice(0, 5), photo: req.user.photo, name_user: req.user.name})
+    res.render('layouts/company/reports', {photo: req.user.photo, name_user: req.user.name, service: service})
 })
 
 const viewReport = asyncHandler(async(req, res) => {
-    res.render('layouts/company/view-report', {notifications: req.user.notifications.reverse().slice(0, 5), photo: req.user.photo, name_user: req.user.name})
+    res.render('layouts/company/view-report', {photo: req.user.photo, name_user: req.user.name, service: service})
 })
 
 
@@ -168,11 +214,11 @@ const viewReport = asyncHandler(async(req, res) => {
 // ########################## //
 
 const budgets = asyncHandler(async(req, res) => {
-    res.render('layouts/company/budgets', {notifications: req.user.notifications.reverse().slice(0, 5), photo: req.user.photo, name_user: req.user.name})
+    res.render('layouts/company/budgets', {photo: req.user.photo, name_user: req.user.name, service: service})
 })
 
 const viewBudget = asyncHandler(async(req, res) => {
-    res.render('layouts/company/view-budget', {notifications: req.user.notifications.reverse().slice(0, 5), photo: req.user.photo, name_user: req.user.name})
+    res.render('layouts/company/view-budget', {photo: req.user.photo, name_user: req.user.name, service: service})
 })
 
 
@@ -184,7 +230,7 @@ const viewBudget = asyncHandler(async(req, res) => {
 // ######################### //
 
 const account = asyncHandler(async(req, res) => {
-    res.render('layouts/company/configurations', {user: req.user, notifications: req.user.notifications.reverse().slice(0, 5), photo: req.user.photo, name_user: req.user.name})
+    res.render('layouts/company/account', {user: req.user, photo: req.user.photo, name_user: req.user.name, service: req.user.service})
 })
 
 const updateAccount = asyncHandler(async(req, res) => {
@@ -222,7 +268,7 @@ const newPassword = asyncHandler(async(req, res) => {
 module.exports = {
     dashboard,
 
-    allCalls,
+    calls,
     newCall,
     viewCall,
     saveCall,

@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<%- include('../partials/head', {title: "title"}) %>
+<%- include('../partials/head', {title: "Orçamentos"}) %>
 
 <body>
-  <%- include('../partials/company/sidebar-company') %>
+  <%- include('../partials/company/sidebar-company', {service: service}) %>
 
   <div class="lg:pl-70">
-    <%- include('../partials/company/nav-company', {title: "Meus orçamentos", notifications: notifications, photo: photo, name_user: name_user}) %>
+    <%- include('../partials/company/nav-company', {title: "Orçamentos", photo: photo, name_user: name_user}) %>
 
     <main class="py-5 fade-in">
       <div class="alert mt-14" style="display: none;"><div style="display: flex;" class="alert-text"></div></div>
