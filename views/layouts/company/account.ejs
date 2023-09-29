@@ -6,13 +6,20 @@
 <body>
   <%- include('../partials/company/sidebar-company', {service: service}) %>
 
+  <div style="z-index: 1" class="hidden relative fade-in" id="loading" role="dialog" aria-modal="true">
+    <div class="fixed inset-0 bg-white bg-opacity-50 transition-opacity"></div>
+
+    <div class="flex justify-center items-center fixed inset-0 z-20 overflow-y-auto">
+      <div class="mx-auto max-w-xl transform divide-y divide-gray-200 transition-all">
+        <div class="c-loader"></div>
+      </div>
+    </div>
+  </div>
+
   <div class="lg:pl-70">
     <%- include('../partials/company/nav-company', {title: "Configurações da conta", photo: photo, name_user: name_user}) %>
 
     <main class="py-8 px-8 fade-in">
-      <div class="alert mt-10" style="display: none;"><div style="display: flex;" class="alert-text"></div></div>
-      <div class="error" style="display: none;"><div style="display: flex;" class="error-text"></div></div>
-
       <div class="hidden fade-in relative z-10" id="popup_profile" role="dialog" aria-modal="true">
         <div class="fixed inset-0 bg-gray-500 bg-opacity-25 transition-opacity"></div>
       
@@ -175,51 +182,9 @@
   </div>
 </body>
 
+<script src="/js/alert-message/alert-message.js"></script>
+<script src="/js/loading-window/loading-window.js"></script>
 <script>
-  function alert_message(type, content) {
-    if (type == 'error') {
-      const divMessage = document.querySelector(".error");
-      divMessage.style.display = "flex";
-      divMessage.innerHTML = "";
-      const message = document.createElement("p");
-      const img = document.createElement("img");
-      img.width = "28"
-      img.height = "28"
-      img.src = "/img/platform/notify-error.png"
-      message.classList.add("message-notify");
-      message.innerText = content;
-      divMessage.appendChild(img);
-      divMessage.appendChild(message);
-
-      setTimeout(() => {
-        divMessage.style = "animation: slideoff 2s;"
-        setTimeout(() => {
-          divMessage.style = "display: none"
-        }, 800)
-      }, 2000);
-    } else if (type == "success") {
-      const divMessage = document.querySelector(".alert");
-      divMessage.style.display = "flex";
-      divMessage.innerHTML = "";
-      const message = document.createElement("p");
-      const img = document.createElement("img");
-      img.width = "28"
-      img.height = "28"
-      img.src = "/img/platform/notify-success.png"
-      message.classList.add("message-notify");
-      message.innerText = content;
-      divMessage.appendChild(img);
-      divMessage.appendChild(message);
-
-      setTimeout(() => {
-        divMessage.style = "animation: slideoff 2s;"
-        setTimeout(() => {
-          divMessage.style = "display: none"
-        }, 800)
-      }, 2000);
-    }
-  }
-
   function openProfile() {
     const profile = document.querySelector("#profile")
     const security = document.querySelector("#security")
@@ -263,85 +228,90 @@
   const upload = (e) => {
     const formData = new FormData();
     formData.append('image', photo.files[0]);
+    
+    openLoading(true)
 
     return fetch('/company/account/upload', {
       method: 'POST',
       body: formData
     })
     .then((response) => {
+      openLoading(false)
       return response.text()
     })
     .then((filename) => {
       const newImagePath = "/img/photos/" + filename
       preview.src = newImagePath;
-      alert_message("success", "Atualizado com sucesso")
+      alertMessage("success", "Atualizado com sucesso", "Sucesso ao atualizar foto de perfil")
+    })
+    .catch((err) => {
+      openLoading(false)
+      alertMessage("error", "Não foi possível atualizar a foto", "Tente novamente mais tarde")
     })
   }
 
   photo.addEventListener('change', upload);
 
   async function saveProfile() {
-    const errors = []
-
     if (email.value.length == 0) {
       email.style.border = "2px solid #e00d0d";
-      errors.push("error")
+      return
     }
 
-    if (errors.length == 0) {
-      fetch('/admin/config/update', {
-        method: 'POST',
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({email: email.value})
-      })
-      .then((response) => {
-        location.reload()
-      })
-      .catch((error) => {
-        alert_message("error", "Erro ao atualizar perfil.")
-      })
-    }
+    openLoading(true)
+
+    fetch('/admin/config/update', {
+      method: 'POST',
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({email: email.value})
+    })
+    .then((response) => {
+      location.reload()
+    })
+    .catch((error) => {
+      openLoading(false)
+      alertMessage("error", "Erro ao atualizar perfil.", "Tente novamente mais tarde.")
+    })
   }
 
   async function changePassword() {
-    const errors = []
-
     if (currentPassword.value.length == 0) {
       currentPassword.style.border = "2px solid #e00d0d";
-      errors.push("error")
     }
 
     if (newPassword.value.length == 0) {
       newPassword.style.border = "2px solid #e00d0d";
-      errors.push("error")
     }
 
     if (confirmPassword.value.length == 0) {
       confirmPassword.style.border = "2px solid #e00d0d";
-      errors.push("error")
     }
 
-    if (errors.length == 0) {
-      fetch('/admin/config/password', {
-        method: 'POST',
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({currentPassword: currentPassword.value, newPassword: newPassword.value, confirmPassword: confirmPassword.value})
-      })
-      .then((response) => {
-        if (response.ok) {
-          alert_message("success", "Senha atualizada com sucesso.")
-        } else {
-          alert_message("error", "As senhas não conferem")
-        }
-      })
-      .catch((error) => {
-        alert_message("error", "Ocorreu um erro")
-      })
-    }
+    openLoading(true)
+
+    fetch('/admin/config/password', {
+      method: 'POST',
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({currentPassword: currentPassword.value, newPassword: newPassword.value, confirmPassword: confirmPassword.value})
+    })
+    .then((response) => {
+      openLoading(false)
+
+      if (response.ok) {
+        alertMessage("success", "Senha atualizada", "Sua senha foi atualizada com sucesso.")
+      } else {
+        alertMessage("error", "As senhas não conferem", "Não foi possível atualizar a sua senha.")
+      }
+    })
+    .catch((error) => {
+      openLoading(false)
+
+      alertMessage("error", "Erro interno", "Não foi possível processar a requisição.")
+    })
   }
 </script>
 

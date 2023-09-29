@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<%- include('../partials/head', {title: "title"}) %>
+<%- include('../partials/head', {title: "Gerenciador de arquivos"}) %>
 
-<body>
-  <%- include('../partials/admin/sidebar-admin', {isAdmin: isAdmin}) %>
+<body class="bg-gray-100">
+  <%- include('../partials/admin/sidebar-admin') %>
 
   <div class="lg:pl-70">
-    <%- include('../partials/admin/nav-admin', {isAdmin: isAdmin, title: "Todos os chamados", notifications: notifications, photo: photo, name_user: name_user}) %>
+    <%- include('../partials/admin/nav-admin', {title: "Gerenciador de arquivos", photo: photo, name_user: name_user}) %>
 
     <main class="py-5 fade-in">
       <div class="hidden fade-in relative z-10" id="popup_new_folder" role="dialog" aria-modal="true">

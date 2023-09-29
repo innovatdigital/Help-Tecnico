@@ -60,8 +60,6 @@ const handleLogin = async (req, res, User) => {
 };
 
 const Login = asyncHandler(async (req, res) => {
-  const { email } = req.body;
-
   const adminPromise = handleLogin(req, res, Admin).catch(() => { });
   const companyPromise = handleLogin(req, res, Company).catch(() => { });
   const technicianPromise = handleLogin(req, res, Technician).catch(() => { });

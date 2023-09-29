@@ -1,40 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<%- include('../partials/head', {title: "title"}) %>
+<%- include('../partials/head', {title: "Nova empresa"}) %>
 
-<body>
-  <%- include('../partials/admin/sidebar-admin', {isAdmin: isAdmin}) %>
+<body class="bg-gray-100">
+  <%- include('../partials/admin/sidebar-admin') %>
 
   <div class="lg:pl-70">
-    <%- include('../partials/admin/nav-admin', {isAdmin: isAdmin, title: "Adicionar novo fornecedor", notifications: notifications, photo: photo, name_user: name_user}) %>
+    <%- include('../partials/admin/nav-admin', {title: "Nova empresa", photo: photo, name_user: name_user}) %>
 
     <main class="py-8 px-12 fade-in">
-      <div class="alert mt-10" style="display: none;"><div style="display: flex;" class="alert-text"></div></div>
-      <div class="error" style="display: none;"><div style="display: flex;" class="error-text"></div></div>
-
       <div class="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-x-6">
         <div class="bg-white rounded-xl shadow-lg border p-4 px-5 col-span-3">
           <div class="col-span-full flex items-center gap-x-6 mt-4">
-            <% if (company.photo.length > 0) { %>
-              <img class="h-20 rounded-full" src="/img/photos/<%= company.photo %>">
-            <% } else { %>
-              <svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-                <g clip-path="url(#clip0_3_2)">
-                <path d="M64 32C64 14.3269 49.6731 0 32 0C14.3269 0 0 14.3269 0 32C0 49.6731 14.3269 64 32 64C49.6731 64 64 49.6731 64 32Z" fill="#239CFF"/>
-                <path d="M53.0793 14.2222H12.4445V49.7778H53.0793V14.2222Z" fill="url(#pattern0)"/>
-                </g>
-                <defs>
-                <pattern id="pattern0" patternContentUnits="objectBoundingBox" width="1" height="1">
-                <use xlink:href="#image0_3_2" transform="matrix(0.00911458 0 0 0.0104167 0.0625001 0)"/>
-                </pattern>
-                <clipPath id="clip0_3_2">
-                <rect width="64" height="64" fill="white"/>
-                </clipPath>
-                <image id="image0_3_2" width="96" height="96" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAAACXBIWXMAAAsTAAALEwEAmpwYAAABvElEQVR4nO3ZPU7DYBCE4S0QVwEJjkoQP+IqVHAK4CJAR9CLIqWgQVvEw6438/SJZr6xHUWOMDMzMzMzMzMz+wNwCdwAr8An/X3us+4yX652WOAUeAC+Wa8tcL/rEis8/GfmeFrVCPsrf5q7WNEzf3frTrMFLqI74Ja5rqM74I25XqI74IO53qM7hovuGC66Y7jojuGiO4aL7hguumO46I7hojt1QcSf/6f3DS/ABjhf7OCXKnjo94c438K+9kOceIBaj4uNcGiSI7sDftt4gPrH0ZnvgFpXHmDt7xsOTXDEvwHLvG9guBCfjwdIeIBiHqCYByjmAYp5gGIeoNj4AdQFEFPnT3UvgJg6f6p7AcTU+VPdCyCmzp/qXgAxdf5U9wKIqfOnuhdATJ0/1b0AYur8UV2wmvp8PEDCAxTzAMU8QDEPUMwDFPMAxcYPoC6AmDp/qnsBxNT5U90LIKbOn+peADF1/lT3Aoip86e6F0BMnT/VvQBi6vyp7gUQU+eP6oLV1OfjARIeoJgHKOYBinmAYh6gmAco5gGG8/+AYh6gmAco5gGKeYBiHqCYB1j7AGZmZmZmZmZmFlP8AN3fTDc25TqSAAAAAElFTkSuQmCC"/>
-                </defs>
-              </svg>                
-            <% } %>                                                                      
+            <svg width="74" height="73" viewBox="0 0 74 73" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+              <ellipse cx="37" cy="36.5" rx="37" ry="36.5" fill="#0EA5E9"/>
+              <rect x="17" y="17" width="40" height="40" fill="url(#pattern0)"/>
+              <defs>
+              <pattern id="pattern0" patternContentUnits="objectBoundingBox" width="1" height="1">
+              <use xlink:href="#image0_0_1" transform="scale(0.0104167)"/>
+              </pattern>
+              <image id="image0_0_1" width="96" height="96" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAAACXBIWXMAAAsTAAALEwEAmpwYAAABvElEQVR4nO3ZPU7DYBCE4S0QVwEJjkoQP+IqVHAK4CJAR9CLIqWgQVvEw6438/SJZr6xHUWOMDMzMzMzMzMz+wNwCdwAr8An/X3us+4yX652WOAUeAC+Wa8tcL/rEis8/GfmeFrVCPsrf5q7WNEzf3frTrMFLqI74Ja5rqM74I25XqI74IO53qM7hovuGC66Y7jojuGiO4aL7hguumO46I7hojt1QcSf/6f3DS/ABjhf7OCXKnjo94c438K+9kOceIBaj4uNcGiSI7sDftt4gPrH0ZnvgFpXHmDt7xsOTXDEvwHLvG9guBCfjwdIeIBiHqCYByjmAYp5gGIeoNj4AdQFEFPnT3UvgJg6f6p7AcTU+VPdCyCmzp/qXgAxdf5U9wKIqfOnuhdATJ0/1b0AYur8UV2wmvp8PEDCAxTzAMU8QDEPUMwDFPMAxcYPoC6AmDp/qnsBxNT5U90LIKbOn+peADF1/lT3Aoip86e6F0BMnT/VvQBi6vyp7gUQU+eP6oLV1OfjARIeoJgHKOYBinmAYh6gmAco5gGG8/+AYh6gmAco5gGKeYBiHqCYB1j7AGZmZmZmZmZmFlP8AN3fTDc25TqSAAAAAElFTkSuQmCC"/>
+              </defs>
+            </svg>                                                                        
                                       
             <div class="items-center mt-2">
               <label style="cursor: pointer;" for="picture" class="rounded-md px-3 py-2 text-sm font-semibold border-blue color-blue shadow-sm inter">Inserir foto</label>
@@ -47,14 +35,14 @@
             <div>
               <label for="name" class="block text-md font-medium leading-6 text-gray-900 inter font-semibold">Nome da empresa</label>
               <div class="relative mt-2 rounded-md shadow-sm">
-                <input type="text" value="<%= company.name %>" name="name" id="name" class="block w-full rounded-lg inter py-1.5 mt-2 pl-2 text-gray-900 ring-1 ring-inset ring-gray-300 sm:text-sm sm:leading-6 border-blue-1" placeholder="Insira o nome">
+                <input type="text" name="name" id="name" class="block w-full rounded-lg inter py-1.5 mt-2 pl-2 text-gray-900 ring-1 ring-inset ring-gray-300 sm:text-sm sm:leading-6 border-blue-1" placeholder="Insira o nome">
               </div>
             </div>
 
             <div>
               <label for="cnpj" class="block text-md font-medium leading-6 text-gray-900 inter font-semibold">CNPJ</label>
               <div class="relative mt-2 rounded-md shadow-sm">
-                <input type="text" value="<%= company.cnpj %>" name="cnpj" id="cnpj" class="block w-full rounded-lg inter py-1.5 mt-2 pl-2 text-gray-900 ring-1 ring-inset ring-gray-300 sm:text-sm sm:leading-6 border-blue-1" placeholder="Insira o CNPJ">
+                <input type="text" name="cnpj" id="cnpj" class="block w-full rounded-lg inter py-1.5 mt-2 pl-2 text-gray-900 ring-1 ring-inset ring-gray-300 sm:text-sm sm:leading-6 border-blue-1" placeholder="Insira o CNPJ">
               </div>
             </div>
           </div>
@@ -63,14 +51,14 @@
             <div>
               <label for="email" class="block text-md font-medium leading-6 text-gray-900 inter font-semibold">Email</label>
               <div class="relative mt-2 rounded-md shadow-sm">
-                <input type="text" value="<%= company.email %>" name="email" id="email" class="block w-full rounded-lg inter py-1.5 mt-2 pl-2 text-gray-900 ring-1 ring-inset ring-gray-300 sm:text-sm sm:leading-6 border-blue-1" placeholder="Insira o email">
+                <input type="text" name="email" id="email" class="block w-full rounded-lg inter py-1.5 mt-2 pl-2 text-gray-900 ring-1 ring-inset ring-gray-300 sm:text-sm sm:leading-6 border-blue-1" placeholder="Insira o email">
               </div>
             </div>
 
             <div>
               <label for="password" class="block text-md font-medium leading-6 text-gray-900 inter font-semibold">Senha</label>
               <div class="relative mt-2 rounded-md shadow-sm">
-                <input type="text" value="<%= company.password %>" name="password" id="password" class="block w-full rounded-lg inter py-1.5 mt-2 pl-2 text-gray-900 ring-1 ring-inset ring-gray-300 sm:text-sm sm:leading-6 border-blue-1" placeholder="Insira a senha">
+                <input type="text" name="password" id="password" class="block w-full rounded-lg inter py-1.5 mt-2 pl-2 text-gray-900 ring-1 ring-inset ring-gray-300 sm:text-sm sm:leading-6 border-blue-1" placeholder="Insira a senha">
               </div>
             </div>
           </div>
@@ -79,14 +67,14 @@
             <div>
               <label for="responsible-phone" class="block text-md font-medium leading-6 text-gray-900 inter font-semibold">Telefone (Responsável)</label>
               <div class="relative mt-2 rounded-md shadow-sm">
-                <input type="text" value="<%= company.phoneResponsible %>" name="responsible-phone" id="responsible-phone" class="block w-full rounded-lg inter py-1.5 mt-2 pl-2 text-gray-900 ring-1 ring-inset ring-gray-300 sm:text-sm sm:leading-6 border-blue-1" placeholder="Insira o número do responsável">
+                <input type="text" name="responsible-phone" id="responsible-phone" class="block w-full rounded-lg inter py-1.5 mt-2 pl-2 text-gray-900 ring-1 ring-inset ring-gray-300 sm:text-sm sm:leading-6 border-blue-1" placeholder="Insira o número do responsável">
               </div>
             </div>
 
             <div>
               <label for="company-phone" class="block text-md font-medium leading-6 text-gray-900 inter font-semibold">Telefone (Empresa)</label>
               <div class="relative mt-2 rounded-md shadow-sm">
-                <input type="text" value="<%= company.phoneCompany %>" name="company-phone" id="company-phone" class="block w-full rounded-lg inter py-1.5 mt-2 pl-2 text-gray-900 ring-1 ring-inset ring-gray-300 sm:text-sm sm:leading-6 border-blue-1" placeholder="Insira o celular">
+                <input type="text" name="company-phone" id="company-phone" class="block w-full rounded-lg inter py-1.5 mt-2 pl-2 text-gray-900 ring-1 ring-inset ring-gray-300 sm:text-sm sm:leading-6 border-blue-1" placeholder="Insira o celular">
               </div>
             </div>
           </div>
@@ -95,14 +83,14 @@
             <div>
               <label for="address" class="block text-md font-medium leading-6 text-gray-900 inter font-semibold">Endereço</label>
               <div class="relative mt-2 rounded-md shadow-sm">
-                <input type="text" value="<%= company.address %>" name="address" id="address" class="block w-full rounded-lg inter py-1.5 mt-2 pl-2 text-gray-900 ring-1 ring-inset ring-gray-300 sm:text-sm sm:leading-6 border-blue-1" placeholder="Insira o endereço">
+                <input type="text" name="address" id="address" class="block w-full rounded-lg inter py-1.5 mt-2 pl-2 text-gray-900 ring-1 ring-inset ring-gray-300 sm:text-sm sm:leading-6 border-blue-1" placeholder="Insira o endereço">
               </div>
             </div>
 
             <div>
               <label for="number" class="block text-md font-medium leading-6 text-gray-900 inter font-semibold">Número</label>
               <div class="relative mt-2 rounded-md shadow-sm">
-                <input type="number" value="<%= company.number %>" name="number" id="number" class="block w-full rounded-lg inter py-1.5 mt-2 pl-2 text-gray-900 ring-1 ring-inset ring-gray-300 sm:text-sm sm:leading-6 border-blue-1" placeholder="Insira o número">
+                <input type="number" name="number" id="number" class="block w-full rounded-lg inter py-1.5 mt-2 pl-2 text-gray-900 ring-1 ring-inset ring-gray-300 sm:text-sm sm:leading-6 border-blue-1" placeholder="Insira o número">
               </div>
             </div>
           </div>
@@ -111,14 +99,14 @@
             <div>
               <label for="cep" class="block text-md font-medium leading-6 text-gray-900 inter font-semibold">CEP</label>
               <div class="relative mt-2 rounded-md shadow-sm">
-                <input type="text" value="<%= company.cep %>" name="cep" id="cep" class="block w-full rounded-lg inter py-1.5 mt-2 pl-2 text-gray-900 ring-1 ring-inset ring-gray-300 sm:text-sm sm:leading-6 border-blue-1" placeholder="Insira o CEP">
+                <input type="text" name="cep" id="cep" class="block w-full rounded-lg inter py-1.5 mt-2 pl-2 text-gray-900 ring-1 ring-inset ring-gray-300 sm:text-sm sm:leading-6 border-blue-1" placeholder="Insira o CEP">
               </div>
             </div>
 
             <div>
               <label for="neighborhood" class="block text-md font-medium leading-6 text-gray-900 inter font-semibold">Bairro</label>
               <div class="relative mt-2 rounded-md shadow-sm">
-                <input type="text" value="<%= company.neighborhood%>" name="neighborhood" id="neighborhood" class="block w-full rounded-lg inter py-1.5 mt-2 pl-2 text-gray-900 ring-1 ring-inset ring-gray-300 sm:text-sm sm:leading-6 border-blue-1" placeholder="Insira o CEP">
+                <input type="text" name="neighborhood" id="neighborhood" class="block w-full rounded-lg inter py-1.5 mt-2 pl-2 text-gray-900 ring-1 ring-inset ring-gray-300 sm:text-sm sm:leading-6 border-blue-1" placeholder="Insira o CEP">
               </div>
             </div>
           </div>
@@ -128,7 +116,7 @@
               <label for="city" class="block text-md font-medium leading-6 text-gray-900 inter font-semibold">Cidade</label>
               <div class="relative mt-2 rounded-md shadow-sm">
                 <select name="city" id="city" class="block w-full rounded-lg inter py-2 mt-2 pl-2 text-gray-900 ring-1 ring-inset ring-gray-300 sm:text-sm sm:leading-6 border-blue-1">
-                  <option value="<%= company.city %>"><%= company.city %> (selecionado)</option>
+                  <option value="select">Selecione a cidade</option>
                   <option value="Porto Alegre / RS">Porto Alegre / RS</option>
                   <option value="Canoas / RS">Canoas / RS</option>
                   <option value="Gramado / RS">Gramado / RS</option>
@@ -202,16 +190,12 @@
             </div>
 
             <div>
-              <label for="city" class="block text-md font-medium leading-6 text-gray-900 inter font-semibold">PMOC/LISTA DE EQUIPAMENTOS</label>
+              <label for="service" class="block text-md font-medium leading-6 text-gray-900 inter font-semibold">PMOC/LISTA DE EQUIPAMENTOS</label>
               <div class="relative mt-2 rounded-md shadow-sm">
                 <select name="service" id="service" class="block w-full rounded-lg inter py-2 mt-2 pl-2 text-gray-900 ring-1 ring-inset ring-gray-300 sm:text-sm sm:leading-6 border-blue-1">
-                  <% if (company.service == "equipment-list") { %>
-                    <option value="equipment-list" selected>Lista de equipamentos</option>
-                    <option value="pmoc">PMOC</option>
-                  <% } else if (company.service == "pmoc") { %>
-                    <option value="pmoc" selected>PMOC</option>
-                    <option value="equipment-list">Lista de equipamentos</option>
-                  <% } %>
+                  <option value="select">Selecione uma opção</option>
+                  <option value="equipment-list">Lista de equipamentos</option>
+                  <option value="pmoc">PMOC</option>
                 </select>
               </div>
             </div>
@@ -224,11 +208,7 @@
                 <select name="technician" id="technician" class="block w-full rounded-lg inter py-2 mt-2 pl-2 text-gray-900 ring-1 ring-inset ring-gray-300 sm:text-sm sm:leading-6 border-blue-1">
                   <option value="select">Selecione o técnico</option>
                   <% technicians.forEach(technician => { %>
-                    <% if (String(technician._id) == company.technician) { %>
-                      <option value="<%= technician._id %>" selected><%= technician.name %></option>
-                    <% } else { %>
-                      <option value="<%= technician._id %>"><%= technician.name %></option>
-                    <% } %>
+                    <option value="<%= technician._id %>"><%= technician.name %></option>
                   <% }) %>
                 </select>
               </div>
@@ -238,7 +218,7 @@
 
         <div class="bg-white rounded-xl shadow-lg border p-4 px-5 col-span-1">
           <div class="space-y-4">
-            <button type="button" onclick="saveCompany()" style="background-color: #00AB55;" class="w-full inline-flex justify-center items-center gap-x-1.5 rounded-md px-3 py-3 text-sm font-semibold text-white inter shadow-sm">
+            <button type="button" onclick="newCompany()" style="background-color: #00AB55;" class="w-full inline-flex justify-center items-center gap-x-1.5 rounded-md px-3 py-3 text-sm font-semibold text-white inter shadow-sm">
               <svg width="21" height="20" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <g clip-path="url(#clip0_156_9768)">
                 <path d="M3.46649 17.1132C4.68687 18.3337 6.65105 18.3337 10.5794 18.3337C14.5078 18.3337 16.472 18.3337 17.6923 17.1132C18.9128 15.8929 18.9128 13.9287 18.9128 10.0003C18.9128 9.71574 18.9128 9.57349 18.9001 9.42883C18.8413 8.75441 18.5678 8.09413 18.1325 7.57561C18.0391 7.46438 17.9361 7.3613 17.7299 7.15514L13.4246 2.84986C13.2184 2.64371 13.1153 2.54062 13.0042 2.44725C12.4856 2.01199 11.8253 1.7385 11.1509 1.67962C11.0063 1.66699 10.864 1.66699 10.5794 1.66699C6.65105 1.66699 4.68687 1.66699 3.46649 2.88738C2.24609 4.10777 2.24609 6.07195 2.24609 10.0003C2.24609 13.9287 2.24609 15.8929 3.46649 17.1132Z" stroke="white" stroke-width="1.25"/>
@@ -336,7 +316,7 @@
     }
   }
 
-  function saveCompany() {
+  function newCompany() {
     const name = document.querySelector("#name")
     const cnpj = document.querySelector("#cnpj")
     const email = document.querySelector("#email")
@@ -412,8 +392,8 @@
       return
     }
 
-    fetch('/admin/save-company/<%= company._id %>', {
-      method: 'PUT',
+    fetch('/admin/new-company/save', {
+      method: 'POST',
       headers: {
         "Content-Type": "application/json",
       },
@@ -421,9 +401,9 @@
     })
     .then((response) => {
       if (response.ok) {
-        alertMessage("success", "Empresa atualizada com sucesso.")
+        alertMessage("success", "Empresa adicionada com sucesso.")
       } else {
-        alertMessage("error", "Erro ao atualizar empresa")
+        alertMessage("error", "Erro ao adicionar empresa")
       }
     })
     .catch((error) => {

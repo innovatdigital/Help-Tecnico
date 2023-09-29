@@ -6,6 +6,16 @@
 <body>
   <%- include('../partials/company/sidebar-company', {service: service}) %>
 
+  <div style="z-index: 1" class="hidden relative fade-in" id="loading" role="dialog" aria-modal="true">
+    <div class="fixed inset-0 bg-white bg-opacity-50 transition-opacity"></div>
+
+    <div class="flex justify-center items-center fixed inset-0 z-20 overflow-y-auto">
+      <div class="mx-auto max-w-xl transform divide-y divide-gray-200 transition-all">
+        <div class="c-loader"></div>
+      </div>
+    </div>
+  </div>
+
   <div class="lg:pl-70">
     <%- include('../partials/company/nav-company', {title: "Visualizar chamado", photo: photo, name_user: name_user}) %>
 
@@ -307,6 +317,8 @@
   </div>
 </body>
 
+<script src="/js/alert-message/alert-message.js"></script>
+<script src="/js/loading-window/loading-window.js"></script>
 <script>
   function downloadFile(path) {
     const link = document.createElement('a');
@@ -335,9 +347,12 @@
     const cancellation_message = document.querySelector("#cancellation_message")
 
     if (cancellation_message.value.length == 0) {
-      cancellation_message.style.border = "1px solid #e00d0d;"
+      alertMessage("error", "Informe o motivo do cancelamento", "Você deve informar o motivo do cancelamento.")
       return
     }
+
+    closeCancel()
+    openLoading(true)
 
     fetch('/company/cancel-call/<%= call._id %>', {
       method: 'DELETE',
@@ -347,12 +362,15 @@
       body: JSON.stringify({cancellation_message: cancellation_message.value})
     })
     .then(response => {
+      openLoading(false)
+
       if (response.ok) {
         location.href = "/company/all-calls"
       }
     })
     .catch(err => {
-      alert_message("error", "Tente mais tarde")
+      openLoading(false)
+      alertMessage("error", "Erro interno", "Não foi possível processar a requisição.")
     })
   }
 </script>

@@ -1,28 +1,36 @@
 <!doctype html>
 <html lang="pt-BR">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Moreira Refrigeração - Help Técnico">
-    <meta name="author" content="Moreira Refrigeração">
-    <meta name="generator" content="Moreira Refrigeração">
-    <title>Help Técnico - Moreira Refrigeração</title>
-    <link rel="shortcut icon" href="/img/login/icon.png" type="image/x-icon">
-    <link rel="stylesheet" href="/css/platform/style.css">
-    <link rel="stylesheet" href="/css/platform/notify.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/1.8.12/tailwind-experimental.min.css">
-  </head>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Moreira Refrigeração - Help Técnico">
+  <meta name="author" content="Moreira Refrigeração">
+  <meta name="generator" content="Moreira Refrigeração">
+  <title>Help Técnico - Moreira Refrigeração</title>
+  <link rel="shortcut icon" href="/img/login/icon.png" type="image/x-icon">
+  <link rel="stylesheet" href="/css/platform/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/1.8.12/tailwind-experimental.min.css">
+</head>
 
 <body style="height: 100vh;">
-  <div class="alert mt-14" style="display: none;"><div style="display: flex;" class="alert-text"></div></div>
-  <div class="error mt-14" style="display: none;"><div style="display: flex;" class="error-text"></div></div>
+  <div style="z-index: 1" class="hidden relative fade-in" id="loading" role="dialog" aria-modal="true">
+    <div class="fixed inset-0 bg-white bg-opacity-50 transition-opacity"></div>
+
+    <div class="flex justify-center items-center fixed inset-0 z-20 overflow-y-auto">
+      <div class="mx-auto max-w-xl transform divide-y divide-gray-200 transition-all">
+        <div class="c-loader"></div>
+      </div>
+    </div>
+  </div>
 
   <div class="flex h-full">
     <div class="flex flex-1 flex-col justify-center px-4 py-12 sm:px-6 lg:flex-none lg:px-20 xl:px-60">
       <div class="mx-auto w-full max-w-sm lg:w-96">
         <div>
           <img class="h-28 w-auto" src="/img/login/logo.png" alt="Logo Moreira Refrigeração">
-          <h2 class="mt-8 text-2xl font-semibold text-blue leading-9 tracking-tight inter">Bem vindo ao Help Técnico!</h2>
+          <h2 class="mt-8 text-2xl font-semibold text-blue leading-9 tracking-tight inter">Bem vindo ao Help Técnico!
+          </h2>
         </div>
 
         <div class="mt-10">
@@ -30,14 +38,16 @@
             <div>
               <label for="email" class="block inter text-sm font-medium leading-6 text-gray-900">Seu email</label>
               <div class="mt-2">
-                <input id="email" name="email" type="email" autocomplete="email" required class="block w-full inter login-input rounded-lg py-1.5 px-2 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                <input id="email" name="email" type="email" autocomplete="email" required
+                  class="block w-full inter login-input rounded-lg py-1.5 px-2 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
               </div>
             </div>
 
             <div>
               <label for="password" class="block inter text-sm font-medium leading-6 text-gray-900">Sua senha</label>
               <div class="mt-2">
-                <input id="password" name="password" type="password" autocomplete="current-password" required class="block w-full inter login-input rounded-lg py-1.5 px-2 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                <input id="password" name="password" type="password" autocomplete="current-password" required
+                  class="block w-full inter login-input rounded-lg py-1.5 px-2 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
               </div>
             </div>
 
@@ -48,7 +58,8 @@
             </div>
 
             <div>
-              <button id="btn-login" class="flex w-full justify-center bg-blue rounded-md px-3 py-2 text-sm font-semibold leading-6 text-white shadow-sm inter">Entrar</button>
+              <button id="btn-login"
+                class="flex w-full justify-center bg-blue rounded-md px-3 py-2 text-sm font-semibold leading-6 text-white shadow-sm inter">Entrar</button>
             </div>
           </div>
 
@@ -61,107 +72,68 @@
         </div>
       </div>
     </div>
-    
+
     <div class="relative hidden w-0 flex-1 lg:block">
       <img class="absolute inset-0 h-full w-full object-cover" src="/img/login/photo.png" alt="">
     </div>
   </div>
-</div>
+  </div>
 
-<script>
-const btn = document.querySelector('#btn-login')
+  <script src="/js/alert-message/alert-message.js"></script>
+  <script src="/js/loading-window/loading-window.js"></script>
+  <script>
+    const btn = document.querySelector('#btn-login')
 
-function alertMessage(type, content) {
-  if (type == 'error') {
-    const divMessage = document.querySelector(".error");
-    divMessage.style.display = "flex";
-    divMessage.innerHTML = "";
-    const message = document.createElement("p");
-    const img = document.createElement("img");
-    img.width = "22"
-    img.height = "22"
-    img.src = "/img/error.svg"
-    message.classList.add("message-notify");
-    message.innerText = content;
-    divMessage.appendChild(img);
-    divMessage.appendChild(message);
+    btn.addEventListener("click", function () {
+      const emailInput = document.querySelector("#email");
+      const passwordInput = document.querySelector("#password");
+      const email = emailInput.value;
+      const password = passwordInput.value;
 
-    setTimeout(() => {
-      divMessage.style = "animation: slideoff 2s;"
-      setTimeout(() => {
-        divMessage.style = "display: none"
-      }, 800)
-    }, 3000);
-  } else if (type == "success") {
-    const divMessage = document.querySelector(".alert");
-    divMessage.style.display = "flex";
-    divMessage.innerHTML = "";
-    const message = document.createElement("p");
-    const img = document.createElement("img");
-    img.width = "28"
-    img.height = "28"
-    img.src = "/img/correct.svg"
-    message.classList.add("message-notify");
-    message.innerText = content;
-    divMessage.appendChild(img);
-    divMessage.appendChild(message);
-
-    setTimeout(() => {
-      divMessage.style = "animation: slideoff 2s;"
-      setTimeout(() => {
-        divMessage.style = "display: none"
-      }, 800)
-    }, 3000);
-  }
-}
-
-btn.addEventListener("click", function() {
-  const emailInput = document.querySelector("#email");
-  const passwordInput = document.querySelector("#password");
-  const email = emailInput.value;
-  const password = passwordInput.value;
-
-  if (email.length == 0) { 
-    emailInput.style.border = "2px solid red";
-    return;
-  }
-
-  if (password.length == 0) {
-    passwordInput.style.border = "2px solid red";
-    return;
-  }
-
-  fetch("/auth", {
-    method: "POST",
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ email: email, password: password })
-  })
-  .then((response) => {
-    if (response.ok) {
-      return response.json();
-    } else {
-      alertMessage("error", "Dados incorretos")
-    }
-  })
-  .then((data) => {
-    if (data.token) {
-      const now = new Date();
-      const expires = new Date(now.getTime() + 1 * 24 * 60 * 60 * 1000);
-      document.cookie = `token=${data.token}; expires=${expires.toUTCString()}; path=/`
-      
-      if (data.roles.includes("ADMIN")) {
-        location.href = "/admin/"
-      } else if (data.roles.includes("COMPANY")) {
-        location.href = "/company/"
-      } else if (data.roles.includes("TECHNICIAN")) {
-        location.href = "/technician/calls"
+      if (email.length == 0) {
+        emailInput.style.border = "2px solid red";
+        return;
       }
-    } else {
-      alertMessage("error", "Dados incorretos")
-    }
-  })
-  .catch((error) => {
-    console.log(error)
-  })
-})
-</script>
+
+      if (password.length == 0) {
+        passwordInput.style.border = "2px solid red";
+        return;
+      }
+      
+      openLoading(true)
+
+      fetch("/auth", {
+        method: "POST",
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email: email, password: password })
+      })
+        .then((response) => {
+          if (response.ok) {
+            return response.json();
+          }
+        })
+        .then((data) => {
+          if (data != undefined) {
+            const now = new Date();
+            const expires = new Date(now.getTime() + 1 * 24 * 60 * 60 * 1000);
+            document.cookie = `token=${data.token}; expires=${expires.toUTCString()}; path=/`
+
+            if (data.roles.includes("ADMIN")) {
+              location.href = "/admin/"
+            } else if (data.roles.includes("COMPANY")) {
+              location.href = "/company/"
+            } else if (data.roles.includes("TECHNICIAN")) {
+              location.href = "/technician/calls"
+            }
+          } else {
+            openLoading(false)
+            alertMessage("error", "Dados incorretos", "Nenhum usuário existente com esses dados.")
+          }
+        })
+        .catch((error) => {
+          openLoading(false)
+          alertMessage("error", "Erro interno", "Não foi possível processar a requisição.")
+          console.log(error)
+        })
+    })
+  </script>

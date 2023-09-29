@@ -95,9 +95,9 @@ const viewCall = asyncHandler(async(req, res) => {
     }
 
     if (findCompany && findCall) {
-        findCall.emailCompany = req.user.email
-        findCall.phoneCompany = req.user.phoneCompany
-        findCall.photoCompany = findCompany.photo
+        findCall.email_company = findCompany.email
+        findCall.phone_company = findCompany.phoneCompany
+        findCall.photo_company = findCompany.photo
         
         res.render('layouts/admin/view-call', {isAdmin: true, notifications: req.user.notifications.reverse(), photo: req.user.photo, name_user: req.user.name, call: findCall, technicians: technicians, equipments: equipments})
     } else {
@@ -147,7 +147,7 @@ const designateCall = asyncHandler(async(req, res) => {
 })
 
 const cancelCall = asyncHandler(async(req, res) => {
-    const cancelCall = await Calls.findByIdAndDelete(req.params.id)
+    const cancelCall = await Calls.findByIdAndUpdate(req.params.id, {cancellation_message: "Cancelado pelo administrador do sistema.", status: "canceled"})
 
     if (cancelCall) {
         res.sendStatus(200)
@@ -304,7 +304,7 @@ const administrators = asyncHandler(async(req, res) => {
 })
 
 const newAdmin = asyncHandler(async(req, res) => {
-    res.render('layouts/admin/newAdmin', { isAdmin: true, notifications: req.user.notifications.reverse(), photo: req.user.photo, name_user: req.user.name })
+    res.render('layouts/admin/new-admin', { isAdmin: true, notifications: req.user.notifications.reverse(), photo: req.user.photo, name_user: req.user.name })
 })
 
 const saveAdmin = asyncHandler(async(req, res) => {
@@ -337,7 +337,7 @@ const testUsers = asyncHandler(async(req, res) => {
 const newTester = asyncHandler(async(req, res) => {
     const find = await User.findById(req.cookies._id)
 
-    res.render('layouts/admin/newTester', { isAdmin: true, notifications: find.notifications.reverse(), photo: find.photo, name_user: find.name })
+    res.render('layouts/admin/new-tester', { isAdmin: true, notifications: find.notifications.reverse(), photo: find.photo, name_user: find.name })
 })
 
 
@@ -367,7 +367,7 @@ const viewTechnician = asyncHandler(async(req, res) => {
 })
 
 const newTechnician = asyncHandler(async(req, res) => {
-    res.render('layouts/admin/newTechnician', { isAdmin: true, notifications: req.user.notifications.reverse(), photo: req.user.photo, name_user: req.user.name })
+    res.render('layouts/admin/new-technician', { isAdmin: true, notifications: req.user.notifications.reverse(), photo: req.user.photo, name_user: req.user.name })
 })
 
 const saveTechnician = asyncHandler(async(req, res) => {
@@ -399,7 +399,7 @@ const updateTechnician = asyncHandler(async(req, res) => {
     const findTechnician = await Technician.findById(req.params.id)
 
     if (findTechnician) {
-        res.render('layouts/admin/editTechnician', { isAdmin: true, notifications: req.user.notifications.reverse(), photo: req.user.photo, name_user: req.user.name, technician: findTechnician })
+        res.render('layouts/admin/update-technician', { isAdmin: true, notifications: req.user.notifications.reverse(), photo: req.user.photo, name_user: req.user.name, technician: findTechnician })
     } else {
         res.render('layouts/notFound')
     }
@@ -437,7 +437,7 @@ const allCompanies = asyncHandler(async(req, res) => {
 const newCompany = asyncHandler(async(req, res) => {
     const technicians = await Technician.find({}).select("name")
 
-    res.render('layouts/admin/newCompany', { isAdmin: true, notifications: req.user.notifications.reverse(), photo: req.user.photo, name_user: req.user.name, technicians: technicians })
+    res.render('layouts/admin/new-company', { isAdmin: true, notifications: req.user.notifications.reverse(), photo: req.user.photo, name_user: req.user.name, technicians: technicians })
 })
 
 const saveCompany = asyncHandler(async(req, res) => {
@@ -479,7 +479,7 @@ const viewCompany = asyncHandler(async(req, res) => {
     if (findCompany) {
         const callsCompany = await Calls.find({id_company: req.params.id})
 
-        res.render('layouts/admin/viewCompany', { isAdmin: true, notifications: req.user.notifications.reverse(), photo: req.user.photo, name_user: req.user.name, company: findCompany, calls: callsCompany })
+        res.render('layouts/admin/view-company', { isAdmin: true, notifications: req.user.notifications.reverse(), photo: req.user.photo, name_user: req.user.name, company: findCompany, calls: callsCompany })
     } else {
         res.render('layouts/404')
     }
@@ -490,7 +490,7 @@ const updateCompany = asyncHandler(async(req, res) => {
     const technicians = await Technician.find({}).select("name")
 
     if (findCompany) {
-        res.render('layouts/admin/editCompany', { isAdmin: true, notifications: req.user.notifications.reverse(), photo: req.user.photo, name_user: req.user.name, company: findCompany, technicians: technicians })
+        res.render('layouts/admin/update-company', { isAdmin: true, notifications: req.user.notifications.reverse(), photo: req.user.photo, name_user: req.user.name, company: findCompany, technicians: technicians })
     } else {
         res.render('layouts/404')
     }
@@ -526,7 +526,7 @@ const allSuppliers = asyncHandler(async(req, res) => {
 })
 
 const newSupplier = asyncHandler(async(req, res) => {
-    res.render('layouts/admin/newSupplier', { isAdmin: true, notifications: req.user.notifications.reverse(), photo: req.user.photo, name_user: req.user.name })
+    res.render('layouts/admin/new-supplier', { isAdmin: true, notifications: req.user.notifications.reverse(), photo: req.user.photo, name_user: req.user.name })
 })
 
 const saveSupplier = asyncHandler(async(req, res) => {
@@ -558,7 +558,7 @@ const viewSupplier = asyncHandler(async(req, res) => {
     const findSupplier = await Suppliers.findById(req.params.id)
 
     if (findSupplier) {
-        res.render('layouts/admin/viewSupplier', { isAdmin: true, notifications: req.user.notifications.reverse(), photo: req.user.photo, name_user: req.user.name, supplier: findSupplier })
+        res.render('layouts/admin/view-supplier', { isAdmin: true, notifications: req.user.notifications.reverse(), photo: req.user.photo, name_user: req.user.name, supplier: findSupplier })
     } else {
         res.render('layouts/notFound')
     }
@@ -568,7 +568,7 @@ const updateSupplier = asyncHandler(async(req, res) => {
     const findSupplier = await Suppliers.findById(req.params.id)
 
     if (findSupplier) {
-        res.render('layouts/admin/editSupplier', { isAdmin: true, notifications: req.user.notifications.reverse(), photo: req.user.photo, name_user: req.user.name, supplier: findSupplier })
+        res.render('layouts/admin/update-supplier', { isAdmin: true, notifications: req.user.notifications.reverse(), photo: req.user.photo, name_user: req.user.name, supplier: findSupplier })
     } else {
         res.render('layouts/notFound')
     }
@@ -612,7 +612,7 @@ const invoices = asyncHandler(async(req, res) => {
 const account = asyncHandler(async(req, res) => {
     const find = await Admin.findById(req.user._id)
 
-    res.render('layouts/admin/configurations', {isAdmin: find.isAdmin, user: find, notifications: find.notifications.reverse(), photo: find.photo, name_user: find.name})
+    res.render('layouts/admin/account', {isAdmin: find.isAdmin, user: find, notifications: find.notifications.reverse(), photo: find.photo, name_user: find.name})
 })
 
 const updateAccount = asyncHandler(async(req, res) => {

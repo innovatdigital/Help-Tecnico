@@ -1,29 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<%- include('../partials/head', {title: "title" }) %>
+<%- include('../partials/head', {title: "Visualizar equipamento"}) %>
 
   <body>
     <%- include('../partials/technician/sidebar-technician') %>
 
       <div class="lg:pl-70">
-        <%- include('../partials/technician/nav-technician', {title: "Visualizar equipamento" , notifications: notifications,
-          photo: photo, name_user: name_user}) %>
+        <%- include('../partials/technician/nav-technician', {title: "Visualizar equipamento", photo: photo, name_user: name_user}) %>
 
           <main class="py-5 fade-in">
-            <div class="alert mt-14" style="display: none;">
-              <div style="display: flex;" class="alert-text"></div>
-            </div>
-            <div class="error mt-14" style="display: none;">
-              <div style="display: flex;" class="error-text"></div>
-            </div>
-
-            <div class="px-4 sm:px-6 lg:pl-12 mt-2 col-span-3">
+            <div class="px-8 col-span-3">
               <div class="min-h-full">
                 <main>
-                  <div class="mx-auto mt-8 grid grid-cols-1">
+                  <div class="mx-auto mt-3 grid grid-cols-1">
                     <div class="space-y-6 lg:col-span-2 lg:col-start-1">
-                      <!-- Description list-->
                       <section aria-labelledby="applicant-information-title">
                         <div class="bg-white shadow-lg border sm:rounded-lg">
                           <div

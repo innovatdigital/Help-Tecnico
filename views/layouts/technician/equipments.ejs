@@ -1,24 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<%- include('../partials/head', {title: "title"}) %>
+<%- include('../partials/head', {title: "Equipamentos"}) %>
 
 <body>
-  <%- include('../partials/technician/sidebar-technician', {isAdmin: isAdmin}) %>
+  <%- include('../partials/technician/sidebar-technician') %>
 
   <div class="lg:pl-70">
-    <%- include('../partials/technician/nav-technician', {isAdmin: isAdmin, title: "Todos os relatórios", notifications: notifications, photo: photo, name_user: name_user}) %>
+    <%- include('../partials/technician/nav-technician', {title: "Equipamentos", photo: photo, name_user: name_user}) %>
 
     <main class="py-5 fade-in">
-      <div class="alert mt-14" style="display: none;"><div style="display: flex;" class="alert-text"></div></div>
-      <div class="error mt-14" style="display: none;"><div style="display: flex;" class="error-text"></div></div>
-
       <div class="px-4 sm:px-6 lg:pl-12 mt-2 col-span-3">
         <div class="sm:flex sm:justify-between sm:items-center">
           <h1 class="text-lg font-semibold leading-6 text-gray-900 inter color-purple"><span class="text-blue"><%= equipments.length %> equipamento(s)</span> cadastrado(s)</h1>
 
           <div class="flex items-center space-x-2">
-            <select class="text-blue inter font-medium text-sm px-4 py-1.5 border-blue-1 rounded-md">
+            <select class="text-blue inter font-medium text-sm pl-2 pr-6 py-1.5 border-blue-1 rounded-md">
               <option value="select">Empresa</option>
             </select>
 

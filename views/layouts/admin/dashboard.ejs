@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<%- include('../partials/head', {title: "title"}) %>
+<%- include('../partials/head', {title: "Dashboard administrativo"}) %>
 
 <body class="bg-gray-100">
-  <%- include('../partials/admin/sidebar-admin', {isAdmin: isAdmin}) %>
+  <%- include('../partials/admin/sidebar-admin') %>
 
   <div class="lg:pl-70">
-    <%- include('../partials/admin/nav-admin', {isAdmin: isAdmin, title: "Visão geral da empresa", notifications: notifications, photo: photo, name_user: name_user}) %>
+    <%- include('../partials/admin/nav-admin', {title: "Dashboard administrativo", photo: photo, name_user: name_user}) %>
 
     <main class="py-4 fade-in">
       <div class="grid grid-cols-1 sm:grid-cols-1 lg:grid-cols-1 lg:pr-12">
@@ -78,9 +78,47 @@
                 </dl>
     
                 <dl class="grid grid-cols-1 mt-2">
-                  <div class="col-sm-6 text-center">
-                    <div id="line-chart"></div>
-                  </div>
+                  <div class="revenueChartTwo">
+                    <div class="card-header">
+                      <h6 class="inter font-semibold text-lg">Chamados</h6>
+                    </div>
+
+                    <div class="card-body px-20">
+                       <div class="tab-content">
+                          <div class="tab-pane fade active show" id="tl_revenue-today" role="tabpanel" aria-labelledby="tl_revenue-today-tab">
+                             <div class="cashflow-display cashflow-display2 d-flex"></div>
+
+                             <div class="wp-chart">
+                                <div class="parentContainer">
+                                   <div>
+                                      <canvas id="earningRevenueToday"></canvas>
+                                   </div>
+                                </div>
+                             </div>
+                          </div>
+                          <div class="tab-pane fade" id="tl_revenue-week" role="tabpanel" aria-labelledby="tl_revenue-week-tab">
+                             <div class="cashflow-display cashflow-display2 d-flex"></div>
+                             <div class="wp-chart">
+                                <div class="parentContainer">
+                                   <div>
+                                      <canvas id="earningRevenueWeek"></canvas>
+                                   </div>
+                                </div>
+                             </div>
+                          </div>
+                          <div class="tab-pane fade" id="tl_revenue-month" role="tabpanel" aria-labelledby="tl_revenue-month-tab">
+                             <div class="cashflow-display cashflow-display2 d-flex"></div>
+                             <div class="wp-chart">
+                                <div class="parentContainer">
+                                   <div>
+                                      <canvas id="earningRevenueMonth"></canvas>
+                                   </div>
+                                </div>
+                             </div>
+                          </div>
+                       </div>
+                    </div>
+                 </div>
                 </dl>
               </div>
               
@@ -397,10 +435,8 @@
   </div>
 </body>
 
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.2/raphael-min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.0/morris.min.js"></script>
-<script src="/js/admin/chart-dashboard.js"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDduF2tLXicDEPDMAtC6-NLOekX0A5vlnY"></script>
+<script src="/js/plugins.min.js"></script>
+<script src="/js/script.min.js"></script>   
 
 </html>

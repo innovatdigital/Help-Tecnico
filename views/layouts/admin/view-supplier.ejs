@@ -1,103 +1,225 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<%- include('../partials/head', {title: "title"}) %>
+<%- include('../partials/head', {title: "Visualizar fornecedor"}) %>
 
-<body>
-  <%- include('../partials/technician/sidebar-technician', {isAdmin: isAdmin}) %>
+<body class="bg-gray-100">
+  <%- include('../partials/admin/sidebar-admin') %>
 
   <div class="lg:pl-70">
-    <%- include('../partials/technician/nav-technician', {isAdmin: isAdmin, title: "Todos os relatórios", notifications: notifications, photo: photo, name_user: name_user}) %>
+    <%- include('../partials/admin/nav-admin', {title: "Visualizar fornecedor", photo: photo, name_user: name_user}) %>
 
-    <main class="py-5 fade-in">
-      <div class="alert mt-14" style="display: none;"><div style="display: flex;" class="alert-text"></div></div>
-      <div class="error mt-14" style="display: none;"><div style="display: flex;" class="error-text"></div></div>
+    <main class="py-8 px-12 fade-in">
+      <div class="hidden fade-in relative z-10" id="popup_delete" role="dialog" aria-modal="true">
+        <div class="fixed inset-0 bg-gray-500 bg-opacity-25 transition-opacity"></div>
+      
+        <div class="fixed inset-0 z-10 overflow-y-auto p-4 mt-40 ml-40 sm:p-6 md:p-20">
+          <div class="mx-auto max-w-xl transform divide-y divide-gray-100 overflow-hidden rounded-xl bg-white shadow-2xl ring-1 ring-black ring-opacity-5 transition-all">
+            <div class="flex justify-between py-3 px-6">
+              <h2 class="color-red inter font-bold text-lg">Excluir fornecedor:</h2>
+              <button onclick="closeDelete()">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M14.3075 11.7231L20.3075 5.67693C20.5844 5.4 20.5844 4.98462 20.3075 4.7077L19.3844 3.73847C19.1075 3.46154 18.6921 3.46154 18.4151 3.73847L12.369 9.78462C12.1844 9.96923 11.9075 9.96923 11.7228 9.78462L5.67668 3.69231C5.39976 3.41539 4.98438 3.41539 4.70745 3.69231L3.73822 4.66154C3.4613 4.93847 3.4613 5.35385 3.73822 5.63077L9.78438 11.6769C9.96899 11.8615 9.96899 12.1385 9.78438 12.3231L3.69207 18.4154C3.41514 18.6923 3.41514 19.1077 3.69207 19.3846L4.6613 20.3538C4.93822 20.6308 5.35361 20.6308 5.63053 20.3538L11.6767 14.3077C11.8613 14.1231 12.1382 14.1231 12.3228 14.3077L18.369 20.3538C18.6459 20.6308 19.0613 20.6308 19.3382 20.3538L20.3075 19.3846C20.5844 19.1077 20.5844 18.6923 20.3075 18.4154L14.3075 12.3692C14.1228 12.1846 14.1228 11.9077 14.3075 11.7231Z" fill="#A31313"/>
+                </svg>                                    
+              </button>
+            </div>
 
-      <div class="px-4 sm:px-6 lg:pl-12 mt-2 col-span-3">
-        <div class="sm:flex sm:justify-between sm:items-center">
-          <h1 class="text-lg font-semibold leading-6 text-gray-900 inter color-purple"><span class="text-blue"><%= companies.length %> empresa(s)</span> responsáveis</h1>
+            <div class="flex flex-col divide-y divide-gray-100 px-6">
+              <div>
+                <div class="flex flex-col items-center justify-center mt-6 py-4">
+                  <svg width="46" height="46" viewBox="0 0 46 46" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M40.2487 2.87504H26.832C26.832 2.36671 26.6301 1.8792 26.2706 1.51975C25.9112 1.16031 25.4237 0.958374 24.9154 0.958374H21.082C20.5737 0.958374 20.0862 1.16031 19.7267 1.51975C19.3673 1.8792 19.1654 2.36671 19.1654 2.87504H5.7487C5.24037 2.87504 4.75285 3.07697 4.39341 3.43642C4.03397 3.79586 3.83203 4.28338 3.83203 4.79171C3.83203 5.30004 4.03397 5.78755 4.39341 6.147C4.75285 6.50644 5.24037 6.70837 5.7487 6.70837H40.2487C40.757 6.70837 41.2445 6.50644 41.604 6.147C41.9634 5.78755 42.1654 5.30004 42.1654 4.79171C42.1654 4.28338 41.9634 3.79586 41.604 3.43642C41.2445 3.07697 40.757 2.87504 40.2487 2.87504Z" fill="#AA2222"/>
+                    <path d="M37.3737 8.625C36.8654 8.625 36.3779 8.82693 36.0184 9.18638C35.659 9.54582 35.457 10.0333 35.457 10.5417V41.2083H10.5404V10.5417C10.5404 10.0333 10.3384 9.54582 9.97899 9.18638C9.61954 8.82693 9.13203 8.625 8.6237 8.625C8.11537 8.625 7.62785 8.82693 7.26841 9.18638C6.90897 9.54582 6.70703 10.0333 6.70703 10.5417V43.125C6.70703 43.6333 6.90897 44.1208 7.26841 44.4803C7.62785 44.8397 8.11537 45.0417 8.6237 45.0417H37.3737C37.882 45.0417 38.3695 44.8397 38.729 44.4803C39.0884 44.1208 39.2904 43.6333 39.2904 43.125V10.5417C39.2904 10.0333 39.0884 9.54582 38.729 9.18638C38.3695 8.82693 37.882 8.625 37.3737 8.625Z" fill="#AA2222"/>
+                    <path d="M20.1263 35.4583V18.2083C20.1263 17.7 19.9244 17.2125 19.5649 16.853C19.2055 16.4936 18.718 16.2916 18.2096 16.2916C17.7013 16.2916 17.2138 16.4936 16.8543 16.853C16.4949 17.2125 16.293 17.7 16.293 18.2083V35.4583C16.293 35.9666 16.4949 36.4541 16.8543 36.8136C17.2138 37.173 17.7013 37.375 18.2096 37.375C18.718 37.375 19.2055 37.173 19.5649 36.8136C19.9244 36.4541 20.1263 35.9666 20.1263 35.4583Z" fill="#AA2222"/>
+                    <path d="M29.7083 35.4583V18.2083C29.7083 17.7 29.5064 17.2125 29.147 16.853C28.7875 16.4936 28.3 16.2916 27.7917 16.2916C27.2833 16.2916 26.7958 16.4936 26.4364 16.853C26.0769 17.2125 25.875 17.7 25.875 18.2083V35.4583C25.875 35.9666 26.0769 36.4541 26.4364 36.8136C26.7958 37.173 27.2833 37.375 27.7917 37.375C28.3 37.375 28.7875 37.173 29.147 36.8136C29.5064 36.4541 29.7083 35.9666 29.7083 35.4583Z" fill="#AA2222"/>
+                  </svg>                                        
+                  <h2 for="content" class="block text-md font-bold leading-6 text-gray-900 inter mt-4">Tem certeza que deseja excluir o fornecedor?</h2>
+                  <p class="inter text-center text-sm font-semibold">Essa ação é irreversível, e todos os dados associados a ele serão apagados.</p>
+                </div>
 
-          <div class="flex items-center space-x-2">
-            <select class="text-blue inter font-medium text-sm px-4 py-1.5 border-blue-1 rounded-md">
-              <option value="select">Empresa</option>
-            </select>
-
-            <div class="relative flex">
-              <label for="search-field" class="sr-only">Search</label>
-              <svg class="pointer-events-none absolute inset-y-0 left-0 h-full ml-2 w-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                <path fill-rule="evenodd" d="M9 3.5a5.5 5.5 0 100 11 5.5 5.5 0 000-11zM2 9a7 7 0 1112.452 4.391l3.328 3.329a.75.75 0 11-1.06 1.06l-3.329-3.328A7 7 0 012 9z" clip-rule="evenodd" />
-              </svg>
-              <input id="search-field" class="block h-full w-full border-blue-1 rounded-lg py-2 pl-8 pr-0 inter text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm" placeholder="Pesquisar por nome" type="search" name="search">
+                <div class="pb-4">
+                  <button class="w-full py-2.5 inter bg-red text-white text-sm rounded-lg mt-4 font-bold" onclick="deleteSupplier()">Confirmar minha escolha</button>
+                </div>
+              </div>
             </div>
           </div>
         </div>
-        
-        <div class="mt-8 flow-root">
-          <div class="-mx-4 -my-2">
-            <div class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-5">
-              <% if (companies.length > 0) { %>
+      </div>
+
+      <div class="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-x-6">
+        <div class="bg-white rounded-xl shadow-lg border p-4 px-5 col-span-1">
+          <div class="flex flex-col items-center justify-center mt-4">
+            <svg width="74" height="73" viewBox="0 0 74 73" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+              <ellipse cx="37" cy="36.5" rx="37" ry="36.5" fill="#0EA5E9"/>
+              <rect x="17" y="17" width="40" height="40" fill="url(#pattern0)"/>
+              <defs>
+              <pattern id="pattern0" patternContentUnits="objectBoundingBox" width="1" height="1">
+              <use xlink:href="#image0_0_1" transform="scale(0.0104167)"/>
+              </pattern>
+              <image id="image0_0_1" width="96" height="96" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAAACXBIWXMAAAsTAAALEwEAmpwYAAABvElEQVR4nO3ZPU7DYBCE4S0QVwEJjkoQP+IqVHAK4CJAR9CLIqWgQVvEw6438/SJZr6xHUWOMDMzMzMzMzMz+wNwCdwAr8An/X3us+4yX652WOAUeAC+Wa8tcL/rEis8/GfmeFrVCPsrf5q7WNEzf3frTrMFLqI74Ja5rqM74I25XqI74IO53qM7hovuGC66Y7jojuGiO4aL7hguumO46I7hojt1QcSf/6f3DS/ABjhf7OCXKnjo94c438K+9kOceIBaj4uNcGiSI7sDftt4gPrH0ZnvgFpXHmDt7xsOTXDEvwHLvG9guBCfjwdIeIBiHqCYByjmAYp5gGIeoNj4AdQFEFPnT3UvgJg6f6p7AcTU+VPdCyCmzp/qXgAxdf5U9wKIqfOnuhdATJ0/1b0AYur8UV2wmvp8PEDCAxTzAMU8QDEPUMwDFPMAxcYPoC6AmDp/qnsBxNT5U90LIKbOn+peADF1/lT3Aoip86e6F0BMnT/VvQBi6vyp7gUQU+eP6oLV1OfjARIeoJgHKOYBinmAYh6gmAco5gGG8/+AYh6gmAco5gGKeYBiHqCYB1j7AGZmZmZmZmZmFlP8AN3fTDc25TqSAAAAAElFTkSuQmCC"/>
+              </defs>
+            </svg>
+            
+            <h1 class="inter text-xl text-blue font-semibold mt-4"><%= supplier.name %></h1>
+            
+            <div class="flex items-center space-x-2 mt-4">
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M1.66602 10C1.66602 6.85734 1.66602 5.286 2.64232 4.30968C3.61864 3.33337 5.18998 3.33337 8.33268 3.33337H11.666C14.8087 3.33337 16.3801 3.33337 17.3563 4.30968C18.3327 5.286 18.3327 6.85734 18.3327 10V11.6667C18.3327 14.8094 18.3327 16.3808 17.3563 17.357C16.3801 18.3334 14.8087 18.3334 11.666 18.3334H8.33268C5.18998 18.3334 3.61864 18.3334 2.64232 17.357C1.66602 16.3808 1.66602 14.8094 1.66602 11.6667V10Z" stroke="#888EA8" stroke-width="1.25"/>
+                <path opacity="0.5" d="M5.83398 3.33337V2.08337" stroke="#888EA8" stroke-width="1.25" stroke-linecap="round"/>
+                <path opacity="0.5" d="M14.166 3.33337V2.08337" stroke="#888EA8" stroke-width="1.25" stroke-linecap="round"/>
+                <path opacity="0.5" d="M1.66602 7.5H18.3327" stroke="#888EA8" stroke-width="1.25" stroke-linecap="round"/>
+              </svg>                
+              <p class="inter text-sm font-semibold text-gray-600">Cadastrado em <%= supplier.createdAt %></p>
+            </div>
+
+            <div class="flex flex-col items-center space-x-2 mt-4">
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path opacity="0.5" d="M3.33398 8.45271C3.33398 4.70486 6.31875 1.66663 10.0007 1.66663C13.6826 1.66663 16.6673 4.70486 16.6673 8.45271C16.6673 12.1712 14.5396 16.5103 11.2197 18.062C10.4459 18.4237 9.5554 18.4237 8.78157 18.062C5.46175 16.5103 3.33398 12.1712 3.33398 8.45271Z" stroke="#3C487B" stroke-width="1.25"/>
+                <path d="M10 10.8334C11.3807 10.8334 12.5 9.71409 12.5 8.33337C12.5 6.95266 11.3807 5.83337 10 5.83337C8.61929 5.83337 7.5 6.95266 7.5 8.33337C7.5 9.71409 8.61929 10.8334 10 10.8334Z" stroke="#888EA8" stroke-width="1.25"/>
+              </svg>                                                
+              <p class="inter text-sm font-semibold text-gray-600 mt-2"><%= supplier.address %></p>
+              <p class="inter text-sm font-semibold text-gray-600"><%= supplier.cep %> - <%= supplier.city %></p>
+            </div>
+
+            <div class="flex items-center space-x-2 mt-4">
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path opacity="0.5" d="M1.66602 10C1.66602 6.85734 1.66602 5.286 2.64232 4.30968C3.61864 3.33337 5.18998 3.33337 8.33268 3.33337H11.666C14.8087 3.33337 16.3801 3.33337 17.3563 4.30968C18.3327 5.286 18.3327 6.85734 18.3327 10C18.3327 13.1427 18.3327 14.7141 17.3563 15.6904C16.3801 16.6667 14.8087 16.6667 11.666 16.6667H8.33268C5.18998 16.6667 3.61864 16.6667 2.64232 15.6904C1.66602 14.7141 1.66602 13.1427 1.66602 10Z" stroke="#3C487B" stroke-width="1.25"/>
+                <path d="M5 6.66663L6.79908 8.16586C8.32961 9.44129 9.09492 10.079 10 10.079C10.9051 10.079 11.6704 9.44129 13.2009 8.16586L15 6.66663" stroke="#888EA8" stroke-width="1.25" stroke-linecap="round"/>
+              </svg>                                
+              <p class="inter text-sm font-semibold text-gray-600"><%= supplier.email %></p>
+            </div>
+
+            <div class="flex items-center space-x-2 mt-4">
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M13.4039 11.1317L13.7831 10.7546C14.3073 10.2333 15.1243 10.1262 15.7949 10.4908L17.3854 11.3557C18.4068 11.911 18.6319 13.2721 17.8336 14.066L16.651 15.2421C16.3503 15.5412 15.9772 15.7598 15.5481 15.7998M3.33248 4.79212C3.30315 4.27584 3.54505 3.81045 3.90604 3.45143L5.21273 2.15187C5.94076 1.42781 7.16813 1.53992 7.80331 2.38856L8.85305 3.79113C9.36628 4.47678 9.31084 5.41599 8.72259 6.00099L8.48383 6.23846" stroke="#888EA8" stroke-width="1.24902"/>
+                <path opacity="0.5" d="M15.5476 15.7998C14.1911 15.9262 10.8739 15.7865 7.33841 12.2704C4.00455 8.95477 3.40708 6.11292 3.33203 4.79211" stroke="#3C487B" stroke-width="1.24902"/>
+                <path opacity="0.5" d="M13.4035 11.1315C13.4035 11.1315 12.5023 12.0278 10.0422 9.58124C7.58215 7.13461 8.48344 6.23828 8.48344 6.23828" stroke="#3C487B" stroke-width="1.24902" stroke-linecap="round"/>
+              </svg>                                
+              <p class="inter text-sm font-semibold text-gray-600"><%= supplier.landline %></p>
+            </div>
+
+            <div class="flex items-center space-x-2 mt-4">
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M13.4039 11.1317L13.7831 10.7546C14.3073 10.2333 15.1243 10.1262 15.7949 10.4908L17.3854 11.3557C18.4068 11.911 18.6319 13.2721 17.8336 14.066L16.651 15.2421C16.3503 15.5412 15.9772 15.7598 15.5481 15.7998M3.33248 4.79212C3.30315 4.27584 3.54505 3.81045 3.90604 3.45143L5.21273 2.15187C5.94076 1.42781 7.16813 1.53992 7.80331 2.38856L8.85305 3.79113C9.36628 4.47678 9.31084 5.41599 8.72259 6.00099L8.48383 6.23846" stroke="#888EA8" stroke-width="1.24902"/>
+                <path opacity="0.5" d="M15.5476 15.7998C14.1911 15.9262 10.8739 15.7865 7.33841 12.2704C4.00455 8.95477 3.40708 6.11292 3.33203 4.79211" stroke="#3C487B" stroke-width="1.24902"/>
+                <path opacity="0.5" d="M13.4035 11.1315C13.4035 11.1315 12.5023 12.0278 10.0422 9.58124C7.58215 7.13461 8.48344 6.23828 8.48344 6.23828" stroke="#3C487B" stroke-width="1.24902" stroke-linecap="round"/>
+              </svg>                                
+              <p class="inter text-sm font-semibold text-gray-600"><%= supplier.phone %></p>
+            </div>
+
+            <div class="flex items-center mt-8">
+              <a href="tel:<%= supplier.phone %>">
+                <svg width="60" height="60" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <g filter="url(#filter0_d_152_3086)">
+                  <rect x="10" width="40" height="40" rx="20" fill="#2196F3"/>
+                  <g clip-path="url(#clip0_152_3086)">
+                  <path d="M32.7709 22.9145L33.2454 22.4432C33.9012 21.7915 34.9235 21.6577 35.7627 22.1134L37.7528 23.1945C39.0308 23.8886 39.3125 25.59 38.3136 26.5825L36.8338 28.0526C36.4576 28.4264 35.9907 28.6997 35.4538 28.7496M20.169 14.9901C20.1323 14.3447 20.435 13.763 20.8867 13.3142L22.5217 11.6897C23.4326 10.7847 24.9684 10.9248 25.7632 11.9856L27.0766 13.7388C27.7188 14.5959 27.6494 15.7699 26.9134 16.5011L26.6147 16.798" stroke="white" stroke-width="1.24902"/>
+                  <path d="M35.4547 28.7497C33.7574 28.9078 29.6067 28.7331 25.1829 24.338C21.0114 20.1934 20.2638 16.6411 20.1699 14.9901" stroke="white" stroke-width="1.24902"/>
+                  <path d="M32.772 22.9144C32.772 22.9144 31.6443 24.0348 28.5661 20.9765C25.488 17.9183 26.6157 16.7979 26.6157 16.7979" stroke="white" stroke-width="1.24902" stroke-linecap="round"/>
+                  </g>
+                  <rect x="10.5" y="0.5" width="39" height="39" rx="19.5" stroke="#2196F3"/>
+                  </g>
+                  <defs>
+                  <filter id="filter0_d_152_3086" x="0" y="0" width="60" height="60" filterUnits="userSpaceOnUse">
+                  <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+                  <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+                  <feMorphology radius="10" operator="erode" in="SourceAlpha" result="effect1_dropShadow_152_3086"/>
+                  <feOffset dy="10"/>
+                  <feGaussianBlur stdDeviation="10"/>
+                  <feComposite in2="hardAlpha" operator="out"/>
+                  <feColorMatrix type="matrix" values="0 0 0 0 0.129412 0 0 0 0 0.588235 0 0 0 0 0.952941 0 0 0 0.6 0"/>
+                  <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_152_3086"/>
+                  <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_152_3086" result="shape"/>
+                  </filter>
+                  <clipPath id="clip0_152_3086">
+                  <rect width="22" height="20" fill="white" transform="translate(19 10)"/>
+                  </clipPath>
+                  </defs>
+                </svg>
+              </a>
+              
+              <a href="/admin/update-supplier/<%= supplier._id %>">
+                <svg width="60" height="60" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <g filter="url(#filter0_d_152_3096)">
+                  <rect x="10" width="40" height="40" rx="20" fill="#3B3F5C"/>
+                  <g clip-path="url(#clip0_152_3096)">
+                  <path opacity="0.5" d="M23.334 28.3334H36.6673" stroke="white" stroke-width="1.25" stroke-linecap="round"/>
+                  <path d="M32.192 12.4345L31.5741 13.0524L25.8932 18.7332C25.5084 19.118 25.316 19.3104 25.1506 19.5225C24.9554 19.7727 24.7881 20.0435 24.6515 20.33C24.5358 20.5728 24.4498 20.831 24.2777 21.3472L23.5485 23.5347L23.3703 24.0694C23.2856 24.3235 23.3517 24.6035 23.5411 24.7929C23.7304 24.9822 24.0105 25.0484 24.2645 24.9636L24.7993 24.7855L26.9868 24.0562C27.503 23.8842 27.7611 23.7981 28.004 23.6824C28.2904 23.5459 28.5612 23.3785 28.8114 23.1834C29.0236 23.0179 29.2159 22.8255 29.6007 22.4408L35.2816 16.7599L35.8995 16.142C36.9232 15.1182 36.9232 13.4583 35.8995 12.4345C34.8757 11.4107 33.2157 11.4107 32.192 12.4345Z" stroke="white" stroke-width="1.25"/>
+                  <path opacity="0.5" d="M31.5724 13.0533C31.5724 13.0533 31.6496 14.3664 32.8082 15.525C33.9669 16.6836 35.2799 16.7609 35.2799 16.7609M24.7976 24.7864L23.5469 23.5356" stroke="white" stroke-width="1.25"/>
+                  </g>
+                  <rect x="10.5" y="0.5" width="39" height="39" rx="19.5" stroke="#3B3F5C"/>
+                  </g>
+                  <defs>
+                  <filter id="filter0_d_152_3096" x="0" y="0" width="60" height="60" filterUnits="userSpaceOnUse">
+                  <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+                  <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+                  <feMorphology radius="10" operator="erode" in="SourceAlpha" result="effect1_dropShadow_152_3096"/>
+                  <feOffset dy="10"/>
+                  <feGaussianBlur stdDeviation="10"/>
+                  <feComposite in2="hardAlpha" operator="out"/>
+                  <feColorMatrix type="matrix" values="0 0 0 0 0.231373 0 0 0 0 0.247059 0 0 0 0 0.360784 0 0 0 0.6 0"/>
+                  <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_152_3096"/>
+                  <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_152_3096" result="shape"/>
+                  </filter>
+                  <clipPath id="clip0_152_3096">
+                  <rect width="20" height="20" fill="white" transform="translate(20 10)"/>
+                  </clipPath>
+                  </defs>
+                </svg>                  
+              </a>
+
+              <button onclick="openDelete()">
+                <svg width="60" height="60" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <g filter="url(#filter0_d_152_3092)">
+                  <rect x="10" width="40" height="40" rx="20" fill="#D90C18"/>
+                  <path d="M38.5001 14H21.5" stroke="white" stroke-width="1.25" stroke-linecap="round"/>
+                  <path d="M36.8327 16.5L36.3728 23.3991C36.1958 26.054 36.1073 27.3815 35.2423 28.1907C34.3773 29 33.0469 29 30.3861 29H29.6127C26.9519 29 25.6215 29 24.7565 28.1907C23.8914 27.3815 23.8029 26.054 23.626 23.3991L23.166 16.5" stroke="white" stroke-width="1.25" stroke-linecap="round"/>
+                  <path opacity="0.5" d="M27.5 19L28 24" stroke="white" stroke-width="1.25" stroke-linecap="round"/>
+                  <path opacity="0.5" d="M32.5 19L32 24" stroke="white" stroke-width="1.25" stroke-linecap="round"/>
+                  <path opacity="0.5" d="M24.5 14C24.5559 14 24.5838 14 24.6091 13.9994C25.4326 13.9785 26.159 13.4549 26.4392 12.6803C26.4478 12.6565 26.4567 12.63 26.4743 12.577L26.5714 12.2857C26.6543 12.0371 26.6957 11.9128 26.7507 11.8072C26.97 11.3861 27.3757 11.0936 27.8446 11.0188C27.9621 11 28.0932 11 28.3553 11H31.6447C31.9068 11 32.0379 11 32.1554 11.0188C32.6243 11.0936 33.03 11.3861 33.2493 11.8072C33.3043 11.9128 33.3457 12.0371 33.4286 12.2857L33.5257 12.577C33.5433 12.6299 33.5522 12.6565 33.5608 12.6803C33.841 13.4549 34.5674 13.9785 35.3909 13.9994C35.4162 14 35.4441 14 35.5 14" stroke="white" stroke-width="1.25"/>
+                  <rect x="10.5" y="0.5" width="39" height="39" rx="19.5" stroke="#D90C18"/>
+                  </g>
+                  <defs>
+                  <filter id="filter0_d_152_3092" x="0" y="0" width="60" height="60" filterUnits="userSpaceOnUse">
+                  <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+                  <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+                  <feMorphology radius="10" operator="erode" in="SourceAlpha" result="effect1_dropShadow_152_3092"/>
+                  <feOffset dy="10"/>
+                  <feGaussianBlur stdDeviation="10"/>
+                  <feComposite in2="hardAlpha" operator="out"/>
+                  <feColorMatrix type="matrix" values="0 0 0 0 0.905882 0 0 0 0 0.317647 0 0 0 0 0.352941 0 0 0 0.6 0"/>
+                  <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_152_3092"/>
+                  <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_152_3092" result="shape"/>
+                  </filter>
+                  </defs>
+                </svg>                  
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-white rounded-xl shadow-lg border col-span-3">
+          <div class="p-2 flow-root">
+            <div class="inline-block min-w-full align-middle">
+              <% if (supplier.materials.length > 0) { %>
                 <div class="overflow-hidden shadow ring-1 ring-black ring-opacity-5 sm:rounded-lg">
                   <table class="min-w-full divide-y divide-gray-300">
                     <thead class="bg-gray-50">
                       <tr>
-                        <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 inter">Empresa</th>
-                        <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 inter">CNPJ</th>
-                        <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 inter">Telefone (Empresa)</th>
-                        <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 inter">Email</th>
-                        <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 inter">Data de cadastro</th>
-                        <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 inter">Cidade</th>
-                        <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 inter">Ações</th>
+                        <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 inter">Material</th>
+                        <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 inter">Fornecedor</th>
                       </tr>
                     </thead>
 
                     <tbody class="divide-y divide-gray-200 bg-white">
-                      <% companies.forEach(function(item) { %>
+                      <% supplier.materials.forEach(function(material) { %>
                         <tr>
-                          <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium sm:pl-6 text-gray-500">
-                            <div class="flex items-center space-x-2">
-                              <% if (item.photo.length > 0) { %>
-                                <img class="h-8 rounded-full" src="/img/photos/<%= item.photo %>">
-                              <% } else { %>
-                                <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-                                  <g clip-path="url(#clip0_3_2)">
-                                  <path d="M32 16C32 7.16344 24.8366 0 16 0C7.16344 0 0 7.16344 0 16C0 24.8366 7.16344 32 16 32C24.8366 32 32 24.8366 32 16Z" fill="#239CFF"/>
-                                  <path d="M26.5396 7.11111H6.22217V24.8889H26.5396V7.11111Z" fill="url(#pattern0)"/>
-                                  </g>
-                                  <defs>
-                                  <pattern id="pattern0" patternContentUnits="objectBoundingBox" width="1" height="1">
-                                  <use xlink:href="#image0_3_2" transform="matrix(0.00911458 0 0 0.0104167 0.0625001 0)"/>
-                                  </pattern>
-                                  <clipPath id="clip0_3_2">
-                                  <rect width="32" height="32" fill="white"/>
-                                  </clipPath>
-                                  <image id="image0_3_2" width="96" height="96" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAAACXBIWXMAAAsTAAALEwEAmpwYAAABvElEQVR4nO3ZPU7DYBCE4S0QVwEJjkoQP+IqVHAK4CJAR9CLIqWgQVvEw6438/SJZr6xHUWOMDMzMzMzMzMz+wNwCdwAr8An/X3us+4yX652WOAUeAC+Wa8tcL/rEis8/GfmeFrVCPsrf5q7WNEzf3frTrMFLqI74Ja5rqM74I25XqI74IO53qM7hovuGC66Y7jojuGiO4aL7hguumO46I7hojt1QcSf/6f3DS/ABjhf7OCXKnjo94c438K+9kOceIBaj4uNcGiSI7sDftt4gPrH0ZnvgFpXHmDt7xsOTXDEvwHLvG9guBCfjwdIeIBiHqCYByjmAYp5gGIeoNj4AdQFEFPnT3UvgJg6f6p7AcTU+VPdCyCmzp/qXgAxdf5U9wKIqfOnuhdATJ0/1b0AYur8UV2wmvp8PEDCAxTzAMU8QDEPUMwDFPMAxcYPoC6AmDp/qnsBxNT5U90LIKbOn+peADF1/lT3Aoip86e6F0BMnT/VvQBi6vyp7gUQU+eP6oLV1OfjARIeoJgHKOYBinmAYh6gmAco5gGG8/+AYh6gmAco5gGKeYBiHqCYB1j7AGZmZmZmZmZmFlP8AN3fTDc25TqSAAAAAElFTkSuQmCC"/>
-                                  </defs>
-                                </svg>
-                              <% } %>
-                              <p class="inter ml-2"><%= item.name %></p>
-                            </div>
-                          </td>
-                          <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 inter">
-                            <%= item.cnpj %>
-                          </td>
-                          <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 inter font-medium">
-                            <%= item.phoneCompany %>
-                          </td>
-                          <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 inter color-purple font-medium"><%= item.email %></td>
                           <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 inter color-purple font-medium">
-                            <%= item.date %>
+                            <%= material.item %>
                           </td>
+                          
                           <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 inter color-purple font-medium">
-                            <%= item.city %>
-                          </td>
-                          <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 inter color-purple font-medium">
-                            <a href="/technician/view-company/<%= item._id %>" class="flex items-center pointer">
-                              <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" class="mr-2">
-                                <path opacity="0.5" d="M2.73038 12.7463C2.0221 11.8262 1.66797 11.3661 1.66797 9.99992C1.66797 8.63375 2.0221 8.17369 2.73038 7.25353C4.1446 5.41622 6.51639 3.33325 10.0013 3.33325C13.4862 3.33325 15.858 5.41622 17.2722 7.25353C17.9805 8.17369 18.3346 8.63375 18.3346 9.99992C18.3346 11.3661 17.9805 11.8262 17.2722 12.7463C15.858 14.5836 13.4862 16.6666 10.0013 16.6666C6.51639 16.6666 4.1446 14.5836 2.73038 12.7463Z" stroke="#0E1726" stroke-width="1.25"/>
-                                <path d="M12.5 10C12.5 11.3807 11.3807 12.5 10 12.5C8.61925 12.5 7.5 11.3807 7.5 10C7.5 8.61925 8.61925 7.5 10 7.5C11.3807 7.5 12.5 8.61925 12.5 10Z" stroke="#0E1726" stroke-width="1.25"/>
-                              </svg>
-                              Visualizar                                  
-                            </a>
+                            <%= material.manufacturer %>
                           </td>
                         </tr>
                       <% }) %>
@@ -155,7 +277,7 @@
                     </defs>
                   </svg>                                                                                                      
                   <h2 class="inter text-xl font-semibold mt-10">Nenhuma empresa disponível</h2>
-                  <p class="inter">Você não é responsável por nenhuma empresa.</p>           
+                  <p class="inter">Você precisa cadastrar uma empresa primeiro</p>           
                 </div>
               <% } %>
             </div>
@@ -165,4 +287,30 @@
     </main>
   </div>
 </body>
+
+<script>
+  function openDelete() {
+    const delete_popup = document.querySelector("#popup_delete")
+
+    delete_popup.classList.remove("hidden")
+  }
+
+  function closeDelete() {
+    const delete_popup = document.querySelector("#popup_delete")
+
+    delete_popup.classList.add("hidden")
+  }
+
+  function deleteSupplier() {
+    fetch('/admin/delete-supplier/<%= supplier._id %>', {
+      method: 'DELETE',
+    })
+    .then(response => {
+      location.href = "/admin/all-suppliers"
+    })
+    .catch(err => {
+      alert_message("error", "Tente mais tarde")
+    })
+  }
+</script>
 </html>

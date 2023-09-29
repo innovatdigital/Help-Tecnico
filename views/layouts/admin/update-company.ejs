@@ -1,25 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<%- include('../partials/head', {title: "title"}) %>
+<%- include('../partials/head', {title: "Atualizar dados da empresa"}) %>
 
-<body>
-  <%- include('../partials/admin/sidebar-admin', {isAdmin: isAdmin}) %>
+<body class="bg-gray-100">
+  <%- include('../partials/admin/sidebar-admin') %>
 
   <div class="lg:pl-70">
-    <%- include('../partials/admin/nav-admin', {isAdmin: isAdmin, title: "Adicionar novo fornecedor", notifications: notifications, photo: photo, name_user: name_user}) %>
+    <%- include('../partials/admin/nav-admin', {title: "Atualizar dados da empresa", photo: photo, name_user: name_user}) %>
 
     <main class="py-8 px-12 fade-in">
-      <div class="alert mt-10" style="display: none;"><div style="display: flex;" class="alert-text"></div></div>
-      <div class="error" style="display: none;"><div style="display: flex;" class="error-text"></div></div>
-
       <div class="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-x-6">
         <div class="bg-white rounded-xl shadow-lg border p-4 px-5 col-span-3">
           <div class="col-span-full flex items-center gap-x-6 mt-4">
-            <svg width="74" height="73" viewBox="0 0 74 73" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <ellipse cx="37" cy="36.5" rx="37" ry="36.5" fill="#0EA5E9"/>
-              <path d="M53.7921 26.6151C53.8836 26.7946 53.9385 26.9905 53.9535 27.1914C53.9684 27.3924 53.9432 27.5943 53.8793 27.7853C53.8153 27.9764 53.7139 28.1528 53.581 28.3042C53.4481 28.4557 53.2864 28.5791 53.1053 28.6673C52.9241 28.7555 52.7272 28.8067 52.526 28.818C52.3249 28.8292 52.1235 28.8002 51.9336 28.7328C51.7438 28.6653 51.5693 28.5606 51.4204 28.4249C51.2714 28.2893 51.151 28.1252 51.0662 27.9425C50.1572 26.0774 48.8766 24.4177 47.303 23.0654C46.8025 22.7863 46.2377 22.6428 45.6646 22.6494C45.0916 22.6559 44.5302 22.8121 44.0361 23.1026C43.5421 23.393 43.1326 23.8076 42.8482 24.3052C42.5638 24.8027 42.4145 25.366 42.415 25.9391V27.6086C42.4143 27.9532 42.2771 28.2834 42.0335 28.527C41.7898 28.7707 41.4596 28.9079 41.115 28.9086H34.3277C33.9831 28.9079 33.6529 28.7707 33.4092 28.527C33.1656 28.2834 33.0284 27.9532 33.0277 27.6086V27.8002C33.0285 27.1613 32.842 26.5361 32.4912 26.0021C32.4113 25.9015 32.3346 25.7984 32.2614 25.6928C31.928 25.295 31.5052 24.9817 31.0276 24.7785C30.5499 24.5753 30.031 24.4881 29.5132 24.5238C28.9954 24.5596 28.4934 24.7174 28.0482 24.9843C27.6031 25.2512 27.2274 25.6197 26.9519 26.0595C26.8101 26.3777 26.563 26.6374 26.2522 26.7949C25.9414 26.9523 25.5859 26.9979 25.2455 26.924C24.905 26.8502 24.6004 26.6613 24.3828 26.3892C24.1653 26.1171 24.048 25.7784 24.0508 25.4301V19.1901C24.0506 18.8366 24.1739 18.4941 24.3994 18.2219C24.6249 17.9497 24.9384 17.7648 25.2858 17.6992C25.6331 17.6336 25.9925 17.6915 26.3017 17.8628C26.6109 18.034 26.8506 18.308 26.9793 18.6372C27.2537 19.0613 27.6223 19.4164 28.0563 19.6749C28.4903 19.9334 28.9781 20.0882 29.4818 20.1274C29.9854 20.1666 30.4913 20.0891 30.9601 19.9009C31.4289 19.7127 31.848 19.4188 32.1847 19.0423C32.3006 18.8661 32.4258 18.6962 32.5597 18.5332L32.5788 18.5031H32.587C33.1443 17.8334 33.8422 17.2947 34.6312 16.9253C35.4202 16.5558 36.2809 16.3648 37.1521 16.3656H37.2342C37.2869 16.3599 37.3399 16.3572 37.3929 16.3574C40.8138 16.3564 44.1661 17.3177 47.0665 19.1316C49.9669 20.9455 52.2985 23.5388 53.7948 26.6151H53.7921ZM41.1014 32.4035C41.1006 32.059 40.9634 31.7287 40.7198 31.4851C40.4761 31.2415 40.1459 31.1043 39.8014 31.1035H35.1077C34.7633 31.105 34.4335 31.2424 34.19 31.4859C33.9465 31.7294 33.8091 32.0592 33.8077 32.4035V58.253C33.8084 58.5976 33.9456 58.9278 34.1892 59.1715C34.4329 59.4151 34.7631 59.5523 35.1077 59.553H39.8014C40.1459 59.5523 40.4761 59.4151 40.7198 59.1715C40.9634 58.9278 41.1006 58.5976 41.1014 58.253V32.4035Z" fill="white"/>
-            </svg>                                                          
+            <% if (company.photo.length > 0) { %>
+              <img class="h-20 rounded-full" src="/img/photos/<%= company.photo %>">
+            <% } else { %>
+              <svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                <g clip-path="url(#clip0_3_2)">
+                <path d="M64 32C64 14.3269 49.6731 0 32 0C14.3269 0 0 14.3269 0 32C0 49.6731 14.3269 64 32 64C49.6731 64 64 49.6731 64 32Z" fill="#239CFF"/>
+                <path d="M53.0793 14.2222H12.4445V49.7778H53.0793V14.2222Z" fill="url(#pattern0)"/>
+                </g>
+                <defs>
+                <pattern id="pattern0" patternContentUnits="objectBoundingBox" width="1" height="1">
+                <use xlink:href="#image0_3_2" transform="matrix(0.00911458 0 0 0.0104167 0.0625001 0)"/>
+                </pattern>
+                <clipPath id="clip0_3_2">
+                <rect width="64" height="64" fill="white"/>
+                </clipPath>
+                <image id="image0_3_2" width="96" height="96" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAAACXBIWXMAAAsTAAALEwEAmpwYAAABvElEQVR4nO3ZPU7DYBCE4S0QVwEJjkoQP+IqVHAK4CJAR9CLIqWgQVvEw6438/SJZr6xHUWOMDMzMzMzMzMz+wNwCdwAr8An/X3us+4yX652WOAUeAC+Wa8tcL/rEis8/GfmeFrVCPsrf5q7WNEzf3frTrMFLqI74Ja5rqM74I25XqI74IO53qM7hovuGC66Y7jojuGiO4aL7hguumO46I7hojt1QcSf/6f3DS/ABjhf7OCXKnjo94c438K+9kOceIBaj4uNcGiSI7sDftt4gPrH0ZnvgFpXHmDt7xsOTXDEvwHLvG9guBCfjwdIeIBiHqCYByjmAYp5gGIeoNj4AdQFEFPnT3UvgJg6f6p7AcTU+VPdCyCmzp/qXgAxdf5U9wKIqfOnuhdATJ0/1b0AYur8UV2wmvp8PEDCAxTzAMU8QDEPUMwDFPMAxcYPoC6AmDp/qnsBxNT5U90LIKbOn+peADF1/lT3Aoip86e6F0BMnT/VvQBi6vyp7gUQU+eP6oLV1OfjARIeoJgHKOYBinmAYh6gmAco5gGG8/+AYh6gmAco5gGKeYBiHqCYB1j7AGZmZmZmZmZmFlP8AN3fTDc25TqSAAAAAElFTkSuQmCC"/>
+                </defs>
+              </svg>                
+            <% } %>                                                                      
                                       
             <div class="items-center mt-2">
               <label style="cursor: pointer;" for="picture" class="rounded-md px-3 py-2 text-sm font-semibold border-blue color-blue shadow-sm inter">Inserir foto</label>
@@ -30,16 +42,16 @@
 
           <div class="grid grid-cols-2 mt-12 gap-x-4">
             <div>
-              <label for="name" class="block text-md font-medium leading-6 text-gray-900 inter font-semibold">Nome do técnico</label>
+              <label for="name" class="block text-md font-medium leading-6 text-gray-900 inter font-semibold">Nome da empresa</label>
               <div class="relative mt-2 rounded-md shadow-sm">
-                <input type="text" name="name" id="name" class="block w-full rounded-lg inter py-1.5 mt-2 pl-2 text-gray-900 ring-1 ring-inset ring-gray-300 sm:text-sm sm:leading-6 border-blue-1" placeholder="Insira o nome">
+                <input type="text" value="<%= company.name %>" name="name" id="name" class="block w-full rounded-lg inter py-1.5 mt-2 pl-2 text-gray-900 ring-1 ring-inset ring-gray-300 sm:text-sm sm:leading-6 border-blue-1" placeholder="Insira o nome">
               </div>
             </div>
 
             <div>
-              <label for="cpf" class="block text-md font-medium leading-6 text-gray-900 inter font-semibold">CPF</label>
+              <label for="cnpj" class="block text-md font-medium leading-6 text-gray-900 inter font-semibold">CNPJ</label>
               <div class="relative mt-2 rounded-md shadow-sm">
-                <input type="text" name="cpf" id="cpf" class="block w-full rounded-lg inter py-1.5 mt-2 pl-2 text-gray-900 ring-1 ring-inset ring-gray-300 sm:text-sm sm:leading-6 border-blue-1" placeholder="Insira o CPF">
+                <input type="text" value="<%= company.cnpj %>" name="cnpj" id="cnpj" class="block w-full rounded-lg inter py-1.5 mt-2 pl-2 text-gray-900 ring-1 ring-inset ring-gray-300 sm:text-sm sm:leading-6 border-blue-1" placeholder="Insira o CNPJ">
               </div>
             </div>
           </div>
@@ -48,31 +60,72 @@
             <div>
               <label for="email" class="block text-md font-medium leading-6 text-gray-900 inter font-semibold">Email</label>
               <div class="relative mt-2 rounded-md shadow-sm">
-                <input type="text" name="email" id="email" class="block w-full rounded-lg inter py-1.5 mt-2 pl-2 text-gray-900 ring-1 ring-inset ring-gray-300 sm:text-sm sm:leading-6 border-blue-1" placeholder="Insira o email">
+                <input type="text" value="<%= company.email %>" name="email" id="email" class="block w-full rounded-lg inter py-1.5 mt-2 pl-2 text-gray-900 ring-1 ring-inset ring-gray-300 sm:text-sm sm:leading-6 border-blue-1" placeholder="Insira o email">
               </div>
             </div>
 
             <div>
               <label for="password" class="block text-md font-medium leading-6 text-gray-900 inter font-semibold">Senha</label>
               <div class="relative mt-2 rounded-md shadow-sm">
-                <input type="text" name="password" id="password" class="block w-full rounded-lg inter py-1.5 mt-2 pl-2 text-gray-900 ring-1 ring-inset ring-gray-300 sm:text-sm sm:leading-6 border-blue-1" placeholder="Insira a senha">
+                <input type="text" value="<%= company.password %>" name="password" id="password" class="block w-full rounded-lg inter py-1.5 mt-2 pl-2 text-gray-900 ring-1 ring-inset ring-gray-300 sm:text-sm sm:leading-6 border-blue-1" placeholder="Insira a senha">
               </div>
             </div>
           </div>
 
           <div class="grid grid-cols-2 mt-12 gap-x-4">
             <div>
-              <label for="phone" class="block text-md font-medium leading-6 text-gray-900 inter font-semibold">Telefone</label>
+              <label for="responsible-phone" class="block text-md font-medium leading-6 text-gray-900 inter font-semibold">Telefone (Responsável)</label>
               <div class="relative mt-2 rounded-md shadow-sm">
-                <input type="text" name="phone" id="phone" class="block w-full rounded-lg inter py-1.5 mt-2 pl-2 text-gray-900 ring-1 ring-inset ring-gray-300 sm:text-sm sm:leading-6 border-blue-1" placeholder="Insira o número de celular">
+                <input type="text" value="<%= company.phoneResponsible %>" name="responsible-phone" id="responsible-phone" class="block w-full rounded-lg inter py-1.5 mt-2 pl-2 text-gray-900 ring-1 ring-inset ring-gray-300 sm:text-sm sm:leading-6 border-blue-1" placeholder="Insira o número do responsável">
               </div>
             </div>
 
             <div>
+              <label for="company-phone" class="block text-md font-medium leading-6 text-gray-900 inter font-semibold">Telefone (Empresa)</label>
+              <div class="relative mt-2 rounded-md shadow-sm">
+                <input type="text" value="<%= company.phoneCompany %>" name="company-phone" id="company-phone" class="block w-full rounded-lg inter py-1.5 mt-2 pl-2 text-gray-900 ring-1 ring-inset ring-gray-300 sm:text-sm sm:leading-6 border-blue-1" placeholder="Insira o celular">
+              </div>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-2 mt-12 gap-x-4">
+            <div>
+              <label for="address" class="block text-md font-medium leading-6 text-gray-900 inter font-semibold">Endereço</label>
+              <div class="relative mt-2 rounded-md shadow-sm">
+                <input type="text" value="<%= company.address %>" name="address" id="address" class="block w-full rounded-lg inter py-1.5 mt-2 pl-2 text-gray-900 ring-1 ring-inset ring-gray-300 sm:text-sm sm:leading-6 border-blue-1" placeholder="Insira o endereço">
+              </div>
+            </div>
+
+            <div>
+              <label for="number" class="block text-md font-medium leading-6 text-gray-900 inter font-semibold">Número</label>
+              <div class="relative mt-2 rounded-md shadow-sm">
+                <input type="number" value="<%= company.number %>" name="number" id="number" class="block w-full rounded-lg inter py-1.5 mt-2 pl-2 text-gray-900 ring-1 ring-inset ring-gray-300 sm:text-sm sm:leading-6 border-blue-1" placeholder="Insira o número">
+              </div>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-2 mt-12 gap-x-4">
+            <div>
+              <label for="cep" class="block text-md font-medium leading-6 text-gray-900 inter font-semibold">CEP</label>
+              <div class="relative mt-2 rounded-md shadow-sm">
+                <input type="text" value="<%= company.cep %>" name="cep" id="cep" class="block w-full rounded-lg inter py-1.5 mt-2 pl-2 text-gray-900 ring-1 ring-inset ring-gray-300 sm:text-sm sm:leading-6 border-blue-1" placeholder="Insira o CEP">
+              </div>
+            </div>
+
+            <div>
+              <label for="neighborhood" class="block text-md font-medium leading-6 text-gray-900 inter font-semibold">Bairro</label>
+              <div class="relative mt-2 rounded-md shadow-sm">
+                <input type="text" value="<%= company.neighborhood%>" name="neighborhood" id="neighborhood" class="block w-full rounded-lg inter py-1.5 mt-2 pl-2 text-gray-900 ring-1 ring-inset ring-gray-300 sm:text-sm sm:leading-6 border-blue-1" placeholder="Insira o CEP">
+              </div>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-2 mt-12 gap-x-4">
+            <div>
               <label for="city" class="block text-md font-medium leading-6 text-gray-900 inter font-semibold">Cidade</label>
               <div class="relative mt-2 rounded-md shadow-sm">
                 <select name="city" id="city" class="block w-full rounded-lg inter py-2 mt-2 pl-2 text-gray-900 ring-1 ring-inset ring-gray-300 sm:text-sm sm:leading-6 border-blue-1">
-                  <option value="select">Selecione a cidade</option>
+                  <option value="<%= company.city %>"><%= company.city %> (selecionado)</option>
                   <option value="Porto Alegre / RS">Porto Alegre / RS</option>
                   <option value="Canoas / RS">Canoas / RS</option>
                   <option value="Gramado / RS">Gramado / RS</option>
@@ -144,61 +197,36 @@
                 </select>
               </div>
             </div>
-          </div>
-
-          <div class="grid grid-cols-2 mt-12 gap-x-4">
-            <div>
-              <label for="address" class="block text-md font-medium leading-6 text-gray-900 inter font-semibold">Endereço</label>
-              <div class="relative mt-2 rounded-md shadow-sm">
-                <input type="text" name="address" id="address" class="block w-full rounded-lg inter py-1.5 mt-2 pl-2 text-gray-900 ring-1 ring-inset ring-gray-300 sm:text-sm sm:leading-6 border-blue-1" placeholder="Insira o endereço">
-              </div>
-            </div>
 
             <div>
-              <label for="cep" class="block text-md font-medium leading-6 text-gray-900 inter font-semibold">CEP</label>
+              <label for="city" class="block text-md font-medium leading-6 text-gray-900 inter font-semibold">PMOC/LISTA DE EQUIPAMENTOS</label>
               <div class="relative mt-2 rounded-md shadow-sm">
-                <input type="text" name="cep" id="cep" class="block w-full rounded-lg inter py-1.5 mt-2 pl-2 text-gray-900 ring-1 ring-inset ring-gray-300 sm:text-sm sm:leading-6 border-blue-1" placeholder="Insira o CEP">
-              </div>
-            </div>
-          </div>
-
-          <div class="grid grid-cols-2 mt-12 gap-x-4">
-            <div>
-              <label for="cnh" class="block text-md font-medium leading-6 text-gray-900 inter font-semibold">CNH do Técnico</label>
-              <div class="relative mt-2 rounded-md shadow-sm">
-                <input type="number" name="cnh" id="cnh" class="block w-full rounded-lg inter py-1.5 mt-2 pl-2 text-gray-900 ring-1 ring-inset ring-gray-300 sm:text-sm sm:leading-6 border-blue-1" placeholder="Insira o número da CNH">
-              </div>
-            </div>
-
-            <div>
-              <label for="car_model" class="block text-md font-medium leading-6 text-gray-900 inter font-semibold">Modelo do carro</label>
-              <div class="relative mt-2 rounded-md shadow-sm">
-                <input type="text" name="car-model" id="car-model" class="block w-full rounded-lg inter py-1.5 mt-2 pl-2 text-gray-900 ring-1 ring-inset ring-gray-300 sm:text-sm sm:leading-6 border-blue-1" placeholder="Insira o modelo do carro">
+                <select name="service" id="service" class="block w-full rounded-lg inter py-2 mt-2 pl-2 text-gray-900 ring-1 ring-inset ring-gray-300 sm:text-sm sm:leading-6 border-blue-1">
+                  <% if (company.service == "equipment-list") { %>
+                    <option value="equipment-list" selected>Lista de equipamentos</option>
+                    <option value="pmoc">PMOC</option>
+                  <% } else if (company.service == "pmoc") { %>
+                    <option value="pmoc" selected>PMOC</option>
+                    <option value="equipment-list">Lista de equipamentos</option>
+                  <% } %>
+                </select>
               </div>
             </div>
           </div>
 
           <div class="grid grid-cols-2 mt-12 gap-x-4">
             <div>
-              <label for="car_plate" class="block text-md font-medium leading-6 text-gray-900 inter font-semibold">Placa do carro</label>
+              <label for="technician" class="block text-md font-medium leading-6 text-gray-900 inter font-semibold">Técnico responsável</label>
               <div class="relative mt-2 rounded-md shadow-sm">
-                <input type="text" name="car-plate" id="car-plate" class="block w-full rounded-lg inter py-1.5 mt-2 pl-2 text-gray-900 ring-1 ring-inset ring-gray-300 sm:text-sm sm:leading-6 border-blue-1" placeholder="Insira a placa do carro">
-              </div>
-            </div>
-
-            <div>
-              <label for="cep" class="block text-md font-medium leading-6 text-gray-900 inter font-semibold">Cor do carro</label>
-              <div class="relative mt-2 rounded-md shadow-sm">
-                <select name="car-color" id="car-color" class="block w-full rounded-lg inter py-2 mt-2 pl-2 text-gray-900 ring-1 ring-inset ring-gray-300 sm:text-sm sm:leading-6 border-blue-1">
-                  <option value="branco">Branco</option>
-                  <option value="vermelho">Vermelho</option>
-                  <option value="azul">Azul</option>
-                  <option value="verde">Verde</option>
-                  <option value="amarelo">Amarelo</option>
-                  <option value="roxo">Roxo</option>
-                  <option value="laranja">Laranja</option>
-                  <option value="rosa">Rosa</option>
-                  <option value="preto">Preto</option>
+                <select name="technician" id="technician" class="block w-full rounded-lg inter py-2 mt-2 pl-2 text-gray-900 ring-1 ring-inset ring-gray-300 sm:text-sm sm:leading-6 border-blue-1">
+                  <option value="select">Selecione o técnico</option>
+                  <% technicians.forEach(technician => { %>
+                    <% if (String(technician._id) == company.technician) { %>
+                      <option value="<%= technician._id %>" selected><%= technician.name %></option>
+                    <% } else { %>
+                      <option value="<%= technician._id %>"><%= technician.name %></option>
+                    <% } %>
+                  <% }) %>
                 </select>
               </div>
             </div>
@@ -207,7 +235,7 @@
 
         <div class="bg-white rounded-xl shadow-lg border p-4 px-5 col-span-1">
           <div class="space-y-4">
-            <button type="button" onclick="newTechnician()" style="background-color: #00AB55;" class="w-full inline-flex justify-center items-center gap-x-1.5 rounded-md px-3 py-3 text-sm font-semibold text-white inter shadow-sm">
+            <button type="button" onclick="saveCompany()" style="background-color: #00AB55;" class="w-full inline-flex justify-center items-center gap-x-1.5 rounded-md px-3 py-3 text-sm font-semibold text-white inter shadow-sm">
               <svg width="21" height="20" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <g clip-path="url(#clip0_156_9768)">
                 <path d="M3.46649 17.1132C4.68687 18.3337 6.65105 18.3337 10.5794 18.3337C14.5078 18.3337 16.472 18.3337 17.6923 17.1132C18.9128 15.8929 18.9128 13.9287 18.9128 10.0003C18.9128 9.71574 18.9128 9.57349 18.9001 9.42883C18.8413 8.75441 18.5678 8.09413 18.1325 7.57561C18.0391 7.46438 17.9361 7.3613 17.7299 7.15514L13.4246 2.84986C13.2184 2.64371 13.1153 2.54062 13.0042 2.44725C12.4856 2.01199 11.8253 1.7385 11.1509 1.67962C11.0063 1.66699 10.864 1.66699 10.5794 1.66699C6.65105 1.66699 4.68687 1.66699 3.46649 2.88738C2.24609 4.10777 2.24609 6.07195 2.24609 10.0003C2.24609 13.9287 2.24609 15.8929 3.46649 17.1132Z" stroke="white" stroke-width="1.25"/>
@@ -305,28 +333,29 @@
     }
   }
 
-  function newTechnician() {
+  function saveCompany() {
     const name = document.querySelector("#name")
-    const cpf = document.querySelector("#cpf")
+    const cnpj = document.querySelector("#cnpj")
     const email = document.querySelector("#email")
     const password = document.querySelector("#password")
-    const phone = document.querySelector("#phone")
-    const city = document.querySelector("#city")
+    const phoneResponsible = document.querySelector("#responsible-phone")
+    const phoneCompany = document.querySelector("#company-phone")
     const address = document.querySelector("#address")
     const cep = document.querySelector("#cep")
-    const cnh = document.querySelector("#cnh")
-    const car_model = document.querySelector("#car-model")
-    const car_plate = document.querySelector("#car-plate")
-    const car_color = document.querySelector("#car-color")
+    const neighborhood = document.querySelector("#neighborhood")
+    const city = document.querySelector("#city")
+    const number = document.querySelector("#number")
     const comments = document.querySelector("#comments")
+    const service = document.querySelector("#service")
+    const technician = document.querySelector("#technician")
 
     if (name.value.length == 0) {
       name.style = "border: 1px solid #e00d0d !important"
       return
     }
 
-    if (cpf.value.length == 0) {
-      cpf.style.border = "1px solid #e00d0d";
+    if (cnpj.value.length == 0) {
+      cnpj.style.border = "1px solid #e00d0d";
       return
     }
 
@@ -340,13 +369,13 @@
       return
     }
 
-    if (phone.value.length == 0) {
-      phone.style.border = "1px solid #e00d0d";
+    if (phoneResponsible.value.length == 0) {
+      phoneResponsible.style.border = "1px solid #e00d0d";
       return
     }
 
-    if (city.value == "select") {
-      city.style.border = "1px solid #e00d0d";
+    if (phoneCompany.value.length == 0) {
+      phoneCompany.style.border = "1px solid #e00d0d";
       return
     }
 
@@ -355,23 +384,43 @@
       return
     }
 
+    if (neighborhood.value.length == 0) {
+      neighborhood.style.border = "1px solid #e00d0d";
+      return
+    }
+
     if (cep.value.length == 0) {
       cep.style.border = "1px solid #e00d0d";
       return
     }
 
-    fetch('/admin/new-technician/save', {
-      method: 'POST',
+    if (city.value == "select") {
+      city.style.border = "1px solid #e00d0d";
+      return
+    }
+
+    if (service.value == "select") {
+      service.style.border = "1px solid #e00d0d";
+      return
+    }
+
+    if (number.value.length == 0) {
+      number.style.border = "1px solid #e00d0d";
+      return
+    }
+
+    fetch('/admin/save-company/<%= company._id %>', {
+      method: 'PUT',
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({name: name.value, cpf: cpf.value, email: email.value, password: password.value, phone: phone.value, city: city.value, address: address.value, cep: cep.value, cnh: cnh.value, car_model: car_model.value, car_plate: car_plate.value, car_color: car_color.value, comments: comments.value})
+      body: JSON.stringify({name: name.value, cnpj: cnpj.value, email: email.value, password: password.value, phoneResponsible: phoneResponsible.value, phoneCompany: phoneCompany.value, city: city.value, address: address.value, cep: cep.value, neighborhood: neighborhood.value, service: service.value, number: number.value, comments: comments.value, technician: technician.value})
     })
     .then((response) => {
       if (response.ok) {
-        alertMessage("success", "Técnico adicionado com sucesso.")
+        alertMessage("success", "Empresa atualizada com sucesso.")
       } else {
-        alertMessage("error", "Erro ao adicionar técnico")
+        alertMessage("error", "Erro ao atualizar empresa")
       }
     })
     .catch((error) => {
@@ -379,23 +428,22 @@
     })
   }
 
+  window.addEventListener('DOMContentLoaded', function () {
+    VMasker(document.getElementById('phone')).maskPattern('(99) 99999-9999');
+  });
+
   cep.addEventListener("input", function() {
     formatCEP(cep)
   })
 
-  document.querySelector("#cpf").addEventListener('input', function (e) {
-    var cpfValue = e.target.value.replace(/\D/g, '');
-
-    if (cpfValue.length > 11) {
-      cpfValue = cpfValue.slice(0, 11);
-    }
-
-    var x = cpfValue.match(/(\d{0,3})(\d{0,3})(\d{0,3})(\d{0,2})/);
-    e.target.value = !x[2] ? x[1] : x[1] + '.' + x[2] + '.' + x[3] + '-' + x[4];
+  cnpj.addEventListener('input', function (e) {
+    var x = e.target.value.replace(/\D/g, '').match(/(\d{0,2})(\d{0,3})(\d{0,3})(\d{0,4})(\d{0,2})/);
+    e.target.value = !x[2] ? x[1] : x[1] + '.' + x[2] + '.' + x[3] + '/' + x[4] + (x[5] ? '-' + x[5] : '');
   });
 
   window.addEventListener('DOMContentLoaded', function () {
-    VMasker(document.getElementById('phone')).maskPattern('(99) 99999-9999');
+    VMasker(document.getElementById('responsible-phone')).maskPattern('(99) 99999-9999');
+    VMasker(document.getElementById('company-phone')).maskPattern('(99) 99999-9999');
   });
 </script>
 </html>

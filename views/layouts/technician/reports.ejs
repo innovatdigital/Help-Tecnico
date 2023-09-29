@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<%- include('../partials/head', {title: "title"}) %>
+<%- include('../partials/head', {title: "Relatórios gerados"}) %>
 
 <body>
   <%- include('../partials/technician/sidebar-technician') %>
 
   <div class="lg:pl-70">
-    <%- include('../partials/admin/nav-admin', {isAdmin: isAdmin, title: "Todos os relatórios", notifications: notifications, photo: photo, name_user: name_user}) %>
+    <%- include('../partials/admin/nav-admin', {title: "Relatórios gerados", photo: photo, name_user: name_user}) %>
 
     <main class="py-5 fade-in">
       <div class="alert mt-14" style="display: none;"><div style="display: flex;" class="alert-text"></div></div>

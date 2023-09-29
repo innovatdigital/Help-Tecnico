@@ -189,7 +189,7 @@ const viewReport = asyncHandler(async (req, res) => {
 // ##    EQUIPAMENTOS    ## //
 // ######################## //
 
-const allEquipments = asyncHandler(async(req, res) => {
+const equipments = asyncHandler(async(req, res) => {
     const equipments = await Equipments.find({
         idCompany: { $in: req.user.responsibleCompanies }
     });
@@ -206,7 +206,7 @@ const allEquipments = asyncHandler(async(req, res) => {
         equipment.createdAtFormatted = createdAtFormatted
     }
 
-    res.render('layouts/technician/all-equipments', {isAdmin: true, notifications: req.user.notifications.reverse(), photo: req.user.photo, name_user: req.user.name, equipments: equipments})
+    res.render('layouts/technician/equipments', {isAdmin: true, notifications: req.user.notifications.reverse(), photo: req.user.photo, name_user: req.user.name, equipments: equipments})
 })
 
 
@@ -259,10 +259,10 @@ const saveEquipment = asyncHandler(async (req, res) => {
 // ##       EMPRESAS       ## //
 // ########################## //
 
-const allCompanies = asyncHandler(async(req, res) => {
+const companies = asyncHandler(async(req, res) => {
     const companies = await Company.find({technician: req.user._id})
 
-    res.render('layouts/technician/all-companies', {isAdmin: false, notifications: req.user.notifications.reverse(), photo: req.user.photo, name_user: req.user.name, companies: companies})
+    res.render('layouts/technician/companies', {isAdmin: false, notifications: req.user.notifications.reverse(), photo: req.user.photo, name_user: req.user.name, companies: companies})
 })
 
 const viewCompany = asyncHandler(async(req, res) => {
@@ -272,7 +272,7 @@ const viewCompany = asyncHandler(async(req, res) => {
     if (findCompany) {
         const callsCompany = await Calls.find({id_company: req.params.id})
 
-        res.render('layouts/technician/viewCompany', { isAdmin: false, notifications: req.user.notifications.reverse(), photo: req.user.photo, name_user: req.user.name, company: findCompany, calls: callsCompany.reverse(), equipments: equipments })
+        res.render('layouts/technician/view-company', { isAdmin: false, notifications: req.user.notifications.reverse(), photo: req.user.photo, name_user: req.user.name, company: findCompany, calls: callsCompany.reverse(), equipments: equipments })
     } else {
         res.render('layouts/404')
     }
@@ -299,7 +299,7 @@ const scanQrCode = asyncHandler(async (req, res) => {
 // ######################### //
 
 const account = asyncHandler(async (req, res) => {
-    res.render('layouts/technician/configurations', { user: req.user, notifications: req.user.notifications.reverse().slice(0, 5), photo: req.user.photo, name_user: req.user.name })
+    res.render('layouts/technician/account', { user: req.user, notifications: req.user.notifications.reverse().slice(0, 5), photo: req.user.photo, name_user: req.user.name })
 })
 
 const updateAccount = asyncHandler(async (req, res) => {
@@ -346,12 +346,12 @@ module.exports = {
 
     scanQrCode,
 
-    allEquipments,
+    equipments,
     newEquipment,
     viewEquipment,
     saveEquipment,
 
-    allCompanies,
+    companies,
     viewCompany,
 
     account,

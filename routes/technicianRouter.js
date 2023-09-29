@@ -23,12 +23,12 @@ const {
 
   scanQrCode,
 
-  allEquipments,
+  equipments,
   newEquipment,
   viewEquipment,
   saveEquipment,
 
-  allCompanies,
+  companies,
   viewCompany,
   
   updateAccount,
@@ -81,7 +81,7 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage: storage });
 
-router.get("/equipments", authMiddleware, allEquipments)
+router.get("/equipments", authMiddleware, equipments)
 router.get("/register-equipment", authMiddleware, newEquipment)
 router.get("/view-equipment/:id", authMiddleware, viewEquipment)
 router.put("/save-equipment", authMiddleware, saveEquipment)
@@ -107,7 +107,7 @@ router.post('/save-image-equipment', authMiddleware, upload.single('image'), fun
 // ##       EMPRESAS       ## //
 // ########################## //
 
-router.get("/companies", authMiddleware, allCompanies)
+router.get("/companies", authMiddleware, companies)
 router.get("/view-company/:id", authMiddleware, viewCompany)
 
 

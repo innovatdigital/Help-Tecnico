@@ -14,6 +14,7 @@ const moment = require('moment')
 
 const dashboard = asyncHandler(async(req, res) => {
     const calls = await Calls.find({id_company: req.user._id})
+    const equipments = await Equipments.find({idCompany: req.user._id}).count()
 
     for (const call of calls) {
         if (call.status != "pending" && call.id_technician.length > 0) {
@@ -28,7 +29,7 @@ const dashboard = asyncHandler(async(req, res) => {
         }
     }
 
-    res.render('layouts/company/dashboard', {photo: req.user.photo, name_user: req.user.name, service: req.user.service, calls: calls.reverse()})
+    res.render('layouts/company/dashboard', {photo: req.user.photo, name_user: req.user.name, service: req.user.service, calls: calls.reverse(), equipments: equipments})
 })
 
 

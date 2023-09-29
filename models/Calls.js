@@ -51,6 +51,15 @@ const Call = new mongoose.Schema({
     logo_company: {
         type: String,
     },
+    email_company: {
+        type: String,
+    },
+    phone_company: {
+        type: String,
+    },
+    logo_company: {
+        type: String,
+    },
     name_technician: {
         type: String,
     },

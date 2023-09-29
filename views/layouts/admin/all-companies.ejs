@@ -1,18 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<%- include('../partials/head', {title: "title"}) %>
+<%- include('../partials/head', {title: "Todas as empresas"}) %>
 
-<body>
-  <%- include('../partials/admin/sidebar-admin', {isAdmin: isAdmin}) %>
+<body class="bg-gray-100">
+  <%- include('../partials/admin/sidebar-admin') %>
 
   <div class="lg:pl-70">
-    <%- include('../partials/admin/nav-admin', {isAdmin: isAdmin, title: "Todas as empresas", notifications: notifications, photo: photo, name_user: name_user}) %>
+    <%- include('../partials/admin/nav-admin', {title: "Todas as empresas", photo: photo, name_user: name_user}) %>
 
     <main class="py-5 fade-in">
-      <div class="alert mt-14" style="display: none;"><div style="display: flex;" class="alert-text"></div></div>
-      <div class="error mt-14" style="display: none;"><div style="display: flex;" class="error-text"></div></div>
-
       <div class="px-4 sm:px-6 lg:pl-12 mt-2 col-span-3">
         <div class="sm:flex sm:justify-between sm:items-center">
           <h1 class="text-lg font-semibold leading-6 text-gray-900 inter color-purple"><span class="text-blue"><%= companies.length %> empresa(s)</span> cadastrada(s)</h1>

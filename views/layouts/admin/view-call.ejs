@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<%- include('../partials/head', {title: "title"}) %>
+<%- include('../partials/head', {title: "Visualizar chamado"}) %>
 
-<body>
+<body class="bg-gray-100">
   <%- include('../partials/admin/sidebar-admin') %>
 
   <div class="lg:pl-70">
-    <%- include('../partials/admin/nav-admin', {title: "Visualizar chamado", notifications: notifications, photo: photo, name_user: name_user}) %>
+    <%- include('../partials/admin/nav-admin', {title: "Visualizar chamado", photo: photo, name_user: name_user}) %>
 
     <main class="py-5 fade-in">
       <div class="hidden fade-in relative z-10" id="popup_technician" role="dialog" aria-modal="true">
@@ -106,7 +106,7 @@
               <div class="flex items-center space-x-5">
                 <div class="flex-shrink-0">
                   <div class="relative">
-                    <img class="h-16 w-16 rounded-full" src="/img/photos/<%= call.photoCompany %>" alt="">
+                    <img class="h-16 w-16 rounded-full" src="/img/photos/<%= call.photo_company %>" alt="">
                     <span class="absolute inset-0 rounded-full shadow-inner" aria-hidden="true"></span>
                   </div>
                 </div>
@@ -116,16 +116,17 @@
                 </div>
               </div>
               <div class="mt-6 flex flex-col-reverse justify-stretch space-y-4 space-y-reverse sm:flex-row-reverse sm:justify-end sm:space-x-3 sm:space-y-0 sm:space-x-reverse md:mt-0 md:flex-row md:space-x-3">
+                <% if (call.status != "canceled" && call.status != "concluded") { %>
+                  <button onclick="openSelectTechnician()" class="inline-flex items-center justify-center rounded-lg bg-blue px-3 py-2 text-sm font-semibold text-white shadow-sm inter">Designar técnico</button>
+                  <button class="inline-flex items-center justify-center rounded-lg bg-green-500 px-3 py-2 text-sm font-semibold text-white shadow-sm inter">Gerar orçamento</button>
+                  <button onclick="openCancel()" class="inline-flex items-center justify-center rounded-lg px-3 py-2 text-sm font-semibold text-white shadow-sm bg-red-600 inter">Cancelar chamado</button>
+                <% } %>
                 <a href="/admin/view-company/<%= call.id_company %>" class="inline-flex items-center justify-center rounded-lg bg-white px-3 py-2 text-sm font-semibold text-gray-900 border-2 shadow-sm inter">Ver empresa</a>
-                <button onclick="openSelectTechnician()" class="inline-flex items-center justify-center rounded-lg bg-blue px-3 py-2 text-sm font-semibold text-white shadow-sm inter">Designar técnico</button>
-                <button class="inline-flex items-center justify-center rounded-lg bg-green-500 px-3 py-2 text-sm font-semibold text-white shadow-sm inter">Gerar orçamento</button>
-                <button onclick="openCancel()" class="inline-flex items-center justify-center rounded-lg px-3 py-2 text-sm font-semibold text-white shadow-sm bg-red-600 inter">Cancelar chamado</button>
               </div>
             </div>
 
             <div class="mx-auto mt-8 grid grid-cols-1 gap-6 sm:px-6 lg:grid-flow-col-dense lg:grid-cols-3">
               <div class="space-y-6 lg:col-span-2 lg:col-start-1">
-                <!-- Description list-->
                 <section aria-labelledby="applicant-information-title">
                   <div class="bg-white shadow border sm:rounded-lg">
                     <div class="px-4 py-5 sm:px-6">
@@ -140,7 +141,7 @@
                         </div>
                         <div class="sm:col-span-1">
                           <dt class="text-sm font-semibold text-gray-500 inter">Endereço de email:</dt>
-                          <dd class="mt-1 text-sm text-gray-900 inter"><%= call.emailCompany %></dd>
+                          <dd class="mt-1 text-sm text-gray-900 inter"><%= call.email_company %></dd>
                         </div>
                         <div class="sm:col-span-1">
                           <dt class="text-sm font-semibold text-gray-500 inter">Data</dt>
@@ -148,11 +149,20 @@
                         </div>
                         <div class="sm:col-span-1">
                           <dt class="text-sm font-semibold text-gray-500 inter">Telefone</dt>
-                          <dd class="mt-1 text-sm text-gray-900 inter"><%= call.phoneCompany %></dd>
+                          <dd class="mt-1 text-sm text-gray-900 inter"><%= call.phone_company %></dd>
                         </div>
                         <div class="sm:col-span-2">
                           <dt class="text-md font-medium text-gray-500 inter">Descrição do chamado:</dt>
                           <dd class="mt-1 text-sm text-gray-900 inter inter font-medium"><%= call.description %></dd>
+                        </div>
+
+                        <div class="sm:col-span-2">
+                          <% if (!call.confirmed_code) { %>
+                            <dt class="text-md font-semibold text-yellow-500 inter">Código para iniciar a contagem do SLA: (Não validado)</dt>
+                          <% } else { %>
+                            <dt class="text-md font-semibold text-green-500 inter">Código para iniciar a contagem do SLA: (Validado)</dt>
+                          <% } %>
+                          <dd class="mt-1 text-sm text-gray-900 inter inter font-medium"><%= call.code %></dd>
                         </div>
 
                         <% if (call.status == "canceled") { %>
