@@ -42,7 +42,7 @@ const dashboard = asyncHandler(async(req, res) => {
         }
     }
 
-    res.render('layouts/admin/dashboard', {isAdmin: true, notifications: req.user.notifications.reverse(), photo: req.user.photo, name_user: req.user.name, calls: calls.reverse()})
+    res.render('layouts/admin/dashboard', {photo: req.user.photo, name_user: req.user.name, calls: calls.reverse()})
 })
 
 
@@ -79,7 +79,7 @@ const allCalls = asyncHandler(async(req, res) => {
         }
     }
 
-    res.render('layouts/admin/all-calls', {isAdmin: true, notifications: req.user.notifications.reverse(), photo: req.user.photo, name_user: req.user.name, calls: calls.reverse()})
+    res.render('layouts/admin/all-calls', {photo: req.user.photo, name_user: req.user.name, calls: calls.reverse()})
 })
 
 const viewCall = asyncHandler(async(req, res) => {
@@ -99,7 +99,7 @@ const viewCall = asyncHandler(async(req, res) => {
         findCall.phone_company = findCompany.phoneCompany
         findCall.photo_company = findCompany.photo
         
-        res.render('layouts/admin/view-call', {isAdmin: true, notifications: req.user.notifications.reverse(), photo: req.user.photo, name_user: req.user.name, call: findCall, technicians: technicians, equipments: equipments})
+        res.render('layouts/admin/view-call', {photo: req.user.photo, name_user: req.user.name, call: findCall, technicians: technicians, equipments: equipments})
     } else {
         res.render('layouts/notFound')
     }
@@ -176,7 +176,7 @@ const fileManager = asyncHandler(async(req, res) => {
           return fs.statSync(filePath).isDirectory();
         });
 
-        res.render('layouts/admin/file-manager', {isAdmin: true, notifications: req.user.notifications.reverse(), photo: req.user.photo, name_user: req.user.name, archives: [], folders: folders})
+        res.render('layouts/admin/file-manager', {photo: req.user.photo, name_user: req.user.name, archives: [], folders: folders})
     });
 })
 
@@ -223,7 +223,7 @@ const allReports = asyncHandler(async(req, res) => {
         createdAt: "16/02/2023"
     }]
 
-    res.render('layouts/admin/all-reports', {isAdmin: true, notifications: req.user.notifications.reverse(), photo: req.user.photo, name_user: req.user.name, reports: reports})
+    res.render('layouts/admin/all-reports', {photo: req.user.photo, name_user: req.user.name, reports: reports})
 })
 
 const viewReport = asyncHandler(async(req, res) => {
@@ -265,18 +265,21 @@ const viewBudget = asyncHandler(async(req, res) => {
 // ########################## //
 
 const allEquipments = asyncHandler(async(req, res) => {
-    const equipments = [{
-        _id: "6501f97cd7c07a0535820364",
-        image: "https://s.zst.com.br/cms-assets/2021/10/cuidados-com-o-ar-condicionado.jpg",
-        model: "Ar condicionado Split",
-        imageCompany: "28730ff9-70c4-4270-898f-903dda65c5be-1694625282204-934505504.png",
-        nameCompany: "Innovat Digital",
-        status: "Funcionando corretamente",
-        maintances: 2,
-        createdAt: "16/02/2023"
-    }]
+    const equipments = await Equipments.find({})
 
-    res.render('layouts/admin/all-equipments', {isAdmin: true, notifications: req.user.notifications.reverse(), photo: req.user.photo, name_user: req.user.name, equipments: equipments})
+    for (const equipment of equipments) {
+        const findCompany = await Company.findById(equipment.idCompany).select("name photo")
+
+        equipment.nameCompany = findCompany.name
+        equipment.photoCompany = findCompany.photo
+
+        const dateCreatedAt = moment.utc(equipment.createdAt);
+        const createdAtFormatted = dateCreatedAt.format("DD/MM/YYYY");
+    
+        equipment.createdAtFormatted = createdAtFormatted
+    }
+
+    res.render('layouts/admin/all-equipments', {photo: req.user.photo, name_user: req.user.name, equipments: equipments})
 })
 
 const viewEquipment = asyncHandler(async (req, res) => {
@@ -300,11 +303,11 @@ const viewEquipment = asyncHandler(async (req, res) => {
 const administrators = asyncHandler(async(req, res) => {
     const findAdmins = await Admin.find({})
 
-    res.render('layouts/admin/administrators', {isAdmin: true, notifications: req.user.notifications.reverse(), photo: req.user.photo, name_user: req.user.name, administrators: findAdmins})
+    res.render('layouts/admin/administrators', {photo: req.user.photo, name_user: req.user.name, administrators: findAdmins})
 })
 
 const newAdmin = asyncHandler(async(req, res) => {
-    res.render('layouts/admin/new-admin', { isAdmin: true, notifications: req.user.notifications.reverse(), photo: req.user.photo, name_user: req.user.name })
+    res.render('layouts/admin/new-admin', { photo: req.user.photo, name_user: req.user.name })
 })
 
 const saveAdmin = asyncHandler(async(req, res) => {
@@ -331,7 +334,7 @@ const saveAdmin = asyncHandler(async(req, res) => {
 // ########################### //
 
 const testUsers = asyncHandler(async(req, res) => {
-    res.render('layouts/admin/test-users', {isAdmin: true, notifications: req.user.notifications.reverse(), photo: req.user.photo, name_user: req.user.name})
+    res.render('layouts/admin/test-users', {photo: req.user.photo, name_user: req.user.name})
 })
 
 const newTester = asyncHandler(async(req, res) => {
@@ -351,7 +354,7 @@ const newTester = asyncHandler(async(req, res) => {
 const technicians = asyncHandler(async(req, res) => {
     const findTechnicians = await Technician.find({})
 
-    res.render('layouts/admin/technicians', {isAdmin: true, notifications: req.user.notifications.reverse(), photo: req.user.photo, name_user: req.user.name, technicians: findTechnicians})
+    res.render('layouts/admin/technicians', {photo: req.user.photo, name_user: req.user.name, technicians: findTechnicians})
 })
 
 const viewTechnician = asyncHandler(async(req, res) => {
@@ -360,14 +363,14 @@ const viewTechnician = asyncHandler(async(req, res) => {
     if (findTechnician) {
         let callsTechnician = await Calls.find({id_technician: req.params.id})
         
-        res.render('layouts/admin/view-technician', {isAdmin: true, notifications: req.user.notifications.reverse(), photo: req.user.photo, name_user: req.user.name, technician: findTechnician, calls: callsTechnician})
+        res.render('layouts/admin/view-technician', {photo: req.user.photo, name_user: req.user.name, technician: findTechnician, calls: callsTechnician})
     } else {
         res.render('layouts/notFound')
     }
 })
 
 const newTechnician = asyncHandler(async(req, res) => {
-    res.render('layouts/admin/new-technician', { isAdmin: true, notifications: req.user.notifications.reverse(), photo: req.user.photo, name_user: req.user.name })
+    res.render('layouts/admin/new-technician', { photo: req.user.photo, name_user: req.user.name })
 })
 
 const saveTechnician = asyncHandler(async(req, res) => {
@@ -399,7 +402,7 @@ const updateTechnician = asyncHandler(async(req, res) => {
     const findTechnician = await Technician.findById(req.params.id)
 
     if (findTechnician) {
-        res.render('layouts/admin/update-technician', { isAdmin: true, notifications: req.user.notifications.reverse(), photo: req.user.photo, name_user: req.user.name, technician: findTechnician })
+        res.render('layouts/admin/update-technician', { photo: req.user.photo, name_user: req.user.name, technician: findTechnician })
     } else {
         res.render('layouts/notFound')
     }
@@ -431,13 +434,20 @@ const deleteTechnician = asyncHandler(async(req, res) => {
 const allCompanies = asyncHandler(async(req, res) => {
     const companies = await Company.find({})
 
-    res.render('layouts/admin/all-companies', {isAdmin: true, notifications: req.user.notifications.reverse(), photo: req.user.photo, name_user: req.user.name, companies: companies.reverse()})
+    for (const company of companies) {
+        const dateCreatedAt = moment.utc(company.createdAt);
+        const createdAtFormatted = dateCreatedAt.format("DD/MM/YYYY");
+    
+        company.createdAtFormatted = createdAtFormatted
+    }
+
+    res.render('layouts/admin/all-companies', {photo: req.user.photo, name_user: req.user.name, companies: companies.reverse()})
 })
 
 const newCompany = asyncHandler(async(req, res) => {
     const technicians = await Technician.find({}).select("name")
 
-    res.render('layouts/admin/new-company', { isAdmin: true, notifications: req.user.notifications.reverse(), photo: req.user.photo, name_user: req.user.name, technicians: technicians })
+    res.render('layouts/admin/new-company', { photo: req.user.photo, name_user: req.user.name, technicians: technicians })
 })
 
 const saveCompany = asyncHandler(async(req, res) => {
@@ -474,12 +484,13 @@ const saveCompany = asyncHandler(async(req, res) => {
 })
 
 const viewCompany = asyncHandler(async(req, res) => {
+    const equipmentsCompany = await Equipments.find({idCompany: req.params.id})
     const findCompany = await Company.findById(req.params.id)
 
     if (findCompany) {
         const callsCompany = await Calls.find({id_company: req.params.id})
 
-        res.render('layouts/admin/view-company', { isAdmin: true, notifications: req.user.notifications.reverse(), photo: req.user.photo, name_user: req.user.name, company: findCompany, calls: callsCompany })
+        res.render('layouts/admin/view-company', { photo: req.user.photo, name_user: req.user.name, company: findCompany, calls: callsCompany.reverse(), equipments: equipmentsCompany })
     } else {
         res.render('layouts/404')
     }
@@ -490,7 +501,7 @@ const updateCompany = asyncHandler(async(req, res) => {
     const technicians = await Technician.find({}).select("name")
 
     if (findCompany) {
-        res.render('layouts/admin/update-company', { isAdmin: true, notifications: req.user.notifications.reverse(), photo: req.user.photo, name_user: req.user.name, company: findCompany, technicians: technicians })
+        res.render('layouts/admin/update-company', { photo: req.user.photo, name_user: req.user.name, company: findCompany, technicians: technicians })
     } else {
         res.render('layouts/404')
     }
@@ -522,11 +533,11 @@ const deleteCompany = asyncHandler(async(req, res) => {
 const allSuppliers = asyncHandler(async(req, res) => {
     const suppliers = await Suppliers.find({})
 
-    res.render('layouts/admin/all-suppliers', {isAdmin: true, notifications: req.user.notifications.reverse(), photo: req.user.photo, name_user: req.user.name, suppliers: suppliers.reverse()})
+    res.render('layouts/admin/all-suppliers', {photo: req.user.photo, name_user: req.user.name, suppliers: suppliers.reverse()})
 })
 
 const newSupplier = asyncHandler(async(req, res) => {
-    res.render('layouts/admin/new-supplier', { isAdmin: true, notifications: req.user.notifications.reverse(), photo: req.user.photo, name_user: req.user.name })
+    res.render('layouts/admin/new-supplier', { photo: req.user.photo, name_user: req.user.name })
 })
 
 const saveSupplier = asyncHandler(async(req, res) => {
@@ -558,7 +569,7 @@ const viewSupplier = asyncHandler(async(req, res) => {
     const findSupplier = await Suppliers.findById(req.params.id)
 
     if (findSupplier) {
-        res.render('layouts/admin/view-supplier', { isAdmin: true, notifications: req.user.notifications.reverse(), photo: req.user.photo, name_user: req.user.name, supplier: findSupplier })
+        res.render('layouts/admin/view-supplier', { photo: req.user.photo, name_user: req.user.name, supplier: findSupplier })
     } else {
         res.render('layouts/notFound')
     }
@@ -568,7 +579,7 @@ const updateSupplier = asyncHandler(async(req, res) => {
     const findSupplier = await Suppliers.findById(req.params.id)
 
     if (findSupplier) {
-        res.render('layouts/admin/update-supplier', { isAdmin: true, notifications: req.user.notifications.reverse(), photo: req.user.photo, name_user: req.user.name, supplier: findSupplier })
+        res.render('layouts/admin/update-supplier', { photo: req.user.photo, name_user: req.user.name, supplier: findSupplier })
     } else {
         res.render('layouts/notFound')
     }
@@ -598,7 +609,7 @@ const deleteSupplier = asyncHandler(async(req, res) => {
 // ######################### //
 
 const invoices = asyncHandler(async(req, res) => {
-    res.render('layouts/admin/invoices', {isAdmin: true, notifications: req.user.notifications.reverse(), photo: req.user.photo, name_user: req.user.name})
+    res.render('layouts/admin/invoices', {photo: req.user.photo, name_user: req.user.name})
 })
 
 

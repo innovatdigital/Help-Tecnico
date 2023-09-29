@@ -65,17 +65,13 @@ const Company = new mongoose.Schema({
         type: Boolean,
         default: false
     },
-    notifications: {
-        type: Array,
-        default: []
-    },
     photo: {
         type: String,
         default: "" 
     },
-    notificationEmail: {
-        type: Boolean,
-        default: true
+    createdAtFormatted: {
+        type: String,
+        require: true
     },
     calls: {
         type: Array,

@@ -392,7 +392,6 @@
               <h2 class="inter font-bold text-gray-700 text-lg">PMOC da empresa:</h2>
             </div>
 
-            <h1 class="inter font-semibold text-blue">Nenhum PMOC disponivel</h1>
             <iframe src="/pmoc.pdf" id="pre" class="w-full mt-3 rounded-lg" height="400" allowfullscreen webkitallowfullscreen></iframe>
           </div>
         <% } else if (company.service == "equipment-list") { %>
@@ -401,7 +400,6 @@
               <h2 class="inter font-bold text-gray-700 text-lg">Lista de equipamentos da empresa:</h2>
             </div>
 
-            <h1 class="inter font-semibold text-blue">Nenhuma lista de equipamentos disponivel</h1>
             <iframe src="/equipments.pdf" class="w-full mt-3 rounded-lg" height="400" allowfullscreen webkitallowfullscreen></iframe>
           </div>
         <% } %>
@@ -410,24 +408,28 @@
           <div class="flex">
             <h2 class="inter font-bold text-gray-700 text-lg">Equipamentos da empresa:</h2>
           </div>
-
-          <h1 class="inter font-semibold text-blue">Nenhum equipamento disponivel</h1>
-
-          <ul role="list" class="mt-4 space-y-2">
-            <li class="flex items-center space-x-4 rounded-lg border">
-              <div>
-                <img class="w-32 h-20 rounded-l-lg" src="https://s.zst.com.br/cms-assets/2021/10/cuidados-com-o-ar-condicionado.jpg" alt="">
-              </div>
-
-              <div>
-                <h2 class="text-sm font-bold text-gray-800 inter">Ar condicionado</h2>
-                <h2 class="text-xs mt-0.5 font-semibold text-gray-800 inter">ID na base: <span class="text-blue">#224242</span></h2>
-                <div>
-                  <a href="/company/view-equipment" class="text-blue mt-2 text-sm font-semibold inter underline">Ver equipamento</a>
-                </div>
-              </div>
-            </li>
-          </ul>
+          
+          <% if (equipments.length > 0) { %>
+            <ul role="list" class="mt-4 space-y-2">
+              <% equipments.forEach(item => { %>
+                <li class="flex items-center space-x-4 rounded-lg border">
+                  <div>
+                    <img class="w-32 h-20 rounded-l-lg" src="/img/equipments/<%= item.imageFile %>" alt="">
+                  </div>
+  
+                  <div>
+                      <h2 class="text-sm font-bold text-gray-800 inter"><%= item.model %></h2>
+                      <h2 class="text-xs mt-0.5 font-semibold text-gray-800 inter">Marca: <span class="text-blue"><%= item.brand %></span></h2>
+                      <div>
+                        <a href="/admin/view-equipment/<%= item._id %>" class="text-blue mt-2 text-sm font-semibold inter underline">Ver equipamento</a>
+                      </div>
+                  </div>
+                </li>
+              <% }) %>
+            </ul>
+          <% } else { %>
+            <h1 class="inter font-semibold text-blue">Nenhum equipamento disponivel</h1>
+          <% } %>
         </div>
 
         <div class="bg-white rounded-xl shadow-lg border p-4 px-5 col-span-1">

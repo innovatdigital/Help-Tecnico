@@ -86,7 +86,7 @@ const viewCall = asyncHandler(async(req, res) => {
     call.phoneCompany = req.user.phoneCompany
     call.photoCompany = req.user.photo
 
-    res.render('layouts/company/view-call', {isAdmin: true, notifications: req.user.notifications.reverse(), photo: req.user.photo, name_user: req.user.name, service: req.user.service, call: call, equipments: equipments})
+    res.render('layouts/company/view-call', {photo: req.user.photo, name_user: req.user.name, service: req.user.service, call: call, equipments: equipments})
 })
 
 const saveCall = asyncHandler(async(req, res) => {

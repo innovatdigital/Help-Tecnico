@@ -51,17 +51,24 @@
                         <tr>
                           <td class="whitespace-nowrap inter py-4 text-sm inter text-gray-800 font-semibold">
                             <div class="flex items-center ml-5">
-                              <% if (item.image.length > 0) { %>
-                                <img class="h-16 w-226 rounded-lg" src="<%= item.image %>">
+                              <% if (item.imageFile.length > 0) { %>
+                                <img class="h-16 w-226 rounded-lg" src="/img/equipments/<%= item.imageFile %>">
                               <% } %>
-                              <p class="inter ml-4"><%= item.model %></p>
                             </div>
                           </td>
 
                           <td class="whitespace-nowrap px-3 py-4 text-sm inter text-gray-800 font-semibold">
+                            <%= item.model %>
+                          </td>
+
+                          <td class="whitespace-nowrap px-3 py-4 text-sm inter text-gray-800 font-semibold">
+                            <%= item.brand %>
+                          </td>
+
+                          <td class="whitespace-nowrap px-3 py-4 text-sm inter text-gray-800 font-semibold">
                             <div class="flex items-center">
-                              <% if (item.imageCompany.length > 0) { %>
-                                <img class="h-9 w-9 rounded-full" src="/img/photos/<%= item.imageCompany %>">
+                              <% if (item.photoCompany.length > 0) { %>
+                                <img class="h-9 w-9 rounded-full" src="/img/photos/<%= item.photoCompany %>">
                               <% } else { %>
                                 <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
                                   <g clip-path="url(#clip0_1_8)">
@@ -96,15 +103,15 @@
                           </td>
 
                           <td class="whitespace-nowrap px-3 py-4 text-sm inter text-gray-800 font-semibold">
-                            <%= item.maintances %> manutenções
+                            <%= item.btus %> BTUs
                           </td>
 
                           <td class="whitespace-nowrap px-3 py-4 text-sm inter text-gray-800 font-semibold">
-                            <%= item.createdAt %>
+                            <%= item.createdAtFormatted %>
                           </td>
   
                           <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 inter color-purple font-semibold">
-                            <a href="/admin/view-report/<%= item._id %>" class="flex items-center pointer">
+                            <a href="/admin/view-equipment/<%= item._id %>" class="flex items-center pointer">
                               <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" class="mr-2">
                                 <path opacity="0.5" d="M2.73038 12.7463C2.0221 11.8262 1.66797 11.3661 1.66797 9.99992C1.66797 8.63375 2.0221 8.17369 2.73038 7.25353C4.1446 5.41622 6.51639 3.33325 10.0013 3.33325C13.4862 3.33325 15.858 5.41622 17.2722 7.25353C17.9805 8.17369 18.3346 8.63375 18.3346 9.99992C18.3346 11.3661 17.9805 11.8262 17.2722 12.7463C15.858 14.5836 13.4862 16.6666 10.0013 16.6666C6.51639 16.6666 4.1446 14.5836 2.73038 12.7463Z" stroke="#0E1726" stroke-width="1.25"/>
                                 <path d="M12.5 10C12.5 11.3807 11.3807 12.5 10 12.5C8.61925 12.5 7.5 11.3807 7.5 10C7.5 8.61925 8.61925 7.5 10 7.5C11.3807 7.5 12.5 8.61925 12.5 10Z" stroke="#0E1726" stroke-width="1.25"/>

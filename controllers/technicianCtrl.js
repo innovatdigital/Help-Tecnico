@@ -33,7 +33,7 @@ const calls = asyncHandler(async (req, res) => {
         calls.push(...foundCalls)
     }
 
-    res.render('layouts/technician/calls', { notifications: req.user.notifications.reverse().slice(0, 5), photo: req.user.photo, name_user: req.user.name, calls: calls.reverse() })
+    res.render('layouts/technician/calls', { photo: req.user.photo, name_user: req.user.name, calls: calls.reverse() })
 })
 
 const viewCall = asyncHandler(async (req, res) => {
@@ -52,7 +52,7 @@ const viewCall = asyncHandler(async (req, res) => {
     call.phoneCompany = findCompany.phoneCompany
     call.photoCompany = findCompany.photo
 
-    res.render('layouts/technician/view-call', { isAdmin: true, notifications: req.user.notifications.reverse(), photo: req.user.photo, name_user: req.user.name, call: call, equipments: equipments })
+    res.render('layouts/technician/view-call', { photo: req.user.photo, name_user: req.user.name, call: call, equipments: equipments })
 })
 
 const initiateCall = asyncHandler(async (req, res) => {
@@ -174,11 +174,11 @@ const reports = asyncHandler(async (req, res) => {
         createdAt: "16/02/2023"
     }]
 
-    res.render('layouts/technician/reports', { isAdmin: true, notifications: req.user.notifications.reverse(), photo: req.user.photo, name_user: req.user.name, reports: reports })
+    res.render('layouts/technician/reports', { photo: req.user.photo, name_user: req.user.name, reports: reports })
 })
 
 const viewReport = asyncHandler(async (req, res) => {
-    res.render('layouts/technician/view-report', { notifications: req.user.notifications.reverse().slice(0, 5), photo: req.user.photo, name_user: req.user.name })
+    res.render('layouts/technician/view-report', { photo: req.user.photo, name_user: req.user.name })
 })
 
 
@@ -206,14 +206,14 @@ const equipments = asyncHandler(async(req, res) => {
         equipment.createdAtFormatted = createdAtFormatted
     }
 
-    res.render('layouts/technician/equipments', {isAdmin: true, notifications: req.user.notifications.reverse(), photo: req.user.photo, name_user: req.user.name, equipments: equipments})
+    res.render('layouts/technician/equipments', {photo: req.user.photo, name_user: req.user.name, equipments: equipments})
 })
 
 
 const newEquipment = asyncHandler(async (req, res) => {
     const companies = await Company.find({technician: req.user._id})
 
-    res.render('layouts/technician/register-equipment', { notifications: req.user.notifications.reverse().slice(0, 5), photo: req.user.photo, name_user: req.user.name, companies: companies })
+    res.render('layouts/technician/register-equipment', { photo: req.user.photo, name_user: req.user.name, companies: companies })
 })
 
 const viewEquipment = asyncHandler(async (req, res) => {
@@ -221,7 +221,7 @@ const viewEquipment = asyncHandler(async (req, res) => {
     const company = await Company.findById(equipment.idCompany).select("name photo")
 
     if (equipment && company) {
-        res.render('layouts/technician/view-equipment', { notifications: req.user.notifications.reverse().slice(0, 5), photo: req.user.photo, name_user: req.user.name, equipment: equipment, company: company })
+        res.render('layouts/technician/view-equipment', { photo: req.user.photo, name_user: req.user.name, equipment: equipment, company: company })
     } else {
         res.render('layouts/notFound')
     }
@@ -287,7 +287,7 @@ const viewCompany = asyncHandler(async(req, res) => {
 // ######################### //
 
 const scanQrCode = asyncHandler(async (req, res) => {
-    res.render('layouts/technician/scan-qr-code', { notifications: req.user.notifications.reverse().slice(0, 5), photo: req.user.photo, name_user: req.user.name })
+    res.render('layouts/technician/scan-qr-code', { photo: req.user.photo, name_user: req.user.name })
 })
 
 
@@ -299,7 +299,7 @@ const scanQrCode = asyncHandler(async (req, res) => {
 // ######################### //
 
 const account = asyncHandler(async (req, res) => {
-    res.render('layouts/technician/account', { user: req.user, notifications: req.user.notifications.reverse().slice(0, 5), photo: req.user.photo, name_user: req.user.name })
+    res.render('layouts/technician/account', { user: req.user, photo: req.user.photo, name_user: req.user.name })
 })
 
 const updateAccount = asyncHandler(async (req, res) => {
