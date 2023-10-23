@@ -1,13 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
+<%- include('../../partials/head', {title: "Dashboard"}) %>
 
-<%- include('../partials/head', {title: "Dashboard"}) %>
-
-<body class="bg-gray-50">
-  <%- include('../partials/company/sidebar-company', {service: service}) %>
+<body class="bg-gray-100">
+  <%- include('../../partials/sidebar', {user: user}) %>
 
   <div class="lg:pl-70">
-    <%- include('../partials/company/nav-company', {title: "Dashboard", photo: photo, name_user: name_user}) %>
+    <%- include('../../partials/nav', {title: "Dashboard"}) %>
 
     <main class="py-4 fade-in">
       <div class="grid grid-cols-1 sm:grid-cols-1 lg:grid-cols-1 lg:pr-12">

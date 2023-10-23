@@ -1,18 +1,12 @@
-<!DOCTYPE html>
-<html lang="en">
+<%- include('../../partials/head', {title: "Relatórios"}) %>
 
-<%- include('../partials/head', {title: "Relatórios gerados"}) %>
-
-<body>
-  <%- include('../partials/technician/sidebar-technician') %>
+<body class="bg-gray-100">
+  <%- include('../../partials/sidebar', {user: user}) %>
 
   <div class="lg:pl-70">
-    <%- include('../partials/admin/nav-admin', {title: "Relatórios gerados", photo: photo, name_user: name_user}) %>
+    <%- include('../../partials/nav', {title: "Relatórios"}) %>
 
     <main class="py-5 fade-in">
-      <div class="alert mt-14" style="display: none;"><div style="display: flex;" class="alert-text"></div></div>
-      <div class="error mt-14" style="display: none;"><div style="display: flex;" class="error-text"></div></div>
-
       <div class="px-4 sm:px-6 lg:pl-12 mt-2 col-span-3">
         <div class="sm:flex sm:justify-between sm:items-center">
           <h1 class="text-lg font-semibold leading-6 text-gray-900 inter color-purple"><span class="text-blue"><%= reports.length %> relatório(s)</span> encontrado(s)</h1>

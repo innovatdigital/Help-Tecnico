@@ -1,18 +1,12 @@
 const express = require('express')
 const router = express.Router()
+
 const { 
-    Page,
-    Login,
-    logout
+    page,
+    login
 } = require('../controllers/authCtrl')
 
-const {
-    authMiddleware
-} = require('../middlewares/authMiddleware')
-
-
-router.get("/", Page)
-router.post("/auth", Login)
-router.get("/logout", logout)
+router.get("/", page)
+router.post("/handle-login", login)
 
 module.exports = router

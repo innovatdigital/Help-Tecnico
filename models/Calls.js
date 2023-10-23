@@ -1,14 +1,17 @@
 const mongoose = require('mongoose')
+const { Schema } = mongoose;
 
 const Call = new mongoose.Schema({
     description: {
         type: String,
     },
-    id_company: {
-        type: String,
+    idCompany: {
+        type: Schema.Types.ObjectId,
+        ref: 'Companies'
     },
-    id_technician: {
-        type: String,
+    idTechnician: {
+        type: Schema.Types.ObjectId,
+        ref: 'Technicians'
     },
     photos: {
         type: Array,
@@ -26,13 +29,10 @@ const Call = new mongoose.Schema({
         type: Array,
         default: []
     },
-    date: {
+    startTime: {
         type: String,
     },
-    start_time: {
-        type: String,
-    },
-    end_time: {
+    endTime: {
         type: String,
     },
     status: {
@@ -41,35 +41,32 @@ const Call = new mongoose.Schema({
     code: {
         type: Number,
     },
-    confirmed_code: {
+    confirmedCode: {
         type: Boolean,
         default: false
     },
-    name_company: {
+    nameCompany: {
         type: String,
     },
-    logo_company: {
+    avatarCompany: {
         type: String,
     },
-    email_company: {
+    emailCompany: {
         type: String,
     },
-    phone_company: {
+    phoneCompany: {
         type: String,
     },
-    logo_company: {
+    nameTechnician: {
         type: String,
     },
-    name_technician: {
-        type: String,
-    },
-    photo_technician: {
+    avatarTechnician: {
         type: String,
     },
     sla: {
         type: String,
     },
-    cancellation_message: {
+    cancellationMessage: {
         type: String,
     }
     },

@@ -8,11 +8,7 @@ const Billing = new mongoose.Schema({
     value: {
         type: String,
         require: true
-    },
-    date: {
-        type: Date,
-        default: Date.now()
-    },
+    }
     },
     {
         timestamps: true,

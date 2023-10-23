@@ -1,30 +1,50 @@
-<!DOCTYPE html>
-<html lang="en">
+<%- include('../../partials/head', {title: "Escanear QR Code"}) %>
 
-<%- include('../partials/head', {title: "Escaner QR Code"}) %>
-
-<body>
-  <%- include('../partials/technician/sidebar-technician') %>
+<body class="bg-gray-100">
+  <%- include('../../partials/sidebar', {user: user}) %>
 
   <div class="lg:pl-70">
-    <%- include('../partials/technician/nav-technician', {title: "Escanear QR Code", photo: photo, name_user: name_user}) %>
+    <%- include('../../partials/nav', {title: "Escanear QR Code"}) %>
 
-    <main id="main" class="py-5 fade-in"></main>
+    <main class="p-4 fade-in">
+      <video class="w-full h-full rounded-lg" id="qr-video"></video>
+
+      <div class="flex flex-col justify-center items-center mt-40 hidden" id="not-available">
+        <svg width="121" height="121" viewBox="0 0 121 121" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <g clip-path="url(#clip0_89_43)">
+          <path d="M60.5 48.6836C56.2933 48.6836 52.181 49.931 48.6833 52.2682C45.1855 54.6053 42.4594 57.9271 40.8495 61.8136C39.2397 65.7001 38.8185 69.9767 39.6392 74.1026C40.4598 78.2285 42.4856 82.0184 45.4602 84.993C48.4348 87.9676 52.2246 89.9933 56.3505 90.814C60.4764 91.6347 64.753 91.2135 68.6395 89.6036C72.526 87.9938 75.8478 85.2676 78.185 81.7699C80.5221 78.2721 81.7695 74.1599 81.7695 69.9531C81.7633 64.314 79.5204 58.9077 75.5329 54.9202C71.5455 50.9328 66.1391 48.6899 60.5 48.6836ZM60.5 63.4139C58.7663 63.4158 57.1041 64.1054 55.8782 65.3313C54.6522 66.5572 53.9627 68.2194 53.9608 69.9531C53.9608 70.8933 53.5873 71.795 52.9225 72.4598C52.2577 73.1246 51.3561 73.4981 50.4159 73.4981C49.4757 73.4981 48.574 73.1246 47.9092 72.4598C47.2444 71.795 46.871 70.8933 46.871 69.9531C46.8747 66.3396 48.3118 62.8752 50.867 60.3201C53.4221 57.765 56.8865 56.3278 60.5 56.3241C61.4402 56.3241 62.3418 56.6976 63.0066 57.3624C63.6714 58.0272 64.0449 58.9288 64.0449 59.869C64.0449 60.8092 63.6714 61.7109 63.0066 62.3757C62.3418 63.0405 61.4402 63.4139 60.5 63.4139ZM28.8911 20.3242V19.6152C28.8911 17.9229 28.2188 16.2999 27.0222 15.1033C25.8256 13.9066 24.2026 13.2344 22.5103 13.2344H16.3657C14.6734 13.2344 13.0504 13.9066 11.8538 15.1033C10.6571 16.2999 9.98486 17.9229 9.98486 19.6152V20.3242H28.8911ZM93.5859 20.3242V14.8887C93.5859 13.1964 92.9137 11.5734 91.717 10.3767C90.5204 9.18008 88.8974 8.50781 87.2051 8.50781H69.0078C67.3155 8.50781 65.6925 9.18008 64.4959 10.3767C63.2992 11.5734 62.627 13.1964 62.627 14.8887V20.3242H93.5859ZM62.6978 27.4141C62.9243 28.9256 63.6858 30.3057 64.8438 31.3032C66.0018 32.3008 67.4794 32.8495 69.0078 32.8496H87.2051C88.7335 32.8495 90.2111 32.3008 91.3691 31.3032C92.5271 30.3057 93.2886 28.9256 93.515 27.4141H62.6978Z" fill="#239CFF"/>
+          <path d="M111.311 27.4141H9.68945C7.11965 27.4141 4.6551 28.4349 2.83798 30.252C1.02085 32.0692 0 34.5337 0 37.1035L0 102.803C0 105.373 1.02085 107.837 2.83798 109.654C4.6551 111.471 7.11965 112.492 9.68945 112.492H111.311C113.88 112.492 116.345 111.471 118.162 109.654C119.979 107.837 121 105.373 121 102.803V37.1035C121 34.5337 119.979 32.0692 118.162 30.252C116.345 28.4349 113.88 27.4141 111.311 27.4141ZM60.5 98.3125C54.891 98.3125 49.4081 96.6493 44.7444 93.5331C40.0807 90.4169 36.4458 85.9878 34.2994 80.8058C32.1529 75.6238 31.5913 69.9217 32.6855 64.4205C33.7798 58.9193 36.4808 53.8661 40.4469 49.9C44.413 45.9339 49.4662 43.2329 54.9674 42.1387C60.4685 41.0444 66.1707 41.606 71.3527 43.7525C76.5347 45.8989 80.9638 49.5338 84.08 54.1975C87.1961 58.8612 88.8594 64.3442 88.8594 69.9531C88.8512 77.472 85.8608 84.6806 80.5441 89.9973C75.2275 95.3139 68.0189 98.3044 60.5 98.3125ZM101.148 48.6836C100.447 48.6836 99.7619 48.4757 99.179 48.0862C98.596 47.6966 98.1417 47.143 97.8734 46.4953C97.6051 45.8475 97.5348 45.1347 97.6716 44.4471C97.8084 43.7594 98.146 43.1278 98.6418 42.632C99.1376 42.1363 99.7692 41.7986 100.457 41.6619C101.145 41.5251 101.857 41.5953 102.505 41.8636C103.153 42.1319 103.706 42.5863 104.096 43.1692C104.485 43.7522 104.693 44.4376 104.693 45.1387C104.693 46.0788 104.32 46.9805 103.655 47.6453C102.99 48.3101 102.089 48.6836 101.148 48.6836Z" fill="#239CFF"/>
+          </g>
+          <defs>
+          <clipPath id="clip0_89_43">
+          <rect width="121" height="121" fill="white"/>
+          </clipPath>
+          </defs>
+        </svg>                              
+        <h2 class="inter text-xl font-semibold mt-10">Nenhuma câmera disponível</h2>
+        <p class="inter">Seu dispositivo não possui uma câmera.</p>           
+      </div>
+    </main>
   </div>
 </body>
 
-<script>
+<script type="module">
+  import QrScanner from '/js/qr-scanner.min.js'
+
+  const video = document.getElementById("qr-video")
+  const notAvailable = document.getElementById("not-available")
+
+  const qrScanner = new QrScanner(
+    video,
+    resultQrCode => location.href = resultQrCode,
+  );
+
   document.addEventListener("DOMContentLoaded", async function() {
-    if ('mediaDevices' in navigator && 'getUserMedia' in navigator.mediaDevices) {
-      const stream = await navigator.mediaDevices.getUserMedia({ video: true });
-
-      const videoElement = document.createElement('video');
-      videoElement.srcObject = stream;
-      document.querySelector("#main").appendChild(videoElement);
-
-      videoElement.play();
+    if (await QrScanner.hasCamera()) {
+      video.classList.remove("hidden")
+      qrScanner.start()
     } else {
-      console.error('A API de câmera não é suportada neste navegador.');
+      notAvailable.classList.remove("hidden")
     }
   })
 </script>

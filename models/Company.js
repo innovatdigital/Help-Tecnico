@@ -65,7 +65,7 @@ const Company = new mongoose.Schema({
         type: Boolean,
         default: false
     },
-    photo: {
+    avatar: {
         type: String,
         default: "" 
     },

@@ -1,13 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
+<%- include('../../partials/head', {title: "Visualizar empresa"}) %>
 
-<%- include('../partials/head', {title: "Visualizar empresa"}) %>
-
-<body>
-  <%- include('../partials/technician/sidebar-technician') %>
+<body class="bg-gray-100">
+  <%- include('../../partials/sidebar', {user: user}) %>
 
   <div class="lg:pl-70">
-    <%- include('../partials/technician/nav-technician', {title: "Visualizar empresa", photo: photo, name_user: name_user}) %>
+    <%- include('../../partials/nav', {title: "Visualizar empresa"}) %>
 
     <main class="py-8 px-12 fade-in">
       <div class="alert mt-10" style="display: none;"><div style="display: flex;" class="alert-text"></div></div>

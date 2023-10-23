@@ -21,7 +21,7 @@ const Supplier = new mongoose.Schema({
         type: String,
         require: true
     },
-    photo: {
+    avatar: {
         type: String,
         default: "" 
     },

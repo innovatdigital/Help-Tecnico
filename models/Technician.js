@@ -45,15 +45,15 @@ const Technician = new mongoose.Schema({
         type: String,
         require: true
     },
-    car_model: {
+    carModel: {
         type: String,
         require: true
     },
-    car_plate: {
+    carPlate: {
         type: String,
         require: true
     },
-    car_color: {
+    carColor: {
         type: String,
         require: true
     },
@@ -61,17 +61,9 @@ const Technician = new mongoose.Schema({
         type: Boolean,
         default: false
     },
-    notifications: {
-        type: Array,
-        default: []
-    },
-    photo: {
+    avatar: {
         type: String,
         default: "" 
-    },
-    notificationEmail: {
-        type: Boolean,
-        default: true
     },
     comments: {
         type: String,
@@ -97,6 +89,10 @@ const Technician = new mongoose.Schema({
     },
     refreshToken: {
         type: String,
+    },
+    createdAtFormatted: {
+        type: String,
+        require: true
     },
     },
     {

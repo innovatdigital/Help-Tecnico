@@ -1,14 +1,15 @@
 const asyncHandler = require('express-async-handler')
+
 const Admin = require('../models/Admin')
 const Technician = require('../models/Technician')
 const Company = require('../models/Company')
-const cookie = require('cookie');
+
 const Promise = require('bluebird');
 const { generateToken } = require('../config/jwtToken')
 const { generateRefreshToken } = require('../config/refreshtoken')
 
-const Page = asyncHandler(async (req, res) => {
-  res.render('layouts/login')
+const page = asyncHandler(async (req, res) => {
+  res.render('layouts/auth/login')
 })
 
 const handleLogin = async (req, res, User) => {
@@ -59,7 +60,7 @@ const handleLogin = async (req, res, User) => {
   });
 };
 
-const Login = asyncHandler(async (req, res) => {
+const login = asyncHandler(async (req, res) => {
   const adminPromise = handleLogin(req, res, Admin).catch(() => { });
   const companyPromise = handleLogin(req, res, Company).catch(() => { });
   const technicianPromise = handleLogin(req, res, Technician).catch(() => { });
@@ -67,25 +68,12 @@ const Login = asyncHandler(async (req, res) => {
   try {
     await Promise.any([adminPromise, companyPromise, technicianPromise]);
   } catch (error) {
-    res.status(500).json({ error: 'Erro interno do servidor' });
+    res.status(500).json({ error: 'Credenciais inválidas' });
   }
 });
 
-const logout = asyncHandler(async (req, res) => {
-  const cookies = req.cookies;
-
-  for (const cookieName in cookies) {
-    res.clearCookie(cookieName, {
-      path: '/',
-      domain: 'plubee.net'
-    });
-  }
-  res.redirect('/');
-})
-
 module.exports =
 {
-  Page,
-  Login,
-  logout
+  page,
+  login
 }

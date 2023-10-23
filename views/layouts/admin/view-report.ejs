@@ -1,13 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<%- include('../partials/head', {title: "Visualizar relatório"}) %>
+<%- include('../../partials/head', {title: "Visualizar relatório"}) %>
 
 <body class="bg-gray-100">
-  <%- include('../partials/admin/sidebar-admin') %>
+  <%- include('../../partials/sidebar', {user: user}) %>
 
   <div class="lg:pl-70">
-    <%- include('../partials/admin/nav-admin', {title: "Visualizar relatório", photo: photo, name_user: name_user}) %>
+    <%- include('../../partials/nav', {title: "Visualizar relatório"}) %>
 
     <main class="py-5 fade-in">
       <div class="px-4 sm:px-6 lg:pl-12 mt-2 col-span-3">
@@ -15,7 +12,6 @@
           <main>
             <div class="mx-auto mt-8 sm:px-6">
               <div class="space-y-6">
-                <!-- Description list-->
                 <section aria-labelledby="applicant-information-title">
                   <div class="bg-white shadow-lg border sm:rounded-lg">
                     <div class="mx-auto px-4 pt-6 sm:px-6 md:flex md:items-center md:justify-between md:space-x-5 lg:pr-8 pb-6">

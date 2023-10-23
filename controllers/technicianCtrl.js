@@ -287,7 +287,7 @@ const viewCompany = asyncHandler(async(req, res) => {
 // ######################### //
 
 const scanQrCode = asyncHandler(async (req, res) => {
-    res.render('layouts/technician/scan-qr-code', { photo: req.user.photo, name_user: req.user.name })
+    res.render('layouts/technician/scan-qr-code', { photo: "", name_user: "" })
 })
 
 

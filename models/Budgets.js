@@ -1,27 +1,25 @@
 const mongoose = require('mongoose')
+const { Schema } = mongoose;
 
 const Budget = new mongoose.Schema({
     description: {
         type: String,
         require: true
     },
-    idEquipment: {
-        type: String,
+    equipments: {
+        type: Array,
+        default: []
     },
     idCompany: {
-        type: String,
+        type: Schema.Types.ObjectId,
+        ref: 'Companies'
     },
     value: {
         type: String,
         require: true
     },
-    date: {
-        type: Date,
-        default: Date.now()
-    },
     expiration: {
-        type: Date,
-        default: Date.now()
+        type: Date
     },
     },
     {

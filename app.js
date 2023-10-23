@@ -3,10 +3,12 @@ const mongoose = require('mongoose')
 const bodyParser = require('body-parser')
 const session = require('express-session');
 const path = require('path')
-const auth = require('./routes/authRouter')
-const admin = require('./routes/adminRouter')
-const company = require('./routes/companyRouter')
-const technician = require('./routes/technicianRouter')
+
+const authRouter = require('./routes/authRouter')
+const adminRouter = require('./routes/adminRouter')
+const companyRouter = require('./routes/companyRouter')
+const technicianRouter = require('./routes/technicianRouter')
+
 const cookieParser = require('cookie-parser');
 const morgan = require('morgan')
 const dotenv = require('dotenv').config()
@@ -35,13 +37,13 @@ app.use(session({
   saveUninitialized: true
 }));
  
-app.use("/", auth)
-app.use("/company", company)
-app.use("/technician", technician)
-app.use("/admin", admin)
+app.use("/", authRouter)
+app.use("/admin", adminRouter)
+app.use("/company", companyRouter)
+app.use("/technician", technicianRouter)
 
 app.use((req, res, next) => {
-  res.status(404).render('layouts/notFound')
+  res.status(404).render('layouts/not-found')
 });
 
 app.use(helmet());

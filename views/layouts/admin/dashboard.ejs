@@ -1,17 +1,14 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<%- include('../partials/head', {title: "Dashboard administrativo"}) %>
+<%- include('../../partials/head', {title: "Dashboard"}) %>
 
 <body class="bg-gray-100">
-  <%- include('../partials/admin/sidebar-admin') %>
+  <%- include('../../partials/sidebar', {user: user}) %>
 
   <div class="lg:pl-70">
-    <%- include('../partials/admin/nav-admin', {title: "Dashboard administrativo", photo: photo, name_user: name_user}) %>
+    <%- include('../../partials/nav', {title: "Dashboard"}) %>
 
-    <main class="py-4 fade-in">
-      <div class="grid grid-cols-1 sm:grid-cols-1 lg:grid-cols-1 lg:pr-12">
-        <div class="px-4 sm:px-6 lg:pl-12 mt-4 col-span-3">
+    <main class="fade-in">
+      <div class="grid grid-cols-1 sm:grid-cols-1 lg:grid-cols-1 px-4 sm:px-8">
+        <div class="mt-4 col-span-3">
           <div class="grid grid-cols-1 mt-2">
             <div class="grid grid-cols-3 gap-x-5">
               <div class="col-span-2">

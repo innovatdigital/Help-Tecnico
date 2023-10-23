@@ -13,7 +13,10 @@ const Equipment = new mongoose.Schema({
     local: {
         type: String
     },
-    type: {
+    evaporator: {
+        type: String
+    },
+    fluid: {
         type: String
     },
     activity: {

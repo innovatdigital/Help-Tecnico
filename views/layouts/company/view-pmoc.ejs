@@ -1,13 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
+<%- include('../../partials/head', {title: "Visualizar PMOC"}) %>
 
-<%- include('../partials/head', {title: "Visualizar PMOC"}) %>
-
-<body>
-  <%- include('../partials/company/sidebar-company', {service: service}) %>
+<body class="bg-gray-100">
+  <%- include('../../partials/sidebar', {user: user}) %>
 
   <div class="lg:pl-70">
-    <%- include('../partials/company/nav-company', {title: "Visualizar PMOC", photo: photo, name_user: name_user}) %>
+    <%- include('../../partials/nav', {title: "Visualizar PMOC"}) %>
 
     <main class="py-5 fade-in">
       <div class="px-4 sm:px-6 lg:pl-12 mt-4 col-span-3">
