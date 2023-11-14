@@ -1,10 +1,10 @@
-<%- include('../../partials/head', {title: "Gerenciador de arquivos"}) %>
+<%- include('../../partials/app/head', {title: "Gerenciador de arquivos"}) %>
 
 <body class="bg-gray-100">
-  <%- include('../../partials/sidebar', {user: user}) %>
+  <%- include('../../partials/app/sidebar', {user: user}) %>
 
   <div class="lg:pl-70">
-    <%- include('../../partials/nav', {title: "Gerenciador de arquivos"}) %>
+    <%- include('../../partials/app/nav', {title: "Gerenciador de arquivos"}) %>
 
     <main class="py-5 fade-in">
       <div class="hidden fade-in relative z-10" id="popup_new_folder" role="dialog" aria-modal="true">

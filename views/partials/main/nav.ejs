@@ -1,0 +1,93 @@
+<header class="shadow-sm">
+  <nav class="bg-blue-500 flex items-center justify-between py-6 px-6 lg:px-8" aria-label="Global">
+    <div class="mx-auto max-w-7xl w-full flex justify-between items-center gap-x-12">
+      <div class="flex items-center">
+        <a href="/">
+          <h1 class="text-xl font-bold text-white inter">Help Técnico</h1>
+        </a>
+      </div>
+
+      <div class="hidden lg:flex lg:gap-x-8">
+        <a href="/#home" class="text-md font-semibold text-white inter">Início</a>
+        <a href="/seguros-oferecidos" class="text-md font-semibold text-white inter">Funcionalidades</a>
+        <a href="/sobre-nos" class="text-md font-semibold text-white inter">Vídeo de apresentação</a>
+        <a href="/sobre-nos" class="text-md font-semibold text-white inter">Clientes</a>
+      </div>
+
+      <div class="hidden lg:flex items-center lg:gap-x-6">
+        <a href="/auth" class="text-sm font-semibold text-gray-800 bg-gray-50 px-5 rounded-full py-2.5 inter">
+          Acessar online         
+        </a>
+      </div>
+    </div>
+    
+    <div class="flex lg:hidden">
+      <button type="button" class="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-white open-menu">
+        <span class="sr-only">Open main menu</span>
+        <svg class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+        </svg>
+      </button>
+    </div>
+  </nav>
+  
+  <!-- Mobile menu, show/hide based on menu open state. -->
+  <div class="lg:hidden" role="dialog" aria-modal="true">
+    <div class="fixed inset-y-0 right-0 z-10 w-full overflow-y-auto px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10 hidden bg-white menu">
+      <div class="flex items-center justify-between">
+        <a href="#" class="-m-1.5 p-1.5">
+          <img class="w-56" src="/img/main/logo-footer.png" alt="Casabem Seguros">            
+        </a>
+
+        <button type="button" class="-m-2.5 rounded-md p-2.5 text-gray-700 close-menu">
+          <span class="sr-only">Close menu</span>
+          <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+      </div>
+
+      <div class="mt-6 flow-root">
+        <div class="-my-6 divide-y divide-gray-500/10">
+          <div class="space-y-2 py-6">
+            <a href="/" class="-mx-3 block px-3 py-2 text-base font-semibold text-red-600 inter">Início</a>
+            <a href="/seguros-oferecidos" class="-mx-3 block px-3 py-2 text-base font-semibold text-red-600 inter">Seguros oferecidos</a>
+            <a href="/sobre-nos" class="-mx-3 block px-3 py-2 text-base font-semibold text-red-600 inter">Sobre a empresa</a>
+            <a href="/seguradoras" class="-mx-3 block px-3 py-2 text-base font-semibold text-red-600 inter">Seguradoras</a>
+            <a href="/contato" class="-mx-3 block px-3 py-2 text-base font-semibold text-red-600 inter">Contato</a>
+          </div>
+
+          <a href="/" class="px-6 py-3 text-base font-semibold rounded-full bg-blue-500 text-white inter mt-4">Cote em 1 minuto</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="hidden relative z-10 fade-in" id="loading" role="dialog" aria-modal="true">
+    <div class="fixed inset-0 bg-white bg-opacity-75 transition-opacity"></div>
+
+    <div class="flex justify-center items-center fixed inset-0 z-10 overflow-y-auto">
+      <div class="mx-auto max-w-xl transform divide-y divide-gray-200 transition-all">
+        <div class="loader loader--style6">
+          <svg version="1.1" id="loader-1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+            width="50px" height="50px" viewBox="0 0 40 40" enable-background="new 0 0 40 40" xml:space="preserve">
+            <path opacity="0.4" fill="#239CFF" d="M20.201,5.169c-8.254,0-14.946,6.692-14.946,14.946c0,8.255,6.692,14.946,14.946,14.946
+              s14.946-6.691,14.946-14.946C35.146,11.861,28.455,5.169,20.201,5.169z M20.201,31.749c-6.425,0-11.634-5.208-11.634-11.634
+              c0-6.425,5.209-11.634,11.634-11.634c6.425,0,11.633,5.209,11.633,11.634C31.834,26.541,26.626,31.749,20.201,31.749z"/>
+            <path fill="#239CFF" d="M26.013,10.047l1.654-2.866c-2.198-1.272-4.743-2.012-7.466-2.012h0v3.312h0 C22.32,8.481,24.301,9.057,26.013,10.047z">
+              <animateTransform attributeType="xml"
+                attributeName="transform"
+                type="rotate"
+                from="0 20 20"
+                to="360 20 20"
+                dur="0.5s"
+                repeatCount="indefinite"/>
+            </path>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<script src="/js/main/index.js"></script>

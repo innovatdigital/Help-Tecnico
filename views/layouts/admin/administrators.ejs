@@ -1,10 +1,10 @@
-<%- include('../../partials/head', {title: "Administradores"}) %>
+<%- include('../../partials/app/head', {title: "Administradores"}) %>
 
 <body class="bg-gray-100">
-  <%- include('../../partials/sidebar', {user: user}) %>
+  <%- include('../../partials/app/sidebar', {user: user}) %>
 
   <div class="lg:pl-70">
-    <%- include('../../partials/nav', {title: "Administradores"}) %>
+    <%- include('../../partials/app/nav', {title: "Administradores"}) %>
 
     <main class="py-5 fade-in">
       <div class="px-4 sm:px-6 lg:pl-12 mt-2 col-span-3">
@@ -13,8 +13,8 @@
             <% administrators.forEach(function(item) { %>
               <li class="col-span-1 divide-y divide-gray-200 rounded-lg bg-white shadow border">
                 <div class="flex w-full items-center space-x-6 p-6">
-                  <% if (item.photo.length > 0) { %>
-                    <img class="h-11 w-11 flex-shrink-0 rounded-full" src="/img/photos/<%= item.photo %>" alt="">
+                  <% if (item.avatar.length > 0) { %>
+                    <img class="h-11 w-11 flex-shrink-0 rounded-full" src="/img/avatars/<%= item.avatar %>" alt="">
                   <% } else { %>
                     <svg width="38" height="38" viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <g clip-path="url(#clip0_116_59)">

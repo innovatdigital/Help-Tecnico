@@ -1,9 +1,9 @@
-const Admin = require('../models/Admin')
-const Technician = require('../models/Technician')
-const Company = require('../models/Company')
-const jwt = require('jsonwebtoken')
 const asyncHandler = require('express-async-handler')
-const expressJwtPermissions = require('express-jwt-permissions')
+const jwt = require('jsonwebtoken')
+
+const Admin = require('../models/adminModel')
+const Technician = require('../models/techinicianModel')
+const Company = require('../models/companyModel')
 
 const authMiddleware = asyncHandler(async (req, res, next) => {
   let token

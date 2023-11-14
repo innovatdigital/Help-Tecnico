@@ -22,7 +22,7 @@ async function login() {
         const loading = document.querySelector("#loading")
         loading.classList.remove("hidden")
 
-        fetch("/handle-login", {
+        fetch("/auth/handle-login", {
             method: "POST",
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ email: email.value, password: password.value })

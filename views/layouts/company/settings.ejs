@@ -1,0 +1,164 @@
+<%- include('../../partials/app/head', {title: "Configurações da conta" }) %>
+
+<body class="bg-gray-100">
+  <%- include('../../partials/app/sidebar') %>
+
+  <div class="lg:pl-64">
+    <%- include('../../partials/app/nav', {user: user, title: "Configurações da conta"}) %>
+
+    <main class="px-10 py-7 pb-20 fade-in">
+      <div class="mx-auto lg:flex space-x-6 mt-4">
+        <aside class="flex border overflow-x-auto lg:block lg:w-80 lg:flex-none inter lg:py-4 bg-white shadow-sm rounded-lg fade-in">
+          <div class="flex flex-col items-center justify-center p-4">
+            <% if (user.avatar.length > 0) { %>
+              <img class="w-24 h-24 rounded-full" src="/img/avatars/<%= user.avatar %>">
+            <% } else { %>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-18 h-18 p-4 rounded-full bg-blue-500 text-white">
+                <path fill-rule="evenodd" d="M4.5 2.25a.75.75 0 000 1.5v16.5h-.75a.75.75 0 000 1.5h16.5a.75.75 0 000-1.5h-.75V3.75a.75.75 0 000-1.5h-15zM9 6a.75.75 0 000 1.5h1.5a.75.75 0 000-1.5H9zm-.75 3.75A.75.75 0 019 9h1.5a.75.75 0 010 1.5H9a.75.75 0 01-.75-.75zM9 12a.75.75 0 000 1.5h1.5a.75.75 0 000-1.5H9zm3.75-5.25A.75.75 0 0113.5 6H15a.75.75 0 010 1.5h-1.5a.75.75 0 01-.75-.75zM13.5 9a.75.75 0 000 1.5H15A.75.75 0 0015 9h-1.5zm-.75 3.75a.75.75 0 01.75-.75H15a.75.75 0 010 1.5h-1.5a.75.75 0 01-.75-.75zM9 19.5v-2.25a.75.75 0 01.75-.75h4.5a.75.75 0 01.75.75v2.25a.75.75 0 01-.75.75h-4.5A.75.75 0 019 19.5z" clip-rule="evenodd" />
+              </svg>
+            <% } %>
+
+            <h2 class="text-lg font-semibold inter text-gray-600 mt-4"><%= user.name %></h2>
+            <span class="w-auto text-sm inter text-gray-500"><%= user.email %></span>
+          </div>
+
+          <nav class="border-t border-gray-200">
+            <ul role="list" class="flex gap-x-3 gap-y-1 whitespace-nowrap lg:flex-col px-4 sm:p-6">
+              <li>
+                <button onclick="openSection('account')" class="w-full text-gray-700 group flex gap-x-3 rounded-lg hover:text-blue-500 py-2 pl-2 pr-3 text-md leading-6 inter font-semibold">
+                  <svg class="h-6 w-6 shrink-0 text-gray-400" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M17.982 18.725A7.488 7.488 0 0012 15.75a7.488 7.488 0 00-5.982 2.975m11.963 0a9 9 0 10-11.963 0m11.963 0A8.966 8.966 0 0112 21a8.966 8.966 0 01-5.982-2.275M15 9.75a3 3 0 11-6 0 3 3 0 016 0z" />
+                  </svg>
+                  Conta
+                </button>
+              </li>
+
+              <li>
+                <button onclick="openSection('security')" class="w-full text-gray-700 group flex gap-x-3 rounded-lg hover:text-blue-500 py-2 pl-2 pr-3 text-md leading-6 inter font-semibold">
+                  <svg class="h-6 w-6 shrink-0 text-gray-400" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M7.864 4.243A7.5 7.5 0 0119.5 10.5c0 2.92-.556 5.709-1.568 8.268M5.742 6.364A7.465 7.465 0 004.5 10.5a7.464 7.464 0 01-1.15 3.993m1.989 3.559A11.209 11.209 0 008.25 10.5a3.75 3.75 0 117.5 0c0 .527-.021 1.049-.064 1.565M12 10.5a14.94 14.94 0 01-3.6 9.75m6.633-4.596a18.666 18.666 0 01-2.485 5.33" />
+                  </svg>
+                  Segurança
+                </button>
+              </li>
+            </ul>
+          </nav>
+        </aside>
+      
+        <div class="border lg:flex-auto bg-white shadow-sm rounded-lg fade-in" id="account">
+          <div class="mx-auto max-w-2xl lg:mx-0 lg:max-w-none">
+            <div class="p-5">
+              <h2 class="text-lg font-semibold leading-7 text-gray-900 inter">Editar conta</h2>
+              <p class="mt-1 text-sm leading-6 text-gray-500 inter">Edite suas informações pessoais</p>
+            </div>
+      
+            <div class="p-6 border-t border-gray-200">
+              <div class="col-span-full flex items-center gap-x-8">
+                <% if (user.avatar.length > 0) { %>
+                  <img src="/img/avatars/<%= user.avatar %>" alt="" class="h-24 w-24 flex-none rounded-full object-cover preview">
+                <% } else { %>
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-18 h-18 p-4 rounded-full bg-blue-500 text-white">
+                    <path fill-rule="evenodd" d="M4.5 2.25a.75.75 0 000 1.5v16.5h-.75a.75.75 0 000 1.5h16.5a.75.75 0 000-1.5h-.75V3.75a.75.75 0 000-1.5h-15zM9 6a.75.75 0 000 1.5h1.5a.75.75 0 000-1.5H9zm-.75 3.75A.75.75 0 019 9h1.5a.75.75 0 010 1.5H9a.75.75 0 01-.75-.75zM9 12a.75.75 0 000 1.5h1.5a.75.75 0 000-1.5H9zm3.75-5.25A.75.75 0 0113.5 6H15a.75.75 0 010 1.5h-1.5a.75.75 0 01-.75-.75zM13.5 9a.75.75 0 000 1.5H15A.75.75 0 0015 9h-1.5zm-.75 3.75a.75.75 0 01.75-.75H15a.75.75 0 010 1.5h-1.5a.75.75 0 01-.75-.75zM9 19.5v-2.25a.75.75 0 01.75-.75h4.5a.75.75 0 01.75.75v2.25a.75.75 0 01-.75.75h-4.5A.75.75 0 019 19.5z" clip-rule="evenodd" />
+                  </svg>                                                                                
+                <% } %>                    
+
+                <div>
+                  <label for="avatar-input" class="rounded-md px-3 py-2 text-sm font-semibold border border-blue-500 text-blue-500 shadow-sm inter cursor-pointer">Faça upload</label>
+                  <p class="mt-4 text-xs leading-5 text-gray-600 inter">JPG, GIF or PNG. 1MB max.</p>
+                  <input type="file" id="avatar-input" class="hidden" name="avatar-input">
+                </div>
+              </div>
+
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-10">
+                <div>
+                  <label for="name" class="block text-md font-medium leading-6 text-gray-900 inter font-semibold">Nome da empresa</label>
+                  <input type="text" name="name" id="name"
+                    class="w-full rounded-lg inter py-1.5 mt-2 pl-2 text-gray-900 sm:text-sm sm:leading-6 border-2"
+                    value="<%= user.name %>">
+                </div>
+
+                <div>
+                  <label for="email" class="block text-md font-medium leading-6 text-gray-900 inter font-semibold">Email</label>
+                  <input type="text" name="email" id="email"
+                    class="w-full rounded-lg inter py-1.5 mt-2 pl-2 text-gray-900 sm:text-sm sm:leading-6 border-2"
+                    value="<%= user.email %>">
+                </div>
+              </div>
+
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-6">
+                <div>
+                  <label for="cnpj" class="block text-md font-medium leading-6 text-gray-900 inter font-semibold">CNPJ</label>
+                  <input type="text" name="cnpj" id="cnpj"
+                    class="w-full rounded-lg inter py-1.5 mt-2 pl-2 text-gray-900 sm:text-sm sm:leading-6 border-2"
+                    value="<%= user.cnpj %>">
+                </div>
+
+                <div>
+                  <label for="city" class="block text-md font-medium leading-6 text-gray-900 inter font-semibold">Cidade</label>
+                  <input type="text" name="city" id="city"
+                    class="w-full rounded-lg inter py-1.5 mt-2 pl-2 text-gray-900 sm:text-sm sm:leading-6 border-2"
+                    value="<%= user.city %>">
+                </div>
+              </div>
+
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-6">
+                <div>
+                  <label for="address" class="block text-md font-medium leading-6 text-gray-900 inter font-semibold">Endereço</label>
+                  <input type="text" name="address" id="address"
+                    class="w-full rounded-lg inter py-1.5 mt-2 pl-2 text-gray-900 sm:text-sm sm:leading-6 border-2"
+                    value="<%= user.address %>">
+                </div>
+
+                <div>
+                  <label for="cep" class="block text-md font-medium leading-6 text-gray-900 inter font-semibold">CEP</label>
+                  <input type="text" name="cep" id="cep"
+                    class="w-full rounded-lg inter py-1.5 mt-2 pl-2 text-gray-900 sm:text-sm sm:leading-6 border-2"
+                    value="<%= user.cep %>">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="border lg:flex-auto bg-white shadow-sm rounded-lg hidden fade-in" id="security">
+          <div class="mx-auto max-w-2xl lg:mx-0 lg:max-w-none">
+            <div class="p-5">
+              <h2 class="text-lg font-semibold leading-7 text-gray-900 inter">Segurança</h2>
+              <p class="mt-1 text-sm leading-6 text-gray-500 inter">Edite suas informações de acesso</p>
+            </div>
+      
+            <div class="p-6 border-t border-gray-200">
+              <div class="grid grid-cols-1 gap-4">
+                <div>
+                  <label for="current-password" class="block text-md font-medium leading-6 text-gray-900 inter font-semibold">Senha atual</label>
+                  <input type="password" name="current-password" id="current-password"
+                    class="w-full rounded-lg inter py-1.5 mt-2 pl-2 text-gray-900 sm:text-sm sm:leading-6 border-2" placeholder="Sua senha atual">
+                </div>
+
+                <div class="col-span-2">
+                  <label for="new-password" class="block text-md font-medium leading-6 text-gray-900 inter font-semibold">Senha nova</label>
+                  <input type="password" name="new-password" id="new-password"
+                    class="w-full rounded-lg inter py-1.5 mt-2 pl-2 text-gray-900 sm:text-sm sm:leading-6 border-2" placeholder="Sua nova senha">
+                </div>
+
+                <div class="col-span-2">
+                  <label for="confirm-password" class="block text-md font-medium leading-6 text-gray-900 inter font-semibold">Confirme a nova senha</label>
+                  <input type="password" name="confirm-password" id="confirm-password"
+                    class="w-full rounded-lg inter py-1.5 mt-2 pl-2 text-gray-900 sm:text-sm sm:leading-6 border-2" placeholder="Confirme sua nova senha">
+                </div>
+              </div>
+            </div>
+
+            <div class="flex justify-end p-6">
+              <button onclick="updatePassword()" type="button" class="text-blue-500 hover:text-white border-2 border-blue-500 hover:bg-blue-500 inter focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2">Atualizar senha</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+</body>
+
+<script src="/js/company/settings.js"></script>
+
+</html>

@@ -3,7 +3,7 @@ const router = express.Router()
 const multer  = require('multer');
 const path = require('path')
 const fs = require('fs')
-const Technician = require('../models/Technician')
+const Technician = require('../models/techinicianModel')
 const { v4: uuidv4 } = require('uuid');
 
 const {

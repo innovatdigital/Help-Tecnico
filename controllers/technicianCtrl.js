@@ -1,10 +1,10 @@
 const asyncHandler = require('express-async-handler')
-const Admin = require('../models/Admin')
-const Technician = require('../models/Technician')
-const Company = require('../models/Company')
-const Suppliers = require('../models/Suppliers')
-const Calls = require('../models/Calls')
-const Equipments = require('../models/Equipments')
+const Admin = require('../models/adminModel')
+const Technician = require('../models/techinicianModel')
+const Company = require('../models/companyModel')
+const Suppliers = require('../models/supplierModel')
+const Calls = require('../models/callModel')
+const Equipments = require('../models/equipmentModel')
 const moment = require('moment')
 
 
@@ -33,7 +33,7 @@ const calls = asyncHandler(async (req, res) => {
         calls.push(...foundCalls)
     }
 
-    res.render('layouts/technician/calls', { photo: req.user.photo, name_user: req.user.name, calls: calls.reverse() })
+    res.render('layouts/technician/calls', { user: req.user, calls: calls.reverse() })
 })
 
 const viewCall = asyncHandler(async (req, res) => {
@@ -52,7 +52,7 @@ const viewCall = asyncHandler(async (req, res) => {
     call.phoneCompany = findCompany.phoneCompany
     call.photoCompany = findCompany.photo
 
-    res.render('layouts/technician/view-call', { photo: req.user.photo, name_user: req.user.name, call: call, equipments: equipments })
+    res.render('layouts/technician/view-call', { user: req.user, call: call, equipments: equipments })
 })
 
 const initiateCall = asyncHandler(async (req, res) => {
@@ -174,11 +174,11 @@ const reports = asyncHandler(async (req, res) => {
         createdAt: "16/02/2023"
     }]
 
-    res.render('layouts/technician/reports', { photo: req.user.photo, name_user: req.user.name, reports: reports })
+    res.render('layouts/technician/reports', { user: req.user, reports: reports })
 })
 
 const viewReport = asyncHandler(async (req, res) => {
-    res.render('layouts/technician/view-report', { photo: req.user.photo, name_user: req.user.name })
+    res.render('layouts/technician/view-report', { user: req.user })
 })
 
 
@@ -206,14 +206,14 @@ const equipments = asyncHandler(async(req, res) => {
         equipment.createdAtFormatted = createdAtFormatted
     }
 
-    res.render('layouts/technician/equipments', {photo: req.user.photo, name_user: req.user.name, equipments: equipments})
+    res.render('layouts/technician/equipments', {user: req.user, equipments: equipments})
 })
 
 
 const newEquipment = asyncHandler(async (req, res) => {
     const companies = await Company.find({technician: req.user._id})
 
-    res.render('layouts/technician/register-equipment', { photo: req.user.photo, name_user: req.user.name, companies: companies })
+    res.render('layouts/technician/register-equipment', { user: req.user, companies: companies })
 })
 
 const viewEquipment = asyncHandler(async (req, res) => {
@@ -221,7 +221,7 @@ const viewEquipment = asyncHandler(async (req, res) => {
     const company = await Company.findById(equipment.idCompany).select("name photo")
 
     if (equipment && company) {
-        res.render('layouts/technician/view-equipment', { photo: req.user.photo, name_user: req.user.name, equipment: equipment, company: company })
+        res.render('layouts/technician/view-equipment', { user: req.user, equipment: equipment, company: company })
     } else {
         res.render('layouts/notFound')
     }
@@ -262,7 +262,7 @@ const saveEquipment = asyncHandler(async (req, res) => {
 const companies = asyncHandler(async(req, res) => {
     const companies = await Company.find({technician: req.user._id})
 
-    res.render('layouts/technician/companies', {isAdmin: false, notifications: req.user.notifications.reverse(), photo: req.user.photo, name_user: req.user.name, companies: companies})
+    res.render('layouts/technician/companies', {isAdmin: false, notifications: req.user.notifications.reverse(), user: req.user, companies: companies})
 })
 
 const viewCompany = asyncHandler(async(req, res) => {
@@ -272,7 +272,7 @@ const viewCompany = asyncHandler(async(req, res) => {
     if (findCompany) {
         const callsCompany = await Calls.find({id_company: req.params.id})
 
-        res.render('layouts/technician/view-company', { isAdmin: false, notifications: req.user.notifications.reverse(), photo: req.user.photo, name_user: req.user.name, company: findCompany, calls: callsCompany.reverse(), equipments: equipments })
+        res.render('layouts/technician/view-company', { isAdmin: false, notifications: req.user.notifications.reverse(), user: req.user, company: findCompany, calls: callsCompany.reverse(), equipments: equipments })
     } else {
         res.render('layouts/404')
     }
@@ -299,7 +299,7 @@ const scanQrCode = asyncHandler(async (req, res) => {
 // ######################### //
 
 const account = asyncHandler(async (req, res) => {
-    res.render('layouts/technician/account', { user: req.user, photo: req.user.photo, name_user: req.user.name })
+    res.render('layouts/technician/account', { user: req.user, user: req.user })
 })
 
 const updateAccount = asyncHandler(async (req, res) => {

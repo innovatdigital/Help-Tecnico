@@ -4,6 +4,7 @@ const bodyParser = require('body-parser')
 const session = require('express-session');
 const path = require('path')
 
+const mainRouter = require('./routes/mainRouter')
 const authRouter = require('./routes/authRouter')
 const adminRouter = require('./routes/adminRouter')
 const companyRouter = require('./routes/companyRouter')
@@ -17,6 +18,7 @@ const fs = require('fs')
 const https = require('https')
 const app = express();
 const helmet = require('helmet');
+const dbConnect = require('./config/dbConnect')
 
 app.use(bodyParser.urlencoded({extended: false}))
 app.use(bodyParser.json())
@@ -26,18 +28,18 @@ app.engine('ejs', ejs.renderFile);
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 
-app.use(morgan('dev'))
-
 app.use(express.static(path.join(__dirname, 'public')))
-app.use(express.static(path.join(__dirname, 'js')));
 
 app.use(session({
   secret: process.env.SECRET,
   resave: false,
   saveUninitialized: true
 }));
+
+app.use(morgan('dev'))
  
-app.use("/", authRouter)
+app.use("/", mainRouter)
+app.use("/auth", authRouter)
 app.use("/admin", adminRouter)
 app.use("/company", companyRouter)
 app.use("/technician", technicianRouter)
@@ -48,17 +50,7 @@ app.use((req, res, next) => {
 
 app.use(helmet());
 
-const dbConnect = () => {
-  try {
-    mongoose.set("strictQuery", false);
-    const conn = mongoose.connect(process.env.MONGODB_URL)
-    console.log('Database connected successful!')
-  } catch(error) {
-    console.log('Database connected error.')
-  }
-}
-
-dbConnect()
+dbConnect(process.env.MONGODB_URL)
 
 if (process.env.MODE == "DEV") {
   const options = {
@@ -70,7 +62,7 @@ if (process.env.MODE == "DEV") {
     console.log('Server listening on port ' + 5500);
   });
 } else if (process.env.MODE == "PROD") {
-  app.listen(process.env.PORT || 3000, () => {
+  app.listen(process.env.PORT, () => {
     console.log('Server listening on port 3000')
   })
 }

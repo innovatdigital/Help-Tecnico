@@ -1,6 +1,6 @@
-const sidebarMobile = document.querySelector('#sidebar-mobile')
-const openSidebarMobile = document.querySelector('#open-sidebar-mobile')
-const closeSidebarMobile = document.querySelector('#close-sidebar-mobile')
+const sidebarMobile = document.getElementById('sidebar-mobile')
+const openSidebarMobile = document.getElementById('open-sidebar-mobile')
+const closeSidebarMobile = document.getElementById('close-sidebar-mobile')
 
 openSidebarMobile.addEventListener('click', () => {
     sidebarMobile.classList.remove("hidden")

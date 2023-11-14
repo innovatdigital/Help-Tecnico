@@ -3,7 +3,7 @@ const router = express.Router()
 const multer = require('multer');
 const path = require('path')
 const fs = require('fs')
-const Company = require('../models/Company')
+const Company = require('../models/companyModel')
 const { v4: uuidv4 } = require('uuid');
 
 const {
@@ -33,9 +33,9 @@ const {
   budgets,
   viewBudget,
 
-  account,
+  settings,
   updateAccount,
-  newPassword,
+  updatePassword,
 } = require('../controllers/companyCtrl')
 
 
@@ -148,13 +148,13 @@ router.get("/view-budget", authMiddleware, viewBudget)
 // ##        CONTA        ## //
 // ######################### //
 
-router.get("/account", authMiddleware, account)
-router.post("/account/update", authMiddleware, updateAccount)
-router.post("/account/password", authMiddleware, newPassword)
+router.get("/settings", authMiddleware, settings)
+router.put("/settings/update-account", authMiddleware, updateAccount)
+router.put("/settings/update-password", authMiddleware, updatePassword)
 
 const storagePhoto = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, './public/img/photos')
+    cb(null, './public/img/avatars')
   },
   filename: function (req, file, cb) {
     const extension = path.extname(file.originalname);
@@ -166,31 +166,26 @@ const storagePhoto = multer.diskStorage({
 
 const uploadPhoto = multer({ storage: storagePhoto });
 
-router.post('/account/upload', authMiddleware, uploadPhoto.single('image'), function (req, res, next) {
-  const filePath = path.join('./public/img/photos', req.file.filename);
+router.put('/settings/update-avatar', authMiddleware, uploadPhoto.single('image'), function (req, res, next) {
+  const filePath = path.join('./public/img/avatars', req.file.filename);
   const extension = path.extname(req.file.originalname);
   const newRandomNumber = Math.floor(Math.random() * 1000000000);
   const newFilename = uuidv4() + '-' + Date.now() + '-' + newRandomNumber.toString() + extension
-  fs.rename(filePath, path.join('./public/img/photos', newFilename), async function (err) {
+
+  fs.rename(filePath, path.join('./public/img/avatars', newFilename), async function (err) {
     if (err) {
       return next(err);
     }
 
-    const find = await Company.findById(req.user._id)
-
-    if (find.photo.length != 0) {
-      fs.unlink(`./public/img/photos/${find.photo}`, (err) => {
-        if (err) {
-          res.sendStatus(500)
-        }
-      });
+    if (req.user.avatar.length != 0) {
+      fs.unlink(`./public/img/avatars/${req.user.avatar}`, (err) => {});
     }
-
-    const update = await Company.findByIdAndUpdate(req.user._id, {
-      photo: newFilename
+    
+    const updateAvatar = await User.findByIdAndUpdate(req.user._id, {
+      avatar: newFilename
     })
 
-    res.send(newFilename);
+    res.sendStatus(200)
   });
 });
 

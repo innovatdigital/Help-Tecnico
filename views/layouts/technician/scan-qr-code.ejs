@@ -1,10 +1,10 @@
-<%- include('../../partials/head', {title: "Escanear QR Code"}) %>
+<%- include('../../partials/app/head', {title: "Escanear QR Code"}) %>
 
 <body class="bg-gray-100">
-  <%- include('../../partials/sidebar', {user: user}) %>
+  <%- include('../../partials/app/sidebar', {user: user}) %>
 
   <div class="lg:pl-70">
-    <%- include('../../partials/nav', {title: "Escanear QR Code"}) %>
+    <%- include('../../partials/app/nav', {title: "Escanear QR Code"}) %>
 
     <main class="p-4 fade-in">
       <video class="w-full h-full rounded-lg" id="qr-video"></video>

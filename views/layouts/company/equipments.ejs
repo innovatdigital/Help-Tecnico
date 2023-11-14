@@ -1,43 +1,33 @@
-<%- include('../../partials/head', {title: "Equipamentos"}) %>
+<%- include('../../partials/app/head', {title: "Equipamentos"}) %>
 
 <body class="bg-gray-100">
-  <%- include('../../partials/sidebar', {user: user}) %>
+  <%- include('../../partials/app/sidebar', {user: user}) %>
 
   <div class="lg:pl-70">
-    <%- include('../../partials/nav', {title: "Equipamentos"}) %>
+    <%- include('../../partials/app/nav', {title: "Equipamentos"}) %>
 
-    <main class="py-5 fade-in">
-      <div class="px-4 sm:px-6 lg:pl-12 mt-2 col-span-3">
+    <main class="fade-in inter">
+      <div class="px-8 py-8">
         <div class="sm:flex sm:justify-between sm:items-center">
-          <h1 class="text-lg font-semibold leading-6 text-gray-900 inter color-purple"><span class="text-blue"><%= equipments.length %> equipamento(s)</span> cadastrado(s)</h1>
-
-          <div class="flex items-center space-x-2">
-            <div class="relative flex">
-              <label for="search-field" class="sr-only">Search</label>
-              <svg class="pointer-events-none absolute inset-y-0 left-0 h-full ml-2 w-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                <path fill-rule="evenodd" d="M9 3.5a5.5 5.5 0 100 11 5.5 5.5 0 000-11zM2 9a7 7 0 1112.452 4.391l3.328 3.329a.75.75 0 11-1.06 1.06l-3.329-3.328A7 7 0 012 9z" clip-rule="evenodd" />
-              </svg>
-              <input id="search-field" class="block h-full w-full border-blue-1 rounded-lg py-2 pl-8 pr-0 inter text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm" placeholder="Pesquisar por nome" type="search" name="search">
-            </div>
-          </div>
+          <h1 class="text-lg font-semibold leading-6 text-gray-900 inter color-purple"><span class="text-blue-500"><%= equipments.length %> equipamento(s)</span> cadastrado(s)</h1>
         </div>
 
         <ul role="list" class="grid grid-cols-2 gap-x-4 gap-y-8 md:grid-cols-3 md:grid-cols-4 sm:gap-x-6 lg:grid-cols-5 xl:gap-x-8 mt-8">
           <% equipments.forEach(item => { %>
-            <li class="relative rounded-lg shadow-lg">
+            <li class="border border-blue-200 rounded-xl bg-white shadow-lg">
               <div class="border-b">
                 <% if (item.imageFile.length > 0) { %>
-                  <img class="w-full h-44 rounded-t-lg" src="/img/equipments/<%= item.imageFile %>" alt="">
+                  <img class="w-full h-44 rounded-t-xl" src="/img/equipments/<%= item.imageFile %>" alt="">
                 <% } %>
               </div>
 
               <div class="p-4">
-                <h2 class="text-lg font-semibold color-blue inter"><%= item.model %> </h2>
+                <h2 class="text-lg font-semibold text-blue-500 inter"><%= item.model %> </h2>
                 <h2 class="text-sm font-medium mt-1 text-gray-800 inter">Data de cadastro: <%= item.createdAtFormatted %></h2>
                 <h2 class="text-sm font-medium mt-1 text-gray-800 inter">Relatórios: <%= item.reports %> relatórios</h2>
                 <h2 class="text-sm font-medium mt-1 text-gray-800 inter">Último status: <span class="font-semibold text-green-600">Funcionando</span></h2>
                 <div>
-                  <a href="/company/view-equipment/<%= item.id %>" class="flex justify-center items-center bg-blue text-white mt-4 text-sm font-medium rounded-lg inter py-2" href="">Ver equipamento</a>
+                  <a href="/company/view-equipment/<%= item.id %>" class="flex justify-center items-center bg-blue-500 text-white mt-4 text-sm font-medium rounded-lg inter py-2" href="">Ver equipamento</a>
                 </div>
               </div>
             </li>

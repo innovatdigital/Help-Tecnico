@@ -1,10 +1,10 @@
-<%- include('../../partials/head', {title: "Cadastrar novo equipamento"}) %>
+<%- include('../../partials/app/head', {title: "Cadastrar novo equipamento"}) %>
 
 <body class="bg-gray-100">
-  <%- include('../../partials/sidebar', {user: user}) %>
+  <%- include('../../partials/app/sidebar', {user: user}) %>
 
   <div class="lg:pl-70">
-    <%- include('../../partials/nav', {title: "Cadastrar novo equipamento"}) %>
+    <%- include('../../partials/app/nav', {title: "Cadastrar novo equipamento"}) %>
 
     <main class="py-5 fade-in">
       <div class="relative z-10 fade-in" id="popup_companies" role="dialog" aria-modal="true">
@@ -198,7 +198,6 @@
 </body>
 
 <script src="/js/alert-message/alert-message.js"></script>
-<script src="/js/loading-window/loading-window.js"></script>
 <script>
   const uploadImageInput = document.querySelector("#image");
   const selectedImage = document.querySelector("#image-selected");
@@ -234,8 +233,6 @@
     const activity = document.querySelector("#activity");
     let imageFile;
 
-    openLoading(true)
-
     const formData = new FormData();
     formData.append('image', images[0]);
 
@@ -263,11 +260,9 @@
 
         location.href = `/technician/view-equipment/${data.id}`;
       } else {
-        openLoading(false)
         alertMessage("error", "Não foi possível cadastrar o equipamento", "Tente novamente mais tarde");
       }
     } catch (error) {
-      openLoading(false)
       alertMessage("error", "Erro interno", "Não foi possível processar a requisição.")
     }
   }

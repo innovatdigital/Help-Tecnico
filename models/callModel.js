@@ -10,8 +10,7 @@ const Call = new mongoose.Schema({
         ref: 'Companies'
     },
     idTechnician: {
-        type: Schema.Types.ObjectId,
-        ref: 'Technicians'
+        type: String,
     },
     photos: {
         type: Array,
@@ -41,7 +40,7 @@ const Call = new mongoose.Schema({
     code: {
         type: Number,
     },
-    confirmedCode: {
+    confirmCode: {
         type: Boolean,
         default: false
     },

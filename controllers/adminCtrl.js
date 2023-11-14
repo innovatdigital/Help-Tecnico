@@ -1,11 +1,11 @@
 const asyncHandler = require('express-async-handler')
-const Admin = require('../models/Admin')
-const Report = require('../models/Report')
-const Technician = require('../models/Technician')
-const Company = require('../models/Company')
-const Equipments = require('../models/Equipments')
-const Suppliers = require('../models/Suppliers')
-const Calls = require('../models/Calls')
+const Admin = require('../models/adminModel')
+const Report = require('../models/reportModel')
+const Technician = require('../models/techinicianModel')
+const Company = require('../models/companyModel')
+const Equipments = require('../models/equipmentModel')
+const Suppliers = require('../models/supplierModel')
+const Calls = require('../models/callModel')
 const path = require('path');
 const moment = require('moment')
 const fs = require('fs')
@@ -17,32 +17,38 @@ const { welcomeCompany } = require('../controllers/emailCtrl')
 // ########################### //
 
 const dashboard = asyncHandler(async(req, res) => {
-    const calls = await Calls.find({})
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+
+    const calls = await Calls.find({createdAt: {$gte: today, $lt: new Date(today.getTime() + 24 * 60 * 60 * 1000)}}).limit(10)
+    const countCompanies = await Company.countDocuments()
+    const countTechnicians = await Technician.countDocuments()
+    const countEquipments = await Equipments.countDocuments()
 
     for (const call of calls) {
-        const findCompany = await Company.findById(call.id_company)
+        const findCompany = await Company.findById(call.idCompany)
 
         if (findCompany) {
-            call.name_company = findCompany.name
-            call.logo_company = findCompany.photo
+            call.nameCompany = findCompany.name
+            call.logoCompany = findCompany.photo
         } else {
-            call.name_company = "Empresa excluida"
-            call.logo_company = ""
+            call.nameCompany = "Empresa excluida"
+            call.logoCompany = ""
         }
 
-        if (call.status != "pending" && call.id_technician.length > 0) {
-            const findTechnician = await Technician.findById(call.id_technician)
+        if (call.status != "pending" && call.idTechnician.length > 0) {
+            const findTechnician = await Technician.findById(call.idTechnician)
 
             if (findTechnician) {
-                call.name_technician = findTechnician.name
-                call.photo_technician = findTechnician.photo
+                call.nameTechnician = findTechnician.name
+                call.photoTechnician = findTechnician.photo
             }
         } else {
-            call.photo_technician = ''
+            call.photoTechnician = ''
         }
     }
 
-    res.render('layouts/admin/dashboard', {user: req.user, calls: calls.reverse()})
+    res.render('layouts/admin/dashboard', {user: req.user, calls: calls.reverse(), countCompanies: countCompanies, countTechnicians: countTechnicians, countEquipments: countEquipments})
 })
 
 
@@ -57,25 +63,25 @@ const allCalls = asyncHandler(async(req, res) => {
     const calls = await Calls.find({})
 
     for (const call of calls) {
-        const findCompany = await Company.findById(call.id_company)
+        const findCompany = await Company.findById(call.idCompany)
 
         if (findCompany) {
-            call.name_company = findCompany.name
-            call.logo_company = findCompany.photo
+            call.nameCompany = findCompany.name
+            call.logoCompany = findCompany.photo
         } else {
-            call.name_company = "Empresa excluida"
-            call.logo_company = ""
+            call.nameCompany = "Empresa excluida"
+            call.logoCompany = ""
         }
 
-        if (call.status != "pending" && call.id_technician.length > 0) {
-            const findTechnician = await Technician.findById(call.id_technician)
+        if (call.status != "pending" && call.idTechnician.length > 0) {
+            const findTechnician = await Technician.findById(call.idTechnician)
 
             if (findTechnician) {
-                call.name_technician = findTechnician.name
-                call.photo_technician = findTechnician.photo
+                call.nameTechnician = findTechnician.name
+                call.photoTechnician = findTechnician.photo
             }
         } else {
-            call.photo_technician = ''
+            call.photoTechnician = ''
         }
     }
 
@@ -84,7 +90,7 @@ const allCalls = asyncHandler(async(req, res) => {
 
 const viewCall = asyncHandler(async(req, res) => {
     const findCall = await Calls.findById(req.params.id)
-    const findCompany = await Company.findById(findCall.id_company)
+    const findCompany = await Company.findById(findCall.idCompany)
     const technicians = await Technician.find({})
     const equipments = []
 
@@ -95,9 +101,9 @@ const viewCall = asyncHandler(async(req, res) => {
     }
 
     if (findCompany && findCall) {
-        findCall.email_company = findCompany.email
-        findCall.phone_company = findCompany.phoneCompany
-        findCall.photo_company = findCompany.photo
+        findCall.emailCompany = findCompany.email
+        findCall.phoneCompany = findCompany.phoneCompany
+        findCall.photoCompany = findCompany.photo
         
         res.render('layouts/admin/view-call', {user: req.user, call: findCall, technicians: technicians, equipments: equipments})
     } else {
@@ -147,7 +153,7 @@ const designateCall = asyncHandler(async(req, res) => {
 })
 
 const cancelCall = asyncHandler(async(req, res) => {
-    const cancelCall = await Calls.findByIdAndUpdate(req.params.id, {cancellation_message: "Cancelado pelo administrador do sistema.", status: "canceled"})
+    const cancelCall = await Calls.findByIdAndUpdate(req.params.id, {cancellationMessage: "Cancelado pelo administrador do sistema.", status: "canceled"})
 
     if (cancelCall) {
         res.sendStatus(200)
@@ -227,7 +233,7 @@ const allReports = asyncHandler(async(req, res) => {
 })
 
 const viewReport = asyncHandler(async(req, res) => {
-    res.render('layouts/admin/view-report', {notifications: req.user.notifications.reverse().slice(0, 5), user: req.user})
+    res.render('layouts/admin/view-report', {user: req.user})
 })
 
 
@@ -249,11 +255,11 @@ const budgets = asyncHandler(async(req, res) => {
         createdAt: "16/02/2023"
     }]
 
-    res.render('layouts/admin/all-budgets', {isAdmin: true, notifications: req.user.notifications.reverse().slice(0, 5), user: req.user, budgets: budgets})
+    res.render('layouts/admin/all-budgets', {user: req.user, budgets: budgets})
 })
 
 const viewBudget = asyncHandler(async(req, res) => {
-    res.render('layouts/admin/view-budget', {isAdmin: true, notifications: req.user.notifications.reverse().slice(0, 5), user: req.user})
+    res.render('layouts/admin/view-budget', {user: req.user})
 })
 
 
@@ -337,12 +343,6 @@ const testUsers = asyncHandler(async(req, res) => {
     res.render('layouts/admin/test-users', {user: req.user})
 })
 
-const newTester = asyncHandler(async(req, res) => {
-    const find = await User.findById(req.cookies._id)
-
-    res.render('layouts/admin/new-tester', { isAdmin: true, notifications: find.notifications.reverse(), photo: find.photo, name_user: find.name })
-})
-
 
 
 
@@ -361,7 +361,7 @@ const viewTechnician = asyncHandler(async(req, res) => {
     const findTechnician = await Technician.findById(req.params.id)
 
     if (findTechnician) {
-        let callsTechnician = await Calls.find({id_technician: req.params.id})
+        let callsTechnician = await Calls.find({idTechnician: req.params.id})
         
         res.render('layouts/admin/view-technician', {user: req.user, technician: findTechnician, calls: callsTechnician})
     } else {
@@ -445,7 +445,7 @@ const allCompanies = asyncHandler(async(req, res) => {
 })
 
 const newCompany = asyncHandler(async(req, res) => {
-    const technicians = await Technician.find({}).select("name")
+    const technicians = await Technician.find({}).select("avatar name")
 
     res.render('layouts/admin/new-company', { user: req.user, technicians: technicians })
 })
@@ -488,22 +488,22 @@ const viewCompany = asyncHandler(async(req, res) => {
     const findCompany = await Company.findById(req.params.id)
 
     if (findCompany) {
-        const callsCompany = await Calls.find({id_company: req.params.id})
+        const callsCompany = await Calls.find({idCompany: req.params.id})
 
         res.render('layouts/admin/view-company', { user: req.user, company: findCompany, calls: callsCompany.reverse(), equipments: equipmentsCompany })
     } else {
-        res.render('layouts/404')
+        res.render('layouts/not-found')
     }
 })
 
 const updateCompany = asyncHandler(async(req, res) => {
     const findCompany = await Company.findById(req.params.id)
-    const technicians = await Technician.find({}).select("name")
+    const technicians = await Technician.find({}).select("avatar name")
 
     if (findCompany) {
         res.render('layouts/admin/update-company', { user: req.user, company: findCompany, technicians: technicians })
     } else {
-        res.render('layouts/404')
+        res.render('layouts/not-found')
     }
 })
 
@@ -620,42 +620,49 @@ const invoices = asyncHandler(async(req, res) => {
 // ##        CONTA        ## //
 // ######################### //
 
-const account = asyncHandler(async(req, res) => {
-    const find = await Admin.findById(req.user._id)
-
-    res.render('layouts/admin/account', {isAdmin: find.isAdmin, user: find, notifications: find.notifications.reverse(), photo: find.photo, name_user: find.name})
+const settings = asyncHandler(async (req, res) => {
+  res.render('layouts/admin/settings', { user: req.user })
 })
 
-const updateAccount = asyncHandler(async(req, res) => {
-    try {
-        const update = await Admin.findByIdAndUpdate(req.cookies._id, {name: req?.body?.name, phone: req?.body?.phone, email: req?.body?.email})
+const updateAccount = asyncHandler(async (req, res) => {
+  try {
+    const updateAccount = await User.findByIdAndUpdate(req.user._id, {
+      name: req?.body?.name,
+      cpf: req?.body?.cpf,
+      email: req?.body?.email
+    })
 
+    if (updateAccount) {
+      res.sendStatus(200)
+    } else {
+      res.status(500).json({ error: "Não foi possível atualizar suas informações" })
+    }
+  } catch (err) {
+    res.status(500).json({ error: "Erro interno no servidor" })
+  }
+})
+
+const updatePassword = asyncHandler(async (req, res) => {
+  const { currentPassword, newPassword, confirmPassword } = req.body
+
+  if (newPassword != confirmPassword) return res.status(500).json({ error: "As senhas não conferem" })
+  else {
+    const findUser = await User.findById(req.user._id)
+
+    if (await findUser.isPasswordMatched(currentPassword)) {
+      const updateUser = await User.findByIdAndUpdate(req.user._id, {
+        password: await bcrypt.hash(newPassword, 10)
+      })
+
+      if (updateUser) {
         res.sendStatus(200)
-    } catch (err) {
-        res.sendStatus(500)
+      } else {
+        res.status(500).json({ error: "Não foi possível atualizar a senha" })
+      }
+    } else {
+      res.status(500).json({ error: "Senha atual incorreta" })
     }
-})
-
-const newPassword = asyncHandler(async(req, res) => {
-    try {
-        const user = await Admin.findById(req.cookies._id)
-
-        if (req.body.currentPassword === user.password && req.body.newPassword === req.body.confirmPassword) {
-            const updatePassword = await Admin.findByIdAndUpdate(req.cookies._id, {
-                password: req.body.newPassword
-            })
-
-            if (updatePassword) {
-                res.sendStatus(200)
-            } else {
-                res.sendStatus(500)
-            }
-        } else {
-            res.sendStatus(500)
-        }
-    } catch (err) {
-        res.sendStatus(500)
-    }
+  }
 })
 
 module.exports = {
@@ -684,7 +691,6 @@ module.exports = {
     saveAdmin,
 
     testUsers,
-    newTester,
 
     technicians,
     viewTechnician,
@@ -709,7 +715,7 @@ module.exports = {
 
     invoices,
 
-    account,
+    settings,
     updateAccount,
-    newPassword
+    updatePassword
 }
