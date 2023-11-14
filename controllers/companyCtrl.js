@@ -205,11 +205,11 @@ const viewEquipment = asyncHandler(async(req, res) => {
 // ########################## //
 
 const reports = asyncHandler(async(req, res) => {
-    res.render('layouts/company/reports', {user: req.user, service: service})
+    res.render('layouts/company/reports', {user: req.user, service: req.user.service})
 })
 
 const viewReport = asyncHandler(async(req, res) => {
-    res.render('layouts/company/view-report', {user: req.user, service: service})
+    res.render('layouts/company/view-report', {user: req.user, service: req.user.service})
 })
 
 
@@ -221,11 +221,11 @@ const viewReport = asyncHandler(async(req, res) => {
 // ########################## //
 
 const budgets = asyncHandler(async(req, res) => {
-    res.render('layouts/company/budgets', {user: req.user, service: service})
+    res.render('layouts/company/budgets', {user: req.user, service: req.user.service})
 })
 
 const viewBudget = asyncHandler(async(req, res) => {
-    res.render('layouts/company/view-budget', {user: req.user, service: service})
+    res.render('layouts/company/view-budget', {user: req.user, service: req.user.service})
 })
 
 
