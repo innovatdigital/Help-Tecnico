@@ -43,8 +43,8 @@
                         <tr>
                           <td class="whitespace-nowrap px-3 py-4 text-sm inter text-gray-800 font-semibold">
                             <div class="flex items-center ml-4">
-                              <% if (item.photo.length > 0) { %>
-                                <img class="h-9 w-9 rounded-full" src="/img/photos/<%= item.imageCompany %>">
+                              <% if (item.avatar.length > 0) { %>
+                                <img class="h-9 w-9 rounded-full" src="/img/avatars/<%= item.avatar %>">
                               <% } else { %>
                                 <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
                                   <g clip-path="url(#clip0_1_8)">
@@ -79,7 +79,7 @@
                           </td>
 
                           <td class="whitespace-nowrap px-3 py-4 text-sm inter text-gray-800 font-semibold">
-                            <%= item.date %>
+                            <%= item.createdAt %>
                           </td>
   
                           <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 inter color-purple font-semibold">

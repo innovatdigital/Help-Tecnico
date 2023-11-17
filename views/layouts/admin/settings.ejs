@@ -13,8 +13,8 @@
             <% if (user.avatar.length > 0) { %>
               <img class="w-24 h-24 rounded-full" src="/img/avatars/<%= user.avatar %>">
             <% } else { %>
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-18 h-18 p-4 rounded-full bg-blue-500 text-white">
-                <path fill-rule="evenodd" d="M4.5 2.25a.75.75 0 000 1.5v16.5h-.75a.75.75 0 000 1.5h16.5a.75.75 0 000-1.5h-.75V3.75a.75.75 0 000-1.5h-15zM9 6a.75.75 0 000 1.5h1.5a.75.75 0 000-1.5H9zm-.75 3.75A.75.75 0 019 9h1.5a.75.75 0 010 1.5H9a.75.75 0 01-.75-.75zM9 12a.75.75 0 000 1.5h1.5a.75.75 0 000-1.5H9zm3.75-5.25A.75.75 0 0113.5 6H15a.75.75 0 010 1.5h-1.5a.75.75 0 01-.75-.75zM13.5 9a.75.75 0 000 1.5H15A.75.75 0 0015 9h-1.5zm-.75 3.75a.75.75 0 01.75-.75H15a.75.75 0 010 1.5h-1.5a.75.75 0 01-.75-.75zM9 19.5v-2.25a.75.75 0 01.75-.75h4.5a.75.75 0 01.75.75v2.25a.75.75 0 01-.75.75h-4.5A.75.75 0 019 19.5z" clip-rule="evenodd" />
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-20 h-20 text-blue-500">
+                <path fill-rule="evenodd" d="M18.685 19.097A9.723 9.723 0 0021.75 12c0-5.385-4.365-9.75-9.75-9.75S2.25 6.615 2.25 12a9.723 9.723 0 003.065 7.097A9.716 9.716 0 0012 21.75a9.716 9.716 0 006.685-2.653zm-12.54-1.285A7.486 7.486 0 0112 15a7.486 7.486 0 015.855 2.812A8.224 8.224 0 0112 20.25a8.224 8.224 0 01-5.855-2.438zM15.75 9a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z" clip-rule="evenodd" />
               </svg>
             <% } %>
 
@@ -57,8 +57,8 @@
                 <% if (user.avatar.length > 0) { %>
                   <img src="/img/avatars/<%= user.avatar %>" alt="" class="h-24 w-24 flex-none rounded-full object-cover preview">
                 <% } else { %>
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-18 h-18 p-4 rounded-full bg-blue-500 text-white">
-                    <path fill-rule="evenodd" d="M4.5 2.25a.75.75 0 000 1.5v16.5h-.75a.75.75 0 000 1.5h16.5a.75.75 0 000-1.5h-.75V3.75a.75.75 0 000-1.5h-15zM9 6a.75.75 0 000 1.5h1.5a.75.75 0 000-1.5H9zm-.75 3.75A.75.75 0 019 9h1.5a.75.75 0 010 1.5H9a.75.75 0 01-.75-.75zM9 12a.75.75 0 000 1.5h1.5a.75.75 0 000-1.5H9zm3.75-5.25A.75.75 0 0113.5 6H15a.75.75 0 010 1.5h-1.5a.75.75 0 01-.75-.75zM13.5 9a.75.75 0 000 1.5H15A.75.75 0 0015 9h-1.5zm-.75 3.75a.75.75 0 01.75-.75H15a.75.75 0 010 1.5h-1.5a.75.75 0 01-.75-.75zM9 19.5v-2.25a.75.75 0 01.75-.75h4.5a.75.75 0 01.75.75v2.25a.75.75 0 01-.75.75h-4.5A.75.75 0 019 19.5z" clip-rule="evenodd" />
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-20 h-20 text-blue-500">
+                    <path fill-rule="evenodd" d="M18.685 19.097A9.723 9.723 0 0021.75 12c0-5.385-4.365-9.75-9.75-9.75S2.25 6.615 2.25 12a9.723 9.723 0 003.065 7.097A9.716 9.716 0 0012 21.75a9.716 9.716 0 006.685-2.653zm-12.54-1.285A7.486 7.486 0 0112 15a7.486 7.486 0 015.855 2.812A8.224 8.224 0 0112 20.25a8.224 8.224 0 01-5.855-2.438zM15.75 9a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z" clip-rule="evenodd" />
                   </svg>                                                                                
                 <% } %>                    
 
@@ -71,7 +71,7 @@
 
               <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-10">
                 <div>
-                  <label for="name" class="block text-md font-medium leading-6 text-gray-900 inter font-semibold">Nome da empresa</label>
+                  <label for="name" class="block text-md font-medium leading-6 text-gray-900 inter font-semibold">Nome</label>
                   <input type="text" name="name" id="name"
                     class="w-full rounded-lg inter py-1.5 mt-2 pl-2 text-gray-900 sm:text-sm sm:leading-6 border-2"
                     value="<%= user.name %>">
@@ -87,33 +87,10 @@
 
               <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-6">
                 <div>
-                  <label for="cnpj" class="block text-md font-medium leading-6 text-gray-900 inter font-semibold">CNPJ</label>
-                  <input type="text" name="cnpj" id="cnpj"
+                  <label for="phone" class="block text-md font-medium leading-6 text-gray-900 inter font-semibold">Telefone</label>
+                  <input type="text" name="phone" id="phone"
                     class="w-full rounded-lg inter py-1.5 mt-2 pl-2 text-gray-900 sm:text-sm sm:leading-6 border-2"
-                    value="<%= user.cnpj %>">
-                </div>
-
-                <div>
-                  <label for="city" class="block text-md font-medium leading-6 text-gray-900 inter font-semibold">Cidade</label>
-                  <input type="text" name="city" id="city"
-                    class="w-full rounded-lg inter py-1.5 mt-2 pl-2 text-gray-900 sm:text-sm sm:leading-6 border-2"
-                    value="<%= user.city %>">
-                </div>
-              </div>
-
-              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-6">
-                <div>
-                  <label for="address" class="block text-md font-medium leading-6 text-gray-900 inter font-semibold">Endereço</label>
-                  <input type="text" name="address" id="address"
-                    class="w-full rounded-lg inter py-1.5 mt-2 pl-2 text-gray-900 sm:text-sm sm:leading-6 border-2"
-                    value="<%= user.address %>">
-                </div>
-
-                <div>
-                  <label for="cep" class="block text-md font-medium leading-6 text-gray-900 inter font-semibold">CEP</label>
-                  <input type="text" name="cep" id="cep"
-                    class="w-full rounded-lg inter py-1.5 mt-2 pl-2 text-gray-900 sm:text-sm sm:leading-6 border-2"
-                    value="<%= user.cep %>">
+                    value="<%= user.phone %>">
                 </div>
               </div>
             </div>

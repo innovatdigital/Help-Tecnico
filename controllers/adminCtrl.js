@@ -30,10 +30,10 @@ const dashboard = asyncHandler(async(req, res) => {
 
         if (findCompany) {
             call.nameCompany = findCompany.name
-            call.logoCompany = findCompany.photo
+            call.avatarCompany = findCompany.avatar
         } else {
             call.nameCompany = "Empresa excluida"
-            call.logoCompany = ""
+            call.avatarCompany = ""
         }
 
         if (call.status != "pending" && call.idTechnician.length > 0) {
@@ -41,10 +41,10 @@ const dashboard = asyncHandler(async(req, res) => {
 
             if (findTechnician) {
                 call.nameTechnician = findTechnician.name
-                call.photoTechnician = findTechnician.photo
+                call.avatarTechnician = findTechnician.avatar
             }
         } else {
-            call.photoTechnician = ''
+            call.avatarTechnician = ''
         }
     }
 
@@ -67,10 +67,10 @@ const allCalls = asyncHandler(async(req, res) => {
 
         if (findCompany) {
             call.nameCompany = findCompany.name
-            call.logoCompany = findCompany.photo
+            call.avatarCompany = findCompany.avatar
         } else {
             call.nameCompany = "Empresa excluida"
-            call.logoCompany = ""
+            call.avatarCompany = ""
         }
 
         if (call.status != "pending" && call.idTechnician.length > 0) {
@@ -78,10 +78,10 @@ const allCalls = asyncHandler(async(req, res) => {
 
             if (findTechnician) {
                 call.nameTechnician = findTechnician.name
-                call.photoTechnician = findTechnician.photo
+                call.avatarTechnician = findTechnician.avatar
             }
         } else {
-            call.photoTechnician = ''
+            call.avatarTechnician = ''
         }
     }
 
@@ -101,9 +101,10 @@ const viewCall = asyncHandler(async(req, res) => {
     }
 
     if (findCompany && findCall) {
+        findCall.nameCompany = findCompany.name
         findCall.emailCompany = findCompany.email
         findCall.phoneCompany = findCompany.phoneCompany
-        findCall.photoCompany = findCompany.photo
+        findCall.avatarCompany = findCompany.avatar
         
         res.render('layouts/admin/view-call', {user: req.user, call: findCall, technicians: technicians, equipments: equipments})
     } else {
@@ -277,7 +278,7 @@ const allEquipments = asyncHandler(async(req, res) => {
         const findCompany = await Company.findById(equipment.idCompany).select("name photo")
 
         equipment.nameCompany = findCompany.name
-        equipment.photoCompany = findCompany.photo
+        equipment.avatarCompany = findCompany.avatar
 
         const dateCreatedAt = moment.utc(equipment.createdAt);
         const createdAtFormatted = dateCreatedAt.format("DD/MM/YYYY");

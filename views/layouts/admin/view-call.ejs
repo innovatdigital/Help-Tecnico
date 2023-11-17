@@ -26,8 +26,8 @@
                 <% technicians.forEach(function(item) { %>
                   <div class="flex justify-between items-center py-2">
                     <div class="flex items-center">
-                      <% if (item.photo.length > 0) { %>
-                        <img class="h-12 w-12 rounded-full" src="/img/photos/<%= item.photo %>">
+                      <% if (item.avatar.length > 0) { %>
+                        <img class="h-12 w-12 rounded-full" src="/img/avatars/<%= item.avatar %>">
                       <% } else { %>
                         <svg width="39" height="40" viewBox="0 0 39 40" fill="none" xmlns="http://www.w3.org/2000/svg">
                           <g clip-path="url(#clip0_103_101)">
@@ -103,8 +103,13 @@
               <div class="flex items-center space-x-5">
                 <div class="flex-shrink-0">
                   <div class="relative">
-                    <img class="h-16 w-16 rounded-full" src="/img/photos/<%= call.photo_company %>" alt="">
-                    <span class="absolute inset-0 rounded-full shadow-inner" aria-hidden="true"></span>
+                    <% if (call.avatarCompany.length > 0) { %>
+                      <img class="h-16 w-16 rounded-full" src="/img/avatars/<%= call.avatarCompany %>">
+                    <% } else { %>
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="h-16 w-16 text-white bg-blue-500 rounded-full p-2">
+                        <path fill-rule="evenodd" d="M4.5 2.25a.75.75 0 000 1.5v16.5h-.75a.75.75 0 000 1.5h16.5a.75.75 0 000-1.5h-.75V3.75a.75.75 0 000-1.5h-15zM9 6a.75.75 0 000 1.5h1.5a.75.75 0 000-1.5H9zm-.75 3.75A.75.75 0 019 9h1.5a.75.75 0 010 1.5H9a.75.75 0 01-.75-.75zM9 12a.75.75 0 000 1.5h1.5a.75.75 0 000-1.5H9zm3.75-5.25A.75.75 0 0113.5 6H15a.75.75 0 010 1.5h-1.5a.75.75 0 01-.75-.75zM13.5 9a.75.75 0 000 1.5H15A.75.75 0 0015 9h-1.5zm-.75 3.75a.75.75 0 01.75-.75H15a.75.75 0 010 1.5h-1.5a.75.75 0 01-.75-.75zM9 19.5v-2.25a.75.75 0 01.75-.75h4.5a.75.75 0 01.75.75v2.25a.75.75 0 01-.75.75h-4.5A.75.75 0 019 19.5z" clip-rule="evenodd" />
+                      </svg>                                                                      
+                    <% } %>
                   </div>
                 </div>
                 <div>
@@ -118,7 +123,7 @@
                   <button class="inline-flex items-center justify-center rounded-lg bg-green-500 px-3 py-2 text-sm font-semibold text-white shadow-sm inter">Gerar orçamento</button>
                   <button onclick="openCancel()" class="inline-flex items-center justify-center rounded-lg px-3 py-2 text-sm font-semibold text-white shadow-sm bg-red-600 inter">Cancelar chamado</button>
                 <% } %>
-                <a href="/admin/view-company/<%= call.id_company %>" class="inline-flex items-center justify-center rounded-lg bg-white px-3 py-2 text-sm font-semibold text-gray-900 border-2 shadow-sm inter">Ver empresa</a>
+                <a href="/admin/view-company/<%= call.idCompany %>" class="inline-flex items-center justify-center rounded-lg bg-white px-3 py-2 text-sm font-semibold text-gray-900 border-2 shadow-sm inter">Ver empresa</a>
               </div>
             </div>
 
@@ -134,19 +139,19 @@
                       <dl class="grid grid-cols-1 gap-x-4 gap-y-8 sm:grid-cols-2">
                         <div class="sm:col-span-1">
                           <dt class="text-sm font-semibold text-gray-500 inter">Chamado aberto por:</dt>
-                          <dd class="mt-1 text-sm text-gray-900 inter"><%= name_user %> (Você)</dd>
+                          <dd class="mt-1 text-sm text-gray-900 inter"><%= call.nameCompany %></dd>
                         </div>
                         <div class="sm:col-span-1">
                           <dt class="text-sm font-semibold text-gray-500 inter">Endereço de email:</dt>
-                          <dd class="mt-1 text-sm text-gray-900 inter"><%= call.email_company %></dd>
+                          <dd class="mt-1 text-sm text-gray-900 inter"><%= call.emailCompany %></dd>
                         </div>
                         <div class="sm:col-span-1">
                           <dt class="text-sm font-semibold text-gray-500 inter">Data</dt>
-                          <dd class="mt-1 text-sm text-gray-900 inter"><%= call.date %></dd>
+                          <dd class="mt-1 text-sm text-gray-900 inter"><%= call.createdAt %></dd>
                         </div>
                         <div class="sm:col-span-1">
                           <dt class="text-sm font-semibold text-gray-500 inter">Telefone</dt>
-                          <dd class="mt-1 text-sm text-gray-900 inter"><%= call.phone_company %></dd>
+                          <dd class="mt-1 text-sm text-gray-900 inter"><%= call.phoneCompany %></dd>
                         </div>
                         <div class="sm:col-span-2">
                           <dt class="text-md font-medium text-gray-500 inter">Descrição do chamado:</dt>
