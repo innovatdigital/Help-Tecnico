@@ -1,10 +1,10 @@
 // Charts
-var graph1RadialBar = {
+var graphRadialBar = {
   chart: {
     height: 240,
     type: "radialBar"
   },
-  series: [0],
+  series: [10],
   colors: ["#3B82F6"],
   plotOptions: {
     radialBar: {
@@ -1079,7 +1079,7 @@ var stats5AreaYellow = {
 };
 
 const pages = [
-  { name: 'graph1', charts: [{ name: 'radial-bar', options: graph1RadialBar }, { name: 'area', options: graph1Area }] },
+  { name: 'budgets', charts: [{ name: 'budgets', options: graphRadialBar }, { name: 'area', options: graph1Area }] },
   { name: 'graph3', charts: [{ name: 'column', options: graph3Column }] },
   { name: 'graph5', charts: [{ name: 'area', options: graph5Area }, { name: 'area2', options: graph5Area2 }] },
   { name: 'graph7', charts: [{ name: 'stacked', options: graph7Stacked }, { name: 'stacked2', options: graph7Stacked2 }] },

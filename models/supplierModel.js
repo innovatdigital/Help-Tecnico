@@ -21,10 +21,6 @@ const Supplier = new mongoose.Schema({
         type: String,
         require: true
     },
-    avatar: {
-        type: String,
-        default: "" 
-    },
     materials: {
         type: Array,
         default: [] 
@@ -42,6 +38,9 @@ const Supplier = new mongoose.Schema({
         require: true 
     },
     comments: {
+        type: String,
+    },
+    createdAtFormatted: {
         type: String,
     }
     },

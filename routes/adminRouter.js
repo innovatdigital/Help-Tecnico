@@ -2,9 +2,10 @@ const express = require('express')
 const router = express.Router()
 const multer  = require('multer');
 const path = require('path')
-const Admin = require('../models/adminModel')
 const fs = require('fs')
 const { v4: uuidv4 } = require('uuid');
+
+const Admin = require('../models/adminModel')
 
 const {
   authMiddleware,
@@ -35,6 +36,8 @@ const {
   administrators,
   newAdmin,
   saveAdmin,
+  updateAdmin,
+  deleteAdmin,
 
   testUsers,
 
@@ -143,6 +146,9 @@ router.get("/view-equipment/:id", authMiddleware, viewEquipment)
 router.get("/administrators", authMiddleware, administrators)
 router.get("/new-admin", authMiddleware, isAdmin, newAdmin)
 router.post("/new-admin/save", authMiddleware, isAdmin, saveAdmin)
+router.get("/update-admin/:id", authMiddleware, isAdmin, updateAdmin)
+router.put("/update-admin/save/:id", authMiddleware, isAdmin, saveAdmin)
+router.delete("/delete-admin/:id", authMiddleware, isAdmin, deleteAdmin)
 
 
 
@@ -167,7 +173,7 @@ router.get("/new-technician", authMiddleware, isAdmin, newTechnician)
 router.post("/new-technician/save", authMiddleware, isAdmin, saveTechnician)
 router.get("/view-technician/:id", authMiddleware, isAdmin, viewTechnician)
 router.get("/update-technician/:id", authMiddleware, isAdmin, updateTechnician)
-router.put("/save-technician/:id", authMiddleware, isAdmin, saveTechnician)
+router.put("/update-technician/save/:id", authMiddleware, isAdmin, saveTechnician)
 router.delete("/delete-technician/:id", authMiddleware, isAdmin, deleteTechnician)
 
 
@@ -183,7 +189,7 @@ router.get("/new-company", authMiddleware, isAdmin, newCompany)
 router.post("/new-company/save", authMiddleware, isAdmin, saveCompany)
 router.get("/view-company/:id", authMiddleware, isAdmin, viewCompany)
 router.get("/update-company/:id", authMiddleware, isAdmin, updateCompany)
-router.put("/save-company/:id", authMiddleware, isAdmin, saveCompany)
+router.put("/update-company/save/:id", authMiddleware, isAdmin, saveCompany)
 router.delete("/delete-company/:id", authMiddleware, isAdmin, deleteCompany)
 
 
@@ -199,7 +205,7 @@ router.get("/new-supplier", authMiddleware, isAdmin, newSupplier)
 router.post("/new-supplier/save", authMiddleware, isAdmin, saveSupplier)
 router.get("/view-supplier/:id", authMiddleware, isAdmin, viewSupplier)
 router.get("/update-supplier/:id", authMiddleware, isAdmin, updateSupplier)
-router.put("/save-supplier/:id", authMiddleware, isAdmin, saveSupplier)
+router.put("/update-supplier/save/:id", authMiddleware, isAdmin, saveSupplier)
 router.delete("/delete-supplier/:id", authMiddleware, isAdmin, deleteSupplier)
 
 
@@ -252,7 +258,7 @@ router.put('/settings/update-avatar', authMiddleware, uploadPhoto.single('image'
       fs.unlink(`./public/img/avatars/${req.user.avatar}`, (err) => {});
     }
     
-    const updateAvatar = await User.findByIdAndUpdate(req.user._id, {
+    const updateAvatar = await Admin.findByIdAndUpdate(req.user._id, {
       avatar: newFilename
     })
 

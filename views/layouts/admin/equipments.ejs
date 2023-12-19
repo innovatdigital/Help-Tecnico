@@ -1,0 +1,128 @@
+<%- include('../../partials/app/head', {title: "Equipamentos"}) %>
+
+<body class="bg-gray-100">
+  <%- include('../../partials/app/sidebar', {user: user}) %>
+
+  <div class="lg:pl-70">
+    <%- include('../../partials/app/nav', {title: "Equipamentos"}) %>
+
+    <main class="fade-in">
+      <div class="p-8">
+        <div class="pt-6 bg-white overflow-hidden border border-coolGray-100 rounded-md shadow-dashboard inter">
+          <h2 class="px-6 mb-4 text-lg text-coolGray-900 font-semibold">Equipamentos</h2>
+          <div class="px-6 pb-2 overflow-x-auto">
+            <table class="w-full">
+              <tbody>
+                <tr class="whitespace-nowrap h-11 bg-coolGray-50 bg-opacity-80">
+                  <th class="px-4 font-semibold text-xs text-coolGray-500 uppercase text-left rounded-l-md">
+                    Modelo do equipamento
+                  </th>
+                  <th
+                    class="whitespace-nowrap px-4 font-semibold text-xs text-coolGray-500 uppercase text-center">
+                    Marca</th>
+                  <th
+                    class="whitespace-nowrap px-4 font-semibold text-xs text-coolGray-500 uppercase text-center">
+                    Empresa</th>
+                  <th
+                    class="whitespace-nowrap px-4 font-semibold text-xs text-coolGray-500 uppercase text-center">
+                    Último status</th>
+                  <th
+                    class="whitespace-nowrap px-4 font-semibold text-xs text-coolGray-500 uppercase text-center">
+                    BTUs</th>
+                  <th
+                    class="whitespace-nowrap px-4 font-semibold text-xs text-coolGray-500 uppercase text-center">
+                    Data de cadastro</th>
+                  <th
+                    class="whitespace-nowrap px-4 font-semibold text-xs text-coolGray-500 uppercase text-center rounded-r-md">
+                    Ações</th>
+                </tr>
+
+                <% equipments.forEach(function(item) { %>
+                  <tr>
+                    <td class="whitespace-nowrap px-4 py-2 bg-white text-sm font-medium text-coolGray-800">
+                      <div class="flex items-center gap-x-4">
+                        <% if (item.imageFile.length > 0) { %>
+                          <img class="w-auto h-16 rounded-lg border" src="/img/equipments/<%= item.imageFile %>">
+                        <% } %>
+
+                        <h2><%= item.model %></h2>
+                      </div>
+                    </td>
+
+                    <td class="whitespace-nowrap px-4 bg-white text-sm font-medium text-coolGray-800 text-center">
+                      <%= item.brand %>
+                    </td>
+
+                    <td class="whitespace-nowrap px-4 bg-white text-sm font-medium text-coolGray-800 text-center">
+                      <div class="flex items-center justify-center">
+                        <% if (item.avatarCompany.length > 0) { %>
+                          <img class="h-9 w-9 rounded-full" src="/img/avatars/<%= item.avatar %>">
+                        <% } else { %>
+                          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-9 h-9 text-white bg-blue-500 rounded-full p-2">
+                            <path fill-rule="evenodd" d="M4.5 2.25a.75.75 0 000 1.5v16.5h-.75a.75.75 0 000 1.5h16.5a.75.75 0 000-1.5h-.75V3.75a.75.75 0 000-1.5h-15zM9 6a.75.75 0 000 1.5h1.5a.75.75 0 000-1.5H9zm-.75 3.75A.75.75 0 019 9h1.5a.75.75 0 010 1.5H9a.75.75 0 01-.75-.75zM9 12a.75.75 0 000 1.5h1.5a.75.75 0 000-1.5H9zm3.75-5.25A.75.75 0 0113.5 6H15a.75.75 0 010 1.5h-1.5a.75.75 0 01-.75-.75zM13.5 9a.75.75 0 000 1.5H15A.75.75 0 0015 9h-1.5zm-.75 3.75a.75.75 0 01.75-.75H15a.75.75 0 010 1.5h-1.5a.75.75 0 01-.75-.75zM9 19.5v-2.25a.75.75 0 01.75-.75h4.5a.75.75 0 01.75.75v2.25a.75.75 0 01-.75.75h-4.5A.75.75 0 019 19.5z" clip-rule="evenodd" />
+                          </svg>
+                        <% } %>                                  
+                        <p class="inter ml-2"><%= item.nameCompany %></p>
+                      </div>
+                    </td>
+
+                    <td class="whitespace-nowrap px-4 bg-white text-sm font-medium text-coolGray-800 text-center">
+                      <% if (item.status == "normal") { %>
+                        <span class="inline-flex items-center inter gap-x-1.5 border rounded-full px-2 py-1 text-xs font-semibold text-gray-900 ring-1 ring-inset ring-gray-200">
+                          <svg width="6" height="6" viewBox="0 0 6 6" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <g clip-path="url(#clip0_285_50)">
+                            <path d="M3 6C4.65685 6 6 4.65685 6 3C6 1.34315 4.65685 0 3 0C1.34315 0 0 1.34315 0 3C0 4.65685 1.34315 6 3 6Z" fill="#11AA17"/>
+                            </g>
+                            <defs>
+                            <clipPath id="clip0_285_50">
+                            <rect width="6" height="6" fill="white"/>
+                            </clipPath>
+                            </defs>
+                          </svg>                              
+                          Funcionando corretamente
+                        </span>
+                      <% } else { %>
+                        <span class="inline-flex items-center inter gap-x-1.5 border rounded-full px-2 py-1 text-xs font-semibold text-gray-900 ring-1 ring-inset ring-gray-200">
+                          <svg width="6" height="6" viewBox="0 0 6 6" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <g clip-path="url(#clip0_285_50)">
+                            <path d="M3 6C4.65685 6 6 4.65685 6 3C6 1.34315 4.65685 0 3 0C1.34315 0 0 1.34315 0 3C0 4.65685 1.34315 6 3 6Z" fill="#e2c106"/>
+                            </g>
+                            <defs>
+                            <clipPath id="clip0_285_50">
+                            <rect width="6" height="6" fill="white"/>
+                            </clipPath>
+                            </defs>
+                          </svg>                              
+                          Em manutenção
+                        </span>
+                      <% } %>
+                    </td>
+
+                    <td class="whitespace-nowrap px-4 bg-white text-sm font-medium text-coolGray-800 text-center">
+                      <%= item.btus %> BTUs
+                    </td>
+
+                    <td class="whitespace-nowrap px-4 bg-white text-sm font-medium text-coolGray-800 text-center">
+                      <%= item.createdAtFormatted %>
+                    </td>
+
+                    <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 inter color-purple font-semibold">
+                      <a href="/admin/view-equipment/<%= item._id %>" class="flex justify-center items-center pointer">
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" class="mr-2">
+                          <path opacity="0.5" d="M2.73038 12.7463C2.0221 11.8262 1.66797 11.3661 1.66797 9.99992C1.66797 8.63375 2.0221 8.17369 2.73038 7.25353C4.1446 5.41622 6.51639 3.33325 10.0013 3.33325C13.4862 3.33325 15.858 5.41622 17.2722 7.25353C17.9805 8.17369 18.3346 8.63375 18.3346 9.99992C18.3346 11.3661 17.9805 11.8262 17.2722 12.7463C15.858 14.5836 13.4862 16.6666 10.0013 16.6666C6.51639 16.6666 4.1446 14.5836 2.73038 12.7463Z" stroke="#0E1726" stroke-width="1.25"/>
+                          <path d="M12.5 10C12.5 11.3807 11.3807 12.5 10 12.5C8.61925 12.5 7.5 11.3807 7.5 10C7.5 8.61925 8.61925 7.5 10 7.5C11.3807 7.5 12.5 8.61925 12.5 10Z" stroke="#0E1726" stroke-width="1.25"/>
+                        </svg>
+                        Visualizar                                  
+                      </a>
+                    </td>
+                  </tr>
+                <% }) %>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+</body>
+</html>

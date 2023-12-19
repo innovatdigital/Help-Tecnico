@@ -11,7 +11,7 @@
                 <div class="flex items-center flex-wrap -m-2">
                   <div class="w-auto">
                     <% if (user.avatar.length > 0) { %>
-                      <img src="/img/avatars/>%= user.avatar %>">
+                      <img class="h-10 rounded-full" src="/img/avatars/<%= user.avatar %>">
                     <% } else { %>
                       <% if (user.roles.includes("ADMIN")) { %>
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-10 h-10 text-blue-500">

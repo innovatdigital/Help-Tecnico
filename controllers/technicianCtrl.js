@@ -195,10 +195,20 @@ const equipments = asyncHandler(async(req, res) => {
     });
 
     for (const equipment of equipments) {
-        const findCompany = await Company.findById(equipment.idCompany).select("name photo")
+        const findCompany = await Company.findById(equipment.idCompany).select("name avatar")
+        const callsWithEquipment = await Calls.find({ equipments: { $elemMatch: { $eq: equipment._id.toString() } } });
 
-        equipment.nameCompany = findCompany.name
-        equipment.photoCompany = findCompany.photo
+        const isInMaintenance = callsWithEquipment.some(call => call.status !== "concluded");
+
+        equipment.status = isInMaintenance ? "maintenance" : "normal";
+
+        if (findCompany) {
+            equipment.nameCompany = findCompany.name
+            equipment.avatarCompany = findCompany.avatar
+        } else {
+            equipment.nameCompany = "Empresa excluída"
+            equipment.avatarCompany = ""
+        }
 
         const dateCreatedAt = moment.utc(equipment.createdAt);
         const createdAtFormatted = dateCreatedAt.format("DD/MM/YYYY");
@@ -206,7 +216,7 @@ const equipments = asyncHandler(async(req, res) => {
         equipment.createdAtFormatted = createdAtFormatted
     }
 
-    res.render('layouts/technician/equipments', {user: req.user, equipments: equipments})
+    res.render('layouts/admin/equipments', {user: req.user, equipments: equipments})
 })
 
 
@@ -217,13 +227,24 @@ const newEquipment = asyncHandler(async (req, res) => {
 })
 
 const viewEquipment = asyncHandler(async (req, res) => {
-    const equipment = await Equipments.findById(req.params.id)
-    const company = await Company.findById(equipment.idCompany).select("name photo")
+    const findEquipment = await Equipments.findById(req.params.id)
 
-    if (equipment && company) {
-        res.render('layouts/technician/view-equipment', { user: req.user, equipment: equipment, company: company })
+    if (findEquipment) {
+        const findCompany = await Company.findById(findEquipment.idCompany).select("name avatar")
+        const callsWithEquipment = await Calls.find({ equipments: { $elemMatch: { $eq: findEquipment._id.toString() } } });
+
+        const isInMaintenance = callsWithEquipment.some(call => call.status !== "concluded");
+
+        findEquipment.status = isInMaintenance ? "maintenance" : "normal";
+
+        const dateCreatedAt = moment.utc(findEquipment.createdAt);
+        const createdAtFormatted = dateCreatedAt.format("DD/MM/YYYY");
+    
+        findEquipment.createdAtFormatted = createdAtFormatted
+
+        res.render('layouts/technician/view-equipment', { user: req.user, equipment: findEquipment, company: findCompany })
     } else {
-        res.render('layouts/notFound')
+        res.render('layouts/not-found')
     }
 })
 

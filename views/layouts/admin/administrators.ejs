@@ -6,122 +6,117 @@
   <div class="lg:pl-70">
     <%- include('../../partials/app/nav', {title: "Administradores"}) %>
 
-    <main class="py-5 fade-in">
-      <div class="px-4 sm:px-6 lg:pl-12 mt-2 col-span-3">
-        <div class="mt-4">
-          <ul role="list" class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            <% administrators.forEach(function(item) { %>
-              <li class="col-span-1 divide-y divide-gray-200 rounded-lg bg-white shadow border">
-                <div class="flex w-full items-center space-x-6 p-6">
-                  <% if (item.avatar.length > 0) { %>
-                    <img class="h-11 w-11 flex-shrink-0 rounded-full" src="/img/avatars/<%= item.avatar %>" alt="">
-                  <% } else { %>
-                    <svg width="38" height="38" viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <g clip-path="url(#clip0_116_59)">
-                      <mask id="mask0_116_59" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="0" y="0" width="38" height="38">
-                      <path d="M38 0H0V38H38V0Z" fill="white"/>
-                      </mask>
-                      <g mask="url(#mask0_116_59)">
-                      <mask id="mask1_116_59" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="0" y="0" width="38" height="38">
-                      <path d="M38 0H0V38H38V0Z" fill="white"/>
-                      </mask>
-                      <g mask="url(#mask1_116_59)">
-                      <path d="M19 0C8.52359 0 0 8.52359 0 19C0 29.4764 8.52359 38 19 38C29.4764 38 38 29.4764 38 19C38 8.52359 29.4764 0 19 0ZM19 5.54169C24.0198 5.54169 28.1042 9.62602 28.1042 14.6459C28.1042 19.6657 24.0198 23.75 19 23.75C13.9802 23.75 9.89582 19.6657 9.89582 14.6458C9.89582 9.62593 13.9802 5.54169 19 5.54169ZM19 34.8333C13.8264 34.8333 9.23868 32.3281 6.34771 28.4791C9.51511 26.9551 14.0383 25.3333 19 25.3333C23.9621 25.3333 28.4857 26.9553 31.6523 28.4789C28.7613 32.328 24.1737 34.8333 19 34.8333Z" fill="#239CFF"/>
-                      </g>
-                      </g>
-                      </g>
-                      <defs>
-                      <clipPath id="clip0_116_59">
-                      <rect width="38" height="38" fill="white"/>
-                      </clipPath>
-                      </defs>
-                    </svg>
-                  <% } %>
-                  <div class="flex-1 truncate">
-                    <div class="flex items-center space-x-2">
-                      <h3 class="truncate text-md font-medium text-gray-900 inter"><%= item.name %></h3>
-                    </div>
-                    <p class="mt-1 truncate text-sm text-gray-500 inter"><%= item.email %></p>
-                  </div>
+    <main class="fade-in">
+      <div class="hidden fade-in relative z-10" id="popup_delete" role="dialog" aria-modal="true">
+        <div class="fixed inset-0 bg-gray-500 bg-opacity-25 transition-opacity"></div>
+      
+        <div class="fixed inset-0 z-10 overflow-y-auto p-4 mt-40 ml-40 sm:p-6 md:p-20">
+          <div class="mx-auto max-w-lg transform divide-y divide-gray-100 overflow-hidden rounded-xl bg-white shadow-2xl ring-1 ring-black ring-opacity-5 transition-all">
+            <div class="flex justify-between py-3 px-6">
+              <h2 class="color-red inter font-bold text-lg">Excluir administrador</h2>
+              <button onclick="closeDelete()">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M14.3075 11.7231L20.3075 5.67693C20.5844 5.4 20.5844 4.98462 20.3075 4.7077L19.3844 3.73847C19.1075 3.46154 18.6921 3.46154 18.4151 3.73847L12.369 9.78462C12.1844 9.96923 11.9075 9.96923 11.7228 9.78462L5.67668 3.69231C5.39976 3.41539 4.98438 3.41539 4.70745 3.69231L3.73822 4.66154C3.4613 4.93847 3.4613 5.35385 3.73822 5.63077L9.78438 11.6769C9.96899 11.8615 9.96899 12.1385 9.78438 12.3231L3.69207 18.4154C3.41514 18.6923 3.41514 19.1077 3.69207 19.3846L4.6613 20.3538C4.93822 20.6308 5.35361 20.6308 5.63053 20.3538L11.6767 14.3077C11.8613 14.1231 12.1382 14.1231 12.3228 14.3077L18.369 20.3538C18.6459 20.6308 19.0613 20.6308 19.3382 20.3538L20.3075 19.3846C20.5844 19.1077 20.5844 18.6923 20.3075 18.4154L14.3075 12.3692C14.1228 12.1846 14.1228 11.9077 14.3075 11.7231Z" fill="#A31313"/>
+                </svg>                                    
+              </button>
+            </div>
+
+            <div class="flex flex-col divide-y divide-gray-100 px-6">
+              <div>
+                <div class="flex flex-col items-center justify-center mt-6 py-4">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-10 h-10 text-red-800">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" />
+                  </svg>                                                          
+                  <h2 for="content" class="block text-md font-bold leading-6 text-gray-900 inter mt-4">Excluir o administrador?</h2>
+                  <p class="inter text-center text-sm font-semibold">Essa ação é irreversível, e todos os dados serão apagados.</p>
                 </div>
-                <div>
-                  <div class="-mt-px flex divide-x divide-gray-200">
-                    <div class="flex w-0 flex-1">
-                      <a href="/platform/users/<%= item._id %>" class="relative -mr-px inter inline-flex w-0 flex-1 items-center justify-center gap-x-3 rounded-bl-lg border border-transparent py-4 text-sm font-semibold color-purple">
-                        <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
-                          <path d="M19.25 19.25H2.75" stroke="#239CFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                          <path d="M18.2246 6.41665L10.0846 14.5108L6.41797 15.5833L7.49047 11.9166L15.6305 3.77665C15.9748 3.40397 16.4528 3.1831 16.9598 3.16247C17.4668 3.14185 17.9612 3.32317 18.3346 3.66665C18.5117 3.8525 18.6497 4.07204 18.7403 4.31225C18.8309 4.55246 18.8723 4.80843 18.862 5.06495C18.8518 5.32147 18.7901 5.57331 18.6806 5.80551C18.5711 6.03772 18.416 6.24554 18.2246 6.41665Z" stroke="#239CFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                        </svg>                          
-                        Editar
-                      </a>
-                    </div>
-                    <% if (item.isBlocked) { %>
-                      <div class="-ml-px flex w-0 flex-1">
-                        <button onclick="unlockUser('<%= item._id %>')" class="relative inter inline-flex w-0 flex-1 items-center justify-center gap-x-3 rounded-br-lg border border-transparent py-4 text-sm font-semibold text-yellow-500">
-                          <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M10.9991 20.46C9.28306 20.46 7.69173 20.0274 6.22506 19.162C4.8024 18.326 3.67306 17.1967 2.83706 15.774C1.97173 14.3074 1.53906 12.716 1.53906 11C1.53906 9.28404 1.97173 7.69271 2.83706 6.22604C3.67306 4.80337 4.8024 3.67404 6.22506 2.83804C7.69173 1.97271 9.28306 1.54004 10.9991 1.54004C12.7151 1.54004 14.3064 1.97271 15.7731 2.83804C17.1957 3.67404 18.3251 4.80337 19.1611 6.22604C20.0264 7.69271 20.4591 9.28404 20.4591 11C20.4591 12.716 20.0264 14.3074 19.1611 15.774C18.3251 17.1967 17.1957 18.326 15.7731 19.162C14.3064 20.0274 12.7151 20.46 10.9991 20.46ZM7.03906 16.72C7.61106 17.1307 8.23806 17.4424 8.92006 17.655C9.60206 17.8677 10.2951 17.974 10.9991 17.974C12.2604 17.974 13.4337 17.6514 14.5191 17.006C15.5604 16.39 16.3891 15.5614 17.0051 14.52C17.6504 13.4347 17.9731 12.2614 17.9731 11C17.9731 10.296 17.8667 9.60304 17.6541 8.92104C17.4414 8.23904 17.1297 7.61204 16.7191 7.04004L7.03906 16.72ZM10.9991 4.02604C9.73773 4.02604 8.5644 4.34871 7.47906 4.99404C6.43773 5.61004 5.60906 6.43871 4.99306 7.48004C4.34773 8.56537 4.02506 9.73871 4.02506 11C4.02506 11.704 4.1314 12.397 4.34406 13.079C4.55673 13.761 4.8684 14.388 5.27906 14.96L14.9591 5.28004C14.3871 4.86937 13.7601 4.55771 13.0781 4.34504C12.3961 4.13237 11.7031 4.02604 10.9991 4.02604Z" fill="#C27803"/>
-                          </svg>                                                      
-                          Desbloquear
+
+                <div class="pb-4">
+                  <button class="w-full py-2.5 inter bg-red text-white text-sm rounded-full mt-4 font-bold" onclick="deleteAdmin()">Confirmar minha escolha</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="p-8">
+        <div class="pt-6 bg-white overflow-hidden border border-coolGray-100 rounded-md shadow-dashboard inter">
+          <h2 class="px-6 mb-4 text-lg text-coolGray-900 font-semibold">Administradores</h2>
+          <div class="px-6 overflow-x-auto">
+            <table class="w-full">
+              <tbody>
+                <tr class="whitespace-nowrap h-11 bg-coolGray-50 bg-opacity-80">
+                  <th class="px-4 font-semibold text-xs text-coolGray-500 uppercase text-left rounded-l-md">
+                    Usuário
+                  </th>
+                  <th
+                    class="whitespace-nowrap px-4 font-semibold text-xs text-coolGray-500 uppercase text-center">
+                    Email</th>
+                  <th
+                    class="whitespace-nowrap px-4 font-semibold text-xs text-coolGray-500 uppercase text-center">
+                    Telefone</th>
+                  <th
+                    class="whitespace-nowrap px-4 font-semibold text-xs text-coolGray-500 uppercase text-center">
+                    Data de criação</th>
+                  <th
+                    class="whitespace-nowrap px-4 font-semibold text-xs text-coolGray-500 uppercase text-center rounded-r-md">
+                    Ações</th>
+                </tr>
+
+                <% administrators.forEach(function(user) { %>
+                  <tr class="h-18 border-b border-coolGray-100">
+                    <th class="whitespace-nowrap px-4 bg-white text-left">
+                      <div class="flex items-center gap-x-4">
+                        <% if (user.avatar.length > 0) { %>
+                          <img class="h-10 w-10 rounded-full object-cover" src="/img/avatars/<%= user.avatar %>" alt="">
+                        <% } else { %>
+                          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="h-10 w-10 text-blue-600">
+                            <path fill-rule="evenodd" d="M18.685 19.097A9.723 9.723 0 0021.75 12c0-5.385-4.365-9.75-9.75-9.75S2.25 6.615 2.25 12a9.723 9.723 0 003.065 7.097A9.716 9.716 0 0012 21.75a9.716 9.716 0 006.685-2.653zm-12.54-1.285A7.486 7.486 0 0112 15a7.486 7.486 0 015.855 2.812A8.224 8.224 0 0112 20.25a8.224 8.224 0 01-5.855-2.438zM15.75 9a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z" clip-rule="evenodd" />
+                          </svg>                                                                      
+                        <% } %>
+                        
+                        <span class="text-sm font-medium"><%= user.name %></span>
+                      </div>
+                    </th>
+                    
+                    <th class="whitespace-nowrap px-4 bg-white text-sm font-medium text-coolGray-800 text-center">
+                      <%= user.email %></th>
+
+                    <th class="whitespace-nowrap px-4 bg-white text-sm font-medium text-coolGray-800 text-center">
+                      <%= user.phone %></th>
+
+                    <th class="whitespace-nowrap px-4 bg-white text-sm font-medium text-coolGray-800 text-center">
+                      <%= user.createdAtFormatted %></th>
+
+                    <td class="whitespace-nowrap px-4 bg-white text-sm font-medium text-coolGray-800 text-center">
+                      <div class="flex items-center justify-center gap-x-5">
+                        <a href="/admin/update-admin/<%= user._id %>" class="flex items-center justify-center gap-x-1.5">
+                          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 text-gray-700">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10" />
+                          </svg>
+                          Editar
+                        </a>
+
+                        <button onclick="openDelete('<%= user._id %>')" class="flex items-center justify-center gap-x-1.5">
+                          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 text-red-700">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" />
+                          </svg>
+                          Excluir
                         </button>
                       </div>
-                    <% } else { %>
-                      <div class="-ml-px flex w-0 flex-1">
-                        <button onclick="blockUser('<%= item._id %>')" class="relative inter inline-flex w-0 flex-1 items-center justify-center gap-x-3 rounded-br-lg border border-transparent py-4 text-sm font-semibold text-gray-900">
-                          <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M10.9991 20.46C9.28306 20.46 7.69173 20.0274 6.22506 19.162C4.8024 18.326 3.67306 17.1967 2.83706 15.774C1.97173 14.3074 1.53906 12.716 1.53906 11C1.53906 9.28404 1.97173 7.69271 2.83706 6.22604C3.67306 4.80337 4.8024 3.67404 6.22506 2.83804C7.69173 1.97271 9.28306 1.54004 10.9991 1.54004C12.7151 1.54004 14.3064 1.97271 15.7731 2.83804C17.1957 3.67404 18.3251 4.80337 19.1611 6.22604C20.0264 7.69271 20.4591 9.28404 20.4591 11C20.4591 12.716 20.0264 14.3074 19.1611 15.774C18.3251 17.1967 17.1957 18.326 15.7731 19.162C14.3064 20.0274 12.7151 20.46 10.9991 20.46ZM7.03906 16.72C7.61106 17.1307 8.23806 17.4424 8.92006 17.655C9.60206 17.8677 10.2951 17.974 10.9991 17.974C12.2604 17.974 13.4337 17.6514 14.5191 17.006C15.5604 16.39 16.3891 15.5614 17.0051 14.52C17.6504 13.4347 17.9731 12.2614 17.9731 11C17.9731 10.296 17.8667 9.60304 17.6541 8.92104C17.4414 8.23904 17.1297 7.61204 16.7191 7.04004L7.03906 16.72ZM10.9991 4.02604C9.73773 4.02604 8.5644 4.34871 7.47906 4.99404C6.43773 5.61004 5.60906 6.43871 4.99306 7.48004C4.34773 8.56537 4.02506 9.73871 4.02506 11C4.02506 11.704 4.1314 12.397 4.34406 13.079C4.55673 13.761 4.8684 14.388 5.27906 14.96L14.9591 5.28004C14.3871 4.86937 13.7601 4.55771 13.0781 4.34504C12.3961 4.13237 11.7031 4.02604 10.9991 4.02604Z" fill="#5F5F5F"/>
-                          </svg>                          
-                          Bloquear
-                        </button>
-                      </div>
-                    <% } %>
-                    <div class="-ml-px flex w-0 flex-1">
-                      <button onclick="deleteUser('<%= item._id %>')" class="relative inter inline-flex w-0 flex-1 items-center justify-center gap-x-3 rounded-br-lg border border-transparent py-4 text-sm font-semibold text-red-700">
-                        <svg class="mt-0.5" width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-                          <path d="M15.75 1.125H10.5C10.5 0.926088 10.421 0.735322 10.2803 0.59467C10.1397 0.454018 9.94891 0.375 9.75 0.375H8.25C8.05109 0.375 7.86032 0.454018 7.71967 0.59467C7.57902 0.735322 7.5 0.926088 7.5 1.125H2.25C2.05109 1.125 1.86032 1.20402 1.71967 1.34467C1.57902 1.48532 1.5 1.67609 1.5 1.875C1.5 2.07391 1.57902 2.26468 1.71967 2.40533C1.86032 2.54598 2.05109 2.625 2.25 2.625H15.75C15.9489 2.625 16.1397 2.54598 16.2803 2.40533C16.421 2.26468 16.5 2.07391 16.5 1.875C16.5 1.67609 16.421 1.48532 16.2803 1.34467C16.1397 1.20402 15.9489 1.125 15.75 1.125Z" fill="#AA2222"/>
-                          <path d="M14.625 3.375C14.4261 3.375 14.2353 3.45402 14.0947 3.59467C13.954 3.73532 13.875 3.92609 13.875 4.125V16.125H4.125V4.125C4.125 3.92609 4.04598 3.73532 3.90533 3.59467C3.76468 3.45402 3.57391 3.375 3.375 3.375C3.17609 3.375 2.98532 3.45402 2.84467 3.59467C2.70402 3.73532 2.625 3.92609 2.625 4.125V16.875C2.625 17.0739 2.70402 17.2647 2.84467 17.4053C2.98532 17.546 3.17609 17.625 3.375 17.625H14.625C14.8239 17.625 15.0147 17.546 15.1553 17.4053C15.296 17.2647 15.375 17.0739 15.375 16.875V4.125C15.375 3.92609 15.296 3.73532 15.1553 3.59467C15.0147 3.45402 14.8239 3.375 14.625 3.375Z" fill="#AA2222"/>
-                          <path d="M7.875 13.875V7.125C7.875 6.92609 7.79598 6.73532 7.65533 6.59467C7.51468 6.45402 7.32391 6.375 7.125 6.375C6.92609 6.375 6.73532 6.45402 6.59467 6.59467C6.45402 6.73532 6.375 6.92609 6.375 7.125V13.875C6.375 14.0739 6.45402 14.2647 6.59467 14.4053C6.73532 14.546 6.92609 14.625 7.125 14.625C7.32391 14.625 7.51468 14.546 7.65533 14.4053C7.79598 14.2647 7.875 14.0739 7.875 13.875Z" fill="#AA2222"/>
-                          <path d="M11.625 13.875V7.125C11.625 6.92609 11.546 6.73532 11.4053 6.59467C11.2647 6.45402 11.0739 6.375 10.875 6.375C10.6761 6.375 10.4853 6.45402 10.3447 6.59467C10.204 6.73532 10.125 6.92609 10.125 7.125V13.875C10.125 14.0739 10.204 14.2647 10.3447 14.4053C10.4853 14.546 10.6761 14.625 10.875 14.625C11.0739 14.625 11.2647 14.546 11.4053 14.4053C11.546 14.2647 11.625 14.0739 11.625 13.875Z" fill="#AA2222"/>
-                        </svg>
-                        Excluir
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              </li>
-            <% }) %>
-          </ul>
+                    </td>
+                  </tr>
+                <% }) %>
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
     </main>
   </div>
 </body>
 
-<script>
-  function blockUser(id_user) {
-    fetch("/platform/users/block/" + id_user, {
-      method: "POST",
-      headers: { 'Content-Type': 'application/json' },
-    })
+<script src="/js/admin/admin.js"></script>
 
-    location.reload();
-  }
-
-  function unlockUser(id_user) {
-    fetch("/platform/users/unlock/" + id_user, {
-      method: "POST",
-      headers: { 'Content-Type': 'application/json' },
-    })
-
-    location.reload();
-  }
-
-  function deleteUser(id_user) {
-    fetch("/platform/users/delete/" + id_user, {
-      method: "DELETE",
-      headers: { 'Content-Type': 'application/json' },
-    })
-
-    location.reload();
-  }
-</script>
 </html>

@@ -165,26 +165,26 @@
             </div>
 
             <div>
-              <label for="car_model" class="block text-md font-medium leading-6 text-gray-900 inter font-semibold">Modelo do carro</label>
+              <label for="car-model" class="block text-md font-medium leading-6 text-gray-900 inter font-semibold">Modelo do carro</label>
               <div class="relative mt-2 rounded-md shadow-sm">
-                <input type="text" name="car-model" id="car-model" value="<%= technician.car_model %>" class="block w-full rounded-lg inter py-1.5 mt-2 pl-2 text-gray-900 ring-1 ring-inset ring-gray-300 sm:text-sm sm:leading-6 border-blue-1" placeholder="Insira o modelo do carro">
+                <input type="text" name="car-model" id="car-model" value="<%= technician.carModel %>" class="block w-full rounded-lg inter py-1.5 mt-2 pl-2 text-gray-900 ring-1 ring-inset ring-gray-300 sm:text-sm sm:leading-6 border-blue-1" placeholder="Insira o modelo do carro">
               </div>
             </div>
           </div>
 
           <div class="grid grid-cols-2 mt-12 gap-x-4">
             <div>
-              <label for="car_plate" class="block text-md font-medium leading-6 text-gray-900 inter font-semibold">Placa do carro</label>
+              <label for="car-plate" class="block text-md font-medium leading-6 text-gray-900 inter font-semibold">Placa do carro</label>
               <div class="relative mt-2 rounded-md shadow-sm">
-                <input type="text" name="car-plate" id="car-plate" value="<%= technician.car_plate %>" class="block w-full rounded-lg inter py-1.5 mt-2 pl-2 text-gray-900 ring-1 ring-inset ring-gray-300 sm:text-sm sm:leading-6 border-blue-1" placeholder="Insira a placa do carro">
+                <input type="text" name="car-plate" id="car-plate" value="<%= technician.carPlate %>" class="block w-full rounded-lg inter py-1.5 mt-2 pl-2 text-gray-900 ring-1 ring-inset ring-gray-300 sm:text-sm sm:leading-6 border-blue-1" placeholder="Insira a placa do carro">
               </div>
             </div>
 
             <div>
-              <label for="cep" class="block text-md font-medium leading-6 text-gray-900 inter font-semibold">Cor do carro</label>
+              <label for="car-color" class="block text-md font-medium leading-6 text-gray-900 inter font-semibold">Cor do carro</label>
               <div class="relative mt-2 rounded-md shadow-sm">
                 <select name="car-color" id="car-color" class="block w-full rounded-lg inter py-2 mt-2 pl-2 text-gray-900 ring-1 ring-inset ring-gray-300 sm:text-sm sm:leading-6 border-blue-1">
-                  <option value="<%= technician.car_color %>"><%= technician.car_color %> (selecionado)</option>
+                  <option value="<%= technician.carColor %>"><%= technician.carColor %> (selecionado)</option>
                   <option value="branco">Branco</option>
                   <option value="vermelho">Vermelho</option>
                   <option value="azul">Azul</option>
@@ -217,26 +217,11 @@
               </svg>                
               Salvar
             </button>
-
-            <button type="button" style="background-color: #2196F3;" class="w-full inline-flex justify-center items-center gap-x-1.5 rounded-md px-3 py-3 text-sm font-semibold text-white inter shadow-sm">
-              <svg width="21" height="20" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <g clip-path="url(#clip0_156_9775)">
-                <path d="M15.3833 15.4046L17.9922 7.57843C19.0324 4.45761 19.5526 2.89719 18.7289 2.07351C17.9052 1.24982 16.3447 1.76996 13.2237 2.81023L5.44772 5.40214C3.71287 5.98041 2.84544 6.26953 2.58215 6.90563C2.52026 7.05513 2.48285 7.21363 2.47134 7.37502C2.42236 8.0617 3.0689 8.70824 4.36198 10.0012L4.59751 10.2367C4.80976 10.449 4.91587 10.5552 4.9961 10.6732C5.15432 10.9062 5.24413 11.1789 5.25536 11.4602C5.26105 11.603 5.23877 11.7514 5.19422 12.0482C5.03115 13.1347 4.94961 13.6779 5.04566 14.0959C5.23712 14.9292 5.88207 15.5832 6.71256 15.7864C7.12921 15.8883 7.67355 15.8145 8.76225 15.6667L8.82177 15.6587C9.12867 15.617 9.28216 15.5962 9.4295 15.6051C9.69691 15.6212 9.95525 15.7083 10.1779 15.8574C10.3005 15.9396 10.41 16.0491 10.629 16.2681L10.8384 16.4774C12.097 17.736 12.7262 18.3652 13.3938 18.3324C13.5778 18.3234 13.7587 18.2807 13.9273 18.2065C14.5391 17.9373 14.8205 17.0931 15.3833 15.4046Z" stroke="white" stroke-width="1.25"/>
-                <path opacity="0.5" d="M5.80078 15L18.3008 2.5" stroke="white" stroke-width="1.25" stroke-linecap="round"/>
-                </g>
-                <defs>
-                <clipPath id="clip0_156_9775">
-                <rect width="20" height="20" fill="white" transform="translate(0.800781)"/>
-                </clipPath>
-                </defs>
-              </svg>                                                
-              Enviar por email
-            </button>
           </div>
 
           <div class="mt-8">
             <h2 class="text-sm inter font-semibold">Observações internas</h2>
-            <textarea class="w-full rounded-lg border-blue text-sm mt-2 inter p-2" name="comments" id="comments" cols="4" rows="6"></textarea>
+            <textarea class="w-full rounded-lg border-blue text-sm mt-2 inter p-2" name="comments" id="comments" cols="4" rows="6"><%= technician.comments %></textarea>
           </div>
         </div>
       </div>

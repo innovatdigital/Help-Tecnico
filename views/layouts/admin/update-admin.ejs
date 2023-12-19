@@ -1,10 +1,10 @@
-<%- include('../../partials/app/head', {title: "Novo administrador"}) %>
+<%- include('../../partials/app/head', {title: "Atualizar administrador"}) %>
 
 <body class="bg-gray-100">
   <%- include('../../partials/app/sidebar', {user: user}) %>
 
   <div class="lg:pl-70">
-    <%- include('../../partials/app/nav', {title: "Novo administrador"}) %>
+    <%- include('../../partials/app/nav', {title: "Atualizar administrador"}) %>
 
     <main class="py-8 px-12 fade-in">
       <div class="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-x-6">
@@ -33,14 +33,14 @@
             <div>
               <label for="name" class="block text-md font-medium leading-6 text-gray-900 inter font-semibold">Nome</label>
               <div class="relative mt-2 rounded-md shadow-sm">
-                <input type="text" name="name" id="name" class="block w-full rounded-lg inter py-1.5 mt-2 pl-2 text-gray-900 ring-1 ring-inset ring-gray-300 sm:text-sm sm:leading-6 border-blue-1" placeholder="Insira o nome">
+                <input type="text" name="name" id="name" value="<%= admin.name %>" class="block w-full rounded-lg inter py-1.5 mt-2 pl-2 text-gray-900 ring-1 ring-inset ring-gray-300 sm:text-sm sm:leading-6 border-blue-1" placeholder="Insira o nome">
               </div>
             </div>
 
             <div>
               <label for="phone" class="block text-md font-medium leading-6 text-gray-900 inter font-semibold">Telefone</label>
               <div class="relative mt-2 rounded-md shadow-sm">
-                <input type="text" name="phone" id="phone" class="block w-full rounded-lg inter py-1.5 mt-2 pl-2 text-gray-900 ring-1 ring-inset ring-gray-300 sm:text-sm sm:leading-6 border-blue-1" placeholder="Insira o número de celular">
+                <input type="text" name="phone" id="phone" value="<%= admin.phone %>" class="block w-full rounded-lg inter py-1.5 mt-2 pl-2 text-gray-900 ring-1 ring-inset ring-gray-300 sm:text-sm sm:leading-6 border-blue-1" placeholder="Insira o número de celular">
               </div>
             </div>
           </div>
@@ -49,14 +49,14 @@
             <div>
               <label for="email" class="block text-md font-medium leading-6 text-gray-900 inter font-semibold">Email</label>
               <div class="relative mt-2 rounded-md shadow-sm">
-                <input type="text" name="email" id="email" class="block w-full rounded-lg inter py-1.5 mt-2 pl-2 text-gray-900 ring-1 ring-inset ring-gray-300 sm:text-sm sm:leading-6 border-blue-1" placeholder="Insira o email">
+                <input type="text" name="email" id="email" value="<%= admin.email %>" class="block w-full rounded-lg inter py-1.5 mt-2 pl-2 text-gray-900 ring-1 ring-inset ring-gray-300 sm:text-sm sm:leading-6 border-blue-1" placeholder="Insira o email">
               </div>
             </div>
 
             <div>
               <label for="password" class="block text-md font-medium leading-6 text-gray-900 inter font-semibold">Senha</label>
               <div class="relative mt-2 rounded-md shadow-sm">
-                <input type="text" name="password" id="password" class="block w-full rounded-lg inter py-1.5 mt-2 pl-2 text-gray-900 ring-1 ring-inset ring-gray-300 sm:text-sm sm:leading-6 border-blue-1" placeholder="Insira a senha">
+                <input type="text" name="password" id="password" value="<%= admin.password %>" class="block w-full rounded-lg inter py-1.5 mt-2 pl-2 text-gray-900 ring-1 ring-inset ring-gray-300 sm:text-sm sm:leading-6 border-blue-1" placeholder="Insira a senha">
               </div>
             </div>
           </div>
@@ -64,7 +64,7 @@
 
         <div class="bg-white rounded-xl shadow-lg border p-4 px-5 col-span-1">
           <div class="space-y-4">
-            <button type="button" onclick="newAdmin()" style="background-color: #00AB55;" class="w-full inline-flex justify-center items-center gap-x-1.5 rounded-md px-3 py-3 text-sm font-semibold text-white inter shadow-sm">
+            <button type="button" onclick="updateAdmin('<%= admin._id %>')" style="background-color: #00AB55;" class="w-full inline-flex justify-center items-center gap-x-1.5 rounded-md px-3 py-3 text-sm font-semibold text-white inter shadow-sm">
               <svg width="21" height="20" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <g clip-path="url(#clip0_156_9768)">
                 <path d="M3.46649 17.1132C4.68687 18.3337 6.65105 18.3337 10.5794 18.3337C14.5078 18.3337 16.472 18.3337 17.6923 17.1132C18.9128 15.8929 18.9128 13.9287 18.9128 10.0003C18.9128 9.71574 18.9128 9.57349 18.9001 9.42883C18.8413 8.75441 18.5678 8.09413 18.1325 7.57561C18.0391 7.46438 17.9361 7.3613 17.7299 7.15514L13.4246 2.84986C13.2184 2.64371 13.1153 2.54062 13.0042 2.44725C12.4856 2.01199 11.8253 1.7385 11.1509 1.67962C11.0063 1.66699 10.864 1.66699 10.5794 1.66699C6.65105 1.66699 4.68687 1.66699 3.46649 2.88738C2.24609 4.10777 2.24609 6.07195 2.24609 10.0003C2.24609 13.9287 2.24609 15.8929 3.46649 17.1132Z" stroke="white" stroke-width="1.25"/>
@@ -83,7 +83,7 @@
 
           <div class="mt-8">
             <h2 class="text-sm inter font-semibold">Observações internas</h2>
-            <textarea class="w-full rounded-lg border-blue text-sm mt-2 inter p-2" name="comments" id="comments" cols="4" rows="6"></textarea>
+            <textarea class="w-full rounded-lg border-blue text-sm mt-2 inter p-2" name="comments" id="comments" cols="4" rows="6"><%= admin.comments %></textarea>
           </div>
         </div>
       </div>

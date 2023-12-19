@@ -1,0 +1,92 @@
+<%- include('../../partials/app/head', {title: "Fornecedores"}) %>
+
+<body class="bg-gray-100">
+  <%- include('../../partials/app/sidebar', {user: user}) %>
+
+  <div class="lg:pl-70">
+    <%- include('../../partials/app/nav', {title: "Fornecedores"}) %>
+
+    <main class="fade-in">
+      <div class="p-8">
+        <div class="pt-6 bg-white overflow-hidden border border-coolGray-100 rounded-md shadow-dashboard inter">
+          <h2 class="px-6 mb-4 text-lg text-coolGray-900 font-semibold">Fornecedores</h2>
+          <div class="px-6 overflow-x-auto">
+            <table class="w-full">
+              <tbody>
+                <tr class="whitespace-nowrap h-11 bg-coolGray-50 bg-opacity-80">
+                  <th class="px-4 font-semibold text-xs text-coolGray-500 uppercase text-left rounded-l-md">
+                    Nome do fornecedor
+                  </th>
+                  <th
+                    class="whitespace-nowrap px-4 font-semibold text-xs text-coolGray-500 uppercase text-center">
+                    Telefone (fixo)</th>
+                  <th
+                    class="whitespace-nowrap px-4 font-semibold text-xs text-coolGray-500 uppercase text-center">
+                    Telefone (celular)</th>
+                  <th
+                    class="whitespace-nowrap px-4 font-semibold text-xs text-coolGray-500 uppercase text-center">
+                    Email</th>
+                  <th
+                    class="whitespace-nowrap px-4 font-semibold text-xs text-coolGray-500 uppercase text-center">
+                    Data de cadastro</th>
+                  <th
+                    class="whitespace-nowrap px-4 font-semibold text-xs text-coolGray-500 uppercase text-center rounded-r-md">
+                    Cidade</th>
+                  <th
+                    class="whitespace-nowrap px-4 font-semibold text-xs text-coolGray-500 uppercase text-center rounded-r-md">
+                    Ações</th>
+                </tr>
+
+                <% suppliers.forEach(function(item) { %>
+                  <tr class="h-18 border-b border-coolGray-100">
+                    <th class="whitespace-nowrap px-4 bg-white text-sm font-medium text-coolGray-800 text-left">
+                      <div class="flex items-center space-x-2">
+                        <svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <g clip-path="url(#clip0_269_10)">
+                          <path d="M36 18C36 8.05887 27.9411 0 18 0C8.05887 0 0 8.05887 0 18C0 27.9411 8.05887 36 18 36C27.9411 36 36 27.9411 36 18Z" fill="#2196F3"/>
+                          <path fill-rule="evenodd" clip-rule="evenodd" d="M17.8889 18.3333C18.1957 18.3333 18.4444 18.582 18.4444 18.8889V24.4444C18.4444 24.7513 18.1957 25 17.8889 25C17.582 25 17.3333 24.7513 17.3333 24.4444V18.8889C17.3333 18.582 17.582 18.3333 17.8889 18.3333ZM21.2222 18.3333C21.5291 18.3333 21.7778 18.582 21.7778 18.8889C21.7778 20.8867 22.7427 22.7218 24.3374 23.8627C24.587 24.0412 24.6445 24.3883 24.466 24.6378C24.2875 24.8873 23.9405 24.9449 23.6909 24.7664C21.8076 23.419 20.6667 21.2491 20.6667 18.8889C20.6667 18.582 20.9154 18.3333 21.2222 18.3333ZM14.5556 18.3333C14.8624 18.3333 15.1111 18.582 15.1111 18.8889C15.1111 21.2464 13.9728 23.4141 12.0931 24.7619C11.8437 24.9407 11.4967 24.8835 11.3179 24.6342C11.1391 24.3848 11.1963 24.0377 11.4456 23.8589C13.0374 22.7176 14 20.8844 14 18.8889C14 18.582 14.2487 18.3333 14.5556 18.3333ZM24.5556 10C25.7829 10 26.7778 10.9949 26.7778 12.2222V15.5556C26.7778 16.7828 25.7829 17.7778 24.5556 17.7778H11.2222C9.99493 17.7778 9 16.7828 9 15.5556V12.2222C9 10.9949 9.99493 10 11.2222 10H24.5556ZM24 14.4444H11.7778C11.4709 14.4444 11.2222 14.6932 11.2222 15C11.2222 15.3068 11.4709 15.5556 11.7778 15.5556H24C24.3068 15.5556 24.5556 15.3068 24.5556 15C24.5556 14.6932 24.3068 14.4444 24 14.4444Z" fill="white"/>
+                          </g>
+                          <defs>
+                          <clipPath id="clip0_269_10">
+                          <rect width="36" height="36" fill="white"/>
+                          </clipPath>
+                          </defs>
+                        </svg>                                
+                        <p class="inter ml-2 font-semibold"><%= item.name %></p>
+                      </div>
+                    </th>
+                    
+                    <th class="whitespace-nowrap px-4 bg-white text-sm font-medium text-coolGray-800 text-center">
+                      <%= item.landline %></th>
+
+                    <th class="whitespace-nowrap px-4 bg-white text-sm font-medium text-coolGray-800 text-center">
+                      <%= item.phone %></th>
+
+                    <th class="whitespace-nowrap px-4 bg-white text-sm font-medium text-coolGray-800 text-center">
+                      <%= item.email %></th>
+
+                    <th class="whitespace-nowrap px-4 bg-white text-sm font-medium text-coolGray-800 text-center">
+                      <%= item.createdAtFormatted %></th>
+
+                    <th class="whitespace-nowrap px-4 bg-white text-sm font-medium text-coolGray-800 text-center">
+                      <%= item.city %></th>
+
+                    <td class="whitespace-nowrap px-4 bg-white text-sm font-medium text-coolGray-800 text-center">
+                      <a href="/admin/view-supplier/<%= item._id %>" class="flex items-center justify-center">                                
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 mr-1">
+                          <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" />
+                        </svg>                                
+                        Visualizar
+                      </a>
+                    </td>
+                  </tr>
+                <% }) %>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+</body>
+</html>

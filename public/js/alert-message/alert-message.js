@@ -5,7 +5,7 @@ function alertMessage(type, title) {
     const html = `
     <div id="alert-message" aria-live="assertive" class="pointer-events-none z-10 fixed inset-0 flex items-end px-4 py-6 sm:items-start sm:p-6 mt-20">
       <div class="flex w-full flex-col items-center space-y-4 sm:items-end">
-        <div class="pointer-events-auto w-full max-w-sm overflow-hidden rounded-lg bg-red-700 bg-opacity-75 shadow-lg ring-1 ring-black ring-opacity-5">
+        <div class="pointer-events-auto w-full max-w-sm overflow-hidden rounded-lg bg-red-700 shadow-lg ring-1 ring-black ring-opacity-5">
           <div class="p-4">
             <div class="flex items-start">
               <div class="flex-shrink-0">
@@ -33,7 +33,7 @@ function alertMessage(type, title) {
     const html = `
     <div id="alert-message" aria-live="assertive" class="pointer-events-none z-10 fixed inset-0 flex items-end px-4 py-6 sm:items-start sm:p-6 mt-20">
       <div class="flex w-full flex-col items-center space-y-4 sm:items-end">
-        <div class="pointer-events-auto w-full max-w-sm overflow-hidden rounded-lg bg-indigo-700 bg-opacity-75 shadow-lg ring-1 ring-black ring-opacity-5">
+        <div class="pointer-events-auto w-full max-w-sm overflow-hidden rounded-lg bg-green-700 shadow-lg ring-1 ring-black ring-opacity-5">
           <div class="p-4">
             <div class="flex items-start">
               <div class="flex-shrink-0">

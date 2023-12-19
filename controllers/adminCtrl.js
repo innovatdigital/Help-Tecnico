@@ -1,38 +1,61 @@
 const asyncHandler = require('express-async-handler')
+const bcrypt = require('bcrypt')
+const path = require('path');
+const moment = require('moment')
+const fs = require('fs')
+const { welcomeCompany } = require('../controllers/emailCtrl')
+
 const Admin = require('../models/adminModel')
 const Report = require('../models/reportModel')
 const Technician = require('../models/techinicianModel')
 const Company = require('../models/companyModel')
 const Equipments = require('../models/equipmentModel')
 const Suppliers = require('../models/supplierModel')
+const Budgets = require('../models/budgetModel')
 const Calls = require('../models/callModel')
-const path = require('path');
-const moment = require('moment')
-const fs = require('fs')
-const { welcomeCompany } = require('../controllers/emailCtrl')
 
 
 // ########################### //
 // ##       DASHBOARD       ## //
 // ########################### //
 
-const dashboard = asyncHandler(async(req, res) => {
+const dashboard = asyncHandler(async (req, res) => {
     const today = new Date();
     today.setHours(0, 0, 0, 0);
 
-    const calls = await Calls.find({createdAt: {$gte: today, $lt: new Date(today.getTime() + 24 * 60 * 60 * 1000)}}).limit(10)
+    // Month
+    const firstDayOfMonth = new Date(new Date().getFullYear(), new Date().getMonth(), 1);
+    const lastDayOfMonth = new Date(new Date().getFullYear(), new Date().getMonth() + 1, 0, 23, 59, 59, 999);
+
+    // Year
+    const startOfYear = new Date(new Date().getFullYear(), 0, 1);
+    const startOfNextYear = new Date(new Date().getFullYear() + 1, 0, 1);
+
+    // Calls today
+    const callsToday = await Calls.find({ createdAt: { $gte: today, $lt: new Date(today.getTime() + 24 * 60 * 60 * 1000) } }).limit(10)
+
+    // Calls today
+    const callsYear = await Calls.countDocuments({ createdAt: { $gte: startOfYear, $lt: startOfNextYear } })
+
     const countCompanies = await Company.countDocuments()
     const countTechnicians = await Technician.countDocuments()
     const countEquipments = await Equipments.countDocuments()
+    
+    const countBudgets = await Budgets.find({
+        createdAt: {
+            $gte: firstDayOfMonth,
+            $lte: lastDayOfMonth,
+        }
+    })
 
-    for (const call of calls) {
+    for (const call of callsToday) {
         const findCompany = await Company.findById(call.idCompany)
 
         if (findCompany) {
             call.nameCompany = findCompany.name
             call.avatarCompany = findCompany.avatar
         } else {
-            call.nameCompany = "Empresa excluida"
+            call.nameCompany = "Empresa excluída"
             call.avatarCompany = ""
         }
 
@@ -48,7 +71,7 @@ const dashboard = asyncHandler(async(req, res) => {
         }
     }
 
-    res.render('layouts/admin/dashboard', {user: req.user, calls: calls.reverse(), countCompanies: countCompanies, countTechnicians: countTechnicians, countEquipments: countEquipments})
+    res.render('layouts/admin/dashboard', { user: req.user, callsToday: callsToday.reverse(), callsYear: callsYear, countCompanies: countCompanies, countTechnicians: countTechnicians, countEquipments: countEquipments, countBudgets: countBudgets })
 })
 
 
@@ -59,7 +82,7 @@ const dashboard = asyncHandler(async(req, res) => {
 // ##       CHAMADOS       ## //
 // ########################## //
 
-const allCalls = asyncHandler(async(req, res) => {
+const allCalls = asyncHandler(async (req, res) => {
     const calls = await Calls.find({})
 
     for (const call of calls) {
@@ -69,7 +92,7 @@ const allCalls = asyncHandler(async(req, res) => {
             call.nameCompany = findCompany.name
             call.avatarCompany = findCompany.avatar
         } else {
-            call.nameCompany = "Empresa excluida"
+            call.nameCompany = "Empresa excluída"
             call.avatarCompany = ""
         }
 
@@ -85,10 +108,10 @@ const allCalls = asyncHandler(async(req, res) => {
         }
     }
 
-    res.render('layouts/admin/all-calls', {user: req.user, calls: calls.reverse()})
+    res.render('layouts/admin/calls', { user: req.user, calls: calls.reverse() })
 })
 
-const viewCall = asyncHandler(async(req, res) => {
+const viewCall = asyncHandler(async (req, res) => {
     const findCall = await Calls.findById(req.params.id)
     const findCompany = await Company.findById(findCall.idCompany)
     const technicians = await Technician.find({})
@@ -105,14 +128,14 @@ const viewCall = asyncHandler(async(req, res) => {
         findCall.emailCompany = findCompany.email
         findCall.phoneCompany = findCompany.phoneCompany
         findCall.avatarCompany = findCompany.avatar
-        
-        res.render('layouts/admin/view-call', {user: req.user, call: findCall, technicians: technicians, equipments: equipments})
+
+        res.render('layouts/admin/view-call', { user: req.user, call: findCall, technicians: technicians, equipments: equipments })
     } else {
         res.render('layouts/not-found')
     }
 })
 
-const designateCall = asyncHandler(async(req, res) => {
+const designateCall = asyncHandler(async (req, res) => {
     const findCall = await Calls.findById(req.query.id_call)
 
     if (findCall) {
@@ -153,8 +176,8 @@ const designateCall = asyncHandler(async(req, res) => {
     }
 })
 
-const cancelCall = asyncHandler(async(req, res) => {
-    const cancelCall = await Calls.findByIdAndUpdate(req.params.id, {cancellationMessage: "Cancelado pelo administrador do sistema.", status: "canceled"})
+const cancelCall = asyncHandler(async (req, res) => {
+    const cancelCall = await Calls.findByIdAndUpdate(req.params.id, { cancellationMessage: "Cancelado pelo administrador do sistema.", status: "canceled" })
 
     if (cancelCall) {
         res.sendStatus(200)
@@ -171,23 +194,23 @@ const cancelCall = asyncHandler(async(req, res) => {
 // ##       ARQUIVOS       ## //
 // ########################## //
 
-const fileManager = asyncHandler(async(req, res) => {
+const fileManager = asyncHandler(async (req, res) => {
     fs.readdir(path.resolve(__dirname, "../public/file-manager/"), (err, files) => {
         if (err) {
-          console.error('Erro ao ler diretório:', err);
-          return;
+            console.error('Erro ao ler diretório:', err);
+            return;
         }
-    
+
         const folders = files.filter(file => {
-          const filePath = path.join(path.resolve(__dirname, "../public/file-manager/"), file);
-          return fs.statSync(filePath).isDirectory();
+            const filePath = path.join(path.resolve(__dirname, "../public/file-manager/"), file);
+            return fs.statSync(filePath).isDirectory();
         });
 
-        res.render('layouts/admin/file-manager', {user: req.user, archives: [], folders: folders})
+        res.render('layouts/admin/file-manager', { user: req.user, archives: [], folders: folders })
     });
 })
 
-const createFolder = asyncHandler(async(req, res) => {
+const createFolder = asyncHandler(async (req, res) => {
     fs.mkdir(path.resolve(__dirname, `../public/file-manager/${req.body.name_folder}`), (err) => {
         if (err) {
             res.sendStatus(500)
@@ -197,7 +220,7 @@ const createFolder = asyncHandler(async(req, res) => {
     });
 })
 
-const uploadArchive = asyncHandler(async(req, res) => {
+const uploadArchive = asyncHandler(async (req, res) => {
     const nomePasta = req.body.name_path;
     const arquivoEnviado = req.file;
 
@@ -219,7 +242,7 @@ const uploadArchive = asyncHandler(async(req, res) => {
 // ##      RELATÓRIOS      ## //
 // ########################## //
 
-const allReports = asyncHandler(async(req, res) => {
+const allReports = asyncHandler(async (req, res) => {
     const reports = [{
         _id: "6501f97cd7c07a0535820364",
         title: "Relatório de conclusão de serviço",
@@ -230,11 +253,11 @@ const allReports = asyncHandler(async(req, res) => {
         createdAt: "16/02/2023"
     }]
 
-    res.render('layouts/admin/all-reports', {user: req.user, reports: reports})
+    res.render('layouts/admin/reports', { user: req.user, reports: reports })
 })
 
-const viewReport = asyncHandler(async(req, res) => {
-    res.render('layouts/admin/view-report', {user: req.user})
+const viewReport = asyncHandler(async (req, res) => {
+    res.render('layouts/admin/view-report', { user: req.user })
 })
 
 
@@ -245,7 +268,7 @@ const viewReport = asyncHandler(async(req, res) => {
 // ##      ORÇAMENTOS      ## //
 // ########################## //
 
-const budgets = asyncHandler(async(req, res) => {
+const budgets = asyncHandler(async (req, res) => {
     const budgets = [{
         _id: "6501f97cd7c07a0535820364",
         title: "Orçamento de serviço",
@@ -256,11 +279,11 @@ const budgets = asyncHandler(async(req, res) => {
         createdAt: "16/02/2023"
     }]
 
-    res.render('layouts/admin/all-budgets', {user: req.user, budgets: budgets})
+    res.render('layouts/admin/budgets', { user: req.user, budgets: budgets })
 })
 
-const viewBudget = asyncHandler(async(req, res) => {
-    res.render('layouts/admin/view-budget', {user: req.user})
+const viewBudget = asyncHandler(async (req, res) => {
+    res.render('layouts/admin/view-budget', { user: req.user })
 })
 
 
@@ -271,30 +294,77 @@ const viewBudget = asyncHandler(async(req, res) => {
 // ##     EQUIPAMENTOS     ## //
 // ########################## //
 
-const allEquipments = asyncHandler(async(req, res) => {
+const allEquipments = asyncHandler(async (req, res) => {
     const equipments = await Equipments.find({})
 
     for (const equipment of equipments) {
-        const findCompany = await Company.findById(equipment.idCompany).select("name photo")
+        const findCompany = await Company.findById(equipment.idCompany).select("name avatar")
+        const callsWithEquipment = await Calls.find({ equipments: { $elemMatch: { $eq: equipment._id.toString() } } });
 
-        equipment.nameCompany = findCompany.name
-        equipment.avatarCompany = findCompany.avatar
+        const isInMaintenance = callsWithEquipment.some(call => call.status !== "concluded");
+
+        equipment.status = isInMaintenance ? "maintenance" : "normal";
+
+        if (findCompany) {
+            equipment.nameCompany = findCompany.name
+            equipment.avatarCompany = findCompany.avatar
+        } else {
+            equipment.nameCompany = "Empresa excluída"
+            equipment.avatarCompany = ""
+        }
 
         const dateCreatedAt = moment.utc(equipment.createdAt);
         const createdAtFormatted = dateCreatedAt.format("DD/MM/YYYY");
-    
+
         equipment.createdAtFormatted = createdAtFormatted
     }
 
-    res.render('layouts/admin/all-equipments', {user: req.user, equipments: equipments})
+    res.render('layouts/admin/equipments', { user: req.user, equipments: equipments })
 })
 
 const viewEquipment = asyncHandler(async (req, res) => {
-    const equipment = await Equipments.findById(req.params.id)
-    const company = await Company.findById(equipment.idCompany).select("name photo")
+    const findEquipment = await Equipments.findById(req.params.id)
 
-    if (equipment && company) {
-        res.render('layouts/admin/view-equipment', { notifications: req.user.notifications.reverse().slice(0, 5), user: req.user, equipment: equipment, company: company })
+    if (findEquipment) {
+        const findCompany = await Company.findById(findEquipment.idCompany).select("name avatar")
+        const callsWithEquipment = await Calls.find({ equipments: { $elemMatch: { $eq: findEquipment._id.toString() } } });
+
+        const isInMaintenance = callsWithEquipment.some(call => call.status !== "concluded");
+
+        findEquipment.status = isInMaintenance ? "maintenance" : "normal";
+
+        for (const call of callsWithEquipment) {
+            const findCompany = await Company.findById(call.idCompany)
+    
+            if (findCompany) {
+                call.nameCompany = findCompany.name
+                call.avatarCompany = findCompany.avatar
+            } else {
+                call.nameCompany = "Empresa excluída"
+                call.avatarCompany = ""
+            }
+    
+            if (call.status != "pending" && call.idTechnician.length > 0) {
+                const findTechnician = await Technician.findById(call.idTechnician)
+    
+                if (findTechnician) {
+                    call.nameTechnician = findTechnician.name
+                    call.avatarTechnician = findTechnician.avatar
+                } else {
+                    call.nameTechnician = "Técnico excluído"
+                    call.avatarTechnician = ""
+                }
+            } else {
+                call.avatarTechnician = ''
+            }
+        }
+
+        const dateCreatedAt = moment.utc(findEquipment.createdAt);
+        const createdAtFormatted = dateCreatedAt.format("DD/MM/YYYY");
+
+        findEquipment.createdAtFormatted = createdAtFormatted
+
+        res.render('layouts/admin/view-equipment', { user: req.user, equipment: findEquipment, company: findCompany, calls: callsWithEquipment })
     } else {
         res.render('layouts/not-found')
     }
@@ -307,21 +377,63 @@ const viewEquipment = asyncHandler(async (req, res) => {
 // ##    ADMINISTRADORES   ## //
 // ########################## //
 
-const administrators = asyncHandler(async(req, res) => {
+const administrators = asyncHandler(async (req, res) => {
     const findAdmins = await Admin.find({})
 
-    res.render('layouts/admin/administrators', {user: req.user, administrators: findAdmins})
+    for (const admin of findAdmins) {
+        const dateCreatedAt = moment.utc(admin.createdAt);
+        const createdAtFormatted = dateCreatedAt.format("DD/MM/YYYY");
+
+        admin.createdAtFormatted = createdAtFormatted
+    }
+
+    res.render('layouts/admin/administrators', { user: req.user, administrators: findAdmins })
 })
 
-const newAdmin = asyncHandler(async(req, res) => {
+const newAdmin = asyncHandler(async (req, res) => {
     res.render('layouts/admin/new-admin', { user: req.user })
 })
 
-const saveAdmin = asyncHandler(async(req, res) => {
+const saveAdmin = asyncHandler(async (req, res) => {
     try {
-        const createAdmin = await Admin.create(req.body)
+        if (req.params.id == undefined) {
+            const createAdmin = await Admin.create(req.body)
 
-        if (createAdmin) {
+            if (createAdmin) {
+                res.sendStatus(200)
+            } else {
+                res.sendStatus(500)
+            }
+        } else {
+            const updateAdmin = await Admin.findByIdAndUpdate(req.params.id, req.body)
+
+            if (updateAdmin) {
+                res.sendStatus(200)
+            } else {
+                res.sendStatus(500)
+            }
+        }
+    } catch (err) {
+        console.log(err)
+        res.sendStatus(500)
+    }
+})
+
+const updateAdmin = asyncHandler(async (req, res) => {
+    const findAdmin = await Admin.findById(req.params.id)
+
+    if (findAdmin) {
+        res.render('layouts/admin/update-admin', { user: req.user, admin: findAdmin })
+    } else {
+        res.render('layouts/not-found')
+    }
+})
+
+const deleteAdmin = asyncHandler(async (req, res) => {
+    try {
+        const deleteAdmin = await Admin.findByIdAndDelete(req.params.id)
+
+        if (deleteAdmin) {
             res.sendStatus(200)
         } else {
             res.sendStatus(500)
@@ -335,13 +447,12 @@ const saveAdmin = asyncHandler(async(req, res) => {
 
 
 
-
 // ########################### //
 // ##   USUÁRIOS DE TESTE   ## //
 // ########################### //
 
-const testUsers = asyncHandler(async(req, res) => {
-    res.render('layouts/admin/test-users', {user: req.user})
+const testUsers = asyncHandler(async (req, res) => {
+    res.render('layouts/admin/test-users', { user: req.user })
 })
 
 
@@ -352,29 +463,41 @@ const testUsers = asyncHandler(async(req, res) => {
 // ##       TÉCNICOS       ## //
 // ########################## //
 
-const technicians = asyncHandler(async(req, res) => {
+const technicians = asyncHandler(async (req, res) => {
     const findTechnicians = await Technician.find({})
 
-    res.render('layouts/admin/technicians', {user: req.user, technicians: findTechnicians})
+    for (const technician of findTechnicians) {
+        const dateCreatedAt = moment.utc(technician.createdAt);
+        const createdAtFormatted = dateCreatedAt.format("DD/MM/YYYY");
+
+        technician.createdAtFormatted = createdAtFormatted
+    }
+
+    res.render('layouts/admin/technicians', { user: req.user, technicians: findTechnicians })
 })
 
-const viewTechnician = asyncHandler(async(req, res) => {
+const viewTechnician = asyncHandler(async (req, res) => {
     const findTechnician = await Technician.findById(req.params.id)
 
     if (findTechnician) {
-        let callsTechnician = await Calls.find({idTechnician: req.params.id})
-        
-        res.render('layouts/admin/view-technician', {user: req.user, technician: findTechnician, calls: callsTechnician})
+        const callsTechnician = await Calls.find({ idTechnician: req.params.id })
+
+        const dateCreatedAt = moment.utc(findTechnician.createdAt);
+        const createdAtFormatted = dateCreatedAt.format("DD/MM/YYYY");
+
+        findTechnician.createdAtFormatted = createdAtFormatted
+
+        res.render('layouts/admin/view-technician', { user: req.user, technician: findTechnician, calls: callsTechnician })
     } else {
         res.render('layouts/not-found')
     }
 })
 
-const newTechnician = asyncHandler(async(req, res) => {
+const newTechnician = asyncHandler(async (req, res) => {
     res.render('layouts/admin/new-technician', { user: req.user })
 })
 
-const saveTechnician = asyncHandler(async(req, res) => {
+const saveTechnician = asyncHandler(async (req, res) => {
     try {
         if (req.params.id == undefined) {
             const createTechnician = await Technician.create(req.body)
@@ -399,7 +522,7 @@ const saveTechnician = asyncHandler(async(req, res) => {
     }
 })
 
-const updateTechnician = asyncHandler(async(req, res) => {
+const updateTechnician = asyncHandler(async (req, res) => {
     const findTechnician = await Technician.findById(req.params.id)
 
     if (findTechnician) {
@@ -409,7 +532,7 @@ const updateTechnician = asyncHandler(async(req, res) => {
     }
 })
 
-const deleteTechnician = asyncHandler(async(req, res) => {
+const deleteTechnician = asyncHandler(async (req, res) => {
     try {
         const deleteTechnician = await Technician.findByIdAndDelete(req.params.id)
 
@@ -432,30 +555,30 @@ const deleteTechnician = asyncHandler(async(req, res) => {
 // ##       EMPRESAS       ## //
 // ########################## //
 
-const allCompanies = asyncHandler(async(req, res) => {
+const allCompanies = asyncHandler(async (req, res) => {
     const companies = await Company.find({})
 
     for (const company of companies) {
         const dateCreatedAt = moment.utc(company.createdAt);
         const createdAtFormatted = dateCreatedAt.format("DD/MM/YYYY");
-    
+
         company.createdAtFormatted = createdAtFormatted
     }
 
-    res.render('layouts/admin/all-companies', {user: req.user, companies: companies.reverse()})
+    res.render('layouts/admin/companies', { user: req.user, companies: companies.reverse() })
 })
 
-const newCompany = asyncHandler(async(req, res) => {
+const newCompany = asyncHandler(async (req, res) => {
     const technicians = await Technician.find({}).select("avatar name")
 
     res.render('layouts/admin/new-company', { user: req.user, technicians: technicians })
 })
 
-const saveCompany = asyncHandler(async(req, res) => {
+const saveCompany = asyncHandler(async (req, res) => {
     try {
         if (req.params.id === undefined) {
             const createCompany = await Company.create(req.body)
-            
+
             const updateTechnician = await Technician.findByIdAndUpdate(req.body.technician, {
                 $push: {
                     responsibleCompanies: createCompany._id
@@ -463,7 +586,7 @@ const saveCompany = asyncHandler(async(req, res) => {
             })
 
             if (createCompany) {
-                await welcomeCompany({name: req.body.name, email: req.body.email, password: req.body.password})
+                await welcomeCompany({ name: req.body.name, email: req.body.email, password: req.body.password })
 
                 res.sendStatus(200)
             } else {
@@ -484,12 +607,17 @@ const saveCompany = asyncHandler(async(req, res) => {
     }
 })
 
-const viewCompany = asyncHandler(async(req, res) => {
-    const equipmentsCompany = await Equipments.find({idCompany: req.params.id})
+const viewCompany = asyncHandler(async (req, res) => {
+    const equipmentsCompany = await Equipments.find({ idCompany: req.params.id })
     const findCompany = await Company.findById(req.params.id)
 
     if (findCompany) {
-        const callsCompany = await Calls.find({idCompany: req.params.id})
+        const callsCompany = await Calls.find({ idCompany: req.params.id })
+
+        const dateCreatedAt = moment.utc(findCompany.createdAt);
+        const createdAtFormatted = dateCreatedAt.format("DD/MM/YYYY");
+
+        findCompany.createdAtFormatted = createdAtFormatted
 
         res.render('layouts/admin/view-company', { user: req.user, company: findCompany, calls: callsCompany.reverse(), equipments: equipmentsCompany })
     } else {
@@ -497,7 +625,7 @@ const viewCompany = asyncHandler(async(req, res) => {
     }
 })
 
-const updateCompany = asyncHandler(async(req, res) => {
+const updateCompany = asyncHandler(async (req, res) => {
     const findCompany = await Company.findById(req.params.id)
     const technicians = await Technician.find({}).select("avatar name")
 
@@ -508,7 +636,7 @@ const updateCompany = asyncHandler(async(req, res) => {
     }
 })
 
-const deleteCompany = asyncHandler(async(req, res) => {
+const deleteCompany = asyncHandler(async (req, res) => {
     try {
         const deleteCompany = await Company.findByIdAndDelete(req.params.id)
 
@@ -531,17 +659,24 @@ const deleteCompany = asyncHandler(async(req, res) => {
 // ##     FORNECEDORES     ## //
 // ########################## //
 
-const allSuppliers = asyncHandler(async(req, res) => {
+const allSuppliers = asyncHandler(async (req, res) => {
     const suppliers = await Suppliers.find({})
 
-    res.render('layouts/admin/all-suppliers', {user: req.user, suppliers: suppliers.reverse()})
+    for (const supplier of suppliers) {
+        const dateCreatedAt = moment.utc(supplier.createdAt);
+        const createdAtFormatted = dateCreatedAt.format("DD/MM/YYYY");
+
+        supplier.createdAtFormatted = createdAtFormatted
+    }
+
+    res.render('layouts/admin/suppliers', { user: req.user, suppliers: suppliers.reverse() })
 })
 
-const newSupplier = asyncHandler(async(req, res) => {
+const newSupplier = asyncHandler(async (req, res) => {
     res.render('layouts/admin/new-supplier', { user: req.user })
 })
 
-const saveSupplier = asyncHandler(async(req, res) => {
+const saveSupplier = asyncHandler(async (req, res) => {
     try {
         if (req.params.id === undefined) {
             const createSupplier = await Suppliers.create(req.body)
@@ -566,17 +701,22 @@ const saveSupplier = asyncHandler(async(req, res) => {
     }
 })
 
-const viewSupplier = asyncHandler(async(req, res) => {
+const viewSupplier = asyncHandler(async (req, res) => {
     const findSupplier = await Suppliers.findById(req.params.id)
 
     if (findSupplier) {
+        const dateCreatedAt = moment.utc(findSupplier.createdAt);
+        const createdAtFormatted = dateCreatedAt.format("DD/MM/YYYY");
+
+        findSupplier.createdAtFormatted = createdAtFormatted
+
         res.render('layouts/admin/view-supplier', { user: req.user, supplier: findSupplier })
     } else {
         res.render('layouts/not-found')
     }
 })
 
-const updateSupplier = asyncHandler(async(req, res) => {
+const updateSupplier = asyncHandler(async (req, res) => {
     const findSupplier = await Suppliers.findById(req.params.id)
 
     if (findSupplier) {
@@ -586,7 +726,7 @@ const updateSupplier = asyncHandler(async(req, res) => {
     }
 })
 
-const deleteSupplier = asyncHandler(async(req, res) => {
+const deleteSupplier = asyncHandler(async (req, res) => {
     try {
         const deleteSupplier = await Suppliers.findByIdAndDelete(req.params.id)
 
@@ -609,8 +749,8 @@ const deleteSupplier = asyncHandler(async(req, res) => {
 // ##     FATURAMENTO     ## //
 // ######################### //
 
-const invoices = asyncHandler(async(req, res) => {
-    res.render('layouts/admin/invoices', {user: req.user})
+const invoices = asyncHandler(async (req, res) => {
+    res.render('layouts/admin/invoices', { user: req.user })
 })
 
 
@@ -622,58 +762,72 @@ const invoices = asyncHandler(async(req, res) => {
 // ######################### //
 
 const settings = asyncHandler(async (req, res) => {
-  res.render('layouts/admin/settings', { user: req.user })
+    res.render('layouts/admin/settings', { user: req.user })
 })
 
 const updateAccount = asyncHandler(async (req, res) => {
-  try {
-    const updateAccount = await User.findByIdAndUpdate(req.user._id, {
-      name: req?.body?.name,
-      cpf: req?.body?.cpf,
-      email: req?.body?.email
-    })
+    try {
+        let existsEmail = false
 
-    if (updateAccount) {
-      res.sendStatus(200)
-    } else {
-      res.status(500).json({ error: "Não foi possível atualizar suas informações" })
+        if (req.body.email !== req.user.email) {
+            const findEmailAdmin = await Admin.findOne({ email: req.body.email.trim() }).select("email")
+            const findEmailCompany = await Company.findOne({ email: req.body.email.trim() }).select("email")
+
+            if (findEmailAdmin || findEmailCompany) existsEmail = true
+        }
+
+        if (!existsEmail) {
+            const updateUser = await Admin.findByIdAndUpdate(req.user._id, {
+                name: req.body.name,
+                email: req.body.email,
+                phone: req.body.phone
+            })
+
+            if (updateUser) {
+                res.sendStatus(200)
+            } else {
+                res.status(500).json({ error: "Não foi possível salvar os dados" })
+            }
+        } else {
+            res.status(500).json({ error: "Email existente" })
+        }
+    } catch (err) {
+        console.log(err)
+        res.status(500).json({ error: "Erro interno no servidor" })
     }
-  } catch (err) {
-    res.status(500).json({ error: "Erro interno no servidor" })
-  }
 })
 
 const updatePassword = asyncHandler(async (req, res) => {
-  const { currentPassword, newPassword, confirmPassword } = req.body
+    const { currentPassword, newPassword, confirmPassword } = req.body
 
-  if (newPassword != confirmPassword) return res.status(500).json({ error: "As senhas não conferem" })
-  else {
-    const findUser = await User.findById(req.user._id)
+    if (newPassword != confirmPassword) return res.status(500).json({ error: "As senhas não conferem" })
+    else {
+        const findUser = await User.findById(req.user._id)
 
-    if (await findUser.isPasswordMatched(currentPassword)) {
-      const updateUser = await User.findByIdAndUpdate(req.user._id, {
-        password: await bcrypt.hash(newPassword, 10)
-      })
+        if (await findUser.isPasswordMatched(currentPassword)) {
+            const updateUser = await User.findByIdAndUpdate(req.user._id, {
+                password: await bcrypt.hash(newPassword, 10)
+            })
 
-      if (updateUser) {
-        res.sendStatus(200)
-      } else {
-        res.status(500).json({ error: "Não foi possível atualizar a senha" })
-      }
-    } else {
-      res.status(500).json({ error: "Senha atual incorreta" })
+            if (updateUser) {
+                res.sendStatus(200)
+            } else {
+                res.status(500).json({ error: "Não foi possível atualizar a senha" })
+            }
+        } else {
+            res.status(500).json({ error: "Senha atual incorreta" })
+        }
     }
-  }
 })
 
 module.exports = {
     dashboard,
-    
+
     allCalls,
     viewCall,
     designateCall,
     cancelCall,
-    
+
     fileManager,
     createFolder,
     uploadArchive,
@@ -690,6 +844,8 @@ module.exports = {
     administrators,
     newAdmin,
     saveAdmin,
+    updateAdmin,
+    deleteAdmin,
 
     testUsers,
 

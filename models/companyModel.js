@@ -41,14 +41,6 @@ const Company = new mongoose.Schema({
         type: String,
         require: true
     },
-    number: {
-        type: String,
-        require: true
-    },
-    neighborhood: {
-        type: String,
-        require: true
-    },
     service: {
         type: String,
         require: true

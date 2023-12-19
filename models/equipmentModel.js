@@ -1,4 +1,5 @@
 const mongoose = require('mongoose')
+const { Schema } = mongoose;
 
 const Equipment = new mongoose.Schema({
     model: {
@@ -29,12 +30,16 @@ const Equipment = new mongoose.Schema({
         type: String
     },
     idCompany: {
+        type: Schema.Types.ObjectId,
+        ref: 'Companies'
+    },
+    status: {
         type: String
     },
     nameCompany: {
         type: String
     },
-    photoCompany: {
+    avatarCompany: {
         type: String
     },
     createdAtFormatted: {

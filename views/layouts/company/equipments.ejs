@@ -25,7 +25,38 @@
                 <h2 class="text-lg font-semibold text-blue-500 inter"><%= item.model %> </h2>
                 <h2 class="text-sm font-medium mt-1 text-gray-800 inter">Data de cadastro: <%= item.createdAtFormatted %></h2>
                 <h2 class="text-sm font-medium mt-1 text-gray-800 inter">Relatórios: <%= item.reports %> relatórios</h2>
-                <h2 class="text-sm font-medium mt-1 text-gray-800 inter">Último status: <span class="font-semibold text-green-600">Funcionando</span></h2>
+                <h2 class="text-sm font-medium mt-1 text-gray-800 inter">Último status: 
+                  <% if (item.status == "normal") { %>
+                    <span class="inline-flex items-center inter gap-x-1.5 border rounded-full px-2 py-1 text-xs font-semibold text-gray-900 ring-1 ring-inset ring-gray-200">
+                      <svg width="6" height="6" viewBox="0 0 6 6" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <g clip-path="url(#clip0_285_50)">
+                        <path d="M3 6C4.65685 6 6 4.65685 6 3C6 1.34315 4.65685 0 3 0C1.34315 0 0 1.34315 0 3C0 4.65685 1.34315 6 3 6Z" fill="#11AA17"/>
+                        </g>
+                        <defs>
+                        <clipPath id="clip0_285_50">
+                        <rect width="6" height="6" fill="white"/>
+                        </clipPath>
+                        </defs>
+                      </svg>                              
+                      Funcionando corretamente
+                    </span>
+                  <% } else { %>
+                    <span class="inline-flex items-center inter gap-x-1.5 border rounded-full px-2 py-1 text-xs font-semibold text-gray-900 ring-1 ring-inset ring-gray-200">
+                      <svg width="6" height="6" viewBox="0 0 6 6" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <g clip-path="url(#clip0_285_50)">
+                        <path d="M3 6C4.65685 6 6 4.65685 6 3C6 1.34315 4.65685 0 3 0C1.34315 0 0 1.34315 0 3C0 4.65685 1.34315 6 3 6Z" fill="#e2c106"/>
+                        </g>
+                        <defs>
+                        <clipPath id="clip0_285_50">
+                        <rect width="6" height="6" fill="white"/>
+                        </clipPath>
+                        </defs>
+                      </svg>                              
+                      Em manutenção
+                    </span>
+                  <% } %>
+                </h2>
+
                 <div>
                   <a href="/company/view-equipment/<%= item.id %>" class="flex justify-center items-center bg-blue-500 text-white mt-4 text-sm font-medium rounded-lg inter py-2" href="">Ver equipamento</a>
                 </div>

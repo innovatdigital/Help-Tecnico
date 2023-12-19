@@ -12,15 +12,16 @@ const moment = require('moment')
 // ##       DASHBOARD       ## //
 // ########################### //
 
-const dashboard = asyncHandler(async(req, res) => {
+const dashboard = asyncHandler(async (req, res) => {
     const calls = await Calls.find({
         idCompany: req.user._id,
         createdAt: {
-          $gte: moment().startOf('month').toDate(),
-          $lte: moment().endOf('month').toDate()
+            $gte: moment().startOf('month').toDate(),
+            $lte: moment().endOf('month').toDate()
         }
     });
-    const countEquipments = await Equipments.find({idCompany: req.user._id}).count()
+
+    const countEquipments = await Equipments.find({ idCompany: req.user._id }).count()
 
     for (const call of calls) {
         if (call.status != "pending" && call.idTechnician.length > 0) {
@@ -35,7 +36,7 @@ const dashboard = asyncHandler(async(req, res) => {
         }
     }
 
-    res.render('layouts/company/dashboard', {user: req.user, service: req.user.service, calls: calls.reverse(), countEquipments: countEquipments})
+    res.render('layouts/company/dashboard', { user: req.user, service: req.user.service, calls: calls.reverse(), countEquipments: countEquipments })
 })
 
 
@@ -46,8 +47,8 @@ const dashboard = asyncHandler(async(req, res) => {
 // ##       CHAMADOS       ## //
 // ########################## //
 
-const calls = asyncHandler(async(req, res) => {
-    const calls = await Calls.find({idCompany: req.user._id})
+const calls = asyncHandler(async (req, res) => {
+    const calls = await Calls.find({ idCompany: req.user._id })
 
     for (const call of calls) {
         if (call.status != "pending" && call.idTechnician.length > 0) {
@@ -62,26 +63,26 @@ const calls = asyncHandler(async(req, res) => {
         }
     }
 
-    res.render('layouts/company/calls', {user: req.user, service: req.user.service, calls: calls.reverse()})
+    res.render('layouts/company/calls', { user: req.user, service: req.user.service, calls: calls.reverse() })
 })
 
-const newCall = asyncHandler(async(req, res) => {
-    const equipments = await Equipments.find({idCompany: req.user._id})
+const newCall = asyncHandler(async (req, res) => {
+    const equipments = await Equipments.find({ idCompany: req.user._id })
 
     for (const equipment of equipments) {
         const dateCreatedAt = moment.utc(equipment.createdAt);
         const createdAtFormatted = dateCreatedAt.format("DD/MM/YYYY");
-    
+
         equipment.createdAtFormatted = createdAtFormatted
     }
 
-    res.render('layouts/company/new-call', {user: req.user, service: req.user.service, equipments: equipments})
+    res.render('layouts/company/new-call', { user: req.user, service: req.user.service, equipments: equipments })
 })
 
-const viewCall = asyncHandler(async(req, res) => {
+const viewCall = asyncHandler(async (req, res) => {
     const call = await Calls.findById(req.params.id)
     const equipments = []
-    
+
     for (const equipment of call.equipments) {
         const findEquipment = await Equipments.findById(equipment)
 
@@ -92,10 +93,10 @@ const viewCall = asyncHandler(async(req, res) => {
     call.phoneCompany = req.user.phoneCompany
     call.avatarCompany = req.user.avatar
 
-    res.render('layouts/company/view-call', {user: req.user, service: req.user.service, call: call, equipments: equipments})
+    res.render('layouts/company/view-call', { user: req.user, service: req.user.service, call: call, equipments: equipments })
 })
 
-const saveCall = asyncHandler(async(req, res) => {
+const saveCall = asyncHandler(async (req, res) => {
     try {
         const { description, photos, equipments } = req.body
 
@@ -111,8 +112,8 @@ const saveCall = asyncHandler(async(req, res) => {
 
         const code = Math.floor(Math.random() * (999999 - 100000 + 1) + 100000);
 
-        const saveCallInDb = await Calls.create({description: description, idCompany: req.user._id, idTechnician: '', photos: photos, equipments: equipments, code: code, date: dataFormat, status: "pending", sla: "0", timeline: [{text: `Chamado aberto por ${req.user.name}`, hour: `${hour}:${minutes}`, type: "company"}]})
-        
+        const saveCallInDb = await Calls.create({ description: description, idCompany: req.user._id, idTechnician: '', photos: photos, equipments: equipments, code: code, date: dataFormat, status: "pending", sla: "0", timeline: [{ text: `Chamado aberto por ${req.user.name}`, hour: `${hour}:${minutes}`, type: "company" }] })
+
         const saveCallInCompany = await Company.findByIdAndUpdate(
             { _id: req.user._id },
             {
@@ -135,8 +136,8 @@ const saveCall = asyncHandler(async(req, res) => {
     }
 })
 
-const cancelCall = asyncHandler(async(req, res) => {
-    const cancelCall = await Calls.findByIdAndUpdate(req.params.id, {cancellation_message: req.body.cancellation_message, status: "canceled"})
+const cancelCall = asyncHandler(async (req, res) => {
+    const cancelCall = await Calls.findByIdAndUpdate(req.params.id, { cancellation_message: req.body.cancellation_message, status: "canceled" })
 
     if (cancelCall) {
         res.sendStatus(200)
@@ -153,8 +154,8 @@ const cancelCall = asyncHandler(async(req, res) => {
 // ##         PMOC         ## //
 // ########################## //
 
-const viewPmoc = asyncHandler(async(req, res) => {
-    res.render('layouts/company/view-pmoc', {user: req.user, service: req.user.service})
+const viewPmoc = asyncHandler(async (req, res) => {
+    res.render('layouts/company/view-pmoc', { user: req.user, service: req.user.service })
 })
 
 
@@ -165,8 +166,8 @@ const viewPmoc = asyncHandler(async(req, res) => {
 // ##    LISTA DE EQUIPAMENTOS    ## //
 // ################################# //
 
-const viewEquipmentList = asyncHandler(async(req, res) => {
-    res.render('layouts/company/view-equipment-list', {user: req.user, service: req.user.service})
+const viewEquipmentList = asyncHandler(async (req, res) => {
+    res.render('layouts/company/view-equipment-list', { user: req.user, service: req.user.service })
 })
 
 
@@ -177,23 +178,58 @@ const viewEquipmentList = asyncHandler(async(req, res) => {
 // ##     EQUIPAMENTOS     ## //
 // ########################## //
 
-const equipments = asyncHandler(async(req, res) => {
-    const equipments = await Equipments.find({idCompany: req.user._id})
-    
-    for (const equipment of equipments) {
+const equipments = asyncHandler(async (req, res) => {
+    const findEquipments = await Equipments.find({ idCompany: req.user._id })
+
+    for (const equipment of findEquipments) {
+        const callsWithEquipment = await Calls.find({ equipments: { $elemMatch: { $eq: equipment._id.toString() } } });
+
+        const isInMaintenance = callsWithEquipment.some(call => call.status !== "concluded");
+
+        equipment.status = isInMaintenance ? "maintenance" : "normal";
+
         const dateCreatedAt = moment.utc(equipment.createdAt);
         const createdAtFormatted = dateCreatedAt.format("DD/MM/YYYY");
-    
+
         equipment.createdAtFormatted = createdAtFormatted
     }
 
-    res.render('layouts/company/equipments', {user: req.user, service: req.user.service, equipments: equipments})
+    res.render('layouts/company/equipments', { user: req.user, service: req.user.service, equipments: findEquipments })
 })
 
-const viewEquipment = asyncHandler(async(req, res) => {
-    const equipment = await Equipments.findById(req.params.id)
+const viewEquipment = asyncHandler(async (req, res) => {
+    const findEquipment = await Equipments.findById(req.params.id)
 
-    res.render('layouts/company/view-equipment', {user: req.user, service: req.user.service, equipment: equipment})
+    if (findEquipment) {
+        const callsWithEquipment = await Calls.find({ equipments: { $elemMatch: { $eq: findEquipment._id.toString() } } });
+
+        const isInMaintenance = callsWithEquipment.some(call => call.status !== "concluded");
+
+        findEquipment.status = isInMaintenance ? "maintenance" : "normal";
+
+
+        for (const call of calls) {
+            if (call.status != "pending" && call.idTechnician.length > 0) {
+                const findTechnician = await Technician.findById(call.idTechnician)
+
+                if (findTechnician) {
+                    call.nameTechnician = findTechnician.name
+                    call.photoTechnician = findTechnician.photo
+                }
+            } else {
+                call.photoTechnician = ''
+            }
+        }
+
+        const dateCreatedAt = moment.utc(findEquipment.createdAt);
+        const createdAtFormatted = dateCreatedAt.format("DD/MM/YYYY");
+
+        findEquipment.createdAtFormatted = createdAtFormatted
+
+        res.render('layouts/company/view-equipment', { user: req.user, service: req.user.service, equipment: findEquipment })
+    } else {
+        res.render('layouts/not-found')
+    }
 })
 
 
@@ -204,12 +240,12 @@ const viewEquipment = asyncHandler(async(req, res) => {
 // ##      RELATÓRIOS      ## //
 // ########################## //
 
-const reports = asyncHandler(async(req, res) => {
-    res.render('layouts/company/reports', {user: req.user, service: req.user.service})
+const reports = asyncHandler(async (req, res) => {
+    res.render('layouts/company/reports', { user: req.user, service: req.user.service })
 })
 
-const viewReport = asyncHandler(async(req, res) => {
-    res.render('layouts/company/view-report', {user: req.user, service: req.user.service})
+const viewReport = asyncHandler(async (req, res) => {
+    res.render('layouts/company/view-report', { user: req.user, service: req.user.service })
 })
 
 
@@ -220,12 +256,12 @@ const viewReport = asyncHandler(async(req, res) => {
 // ##      ORÇAMENTOS      ## //
 // ########################## //
 
-const budgets = asyncHandler(async(req, res) => {
-    res.render('layouts/company/budgets', {user: req.user, service: req.user.service})
+const budgets = asyncHandler(async (req, res) => {
+    res.render('layouts/company/budgets', { user: req.user, service: req.user.service })
 })
 
-const viewBudget = asyncHandler(async(req, res) => {
-    res.render('layouts/company/view-budget', {user: req.user, service: req.user.service})
+const viewBudget = asyncHandler(async (req, res) => {
+    res.render('layouts/company/view-budget', { user: req.user, service: req.user.service })
 })
 
 
@@ -236,49 +272,49 @@ const viewBudget = asyncHandler(async(req, res) => {
 // ##        CONTA        ## //
 // ######################### //
 
-const settings = asyncHandler(async(req, res) => {
-    res.render('layouts/company/settings', {user: req.user, service: req.user.service})
+const settings = asyncHandler(async (req, res) => {
+    res.render('layouts/company/settings', { user: req.user, service: req.user.service })
 })
 
 const updateAccount = asyncHandler(async (req, res) => {
-  try {
-    const updateAccount = await User.findByIdAndUpdate(req.user._id, {
-      name: req?.body?.name,
-      cpf: req?.body?.cpf,
-      email: req?.body?.email
-    })
+    try {
+        const updateAccount = await User.findByIdAndUpdate(req.user._id, {
+            name: req?.body?.name,
+            cpf: req?.body?.cpf,
+            email: req?.body?.email
+        })
 
-    if (updateAccount) {
-      res.sendStatus(200)
-    } else {
-      res.status(500).json({ error: "Não foi possível atualizar suas informações" })
+        if (updateAccount) {
+            res.sendStatus(200)
+        } else {
+            res.status(500).json({ error: "Não foi possível atualizar suas informações" })
+        }
+    } catch (err) {
+        res.status(500).json({ error: "Erro interno no servidor" })
     }
-  } catch (err) {
-    res.status(500).json({ error: "Erro interno no servidor" })
-  }
 })
 
 const updatePassword = asyncHandler(async (req, res) => {
-  const { currentPassword, newPassword, confirmPassword } = req.body
+    const { currentPassword, newPassword, confirmPassword } = req.body
 
-  if (newPassword != confirmPassword) return res.status(500).json({ error: "As senhas não conferem" })
-  else {
-    const findUser = await User.findById(req.user._id)
+    if (newPassword != confirmPassword) return res.status(500).json({ error: "As senhas não conferem" })
+    else {
+        const findUser = await User.findById(req.user._id)
 
-    if (await findUser.isPasswordMatched(currentPassword)) {
-      const updateUser = await User.findByIdAndUpdate(req.user._id, {
-        password: await bcrypt.hash(newPassword, 10)
-      })
+        if (await findUser.isPasswordMatched(currentPassword)) {
+            const updateUser = await User.findByIdAndUpdate(req.user._id, {
+                password: await bcrypt.hash(newPassword, 10)
+            })
 
-      if (updateUser) {
-        res.sendStatus(200)
-      } else {
-        res.status(500).json({ error: "Não foi possível atualizar a senha" })
-      }
-    } else {
-      res.status(500).json({ error: "Senha atual incorreta" })
+            if (updateUser) {
+                res.sendStatus(200)
+            } else {
+                res.status(500).json({ error: "Não foi possível atualizar a senha" })
+            }
+        } else {
+            res.status(500).json({ error: "Senha atual incorreta" })
+        }
     }
-  }
 })
 
 module.exports = {

@@ -6,14 +6,14 @@
   <div class="lg:pl-70">
     <%- include('../../partials/app/nav', {title: "Visualizar fornecedor"}) %>
 
-    <main class="py-8 px-12 fade-in">
+    <main class="p-8 fade-in">
       <div class="hidden fade-in relative z-10" id="popup_delete" role="dialog" aria-modal="true">
         <div class="fixed inset-0 bg-gray-500 bg-opacity-25 transition-opacity"></div>
       
         <div class="fixed inset-0 z-10 overflow-y-auto p-4 mt-40 ml-40 sm:p-6 md:p-20">
-          <div class="mx-auto max-w-xl transform divide-y divide-gray-100 overflow-hidden rounded-xl bg-white shadow-2xl ring-1 ring-black ring-opacity-5 transition-all">
+          <div class="mx-auto max-w-lg transform divide-y divide-gray-100 overflow-hidden rounded-xl bg-white shadow-2xl ring-1 ring-black ring-opacity-5 transition-all">
             <div class="flex justify-between py-3 px-6">
-              <h2 class="color-red inter font-bold text-lg">Excluir fornecedor:</h2>
+              <h2 class="color-red inter font-bold text-lg">Excluir fornecedor</h2>
               <button onclick="closeDelete()">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path d="M14.3075 11.7231L20.3075 5.67693C20.5844 5.4 20.5844 4.98462 20.3075 4.7077L19.3844 3.73847C19.1075 3.46154 18.6921 3.46154 18.4151 3.73847L12.369 9.78462C12.1844 9.96923 11.9075 9.96923 11.7228 9.78462L5.67668 3.69231C5.39976 3.41539 4.98438 3.41539 4.70745 3.69231L3.73822 4.66154C3.4613 4.93847 3.4613 5.35385 3.73822 5.63077L9.78438 11.6769C9.96899 11.8615 9.96899 12.1385 9.78438 12.3231L3.69207 18.4154C3.41514 18.6923 3.41514 19.1077 3.69207 19.3846L4.6613 20.3538C4.93822 20.6308 5.35361 20.6308 5.63053 20.3538L11.6767 14.3077C11.8613 14.1231 12.1382 14.1231 12.3228 14.3077L18.369 20.3538C18.6459 20.6308 19.0613 20.6308 19.3382 20.3538L20.3075 19.3846C20.5844 19.1077 20.5844 18.6923 20.3075 18.4154L14.3075 12.3692C14.1228 12.1846 14.1228 11.9077 14.3075 11.7231Z" fill="#A31313"/>
@@ -24,18 +24,15 @@
             <div class="flex flex-col divide-y divide-gray-100 px-6">
               <div>
                 <div class="flex flex-col items-center justify-center mt-6 py-4">
-                  <svg width="46" height="46" viewBox="0 0 46 46" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M40.2487 2.87504H26.832C26.832 2.36671 26.6301 1.8792 26.2706 1.51975C25.9112 1.16031 25.4237 0.958374 24.9154 0.958374H21.082C20.5737 0.958374 20.0862 1.16031 19.7267 1.51975C19.3673 1.8792 19.1654 2.36671 19.1654 2.87504H5.7487C5.24037 2.87504 4.75285 3.07697 4.39341 3.43642C4.03397 3.79586 3.83203 4.28338 3.83203 4.79171C3.83203 5.30004 4.03397 5.78755 4.39341 6.147C4.75285 6.50644 5.24037 6.70837 5.7487 6.70837H40.2487C40.757 6.70837 41.2445 6.50644 41.604 6.147C41.9634 5.78755 42.1654 5.30004 42.1654 4.79171C42.1654 4.28338 41.9634 3.79586 41.604 3.43642C41.2445 3.07697 40.757 2.87504 40.2487 2.87504Z" fill="#AA2222"/>
-                    <path d="M37.3737 8.625C36.8654 8.625 36.3779 8.82693 36.0184 9.18638C35.659 9.54582 35.457 10.0333 35.457 10.5417V41.2083H10.5404V10.5417C10.5404 10.0333 10.3384 9.54582 9.97899 9.18638C9.61954 8.82693 9.13203 8.625 8.6237 8.625C8.11537 8.625 7.62785 8.82693 7.26841 9.18638C6.90897 9.54582 6.70703 10.0333 6.70703 10.5417V43.125C6.70703 43.6333 6.90897 44.1208 7.26841 44.4803C7.62785 44.8397 8.11537 45.0417 8.6237 45.0417H37.3737C37.882 45.0417 38.3695 44.8397 38.729 44.4803C39.0884 44.1208 39.2904 43.6333 39.2904 43.125V10.5417C39.2904 10.0333 39.0884 9.54582 38.729 9.18638C38.3695 8.82693 37.882 8.625 37.3737 8.625Z" fill="#AA2222"/>
-                    <path d="M20.1263 35.4583V18.2083C20.1263 17.7 19.9244 17.2125 19.5649 16.853C19.2055 16.4936 18.718 16.2916 18.2096 16.2916C17.7013 16.2916 17.2138 16.4936 16.8543 16.853C16.4949 17.2125 16.293 17.7 16.293 18.2083V35.4583C16.293 35.9666 16.4949 36.4541 16.8543 36.8136C17.2138 37.173 17.7013 37.375 18.2096 37.375C18.718 37.375 19.2055 37.173 19.5649 36.8136C19.9244 36.4541 20.1263 35.9666 20.1263 35.4583Z" fill="#AA2222"/>
-                    <path d="M29.7083 35.4583V18.2083C29.7083 17.7 29.5064 17.2125 29.147 16.853C28.7875 16.4936 28.3 16.2916 27.7917 16.2916C27.2833 16.2916 26.7958 16.4936 26.4364 16.853C26.0769 17.2125 25.875 17.7 25.875 18.2083V35.4583C25.875 35.9666 26.0769 36.4541 26.4364 36.8136C26.7958 37.173 27.2833 37.375 27.7917 37.375C28.3 37.375 28.7875 37.173 29.147 36.8136C29.5064 36.4541 29.7083 35.9666 29.7083 35.4583Z" fill="#AA2222"/>
-                  </svg>                                        
-                  <h2 for="content" class="block text-md font-bold leading-6 text-gray-900 inter mt-4">Tem certeza que deseja excluir o fornecedor?</h2>
-                  <p class="inter text-center text-sm font-semibold">Essa ação é irreversível, e todos os dados associados a ele serão apagados.</p>
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-10 h-10 text-red-800">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" />
+                  </svg>                                                          
+                  <h2 for="content" class="block text-md font-bold leading-6 text-gray-900 inter mt-4">Excluir o fornecedor?</h2>
+                  <p class="inter text-center text-sm font-semibold">Essa ação é irreversível, e todos os dados serão apagados.</p>
                 </div>
 
                 <div class="pb-4">
-                  <button class="w-full py-2.5 inter bg-red text-white text-sm rounded-lg mt-4 font-bold" onclick="deleteSupplier()">Confirmar minha escolha</button>
+                  <button class="w-full py-2.5 inter bg-red text-white text-sm rounded-full mt-4 font-bold" onclick="deleteSupplier()">Confirmar minha escolha</button>
                 </div>
               </div>
             </div>
@@ -46,15 +43,9 @@
       <div class="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-x-6">
         <div class="bg-white rounded-xl shadow-lg border p-4 px-5 col-span-1">
           <div class="flex flex-col items-center justify-center mt-4">
-            <svg width="74" height="73" viewBox="0 0 74 73" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+            <svg width="74" height="73" viewBox="0 0 74 73" fill="none" xmlns="http://www.w3.org/2000/svg">
               <ellipse cx="37" cy="36.5" rx="37" ry="36.5" fill="#0EA5E9"/>
-              <rect x="17" y="17" width="40" height="40" fill="url(#pattern0)"/>
-              <defs>
-              <pattern id="pattern0" patternContentUnits="objectBoundingBox" width="1" height="1">
-              <use xlink:href="#image0_0_1" transform="scale(0.0104167)"/>
-              </pattern>
-              <image id="image0_0_1" width="96" height="96" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAAACXBIWXMAAAsTAAALEwEAmpwYAAABvElEQVR4nO3ZPU7DYBCE4S0QVwEJjkoQP+IqVHAK4CJAR9CLIqWgQVvEw6438/SJZr6xHUWOMDMzMzMzMzMz+wNwCdwAr8An/X3us+4yX652WOAUeAC+Wa8tcL/rEis8/GfmeFrVCPsrf5q7WNEzf3frTrMFLqI74Ja5rqM74I25XqI74IO53qM7hovuGC66Y7jojuGiO4aL7hguumO46I7hojt1QcSf/6f3DS/ABjhf7OCXKnjo94c438K+9kOceIBaj4uNcGiSI7sDftt4gPrH0ZnvgFpXHmDt7xsOTXDEvwHLvG9guBCfjwdIeIBiHqCYByjmAYp5gGIeoNj4AdQFEFPnT3UvgJg6f6p7AcTU+VPdCyCmzp/qXgAxdf5U9wKIqfOnuhdATJ0/1b0AYur8UV2wmvp8PEDCAxTzAMU8QDEPUMwDFPMAxcYPoC6AmDp/qnsBxNT5U90LIKbOn+peADF1/lT3Aoip86e6F0BMnT/VvQBi6vyp7gUQU+eP6oLV1OfjARIeoJgHKOYBinmAYh6gmAco5gGG8/+AYh6gmAco5gGKeYBiHqCYB1j7AGZmZmZmZmZmFlP8AN3fTDc25TqSAAAAAElFTkSuQmCC"/>
-              </defs>
+              <path fill-rule="evenodd" clip-rule="evenodd" d="M37 38.25C37.6904 38.25 38.25 38.8096 38.25 39.5V52C38.25 52.6904 37.6904 53.25 37 53.25C36.3096 53.25 35.75 52.6904 35.75 52V39.5C35.75 38.8096 36.3096 38.25 37 38.25ZM44.5 38.25C45.1904 38.25 45.75 38.8096 45.75 39.5C45.75 43.9951 47.921 48.124 51.5092 50.6911C52.0707 51.0928 52.2002 51.8736 51.7985 52.4351C51.3968 52.9965 50.6161 53.1261 50.0546 52.7244C45.8171 49.6928 43.25 44.8105 43.25 39.5C43.25 38.8096 43.8096 38.25 44.5 38.25ZM29.5 38.25C30.1904 38.25 30.75 38.8096 30.75 39.5C30.75 44.8044 28.1889 49.6817 23.9595 52.7143C23.3984 53.1166 22.6175 52.9879 22.2152 52.4269C21.8129 51.8658 21.9416 51.0849 22.5027 50.6826C26.0841 48.1147 28.25 43.9899 28.25 39.5C28.25 38.8096 28.8096 38.25 29.5 38.25ZM52 19.5C54.7614 19.5 57 21.7386 57 24.5V32C57 34.7614 54.7614 37 52 37H22C19.2386 37 17 34.7614 17 32V24.5C17 21.7386 19.2386 19.5 22 19.5H52ZM50.75 29.5H23.25C22.5596 29.5 22 30.0596 22 30.75C22 31.4404 22.5596 32 23.25 32H50.75C51.4404 32 52 31.4404 52 30.75C52 30.0596 51.4404 29.5 50.75 29.5Z" fill="white"/>
             </svg>
             
             <h1 class="inter text-xl text-blue font-semibold mt-4"><%= supplier.name %></h1>
@@ -66,7 +57,7 @@
                 <path opacity="0.5" d="M14.166 3.33337V2.08337" stroke="#888EA8" stroke-width="1.25" stroke-linecap="round"/>
                 <path opacity="0.5" d="M1.66602 7.5H18.3327" stroke="#888EA8" stroke-width="1.25" stroke-linecap="round"/>
               </svg>                
-              <p class="inter text-sm font-semibold text-gray-600">Cadastrado em <%= supplier.createdAt %></p>
+              <p class="inter text-sm font-semibold text-gray-600">Cadastrado em <%= supplier.createdAtFormatted %></p>
             </div>
 
             <div class="flex flex-col items-center space-x-2 mt-4">

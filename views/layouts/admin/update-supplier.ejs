@@ -6,7 +6,7 @@
   <div class="lg:pl-70">
     <%- include('../../partials/app/nav', {title: "Atualizar fornecedor"}) %>
 
-    <main class="py-8 px-12 fade-in">
+    <main class="p-8 fade-in inter">
       <div class="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-x-6">
         <div class="bg-white rounded-xl shadow-lg border p-4 px-5 col-span-3">
           <div class="col-span-full flex items-center gap-x-6 mt-4">
@@ -15,10 +15,9 @@
               <path fill-rule="evenodd" clip-rule="evenodd" d="M37 38.25C37.6904 38.25 38.25 38.8096 38.25 39.5V52C38.25 52.6904 37.6904 53.25 37 53.25C36.3096 53.25 35.75 52.6904 35.75 52V39.5C35.75 38.8096 36.3096 38.25 37 38.25ZM44.5 38.25C45.1904 38.25 45.75 38.8096 45.75 39.5C45.75 43.9951 47.921 48.124 51.5092 50.6911C52.0707 51.0928 52.2002 51.8736 51.7985 52.4351C51.3968 52.9965 50.6161 53.1261 50.0546 52.7244C45.8171 49.6928 43.25 44.8105 43.25 39.5C43.25 38.8096 43.8096 38.25 44.5 38.25ZM29.5 38.25C30.1904 38.25 30.75 38.8096 30.75 39.5C30.75 44.8044 28.1889 49.6817 23.9595 52.7143C23.3984 53.1166 22.6175 52.9879 22.2152 52.4269C21.8129 51.8658 21.9416 51.0849 22.5027 50.6826C26.0841 48.1147 28.25 43.9899 28.25 39.5C28.25 38.8096 28.8096 38.25 29.5 38.25ZM52 19.5C54.7614 19.5 57 21.7386 57 24.5V32C57 34.7614 54.7614 37 52 37H22C19.2386 37 17 34.7614 17 32V24.5C17 21.7386 19.2386 19.5 22 19.5H52ZM50.75 29.5H23.25C22.5596 29.5 22 30.0596 22 30.75C22 31.4404 22.5596 32 23.25 32H50.75C51.4404 32 52 31.4404 52 30.75C52 30.0596 51.4404 29.5 50.75 29.5Z" fill="white"/>
             </svg>                                            
                                       
-            <div class="items-center mt-2">
-              <label style="cursor: pointer;" for="picture" class="rounded-md px-3 py-2 text-sm font-semibold border-blue color-blue shadow-sm inter">Inserir foto</label>
-              <p class="mt-4 text-xs leading-5 text-gray-600 inter">JPG, GIF or PNG. 1MB max.</p>
-              <input type="file" id="picture" class="hidden" name="picture">
+            <div class="items-center">
+              <h2 class="text-md font-semibold">Editar fornecedor</h2>
+              <p class="text-sm leading-5 text-gray-600 mt-2 inter">Preencha com os dados do fornecedor:</p>
             </div>
           </div>
 
@@ -34,6 +33,29 @@
               <label for="email" class="block text-md font-medium leading-6 text-gray-900 inter font-semibold">Email</label>
               <div class="relative mt-2 rounded-md shadow-sm">
                 <input type="text" name="email" id="email" value="<%= supplier.email %>" class="block w-full rounded-lg inter py-1.5 mt-2 pl-2 text-gray-900 ring-1 ring-inset ring-gray-300 sm:text-sm sm:leading-6 border-blue-1" placeholder="Insira o email">
+              </div>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-3 mt-12 gap-x-4">
+            <div>
+              <label for="landline" class="block text-md font-medium leading-6 text-gray-900 inter font-semibold">Telefone (Fixo)</label>
+              <div class="relative mt-2 rounded-md shadow-sm">
+                <input type="text" name="landline" id="landline" value="<%= supplier.landline %>"  class="block w-full rounded-lg inter py-1.5 mt-2 pl-2 text-gray-900 ring-1 ring-inset ring-gray-300 sm:text-sm sm:leading-6 border-blue-1" placeholder="Insira o telefone fixo">
+              </div>
+            </div>
+
+            <div>
+              <label for="phone" class="block text-md font-medium leading-6 text-gray-900 inter font-semibold">Telefone (Celular)</label>
+              <div class="relative mt-2 rounded-md shadow-sm">
+                <input type="text" name="phone" id="phone" value="<%= supplier.phone %>"  class="block w-full rounded-lg inter py-1.5 mt-2 pl-2 text-gray-900 ring-1 ring-inset ring-gray-300 sm:text-sm sm:leading-6 border-blue-1" placeholder="Insira o celular">
+              </div>
+            </div>
+
+            <div>
+              <label for="contactName" class="block text-md font-medium leading-6 text-gray-900 inter font-semibold">Nome do contato</label>
+              <div class="relative mt-2 rounded-md shadow-sm">
+                <input type="text" name="contactName" id="contactName" value="<%= supplier.contactName %>"  class="block w-full rounded-lg inter py-1.5 mt-2 pl-2 text-gray-900 ring-1 ring-inset ring-gray-300 sm:text-sm sm:leading-6 border-blue-1" placeholder="Insira o nome do contato">
               </div>
             </div>
           </div>
@@ -131,32 +153,45 @@
             </div>
           </div>
 
-          <div class="grid grid-cols-3 mt-12 gap-x-4">
-            <div>
-              <label for="landline" class="block text-md font-medium leading-6 text-gray-900 inter font-semibold">Telefone (Fixo)</label>
-              <div class="relative mt-2 rounded-md shadow-sm">
-                <input type="text" name="landline" id="landline" value="<%= supplier.landline %>"  class="block w-full rounded-lg inter py-1.5 mt-2 pl-2 text-gray-900 ring-1 ring-inset ring-gray-300 sm:text-sm sm:leading-6 border-blue-1" placeholder="Insira o telefone fixo">
+          <div id="materials" class="grid grid-cols-1 mt-12 gap-x-4">
+            <% supplier.materials.forEach((material, index) => { %>
+              <div id='<%= index %>' class="material grid grid-cols-4 gap-x-3 mt-2">
+                <div class="col-span-3">
+                  <div class="relative mt-2 rounded-lg shadow-sm item-div">
+                    <input type="text" id="item" value="<%= material.item %>" class="block w-full rounded-lg inter py-1.5 mt-2 pl-2 text-gray-900 ring-1 ring-inset ring-gray-300 sm:text-sm sm:leading-6 border-blue-1" placeholder="Nome da peça/material">
+                  </div>
+                </div>
+        
+                <div class="flex items-center col-span-1">
+                  <div class="flex flex-col">
+                    <div class="relative rounded-lg shadow-sm item-div">
+                      <input type="text" id="manufacturer" value="<%= material.manufacturer %>" class="block w-full rounded-lg inter py-1.5 mt-2 pl-2 text-gray-900 ring-1 ring-inset ring-gray-300 sm:text-sm sm:leading-6 border-blue-1" placeholder="Nome do fabricante">
+                    </div>
+                  </div>
+        
+                  <button onclick="deleteExistingElement('<%= index %>')" class="ml-2 mr-1">
+                    <svg width="16" height="18" viewBox="0 0 16 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <g clip-path="url(#clip0_236_23)">
+                      <mask id="mask0_236_23" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="0" y="0" width="16" height="18">
+                      <path d="M16 0H0V18H16V0Z" fill="white"/>
+                      </mask>
+                      <g mask="url(#mask0_236_23)">
+                      <path d="M14.125 4.625L13.3661 15.2497C13.3007 16.1655 12.5387 16.875 11.6205 16.875H4.37946C3.46134 16.875 2.69932 16.1655 2.63391 15.2497L1.875 4.625M6.25 8.125V13.375M9.75 8.125V13.375M10.625 4.625V2C10.625 1.51675 10.2332 1.125 9.75 1.125H6.25C5.76675 1.125 5.375 1.51675 5.375 2V4.625M1 4.625H15" stroke="#239CFF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                      </g>
+                      </g>
+                      <defs>
+                      <clipPath id="clip0_236_23">
+                      <rect width="16" height="18" fill="white"/>
+                      </clipPath>
+                      </defs>
+                    </svg>
+                  </button>
+                </div>
               </div>
-            </div>
-
-            <div>
-              <label for="phone" class="block text-md font-medium leading-6 text-gray-900 inter font-semibold">Telefone (Celular)</label>
-              <div class="relative mt-2 rounded-md shadow-sm">
-                <input type="text" name="phone" id="phone" value="<%= supplier.phone %>"  class="block w-full rounded-lg inter py-1.5 mt-2 pl-2 text-gray-900 ring-1 ring-inset ring-gray-300 sm:text-sm sm:leading-6 border-blue-1" placeholder="Insira o celular">
-              </div>
-            </div>
-
-            <div>
-              <label for="contactName" class="block text-md font-medium leading-6 text-gray-900 inter font-semibold">Nome do contato</label>
-              <div class="relative mt-2 rounded-md shadow-sm">
-                <input type="text" name="contactName" id="contactName" value="<%= supplier.contactName %>"  class="block w-full rounded-lg inter py-1.5 mt-2 pl-2 text-gray-900 ring-1 ring-inset ring-gray-300 sm:text-sm sm:leading-6 border-blue-1" placeholder="Insira o nome do contato">
-              </div>
-            </div>
+            <% }) %>
           </div>
 
-          <div id="materials" class="grid grid-cols-1 mt-12 gap-x-4"></div>
-
-          <div style="cursor: pointer;" class="flex mt-6" id="newMaterial">          
+          <div class="flex mt-6 cursor-pointer" id="newMaterial">          
             <div class="relative flex items-center">
               <div class="flex h-6 items-center">
                 <svg width="15" height="16" viewBox="0 0 15 16" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -179,7 +214,7 @@
 
         <div class="bg-white rounded-xl shadow-lg border p-4 px-5 col-span-1">
           <div class="space-y-4">
-            <button type="button" onclick="updateSupplier()" style="background-color: #00AB55;" class="w-full inline-flex justify-center items-center gap-x-1.5 rounded-md px-3 py-3 text-sm font-semibold text-white inter shadow-sm">
+            <button type="button" onclick="updateSupplier('<%= supplier._id %>')" style="background-color: #00AB55;" class="w-full inline-flex justify-center items-center gap-x-1.5 rounded-md px-3 py-3 text-sm font-semibold text-white inter shadow-sm">
               <svg width="21" height="20" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <g clip-path="url(#clip0_156_9768)">
                 <path d="M3.46649 17.1132C4.68687 18.3337 6.65105 18.3337 10.5794 18.3337C14.5078 18.3337 16.472 18.3337 17.6923 17.1132C18.9128 15.8929 18.9128 13.9287 18.9128 10.0003C18.9128 9.71574 18.9128 9.57349 18.9001 9.42883C18.8413 8.75441 18.5678 8.09413 18.1325 7.57561C18.0391 7.46438 17.9361 7.3613 17.7299 7.15514L13.4246 2.84986C13.2184 2.64371 13.1153 2.54062 13.0042 2.44725C12.4856 2.01199 11.8253 1.7385 11.1509 1.67962C11.0063 1.66699 10.864 1.66699 10.5794 1.66699C6.65105 1.66699 4.68687 1.66699 3.46649 2.88738C2.24609 4.10777 2.24609 6.07195 2.24609 10.0003C2.24609 13.9287 2.24609 15.8929 3.46649 17.1132Z" stroke="white" stroke-width="1.25"/>
@@ -198,7 +233,7 @@
 
           <div class="mt-8">
             <h2 class="text-sm inter font-semibold">Observações internas</h2>
-            <textarea class="w-full rounded-lg border-blue text-sm mt-2 inter p-2" name="comments" id="comments" cols="4" rows="6"></textarea>
+            <textarea class="w-full rounded-lg border-blue text-sm mt-2 inter p-2" name="comments" id="comments" cols="4" rows="6"><%= supplier.comments %></textarea>
           </div>
         </div>
       </div>
@@ -207,248 +242,69 @@
 </body>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-masker/1.1.0/vanilla-masker.min.js"></script>
+<script src="/js/admin/supplier.js"></script>
 <script>
-  const divMaterials = document.querySelector("#materials")
-  const newMaterialButton = document.querySelector("#newMaterial")
-
-  function newMaterial() {
-    var chars = 'abcdefghijklmnopqrstuvwxyz';
-    var id = '';
-
-    for (var i = 0; i < chars.length; i++) {
-      var random = Math.floor(Math.random() * chars.length);
-      id += chars.charAt(random);
-    }
-
-    const html = `
-      <div id='${id}' class="material grid grid-cols-4 gap-x-3 mt-2">
-        <div class="col-span-3">
-          <div class="relative mt-2 rounded-lg shadow-sm item-div">
-            <input type="text" id="item" class="block w-full rounded-lg inter py-1.5 mt-2 pl-2 text-gray-900 ring-1 ring-inset ring-gray-300 sm:text-sm sm:leading-6 border-blue-1" placeholder="Nome da peça/material">
-          </div>
-        </div>
-
-        <div class="flex items-center col-span-1">
-          <div class="flex flex-col">
-            <div class="relative rounded-lg shadow-sm item-div">
-              <input type="text" id="manufacturer" class="block w-full rounded-lg inter py-1.5 mt-2 pl-2 text-gray-900 ring-1 ring-inset ring-gray-300 sm:text-sm sm:leading-6 border-blue-1" placeholder="Nome do fabricante">
-            </div>
-          </div>
-
-          <button onclick="deleteElement(${id})" class="ml-2 mr-1">
-            <svg width="16" height="18" viewBox="0 0 16 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <g clip-path="url(#clip0_236_23)">
-              <mask id="mask0_236_23" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="0" y="0" width="16" height="18">
-              <path d="M16 0H0V18H16V0Z" fill="white"/>
-              </mask>
-              <g mask="url(#mask0_236_23)">
-              <path d="M14.125 4.625L13.3661 15.2497C13.3007 16.1655 12.5387 16.875 11.6205 16.875H4.37946C3.46134 16.875 2.69932 16.1655 2.63391 15.2497L1.875 4.625M6.25 8.125V13.375M9.75 8.125V13.375M10.625 4.625V2C10.625 1.51675 10.2332 1.125 9.75 1.125H6.25C5.76675 1.125 5.375 1.51675 5.375 2V4.625M1 4.625H15" stroke="#239CFF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-              </g>
-              </g>
-              <defs>
-              <clipPath id="clip0_236_23">
-              <rect width="16" height="18" fill="white"/>
-              </clipPath>
-              </defs>
-            </svg>
-          </button>
-        </div>
-      </div>
-    `;
-
-    divMaterials.insertAdjacentHTML("beforeend", html);
-  }
-
   function loadMaterials(data) {
-    var chars = 'abcdefghijklmnopqrstuvwxyz';
-    var id = '';
+    const items = JSON.parse(data)
 
-    for (var i = 0; i < chars.length; i++) {
-      var random = Math.floor(Math.random() * chars.length);
-      id += chars.charAt(random);
-    }
+    for (const item of items) {
+      var chars = 'abcdefghijklmnopqrstuvwxyz';
+      var id = '';
 
-    const html = `
-      <div id='${id}' class="material grid grid-cols-4 gap-x-3 mt-2">
-        <div class="col-span-3">
-          <div class="relative mt-2 rounded-lg shadow-sm item-div">
-            <input type="text" id="item" value='${item}' class="block w-full rounded-lg inter py-1.5 mt-2 pl-2 text-gray-900 ring-1 ring-inset ring-gray-300 sm:text-sm sm:leading-6 border-blue-1" placeholder="Nome da peça/material">
-          </div>
-        </div>
+      for (var i = 0; i < chars.length; i++) {
+        var random = Math.floor(Math.random() * chars.length);
+        id += chars.charAt(random);
+      }
 
-        <div class="flex items-center col-span-1">
-          <div class="flex flex-col">
-            <div class="relative rounded-lg shadow-sm item-div">
-              <input type="text" id="manufacturer" value='${manufacturer}' class="block w-full rounded-lg inter py-1.5 mt-2 pl-2 text-gray-900 ring-1 ring-inset ring-gray-300 sm:text-sm sm:leading-6 border-blue-1" placeholder="Nome do fabricante">
+      const html = `
+        <div id='${id}' class="material grid grid-cols-4 gap-x-3 mt-2">
+          <div class="col-span-3">
+            <div class="relative mt-2 rounded-lg shadow-sm item-div">
+              <input type="text" id="item" value='${item}' class="block w-full rounded-lg inter py-1.5 mt-2 pl-2 text-gray-900 ring-1 ring-inset ring-gray-300 sm:text-sm sm:leading-6 border-blue-1" placeholder="Nome da peça/material">
             </div>
           </div>
 
-          <button onclick="deleteElement(${id})" class="ml-2 mr-1">
-            <svg width="16" height="18" viewBox="0 0 16 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <g clip-path="url(#clip0_236_23)">
-              <mask id="mask0_236_23" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="0" y="0" width="16" height="18">
-              <path d="M16 0H0V18H16V0Z" fill="white"/>
-              </mask>
-              <g mask="url(#mask0_236_23)">
-              <path d="M14.125 4.625L13.3661 15.2497C13.3007 16.1655 12.5387 16.875 11.6205 16.875H4.37946C3.46134 16.875 2.69932 16.1655 2.63391 15.2497L1.875 4.625M6.25 8.125V13.375M9.75 8.125V13.375M10.625 4.625V2C10.625 1.51675 10.2332 1.125 9.75 1.125H6.25C5.76675 1.125 5.375 1.51675 5.375 2V4.625M1 4.625H15" stroke="#239CFF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-              </g>
-              </g>
-              <defs>
-              <clipPath id="clip0_236_23">
-              <rect width="16" height="18" fill="white"/>
-              </clipPath>
-              </defs>
-            </svg>
-          </button>
+          <div class="flex items-center col-span-1">
+            <div class="flex flex-col">
+              <div class="relative rounded-lg shadow-sm item-div">
+                <input type="text" id="manufacturer" value='${manufacturer}' class="block w-full rounded-lg inter py-1.5 mt-2 pl-2 text-gray-900 ring-1 ring-inset ring-gray-300 sm:text-sm sm:leading-6 border-blue-1" placeholder="Nome do fabricante">
+              </div>
+            </div>
+
+            <button onclick="deleteElement(${id})" class="ml-2 mr-1">
+              <svg width="16" height="18" viewBox="0 0 16 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <g clip-path="url(#clip0_236_23)">
+                <mask id="mask0_236_23" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="0" y="0" width="16" height="18">
+                <path d="M16 0H0V18H16V0Z" fill="white"/>
+                </mask>
+                <g mask="url(#mask0_236_23)">
+                <path d="M14.125 4.625L13.3661 15.2497C13.3007 16.1655 12.5387 16.875 11.6205 16.875H4.37946C3.46134 16.875 2.69932 16.1655 2.63391 15.2497L1.875 4.625M6.25 8.125V13.375M9.75 8.125V13.375M10.625 4.625V2C10.625 1.51675 10.2332 1.125 9.75 1.125H6.25C5.76675 1.125 5.375 1.51675 5.375 2V4.625M1 4.625H15" stroke="#239CFF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </g>
+                </g>
+                <defs>
+                <clipPath id="clip0_236_23">
+                <rect width="16" height="18" fill="white"/>
+                </clipPath>
+                </defs>
+              </svg>
+            </button>
+          </div>
         </div>
-      </div>
-    `;
+      `;
 
-    divMaterials.insertAdjacentHTML("beforeend", html);
+      divMaterials.insertAdjacentHTML("beforeend", html);
+    }
   }
 
-  function deleteElement(element) {
-    element.remove()
-  }
-
-  newMaterialButton.addEventListener("click", function() {
+  newMaterialButton.addEventListener("click", function () {
     newMaterial()
-  })
-
-  function alertMessage(type, content) {
-    if (type == 'error') {
-      const divMessage = document.querySelector(".error");
-      divMessage.style.display = "flex";
-      divMessage.innerHTML = "";
-      const message = document.createElement("p");
-      const img = document.createElement("img");
-      img.width = "28"
-      img.height = "28"
-      img.src = "/img/platform/notify-error.png"
-      message.classList.add("message-notify");
-      message.innerText = content;
-      divMessage.appendChild(img);
-      divMessage.appendChild(message);
-
-      setTimeout(() => {
-        divMessage.style = "animation: slideoff 2s;"
-        setTimeout(() => {
-          divMessage.style = "display: none"
-        }, 800)
-      }, 2000);
-    } else if (type == "success") {
-      const divMessage = document.querySelector(".alert");
-      divMessage.style.display = "flex";
-      divMessage.innerHTML = "";
-      const message = document.createElement("p");
-      const img = document.createElement("img");
-      img.width = "28"
-      img.height = "28"
-      img.src = "/img/platform/notify-success.png"
-      message.classList.add("message-notify");
-      message.innerText = content;
-      divMessage.appendChild(img);
-      divMessage.appendChild(message);
-
-      setTimeout(() => {
-        divMessage.style = "animation: slideoff 2s;"
-        setTimeout(() => {
-          divMessage.style = "display: none"
-        }, 800)
-      }, 2000);
-    }
-  }
-
-  function formatCEP(input) {
-    const value = input.value.replace(/\D/g, '').substring(0, 8);
-
-    if (value.length > 5) {
-      input.value = value.substring(0, 5) + '-' + value.substring(5);
-    } else {
-      input.value = value;
-    }
-  }
-
-  function updateSupplier() {
-    const name = document.querySelector("#name")
-    const email = document.querySelector("#email")
-    const address = document.querySelector("#address")
-    const cep = document.querySelector("#cep")
-    const city = document.querySelector("#city")
-    const landline = document.querySelector("#landline")
-    const phone = document.querySelector("#phone")
-    const contactName = document.querySelector("#contactName")
-    const comments = document.querySelector("#comments")
-    const materials = document.getElementsByClassName('material')
-    const materialsArray = []
-
-    for (var i = 0; i < materials.length; i++) {
-      const item = materials[i].querySelector("#item");
-      const manufacturer = materials[i].querySelector("#manufacturer");
-      
-      materialsArray.push({item: item.value, manufacturer: manufacturer.value})
-    }
-
-    if (name.value.length == 0) {
-      name.style = "border: 1px solid #e00d0d !important"
-      return
-    }
-
-    if (address.value.length == 0) {
-      address.style.border = "1px solid #e00d0d";
-      return
-    }
-
-    if (cep.value.length == 0) {
-      cep.style.border = "1px solid #e00d0d";
-      return
-    }
-
-    if (city.value.length == 0) {
-      city.style.border = "1px solid #e00d0d";
-      return
-    }
-
-    if (landline.value.length == 0) {
-      landline.style.border = "1px solid #e00d0d";
-      return
-    }
-
-    if (phone.value.length == 0) {
-      phone.style.border = "1px solid #e00d0d";
-      return
-    }
-
-    fetch('/admin/save-supplier/<%= supplier._id %>', {
-      method: 'POST',
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({name: name.value, email: email.value, address: address.value, cep: cep.value, city: city.value, landline: landline.value, phone: phone.value, contactName: contactName.value, materials: materialsArray, comments: comments.value})
-    })
-    .then((response) => {
-      if (response.ok) {
-        alertMessage("success", "Fornecedor atualizado com sucesso.")
-      } else {
-        alertMessage("error", "Erro ao atualizar fornecedor")
-      }
-    })
-    .catch((error) => {
-      alertMessage("error", "Tente novamente mais tarde")
-    })
-  }
-
-  cep.addEventListener("input", function() {
-    formatCEP(cep)
   })
 
   window.addEventListener('DOMContentLoaded', function () {
     VMasker(document.getElementById('landline')).maskPattern('(99) 9999-9999');
     VMasker(document.getElementById('phone')).maskPattern('(99) 99999-9999');
+    VMasker(document.getElementById('cep')).maskPattern('99999-999');
   });
-
-  document.addEventListener("DOMContentLoaded", function() {
-    loadMaterials('<%= JSON.stringify(supplier.materials) %>')
-  })
 </script>
+
 </html>
